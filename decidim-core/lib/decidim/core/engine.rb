@@ -46,6 +46,8 @@ require "decidim/middleware/static_dispatcher"
 require "decidim/middleware/current_organization"
 require "decidim/webpacker"
 
+require "rqrcode"
+
 module Decidim
   module Core
     # Decidim's core Rails Engine.
