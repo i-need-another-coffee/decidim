@@ -79,6 +79,10 @@ en:
       decidim/meetings/update_meeting_event: Meeting updated
   activerecord:
     models:
+      decidim:
+        meetings:
+          meeting:
+            text: 'It was discussed in this meeting: %{link}'
       decidim/meetings/meeting:
         one: Meeting
         other: Meetings
@@ -91,9 +95,12 @@ en:
   decidim:
     admin:
       filters:
+        accepted_at_not_null:
+          label: Accepted
+          values:
+            'false': Not accepted
+            'true': Accepted
         meetings:
-          category_id_eq:
-            label: Category
           closed_at_present:
             label: State
             values:
@@ -104,8 +111,8 @@ en:
             values:
               'false': Past
               'true': Upcoming
-          scope_id_eq:
-            label: Scope
+          taxonomies_part_of_contains:
+            label: Taxonomy
           with_any_origin:
             label: Origin
             values:
@@ -118,6 +125,18 @@ en:
               hybrid: Hybrid
               in_person: In Person
               online: Online
+        rejected_at_not_null:
+          label: Rejected
+          values:
+            'false': Not rejected
+            'true': Rejected
+        search_placeholder:
+          user_name_or_user_email_cont: Search by name or email
+        sent_at_not_null:
+          label: Sent
+          values:
+            'false': Not sent
+            'true': Sent
       meeting_copies:
         create:
           error: There was a problem duplicating this meeting.
@@ -130,20 +149,26 @@ en:
         actions:
           comment: Comment
           join: Join
+          reply_poll: Reply poll
         name: Meetings
         settings:
           global:
             announcement: Announcement
+            clear_all: Clear all
             comments_enabled: Comments enabled
             comments_max_length: Comments max length (Leave 0 for default value)
             creation_enabled_for_participants: Participants can create meetings
             default_registration_terms: Default registration terms
+            define_taxonomy_filters: Please define some filters for this participatory space before using this setting.
             enable_pads_creation: Enable pads creation
             maps_enabled: Maps enabled
+            no_taxonomy_filters_found: No taxonomy filters found.
             registration_code_enabled: Registration code enabled
             resources_permissions_enabled: Actions permissions can be set for each meeting
             scope_id: Scope
             scopes_enabled: Scopes enabled
+            taxonomy_filters: Select filters for the component
+            taxonomy_filters_add: Add filter
             terms_and_conditions_url_for_meeting_creators: Terms and conditions URL for meeting creators
           step:
             announcement: Announcement
@@ -282,15 +307,9 @@ en:
             non_user: Non existing participant
             select_user: Select participant
           index:
-            filter:
-              accepted: Accepted
-              all: All
-              rejected: Rejected
-              sent: Sent
             invite_attendee: Invite attendee
             invites: Invites
             registrations_disabled: You cannot invite an attendee because the registrations are disabled.
-            search: Search
         meeting_closes:
           edit:
             close: Close
@@ -299,6 +318,8 @@ en:
           close:
             invalid: There was a problem closing this meeting.
             success: Meeting successfully closed.
+          component:
+            unlink: Unlink
           create:
             invalid: There was a problem creating this meeting.
             success: Meeting successfully created. Notice this is unpublished yet, you need to manually publish it.
@@ -323,7 +344,18 @@ en:
             select_a_registration_type: Please select a registration type
             select_an_iframe_access_level: Please select an iframe access level
           index:
+            linked_meeting_warning_html: This meeting must be edited from <br><a href="%{href}">%{name}</a>
             title: Meetings
+          linked_spaces:
+            assign: Assign
+            link_a_space: Link a space
+            private_meeting_warning: Linked spaces will not be applied if the meeting is private and non transparent.
+            private_space_warning: Linked spaces will not be applied when the meeting belongs to a private non transparent space.
+            select: Select a space
+            table:
+              actions: Actions
+              component: Linked spaces
+            title: Linked spaces
           new:
             create: Create
             title: Create meeting
@@ -352,6 +384,13 @@ en:
           update:
             invalid: There was a problem updating this meeting poll.
             success: Meeting poll successfully updated.
+        poll:
+          form:
+            announcement_html:
+            - When a question receives answers or is published/closed, it can no longer be edited.
+            - You can add a question at any time.
+            - The poll will be closed when the results of all created questions have been published.
+            - Visit the <a href='%{admin_link}'>poll administration page</a> to send questions and publish results.
         registrations:
           edit:
             save: Save
@@ -392,8 +431,6 @@ en:
         questionnaire:
           update: "%{user_name} updated the questionnaire for the %{meeting_name} meeting"
       application_helper:
-        filter_category_values:
-          all: All
         filter_meeting_space_values:
           all: All
       calendar:
@@ -413,7 +450,7 @@ en:
           body: The meeting <a href="%{meeting_path}">"%{meeting_title}"</a> is pending to be closed. Please add a report of the meeting using the "Close meeting" button.
           greetings: Greetings,<br/>%{organization_name}<br/><a href="%{organization_url}">%{organization_url}</a>
           hello: Hello %{username},
-          subject: You can now close your meeting with a report on the %{organization_name} platform
+          subject: You can now close the meeting "%{meeting_title}" with a report
       conference_venues: Conference Venues
       content_blocks:
         upcoming_meetings:
@@ -430,16 +467,14 @@ en:
       iframe_embed_type:
         embed_in_meeting_page: Embed in meeting page
         none: None
-        open_in_live_event_page: Open in live event page (with optional polls)
+        open_in_live_event_page: Open in live event page
         open_in_new_tab: Open URL in a new tab
       last_activity:
         meeting_updated: 'Meeting updated:'
         new_meeting: 'New meeting:'
       layouts:
         live_event:
-          administrate: Administrate
           close: close
-          questions: Questions
       mailer:
         invite_join_meeting_mailer:
           invite:
@@ -505,7 +540,6 @@ en:
           location_hints_help: 'Location hints: additional info. Example: the floor of the building if it is an in-person meeting, or the meeting password if it is an online meeting with restricted access.'
           online_meeting_url_help: 'Link: allow participants to connect directly to your meeting'
           registration_url_help: 'Link: allow participants to go on the external service you are using for registrations'
-          select_a_category: Please select a category
           select_a_meeting_type: Please select a meeting type
           select_a_registration_type: Please select a registration type
           select_an_iframe_access_level: Please select an iframe access level
@@ -520,6 +554,8 @@ en:
           edit_close_meeting: Edit meeting report
           edit_meeting: Edit meeting
           join_meeting: Join meeting
+          reply_poll: Reply poll
+          view_poll: View poll
         meetings:
           no_meetings_warning: No meetings match your search criteria or there is not any meeting scheduled.
           upcoming_meetings_warning: Currently, there are no scheduled meetings, but here you can find all the past meetings listed.
@@ -543,6 +579,7 @@ en:
           micro_camera_permissions_warning: When you click on the button below, you will be asked for microphone and/or camera permissions, and you will join the videoconference
           no_slots_available: No slots available
           organizations: Attending organizations
+          redirect_notice: This meeting is part of another space, so you have been moved to %{current_space_name}. <br>If you prefer, you can go back to <a href="%{previous_space_url}">%{previous_space_name}</a>.
           registration_code_help_text: Your registration code
           registration_state:
             validated: VALIDATED
@@ -576,15 +613,25 @@ en:
             map: Map
             official_meeting: Official meeting
             start_time: Start date
+            taxonomies: Taxonomies
             title: Title
       polls:
+        answers:
+          index:
+            administrate: Administrate
+            title: Poll
+          index_admin:
+            back_to_meeting: Back to meeting
+            title: Administrate poll
+            view_poll: View poll
         questions:
           closed_question:
-            question_results: Question results
+            announcement: The replies for this question have been closed.
+            question: Question
+            question_results: Results
           index:
             empty_questions: Throughout this meeting, some questions will be sent and you will be able to answer them. They will be displayed here.
           index_admin:
-            admin_dashboard: Administrator dashboard
             edit: Edit in the admin panel
             question: Question
             received_answer: received answer
@@ -592,6 +639,10 @@ en:
             results: Results
             send: Send
             sent: Sent
+            statuses:
+              closed: Results sent (closed)
+              published: Sent (open)
+              unpublished: Pending to be sent
           published_question:
             max_choices_alert: There are too many choices selected
             question: Question
@@ -632,13 +683,51 @@ en:
         transparent: Transparent
         withdraw: Withdrawn
       withdraw:
-        error: An error ocurred while withdrawing the meeting.
+        error: There was a problem withdrawing the meeting.
         success: The meeting has been withdrawn successfully.
     metrics:
       meetings:
         description: Number of meetings created
         object: meetings
         title: Meetings
+    open_data:
+      help:
+        meeting_comments:
+          alignment: If this comment was a favour, against or neutral
+          author: The name of the participant that made this comment
+          body: The comment itself
+          commentable_id: The unique id of the commentable
+          commentable_type: The type of the commentable (if it was a result, a proposal, etc.)
+          created_at: The date when this comment was created
+          depth: The place where this comment is in the three of comments (if it is an answer or an answer of an answer)
+          id: The id for this comment
+          locale: The locale (language) that the participant had when leaving this comment
+          root_commentable_url: The URL of the resource that ties to this comment
+          user_group: The name of the user group that made this comment (if any)
+        meetings:
+          address: The address of the meeting in case it is in person and has a physical location
+          attachments: The number of attachments in this meeting
+          attendees: The number of people attending this meeting
+          comments: The number of comments made in this meeting
+          component: The component that the meeting belongs to
+          contributions: The number of contributions in this meeting made by the atteendes
+          description: The description of the meeting
+          end_time: The date and time that this meeting ends
+          followers: The number of followers of this meeting
+          id: The unique identifier of the meeting
+          location: The location of the meeting
+          organizations: The organizations attending this meeting
+          participatory_space: To which space (e.g. Participatory Process, or Assembly) this meeting belongs to
+          published: When the meeting has been published
+          reference: The unique identifier of the resource in this platform
+          related_proposals: The proposals related to this meeting
+          related_results: The results related to this meeting
+          start_time: The date and time that this meeting starts
+          taxonomies: The taxonomies that this meeting belongs to
+          title: The title of the meeting
+          url: The URL of the meeting
+          withdrawn: Wheter this meeting has been withdrawn
+          withdrawn_at: When this meeting was withdrawn
     participatory_spaces:
       highlighted_meetings:
         past_meetings: Past meetings
@@ -652,6 +741,7 @@ en:
         meeting_proposal: 'Related proposals:'
         proposal_meeting: 'Related meetings:'
     statistics:
+      attendees_count: Meeting attendees
       meetings_count: Meetings
   devise:
     mailer:

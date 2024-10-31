@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "parallel_tests"
 require "selenium-webdriver"
 
 module Decidim
@@ -10,6 +11,7 @@ module Decidim
 
       app_host = (host ? "#{protocol}://#{host}" : nil)
       Capybara.app_host = app_host
+      Rails.application.config.action_controller.asset_host = host
     end
 
     def switch_to_default_host
@@ -30,19 +32,35 @@ end
 
 1.step do
   port = rand(5000..6999)
+  next if port == 6379 # Reserved for Redis
+
   begin
-    Socket.tcp("127.0.0.1", port, connect_timeout: 5).close
-  rescue Errno::ECONNREFUSED
-    # When connection is refused, the port is available for use.
-    Capybara.server_port = port
+    redis = Redis.new
+    reserved_ports = (redis.get("decidim_test_capybara_reserved_ports") || "").split(",").map(&:to_i)
+    unless reserved_ports.include?(port)
+      reserved_ports << port
+      if ParallelTests.last_process?
+        redis.del("decidim_test_capybara_reserved_ports")
+      else
+        redis.set("decidim_test_capybara_reserved_ports", reserved_ports.sort.join(","))
+      end
+      break
+    end
+  rescue Redis::CannotConnectError
+    # Redis is not available
     break
   end
+ensure
+  Capybara.server_port = port
 end
 
 Capybara.register_driver :headless_chrome do |app|
   options = Selenium::WebDriver::Chrome::Options.new
   options.args << "--explicitly-allowed-ports=#{Capybara.server_port}"
-  options.args << "--headless"
+  options.args << "--headless=new"
+  options.args << "--disable-search-engine-choice-screen" # Prevents closing the window normally
+  # Do not limit browser resources
+  options.args << "--disable-dev-shm-usage"
   options.args << "--no-sandbox"
   options.args << if ENV["BIG_SCREEN_SIZE"].present?
                     "--window-size=1920,3000"
@@ -63,7 +81,7 @@ Capybara.register_driver :pwa_chrome do |app|
   options = Selenium::WebDriver::Chrome::Options.new
   options.args << "--explicitly-allowed-ports=#{Capybara.server_port}"
   # If we have a headless browser things like the offline navigation feature stop working,
-  # so we need to have have a headful/recapitated (aka not headless) browser for these specs
+  # so we need to have a headful/recapitated (aka not headless) browser for these specs
   # options.args << "--headless"
   options.args << "--no-sandbox"
   # Do not limit browser resources
@@ -91,8 +109,10 @@ end
 
 Capybara.register_driver :iphone do |app|
   options = Selenium::WebDriver::Chrome::Options.new
-  options.args << "--headless"
+  options.args << "--headless=new"
   options.args << "--no-sandbox"
+  # Do not limit browser resources
+  options.args << "--disable-dev-shm-usage"
   options.add_emulation(device_name: "iPhone 6")
 
   Capybara::Selenium::Driver.new(
@@ -116,16 +136,18 @@ end
 Capybara.server = :puma, server_options
 
 Capybara.server_errors = [SyntaxError, StandardError]
+Capybara.save_path = Rails.root.join("tmp/screenshots")
 
 Capybara.default_max_wait_time = 10
 
 RSpec.configure do |config|
   config.before :each, type: :system do
     driven_by(:headless_chrome)
+
     switch_to_default_host
     domain = (try(:organization) || try(:current_organization))&.host
     if domain
-      # Javascript sets the cookie also for all subdomains but localhost is a
+      # JavaScript sets the cookie also for all subdomains but localhost is a
       # special case.
       domain = ".#{domain}" unless domain == "localhost"
       page.driver.browser.execute_cdp(

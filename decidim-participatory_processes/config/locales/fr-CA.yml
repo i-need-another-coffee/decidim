@@ -4,7 +4,6 @@ fr-CA:
       participatory_process:
         announcement: Annonce
         area_id: Périmètre d'assemblée
-        banner_image: Image d'en-tête
         copy_categories: Copier les catégories
         copy_components: Copier les fonctionnalités
         copy_steps: Copier les étapes
@@ -34,8 +33,6 @@ fr-CA:
         scope_type_max_depth_id: Profondeur du filtre de portée
         scopes_enabled: Périmètres d'application activés
         short_description: Résumé
-        show_metrics: Afficher les métriques
-        show_statistics: Montrer les statistiques
         slug: Identifiant
         start_date: Date de début
         subtitle: Sous-titre
@@ -98,10 +95,8 @@ fr-CA:
         destroy: Supprimer
         duplicate: Dupliquer
         edit: Modifier
-        filter:
-          all_processes: Afficher tous les processus
-          process_groups: Filtrer les concertations par groupe
         import_process: Importer
+        menu_hidden: Masquer
         moderate: Modérer
         new_process: Nouvelle concertation
         new_process_group: Nouveau groupe de concertations
@@ -113,6 +108,9 @@ fr-CA:
         resend_invitation: Renvoyer l'invitation
         see_process: Voir la concertation
         unpublish: Dépublier
+      filters:
+        decidim_participatory_process_group_id_eq:
+          label: Par groupe de concertations
       menu:
         participatory_process_groups: Groupes de concertations
         participatory_process_groups_submenu:
@@ -219,6 +217,12 @@ fr-CA:
             last_step: Vous ne pouvez pas supprimer la dernière étape d'une concertation.
           success: L'étape de la concertation a été supprimée avec succès.
         edit:
+          cta_deprecated:
+            body_html: |-
+              Configurer le bouton d'action depuis l'étape de concertation ne fonctionne plus dans le nouveau design.
+              Cela est maintenant fait via la <b>page d'accueil</b> de la concertation, en utilisant le bloc de contenu<b>Hero et image</b>.
+              Nous l'avons laissé ici pour migrer les boutons d'actions dont vous avez besoin. Les champs <i>Chemin d'appel à l'action</i> et <i>Texte d'appel à l'action</i> seront supprimés dans une prochaine version.
+            title: Bouton d'action obsolète
           title: Modifier l'étape de la concertation
           update: Mettre à jour
         index:
@@ -429,8 +433,9 @@ fr-CA:
             select_participatory_process_type: Sélectionnez un type de concertation
             select_process_group: Sélectionnez un groupe de concertations
             slug_help_html: 'Les identifiants d''URL sont utilisés pour générer les URL qui pointent vers cette concertation. N''accepte que des lettres, des chiffres et des tirets et doit commencer par une lettre. Exemple : %{url}'
+            taxonomies: Taxonomies
             title: Informations générales
-            visbility: Visibilité
+            visibility: Visibilité
       content_blocks:
         extra_data:
           name: Phase & durée
@@ -443,7 +448,7 @@ fr-CA:
       index:
         title: Concertations
       last_activity:
-        new_participatory_process: Nouvelle concertation
+        new_participatory_process: 'Nouveau processus participatif:'
       pages:
         home:
           highlighted_processes:

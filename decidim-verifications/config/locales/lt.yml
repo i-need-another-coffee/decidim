@@ -43,7 +43,6 @@ lt:
           destroy:
             confirm: Atšaukus leidimus iki datos, veiksmo nebus galima anuliuoti. Ar tikrai norite tęsti?
             confirm_all: Atšaukus visus leidimus, veiksmo nebus galima anuliuoti. Ar tikrai norite tęsti?
-          destroy_nok: Atšaukiant leidimus, iškilo problema.
           destroy_ok: Visi sutampantys leidimai atšaukti.
           info: Bendras patvirtintų dalyvių skaičius – %{count}.
           no_data: Patvirtintų dalyvių nėra.
@@ -88,10 +87,8 @@ lt:
     events:
       verifications:
         verify_with_managed_user:
-          email_intro: Dalyvis <a href="%{resource_url}">%{resource_title}</a> bandė patvirtinti save kito dalyvio duomenimis (<a href="%{managed_user_url}">%{managed_user_name}</a>).
           email_outro: Patikrinkite <a href="%{conflicts_url}">Patvirtinimų konfliktų sąrašą</a> ir susisiekite su dalyviu, kad patikrintumėte jo informaciją ir išspręstumėte problemą.
           email_subject: Nepavyko patikrinti kito dalyvio
-          notification_title: Dalyvis <a href="%{resource_path}">%{resource_title}</a> bandė patvirtinti save kito dalyvio duomenimis (<a href="%{managed_user_path}">%{managed_user_name}</a>).
     verifications:
       authorizations:
         authorization_metadata:
@@ -138,7 +135,6 @@ lt:
         admin:
           census:
             create:
-              error: Importuojant surašymo duomenis įvyko klaida.
               success: Sėkmingai importuota %{count} elementų (%{errors} klaidų).
             destroy_all:
               success: Visi surašymo duomenys pašalinti.
@@ -235,8 +231,6 @@ lt:
           update:
             error: Iš naujo įkeliant jūsų dokumentą iškilo problema.
             success: Dokumentas įkeltas iš naujo.
-        dni: Asmens tapatybės dokumentas
-        nie: NIE
         passport: Pasas
       postal_letter:
         admin:
@@ -272,8 +266,6 @@ lt:
           create:
             error: Dėl jūsų užklausos iškilo problema.
             success: Dėkojame! Jūsų telefonu išsiuntėme SMS žinutę.
-          destroy:
-            success: Tikrinimo kodas nustatytas iš naujo. Dar kartą įveskite savo telefono numerį.
           edit:
             confirm_destroy: Ar tikrai norite iš naujo nustatyti tikrinimo kodą?
             destroy: Tikrinimo kodą nustatyti iš naujo

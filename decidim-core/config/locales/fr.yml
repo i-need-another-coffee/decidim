@@ -77,13 +77,10 @@ fr:
   booleans:
     'false': 'Non'
     'true': 'Oui'
-  carrierwave:
-    errors:
-      file_cannot_be_processed: Le fichier n'a pas pu être traité
-      file_resolution_too_large: La résolution du fichier est trop grande
-      file_size_too_large: Le fichier est trop volumineux
-      not_inside_organization: Le fichier n'est relié à aucune organisation
   date:
+    buttons:
+      close: Fermer
+      select: Sélectionner
     formats:
       decidim_short: "%d/%m/%Y"
       decidim_short_dashed: "%d-%m-%Y"
@@ -91,6 +88,10 @@ fr:
       decidim_with_day_and_month_name: "%A %d %b %Y"
       decidim_with_month_name: "%d %B %Y"
       decidim_with_month_name_short: "%d %b"
+      help:
+        date_format: 'Format: jj/mm/aaaa'
+      order: j-m-a
+      separator: "/"
   datetime:
     distance_in_words:
       about_x_hours:
@@ -143,6 +144,7 @@ fr:
       external_link: Lien externe
       front_page_link: Aller à la première page
       logo: "Logo officiel de %{organization}"
+      opens_in_new_tab: S'ouvre dans un nouvel onglet
       skip_button: Passer au contenu principal
     account:
       blocked: Ce compte a été bloqué en raison d'une violation des conditions d'utilisation
@@ -258,6 +260,13 @@ fr:
         create: "%{user_name} a créé la page statique %{resource_name}"
         delete: "%{user_name} a supprimé la page statique %{resource_name}"
         update: "%{user_name} a mis à jour la page statique %{resource_name}"
+      taxonomy_filter:
+        create: "%{user_name} a créé un filtre basé sur la taxonomie %{resource_name}"
+        create_with_filter_items_count: "%{user_name} a créé un filtre basé sur la taxonomie %{resource_name} avec %{filter_items_count} filtres pour %{space_manifest_name}"
+        delete: "%{user_name} a supprimé un filtre basé sur la taxonomie %{resource_name}"
+        delete_with_filter_items_count: "%{user_name} a supprimé un filtre basé sur la taxonomie %{resource_name} avec %{filter_items_count} filtres pour %{space_manifest_name}"
+        update: "%{user_name} a mis à jour un filtre basé sur la taxonomie %{resource_name}"
+        update_with_filter_items_count: "%{user_name} a mis à jour un filtre basé sur la taxonomie %{resource_name} avec %{filter_items_count} filtres pour %{space_manifest_name}"
       user:
         block: "%{user_name} a bloqué l'utilisateur %{resource_name}"
         invite: "%{user_name} a invité l'utilisateur %{resource_name} avec le rôle : %{role}"
@@ -282,7 +291,7 @@ fr:
       dismiss: Rejeter la notification
     amendments:
       accepted:
-        error: Une erreur s'est produite lors de l'acceptation de l'amendement.
+        error: Une erreur s'est produite lors de l'acceptation de cet amendement.
         success: L'amendement a été accepté avec succès.
       amendable:
         button: Modifier %{model_name}
@@ -294,12 +303,8 @@ fr:
         title:
           one: "%{count} amendement"
           other: "%{count} amendements"
-      compare_draft:
-        continue: Continuer
-        no_similars_found: Aucune modification similaire trouvé.
-        title: Modifications similaires
       created:
-        error: Une erreur s’est produite lors de la création du projet d'amendement.
+        error: Une erreur s'est produite lors de la création du brouillon d'amendement.
         success: Le projet d'amendement a été créé avec succès.
       destroy_draft:
         error: Il y a eu un problème de suppression du projet d'amendement.
@@ -351,19 +356,20 @@ fr:
         error: Une erreur s'est produite lors de la modification de ce projet d'amendement.
         success: Le projet d'amendement a été mis à jour avec succès.
       withdraw:
-        error: Une erreur s'est produite lors du retrait de l'amendement.
+        error: Une erreur s'est produite lors du retrait de cet amendement.
         success: L'amendement a été retiré avec succès.
       wizard_step_form:
         steps:
           '1': Créez votre amendement
-          '2': Comparez votre amendement
-          '3': Complétez votre amendement
-          '4': Publier votre amendement
+          '2': Publier votre amendement
     anonymous_user: Anonyme
     application:
       document:
         download: Télécharger le fichier
       documents:
+        component_documents:
+          dummy: Documents de fonctionnalité factices
+          meetings: Documents de réunions
         documents: Documents
         related_documents: Documents à consulter
       photo:
@@ -514,7 +520,7 @@ fr:
       global_menu:
         name: Menu global
       hero:
-        name: Image principale (hero)
+        name: Image principale et bouton d'action
       hero_settings_form:
         background_image: Image d'arrière-plan
         welcome_text: Texte de bienvenue
@@ -585,8 +591,11 @@ fr:
           complete_profile: Complétez votre profil
           nickname_help: Cet identifiant est public et unique sur %{organization} ; il permet aux autres utilisateurs de vous suivre, de vous contacter ou de vous mentionner dans leurs commentaires. Il s’affichera précédé d’un « @ » ; il ne doit pas contenir d’espace ni de caractère spécial.
           sign_up: Veuillez compléter votre profil
-          subtitle: Remplissez le formulaire suivant pour créer votre compte
+          subtitle: Veuillez compléter le formulaire suivant afin de compléter l’inscription
           username_help: Le nom est public et apparaît dans votre profil et sur vos messages. Dans le but de garantir l'anonymat, vous pouvez choisir n'importe quel nom.
+        new_tos_fields:
+          sign_up: Créer un compte
+          sign_up_title: Finalisez la création de votre compte
       registrations:
         create:
           error: Il y a eu un problème pour créer votre compte.
@@ -596,7 +605,7 @@ fr:
           newsletter: Recevoir une newsletter sur l'actualité de la plateforme
           newsletter_title: Autorisation de contact
           sign_up: Créer un compte
-          subtitle: Créez un compte pour participer aux discussions et pour exprimer votre soutien aux propositions de votre choix.
+          subtitle: Créez un compte pour participer à la plateforme.
           terms: Conditions d'Utilisation
           tos_agreement: En vous créant un compte, vous acceptez %{link}.
           tos_title: Conditions d'utilisation
@@ -671,6 +680,10 @@ fr:
     endorsers_list:
       endorsed_by: Soutenu par …
     errors:
+      files:
+        file_cannot_be_processed: Le fichier ne peut pas être traité
+        file_resolution_too_large: La résolution du fichier est trop grande
+        not_inside_organization: Le fichier n'est attaché à aucune organisation
       internal_server_error:
         copied: Texte copié !
         copy_error_message_clarification: Copier le message d'erreur dans le presse-papiers
@@ -808,9 +821,9 @@ fr:
           email_subject: Un groupe d'utilisateurs viens de mettre à jour son profil
           notification_title: Le groupe d'utilisateurs %{user_group_name} a mis à jour son profil, le laissant non vérifié. Vous pouvez maintenant le vérifier dans le <a href="%{groups_admin_path}">panneau d'administration</a>.
       nickname_event:
-        notification_body: Nous avons corrigé la façon dont les pseudonymes sont utilisés pour qu'il n'y ait pas de doublons, quelque soit l'utilisation de majuscules et/ou de minuscules. <br/> Votre pseudonyme a été créé après un autre qui était identique, nous l'avons donc automatiquement renommé. Vous pouvez le modifier depuis <a href="%{link_to_account_settings}">les paramètres de votre compte</a>.
+        notification_body: Nous avons corrigé la façon dont les pseudonymes sont utilisés pour qu'il n'y ait pas de doublons, et c'est pourquoi nous avons supprimé la distinction entre les majuscules et les minuscules. <br/> Votre pseudonyme a été créé après un autre qui était identique, nous l'avons donc automatiquement modifié. Vous pouvez le modifier depuis <a href="%{link_to_account_settings}">les paramètres de votre compte</a>.
       notification_event:
-        notification_title: Un événement a eu lieu à <a href="%{resource_path}">%{resource_title}</a>.
+        notification_title: Un événement a eu lieu sur <a href="%{resource_path}">%{resource_title}</a>.
       reports:
         resource_hidden:
           email_intro: Un administrateur a modéré votre %{resource_type} car il a été signalé comme %{report_reasons}.
@@ -875,7 +888,7 @@ fr:
       create:
         button: Suivre
         error: Une erreur s'est produite lors du traitement de votre demande de suivre ce contenu.
-        participatory_space: Suivre <span class="show-for-sr">%{resource_name}</span>
+        participatory_space: Déjà abonné à <span>%{resource_name}</span>
       destroy:
         button: Ne plus suivre
         error: Une erreur s'est produite lors du traitement de votre demande de ne plus suivre ce contenu.
@@ -889,14 +902,14 @@ fr:
         file:
           explanation: 'Orientation pour le fichier :'
           message_1: Doit être une image ou un document.
-          message_2: Pour les images, utilisez de préférence des images en format paysage, le service rogne l'image.
+          message_2: Pour les images, utilisez de préférence des images en format paysage car le service rogne l'image.
         icon:
           explanation: 'Manuel pour l''image:'
           message_1: Doit être une image carrée.
           message_2: La taille recommandée pour cette image est de 512x512.
         image:
           explanation: 'Orientation pour l''image:'
-          message_1: De préférence une image au format paysage qui n'a pas de texte.
+          message_1: De préférence une image au format paysage ne contenant pas de texte.
           message_2: Le service recadre l'image.
       file_validation:
         allowed_file_extensions: 'Extensions de fichier autorisées : %{extensions}'
@@ -915,11 +928,12 @@ fr:
           filename: Nom du fichier
           remove: Supprimer
           replace: Remplacer
+          save: Sauvegarder
           title: Titre
           title_required: Le titre est requis !
           uploaded: Téléchargé
           validating: Validation en cours...
-          validation_error: Erreur de validation !
+          validation_error: Erreur de validation ! Vérifiez que le fichier a une extension ou taille autorisée.
         select_file: Sélectionnez un fichier
       upload_help:
         dropzone: Déposez des fichiers ici ou cliquez sur le bouton pour télécharger
@@ -1038,7 +1052,7 @@ fr:
           content: "<p>Sur %{organization} vous pouvez participer et décider sur différents sujets grâce aux espaces que vous voyez dans le menu principal: Processus, Assemblées, Pétitions, Consultations.</p> <p>Au sein de chacune d’elles, vous trouverez différentes options de participation: faites des propositions - individuellement ou avec d’autres personnes -, participez aux débats, accordez la priorité aux projets à mettre en œuvre, participez aux réunions en personne et autres actions.</p>\n"
           title: Que puis-je faire sur la plateforme %{organization} ?
         description: En savoir plus sur %{organization}.
-        title: Aide générale
+        title: Général
     last_activities:
       all: Tous les types d'activité
       index:
@@ -1214,7 +1228,7 @@ fr:
         token_error: Le lien a expiré.
         unsubscribe: Se désabonner
     newsletters_opt_in:
-      unathorized: Désolé, ce lien n'est plus disponible.
+      unauthorized: Désolé, ce lien n'est plus disponible.
       update:
         error: Un problème est survenu lors de l'enregistrement des paramètres de la newsletter.
         success: Les paramètres de la newsletter ont été mis à jour avec succès.
@@ -1234,9 +1248,11 @@ fr:
         same_language: Le contenu a été publié dans votre langue préférée (%{language}), c'est pourquoi aucune traduction automatique n'est affichée dans cet e-mail.
         translated_text: 'Traduction automatique du texte :'
     notifications:
+      action_error: Un problème est survenu lors de la mise à jour des notifications.
       no_notifications: Il n'y a pas encore de notifications.
       show:
         missing_event: Oups, cette notification est liée à un élément qui n'est plus disponible. Vous pouvez la supprimer.
+        moderated: Contenu modéré
     notifications_digest_mailer:
       header:
         daily: Résumé quotidien des notifications
@@ -1253,6 +1269,7 @@ fr:
         administrators: Administrateurs
         allow_public_contact: "Allow anyone to send me a direct message, even if I do not follow them.\nAutoriser tout le monde à m'envoyer un message direct même si je ne les suis pas."
         allow_push_notifications: Recevez des notifications push pour savoir ce qui se passe lorsque vous n'êtes pas sur la plateforme. Vous pouvez les désactiver à tout moment.
+        assigned_to_proposal: Je veux recevoir un email quand quelqu'un m'assigne une proposition à évaluer
         direct_messages: Recevoir des messages directs de n'importe qui
         email_on_moderations: Je veux recevoir un email chaque fois que quelqu'un ou qu'une ressource a été signalé à des fins de modérations.
         everything_followed: Tout ce que je suis
@@ -1271,13 +1288,15 @@ fr:
         push_notifications_reminder: Pour recevoir des notifications de la plateforme, vous devez d'abord les autoriser dans les paramètres de votre navigateur.
         receive_notifications_about: Je veux recevoir des notifications sur
         update_notifications_settings: Enregistrer les modifications
+        valuators: Évaluateurs
       update:
         error: Une erreur s'est produite lors de la mise à jour des paramètres de vos notifications.
         success: Vos paramètres de notifications ont été mis à jour avec succès.
     offline:
       name: Hors ligne
       show:
-        message: Il semble que vous êtes actuellement hors ligne. Veuillez réessayer plus tard.
+        message_1: On dirait que vous êtes actuellement hors ligne.
+        message_2: Veuillez réessayer plus tard.
         retry: Réessayer
     open_data:
       not_available_yet: Les fichiers Open Data ne sont pas encore disponibles. Veuillez réessayer dans quelques minutes.
@@ -1308,7 +1327,7 @@ fr:
           headline: État actuel de %{organization}
         sub_hero:
           register: S'inscrire
-          register_title: Inscrivez-vous pour créer un compte
+          register_title: Créer un compte
       index:
         standalone_pages: Pages
         subheading: Naviguer à travers les pages d'aide de %{name}
@@ -1335,8 +1354,6 @@ fr:
           alert: Nous avons mis à jour nos conditions d'utilisation, veuillez les consulter.
           body: Veuillez prendre le temps de consulter nos conditions d'utilisation mises à jour. Dans le cas contraire, vous ne serrez pas en mesure d'utiliser la plateforme.
           title: 'Requis : veuillez consulter la mise à jour des conditions d''utilisation.'
-    participatory_space_private_users:
-      not_allowed: Vous n'êtes pas autorisé à voir ce contenu
     passwords:
       update:
         error: Il y a eu un problème lors de la mise à jour de votre mot de passe.
@@ -1456,6 +1473,9 @@ fr:
         close_modal: Fermer la fenêtre de dialogue
         ok: Ok
         title: Valider
+      confirm_unload: Cette page contient des modifications non enregistrées. Êtes-vous sûr(e) de vouloir quitter cette page ?
+      embed:
+        title: Contenu vidéo intégré
       extended_navigation_bar:
         more: Plus
         unfold: Afficher
@@ -1618,7 +1638,7 @@ fr:
       locked: Votre compte est bloqué.
       not_found_in_database: '%{authentication_keys} ou mot de passe invalide.'
       timeout: Votre session a expiré, veuillez vous reconnecter pour continuer.
-      unauthenticated: Vous devez vous connecter ou vous inscrire pour continuer.
+      unauthenticated: Vous devez vous connecter ou créer un compte pour continuer.
     invitations:
       edit:
         header: Terminer la création de votre compte
@@ -1683,6 +1703,7 @@ fr:
         message: Votre compte a été verrouillé en raison d'une quantité excessive de tentatives de connexion infructueuses.
         subject: Instructions de déverrouillage
     omniauth_callbacks:
+      add_tos_errors: Les conditions d'utilisation doivent être acceptées afin de créer un compte.
       failure: Impossible de vous authentifier à partir de %{kind} car "%{reason}".
       success: Authentifié avec succès à partir de %{kind} compte.
     passwords:
@@ -1797,30 +1818,32 @@ fr:
     upload:
       uploadedFile: Fichier déposé
   emojis:
+    add_custom: Ajouter un émoji personnalisé
     button: Ajouter un émoji
     categories:
-      activities: Activités
-      animals-nature: Animaux & nature
+      activity: Activité
       custom: Personnalisé
       flags: Drapeaux
-      food-drink: Nourriture et boissons
+      foods: Nourriture et Boissons
+      frequent: Fréquemment utilisés
+      nature: Animaux & Nature
       objects: Objets
-      people-body: Personnes & Corps
-      recents: Utilisés récemment
-      smileys-emotion: Smileys & Émotion
+      people: Smileys et Personnes
+      places: Voyages et Lieux
+      search: Résultats de recherche
       symbols: Symboles
-      travel-places: Lieux et voyages
-    error:
-      load: Impossible de charger la liste des émojis
-    recents:
-      clear: Effacer les émojis récents
-      none: Vous n'avez pas encore sélectionné d'emojis.
-    retry: Réessayez
-    search:
-      _: Rechercher des émojis...
-      clear: Effacer la recherche
-      error: La recherche d'émojis a échoué
-      not_found: Aucun résultat trouvé
+    pick: Choisissez un emoji…
+    search: Rechercher
+    search_no_results_1: Oh non!
+    search_no_results_2: Cet émoji n'a pas pu être trouvé
+    skins:
+      '1': Par défaut
+      '2': Clair
+      '3': Moyennement clair
+      '4': Moyen
+      '5': Moyennement sombre
+      '6': Sombre
+      choose: Choisissez le teint de peau par défaut
   errors:
     messages:
       allowed_file_content_types: 'seuls les fichiers avec les extensions suivantes sont autorisés : %{types}'
@@ -1838,10 +1861,10 @@ fr:
       long_words: contient des mots trop longs (plus de 35 caractères)
       must_start_with_caps: doit commencer par une majuscule
       nesting_too_deep: ne peut pas être à l'intérieur d'une sous-catégorie
-      not_found: Compte introuvable. Vous êtes-vous déjà inscrit ?
+      not_found: n'a pas pu être trouvé. Avez-vous créé un compte précédemment ?
       not_locked: n'était pas verrouillé
       not_saved:
-        one: 'Une erreur est survenue pendant le traitement de votre requête.'
+        one: 'Une erreur est survenue pendant le traitement de votre requête:'
         other: 'Plusieurs erreurs sont survenues pendant le traitement de votre requête.'
       too_many_marks: utilise trop de signes de ponctuation consécutifs (par exemple! et?)
       too_much_caps: utilise trop de lettres majuscules (plus de 25% du texte)
@@ -1924,7 +1947,7 @@ fr:
         made_with_open_source: Site réalisé grâce au <a target="_blank" href="https://github.com/decidim/decidim">logiciel libre Decidim</a>.
         resources: Ressources
         sign_up: Créer un compte
-        terms_and_conditions: Conditions générales
+        terms_of_service: Conditions d'utilisation
       header:
         log_in: Se connecter
         main_menu: Menu principal
@@ -1940,10 +1963,6 @@ fr:
         mark_as_read: Marquer comme lu
       offline_banner:
         cache_version_page: Désolé ! Votre réseau est hors ligne. Il s'agit d'une version antérieurement mise en cache de la page que vous visitez, dont le contenu n'est peut-être pas à jour.
-      shared:
-        layout_item:
-          next: Élément suivant
-          prev: Élément précédent
       social_media_links:
         facebook: "%{organization} sur Facebook"
         github: "%{organization} sur GitHub"
@@ -2022,6 +2041,10 @@ fr:
     x: X
     xing: Xing
   time:
+    buttons:
+      close: Fermer
+      reset: Réinitialiser
+      select:
     formats:
       day_of_month: "%b %d"
       day_of_week: "%a"
@@ -2036,11 +2059,14 @@ fr:
         mailer:
           invitation_instructions:
             accept_until_format: "%B %d, %Y %I:%M %p"
+      help:
+        time_format: 'Format: hh:mm'
       long: "%A %d %B %Y %H h %M"
       long_dashed: "%Y-%m-%d %H:%M:%S"
       long_with_particles: "%d %B %Y à %H:%M"
       short: "%d/%m/%Y %H:%M"
       time_of_day: "%H:%M"
+      tooltip: "%d-%m-%Y %H:%M %p %Z (GMT %:z)"
   versions:
     directions:
       left: Suppressions

@@ -18,24 +18,30 @@ Gem::Specification.new do |s|
     "homepage_uri" => "https://decidim.org",
     "source_code_uri" => "https://github.com/decidim/decidim"
   }
-  s.required_ruby_version = ">= 3.1"
+  s.required_ruby_version = "~> 3.3.0"
 
   s.name = "decidim"
 
   s.summary = "Citizen participation framework for Ruby on Rails."
   s.description = "A generator and multiple gems made with Ruby on Rails."
 
-  s.files = Dir[
-    "{docs,lib}/**/*",
-    "LICENSE-AGPLv3.txt",
-    "Rakefile",
-    "README.md",
-    "package.json",
-    "package-lock.json",
-    "packages/**/*",
-    "babel.config.json",
-    "decidim-core/lib/decidim/webpacker/**/*"
-  ]
+  s.files = Dir.chdir(__dir__) do
+    `git ls-files -z`.split("\x0").select do |f|
+      (File.expand_path(f) == __FILE__) ||
+        f.start_with?(*%w(
+                        docs/
+                        lib/
+                        LICENSE-AGPLv3.txt
+                        Rakefile
+                        README.md
+                        package.json
+                        package-lock.json
+                        packages/
+                        babel.config.json
+                        decidim-core/lib/decidim/webpacker/
+                      ))
+    end
+  end
 
   s.require_paths = ["lib"]
 
@@ -57,7 +63,6 @@ Gem::Specification.new do |s|
   s.add_dependency "decidim-sortitions", Decidim.version
   s.add_dependency "decidim-surveys", Decidim.version
   s.add_dependency "decidim-system", Decidim.version
-  s.add_dependency "decidim-templates", Decidim.version
   s.add_dependency "decidim-verifications", Decidim.version
 
   s.add_development_dependency "bundler", "~> 2.2", ">= 2.2.18"

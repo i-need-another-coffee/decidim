@@ -39,7 +39,7 @@ module Decidim
           }
         end
         let(:command) do
-          described_class.new(initiative, form, initiative.author)
+          described_class.new(initiative, form)
         end
 
         describe "when the form is not valid" do
@@ -59,6 +59,9 @@ module Decidim
         end
 
         describe "when the form is valid" do
+          it_behaves_like "fires an ActiveSupport::Notification event", "decidim.initiatives.update_initiative:before"
+          it_behaves_like "fires an ActiveSupport::Notification event", "decidim.initiatives.update_initiative:after"
+
           it "broadcasts ok" do
             expect { command.call }.to broadcast(:ok)
           end
@@ -131,7 +134,7 @@ module Decidim
               ]
             end
 
-            it "creates multiple atachments for the initiative" do
+            it "creates multiple attachments for the initiative" do
               expect { command.call }.to change(Decidim::Attachment, :count).by(2)
               initiative.reload
               last_attachment = Decidim::Attachment.last
@@ -165,11 +168,11 @@ module Decidim
             let(:uploaded_files) do
               [
                 upload_test_file(Decidim::Dev.test_file("city.jpeg", "image/jpeg")),
-                upload_test_file(Decidim::Dev.test_file("verify_user_groups.csv", "text/csv"))
+                upload_test_file(Decidim::Dev.test_file("invalid_extension.log", "text/plain"))
               ]
             end
 
-            it "does not create atachments for the initiative" do
+            it "does not create attachments for the initiative" do
               expect { command.call }.not_to change(Decidim::Attachment, :count)
             end
 

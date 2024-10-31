@@ -12,13 +12,16 @@ describe "Explore meetings", :slow do
   let!(:meetings) do
     create_list(:meeting, meetings_count, :not_official, :published, component:)
   end
+  let(:taxonomy) { create(:taxonomy, :with_parent, skip_injection: true, organization:) }
+  let(:taxonomy_filter) { create(:taxonomy_filter, root_taxonomy: taxonomy.parent) }
+  let!(:taxonomy_filter_item) { create(:taxonomy_filter_item, taxonomy_filter:, taxonomy_item: taxonomy) }
+  let(:taxonomy_filter_ids) { [taxonomy_filter.id] }
 
   before do
     # Required for the link to be pointing to the correct URL with the server
     # port since the server port is not defined for the test environment.
     allow(ActionMailer::Base).to receive(:default_url_options).and_return(port: Capybara.server_port)
-    component_scope = create(:scope, parent: participatory_process.scope)
-    component_settings = component["settings"]["global"].merge!(scopes_enabled: true, scope_id: component_scope.id)
+    component_settings = component["settings"]["global"].merge!(taxonomy_filters: taxonomy_filter_ids)
     component.update!(settings: component_settings)
   end
 
@@ -40,7 +43,7 @@ describe "Explore meetings", :slow do
         visit_component
       end
 
-      context "when meetings mounted under paraticipatory process" do
+      context "when meetings mounted under participatory process" do
         let(:participatory_space) { create(:participatory_process, organization:) }
 
         it "properly saves the shortened link" do
@@ -77,18 +80,18 @@ describe "Explore meetings", :slow do
       it "does not show past meetings" do
         visit_component
         within "#meetings" do
-          expect(page).not_to have_content(translated(past_meeting.title))
+          expect(page).to have_no_content(translated(past_meeting.title))
         end
       end
     end
 
     context "when checking withdrawn meetings" do
-      context "when there are no withrawn meetings" do
+      context "when there are no withdrawn meetings" do
         let!(:meeting) { create_list(:meeting, 3, :published, component:) }
 
         before do
           visit_component
-          click_link "See all withdrawn meetings"
+          click_on "See all withdrawn meetings"
         end
 
         it "shows an empty page with a message" do
@@ -99,16 +102,16 @@ describe "Explore meetings", :slow do
         end
       end
 
-      context "when there are withrawn meetings" do
+      context "when there are withdrawn meetings" do
         let!(:withdrawn_meetings) { create_list(:meeting, 3, :withdrawn, :published, component:) }
 
         before do
           visit_component
-          click_link "See all withdrawn meetings"
+          click_on "See all withdrawn meetings"
         end
 
         it "shows all the withdrawn meetings" do
-          expect(page).to have_css("span", text: "Withdrawn", count: 3)
+          expect(page).to have_css(".card__list-metadata div", text: "Withdrawn", count: 3)
           within ".flash.info", match: :first do
             expect(page).to have_content("You are viewing the list of meetings withdrawn by their authors.")
           end
@@ -128,7 +131,7 @@ describe "Explore meetings", :slow do
 
         expect(page).to have_selector(meetings_selector, count: meetings_count - 1)
 
-        expect(page).not_to have_content(translated(meeting.title))
+        expect(page).to have_no_content(translated(meeting.title))
       end
     end
 
@@ -141,7 +144,7 @@ describe "Explore meetings", :slow do
         visit_component
 
         within("#meetings__meeting_#{meeting.id}") do
-          expect(page).to have_css("span", text: 2)
+          expect(page).to have_css("[data-comments-count]", text: 2)
         end
       end
     end
@@ -156,11 +159,11 @@ describe "Explore meetings", :slow do
           within "form.new_filter" do
             fill_in("filter[search_text_cont]", with: "foobar")
             within "div.filter-search" do
-              click_button
+              click_on
             end
           end
 
-          expect(page).not_to have_content("Another meeting")
+          expect(page).to have_no_content("Another meeting")
           expect(page).to have_content("Foobar meeting")
 
           filter_params = CGI.parse(URI.parse(page.current_url).query)
@@ -227,7 +230,7 @@ describe "Explore meetings", :slow do
         within "form.new_filter" do
           fill_in("filter[search_text_cont]", with: translated(meetings.first.title))
           within "div.filter-search" do
-            click_button
+            click_on
           end
         end
 
@@ -252,14 +255,14 @@ describe "Explore meetings", :slow do
 
           expect(page).to have_css(meetings_selector, count: 3)
           expect(page).to have_content(translated(past_meeting1.title))
-          expect(page).not_to have_content(translated(upcoming_meeting1.title))
+          expect(page).to have_no_content(translated(upcoming_meeting1.title))
 
           within "#panel-dropdown-menu-date" do
             click_filter_item "Upcoming"
           end
 
           expect(page).to have_content(translated(upcoming_meeting1.title))
-          expect(page).not_to have_content(translated(past_meeting1.title))
+          expect(page).to have_no_content(translated(past_meeting1.title))
 
           expect(page).to have_css(meetings_selector, count: 8)
 
@@ -335,7 +338,7 @@ describe "Explore meetings", :slow do
         filter_params = CGI.parse(URI.parse(page.current_url).query)
         base_url = "http://#{organization.host}:#{Capybara.server_port}"
 
-        click_button "Export calendar"
+        click_on "Export calendar"
         expect(page).to have_css("#calendarShare", visible: :visible)
         within("#calendarShare") do
           expect(page).to have_content("Calendar URL")
@@ -356,16 +359,15 @@ describe "Explore meetings", :slow do
         expect(current_params).to eq(filter_params)
       end
 
-      it "allows filtering by scope" do
-        scope = create(:scope, organization:)
+      it "allows filtering by taxonomies" do
         meeting = meetings.first
-        meeting.scope = scope
+        meeting.taxonomies << taxonomy
         meeting.save
 
         visit_component
 
-        within "#panel-dropdown-menu-scope" do
-          click_filter_item translated(scope.name)
+        within "#panel-dropdown-menu-taxonomy-#{taxonomy.parent.id}" do
+          click_filter_item decidim_escape_translated(taxonomy.name)
         end
 
         expect(page).to have_css(meetings_selector, count: 1)
@@ -420,12 +422,12 @@ describe "Explore meetings", :slow do
       it "hides map" do
         visit_component
 
-        expect(page).not_to have_css("div.map__help")
+        expect(page).to have_no_css("div.map__help")
       end
     end
   end
 
-  describe "show", :serves_map do
+  describe "show" do
     let(:meetings_count) { 1 }
     let(:meeting) { meetings.first }
     let(:date) { 10.days.from_now }
@@ -435,7 +437,7 @@ describe "Explore meetings", :slow do
         start_time: date.beginning_of_day,
         end_time: date.end_of_day
       )
-
+      stub_geocoding_coordinates([meeting.latitude, meeting.longitude])
       visit resource_locator(meeting).path
     end
 
@@ -446,58 +448,57 @@ describe "Explore meetings", :slow do
       expect(page).to have_i18n_content(meeting.location_hints, strip_tags: true)
       expect(page).to have_content(meeting.address)
       expect(page).to have_content(meeting.reference)
+      expect(page).to have_content(I18n.l(meeting.start_time, format: "%H:%M"))
+      expect(page).to have_content(I18n.l(meeting.end_time, format: "%H:%M"))
+      expect(page).to have_content("UTC")
 
       within ".meeting__calendar-day" do
         expect(page).to have_content(date.day)
       end
-      within ".meeting__calendar-time" do
-        expect(page).to have_content(/00:00\s-\s23:59/)
+      within ".meeting__calendar-year" do
+        expect(page).to have_content(/20\d\d/)
       end
     end
 
-    context "without category or scope" do
+    context "when the organization has a different timezone" do
+      before do
+        organization.update!(time_zone: "Hawaii")
+
+        visit resource_locator(meeting).path
+      end
+
+      it "shows the correct time zone" do
+        expect(page).to have_content("HST")
+      end
+    end
+
+    context "without taxonomies" do
       it "does not show any tag" do
-        expect(page).not_to have_selector("[data-tags]")
+        expect(page).to have_no_selector("[data-tags]")
       end
     end
 
-    context "with a category" do
+    context "with a taxonomy" do
       let(:meeting) do
         meeting = meetings.first
-        meeting.category = create(:category, participatory_space: participatory_process)
+        meeting.taxonomies << taxonomy
         meeting.save
         meeting
       end
 
-      it "shows tags for category" do
-        expect(page).to have_selector("[data-tags]")
+      it "shows tags for taxonomy" do
+        expect(page).to have_css("[data-tags]")
         within "[data-tags]" do
-          expect(page).to have_content(translated(meeting.category.name))
+          expect(page).to have_content(decidim_escape_translated(taxonomy.name))
         end
       end
 
-      it "links to the filter for this category" do
+      it "links to the filter for this taxonomy" do
         within "[data-tags]" do
-          click_link translated(meeting.category.name)
+          click_on decidim_escape_translated(taxonomy.name)
         end
 
-        expect(page).to have_checked_field(translated(meeting.category.name))
-      end
-    end
-
-    context "with a scope" do
-      let(:meeting) do
-        meeting = meetings.first
-        meeting.scope = create(:scope, organization:)
-        meeting.save
-        meeting
-      end
-
-      it "shows tags for scope" do
-        expect(page).to have_selector("[data-tags]")
-        within "[data-tags]" do
-          expect(page).to have_content(translated(meeting.scope.name))
-        end
+        expect(page).to have_checked_field(decidim_escape_translated(taxonomy.name))
       end
     end
 
@@ -513,7 +514,7 @@ describe "Explore meetings", :slow do
 
       it "shows related proposals" do
         visit_component
-        click_link translated(meeting.title)
+        click_on translated(meeting.title)
         proposals.each do |proposal|
           expect(page).to have_content(translated(proposal.title))
           expect(page).to have_content(proposal.creator_author.name)
@@ -534,7 +535,7 @@ describe "Explore meetings", :slow do
 
       it "shows related resources" do
         visit_component
-        click_link translated(meeting.title)
+        click_on translated(meeting.title)
         results.each do |result|
           expect(page).to have_i18n_content(result.title)
         end
@@ -548,7 +549,7 @@ describe "Explore meetings", :slow do
     shared_examples_for "a closing report page" do
       it "shows the closing report" do
         visit_component
-        click_link translated(meeting.title)
+        click_on translated(meeting.title)
         expect(page).to have_i18n_content(meeting.closing_report, strip_tags: true)
 
         within "[data-content]" do
@@ -565,7 +566,7 @@ describe "Explore meetings", :slow do
 
       it "does not show contributions count" do
         within "[data-content]" do
-          expect(page).not_to have_css(".meeting__aside-block", text: "Contributions count\n0")
+          expect(page).to have_no_css(".meeting__aside-block", text: "Contributions count\n0")
         end
       end
     end

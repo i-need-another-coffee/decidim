@@ -126,6 +126,12 @@ fi-pl:
         new:
           create: Luo
           title: Uusi konferenssin puhuja.
+        publish:
+          invalid: Puhujan julkaiseminen epäonnistui.
+          success: Konferenssin puhujan julkaiseminen onnistui.
+        unpublish:
+          invalid: Puhujan julkaisun lopettaminen epäonnistui.
+          success: Konferenssin puhujan julkaisu onnistui.
         update:
           error: Konferenssin puhujan päivittämisessä tapahtui virhe.
           success: Konferenssin puhuja päivitettiin onnistuneesti.
@@ -347,14 +353,8 @@ fi-pl:
             non_user: Käyttäjää ei ole olemassa
             select_user: Valitse käyttäjä
           index:
-            filter:
-              accepted: Hyväksytyt
-              all: Kaikki
-              rejected: Hylätyt
-              sent: Lähetetyt
             invite_attendee: Kutsu osallistuja
             invites: Kutsut
-            search: Hae
           new:
             explanation: Käyttäjä kutsutaan mukaan konferenssiin. Jos sähköpostiosoitteella ei ole käyttäjätiliä, käyttäjä kutsutaan myös organisaatioon.
             invite: Kutsu
@@ -473,6 +473,8 @@ fi-pl:
           name: Tärkeimmät konferenssit
       index:
         title: Konferenssit
+      last_activity:
+        new_conference: 'Uusi konferenssi:'
       mailer:
         conference_registration_mailer:
           confirmation:

@@ -7,10 +7,9 @@ describe "Proposals" do
   include_context "with a component"
   let(:manifest_name) { "proposals" }
 
-  let!(:category) { create(:category, participatory_space: participatory_process) }
-  let!(:scope) { create(:scope, organization:) }
+  let(:root_taxonomy) { create(:taxonomy, organization:) }
+  let!(:taxonomy) { create(:taxonomy, parent: root_taxonomy, organization:) }
   let!(:user) { create(:user, :confirmed, organization:) }
-  let(:scoped_participatory_process) { create(:participatory_process, :with_steps, organization:, scope:) }
 
   let(:address) { "Some address" }
   let(:latitude) { 40.1234 }
@@ -36,11 +35,7 @@ describe "Proposals" do
     let!(:component) do
       create(:proposal_component,
              manifest:,
-             participatory_space: participatory_process,
-             settings: {
-               scopes_enabled: true,
-               scope_id: participatory_process.scope&.id
-             })
+             participatory_space: participatory_process)
     end
 
     let!(:proposals) { create_list(:proposal, 3, component:) }
@@ -49,7 +44,7 @@ describe "Proposals" do
     it_behaves_like "accessible page" do
       before do
         visit_component
-        click_link proposal_title
+        click_on proposal_title
       end
     end
 
@@ -64,32 +59,22 @@ describe "Proposals" do
     it "allows viewing a single proposal" do
       visit_component
 
-      click_link proposal_title
+      click_on proposal_title
 
       expect(page).to have_content(proposal_title)
       expect(page).to have_content(strip_tags(translated(proposal.body)).strip)
       expect(page).to have_author(proposal.creator_author.name)
       expect(page).to have_content(proposal.reference)
+      expect(page).to have_content(proposal.published_at.strftime("%d/%m/%Y %H:%M"))
     end
 
-    context "when process is not related to any scope" do
-      let!(:proposal) { create(:proposal, component:, scope:) }
+    context "when proposal has a taxonomies" do
+      let!(:proposal) { create(:proposal, component:, taxonomies: [taxonomy]) }
 
-      it "can be filtered by scope" do
+      it "can be filtered by taxonomy" do
         visit_component
-        click_link proposal_title
-        expect(page).to have_content(translated(scope.name))
-      end
-    end
-
-    context "when process is related to a child scope" do
-      let!(:proposal) { create(:proposal, component:, scope:) }
-      let(:participatory_process) { scoped_participatory_process }
-
-      it "does not show the scope name" do
-        visit_component
-        click_link proposal_title
-        expect(page).not_to have_content(translated(scope.name))
+        click_on proposal_title
+        expect(page).to have_content(decidim_sanitize_translated(taxonomy.name))
       end
     end
 
@@ -100,7 +85,7 @@ describe "Proposals" do
 
       before do
         visit_component
-        click_link official_proposal_title
+        click_on official_proposal_title
       end
 
       it "shows the author as official" do
@@ -116,7 +101,7 @@ describe "Proposals" do
       before do
         organization.update(rich_text_editor_in_public_views: true)
         visit_component
-        click_link proposal_title
+        click_on proposal_title
       end
 
       it_behaves_like "rendering safe content", ".editor-content"
@@ -127,7 +112,7 @@ describe "Proposals" do
 
       before do
         visit_component
-        click_link proposal_title
+        click_on proposal_title
       end
 
       it_behaves_like "rendering unsafe content", ".editor-content"
@@ -139,7 +124,7 @@ describe "Proposals" do
 
       before do
         visit_component
-        click_link proposal_title
+        click_on proposal_title
       end
 
       it "shows the author as meeting" do
@@ -156,7 +141,7 @@ describe "Proposals" do
 
       it "shows the comments" do
         visit_component
-        click_link proposal_title
+        click_on proposal_title
 
         comments.each do |comment|
           expect(page).to have_content(comment.body.values.first)
@@ -195,7 +180,7 @@ describe "Proposals" do
         )
 
         visit_component
-        click_link proposal_title
+        click_on proposal_title
       end
 
       context "when is created by the admin" do
@@ -235,7 +220,7 @@ describe "Proposals" do
         )
 
         visit_component
-        click_link proposal_title
+        click_on proposal_title
 
         expect(page).to have_content("20,000.00")
         expect(page).to have_content("MY EXECUTION PERIOD")
@@ -256,9 +241,9 @@ describe "Proposals" do
 
       it "shows related meetings" do
         visit_component
-        click_link proposal_title
+        click_on proposal_title
 
-        expect(page).to have_i18n_content(meeting.title)
+        expect(page).to have_i18n_content(decidim_sanitize_translated(meeting.title))
       end
     end
 
@@ -275,9 +260,9 @@ describe "Proposals" do
 
       it "shows related resources" do
         visit_component
-        click_link proposal_title
+        click_on proposal_title
 
-        expect(page).to have_i18n_content(result.title)
+        expect(page).to have_i18n_content(decidim_sanitize_translated(result.title))
       end
     end
 
@@ -286,11 +271,11 @@ describe "Proposals" do
 
       it "shows a badge and an answer" do
         visit_component
-        click_link proposal_title
+        click_on proposal_title
 
         expect(page).to have_content("Evaluating")
 
-        within ".flash.warning[data-announcement]" do
+        within ".flash[data-announcement]", style: proposal.proposal_state.css_style do
           expect(page).to have_content("This proposal is being evaluated")
           expect(page).to have_i18n_content(proposal.answer)
         end
@@ -306,11 +291,11 @@ describe "Proposals" do
         uncheck "Evaluating"
         uncheck "Not answered"
         page.find_link(proposal_title, wait: 30)
-        click_link proposal_title
+        click_on proposal_title
 
         expect(page).to have_content("Rejected")
 
-        within ".flash.alert[data-announcement]" do
+        within ".flash[data-announcement]", style: proposal.proposal_state.css_style do
           expect(page).to have_content("This proposal has been rejected")
           expect(page).to have_i18n_content(proposal.answer)
         end
@@ -322,11 +307,11 @@ describe "Proposals" do
 
       it "shows the acceptance reason" do
         visit_component
-        click_link proposal_title
+        click_on proposal_title
 
         expect(page).to have_content("Accepted")
 
-        within ".flash.success[data-announcement]" do
+        within ".flash[data-announcement]", style: proposal.proposal_state.css_style do
           expect(page).to have_content("This proposal has been accepted")
           expect(page).to have_i18n_content(proposal.answer)
         end
@@ -338,25 +323,27 @@ describe "Proposals" do
 
       it "shows the acceptance reason" do
         visit_component
-        click_link proposal_title
+        click_on proposal_title
 
-        expect(page).not_to have_content("Accepted")
-        expect(page).not_to have_content("This proposal has been accepted")
+        within ".layout-author" do
+          expect(page).to have_no_content("Accepted")
+        end
+        expect(page).to have_no_content("This proposal has been accepted")
         expect(page).not_to have_i18n_content(proposal.answer)
       end
     end
 
-    context "when the proposals'a author account has been deleted" do
+    context "when the proposal's author account has been deleted" do
       let(:proposal) { proposals.first }
 
       before do
-        Decidim::DestroyAccount.call(proposal.creator_author, Decidim::DeleteAccountForm.from_params({}))
+        Decidim::DestroyAccount.call(Decidim::DeleteAccountForm.from_params({}).with_context({ current_user: proposal.creator_author }))
       end
 
       it "the user is displayed as a deleted user" do
         visit_component
 
-        click_link proposal_title
+        click_on proposal_title
 
         expect(page).to have_content("Deleted participant")
       end
@@ -381,9 +368,9 @@ describe "Proposals" do
 
     it "shows related projects" do
       visit_component
-      click_link proposal_title
+      click_on proposal_title
 
-      expect(page).to have_i18n_content(project.title)
+      expect(page).to have_i18n_content(decidim_sanitize_translated(project.title))
     end
   end
 
@@ -397,10 +384,10 @@ describe "Proposals" do
       it "lists the proposals ordered randomly by default" do
         visit_component
 
-        expect(page).to have_selector("a", text: "Random")
-        expect(page).to have_selector("[id^='proposals__proposal']", count: 2)
-        expect(page).to have_selector("[id^='proposals__proposal']", text: lucky_proposal_title)
-        expect(page).to have_selector("[id^='proposals__proposal']", text: unlucky_proposal_title)
+        expect(page).to have_css("a", text: "Random")
+        expect(page).to have_css("[id^='proposals__proposal']", count: 2)
+        expect(page).to have_css("[id^='proposals__proposal']", text: lucky_proposal_title)
+        expect(page).to have_css("[id^='proposals__proposal']", text: unlucky_proposal_title)
         expect(page).to have_author(lucky_proposal.creator_author.name)
       end
     end
@@ -437,7 +424,7 @@ describe "Proposals" do
 
         within("#proposals__proposal_#{proposal.id}") do
           within(".card__list-metadata") do
-            expect(page).to have_css("span", text: 2)
+            expect(page).to have_css("div", text: 2)
           end
         end
       end
@@ -468,9 +455,9 @@ describe "Proposals" do
       before { visit_component }
 
       it "lists the proposals ordered by votes by default" do
-        expect(page).to have_selector("a", text: "Most supported")
-        expect(page).to have_selector("[id^='proposals__proposal']:first-child", text: most_voted_proposal_title)
-        expect(page).to have_selector("[id^='proposals__proposal']:last-child", text: less_voted_proposal_title)
+        expect(page).to have_css("a", text: "Most voted")
+        expect(page).to have_css("[id^='proposals__proposal']:first-child", text: most_voted_proposal_title)
+        expect(page).to have_css("[id^='proposals__proposal']:last-child", text: less_voted_proposal_title)
       end
     end
 
@@ -478,6 +465,7 @@ describe "Proposals" do
       let!(:component) do
         create(:proposal_component,
                :with_votes_disabled,
+               :with_proposal_limit,
                manifest:,
                participatory_space: participatory_process)
       end
@@ -505,9 +493,9 @@ describe "Proposals" do
 
         expect(page).to have_css("[id^='proposals__proposal']", count: Decidim::Paginable::OPTIONS.first)
 
-        click_link "Next"
+        click_on "Next"
 
-        expect(page).to have_selector("[data-pages] [data-page][aria-current='page']", text: "2")
+        expect(page).to have_css("[data-pages] [data-page][aria-current='page']", text: "2")
 
         expect(page).to have_css("[id^='proposals__proposal']", count: 5)
       end
@@ -519,15 +507,15 @@ describe "Proposals" do
       before do
         visit_component
         within ".order-by" do
-          expect(page).to have_selector("div.order-by a", text: "Random")
+          expect(page).to have_css("div.order-by a", text: "Random")
           page.find("a", text: "Random").click
-          click_link(selected_option)
+          click_on(selected_option)
         end
       end
 
       it "lists the proposals ordered by selected option" do
-        expect(page).to have_selector("[id^='proposals__proposal']:first-child", text: first_proposal_title)
-        expect(page).to have_selector("[id^='proposals__proposal']:last-child", text: last_proposal_title)
+        expect(page).to have_css("[id^='proposals__proposal']:first-child", text: first_proposal_title)
+        expect(page).to have_css("[id^='proposals__proposal']:last-child", text: last_proposal_title)
       end
     end
 
@@ -542,7 +530,7 @@ describe "Proposals" do
       let!(:votes) { create_list(:proposal_vote, 3, proposal: most_voted_proposal) }
       let!(:less_voted_proposal) { create(:proposal, component:) }
 
-      it_behaves_like "ordering proposals by selected option", "Most supported" do
+      it_behaves_like "ordering proposals by selected option", "Most voted" do
         let(:first_proposal) { most_voted_proposal }
         let(:last_proposal) { less_voted_proposal }
       end
@@ -640,6 +628,117 @@ describe "Proposals" do
       let!(:resources) { create_list(:proposal, 3, component:) }
 
       it_behaves_like "an uncommentable component"
+    end
+  end
+
+  describe "viewing mode for proposals" do
+    let!(:proposal) { create(:proposal, :evaluating, component:) }
+
+    context "when participants interact with the proposal view" do
+      it "provides an option for toggling between list and grid views" do
+        visit_component
+        expect(page).to have_css("use[href*='layout-grid-fill']")
+        expect(page).to have_css("use[href*='list-check']")
+      end
+    end
+
+    context "when participants are viewing a grid of proposals" do
+      it "shows a grid of proposals with images" do
+        visit_component
+
+        # Check that grid view is not the default
+        expect(page).to have_no_css(".card__grid-grid")
+
+        # Switch to grid view
+        find("a[href*='view_mode=grid']").click
+        expect(page).to have_css(".card__grid-grid")
+        expect(page).to have_css(".card__grid-img img, .card__grid-img svg")
+
+        # Revisit the component and check session storage
+        visit_component
+        expect(page).to have_css(".card__grid-grid")
+      end
+    end
+
+    context "when participants are filtering proposals" do
+      let!(:evaluating_proposals) { create_list(:proposal, 3, :evaluating, component:) }
+      let!(:accepted_proposals) { create_list(:proposal, 5, :accepted, component:) }
+
+      it "filters the proposals and keeps the filter when changing the view mode" do
+        visit_component
+        uncheck "Evaluating"
+
+        expect(page).to have_css("[id^='proposals__proposal']", count: 5)
+
+        find("a[href*='view_mode=grid']").click
+
+        expect(page).to have_css(".card__grid-img svg#ri-proposal-placeholder-card-g", count: 5)
+        expect(page).to have_css("[id^='proposals__proposal']", count: 5)
+      end
+    end
+
+    context "when participants are viewing a list of proposals" do
+      it "shows a list of proposals" do
+        visit_component
+        find("a[href*='view_mode=list']").click
+        expect(page).to have_css(".card__list-list")
+      end
+    end
+
+    context "when proposals does not have attachments" do
+      it "shows a placeholder image" do
+        visit_component
+        find("a[href*='view_mode=grid']").click
+        expect(page).to have_css(".card__grid-img svg#ri-proposal-placeholder-card-g")
+      end
+    end
+
+    context "when proposals have attachments" do
+      let!(:proposal) { create(:proposal, component:) }
+      let!(:attachment) { create(:attachment, attached_to: proposal) }
+
+      before do
+        component.update!(settings: { attachments_allowed: true })
+      end
+
+      it "shows the proposal image" do
+        visit_component
+
+        expect(page).to have_no_css(".card__grid-img img[src*='proposal_image_placeholder.svg']")
+        expect(page).to have_css(".card__grid-img img")
+      end
+    end
+
+    context "when proposal does not have history" do
+      let!(:proposal) { create(:proposal, component:) }
+
+      it "shows the proposal with no history panel" do
+        visit_component
+        click_on proposal_title
+
+        expect(page).to have_no_content("History")
+        expect(page).to have_no_content("This proposal was created")
+      end
+    end
+
+    context "when proposal have history" do
+      let!(:proposal) { create(:proposal, component:) }
+      let(:budget_component) do
+        create(:component, manifest_name: :budgets, participatory_space: proposal.component.participatory_space)
+      end
+      let(:project) { create(:project, component: budget_component) }
+
+      before do
+        project.link_resources([proposal], "included_proposals")
+      end
+
+      it "shows the proposal with history panel" do
+        visit_component
+        click_on proposal_title
+
+        expect(page).to have_content("History")
+        expect(page).to have_content("This proposal was created")
+      end
     end
   end
 end

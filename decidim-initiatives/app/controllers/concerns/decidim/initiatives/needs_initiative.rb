@@ -35,7 +35,7 @@ module Decidim
 
         alias_method :current_participatory_space, :current_initiative
 
-        # Public: Wether the current initiative belongs to an initiative type
+        # Public: Whether the current initiative belongs to an initiative type
         # which requires one or more step before creating a signature
         #
         # Returns nil if there is no current_initiative, true or false
@@ -51,7 +51,7 @@ module Decidim
         def detect_initiative
           request.env["current_initiative"] ||
             Initiative.find_by(
-              id: (id_from_slug(params[:slug]) || id_from_slug(params[:initiative_slug]) || params[:initiative_id] || params[:id]),
+              id: id_from_slug(params[:slug]) || id_from_slug(params[:initiative_slug]) || params[:initiative_id] || params[:id],
               organization: current_organization
             )
         end

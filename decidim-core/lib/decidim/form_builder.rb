@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
-require "foundation_rails_helper/form_builder"
-
 module Decidim
   # This custom FormBuilder adds fields needed to deal with translatable fields,
   # following the conventions set on `Decidim::TranslatableAttributes`.
-  class FormBuilder < FoundationRailsHelper::FormBuilder
+  class FormBuilder < LegacyFormBuilder
     include ActionView::Context
     include Decidim::TranslatableAttributes
     include Decidim::Map::Autocomplete::FormBuilder
@@ -62,7 +60,7 @@ module Decidim
     #
     # Renders form fields for each locale.
     def translated(type, name, options = {})
-      return translated_one_locale(type, name, locales.first, options.merge(label: (options[:label] || label_for(name)))) if locales.count == 1
+      return translated_one_locale(type, name, locales.first, options.merge(label: options[:label] || label_for(name))) if locales.count == 1
 
       tabs_id = sanitize_tabs_selector(options[:tabs_id] || "#{object_name}-#{name}-tabs")
 
@@ -79,7 +77,7 @@ module Decidim
       tabs_content = content_tag(:div, class: "tabs-content", data: { tabs_content: tabs_id }) do
         locales.each_with_index.inject("".html_safe) do |string, (locale, index)|
           tab_content_id = "#{tabs_id}-#{name}-panel-#{index}"
-          string + content_tag(:div, class: tab_element_class_for("panel", index), id: tab_content_id) do
+          string + content_tag(:div, class: tab_element_class_for("panel", index), id: tab_content_id, "aria-hidden": tab_attr_aria_hidden_for(index)) do
             if hashtaggable
               hashtaggable_text_field(type, name, locale, options.merge(label: false))
             elsif type.to_sym == :editor
@@ -98,7 +96,7 @@ module Decidim
       field attribute, options do |opts|
         opts[:autocomplete] ||= :off
         opts[:class] ||= "input-group-field"
-        method(__method__).super_method.super_method.call(attribute, opts)
+        super(attribute, opts)
       end
     end
 
@@ -122,7 +120,7 @@ module Decidim
     def hashtaggable_text_field(type, name, locale, options = {})
       options[:hashtaggable] = true if type.to_sym == :editor
 
-      content_tag(:div, class: "hashtags__container") do
+      content_tag(:div) do
         if options[:value]
           send(type, name_with_locale(name, locale), options.merge(label: options[:label], value: options[:value][locale]))
         else
@@ -164,7 +162,7 @@ module Decidim
       tabs_content = content_tag(:div, class: "tabs-content", data: { tabs_content: tabs_id }) do
         handlers.each_with_index.inject("".html_safe) do |string, (handler, index)|
           tab_content_id = sanitize_tabs_selector "#{tabs_id}-#{name}-panel-#{index}"
-          string + content_tag(:div, class: tab_element_class_for("panel", index), id: tab_content_id) do
+          string + content_tag(:div, class: tab_element_class_for("panel", index), id: tab_content_id, "aria-hidden": tab_attr_aria_hidden_for(index)) do
             send(type, "#{handler}_handler", options.merge(label: false))
           end
         end
@@ -202,7 +200,7 @@ module Decidim
 
       content_tag(
         :div,
-        class: "editor #{"hashtags__container" if editor_options[:editor]["class"].include?("js-hashtags")}",
+        class: "editor",
         id: "#{sanitize_for_dom_selector(@object_name)}_#{sanitize_for_dom_selector(name)}"
       ) do
         template = ""
@@ -378,7 +376,7 @@ module Decidim
       custom_label(attribute, options[:label], options[:label_options], field_before_label: true) do
         options.delete(:label)
         options.delete(:label_options)
-        @template.check_box(@object_name, attribute, objectify_options(options.except(:help_text)), checked_value, unchecked_value)
+        super(attribute, options.except(:help_text), checked_value, unchecked_value)
       end + error_and_help_text(attribute, options)
     end
 
@@ -416,9 +414,9 @@ module Decidim
     # options      - A Hash with options to build the field.
     #              * max_file_size: Maximum size for the file (If you really want to change max
     #                 file size you should probably change it in validator).
-    #              * resouce_name: Name of the resource (e.g. user)
+    #              * resource_name: Name of the resource (e.g. user)
     #              * resource_class: Attribute's resource class (e.g. Decidim::User)
-    #              * resouce_class: Class of the resource (e.g. user)
+    #              * resource_class: Class of the resource (e.g. user)
     #              * required: Whether the file is required or not (false by default).
     #              * titled: Whether the file can have title or not.
     #              * show_current: Whether the current file is displayed next to the button.
@@ -563,8 +561,6 @@ module Decidim
       end
 
       help_text = options.delete(:help_text)
-      prefix = options.delete(:prefix)
-      postfix = options.delete(:postfix)
 
       class_options = extract_validations(attribute, options).merge(class_options)
 
@@ -573,7 +569,7 @@ module Decidim
       content = content.html_safe
 
       html = error_and_help_text(attribute, options.merge(help_text:))
-      html + wrap_prefix_and_postfix(content, prefix, postfix)
+      html + content
     end
 
     # rubocop: disable Metrics/CyclomaticComplexity
@@ -746,6 +742,12 @@ module Decidim
       element_class
     end
 
+    def tab_attr_aria_hidden_for(index)
+      return "false" if index.zero?
+
+      "true"
+    end
+
     def locales
       @locales ||= if @template.respond_to?(:available_locales)
                      Set.new([@template.current_locale] + @template.available_locales).to_a
@@ -864,24 +866,7 @@ module Decidim
 
       content_tag(:span,
                   content_tag(:span, options[:value], class: name),
-                  class: column_classes(options).to_s)
-    end
-
-    # Private: Wraps the prefix and postfix for the field. Overridden from
-    # FoundationRailsHelper to make the generated HTML valid since these
-    # elements are printed within <label> elements and <div>'s are not allowed
-    # there.
-    def wrap_prefix_and_postfix(block, prefix_options, postfix_options)
-      prefix = tag_from_options("prefix", prefix_options)
-      postfix = tag_from_options("postfix", postfix_options)
-
-      input_size = calculate_input_size(prefix_options, postfix_options)
-      klass = column_classes(input_size.marshal_dump).to_s
-      input = content_tag(:span, block, class: klass)
-
-      return block unless input_size.changed?
-
-      content_tag(:span, prefix + input + postfix, class: "row collapse")
+                  class: "columns")
     end
 
     def language_selector_select(locales, tabs_id, name)

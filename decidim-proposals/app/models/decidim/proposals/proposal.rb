@@ -7,6 +7,7 @@ module Decidim
       include Decidim::Resourceable
       include Decidim::Coauthorable
       include Decidim::HasComponent
+      include Decidim::Taxonomizable
       include Decidim::ScopableResource
       include Decidim::HasReference
       include Decidim::HasCategory
@@ -29,9 +30,13 @@ module Decidim
       include Decidim::TranslatableAttributes
       include Decidim::FilterableResource
 
-      translatable_fields :title, :body
+      def assign_state(token)
+        proposal_state = Decidim::Proposals::ProposalState.where(component:, token:).first
 
-      STATES = { not_answered: 0, evaluating: 10, accepted: 20, rejected: -10, withdrawn: -20 }.freeze
+        self.proposal_state = proposal_state
+      end
+
+      translatable_fields :title, :body
 
       fingerprint fields: [:title, :body]
 
@@ -41,6 +46,13 @@ module Decidim
       )
 
       component_manifest_name "proposals"
+
+      belongs_to :proposal_state,
+                 class_name: "Decidim::Proposals::ProposalState",
+                 foreign_key: "decidim_proposals_proposal_state_id",
+                 inverse_of: :proposals,
+                 optional: true,
+                 counter_cache: true
 
       has_many :votes,
                -> { final },
@@ -55,19 +67,31 @@ module Decidim
 
       geocoded_by :address
 
-      enum state: STATES, _default: "not_answered"
+      scope :not_status, lambda { |status|
+        joins(:proposal_state).where.not(decidim_proposals_proposal_states: { token: status })
+      }
 
-      scope :accepted, -> { state_published.where(state: "accepted") }
-      scope :rejected, -> { state_published.where(state: "rejected") }
-      scope :evaluating, -> { state_published.where(state: "evaluating") }
+      scope :only_status, lambda { |status|
+        joins(:proposal_state).where(decidim_proposals_proposal_states: { token: status })
+      }
+
+      scope :accepted, -> { state_published.only_status(:accepted) }
+      scope :rejected, -> { state_published.only_status(:rejected) }
+      scope :evaluating, -> { state_published.only_status(:evaluating) }
+
+      scope :gamified, -> { only_status(:accepted).where(decidim_proposals_proposal_states: { gamified: true }) }
 
       scope :answered, -> { where.not(answered_at: nil) }
       scope :not_answered, -> { where(answered_at: nil) }
 
       scope :state_not_published, -> { where(state_published_at: nil) }
       scope :state_published, -> { where.not(state_published_at: nil) }
-      scope :except_rejected, -> { not_rejected.or(state_not_published) }
-      scope :except_withdrawn, -> { not_withdrawn }
+
+      scope :except_rejected, -> { state_published.not_status(:rejected).or(state_not_published) }
+
+      scope :withdrawn, -> { where.not(withdrawn_at: nil) }
+      scope :not_withdrawn, -> { where(withdrawn_at: nil) }
+
       scope :drafts, -> { where(published_at: nil) }
       scope :published, -> { where.not(published_at: nil) }
       scope :order_by_most_recent, -> { order(created_at: :desc) }
@@ -77,7 +101,7 @@ module Decidim
         when "withdrawn"
           withdrawn
         else
-          except_withdrawn
+          not_withdrawn
         end
       }
 
@@ -97,14 +121,41 @@ module Decidim
       }
 
       scope :sort_by_valuation_assignments_count_asc, lambda {
-        order(Arel.sql("#{sort_by_valuation_assignments_count_nulls_last_query} ASC NULLS FIRST").to_s)
+        order(valuation_assignments_count: :asc)
       }
 
       scope :sort_by_valuation_assignments_count_desc, lambda {
-        order(Arel.sql("#{sort_by_valuation_assignments_count_nulls_last_query} DESC NULLS LAST").to_s)
+        order(valuation_assignments_count: :desc)
       }
 
-      scope_search_multi :with_any_state, [:accepted, :rejected, :evaluating, :state_not_published, :state_published]
+      scope :state_eq, lambda { |state|
+        return withdrawn if state == "withdrawn"
+
+        only_status(state)
+      }
+
+      scope :with_any_state, lambda { |*value_keys|
+        possible_scopes = [:state_not_published, :state_published]
+        custom_states = Decidim::Proposals::ProposalState.distinct.pluck(:token)
+
+        search_values = value_keys.compact.compact_blank
+
+        conditions = possible_scopes.map do |scope|
+          search_values.member?(scope.to_s) ? try(scope) : nil
+        end.compact
+
+        additional_conditions = search_values & custom_states
+        conditions.push(state_published.only_status(additional_conditions)) if additional_conditions.any?
+
+        return self unless conditions.any?
+
+        scoped_query = where(id: conditions.shift)
+        conditions.each do |condition|
+          scoped_query = scoped_query.or(where(id: condition))
+        end
+
+        scoped_query
+      }
 
       def self.with_valuation_assigned_to(user, space)
         valuator_roles = space.user_roles(:valuator).where(user:)
@@ -145,7 +196,7 @@ module Decidim
                                     .where(decidim_coauthorships: { decidim_author_type: "Decidim::UserBaseEntity" })
                                     .not_hidden
                                     .published
-                                    .except_withdrawn
+                                    .not_withdrawn
       end
 
       def self.newsletter_participant_ids(component)
@@ -194,10 +245,10 @@ module Decidim
         return amendment.state if emendation?
         return nil unless published_state? || withdrawn?
 
-        super
+        proposal_state&.token || "not_answered"
       end
 
-      # This is only used to define the setter, as the getter will be overriden below.
+      # This is only used to define the setter, as the getter will be overridden below.
       alias_attribute :internal_state, :state
 
       # Public: Returns the internal state of the proposal.
@@ -206,7 +257,7 @@ module Decidim
       def internal_state
         return amendment.state if emendation?
 
-        self[:state]
+        proposal_state&.token || "not_answered"
       end
 
       # Public: Checks if the organization has published the state for the proposal.
@@ -227,7 +278,7 @@ module Decidim
       #
       # Returns Boolean.
       def withdrawn?
-        internal_state == "withdrawn"
+        withdrawn_at.present?
       end
 
       # Public: Checks if the organization has accepted a proposal.
@@ -302,11 +353,11 @@ module Decidim
         votes.count >= maximum_votes
       end
 
-      # Public: Can accumulate more votres than maximum for this proposal.
+      # Public: Can accumulate more votes than maximum for this proposal.
       #
       # Returns true if can accumulate, false otherwise
-      def can_accumulate_supports_beyond_threshold
-        component.settings.can_accumulate_supports_beyond_threshold
+      def can_accumulate_votes_beyond_threshold
+        component.settings.can_accumulate_votes_beyond_threshold
       end
 
       # Checks whether the user can edit the given proposal.
@@ -325,6 +376,11 @@ module Decidim
         user && !withdrawn? && authored_by?(user) && !copied_from_other_component?
       end
 
+      def withdraw!
+        self.withdrawn_at = Time.zone.now
+        save
+      end
+
       # Public: Whether the proposal is a draft or not.
       def draft?
         published_at.nil?
@@ -332,18 +388,6 @@ module Decidim
 
       def self.ransack(params = {}, options = {})
         ProposalSearch.new(self, params, options)
-      end
-
-      # Defines the base query so that ransack can actually sort by this value
-      def self.sort_by_valuation_assignments_count_nulls_last_query
-        <<-SQL.squish
-        (
-          SELECT COUNT(decidim_proposals_valuation_assignments.id)
-          FROM decidim_proposals_valuation_assignments
-          WHERE decidim_proposals_valuation_assignments.decidim_proposal_id = decidim_proposals_proposals.id
-          GROUP BY decidim_proposals_valuation_assignments.decidim_proposal_id
-        )
-        SQL
       end
 
       # method to filter by assigned valuator role ID
@@ -360,7 +404,7 @@ module Decidim
       end
 
       def self.ransackable_scopes(auth_object = nil)
-        base = [:with_any_origin, :with_any_state, :voted_by, :coauthored_by, :related_to, :with_any_scope, :with_any_category]
+        base = [:with_any_origin, :with_any_state, :state_eq, :voted_by, :coauthored_by, :related_to, :with_any_taxonomies]
         return base unless auth_object&.admin?
 
         # Add extra scopes for admins for the admin panel searches
@@ -370,6 +414,14 @@ module Decidim
       # Create i18n ransackers for :title and :body.
       # Create the :search_text ransacker alias for searching from both of these.
       ransacker_i18n_multi :search_text, [:title, :body]
+
+      def self.ransackable_attributes(_auth_object = nil)
+        %w(id_string search_text title body is_emendation)
+      end
+
+      def self.ransackable_associations(_auth_object = nil)
+        %w(taxonomies proposal_state)
+      end
 
       ransacker :state_published do
         Arel.sql("CASE
@@ -400,10 +452,6 @@ module Decidim
 
       ransacker :id_string do
         Arel.sql(%{cast("decidim_proposals_proposals"."id" as text)})
-      end
-
-      ransacker :state, formatter: proc { |v| STATES[v.to_sym] } do |parent|
-        parent.table[:state]
       end
 
       ransacker :is_emendation do |_parent|
@@ -437,25 +485,75 @@ module Decidim
         return true if draft?
         return true if component.settings.proposal_edit_time == "infinite"
 
-        limit = updated_at + component.settings.proposal_edit_before_minutes.minutes
-        Time.current < limit
+        time_value, time_unit = component.settings.edit_time
+
+        limit_time = case time_unit
+                     when "minutes"
+                       updated_at + time_value.minutes
+                     when "hours"
+                       updated_at + time_value.hours
+                     else
+                       updated_at + time_value.days
+                     end
+
+        Time.current < limit_time
       end
 
       def process_amendment_state_change!
-        return unless %w(accepted rejected evaluating withdrawn).member?(amendment.state)
+        return withdraw! if amendment.withdrawn?
+        return unless %w(accepted rejected evaluating).member?(amendment.state)
 
         PaperTrail.request(enabled: false) do
-          update!(
-            state: amendment.state,
-            state_published_at: Time.current
-          )
+          assign_state(amendment.state)
+          update!(state_published_at: Time.current)
         end
+      end
+
+      def user_has_actions?(user)
+        return false if authors.include?(user)
+        return false if user&.blocked?
+        return false if user&.deleted?
+        return false unless user&.confirmed?
+
+        true
+      end
+
+      def actions_for_comment(comment, current_user)
+        return if comment.commentable != self
+        return unless authors.include?(current_user)
+        return unless user_has_actions?(comment.author)
+
+        if coauthor_invitations_for(comment.author).any?
+          [
+            {
+              label: I18n.t("decidim.proposals.actions.cancel_coauthor_invitation"),
+              url: EngineRouter.main_proxy(component).cancel_proposal_invite_coauthors_path(proposal_id: id, id: comment.author.id),
+              icon: "user-forbid-line",
+              method: :delete,
+              data: { confirm: I18n.t("decidim.proposals.actions.cancel_coauthor_invitation_confirm") }
+            }
+          ]
+        else
+          [
+            {
+              label: I18n.t("decidim.proposals.actions.mark_as_coauthor"),
+              url: EngineRouter.main_proxy(component).proposal_invite_coauthors_path(proposal_id: id, id: comment.author.id),
+              icon: "user-add-line",
+              method: :post,
+              data: { confirm: I18n.t("decidim.proposals.actions.mark_as_coauthor_confirm") }
+            }
+          ]
+        end
+      end
+
+      def coauthor_invitations_for(user)
+        Decidim::Notification.where(event_class: "Decidim::Proposals::CoauthorInvitedEvent", resource: self, user:)
       end
 
       private
 
       def copied_from_other_component?
-        linked_resources(:proposals, "copied_from_component").any?
+        linked_resources(:proposals, %w(splitted_from_component merged_from_component copied_from_component)).any?
       end
     end
   end

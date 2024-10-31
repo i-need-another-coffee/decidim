@@ -187,6 +187,7 @@ fr:
         export: Tout exporter
         export-selection: Exporter la sélection
         import: Importer
+        manage: Gérer
         newsletter:
           new: Nouvelle newsletter
         participatory_space_private_user:
@@ -201,7 +202,7 @@ fr:
         verify: Vérifier
       admin_terms_of_service:
         accept:
-          error: Une erreur s'est produite lors de l'acceptation des conditions d'utilisation de l'administrateur.
+          error: Une erreur s'est produite lors de l'acceptation des conditions d'utilisation relatives aux administrateurs.
           success: Félicitations ! Vous avez accepté les conditions d'utilisation administrateur.
         actions:
           accept: J'accepte les conditions d'utilisation
@@ -287,7 +288,7 @@ fr:
       block_user:
         new:
           action: Bloquer le compte et envoyer la justification
-          already_reported_html: En poursuivant cette action, vous masquerez également tous les contenus du participant. <a href="%{link}">Bloquez le compte</a>.
+          already_reported_html: En poursuivant cette action, vous masquerez également tous les contenus du participant.
           description: Bloquer un utilisateur rendra son compte inutilisable, vous devriez fournir dans votre justification les conditions de déblocage de l'utilisateur.
           justification: Justification
           title: Bloquer l'utilisateur %{name}
@@ -328,13 +329,15 @@ fr:
           default_step_settings: Paramètres d'étape par défaut
           global_settings: Paramètres globaux
           step_settings: Paramètres de l'étape
+        hide:
+          success: Le composant a été retiré du menu avec succès.
         index:
           add: Ajouter une fonctionnalité
           headers:
             actions: Actions
             name: Nom de la fonctionnalité
-            scope: Secteur de la fonctionnalité
             type: Type de fonctionnalité
+            visibility: Visibilité
         new:
           add: Ajouter une fonctionnalité
           title: 'Ajouter une fonctionnalité : %{name}'
@@ -346,9 +349,15 @@ fr:
         update:
           error: Une erreur est survenue lors de la mise à jour de cette fonctionnalité.
           success: La fonctionnalité a été mise à jour avec succès.
+        visibility_label:
+          menu_hidden: Retiré du menu
+          published: Publié
+          unpublished: Non publié
       conflicts:
         attempts: Tentatives
         'false': 'Non'
+        index:
+          text: Recherche par adresse e-mail, nom ou pseudonyme.
         managed_user_name: Utilisateur représenté
         solved: Résolu
         title: Conflits de vérification
@@ -377,7 +386,7 @@ fr:
           update: Mettre à jour
       dashboard:
         pending_moderations:
-          anouncement:
+          announcement:
             one: Il y a %{count} modération en attente
             other: Il y a %{count} modérations en attente
           goto_moderation: Aller au panneau de modération global
@@ -385,12 +394,12 @@ fr:
         show:
           dropdown: Liste déroulante
           view_more_logs: Afficher plus
-      domain_whitelist:
+      domain_allowlist:
         form:
           domain_too_short: Le nom de domaine est trop court
         update:
-          error: Échec lors de la mise à jour de la liste des domaines externes autorisés.
-          success: Liste des domaines externes autorisés mise à jour avec succès.
+          error: Impossible de mettre à jour la liste des domaines externes autorisés
+          success: La liste des domaines externes autorisés a été mise à jour avec succès.
       exports:
         export_as: "%{name} en format %{export_format}"
         formats:
@@ -449,6 +458,7 @@ fr:
           values:
             'false': Publié
             'true': Dépublié
+        remove_all: Tout supprimer
         scope_id_eq:
           label: Secteur
         search_label: Rechercher
@@ -457,7 +467,6 @@ fr:
           report_count_eq: Nombre de signalement
           reported_id_string_or_reported_content_cont: Rechercher %{collection} par Id ou par contenu.
           title_cont: Rechercher %{collection} par titre.
-          user_name_or_user_email_cont: Rechercher %{collection} par nom ou par email.
           user_name_or_user_nickname_or_user_email_cont: Rechercher les %{collection} par e-mail, nom ou pseudo.
         state_eq:
           label: État
@@ -570,12 +579,14 @@ fr:
         appearance: Apparence
         area_types: Types de périmètre d'assemblée
         areas: Périmètres d'assemblée
+        components: Fonctionnalités
         configuration: Configuration
         content: Contenu signalé
-        external_domain_whitelist: Domaines externes autorisés
+        external_domain_allowlist: Domaines externes autorisés
         help_sections: Sections d'aide
         homepage: Page d'accueil
         impersonations: Utilisateurs représentés
+        manage: Gérer
         moderation: Modération globale
         newsletters: Bulletins d'information (newsletter)
         participants: Participants
@@ -856,7 +867,7 @@ fr:
             layout_appearance_title: Modifier l’aspect de la mise en page
             preview: Aperçu
           omnipresent_banner_appearance_title: Modifier la bannière permanente
-      organization_external_domain_whitelist:
+      organization_external_domain_allowlist:
         edit:
           update: Mettre à jour
         external_domain:
@@ -865,7 +876,7 @@ fr:
           remove: Retirer
           up: Monter
         form:
-          add: Ajouter à la liste blanche
+          add: Ajouter à la liste autorisée
           title: Liste des domaines externes autorisés
       participatory_space_private_users:
         create:
@@ -962,6 +973,11 @@ fr:
           help: Ces jetons sont utilisés pour partager cette ressource non publiée à n'importe quel utilisateur. Ils seront cachés dès que la ressource sera publiée. Cliquez sur l'icône du jeton pour visiter l'URL partageable.
           title: Partager les jetons
       shared:
+        adjacent_navigation:
+          next: Suivant
+          next_title: Élément suivant
+          previous: Précédent
+          previous_title: Élément précédent
         gallery:
           add_images: Ajouter des images
           edit_images: Modifier les images
@@ -1008,6 +1024,34 @@ fr:
         update:
           error: Une erreur s'est produite lors de la mise à jour de cette page.
           success: Page mise à jour avec succès.
+      taxonomies:
+        count: Compteur
+      taxonomy_filters:
+        edit:
+          back: Revenir en arrière
+          no_items: Aucun élément n'est disponible pour cette taxonomie. Vous pouvez créer des éléments dans les paramètres de configuration de taxonomie.
+          title: Modifier le filtre de taxonomie
+          update: Mettre à jour le filtre de taxonomie
+        form:
+          select_taxonomy: Sélectionner une taxonomie
+        index:
+          description: Un filtre de taxonomie permet aux administrateurs de trier et de filtrer les espaces participatifs selon une taxonomie. Par exemple, ajoutez un filtre de taxonomie pour trier les processus par étendue géographique.
+          empty: Il n'y a actuellement aucun filtre de taxonomie. Créez une liste de filtres de taxonomie ici pour trier et filtrer les espaces participatifs basés sur une taxonomie.
+        new:
+          back: Revenir en arrière
+          create: Créer un filtre de taxonomie
+          items: "%{count} éléments disponibles"
+          title: Nouveau filtre de taxonomie
+        table:
+          actions: Actions
+          confirm_destroy: Êtes-vous sûr(e) de vouloir supprimer le filtre %{name}?
+          count: Nombre d'éléments
+          destroy: Supprimer
+          edit: Modifier
+          name: Nom
+        update:
+          error: Il y a eu un problème lors de la mise à jour de ce filtre de taxonomie.
+          success: Filtre de taxonomie mis à jour avec succès.
       titles:
         admin_log: Journal d'administration
         area_types: Types de périmètre d'assemblée
@@ -1028,6 +1072,7 @@ fr:
         scope_types: Types de secteur
         scopes: Secteurs
         statistics: Activité
+        taxonomy_filters: Filtres de taxonomie
         user_groups: Groupes d'utilisateurs
         users: Administrateurs
       user_group:

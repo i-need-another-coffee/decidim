@@ -4,7 +4,6 @@ es-MX:
       participatory_process:
         announcement: Anuncio
         area_id: Área
-        banner_image: Imagen de banner
         copy_categories: Copiar categorías
         copy_components: Copiar componentes
         copy_steps: Copiar las fases
@@ -34,8 +33,6 @@ es-MX:
         scope_type_max_depth_id: Profundidad del filtro de ámbito
         scopes_enabled: Ámbitos habilitados
         short_description: Descripción breve
-        show_metrics: Mostrar métricas
-        show_statistics: Mostrar estadísticas
         slug: Texto corto de URL
         start_date: Fecha de inicio
         subtitle: Subtítulo
@@ -98,10 +95,8 @@ es-MX:
         destroy: Borrar
         duplicate: Duplicar
         edit: Editar
-        filter:
-          all_processes: Mostrar todos los procesos
-          process_groups: Grupos de procesos
         import_process: Importar
+        menu_hidden: Ocultar
         moderate: Moderar
         new_process: Nuevo proceso
         new_process_group: Nuevo grupo de procesos
@@ -113,6 +108,9 @@ es-MX:
         resend_invitation: Reenviar invitación
         see_process: Ver el proceso
         unpublish: Despublicar
+      filters:
+        decidim_participatory_process_group_id_eq:
+          label: Por grupo de procesos
       menu:
         participatory_process_groups: Grupos de procesos
         participatory_process_groups_submenu:
@@ -219,6 +217,13 @@ es-MX:
             last_step: No se puede eliminar la última fase de un proceso.
           success: Fase de proceso participativo eliminada con éxito.
         edit:
+          cta_deprecated:
+            body_html: |-
+              La configuración del CTA a través de la Fase del proceso participativo está obsoleta con el nuevo diseño.
+              Ahora esto se hace en la <b>Página de Inicio</b>, usando el bloque de contenido <b>Imagen principal y botón de acción</b> .
+              Lo hemos dejado aquí para que migres las CTAs que necesites. Los campos <i>Ruta del acción</i> y
+              <i>Texto del botón de acción</i> se eliminaran en la próxima versión.
+            title: CTA obsoleto
           title: Editar fase de proceso participativo
           update: Actualizar
         index:
@@ -429,8 +434,9 @@ es-MX:
             select_participatory_process_type: Selecciona un tipo de proceso
             select_process_group: Seleccione un grupo de proceso
             slug_help_html: 'Los nombres cortos de URL se utilizan para generar las URL que apuntan a esta votación. Sólo acepta letras, números y guiones, y debe comenzar con una letra. Ejemplo: %{url}'
+            taxonomies: Taxonomías
             title: Información general
-            visbility: Visibilidad
+            visibility: Visibilidad
       content_blocks:
         extra_data:
           name: Fase y duración
@@ -443,7 +449,7 @@ es-MX:
       index:
         title: Procesos participativos
       last_activity:
-        new_participatory_process: Nuevo proceso participativo
+        new_participatory_process: 'Nuevo proceso participativo:'
       pages:
         home:
           highlighted_processes:

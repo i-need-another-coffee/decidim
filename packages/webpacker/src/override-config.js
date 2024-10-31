@@ -24,6 +24,13 @@ const overrideSassRule = (modifyConfig) => {
       baseLoader = miniCssExtractPlugin.loader;
     }
 
+    // eslint-disable-next-line no-undef
+    let postCssConfig = path.resolve(__dirname, "../../../postcss.config.js");
+    if (postCssConfig.includes("node_modules")) {
+      // eslint-disable-next-line no-undef
+      postCssConfig = path.resolve(__dirname, "../../../../postcss.config.js");
+    }
+
     modifyConfig.module.rules.push({
       test: /\.(scss|sass)(\.erb)?$/i,
       use: [
@@ -40,8 +47,7 @@ const overrideSassRule = (modifyConfig) => {
           options: {
             sourceMap: true,
             postcssOptions: {
-              // eslint-disable-next-line no-undef
-              config: path.resolve(__dirname, "../../../postcss.config.js")
+              config: postCssConfig
             }
           }
         },
@@ -55,5 +61,15 @@ const overrideSassRule = (modifyConfig) => {
   return modifyConfig;
 }
 
+const addExternalResources = (modifyConfig) => {
+  const leafletPath = path.dirname(require.resolve("leaflet"));
+
+  // Needed for Leaflet CSS to load its images correctly.
+  // See https://github.com/Leaflet/Leaflet/issues/4849 for further info
+  modifyConfig.resolve.modules.push(leafletPath);
+
+  return modifyConfig;
+}
+
 // Since all modifiers are functions, we can use a reduce clause to apply all them
-module.exports = (originalConfig) => [overrideSassRule].reduce((acc, modifier) => modifier(acc), originalConfig)
+module.exports = (originalConfig) => [overrideSassRule, addExternalResources].reduce((acc, modifier) => modifier(acc), originalConfig)

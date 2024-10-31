@@ -19,13 +19,12 @@ module Decidim
       def serialize
         {
           id: proposal.id,
-          category: {
-            id: proposal.category.try(:id),
-            name: proposal.category.try(:name) || empty_translatable
+          author: {
+            **author_fields
           },
-          scope: {
-            id: proposal.scope.try(:id),
-            name: proposal.scope.try(:name) || empty_translatable
+          taxonomies: {
+            id: proposal.taxonomies.map(&:id),
+            name: proposal.taxonomies.map(&:name)
           },
           participatory_space: {
             id: proposal.participatory_space.id,
@@ -40,13 +39,14 @@ module Decidim
           state: proposal.state.to_s,
           reference: proposal.reference,
           answer: ensure_translatable(proposal.answer),
-          supports: proposal.proposal_votes_count,
+          answered_at: proposal.answered_at,
+          votes: proposal.proposal_votes_count,
           endorsements: {
             total_count: proposal.endorsements.size,
             user_endorsements:
           },
           comments: proposal.comments_count,
-          attachments: proposal.attachments.count,
+          attachments: proposal.attachments.size,
           followers: proposal.follows.size,
           published_at: proposal.published_at,
           url:,
@@ -56,7 +56,9 @@ module Decidim
           original_proposal: {
             title: proposal&.amendable&.title,
             url: original_proposal_url
-          }
+          },
+          withdrawn: proposal.withdrawn?,
+          withdrawn_at: proposal.withdrawn_at
         }
       end
 
@@ -76,7 +78,7 @@ module Decidim
       end
 
       def related_proposals
-        proposal.linked_resources(:proposals, "copied_from_component").map do |proposal|
+        proposal.linked_resources(:proposals, %w(copied_from_component merged_from_component splitted_from_component)).map do |proposal|
           Decidim::ResourceLocatorPresenter.new(proposal).url
         end
       end
@@ -100,6 +102,54 @@ module Decidim
         return value.transform_values { |v| convert_to_plain_text(v) } if value.is_a?(Hash)
 
         convert_to_text(value)
+      end
+
+      def author_fields
+        is_author_user_group = resource.coauthorships.map(&:decidim_user_group_id).any?
+
+        {
+          id: resource.authors.map(&:id),
+          name: resource.authors.map do |author|
+            author_name(is_author_user_group ? resource.coauthorships.first.user_group : author)
+          end,
+          url: resource.authors.map do |author|
+            author_url(is_author_user_group ? resource.coauthorships.first.user_group : author)
+          end
+        }
+      end
+
+      def author_name(author)
+        if author.respond_to?(:name)
+          translated_attribute(author.name) # is a Decidim::User or Decidim::Organization or Decidim::UserGroup
+        elsif author.respond_to?(:title)
+          translated_attribute(author.title) # is a Decidim::Meetings::Meeting
+        end
+      end
+
+      def author_url(author)
+        if author.respond_to?(:nickname)
+          profile_url(author.nickname) # is a Decidim::User or Decidim::UserGroup
+        elsif author.respond_to?(:title)
+          meeting_url(author) # is a Decidim::Meetings::Meeting
+        else
+          root_url # is a Decidim::Organization
+        end
+      end
+
+      def profile_url(nickname)
+        Decidim::Core::Engine.routes.url_helpers.profile_url(nickname, host:)
+      end
+
+      def meeting_url(meeting)
+        Decidim::EngineRouter.main_proxy(meeting.component).meeting_url(id: meeting.id, host:)
+      end
+
+      def root_url
+        Decidim::Core::Engine.routes.url_helpers.root_url(host:)
+      end
+
+      def host
+        resource.organization.host
       end
     end
   end

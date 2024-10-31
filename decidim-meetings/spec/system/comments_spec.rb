@@ -20,9 +20,15 @@ describe "Comments" do
   let(:resource_path) { resource_locator(commentable).path }
 
   before do
-    # Make static map requests not to fail with HTTP 500 (causes JS error)
-    stub_request(:get, Regexp.new(Decidim.maps.fetch(:static).fetch(:url))).to_return(body: "")
+    stub_geocoding_coordinates([commentable.latitude, commentable.longitude])
   end
 
   include_examples "comments"
+
+  context "with comments blocked" do
+    let!(:component) { create(:component, manifest_name: :meetings, participatory_space:, organization:) }
+    let(:participatory_space) { create(:participatory_process, :with_steps, organization:) }
+
+    include_examples "comments blocked"
+  end
 end

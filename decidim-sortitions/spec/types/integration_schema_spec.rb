@@ -8,7 +8,7 @@ describe "Decidim::Api::QueryType" do
   include_context "with a graphql decidim component"
   let(:component_type) { "Sortitions" }
   let!(:current_component) { create(:sortition_component, participatory_space: participatory_process) }
-  let!(:sortition) { create(:sortition, component: current_component, category:) }
+  let!(:sortition) { create(:sortition, component: current_component, taxonomies:) }
 
   let(:sortition_single_result) do
     sortition.reload
@@ -20,7 +20,7 @@ describe "Decidim::Api::QueryType" do
       "cancelledByUser" => sortition.cancelled_by_user,
       "cancelledOn" => sortition.cancelled_on,
       "candidateProposals" => sortition.candidate_proposals,
-      "category" => { "id" => sortition.category.id.to_s },
+      "taxonomies" => [{ "id" => sortition.taxonomies.first.id.to_s }],
       "comments" => [],
       "commentsHaveAlignment" => sortition.comments_have_alignment?,
       "commentsHaveVotes" => sortition.comments_have_votes?,
@@ -45,7 +45,7 @@ describe "Decidim::Api::QueryType" do
     {
       "__typename" => "Sortitions",
       "id" => current_component.id.to_s,
-      "name" => { "translation" => "Sortitions" },
+      "name" => { "translation" => translated(current_component.name) },
       "sortitions" => {
         "edges" => [
           {
@@ -71,7 +71,7 @@ describe "Decidim::Api::QueryType" do
                 cancelledByUser { id }
                 cancelledOn
                 candidateProposals
-                category { id }
+                taxonomies { id }
                 comments { id }
                 commentsHaveAlignment
                 commentsHaveVotes
@@ -96,7 +96,7 @@ describe "Decidim::Api::QueryType" do
       )
     end
 
-    it "executes sucessfully" do
+    it "executes successfully" do
       expect { response }.not_to raise_error
     end
 
@@ -115,7 +115,7 @@ describe "Decidim::Api::QueryType" do
           cancelledByUser { id }
           cancelledOn
           candidateProposals
-          category { id }
+          taxonomies { id }
           comments { id }
           commentsHaveAlignment
           commentsHaveVotes
@@ -138,7 +138,7 @@ describe "Decidim::Api::QueryType" do
     )
     end
 
-    it "executes sucessfully" do
+    it "executes successfully" do
       expect { response }.not_to raise_error
     end
 

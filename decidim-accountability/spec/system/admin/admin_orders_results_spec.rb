@@ -6,20 +6,17 @@ describe "Admin orders results" do
   let(:manifest_name) { "accountability" }
   let!(:results) do
     [
-      create(:result, scope: create(:scope, organization: component.organization,
-                                            name: { "ca" => "Scope2", "en" => "Scope3" }),
+      create(:result, taxonomies: [create(:taxonomy, :with_parent, organization: component.organization,
+                                                                   name: { "ca" => "Taxonomy3", "en" => "Taxonomy3" })],
                       component: current_component,
-                      category: create(:category, participatory_space:),
                       created_at: 2.days.ago),
-      create(:result, scope: create(:scope, organization: component.organization,
-                                            name: { "ca" => "Scope3", "en" => "Scope1" }),
+      create(:result, taxonomies: [create(:taxonomy, :with_parent, organization: component.organization,
+                                                                   name: { "ca" => "Taxonomy1", "en" => "Taxonomy1" })],
                       component: current_component,
-                      category: create(:category, participatory_space:),
                       created_at: 1.day.ago),
-      create(:result, scope: create(:scope, organization: component.organization,
-                                            name: { "ca" => "Scope1", "en" => "Scope2" }),
+      create(:result, taxonomies: [create(:taxonomy, :with_parent, organization: component.organization,
+                                                                   name: { "ca" => "Taxonomy2", "en" => "Taxonomy2" })],
                       component: current_component,
-                      category: create(:category, participatory_space:),
                       created_at: Time.current)
     ]
   end
@@ -29,7 +26,7 @@ describe "Admin orders results" do
   it "orders results by ID" do
     ordered_results = results.sort_by(&:id).reverse
 
-    click_link "ID"
+    click_on "ID"
     rows = page.all("tbody tr")
 
     rows.each_with_index do |row, i|
@@ -40,7 +37,7 @@ describe "Admin orders results" do
   it "orders results by title" do
     ordered_results = results.sort_by { |result| translated(result.title) }
 
-    click_link "Title"
+    click_on "Title"
     rows = page.all("tbody tr")
 
     rows.each_with_index do |row, i|
@@ -48,21 +45,10 @@ describe "Admin orders results" do
     end
   end
 
-  it "orders results by category" do
-    ordered_results = results.sort_by { |result| translated(result.category.name) }
+  it "orders results by taxonomy" do
+    ordered_results = results.sort_by { |result| translated(result.taxonomies.first.name) }
 
-    click_link "Category"
-    rows = page.all("tbody tr")
-
-    rows.each_with_index do |row, i|
-      expect(row).to have_text(translated(ordered_results[i].title))
-    end
-  end
-
-  it "orders results by scope" do
-    ordered_results = results.sort_by { |result| translated(result.scope.name) }
-
-    click_link "Scope"
+    click_on "Taxonomies"
     rows = page.all("tbody tr")
 
     rows.each_with_index do |row, i|
@@ -73,7 +59,7 @@ describe "Admin orders results" do
   it "orders results by status" do
     ordered_results = results.sort_by { |result| translated(result.status.name) }
 
-    click_link "Status"
+    click_on "Status"
     rows = page.all("tbody tr")
 
     rows.each_with_index do |row, i|
@@ -84,7 +70,7 @@ describe "Admin orders results" do
   it "orders results by progress" do
     ordered_results = results.sort_by(&:progress)
 
-    click_link "Progress"
+    click_on "Progress"
     rows = page.all("tbody tr")
 
     rows.each_with_index do |row, i|
@@ -95,7 +81,7 @@ describe "Admin orders results" do
   it "orders results by created at" do
     ordered_results = results.sort_by(&:created_at)
 
-    click_link "Created"
+    click_on "Created"
     rows = page.all("tbody tr")
 
     rows.each_with_index do |row, i|

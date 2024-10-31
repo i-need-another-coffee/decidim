@@ -150,6 +150,7 @@ it:
         export: Esporta tutto
         export-selection: Esporta selezione
         import: Importazione
+        manage: Gestisci
         newsletter:
           new: Nuova newsletter
         participatory_space_private_user:
@@ -269,7 +270,6 @@ it:
           headers:
             actions: Azioni
             name: Nome del componente
-            scope: Ambito del componente
             type: Tipo di componente
         new:
           add: Aggiungi componente
@@ -290,7 +290,6 @@ it:
         title: Verifica dei conflitti
         transfer:
           email: Email
-          error: Si è verificato un problema nel trasferimento dell'utente corrente a partecipante gestito.
           name: Nome
           reason: Motivazione
           success: Il trasferimento è stato completato con successo.
@@ -300,9 +299,6 @@ it:
       dashboard:
         show:
           view_more_logs: Visualizza più registri
-      domain_whitelist:
-        form:
-          domain_too_short: Dominio troppo corto
       exports:
         export_as: "%{name} esporta come %{export_format}"
         formats:
@@ -360,7 +356,6 @@ it:
           name_or_nickname_or_email_cont: Cerca %{collection} per email, nome o pseudonimo.
           reported_id_string_or_reported_content_cont: Cerca %{collection} per id o contenuto segnalabile.
           title_cont: Cerca %{collection} per titolo.
-          user_name_or_user_email_cont: Cerca %{collection} per nome o email.
         state_eq:
           label: Stato
           values:
@@ -434,11 +429,12 @@ it:
         appearance: Aspetto
         area_types: Tipi di ambito territoriale
         areas: Ambiti territoriali
+        components: Componenti
         configuration: Configurazione
-        external_domain_whitelist: Consenti l'uso di domini esterni
         help_sections: Sezioni di Aiuto
         homepage: Homepage
         impersonations: Impersonificazioni
+        manage: Gestisci
         moderation: Moderazione globale
         newsletters: Newsletters
         participants: Partecipanti
@@ -684,17 +680,6 @@ it:
             layout_appearance_title: Modifica aspetto del layout
             preview: Anteprima
           omnipresent_banner_appearance_title: Modifica banner onnipresente
-      organization_external_domain_whitelist:
-        edit:
-          update: Aggiorna
-        external_domain:
-          down: Giù
-          external_domain: Dominio esterno
-          remove: Rimuovi
-          up: Su
-        form:
-          add: Aggiungi alla whitelist
-          title: Whitelist di domini esterni
       participatory_space_private_users:
         create:
           error: Si è verificato un errore durante l'aggiunta di un utente privato per questo spazio partecipativo.
@@ -805,6 +790,8 @@ it:
           without_topic: Pagine senza argomento
         update:
           error: Si è verificato un errore durante l'aggiornamento di questa pagina.
+      taxonomies:
+        count: Conteggio
       titles:
         admin_log: Registro di amministrazione
         area_types: Tipi di ambito territoriale
@@ -905,3 +892,8 @@ it:
   errors:
     messages:
       invalid_json: Problemi con la trasmissione tramite JSON (JSON non valido)
+  layouts:
+    decidim:
+      admin:
+        global_moderations:
+          title: Moderazione globale

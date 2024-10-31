@@ -10,19 +10,18 @@ describe "Decidim::Api::QueryType" do
 
   let(:locale) { "en" }
 
-  let!(:conference) { create(:conference, :diploma, organization: current_organization) }
+  let!(:taxonomy) { create(:taxonomy, :with_parent, :with_children, organization: current_organization) }
+  let!(:conference) { create(:conference, :diploma, organization: current_organization, taxonomies: [taxonomy]) }
   let(:conference_data) do
     {
       "attachments" => [],
       "availableSlots" => conference.available_slots,
-      "bannerImage" => conference.attached_uploader(:banner_image).path,
       "categories" => [],
       "components" => [],
       "createdAt" => conference.created_at.iso8601.to_s.gsub("Z", "+00:00"),
       "description" => { "translation" => conference.description[locale] },
       "endDate" => conference.end_date.to_s,
       "hashtag" => conference.hashtag,
-      "heroImage" => conference.attached_uploader(:hero_image).path,
       "id" => conference.id.to_s,
       "location" => conference.location,
       "mediaLinks" => [],
@@ -33,7 +32,7 @@ describe "Decidim::Api::QueryType" do
       "reference" => conference.reference,
       "registrationTerms" => { "translation" => conference.registration_terms[locale] },
       "registrationsEnabled" => conference.registrations_enabled?,
-      "scope" => nil,
+      "taxonomies" => [{ "id" => taxonomy.id.to_s, "name" => { "translation" => taxonomy.name[locale] }, "parent" => { "id" => taxonomy.parent_id.to_s }, "children" => taxonomy.children.map { |child| { "id" => child.id.to_s } } }],
       "shortDescription" => { "translation" => conference.short_description[locale] },
       "showStatistics" => conference.show_statistics?,
       "slogan" => { "translation" => conference.slogan[locale] },
@@ -85,7 +84,10 @@ describe "Decidim::Api::QueryType" do
           translation(locale:"#{locale}")
         }
         registrationsEnabled
-        scope {
+        taxonomies {
+          parent {
+            id
+          }
           id
           children{
             id
@@ -124,12 +126,15 @@ describe "Decidim::Api::QueryType" do
   end
 
   describe "valid query" do
-    it "executes sucessfully" do
+    it "executes successfully" do
       expect { response }.not_to raise_error
     end
 
     it "returns the correct response" do
-      expect(response["conferences"].first).to eq(conference_data)
+      data = response["conferences"].first
+      expect(data).to include(conference_data)
+      expect(data["bannerImage"]).to be_blob_url(conference.banner_image.blob)
+      expect(data["heroImage"]).to be_blob_url(conference.hero_image.blob)
     end
 
     it_behaves_like "implements stats type" do
@@ -187,7 +192,10 @@ describe "Decidim::Api::QueryType" do
           translation(locale:"#{locale}")
         }
         registrationsEnabled
-        scope {
+        taxonomies {
+          parent {
+            id
+          }
           id
           children{
             id
@@ -217,12 +225,15 @@ describe "Decidim::Api::QueryType" do
     )
     end
 
-    it "executes sucessfully" do
+    it "executes successfully" do
       expect { response }.not_to raise_error
     end
 
     it "returns the correct response" do
-      expect(response["conference"]).to eq(conference_data)
+      data = response["conference"]
+      expect(data).to include(conference_data)
+      expect(data["bannerImage"]).to be_blob_url(conference.banner_image.blob)
+      expect(data["heroImage"]).to be_blob_url(conference.hero_image.blob)
     end
 
     it_behaves_like "implements stats type" do

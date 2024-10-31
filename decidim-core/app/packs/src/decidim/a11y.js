@@ -59,7 +59,6 @@ const createDropdown = (component) => {
   const dropdownOptions = {};
   dropdownOptions.dropdown = component.dataset.target;
   dropdownOptions.hover = component.dataset.hover === "true";
-  dropdownOptions.isOpen = component.dataset.open === "true";
   dropdownOptions.autoClose = component.dataset.autoClose === "true";
 
   // This snippet allows to disable the dropdown based on the current viewport
@@ -77,6 +76,17 @@ const createDropdown = (component) => {
   if (isDisabled) {
     return
   }
+
+  dropdownOptions.isOpen = component.dataset.open === "true";
+
+  const isOpen = Object.keys(screens).some((key) => {
+    if (!isScreenSize(key)) {
+      return false;
+    }
+    return Boolean(component.dataset[`open-${key}`.replace(/-([a-z])/g, (str) => str[1].toUpperCase())]);
+  });
+
+  dropdownOptions.isOpen = dropdownOptions.isOpen || isOpen;
 
   if (!component.id) {
     // when component has no id, we enforce to have it one
@@ -136,7 +146,7 @@ const createDialog = (component) => {
     enableAutoFocus: false,
     onOpen: (params, trigger) => {
       setFocusOnTitle(params);
-      window.focusGuard.trap(trigger);
+      window.focusGuard.trap(params, trigger);
       params.dispatchEvent(new CustomEvent("open.dialog"));
     },
     onClose: (params) => {
@@ -176,10 +186,56 @@ const createDialog = (component) => {
   })
 }
 
+/**
+ * Announces a message to the screen reader dynamically.
+ *
+ * This should not be called consecutively multiple times because the screen
+ * reader may not read all the messages if the content is changed quickly.
+ *
+ * @param {String} message The message to be announced
+ * @param {String} mode The mode for the announcement, either "assertive"
+ *   (default) or "polite".
+ * @return {void}
+ */
+const announceForScreenReader = (message, mode = "assertive") => {
+  if (!message || typeof message !== "string" || message.length < 1) {
+    return;
+  }
+
+  let element = document.getElementById("screen-reader-announcement");
+  if (!element) {
+    element = document.createElement("div");
+    element.setAttribute("id", "screen-reader-announcement");
+    element.classList.add("sr-only");
+    element.setAttribute("aria-atomic", true);
+    document.body.append(element);
+  }
+  if (mode === "polite") {
+    element.setAttribute("aria-live", mode);
+  } else {
+    element.setAttribute("aria-live", "assertive");
+  }
+
+  element.innerHTML = "";
+
+  setTimeout(() => {
+    // Wrap the text in a span with a random attribute value that changes every
+    // time to try to indicate to the screen reader the content has changed. This
+    // helps reading the message aloud if the message is exactly the same as the
+    // last time.
+    const randomIdentifier = `announcement-${new Date().getUTCMilliseconds()}-${Math.floor(Math.random() * 10000000)}`;
+    const announce = document.createElement("span")
+    announce.setAttribute("data-random", randomIdentifier);
+    announce.textContent = message;
+    element.append(announce);
+  }, 100);
+};
+
 export {
   createAccordion,
   createDialog,
   createDropdown,
+  announceForScreenReader,
   Accordions,
   Dialogs,
   Dropdowns

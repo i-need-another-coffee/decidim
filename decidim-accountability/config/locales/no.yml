@@ -8,8 +8,6 @@
         description: Beskrivelse
         end_date: Sluttdato
         progress: Framgang
-        project_ids: Inkluderte prosjekter
-        proposals: Inkluderte forslag
         start_date: Startdato
         title: Tittel
         updated_at: Oppdatert
@@ -72,25 +70,25 @@
           index:
             title: Statuser
           new:
-            create: Lag ny status
+            create: Opprett status
             title: Ny status
         timeline_entries:
           edit:
-            title: Rediger oppføringen
+            title: Rediger oppføring
             update: Oppdater oppføringen
           index:
-            title: Prosjekt tidslinje oppføringer
+            title: Oppføringer på prosjekttidslinje
           new:
-            create: Lag en ny oppføring
+            create: Opprett oppføring
             title: Ny oppføring
       admin_log:
         result:
           create: "%{user_name} opprettet resultat %{resource_name} i %{space_name}"
-          delete: "%{user_name} slettet %{resource_name} resultatet i %{space_name}"
-          update: "%{user_name} oppdaterte rusultat%{resource_name} i %{space_name}"
+          delete: "%{user_name} slettet %{resource_name}-resultatet i %{space_name}"
+          update: "%{user_name} oppdaterte %{resource_name}-resultatet i %{space_name}"
         status:
-          create: "%{user_name} har opprettet statusen %{resource_name}"
-          delete: "%{user_name} slettet statusen %{resource_name}"
+          create: "%{user_name} har opprettet %{resource_name}-statusen"
+          delete: "%{user_name} slettet %{resource_name}-statusen"
           update: "%{user_name} oppdaterte statusen %{resource_name}"
         timeline_entry:
           create: "%{user_name} opprettet %{resource_name} i tidslinjen"
@@ -148,15 +146,7 @@
           search: Søk etter handlinger
         show:
           stats:
-            attendees: Deltakere
             back_to_resource: Gå tilbake til resultatet
-            comments: Kommentarer
-            contributions: Bidragene
-            last_edited_by: Sist endret av
-            last_updated_at: Sist oppdatert
-            meetings: Møter
-            proposals: Forslag
-            votes: Støtter
         timeline:
           title: Prosjektutvikling
     admin:
@@ -175,16 +165,12 @@
         name: Ansvarlighet
         settings:
           global:
-            categories_label: Navn på "Kategorier"
             comments_enabled: Kommentarer aktivert
             comments_max_length: Maks lengde på kommentarer (Sett 0 for standardverdi)
             display_progress_enabled: Vis fremgang
-            heading_leaf_level_results: Navn på "Prosjekter"
-            heading_parent_level_results: Navn på "Resultater"
             intro: Introduksjon
             scope_id: Tema
             scopes_enabled: Temaer aktivert
-            subcategories_label: Navn på "Underkategorier"
           step:
             comments_blocked: Kommentarer blokkert
     events:

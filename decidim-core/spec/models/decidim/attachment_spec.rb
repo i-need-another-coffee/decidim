@@ -6,6 +6,12 @@ module Decidim
   describe Attachment do
     subject { build(:attachment) }
 
+    RSpec::Matchers.define :be_url do |_expected|
+      match do |actual|
+        actual =~ URI::DEFAULT_PARSER.make_regexp
+      end
+    end
+
     let(:organization) { subject.organization }
 
     it { is_expected.to be_valid }
@@ -49,6 +55,16 @@ module Decidim
       it "returns the file extension" do
         expect(subject.file_type).to eq("jpeg")
       end
+
+      context "when the url is in S3" do
+        before do
+          allow(subject).to receive(:url).and_return("https://s3.example.com/1234?response-content-disposition=inline&filename=image.jpeg&response-content-type=image%2Fjpeg")
+        end
+
+        it "returns the file extension" do
+          expect(subject.file_type).to eq("jpeg")
+        end
+      end
     end
 
     context "when it has an image" do
@@ -76,6 +92,12 @@ module Decidim
         end
       end
 
+      describe "link?" do
+        it "returns false" do
+          expect(subject.link?).to be(false)
+        end
+      end
+
       describe "photo?" do
         it "returns true" do
           expect(subject.photo?).to be(true)
@@ -98,6 +120,38 @@ module Decidim
 
       it "does not have a big version" do
         expect(subject.big_url).to be_nil
+      end
+
+      describe "link?" do
+        it "returns false" do
+          expect(subject.link?).to be(false)
+        end
+      end
+
+      describe "photo?" do
+        it "returns false" do
+          expect(subject.photo?).to be(false)
+        end
+      end
+
+      describe "document?" do
+        it "returns true" do
+          expect(subject.document?).to be(true)
+        end
+      end
+    end
+
+    context "when it has a link" do
+      subject { build(:attachment, :with_link) }
+
+      it "has a correct link url" do
+        expect(subject.link).to be_url
+      end
+
+      describe "link?" do
+        it "returns true" do
+          expect(subject.link?).to be(true)
+        end
       end
 
       describe "photo?" do

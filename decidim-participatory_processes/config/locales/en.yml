@@ -5,7 +5,6 @@ en:
       participatory_process:
         announcement: Announcement
         area_id: Area
-        banner_image: Banner image
         copy_categories: Copy categories
         copy_components: Copy components
         copy_steps: Copy steps
@@ -35,8 +34,6 @@ en:
         scope_type_max_depth_id: Scope filter depth
         scopes_enabled: Scopes enabled
         short_description: Short description
-        show_metrics: Show metrics
-        show_statistics: Show statistics
         slug: URL slug
         start_date: Start date
         subtitle: Subtitle
@@ -99,10 +96,8 @@ en:
         destroy: Delete
         duplicate: Duplicate
         edit: Edit
-        filter:
-          all_processes: Show all processes
-          process_groups: Filter processes in groups
         import_process: Import
+        menu_hidden: Hide
         moderate: Moderate
         new_process: New process
         new_process_group: New process group
@@ -114,6 +109,9 @@ en:
         resend_invitation: Resend invitation
         see_process: See process
         unpublish: Unpublish
+      filters:
+        decidim_participatory_process_group_id_eq:
+          label: By process group
       menu:
         participatory_process_groups: Process groups
         participatory_process_groups_submenu:
@@ -179,7 +177,7 @@ en:
           title: Duplicate participatory process
       participatory_process_groups:
         destroy:
-          error: There was an error while destroying the Participatory process group.
+          error: There was a problem while destroying the participatory process group.
           success: Participatory process group successfully deleted.
         edit:
           title: Edit process group
@@ -220,6 +218,13 @@ en:
             last_step: Cannot delete the last phase of a process.
           success: Participatory process phase successfully deleted.
         edit:
+          cta_deprecated:
+            body_html: |-
+              Configuring the CTA through the Phase of the participatory process is deprecated with the new design.
+              Now this is done in the <b>Landing Page</b>, using the <b>Hero and image</b> content block.
+              We have left it here for you to migrate the CTAs that you need. The fields <i>Call to action path</i> and
+              <i>Call to action text</i> will be removed in the next version.
+            title: CTA deprecated
           title: Edit participatory process phase
           update: Update
         index:
@@ -356,6 +361,32 @@ en:
         description: Number of participatory processes in this organization
         object: participatory processes
         title: Participatory processes
+    open_data:
+      help:
+        participatory_processes:
+          announcement: The announcement (callout) information
+          area: The area where the process is taking place
+          description: A long description of the process
+          developer_group: The developer group of the process. This is the organization that is promoting the process.
+          end_date: The end date of the process
+          hashtag: The process hashtag, used for Twitter/X
+          id: The unique identifier of this process
+          local_area: The local area of the process. This is the organization area where the process is taking place.
+          meta_scope: The scope metadata of the process
+          participatory_process_group: The group of the process, if there is any
+          participatory_process_type: The type of the process
+          participatory_scope: The participatory scope of the process
+          participatory_structure: The participatory structure of the process. This is how the process is decided.
+          promoted: Wheter the process is promoted or not
+          remote_hero_image_url: The URL of the process hero image
+          scope: The scope of the process
+          scopes_enabled: Whether the scopes are enabled or not
+          short_description: A short description of the process
+          slug: The process slug (used for identification purposes, for the URL)
+          start_date: The start date of the process
+          subtitle: The subtitle of the process
+          target: The target of the process. This is who is called to participate in the process.
+          title: The process title
     participatory_process_groups:
       content_blocks:
         extra_data:
@@ -419,10 +450,12 @@ en:
         participatory_processes:
           form:
             announcement_help: The text you enter here will be shown to the user right below the process information.
+            define_taxonomy_filters: Please define some filters for this participatory space before using this setting.
             duration: Duration
             filters: Filters
             images: Images
             metadata: Metadata
+            no_taxonomy_filters_found: No taxonomy filters found.
             other: Other
             related_processes: Related processes
             scope_type_max_depth_help: Restrict the scope filter depth; The filter will show from general to the selected scope type.
@@ -430,8 +463,9 @@ en:
             select_participatory_process_type: Select a process type
             select_process_group: Select a process group
             slug_help_html: 'URL slugs are used to generate the URLs that point to this process. Only accepts letters, numbers and dashes, and must start with a letter. Example: %{url}'
+            taxonomies: Taxonomies
             title: General Information
-            visbility: Visibility
+            visibility: Visibility
       content_blocks:
         extra_data:
           name: Phase & duration
@@ -444,7 +478,7 @@ en:
       index:
         title: Participatory processes
       last_activity:
-        new_participatory_process: New participatory process
+        new_participatory_process: 'New participatory process:'
       pages:
         home:
           highlighted_processes:

@@ -2,11 +2,10 @@
 
 require "spec_helper"
 
-describe "Admin manages assemblies" do
-  include Decidim::SanitizeHelper
-
+describe "Admin manages assemblies types" do
   let(:admin) { create(:user, :admin, :confirmed) }
   let(:organization) { admin.organization }
+  let(:attributes) { attributes_for(:assemblies_type) }
 
   describe "Managing assemblies types" do
     before do
@@ -15,18 +14,13 @@ describe "Admin manages assemblies" do
       visit decidim_admin_assemblies.assemblies_types_path
     end
 
-    it "can create new assemblies types" do
+    it "can create new assemblies types", versioning: true do
       within "[data-content]" do
-        click_link "New assembly type"
+        click_on "New assembly type"
 
         within ".new_assembly_type" do
-          fill_in_i18n(
-            :assemblies_type_title,
-            "#assemblies_type-title-tabs",
-            en: "My assembly type",
-            es: "Mi assembly type",
-            ca: "La meva assembly type"
-          )
+          fill_in_i18n(:assemblies_type_title, "#assemblies_type-title-tabs", **attributes[:title].except("machine_translations"))
+
           find("*[type=submit]").click
         end
       end
@@ -34,8 +28,11 @@ describe "Admin manages assemblies" do
       expect(page).to have_admin_callout("successfully")
 
       within "table" do
-        expect(page).to have_content("My assembly type")
+        expect(page).to have_content(translated(attributes[:title]))
       end
+
+      visit decidim_admin.root_path
+      expect(page).to have_content("created the #{translated(attributes[:title])} assembly type")
     end
 
     context "with existing assemblies types" do
@@ -51,23 +48,24 @@ describe "Admin manages assemblies" do
         end
       end
 
-      it "can edit them" do
-        within find("tr", text: translated(assembly_type.title)) do
-          click_link "Edit"
+      it "can edit them", versioning: true do
+        within "tr", text: translated(assembly_type.title) do
+          click_on "Edit"
         end
 
         within ".edit_assembly_type" do
-          fill_in_i18n :assemblies_type_title, "#assemblies_type-title-tabs", en: "Another assembly type",
-                                                                              es: "Otra assembly type",
-                                                                              ca: "Una altra assembly type"
+          fill_in_i18n :assemblies_type_title, "#assemblies_type-title-tabs", **attributes[:title].except("machine_translations")
           find("*[type=submit]").click
         end
 
         expect(page).to have_admin_callout("successfully")
 
         within "table" do
-          expect(page).to have_content("Another assembly type")
+          expect(page).to have_content(translated(attributes[:title]))
         end
+
+        visit decidim_admin.root_path
+        expect(page).to have_content("updated the #{translated(attributes[:title])} assembly type")
       end
 
       it "can delete them" do
@@ -76,7 +74,7 @@ describe "Admin manages assemblies" do
         expect(page).to have_admin_callout("successfully")
 
         within "#assembly-types" do
-          expect(page).not_to have_content(translated(assembly_type.title))
+          expect(page).to have_no_content(translated(assembly_type.title))
         end
       end
     end
@@ -85,8 +83,8 @@ describe "Admin manages assemblies" do
   private
 
   def click_delete_assembly_type
-    within find("tr", text: translated(assembly_type.title)) do
-      accept_confirm { click_link "Delete" }
+    within "tr", text: translated(assembly_type.title) do
+      accept_confirm { click_on "Delete" }
     end
   end
 end

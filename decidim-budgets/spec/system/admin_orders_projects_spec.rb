@@ -9,21 +9,18 @@ describe "Admin orders projects" do
   let!(:projects) do
     [
       create(:project,
-             scope: create(:scope, organization: component.organization, name: { "ca" => "Scope2", "en" => "Scope3" }),
+             taxonomies: [create(:taxonomy, :with_parent, organization: component.organization, name: { "ca" => "Taxonomy3", "en" => "Taxonomy3" })],
              budget:,
-             category: create(:category, participatory_space:),
              created_at: 2.days.ago,
              budget_amount: 10_000),
       create(:project,
-             scope: create(:scope, organization: component.organization, name: { "ca" => "Scope3", "en" => "Scope1" }),
              budget:,
-             category: create(:category, participatory_space:),
+             taxonomies: [create(:taxonomy, :with_parent, organization: component.organization, name: { "ca" => "Taxonomy1", "en" => "Taxonomy1" })],
              created_at: 1.day.ago,
              budget_amount: 75_000),
       create(:project,
-             scope: create(:scope, organization: component.organization, name: { "ca" => "Scope1", "en" => "Scope2" }),
              budget:,
-             category: create(:category, participatory_space:),
+             taxonomies: [create(:taxonomy, :with_parent, organization: component.organization, name: { "ca" => "Taxonomy2", "en" => "Taxonomy2" })],
              created_at: Time.current,
              budget_amount: 80_000,
              selected_at: Time.current)
@@ -38,7 +35,7 @@ describe "Admin orders projects" do
   it "orders projects by ID" do
     ordered_projects = projects.sort_by(&:id).reverse
 
-    click_link "ID"
+    click_on "ID"
     rows = page.all("tbody tr")
 
     rows.each_with_index do |row, i|
@@ -49,7 +46,7 @@ describe "Admin orders projects" do
   it "orders projects by title" do
     ordered_projects = projects.sort_by { |project| translated(project.title) }
 
-    click_link "Title"
+    click_on "Title"
     rows = page.all("tbody tr")
 
     rows.each_with_index do |row, i|
@@ -57,21 +54,10 @@ describe "Admin orders projects" do
     end
   end
 
-  it "orders projects by category" do
-    ordered_projects = projects.sort_by { |project| translated(project.category.name) }
+  it "orders projects by taxonomy" do
+    ordered_projects = projects.sort_by { |project| translated(project.taxonomies.first.name) }
 
-    click_link "Category"
-    rows = page.all("tbody tr")
-
-    rows.each_with_index do |row, i|
-      expect(row).to have_text(translated(ordered_projects[i].category.name))
-    end
-  end
-
-  it "orders projects by scope" do
-    ordered_projects = projects.sort_by { |project| translated(project.scope.name) }
-
-    click_link "Scope"
+    click_on "Taxonomies"
     rows = page.all("tbody tr")
 
     rows.each_with_index do |row, i|
@@ -80,7 +66,7 @@ describe "Admin orders projects" do
   end
 
   it "orders projects by selected" do
-    click_link "Selected"
+    click_on "Selected"
     rows = page.all("tbody tr")
 
     expect(rows[0]).to have_text(translated(projects[2].title))
@@ -117,7 +103,7 @@ describe "Admin orders projects" do
     end
 
     it "orders projects by votes count" do
-      click_link "Votes count"
+      click_on "Votes count"
       rows = page.all("tbody tr")
 
       expect(rows[0]).to have_text(translated(projects.second.title))

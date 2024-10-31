@@ -14,6 +14,12 @@ module Decidim
 
       # A setting to choose if the collection exported by this manifest should
       # be included in the open data export available for all users.
+      #
+      # Optionally, you can define a specific serializer using the `open_data_serializer` method
+      # to have a granular control on which fields are added to the open data export.
+      # This is specially useful for ParticipatorySpaces, as the serializer is used for the
+      # export/import feature, and we do not want to publish some of the data available there
+      # (as the components settings).
       attribute :include_in_open_data, Boolean, default: false
 
       attr_reader :name, :manifest
@@ -32,7 +38,7 @@ module Decidim
       end
 
       # Public: Sets the +collection block+ when a block is given, or returns
-      # the previously setted +collection block+ if no block is provided.
+      # the previously set +collection block+ if no block is provided.
       #
       # The +collection block+ knows how to obtain the collection of elements
       # to be serialized by the +Serializer+.
@@ -71,6 +77,14 @@ module Decidim
       # `Decidim::Exporters::Serializer` as a default implementation.
       def serializer(serializer = nil)
         @serializer ||= serializer || Decidim::Exporters::Serializer
+      end
+
+      # Public: Sets the open data serializer when an argument is provided, returns the
+      # stored serializer otherwise.
+      #
+      # See more information in the `serializer` method.
+      def open_data_serializer(serializer = nil)
+        @open_data_serializer ||= serializer || nil
       end
 
       DEFAULT_FORMATS = %w(CSV JSON Excel).freeze

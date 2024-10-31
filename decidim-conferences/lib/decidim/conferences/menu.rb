@@ -14,6 +14,17 @@ module Decidim
         end
       end
 
+      def self.register_mobile_menu!
+        Decidim.menu :mobile_menu do |menu|
+          menu.add_item :conferences,
+                        I18n.t("menu.conferences", scope: "decidim"),
+                        decidim_conferences.conferences_path,
+                        position: 2.8,
+                        if: Decidim::Conference.where(organization: current_organization).published.any?,
+                        active: :inclusive
+        end
+      end
+
       def self.register_home_content_block_menu!
         Decidim.menu :home_content_block_menu do |menu|
           menu.add_item :conferences,
@@ -28,10 +39,8 @@ module Decidim
       def self.register_admin_conferences_components_menu!
         Decidim.menu :admin_conferences_components_menu do |menu|
           current_participatory_space.components.each do |component|
-            caption = translated_attribute(component.name)
-            if component.primary_stat.present?
-              caption += content_tag(:span, component.primary_stat, class: component.primary_stat.zero? ? "component-counter component-counter--off" : "component-counter")
-            end
+            caption = decidim_escape_translated(component.name)
+            caption += content_tag(:span, component.primary_stat, class: "component-counter") if component.primary_stat.present?
 
             menu.add_item [component.manifest_name, component.id].join("_"),
                           caption.html_safe,
@@ -39,6 +48,7 @@ module Decidim
                           active: is_active_link?(manage_component_path(component)) ||
                                   is_active_link?(decidim_admin_conferences.edit_component_path(current_participatory_space, component)) ||
                                   is_active_link?(decidim_admin_conferences.edit_component_permissions_path(current_participatory_space, component)) ||
+                                  is_active_link?(decidim_admin_conferences.component_share_tokens_path(current_participatory_space, component)) ||
                                   participatory_space_active_link?(component),
                           if: component.manifest.admin_engine && user_role_config.component_is_accessible?(component.manifest_name)
           end
@@ -91,8 +101,8 @@ module Decidim
         end
       end
 
-      def self.register_conferences_admin_menu!
-        Decidim.menu :conferences_admin_menu do |menu|
+      def self.register_conference_admin_menu!
+        Decidim.menu :conference_admin_menu do |menu|
           menu.add_item :edit_conference,
                         I18n.t("info", scope: "decidim.admin.menu.conferences_submenu"),
                         decidim_admin_conferences.edit_conference_path(current_participatory_space),
@@ -163,6 +173,33 @@ module Decidim
                         decidim_admin_conferences.moderations_path(current_participatory_space),
                         icon_name: "flag-line",
                         if: allowed_to?(:read, :moderation, conference: current_participatory_space)
+
+          menu.add_item :conference_share_tokens,
+                        I18n.t("menu.share_tokens", scope: "decidim.admin"),
+                        decidim_admin_conferences.conference_share_tokens_path(current_participatory_space),
+                        active: is_active_link?(decidim_admin_conferences.conference_share_tokens_path(current_participatory_space)),
+                        icon_name: "share-line",
+                        if: allowed_to?(:read, :share_tokens, current_participatory_space:)
+        end
+      end
+
+      def self.register_conferences_admin_menu!
+        Decidim.menu :admin_conferences_menu do |menu|
+          menu.add_item :conferences,
+                        I18n.t("menu.conferences", scope: "decidim.admin"),
+                        decidim_admin_conferences.conferences_path,
+                        position: 1,
+                        active: is_active_link?(decidim_admin_conferences.conferences_path),
+                        icon_name: "government-line",
+                        if: allowed_to?(:read, :conference_list)
+
+          menu.add_item :taxonomy_filters,
+                        I18n.t("menu.taxonomy_filters", scope: "decidim.admin"),
+                        decidim_admin_conferences.conference_filters_path,
+                        position: 3,
+                        icon_name: "price-tag-3-line",
+                        if: allowed_to?(:manage, :taxonomy_filter),
+                        active: is_active_link?(decidim_admin_conferences.conference_filters_path)
         end
       end
 
@@ -173,7 +210,8 @@ module Decidim
                         decidim_admin_conferences.conferences_path,
                         icon_name: "live-line",
                         position: 2.8,
-                        active: :inclusive,
+                        active: is_active_link?(decidim_admin_conferences.conferences_path, :inclusive) ||
+                                is_active_link?(decidim_admin_conferences.conference_filters_path, :inclusive),
                         if: allowed_to?(:enter, :space_area, space_name: :conferences)
         end
       end

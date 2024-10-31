@@ -35,7 +35,7 @@ module Decidim
 
         CreateComponent.call(@form) do
           on(:ok) do
-            if (landing_page_path = participatory_space_landing_page_path(@component)).present?
+            if (landing_page_path = participatory_space_landing_page_path(resource)).present?
               flash[:notice_html] = I18n.t("components.create.success_landing_page", landing_page_path:, scope: "decidim.admin").html_safe
             else
               flash[:notice] = I18n.t("components.create.success", scope: "decidim.admin")
@@ -63,7 +63,7 @@ module Decidim
         @form = form(@component.form_class).from_params(component_params)
         enforce_permission_to :update, :component, component: @component
 
-        UpdateComponent.call(@form, @component, current_user) do
+        UpdateComponent.call(@form, @component) do
           on(:ok) do |settings_changed, previous_settings, current_settings|
             handle_component_settings_change(previous_settings, current_settings) if settings_changed
 
@@ -119,11 +119,37 @@ module Decidim
         end
       end
 
+      def hide
+        @component = query_scope.find(params[:id])
+        enforce_permission_to :publish, :component, component: @component
+
+        HideMenuComponent.call(@component, current_user) do
+          on(:ok) do
+            flash[:notice] = I18n.t("components.hide.success", scope: "decidim.admin")
+            redirect_to action: :index
+          end
+        end
+      end
+
       def share
         @component = query_scope.find(params[:id])
         share_token = @component.share_tokens.create!(user: current_user, organization: current_organization)
 
         redirect_to share_token.url
+      end
+
+      def reorder
+        enforce_permission_to :reorder, :component
+
+        ReorderComponents.call(current_participatory_space.components, params[:order_ids]) do
+          on(:ok) do
+            head :ok
+          end
+
+          on(:invalid) do
+            head :bad_request
+          end
+        end
       end
 
       private

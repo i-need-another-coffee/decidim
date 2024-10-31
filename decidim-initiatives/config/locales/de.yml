@@ -19,7 +19,7 @@ de:
           any: Gemischt
           offline: Angesicht zu Angesicht
           online: Online
-        state: Zustand
+        state: Status
         title: Titel
         type_id: Typ
       initiatives_committee_member:
@@ -79,7 +79,6 @@ de:
   decidim:
     admin:
       actions:
-        manage: Verwalten
         new_initiative_type: Neuer Initiativentyp
         new_initiative_type_scope: Neuer Initiativentyp
       filters:
@@ -87,12 +86,12 @@ de:
           decidim_area_id_eq:
             label: Bereich
           state_eq:
-            label: Zustand
+            label: Status
             values:
               accepted: Ausreichend Unterschriften
               created: Erstellt
               discarded: Verworfen
-              published: Veröffentlicht
+              open: Offen
               rejected: Zu wenige Unterschriften
               validating: Technische Validierung
           type_id_eq:
@@ -101,12 +100,11 @@ de:
           title_or_description_or_id_string_or_author_name_or_author_nickname_cont: Suche in %{collection} nach Titel, Beschreibung, ID oder Autoren.
       initiatives_settings:
         update:
-          error: Ein Fehler ist aufgetreten.
+          error: Beim Aktualisieren der Initiativeneinstellungen ist ein Fehler aufgetreten.
           success: Die Einstellungen für Initiativen wurden erfolgreich aktualisiert.
       menu:
         attachments: Anhänge
         committee_members: Ausschussmitglieder
-        components: Komponenten
         information: Information
         initiative_type_scopes: Initiativentyp
         initiatives: Initiativen
@@ -123,7 +121,7 @@ de:
             created_at: Erstellt am
             id: ID
             published_at: Veröffentlicht am
-            state: Zustand
+            state: Status
             supports_count: Unterschriften
             title: Initiativen
         initiatives_type_scope:
@@ -196,7 +194,7 @@ de:
             - Befolgen Sie die Schritte, um eine neue Initiative zu erstellen
           description: Dieses Abzeichen wird gewährt, wenn Sie neue Initiativen starten und mit anderen zusammenarbeiten, um sie durchzuführen.
           description_another: Dieser Benutzer hat %{score} Initiativen veröffentlicht.
-          description_own: Du hast %{score} veröffentlichte Initiativen.
+          description_own: Sie haben %{score} veröffentlichte Initiativen.
           name: Veröffentlichte Initiativen
           next_level_in: Holen Sie sich %{score} weitere Initiativen veröffentlicht, um das nächste Level zu erreichen!
           unearned_another: Dieser Teilnehmer hat noch keine Initiativen veröffentlicht.
@@ -218,13 +216,13 @@ de:
           info_initiative:
             created_at: Erstellt am
             description: Beschreibung
-            initiative_votes_count: Stimmen zählen
+            initiative_votes_count: Anzahl Stimmen
             initiatives: Initiativen
-            state: Zustand
+            state: Status
         committee_requests:
           index:
             approve: Genehmigen
-            confirm_revoke: Bist du sicher?
+            confirm_revoke: Sind Sie sicher?
             invite_to_committee_help: Teilen Sie diesen Link, um andere Teilnehmer zum Unterstützungskomitee einzuladen.
             no_members_yet: Es gibt keine Mitglieder im Unterstützungskomitee.
             revoke: Widerrufen
@@ -238,11 +236,19 @@ de:
               most_recent: Neueste zuerst
         exports:
           initiatives: Initiativen
+        index:
+          initiatives_types:
+            alert_html: "<p>Sie müssen mindestens einen Initiativentyp erstellen, damit die Teilnehmenden Initiativen erstellen können.</p><p> %{link}</p>"
+            button: Neuer Initiativentyp
         initiatives:
+          accept:
+            success: Die Initiative wurde erfolgreich akzeptiert.
+          discard:
+            success: Die Initiative wurde erfolgreich gelöscht.
           edit:
             accept: Initiative akzeptieren
-            confirm: Bist du sicher?
-            confirm_send_to_technical_validation: Sind Sie sicher?
+            confirm: Sind Sie sich sicher?
+            confirm_send_to_technical_validation: Sind Sie sich sicher?
             discard: Verwerfen Sie die Initiative
             export_pdf_signatures: Exportieren von PDF-Signaturen
             export_votes: Export unterstützt
@@ -262,8 +268,14 @@ de:
             edit: Bearbeiten
             new: Neu
             photos: Fotos
+          publish:
+            success: Die Initiative wurde erfolgreich veröffentlicht.
+          reject:
+            success: Die Initiative wurde erfolgreich zurückgewiesen.
+          unpublish:
+            success: Die Veröffentlichung der Initiative wurde erfolgreich zurückgezogen.
           update:
-            error: Ein Fehler ist aufgetreten.
+            error: Beim Aktualisieren der Initiative ist ein Problem aufgetreten.
             success: Die Initiative wurde erfolgreich aktualisiert.
         initiatives_settings:
           edit:
@@ -277,7 +289,7 @@ de:
             title: Einstellungen für Initiativen
         initiatives_type_scopes:
           create:
-            error: Ein Fehler ist aufgetreten.
+            error: Beim Erstellen eines neuen Bereichs für diese Intiative ist ein Problem aufgetreten.
             success: Ein neues Thema wurde für den angegebenen Initiativentyp erstellt.
           destroy:
             success: Das Thema wurde erfolgreich entfernt.
@@ -288,12 +300,12 @@ de:
             create: Erstellen
             title: Initiativentypbereich erstellen
           update:
-            error: Ein Fehler ist aufgetreten.
+            error: Beim Aktualisieren dieses Bereichs ist ein Problem aufgetreten.
             success: Das Thema wurde erfolgreich aktualisiert.
         initiatives_types:
           create:
-            error: Ein Fehler ist aufgetreten.
-            success: Ein neuer Initiativentyp wurde erfolgreich erstellt.
+            error: Beim Erstellen des Initiativentyps ist ein Problem aufgetreten.
+            success: Ein neuer Initiativentyp wurde erfolgreich erstellt. Sie müssen mindestens einen Bereich für diese Initiative festlegen, damit er genutzt werden kann.
           destroy:
             success: Der Initiativentyp wurde erfolgreich entfernt.
           edit:
@@ -309,7 +321,7 @@ de:
             create: Erstellen
             title: Neuer Initiativentyp
           update:
-            error: Ein Fehler ist aufgetreten.
+            error: Beim Aktualisieren des Initiativentyps ist ein Problem aufgetreten.
             success: Der Initiativentyp wurde erfolgreich aktualisiert.
       admin_log:
         initiative:
@@ -327,7 +339,7 @@ de:
         accepted: Ausreichend Unterschriften
         created: Erstellt
         discarded: Verworfen
-        published: Veröffentlicht
+        open: Offen
         rejected: Ungenügend Unterschriften
         validating: Technische Validierung
       application_helper:
@@ -391,7 +403,7 @@ de:
       edit:
         accept: Initiative akzeptieren
         back: Zurück
-        confirm: Bist du dir sicher?
+        confirm: Sind Sie sich sicher?
         discard: Initiative verwerfen
         export_pdf_signatures: PDF der Unterschriften exportieren
         export_votes: Unterschriften exportieren
@@ -480,7 +492,7 @@ de:
           author: Autor
           myself: Meine Initiativen
           scope: Umfang
-          state: Zustand
+          state: Status
           type: Art
         index_header:
           new_initiative: Neue Initiative
@@ -541,7 +553,6 @@ de:
           other: " Signaturen"
         vote_cabin:
           already_voted: Schon unterschrieben
-          supports_required: "%{total_supports} Signaturen erforderlich"
           verification_required: Bestätigen Sie Ihr Konto, um die Initiative zu unterzeichnen
           vote: Signieren
           votes_blocked: Die Anmeldung ist deaktiviert
@@ -577,7 +588,7 @@ de:
           accepted: Ausreichend Unterschriften
           created: Erstellt
           discarded: Verworfen
-          published: Veröffentlicht
+          open: Offen
           rejected: Ungenügend Unterschriften
           validating: Technische Validierung
       states:
@@ -585,7 +596,7 @@ de:
         expired: Abgelaufen
       unavailable_scope: Nicht verfügbarer Umfang
       update:
-        error: Es ist ein Fehler aufgetreten.
+        error: Beim Aktualisieren der Initiative ist ein Problem aufgetreten.
         success: Die Initiative wurde erfolgreich aktualisiert.
     menu:
       initiatives: Initiativen

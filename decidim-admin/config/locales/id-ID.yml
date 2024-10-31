@@ -111,6 +111,7 @@ id:
       actions:
         add: Menambahkan
         browse: Jelajahi
+        manage: Mengelola
         permissions: Izin
         reject: Menolak
         verify: Memeriksa
@@ -295,6 +296,7 @@ id:
         help_sections: Bagian bantuan
         homepage: Homepage
         impersonations: Peniruan identitas
+        manage: Mengelola
         newsletters: Nawala
         participants: Peserta
         scope_types: Tipe lingkup
@@ -531,6 +533,8 @@ id:
           without_topic: Halaman tanpa topik
         update:
           error: Terjadi kesalahan saat memperbarui halaman ini.
+      taxonomies:
+        count: Menghitung
       titles:
         admin_log: Log admin
         area_types: Tipe area

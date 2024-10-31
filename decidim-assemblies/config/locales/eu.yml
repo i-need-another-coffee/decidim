@@ -41,8 +41,8 @@ eu:
         meta_scope: Esparruko metadatuak
         parent_id: Batzar nagusia
         participatory_processes_ids: Erlazionatutako prozesu parte-hartzaileak
-        participatory_scope: Zer erabakitzen da?
-        participatory_structure: Nola erabakitzen da?
+        participatory_scope: Zer erabakitzen den
+        participatory_structure: Nola erabakitzen den
         private_space: Espazio pribatua
         promoted: Nabarmendua
         published_at: Noiz argitaratua
@@ -50,7 +50,6 @@ eu:
         scope_id: Esparrua
         scopes_enabled: Esparru gaituak
         short_description: Deskribapen laburra
-        show_statistics: Erakutsi estatistikak
         slug: URL laburra
         special_features: Ezaugarri bereziak
         subtitle: Azpititulua
@@ -209,7 +208,7 @@ eu:
           info: Batzar honi buruz
           landing_page: Hasierako orria
           moderations: Moderazioak
-          private_users: Erabiltzaile pribatuak
+          private_users: Parte-hartzaile pribatuak
           see_assembly: Ikusi batzarra
         assemblies_types: Batzar motak
       models:
@@ -295,8 +294,9 @@ eu:
             select_parent_assembly: Hautatu batzar nagusia
             slug_help_html: 'URL-ren testu laburrak batzar honetara daramaten URL-ak sortzeko erabiltzen dira. Letrak, zenbakiak eta gidoiak soilik onartzen ditu, eta letra batez hasi behar du. Adibidea: % {url}'
             social_handlers: Soziala
+            taxonomies: Taxonomiak
             title: Informazio orokorra
-            visbility: ikusgarritasuna
+            visibility: Ikusgarritasuna
         assemblies_types:
           form:
             title: Editatu batzar mota
@@ -310,7 +310,7 @@ eu:
           form:
             existing_user: Parte-hartzailea existitzen da
             explanation: 'Jarraibideak irudirako:'
-            image_guide: Ahal izanez gero, irudi bertikal bat testurik gabe.
+            image_guide: Ahal dela, testurik gabeko irudi bertikal bat.
             non_user: Erabiltzailea ez
             non_user_avatar_help: Pertsonen baimena lortu beharko zenuke, kide gisa argitaratu baino lehen.
             select_a_position: Hautatu posizio bat
@@ -335,8 +335,8 @@ eu:
           indefinite_duration: Zehaztu gabe
           local_area: Antolakuntza Arloa
           meta_scope: Esparrua
-          participatory_scope: Zer erabakitzen da?
-          participatory_structure: Nola erabakitzen da?
+          participatory_scope: Zer erabakitzen den
+          participatory_structure: Nola erabakitzen den
           target: Nork hartzen du parte?
           title: Batzar honi buruz
         filters:
@@ -396,11 +396,7 @@ eu:
       show:
         assembly_type: Batzar mota
         duration: Iraupena
-        is_transparent:
-          'false': opakua
-          'true': gardena
         private_space: Hau batzar pribatua da
-        related_participatory_processes: Erlazionatutako parte hartze prozesuak
         social_networks_title: 'Bisitatu batzarra:'
     assembly_members:
       assembly_member:
@@ -452,6 +448,10 @@ eu:
           take_part: Parte hartu
         index:
           promoted_assemblies: Batzar nabarmenduak
+        metadata:
+          children_item:
+            one: "%{count} batzarra"
+            other: "%{count} batzar"
         order_by_assemblies:
           assemblies:
             one: "%{count} batzarrak"

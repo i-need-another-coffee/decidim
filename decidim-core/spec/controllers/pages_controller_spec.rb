@@ -21,8 +21,8 @@ module Decidim
 
           expect(response).to render_template(:show)
 
-          expect(response.body).to include(page.title[I18n.locale.to_s])
-          expect(response.body).to include(page.content[I18n.locale.to_s])
+          expect(response.body).to include(decidim_escape_translated(page.title))
+          expect(response.body).to include(decidim_sanitize_admin(translated(page.content)))
         end
       end
 
@@ -66,7 +66,7 @@ module Decidim
             get :show, params: { id: page.slug }
 
             expect(response).to redirect_to("/users/sign_in")
-            expect(flash[:warning]).to include("Please, login with your account before access")
+            expect(flash[:warning]).to include("Please, log in with your account before access")
           end
         end
 

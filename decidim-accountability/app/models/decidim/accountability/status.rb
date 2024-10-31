@@ -3,7 +3,7 @@
 module Decidim
   module Accountability
     # The data store for a Status in the Decidim::Accountability component. It stores a
-    # key, a localized name, a localized description and and associated progress number.
+    # key, a localized name, a localized description and associated progress number.
     class Status < Accountability::ApplicationRecord
       include Decidim::HasComponent
       include Decidim::TranslatableResource
@@ -21,6 +21,10 @@ module Decidim
 
       # Allow ransacker to search for a key in a hstore column (`name`.`en`)
       ransacker_i18n :name
+
+      def self.ransackable_attributes(_auth_object = nil)
+        %w(id name)
+      end
 
       def self.log_presenter_class_for(_log)
         Decidim::Accountability::AdminLog::StatusPresenter

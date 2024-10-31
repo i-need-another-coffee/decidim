@@ -4,7 +4,6 @@ module Decidim
   module ContentBlocks
     class HeroCell < Decidim::ViewModel
       include Decidim::CtaButtonHelper
-      include Decidim::SanitizeHelper
 
       # Needed so that the `CtaButtonHelper` can work.
       def decidim_participatory_processes
@@ -16,7 +15,7 @@ module Decidim
       end
 
       def background_image
-        model.images_container.attached_uploader(:background_image).path(variant: :big)
+        model.images_container.attached_uploader(:background_image).variant_url(:big)
       end
 
       private

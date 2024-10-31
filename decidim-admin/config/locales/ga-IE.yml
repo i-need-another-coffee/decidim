@@ -67,6 +67,7 @@ ga:
         category:
           new: Catagóir nua
         import: Iompórtáil
+        manage: Bainistigh
         per_page: In aghaidh an leathanach
         reject: Diúltaigh
         share: Roinn
@@ -191,6 +192,7 @@ ga:
         admins: Riaracháin
         areas: Ceantair
         homepage: Leathanach baile
+        manage: Bainistigh
         scopes: Scóip
         settings: Socruithe
         static_pages: Leathanaigh
@@ -312,13 +314,6 @@ ga:
         form:
           images:
             preview: Réamhamharc
-      organization_external_domain_whitelist:
-        edit:
-          update: Nuashonraigh
-        external_domain:
-          down: Ísligh
-          remove: Bain as
-          up: Ardaigh
       participatory_space_private_users:
         new:
           create: Cruthaigh
@@ -349,6 +344,8 @@ ga:
           none: Ceann ar Bith
         new:
           title: Leathanach nua
+      taxonomies:
+        count: Líon
       titles:
         areas: Ceantair
         authorization_workflows: Modhanna deimhnithe

@@ -6,7 +6,6 @@ require "active_support/all"
 require "devise"
 require "devise-i18n"
 require "decidim/core"
-require "foundation_rails_helper"
 require "doorkeeper"
 require "doorkeeper-i18n"
 require "hashdiff"
@@ -26,6 +25,7 @@ module Decidim
       end
 
       initializer "decidim_admin.register_icons" do |_app|
+        Decidim.icons.register(name: "lock-2-line", icon: "lock-2-line", category: "system", description: "Block user icon", engine: :admin)
         Decidim.icons.register(name: "layout-masonry-line", icon: "layout-masonry-line", category: "system", description: "", engine: :admin)
         Decidim.icons.register(name: "service-line", icon: "service-line", category: "system", description: "", engine: :admin)
         Decidim.icons.register(name: "fullscreen-line", icon: "fullscreen-line", category: "system", description: "", engine: :admin)
@@ -57,39 +57,15 @@ module Decidim
         Mime::Type.register Decidim::Admin::Import::Readers::XLSX::MIME_TYPE, :xlsx
       end
 
-      initializer "decidim_admin.global_moderation_menu" do
-        Decidim::Admin::Menu.register_admin_global_moderation_menu!
-      end
-
-      initializer "decidim_admin.workflows_menu" do
-        Decidim::Admin::Menu.register_workflows_menu!
-      end
-
-      initializer "decidim_admin.impersonate_menu" do
-        Decidim::Admin::Menu.register_impersonate_menu!
-      end
-
-      initializer "decidim_admin.static_pages_menu" do
-        Decidim::Admin::Menu.register_admin_static_pages_menu!
-      end
-
-      initializer "decidim_admin.user_menu" do
-        Decidim::Admin::Menu.register_admin_user_menu!
-      end
-
-      initializer "decidim_admin.scopes_menu" do
-        Decidim::Admin::Menu.register_admin_scopes_menu!
-      end
-
-      initializer "decidim_admin.areas_menu" do
-        Decidim::Admin::Menu.register_admin_areas_menu!
-      end
-
-      initializer "decidim_admin.settings_menu" do
-        Decidim::Admin::Menu.register_admin_settings_menu!
-      end
-
       initializer "decidim_admin.menu" do
+        Decidim::Admin::Menu.register_admin_global_moderation_menu!
+        Decidim::Admin::Menu.register_workflows_menu!
+        Decidim::Admin::Menu.register_impersonate_menu!
+        Decidim::Admin::Menu.register_admin_static_pages_menu!
+        Decidim::Admin::Menu.register_admin_user_menu!
+        Decidim::Admin::Menu.register_admin_scopes_menu!
+        Decidim::Admin::Menu.register_admin_areas_menu!
+        Decidim::Admin::Menu.register_admin_settings_menu!
         Decidim::Admin::Menu.register_admin_menu!
       end
 

@@ -4,7 +4,7 @@ require "spec_helper"
 
 module Decidim::Conferences
   describe Admin::CreateConferenceSpeaker do
-    subject { described_class.new(form, current_user, conference) }
+    subject { described_class.new(form) }
 
     let(:conference) { create(:conference) }
     let(:user) { nil }
@@ -60,7 +60,8 @@ module Decidim::Conferences
         form_params
       ).with_context(
         current_user:,
-        current_organization: conference.organization
+        current_organization: conference.organization,
+        current_participatory_space: conference
       )
     end
 
@@ -132,9 +133,8 @@ module Decidim::Conferences
       it "links meetings" do
         subject.call
 
-        conference_meetings = []
-        meetings.each do |meeting|
-          conference_meetings << meeting.becomes(Decidim::ConferenceMeeting)
+        conference_meetings = meetings.map do |meeting|
+          meeting.becomes(Decidim::ConferenceMeeting)
         end
 
         conference_speaker.conference_meetings = conference_meetings

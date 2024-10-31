@@ -7,10 +7,7 @@ fr-CA:
         decidim_scope_id: Périmètre d'application
         description: Description
         end_date: Date de fin
-        meetings_ids: Rencontres associées
         progress: Avancement
-        project_ids: Projets inclus
-        proposals: Propositions incluses
         start_date: Date de début
         title: Titre
         updated_at: Mise à jour à
@@ -39,7 +36,7 @@ fr-CA:
         confirm_destroy: Êtes-vous sûr de vouloir supprimer ce %{name}?
         destroy: Supprimer
         edit: Modifier
-        import: Importer des projets depuis un autre composant
+        import: Importer des projets depuis une autre fonctionnalité
         import_csv: Importer les résultats depuis un fichier CSV
         new_result: Nouvelle réalisation
         new_status: Nouveau statut
@@ -101,7 +98,7 @@ fr-CA:
             success:
               one: Projet en attente d'importation. Vous serez notifié par courriel, une fois l'import terminé.
               other: "%{count} projets en attente d'importation. Vous serez notifié par email une fois l'import terminé."
-            title: Importer des projets depuis un autre composant
+            title: Importer des projets depuis une autre fonctionnalité
         results:
           create:
             invalid: Un problème est survenu lors de la création de ce résultat.
@@ -234,15 +231,7 @@ fr-CA:
           search: Rechercher des réalisations
         show:
           stats:
-            attendees: Participants
             back_to_resource: Revenir à la réalisation
-            comments: Commentaires
-            contributions: Contributions
-            last_edited_by: Dernière édition par
-            last_updated_at: Dernière mise à jour à
-            meetings: Réunions
-            proposals: Propositions
-            votes: Votes
         timeline:
           title: Évolution du projet
     admin:
@@ -261,16 +250,12 @@ fr-CA:
         name: Suivi
         settings:
           global:
-            categories_label: Nom pour "Catégories"
             comments_enabled: Activer le module de commentaire
             comments_max_length: Longueur max des commentaires (laisser 0 pour la valeur par défaut)
             display_progress_enabled: Afficher les progrès
-            heading_leaf_level_results: Nom pour "Projets"
-            heading_parent_level_results: Nom pour "Réalisations"
             intro: Introduction
             scope_id: Secteur
             scopes_enabled: Secteurs activés
-            subcategories_label: Nom pour "Sous-catégories"
           step:
             comments_blocked: Bloquer la création de nouveaux commentaires
     events:

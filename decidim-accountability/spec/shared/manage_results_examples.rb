@@ -3,8 +3,6 @@
 require "decidim/dev/test/rspec_support/tom_select"
 
 shared_examples "manage results" do
-  include_context "when managing an accountability component as an admin"
-
   describe "admin form" do
     before { click_on "New result", match: :first }
 
@@ -23,7 +21,7 @@ shared_examples "manage results" do
       end
 
       it "does not display the proposal picker" do
-        expect(page).not_to have_content "Choose proposals"
+        expect(page).to have_no_content "Choose proposals"
       end
     end
   end
@@ -31,76 +29,75 @@ shared_examples "manage results" do
   context "when having existing proposals" do
     let!(:proposal_component) { create(:proposal_component, participatory_space:) }
     let!(:proposals) { create_list(:proposal, 5, component: proposal_component) }
+    let(:attributes) { attributes_for(:result, component: current_component) }
 
     it "updates a result" do
-      within find("tr", text: translated(result.title)) do
-        click_link "Edit"
+      within "tr", text: translated(result.title) do
+        click_on "Edit"
       end
 
       within ".edit_result" do
-        fill_in_i18n(
-          :result_title,
-          "#result-title-tabs",
-          en: "My new title",
-          es: "Mi nuevo título",
-          ca: "El meu nou títol"
-        )
+        fill_in_i18n(:result_title, "#result-title-tabs", **attributes[:title].except("machine_translations"))
 
         tom_select("#proposals_list", option_id: proposals.first(2).map(&:id))
-
+      end
+      within ".item__edit-sticky" do
         find("*[type=submit]").click
       end
 
       expect(page).to have_admin_callout("successfully")
 
       within "table" do
-        expect(page).to have_content("My new title")
+        expect(page).to have_content(translated(attributes[:title]))
       end
+
+      visit decidim_admin.root_path
+      expect(page).to have_content("updated result")
+      expect(page).to have_content(translated(attributes[:title]))
     end
 
     it "creates a new result", :slow do
-      click_link "New result", match: :first
+      click_on "New result", match: :first
 
       within ".new_result" do
-        fill_in_i18n(
-          :result_title,
-          "#result-title-tabs",
-          en: "My result",
-          es: "Mi result",
-          ca: "El meu result"
-        )
-        fill_in_i18n_editor(
-          :result_description,
-          "#result-description-tabs",
-          en: "A longer description",
-          es: "Descripción más larga",
-          ca: "Descripció més llarga"
-        )
+        fill_in_i18n(:result_title, "#result-title-tabs", **attributes[:title].except("machine_translations"))
+        fill_in_i18n_editor(:result_description, "#result-description-tabs", **attributes[:description].except("machine_translations"))
 
         tom_select("#proposals_list", option_id: proposals.first(2).map(&:id))
 
-        select translated(scope.name), from: :result_decidim_scope_id
-        select translated(category.name), from: :result_decidim_category_id
-
+        select decidim_sanitize_translated(taxonomy.name), from: "taxonomies-#{taxonomy_filter.id}"
+      end
+      within ".item__edit-sticky" do
         find("*[type=submit]").click
       end
-
       expect(page).to have_admin_callout("successfully")
 
       within "table" do
-        expect(page).to have_content("My result")
+        expect(page).to have_content(translated(attributes[:title]))
+        expect(page).to have_content(decidim_sanitize_translated(taxonomy.name))
       end
+
+      visit decidim_admin.root_path
+      expect(page).to have_content("created result")
+      expect(page).to have_content(attributes[:title]["en"])
+
+      visit decidim.last_activities_path
+      expect(page).to have_content("New result: #{translated(attributes[:title])}")
+
+      within "#filters" do
+        find("a", class: "filter", text: "Result", match: :first).click
+      end
+      expect(page).to have_content("New result: #{translated(attributes[:title])}")
     end
   end
 
   it "allows the user to preview the result" do
-    within find("tr", text: translated(result.title)) do
+    within "tr", text: translated(result.title) do
       klass = "action-icon--preview"
       href = resource_locator(result).path
       target = "blank"
 
-      expect(page).to have_selector(
-        :xpath,
+      expect(page).to have_xpath(
         "//a[contains(@class,'#{klass}')][@href='#{href}'][@target='#{target}']"
       )
     end
@@ -114,14 +111,14 @@ shared_examples "manage results" do
     end
 
     it "deletes a result" do
-      within find("tr", text: translated(result2.title)) do
-        accept_confirm { click_link "Delete" }
+      within "tr", text: translated(result2.title) do
+        accept_confirm { click_on "Delete" }
       end
 
       expect(page).to have_admin_callout("successfully")
 
       within "table" do
-        expect(page).not_to have_content(translated(result2.title))
+        expect(page).to have_no_content(translated(result2.title))
       end
     end
   end

@@ -15,10 +15,17 @@ module Decidim
       paths["lib/tasks"] = nil
 
       routes do
+        resources :conference_filters, except: [:show]
+
         resources :conferences, param: :slug, except: [:show, :destroy] do
           resource :publish, controller: "conference_publications", only: [:create, :destroy]
           resources :copies, controller: "conference_copies", only: [:new, :create]
-          resources :speakers, controller: "conference_speakers"
+          resources :speakers, controller: "conference_speakers" do
+            member do
+              put :publish
+              put :unpublish
+            end
+          end
           resources :partners, controller: "partners", except: [:show]
           resources :media_links, controller: "media_links"
           resources :registration_types, controller: "registration_types" do
@@ -55,12 +62,17 @@ module Decidim
           resources :categories, except: [:show]
 
           resources :components do
+            collection do
+              put :reorder
+            end
             resource :permissions, controller: "component_permissions"
             member do
               put :publish
               put :unpublish
               get :share
+              put :hide
             end
+            resources :component_share_tokens, except: [:show], path: "share_tokens", as: "share_tokens"
             resources :exports, only: :create
             resources :imports, only: [:new, :create] do
               get :example, on: :collection
@@ -76,6 +88,8 @@ module Decidim
             end
             resources :reports, controller: "moderations/reports", only: [:index, :show]
           end
+
+          resources :conference_share_tokens, except: [:show], path: "share_tokens"
         end
 
         scope "/conferences/:conference_slug/components/:component_id/manage" do
@@ -89,23 +103,12 @@ module Decidim
         end
       end
 
-      initializer "decidim_conferences_admin.components_menu" do
-        Decidim::Conferences::Menu.register_admin_conferences_components_menu!
-      end
-
-      initializer "decidim_conferences_admin.registrations_menu" do
-        Decidim::Conferences::Menu.register_conferences_admin_registrations_menu!
-      end
-
-      initializer "decidim_conferences_admin.attachments_menu" do
-        Decidim::Conferences::Menu.register_conferences_admin_attachments_menu!
-      end
-
-      initializer "decidim_conferences_admin.conferences_menu" do
-        Decidim::Conferences::Menu.register_conferences_admin_menu!
-      end
-
       initializer "decidim_conferences_admin.menu" do
+        Decidim::Conferences::Menu.register_admin_conferences_components_menu!
+        Decidim::Conferences::Menu.register_conferences_admin_registrations_menu!
+        Decidim::Conferences::Menu.register_conferences_admin_attachments_menu!
+        Decidim::Conferences::Menu.register_conference_admin_menu!
+        Decidim::Conferences::Menu.register_conferences_admin_menu!
         Decidim::Conferences::Menu.register_admin_menu_modules!
       end
     end

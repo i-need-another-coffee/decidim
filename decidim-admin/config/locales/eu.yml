@@ -187,6 +187,7 @@ eu:
         export: Esportatu dena
         export-selection: Esportatu hautaketa
         import: Inportatu
+        manage: Kudeatu
         newsletter:
           new: Beste buletin bat
         participatory_space_private_user:
@@ -201,7 +202,7 @@ eu:
         verify: Egiaztatu
       admin_terms_of_service:
         accept:
-          error: Errore bat egon da zerbitzuaren administrazio-baldintzak onartzean.
+          error: Arazoa izan da zerbitzuaren baldintzak onartzean.
           success: Ederto! Onartu dituzu zerbitzuaren administrazio-baldintzak.
         actions:
           accept: Bat nator baldintzekin
@@ -233,7 +234,7 @@ eu:
           error: Arazo bat egon da beste arlo bat sortzean.
           success: Arloa zuzen sortua.
         destroy:
-          has_spaces: Eremu honek mendekotasuna duten espazioak ditu. Kendu aurretik, ziurtatu ez duela parte hartzeko gunerik aipatzen.
+          has_spaces: Arlo honek mendekotasuna duten espazioak ditu. Kendu aurretik, ziurtatu ez duela parte hartzeko gunerik aipatzen.
           success: Arloa behar bezala suntsitua.
         edit:
           title: Editatu arloa
@@ -264,7 +265,7 @@ eu:
           success: Karpeta zuzen eguneratua.
       attachments:
         create:
-          error: Arazo bat egon da beste eranskin bat sortzean.
+          error: "Arazo bat egon da beste eranskin bat sortzean.\n"
           success: Fitxategi erantsia zuzen sortua.
         destroy:
           success: Fitxategi erantsia behar bezala ezabatua.
@@ -287,7 +288,7 @@ eu:
       block_user:
         new:
           action: Blokeatu kontua eta bidali justifikazioa
-          already_reported_html: Ekintza honekin jarraituz gero, parte-hartzailearen eduki guztiak ere ezkutatuko dituzu. < a href = " % {link}">Blokeatu kontua </a>.
+          already_reported_html: Ekintza honekin jarraituz, parte-hartzailearen eduki guztiak ere ezkutatuko dituzu.
           description: Erabiltzaile baten blokeoak kontu erabilezina utziko du. Zure justifikazioan zein irizpideren arabera desblokeatuko zenukeen azaldu dezakezu.
           justification: Justifikazioa
           title: Blokeatu erabiltzaile hau %{name}
@@ -328,13 +329,15 @@ eu:
           default_step_settings: Faseen ezarpen lehenetsiak
           global_settings: Ezarpen globalak
           step_settings: Ezarpenen faseak
+        hide:
+          success: Osagaia zuzen ezkutatu da menutik.
         index:
           add: Gehitu osagaia
           headers:
             actions: Ekintzak
             name: Osagaiaren izena
-            scope: Osagaiaren esparrua
             type: Osagai mota
+            visibility: Ikusgarritasuna
         new:
           add: Gehitu osagaia
           title: 'Gehitu osagaia: %{name}'
@@ -346,15 +349,21 @@ eu:
         update:
           error: Arazo bat egon da osagai hau eguneratzean.
           success: Osagaia zuzen eguneratua.
+        visibility_label:
+          menu_hidden: Menu ezkutua
+          published: Argitaratua
+          unpublished: Despublikatua
       conflicts:
         attempts: Saiakerak
         'false': 'Ez'
+        index:
+          text: Bilatu gaur egungo erabiltzailearen posta elektronikoaren, izenaren edo ezizenaren bidez.
         managed_user_name: Erabiltzaile kudeatua
         solved: Ebatzita
         title: Egiaztapen-arazoak
         transfer:
           email: Helbide elektronikoa
-          error: Arazo bat egon da oraingo parte-hartzailea kudeatutako parte-hartzaile batera.
+          error: Arazo bat sortu da parte-hartzailea kudeatutako parte-hartzaileari eskualdatzean.
           name: Izena
           reason: Arrazoia
           success: Egungo transferentzia zuzen egina.
@@ -363,7 +372,7 @@ eu:
         user_name: Erabiltzailea
       content_blocks:
         create:
-          error: Errorea izan da eduki-blokea sortzean
+          error: Arazo bat izan da edukien blokea sortzean.
           success: Eduki-blokea zuzen sortua.
         destroy:
           error: Arazoa izan da eduki-bloke hau ezabatzen saiatzean
@@ -377,20 +386,20 @@ eu:
           update: Eguneratu
       dashboard:
         pending_moderations:
-          anouncement:
-            one: '%{count} moderazio daude zain'
-            other: '%{count} moderazo zain'
+          announcement:
+            one: Moderazio bat falta da
+            other: '%{count} moderazio daude zain'
           goto_moderation: Joan moderazio globaletara
           title: Zain dauden moderazioak
         show:
           dropdown: Goitibeherako zerrrenda
           view_more_logs: Ikusi erregistro gehiago 
-      domain_whitelist:
+      domain_allowlist:
         form:
           domain_too_short: Domeinu laburregia
         update:
-          error: Errorea baimendutako domeinuen zerrenda eguneratzean.
-          success: Baimendutako domeinuen zerrenda zuzen eguneratua.
+          error: Errorea gertatu da baimendutako kanpoko domeinuen zerrenda eguneratzean
+          success: Baimendutako kanpoko domeinuen zerrenda zuzen eguneratua.
       exports:
         export_as: "%{name} honako hau gisa: %{export_format}"
         formats:
@@ -449,6 +458,7 @@ eu:
           values:
             'false': Argitaratua
             'true': Ez da argitaratu
+        remove_all: Ezabatu denak
         scope_id_eq:
           label: Esparrua
         search_label: Bilatu
@@ -457,7 +467,6 @@ eu:
           report_count_eq: Salaketa kopurua
           reported_id_string_or_reported_content_cont: Bilatu %{collection} eduki edo Id erreportablearen arabera.
           title_cont: Bilatu %{collection} izenburuaren arabera.
-          user_name_or_user_email_cont: Bilatu %{collection} helbide elektroniko edo izenaren arabera.
           user_name_or_user_nickname_or_user_email_cont: Bilatu %{collection} helbide elektroniko, izen edo ezizenaren arabera.
         state_eq:
           label: Egoera
@@ -466,6 +475,9 @@ eu:
             pending: Zain
             rejected: Ukatua
             verified: Egiaztatua
+        taxonomies:
+          taxonomy_id_eq:
+            label: Taxonomia
       forms:
         file_help:
           import:
@@ -561,12 +573,14 @@ eu:
         appearance: Itxura
         area_types: Arlo motak
         areas: Arloak
+        components: Osagaiak
         configuration: Konfigurazioa
         content: Eduki salatua
-        external_domain_whitelist: Kanpoko domeinuak baimenduta
+        external_domain_allowlist: Baimendutako kanpoko domeinuak
         help_sections: Laguntza atalak
         homepage: Orrialde nagusia
         impersonations: Inpertsonazioak
+        manage: Kudeatu
         moderation: Moderazio globalak
         newsletters: Buletinak
         participants: Parte-hartzaileak
@@ -577,6 +591,8 @@ eu:
         settings: Ezarpenak
         static_page_topics: Gaiak
         static_pages: Orriak
+        taxonomies: Taxonomiak
+        taxonomy_filters: Taxonomia-iragazkiak
         user_groups: Erabiltzaile-taldeak
         users: Parte-hartzaileak 
       metrics:
@@ -771,12 +787,12 @@ eu:
           success: Buletina zuzen eguneratu da. Mesedez, berrikusi bidali baino lehen.
       officializations:
         block:
-          error: Errore bat egon da parte-hartzaile hau blokeatzean.
+          error: Arazo bat izan da parte-hartzailea blokeatzean.
           success: Parte-hartzailea zuzen blokeatua.
         create:
           success: Pate-hartzailea zuzen ofizializatua.
         destroy:
-          success: Parte-hartzailearen ofizializazioa behar bezala desgaitu da.
+          success: Parte-hartzailearen ofizializazioa behar bezala desgaitua.
         index:
           actions: Ekintzak
           badge: Garaikurra
@@ -785,7 +801,7 @@ eu:
           name: Izena
           nickname: Ezizena
           not_officialized: Ez ofizializatua
-          officialize: Ofizializatzen du
+          officialize: Ofiziala
           officialized: Ofizializatua
           reofficialize: Berriro ofizializatzen du
           reports: Txostenak
@@ -805,7 +821,7 @@ eu:
           show: Erakutsi
           title: Erakutsi parte-hartzailearen helbide elektronikoa
         unblock:
-          error: Errore bat egon da parte-hartzailea desblokeatzean.
+          error: Arazo bat izan da parte-hartzailea desblokeatzean.
           success: Parte-hartzailea zuzen desblokeatua.
       organization:
         edit:
@@ -847,17 +863,17 @@ eu:
             layout_appearance_title: Editatu itxura globalaren itxura
             preview: Aurrebistaratu
           omnipresent_banner_appearance_title: Editatu banner nonahikoa
-      organization_external_domain_whitelist:
+      organization_external_domain_allowlist:
         edit:
           update: Eguneratu
         external_domain:
           down: Jaitsi
           external_domain: Kanpoko domeinua
-          remove: Kendu
+          remove: Ezabatu
           up: Igo
         form:
-          add: Gehitu zerrenda zurian
-          title: Kanpoko domeinuen zerrenda zuria
+          add: Gehitu baimendutako helbideen zerrendara
+          title: Baimendutako kanpoko domeinuen zerrenda
       participatory_space_private_users:
         create:
           error: Arazo bat egon da parte-hartzaile pribatu bat gehitzean parte hartzeko espazio honetarako.
@@ -867,10 +883,10 @@ eu:
           success: Behar bezala ezabatua parte-hartzailearen sarbidea parte hartzeko espazio pribaturako.
         index:
           import_via_csv: Inportatu CSV bidetik
-          title: Parte-hartze pribatuko espazioko parte-hartzailea
+          title: Parte hartzeko espazio pribatuko parte-hartzailea 
         new:
           create: Sortu
-          title: Parte-hartze pribatuko espazioko parte-hartzaile berria.
+          title: Parte hartzeko espazio pribatuko parte-hartzaile berria.
       participatory_space_private_users_csv_imports:
         create:
           invalid: Arazo bat egon da CSV fitxategia irakurtzean. Mesedez, ziurtatu jarraibideei kasu egin diezula.
@@ -950,6 +966,11 @@ eu:
           help: Identifikatzaile-ikur hauek argitaratu gabeko baliabide hori edozein erabiltzaileri publikoki partekatzeko erabiltzen dira. Errekurtsoa argitaratzean ezkutatuko dira. Egin klik identifikatzaile-ikurra partekatzeko ikonoan, URL partekagarria bisitatzeko.
           title: Partekatu identifikatzaile-ikurrak
       shared:
+        adjacent_navigation:
+          next: Hurrengoa
+          next_title: Hurrengo elementua
+          previous: Aurrekoa
+          previous_title: Aurreko elementua
         gallery:
           add_images: Gehitu irudiak
           edit_images: Editatu irudiak
@@ -996,13 +1017,95 @@ eu:
         update:
           error: Arazo bat egon da orri hau eguneratzean.
           success: Orria zuzen eguneratua.
+      taxonomies:
+        actions: Ekintzak
+        amount: Kopurua
+        count: Zenbaketa
+        create:
+          invalid: Arazo bat egon da kategoria hau sortzean.
+          success: Kategoria zuzen sortua.
+        destroy:
+          invalid: Arazo bat egon da osagai hau ezabatzean.
+          success: Taxonomia behar bezala suntsitua.
+        edit:
+          back: Atzera
+          description: Taxonomia honetako elementuak baliabideak sailkatzeko edo iragazteko erabiliko dira, hala nola espazio edo osagai parte-hartzaileak. Arrastatu eta utzi zerrenda berrantolatzeko.
+          new_item: Elementu berria
+          no_items: Gaur egun ez dago taxonomia honetako elementurik. Sortu hemen elementuen zerrenda bat baliabideak sailkatzeko edo iragazteko, hala nola espazio edo osagai parte-hartzaileak. Elementuak hiru mailatan sailka daitezke.
+          subtitle: 'Elementuak hemen: "%{taxonomy_name}"'
+          title: Editatu "%{taxonomy_name}" taxonomia
+          update: Gorde
+        filters:
+          search_placeholder: Bilatu
+        index:
+          description: Taxonomiak edukiak sailkatzeko eta antolatzeko aukera ematen die administratuei. Adibidez, gehitu taxonomia bat prozesuak sailkatzeko eremu geografikoaren arabera.
+          new_taxonomy: Taxonomia berria
+          no_items_found: Ez dago bilaketa-irizpidearekin bat datorren taxonomiarik.
+        name: Izena
+        new:
+          create: Sortu taxonomia
+          title: Beste taxonomia bat
+        no_taxonomies: Gaur egun ez dago taxonomiarik. Sortu taxonomien zerrenda bat hemen, eta zehaztu elementuak horietako bakoitzean baliabideak sailkatzeko edo iragazteko.
+        table:
+          to_next_page: Arrastatu hurrengo orrira
+          to_prev_page: Arrastatu aurreko orrira
+        taxonomy_actions:
+          confirm_destroy: Ziur zaude %{name} ezabatu nahi duzula? Honek elementu txiki guztiak ere ezabatuko ditu.
+        update:
+          invalid: Arazo bat izan da taxonomia hau eguneratzean.
+          success: Taxonomia zuzen eguneratua.
+      taxonomy_filters:
+        actions:
+          new_taxonomy_filter: Beste taxonomia-iragazki bat
+        callout:
+          modify_taxonomy_html: Taxonomia hau edo bere elementuak aldatu behar badituzu, egin ezazu Taxonomiak ataleko <a href="%{url}">Taxonomies</a> ezarpenen bidez.
+        create:
+          error: Arazo bai izan da taxonomia-iragazki hau sortzean.
+          success: Taxonomia-iragazkia zuzen sortua.
+        destroy:
+          error: Arazo bat izan da taxonomia-iragazki hau suntsitzean.
+          success: Taxonomia-iragazkia behar bezala suntsitua.
+        edit:
+          back: Atzera
+          items: "%{count} elementu hautatu dira"
+          no_items: Ez dago taxonomia hauentzako elementurik. Taxonomia konfiguratzeko konfigurazioan sor ditzakezu elementuak.
+          title: Editatu taxonomia-iragazkia
+          update: Eguneratu taxonomia-iragazkia
+        form:
+          select_taxonomy: Hautatu taxonomia bat
+        index:
+          description: Taxonomia-iragazki batek aukera ematen die administratzaileei espazio parte-hartzaileak taxonomia batean oinarrituta ordenatzeko eta iragazteko. Adibidez, gehitu taxonomia-iragazki bat prozesuak eremu geografikoaren arabera sailkatzeko.
+          empty: Gaur egun ez dago taxonomia-iragazkirik. Sortutaxonomia-iragazkien zerrenda bat, espazio parte-hartzaileak taxonomia baten arabera ordenatu eta iragazteko.
+        new:
+          back: Atzera
+          create: Sortu taxonomia-iragazkia
+          items: "%{count} elementu eskuragarri"
+          title: Beste taxonomia-iragazki bat
+        table:
+          actions: Ekintzak
+          confirm_destroy: Ziur zaude %{name} iragazkia ezabatu nahi duzula?
+          count: Elementu kopurua
+          destroy: Ezabatu
+          edit: Editatu
+          name: Izena
+        update:
+          error: Arazo bai izan da taxonomia-iragazki hau eguneratzean.
+          success: Taxonomia-iragazkia zuzen eguneratua.
+      taxonomy_items:
+        edit:
+          title: 'Editatu elementua hemen: %{taxonomy}'
+          update: Eguneratu elementua
+        new:
+          create: Sortu elementua
+          none: Bat ere ez
+          title: 'Beste elementu bat hemen: %{taxonomy}'
       titles:
         admin_log: Administratzaile-erregistroa
         area_types: Arlo motak
         areas: Arloak
         authorization_workflows: Egiaztapen-metodoak
         dashboard: Kontrol-panela
-        edit_external_domains: Kanpoko domeinuen zerrenda
+        edit_external_domains: Baimendutako kanpoko domeinuen zerrenda
         edit_landing_page: Orriaren edukiak
         edit_organization_appearance: Editatu hasierako orriaren itxura
         impersonatable_users: Erabiltzaile erabilgarriak
@@ -1016,6 +1119,8 @@ eu:
         scope_types: Esparru motak
         scopes: Esparruak
         statistics: Jarduera
+        taxonomies: Taxonomiak
+        taxonomy_filters: Taxonomia-iragazkiak
         user_groups: Erabiltzaile-taldeak
         users: Administratzaileak
       user_group:

@@ -27,13 +27,14 @@ describe "Report Proposal" do
 
     it "reports the resource" do
       visit reportable_path
+      find("#dropdown-trigger-resource-#{reportable.id}").click
 
       expect(page).to have_css(%(button[data-dialog-open="flagModal"]))
       find(%(button[data-dialog-open="flagModal"])).click
       expect(page).to have_css(".flag-modal", visible: :visible)
 
       within ".flag-modal" do
-        click_button "Report"
+        click_on "Report"
       end
 
       expect(page).to have_content "report has been created"

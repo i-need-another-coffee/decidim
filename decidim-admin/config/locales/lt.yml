@@ -182,6 +182,7 @@ lt:
         export: Eksportuoti viską
         export-selection: Eksportuoti pasirinktą
         import: Importuoti
+        manage: Valdyti
         newsletter:
           new: Naujas naujienlaiškis
         participatory_space_private_user:
@@ -196,7 +197,6 @@ lt:
         verify: Patikrinti
       admin_terms_of_service:
         accept:
-          error: Sutinkant su administratoriaus nustatytomis naudojimosi sąlygomis įvyko klaida.
           success: Puiku! Jūs sutikote su administratoriaus naudojimosi sąlygomis.
         actions:
           accept: Aš sutinku su šiomis sąlygomis
@@ -282,7 +282,6 @@ lt:
       block_user:
         new:
           action: Užblokuoti paskyrą ir išsiųsti paaiškinimą
-          already_reported_html: Tęsdami šį veiksmą taip pat paslėpsite visus dalyvių turinius. <a href="%{link}">Užblokuoti paskyrą</a>.
           description: Naudotojo užblokavimas pavers paskyrą nenaudojama. Rekomenduojame paaiškinime pasidalinti būdais kaip naudotojas gali būti atblokuotas.
           justification: Paaiškinimas
           title: Blokuoti naudotoją %{name}
@@ -328,7 +327,6 @@ lt:
           headers:
             actions: Veiksmai
             name: Komponento pavadinimas
-            scope: Komponento apimtis
             type: Komponento tipas
         new:
           add: Pridėti komponentą
@@ -349,7 +347,6 @@ lt:
         title: Patikros konfliktai
         transfer:
           email: El. paštas
-          error: Iškilo problema perkeliant dabartinį dalyvį į tvarkomą dalyvį.
           name: Vardas
           reason: Priežastis
           success: Perkėlimas sėkmingai baigtas.
@@ -358,21 +355,10 @@ lt:
         user_name: Naudotojas
       dashboard:
         pending_moderations:
-          anouncement:
-            one: Yra %{count} laukiantis moderavimo
-            few: Yra %{count} laukiantys moderavimo
-            many: Yra %{count} laukiantys moderavimo
-            other: Yra %{count} laukiantys moderavimo
           goto_moderation: Eikite į globalius moderavimus
           title: Laukiantys Moderavimai
         show:
           view_more_logs: Peržiūrėti daugiau ataskaitų
-      domain_whitelist:
-        form:
-          domain_too_short: Domenas per trumpas
-        update:
-          error: Nepavyko atnaujinti domenų baltąjo sąrašo.
-          success: Domenų baltasis sąrašas atnaujintas sėkmingai.
       exports:
         export_as: "%{name} kaip %{export_format}"
         formats:
@@ -439,7 +425,6 @@ lt:
           report_count_eq: Raportuoti skaičių
           reported_id_string_or_reported_content_cont: Ieškoti %{collection} pagal ID arba turinį.
           title_cont: Ieškoti %{collection} pagal pavadinimą.
-          user_name_or_user_email_cont: Ieškoti %{collection} pagal vardą ar el. paštą.
           user_name_or_user_nickname_or_user_email_cont: Ieškoti %{collection} pagal el. pašto adresą, vardą arba naudotojo vardą.
         state_eq:
           label: Būsena
@@ -560,12 +545,13 @@ lt:
         appearance: Išvaizda
         area_types: Erdvės tipas
         areas: Erdvės
+        components: Komponentai
         configuration: Konfigūracija
         content: Turinys, apie kurį pranešta
-        external_domain_whitelist: Leistini išoriniai domenai
         help_sections: Pagalbos skyrius
         homepage: Pradinis puslapis
         impersonations: Įsikūnyjimai
+        manage: Valdyti
         moderation: Globalūs moderavimai
         newsletters: Naujienlaiškiai
         participants: Dalyviai
@@ -767,7 +753,6 @@ lt:
           success: Naujienlaiškis atnaujintas. Peržiūrėkite jį prieš išsiųsdami.
       officializations:
         block:
-          error: Blokuojant dalyvį iškilo problema.
           success: Dalyvis sėkmingai užblokuotas.
         create:
           success: Dalyvis sėkmingai oficializuotas.
@@ -801,7 +786,6 @@ lt:
           show: Rodyti
           title: Rodyti dalyvio el. pašto adresą
         unblock:
-          error: Atblokuojant dalyvį iškilo problema.
           success: Dalyvis sėkmingai atblokuotas.
       organization:
         edit:
@@ -838,17 +822,6 @@ lt:
             layout_appearance_title: Redaguoti išdėstymą
             preview: Peržiūra
           omnipresent_banner_appearance_title: Keisti visur naudojamą reklamjuostę
-      organization_external_domain_whitelist:
-        edit:
-          update: Atnaujinti
-        external_domain:
-          down: Žemyn
-          external_domain: Išorinis domenas
-          remove: Pašalinti
-          up: Aukštyn
-        form:
-          add: Pridėti prie baltojo sąrašo
-          title: Išorinių domenų baltasis sąrašas
       participatory_space_private_users:
         create:
           error: Pridedant privatų dalyvį į šia dalyvaujamają erdvę kilo problema.
@@ -987,13 +960,14 @@ lt:
         update:
           error: Atnaujinant šį puslapį iškilo problema.
           success: Puslapis atnaujintas.
+      taxonomies:
+        count: Kiekis
       titles:
         admin_log: Administratoriaus veiklos žurnalas
         area_types: Aplinkos tipai
         areas: Aplinkos
         authorization_workflows: Verifikacijos metodai
         dashboard: Švieslentė
-        edit_external_domains: Išorinių domenų baltasis sąrašas
         edit_landing_page: Puslapio turinys
         edit_organization_appearance: Keisti pagrindinio puslapio išvaizdą
         impersonatable_users: Dalyviai, kurių duomenis galima tvarkyti

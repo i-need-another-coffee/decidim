@@ -33,7 +33,7 @@ describe "Space moderator manages global moderations" do
     it "does not have the menu item in the main navigation" do
       visit participatory_space_path
       within ".main-nav + .main-nav" do
-        expect(page).not_to have_text("Global moderations")
+        expect(page).to have_no_text("Global moderations")
       end
     end
 
@@ -51,7 +51,7 @@ describe "Space moderator manages global moderations" do
     end
 
     it_behaves_like "sorted moderations" do
-      let!(:reportables) { create_list(:dummy_resource, 17, component: current_component) }
+      let!(:reportables) { create_list(:dummy_resource, 27, component: current_component) }
       let(:moderations_link_text) { "Global moderations" }
       let(:moderations_link_in_admin_menu) { false }
     end
@@ -68,7 +68,7 @@ describe "Space moderator manages global moderations" do
       within "[data-content]" do
         expect(page).to have_content("Reported content")
 
-        expect(page).not_to have_selector("table.table-list tbody tr")
+        expect(page).to have_no_css("table.table-list tbody tr")
       end
     end
   end

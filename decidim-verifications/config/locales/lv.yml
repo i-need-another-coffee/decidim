@@ -90,9 +90,6 @@ lv:
         start_exploring: sāciet izpētīt
       csv_census:
         admin:
-          census:
-            create:
-              error: Importējot skaitīšanu, radās kļūda.
           destroy:
             title: Dzēst visus skaitīšanas datus
           index:
@@ -166,8 +163,6 @@ lv:
             title: Pieprasīt jūsu verifikācijas kodu
       sms:
         authorizations:
-          destroy:
-            success: Verifikācijas kods ir veiksmīgi atiestatīts. Lūdzu, atkārtoti ievadiet savu tālruņa numuru.
           edit:
             confirm_destroy: Vai tiešām vēlaties atiestatīt verifikācijas kodu?
             destroy: Atiestatīt verifikācijas kodu

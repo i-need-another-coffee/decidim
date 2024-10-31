@@ -7,11 +7,9 @@ fi-pl:
         decidim_scope_id: Teema
         description: Kuvaus
         end_date: Päättymispäivä
-        meetings_ids: Sisällytetyt tapaamiset
         progress: Edistyminen
-        project_ids: Liitetyt suunnitelmat
-        proposals: Sisällytetyt ehdotukset
         start_date: Alkamispäivä
+        subresults: Alitulokset
         title: Otsikko
         updated_at: Päivitysaika
       status:
@@ -28,6 +26,14 @@ fi-pl:
       decidim/accountability/result_progress_updated_event: Tuloksen edistyminen päivitetty
   activerecord:
     models:
+      decidim:
+        accountability:
+          result:
+            budget_text: Tulos %{link} liitettiin hankkeeseen
+            meetings_ids: 'Tuloksesta keskusteltiin tapaamisessa: %{link}'
+            project_ids: 'Tulos liitettiin hankkeeseen: %{link}'
+            proposal_ids: 'Tulos liitettiin ehdotukseen: %{link}'
+            text: 'Liitettiin osaksi tulosta: %{link}'
       decidim/accountability/result:
         one: Tulos
         other: Tulokset
@@ -175,6 +181,8 @@ fi-pl:
       content_blocks:
         highlighted_results:
           results: Tulokset
+      creation:
+        text: Tämä tulos luotiin
       import_mailer:
         import:
           errors: Virheet
@@ -234,15 +242,7 @@ fi-pl:
           search: Hae toimintoja
         show:
           stats:
-            attendees: Osallistujat
             back_to_resource: Palaa tulokseen
-            comments: Kommentit
-            contributions: Osallistumiset
-            last_edited_by: Viimeksi muokannut
-            last_updated_at: Päivitetty viimeksi
-            meetings: Tapaamiset
-            proposals: Ehdotukset
-            votes: Kannatukset
         timeline:
           title: Projektin kehitys
     admin:
@@ -261,16 +261,12 @@ fi-pl:
         name: Vastuullisuus
         settings:
           global:
-            categories_label: Nimi termille "Aihepiirit"
             comments_enabled: Kommentointi käytössä
             comments_max_length: Kommenttien maksimipituus (jätä arvoksi 0 käyttääksesi oletusarvoa)
             display_progress_enabled: Näytä edistyminen
-            heading_leaf_level_results: Nimi termille "Suunnitelmat"
-            heading_parent_level_results: Nimi termille "Tulokset"
             intro: Esittelyteksti
             scope_id: Teema
             scopes_enabled: Teemat käytössä
-            subcategories_label: Nimi termille "Ala-aihepiirit"
           step:
             comments_blocked: Kommentointi estetty
     events:

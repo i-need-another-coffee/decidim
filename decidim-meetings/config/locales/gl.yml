@@ -194,14 +194,8 @@ gl:
             non_user: Usuario non existente
             select_user: Seleccionar usuario
           index:
-            filter:
-              accepted: Aceptada
-              all: Todo
-              rejected: Rexeitado
-              sent: Enviado
             invite_attendee: Invitar asistente
             invites: Invitacións
-            search: Busca
         meeting_closes:
           edit:
             close: Pechar
@@ -283,9 +277,7 @@ gl:
         open_in_new_tab: Abrir ligazón nunha nova lapela
       layouts:
         live_event:
-          administrate: Administrar
           close: pechar
-          questions: Preguntas
       mailer:
         invite_join_meeting_mailer:
           invite:

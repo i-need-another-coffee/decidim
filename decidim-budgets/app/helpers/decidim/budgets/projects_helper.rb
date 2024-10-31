@@ -46,7 +46,7 @@ module Decidim
 
       # Returns false if the current order does not have a rule for minimum budget
       # Returns false if the current order has not reached the minimum budget
-      # Otherwhise returns true
+      # Otherwise returns true
       def current_order_minimum_reached?
         return false if current_order.minimum_budget.zero?
 
@@ -114,7 +114,7 @@ module Decidim
         project
           .slice(:latitude, :longitude, :address)
           .merge(
-            title: decidim_html_escape(translated_attribute(project.title)),
+            title: decidim_escape_translated(project.title),
             link: ::Decidim::ResourceLocatorPresenter.new([project.budget, project]).path,
             items: cell("decidim/budgets/project_metadata", project).send(:project_items_for_map).to_json
           )
@@ -126,24 +126,24 @@ module Decidim
         project.latitude.present? && project.longitude.present?
       end
 
-      def filter_addition_type_values(added_count:)
+      def filter_addition_type_values
         return [] if voting_finished?
 
         [
-          ["all", { text: t("all", scope: "decidim.budgets.projects.project_filter"), count: nil }],
-          ["added", { text: t("added", scope: "decidim.budgets.projects.project_filter"), count: added_count }]
+          ["all", t("all", scope: "decidim.budgets.projects.project_filter")],
+          ["added", t("added", scope: "decidim.budgets.projects.project_filter")]
         ]
       end
 
       def filter_sections
         @filter_sections ||= begin
           items = []
-          items.append(method: :with_any_status, collection: filter_status_values, label_scope: "decidim.budgets.projects.filters", id: "status") if voting_finished?
-          if current_component.has_subscopes?
-            items.append(method: :with_any_scope, collection: resource_filter_scope_values(budget.scope), label_scope: "decidim.budgets.projects.filters", id: "scope")
-          end
-          if current_participatory_space.categories.any?
-            items.append(method: :with_any_category, collection: filter_categories_values, label_scope: "decidim.budgets.projects.filters", id: "category")
+          items.append(method: :with_any_status, collection: filter_status_values, label: t("decidim.budgets.projects.filters.status"), id: "status") if voting_finished?
+          current_component.available_taxonomy_filters.each do |taxonomy_filter|
+            items.append(method: "with_any_taxonomies[#{taxonomy_filter.root_taxonomy_id}]",
+                         collection: filter_taxonomy_values_for(taxonomy_filter),
+                         label: decidim_sanitize_translated(taxonomy_filter.name),
+                         id: "taxonomy-#{taxonomy_filter.root_taxonomy_id}")
           end
         end
 
@@ -162,7 +162,7 @@ module Decidim
         references = Budget.joins(:component)
                            .where(component: { participatory_space: current_participatory_space }).order(weight: :asc)
         references.map do |budget|
-          ["#{"&nbsp;" * 4} #{translated_attribute(budget.title)}".html_safe, budget.id]
+          ["#{"&nbsp;" * 4} #{decidim_escape_translated(budget.title)}".html_safe, budget.id]
         end
       end
     end

@@ -7,11 +7,9 @@ cs:
         decidim_scope_id: Oblast působnosti
         description: Popis
         end_date: Datum ukončení
-        meetings_ids: Zahrnuté schůzky
         progress: Průběh
-        project_ids: Zahrnuté projekty
-        proposals: Zahrnuté návrhy
         start_date: Datum zahájení
+        subresults: Dílčí výsledky
         title: Titul
         updated_at: Aktualizováno v
       status:
@@ -28,6 +26,14 @@ cs:
       decidim/accountability/result_progress_updated_event: Výsledek byl aktualizován
   activerecord:
     models:
+      decidim:
+        accountability:
+          result:
+            budget_text: Tento výsledek %{link} byl zahrnut
+            meetings_ids: 'Bylo projednáno na této schůzce: %{link}'
+            project_ids: 'Byl zahrnut do tohoto projektu: %{link}'
+            proposal_ids: 'Byl zahrnut do tohoto návrhu: %{link}'
+            text: 'Byl přidán k tomuto výsledku: %{link}'
       decidim/accountability/result:
         one: Výsledek
         few: Výsledek
@@ -181,6 +187,8 @@ cs:
       content_blocks:
         highlighted_results:
           results: Výsledky
+      creation:
+        text: Tento výsledek byl vytvořen
       import_mailer:
         import:
           errors: Chyby
@@ -244,15 +252,7 @@ cs:
           search: Hledat akce
         show:
           stats:
-            attendees: Účastníci
             back_to_resource: Přejít zpět na výsledek
-            comments: Komentáře
-            contributions: Příspěvky
-            last_edited_by: Naposledy upravil
-            last_updated_at: Poslední aktualizace v
-            meetings: Setkání
-            proposals: Návrhy
-            votes: Hlasy
         timeline:
           title: Vývoj projektu
     admin:
@@ -271,16 +271,12 @@ cs:
         name: Odpovědnost
         settings:
           global:
-            categories_label: Název pro "Kategorie"
             comments_enabled: Komentáře povoleny
             comments_max_length: Maximální délka komentáře (ponechte 0 pro výchozí hodnotu)
             display_progress_enabled: Zobrazit průběh
-            heading_leaf_level_results: Název pro "Projekty"
-            heading_parent_level_results: Název pro "Výsledky"
             intro: Intro
             scope_id: Oblast působnosti
             scopes_enabled: Oblast působnosti povolena
-            subcategories_label: Název pro "Podkategorie"
           step:
             comments_blocked: Komentáře blokovány
     events:

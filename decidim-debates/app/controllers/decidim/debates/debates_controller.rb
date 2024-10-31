@@ -13,6 +13,7 @@ module Decidim
       include Decidim::Debates::Orderable
 
       helper_method :debates, :debate, :form_presenter, :paginated_debates, :close_debate_form
+      before_action :authenticate_user!, only: [:new, :create]
 
       def new
         enforce_permission_to :create, :debate
@@ -53,7 +54,7 @@ module Decidim
 
         @form = form(DebateForm).from_params(params)
 
-        UpdateDebate.call(@form) do
+        UpdateDebate.call(@form, debate) do
           on(:ok) do |debate|
             flash[:notice] = I18n.t("debates.update.success", scope: "decidim.debates")
             redirect_to Decidim::ResourceLocatorPresenter.new(debate).path
@@ -91,7 +92,7 @@ module Decidim
       end
 
       def paginated_debates
-        @paginated_debates ||= paginate(debates).includes(:category)
+        @paginated_debates ||= paginate(debates).includes(:taxonomies)
       end
 
       def debates
@@ -115,8 +116,7 @@ module Decidim
           search_text_cont: "",
           with_any_origin: nil,
           activity: %w(all),
-          with_any_category: nil,
-          with_any_scope: nil,
+          with_any_taxonomies: nil,
           with_any_state: %w(open closed)
         }
       end

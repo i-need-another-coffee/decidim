@@ -65,7 +65,7 @@ describe Decidim::Initiatives::InitiativesController do
       let(:commented_initiative) { create(:initiative, organization:) }
       let!(:comment) { create(:comment, commentable: commented_initiative) }
 
-      it "most commented appears fisrt" do
+      it "most commented appears first" do
         get :index, params: { order: "most_commented" }
         expect(subject.helpers.initiatives.first).to eq(commented_initiative)
       end
@@ -181,7 +181,7 @@ describe Decidim::Initiatives::InitiativesController do
             expect(flash[:alert]).not_to be_empty
             expect(response).to have_http_status(:ok)
             expect(subject).to render_template(:edit)
-            expect(response.body).to include("An error has occurred")
+            expect(response.body).to include("There was a problem updating the initiative.")
           end
         end
       end

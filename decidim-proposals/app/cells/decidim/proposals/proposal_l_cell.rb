@@ -7,8 +7,6 @@ module Decidim
     # This cell renders the List (:l) proposal card
     # for an instance of a Proposal
     class ProposalLCell < Decidim::CardLCell
-      delegate :component_settings, to: :controller
-
       alias proposal model
 
       def title
@@ -29,7 +27,7 @@ module Decidim
         hash << model.endorsements_count
         hash << model.comments_count
         hash << Digest::MD5.hexdigest(model.component.cache_key_with_version)
-        hash << Digest::MD5.hexdigest(resource_image_path) if resource_image_path
+        hash << Digest::MD5.hexdigest(resource_image_url) if resource_image_url
         hash << render_space? ? 1 : 0
         if current_user
           hash << current_user.cache_key_with_version

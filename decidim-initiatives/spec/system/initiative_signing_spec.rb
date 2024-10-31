@@ -5,7 +5,7 @@ require "spec_helper"
 describe "Initiative signing" do
   let(:organization) { create(:organization, available_authorizations: authorizations) }
   let(:initiative) do
-    create(:initiative, :published, organization:)
+    create(:initiative, organization:)
   end
   let(:confirmed_user) { create(:user, :confirmed, organization:) }
   let(:authorizations) { %w(dummy_authorization_handler another_dummy_authorization_handler) }
@@ -20,8 +20,8 @@ describe "Initiative signing" do
 
   context "when the user has not signed the initiative" do
     context "when online signatures are enabled for site" do
-      context "when initative type only allows In-person signatures" do
-        let(:initiative) { create(:initiative, :published, organization:, signature_type: "offline") }
+      context "when initiative type only allows In-person signatures" do
+        let(:initiative) { create(:initiative, organization:, signature_type: "offline") }
 
         it "voting disabled message is shown" do
           visit decidim_initiatives.initiative_path(initiative)
@@ -44,7 +44,7 @@ describe "Initiative signing" do
     context "when initiative type has unvotes disabled" do
       let(:initiatives_type) { create(:initiatives_type, :undo_online_signatures_disabled, organization:) }
       let(:scope) { create(:initiatives_type_scope, type: initiatives_type) }
-      let(:initiative) { create(:initiative, :published, organization:, scoped_type: scope) }
+      let(:initiative) { create(:initiative, organization:, scoped_type: scope) }
 
       it "unsigning initiative is disabled" do
         vote_initiative
@@ -52,7 +52,7 @@ describe "Initiative signing" do
         within ".initiative__aside" do
           expect(page).to have_content(signature_text(1))
           expect(page).to have_button("Already signed", disabled: true)
-          click_button("Already signed", disabled: true)
+          click_on("Already signed", disabled: true)
           expect(page).to have_content(signature_text(1))
         end
       end
@@ -63,7 +63,7 @@ describe "Initiative signing" do
 
       within ".initiative__aside" do
         expect(page).to have_content(signature_text(1))
-        click_button("Already signed")
+        click_on("Already signed")
         expect(page).to have_content(signature_text(0))
       end
     end
@@ -91,7 +91,7 @@ describe "Initiative signing" do
           within ".initiative__aside" do
             expect(page).to have_content("Verify your account to sign the initiative")
           end
-          click_button "Verify your account to sign the initiative"
+          click_on "Verify your account to sign the initiative"
           expect(page).to have_content("Authorization required")
         end
       end
@@ -120,7 +120,7 @@ describe "Initiative signing" do
           within ".initiative__aside" do
             expect(page).to have_content(signature_text(1))
             expect(page).to have_button("Already signed", disabled: true)
-            click_button("Already signed", disabled: true)
+            click_on("Already signed", disabled: true)
             expect(page).to have_content(signature_text(1))
           end
         end
@@ -130,7 +130,7 @@ describe "Initiative signing" do
 
   context "when the initiative requires user extra fields collection to be signed" do
     let(:initiative) do
-      create(:initiative, :published, :with_user_extra_fields_collection, organization:)
+      create(:initiative, :with_user_extra_fields_collection, organization:)
     end
 
     context "when the user has not signed the initiative yet and signs it" do
@@ -151,7 +151,7 @@ describe "Initiative signing" do
         end
       end
 
-      context "when the personal daata is not filled" do
+      context "when the personal data is not filled" do
         it "does not allow voting" do
           visit decidim_initiatives.initiative_path(initiative)
 
@@ -159,7 +159,7 @@ describe "Initiative signing" do
             expect(page).to have_content(signature_text(0))
             click_on "Sign"
           end
-          click_button "Continue"
+          click_on "Continue"
 
           expect(page).to have_content "error"
 
@@ -185,10 +185,10 @@ describe "Initiative signing" do
     if has_content?("Complete your data")
       fill_in :initiatives_vote_name_and_surname, with: confirmed_user.name
       fill_in :initiatives_vote_document_number, with: "012345678X"
-      fill_in :initiatives_vote_date_of_birth, with: 30.years.ago.strftime("01/01/%Y")
+      fill_in_datepicker :initiatives_vote_date_of_birth_date, with: 30.years.ago.strftime("01/01/%Y")
       fill_in :initiatives_vote_postal_code, with: "01234"
 
-      click_button "Continue"
+      click_on "Continue"
 
       expect(page).to have_content("initiative has been successfully signed")
       click_on "Back to initiative"

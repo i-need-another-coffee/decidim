@@ -137,13 +137,37 @@ module Decidim
 
       describe "future_spaces" do
         it "returns none" do
-          expect(described_class.future_spaces).to eq ApplicationRecord.none
+          expect(described_class.future_spaces).to eq ApplicationRecord.none.to_a
         end
       end
 
       describe "past_spaces" do
         it "returns none" do
-          expect(described_class.past_spaces).to eq ApplicationRecord.none
+          expect(described_class.past_spaces).to eq ApplicationRecord.none.to_a
+        end
+      end
+    end
+
+    describe "taxonomies" do
+      let!(:taxonomy) { create(:taxonomy, :with_parent) }
+      let(:assembly) { build(:assembly, taxonomies: [taxonomy], organization: taxonomy.organization) }
+
+      it { is_expected.to be_valid }
+
+      context "when a root taxonomy is assigned" do
+        let(:taxonomy) { create(:taxonomy) }
+
+        it "is not valid" do
+          expect(subject).not_to be_valid
+        end
+      end
+
+      context "when a taxonomy from another organization is assigned" do
+        let!(:organization) { create(:organization) }
+        let(:assembly) { build(:assembly, taxonomies: [taxonomy]) }
+
+        it "is not valid" do
+          expect(subject).not_to be_valid
         end
       end
     end

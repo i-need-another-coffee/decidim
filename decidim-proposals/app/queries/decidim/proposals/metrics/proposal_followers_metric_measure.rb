@@ -30,23 +30,23 @@ module Decidim
 
         def retrieve_proposals_followers(from_start: false)
           @proposals_followers ||= Decidim::Follow.where(followable: retrieve_proposals).joins(:user)
-                                                  .where("decidim_follows.created_at <= ?", end_time)
+                                                  .where(decidim_follows: { created_at: ..end_time })
 
-          return @proposals_followers.where("decidim_follows.created_at >= ?", start_time) if from_start
+          return @proposals_followers.where(decidim_follows: { created_at: start_time.. }) if from_start
 
           @proposals_followers
         end
 
         def retrieve_drafts_followers(from_start: false)
           @drafts_followers ||= Decidim::Follow.where(followable: retrieve_collaborative_drafts).joins(:user)
-                                               .where("decidim_follows.created_at <= ?", end_time)
-          return @drafts_followers.where("decidim_follows.created_at >= ?", start_time) if from_start
+                                               .where(decidim_follows: { created_at: ..end_time })
+          return @drafts_followers.where(decidim_follows: { created_at: start_time.. }) if from_start
 
           @drafts_followers
         end
 
         def retrieve_proposals
-          Decidim::Proposals::Proposal.where(component: @resource).except_withdrawn
+          Decidim::Proposals::Proposal.where(component: @resource).not_withdrawn
         end
 
         def retrieve_collaborative_drafts

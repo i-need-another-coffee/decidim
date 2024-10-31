@@ -23,13 +23,13 @@ describe "Decidim::Api::QueryType" do
       "endorsements" => post.endorsements.map do |endo|
         {
           "__typename" => "User",
-          "avatarUrl" => endo.author.attached_uploader(:avatar).path(variant: :thumb),
+          "avatarUrl" => endo.author.attached_uploader(:avatar).variant_url(:thumb),
           "badge" => "",
           "deleted" => false,
           "id" => endo.author.id.to_s,
           "name" => endo.author.name,
           "nickname" => "@#{endo.author.nickname}",
-          "organizationName" => endo.author.organization.name,
+          "organizationName" => { "translation" => translated(endo.author.organization.name) },
           "profilePath" => "/profiles/#{endo.author.nickname}"
         }
       end,
@@ -50,7 +50,7 @@ describe "Decidim::Api::QueryType" do
     {
       "__typename" => "Blogs",
       "id" => current_component.id.to_s,
-      "name" => { "translation" => "Blog" },
+      "name" => { "translation" => translated(current_component.name) },
       "posts" => {
         "edges" => [
           {
@@ -98,7 +98,7 @@ describe "Decidim::Api::QueryType" do
                 deleted
                 name
                 nickname
-                organizationName
+                organizationName { translation(locale:"#{locale}") }
                 profilePath
                 __typename
               }
@@ -135,7 +135,7 @@ describe "Decidim::Api::QueryType" do
     end
 
     context "when unfiltered" do
-      it "executes sucessfully" do
+      it "executes successfully" do
         expect { response }.not_to raise_error
       end
 
@@ -278,7 +278,7 @@ describe "Decidim::Api::QueryType" do
             deleted
             name
             nickname
-            organizationName
+            organizationName { translation(locale:"#{locale}") }
             profilePath
             __typename
           }
@@ -306,7 +306,7 @@ describe "Decidim::Api::QueryType" do
     )
     end
 
-    it "executes sucessfully" do
+    it "executes successfully" do
       expect { response }.not_to raise_error
     end
 

@@ -27,22 +27,21 @@ module Decidim
             content_block.default!
           end
 
-          Decidim.content_blocks.register(:participatory_process_group_homepage, :cta) do |content_block|
-            content_block.cell = "decidim/content_blocks/cta"
-            content_block.settings_form_cell = "decidim/content_blocks/cta_settings_form"
-            content_block.public_name_key = "decidim.content_blocks.cta.name"
+          Decidim.content_blocks.register(:participatory_process_group_homepage, :hero) do |content_block|
+            content_block.cell = "decidim/content_blocks/participatory_space_hero"
+            content_block.settings_form_cell = "decidim/content_blocks/participatory_space_hero_settings_form"
+            content_block.public_name_key = "decidim.participatory_processes.content_blocks.hero.name"
 
             content_block.images = [
               {
                 name: :background_image,
-                uploader: "Decidim::HomepageImageUploader"
+                uploader: "Decidim::BackgroundImageUploader"
               }
             ]
 
             content_block.settings do |settings|
               settings.attribute :button_text, type: :text, translated: true
-              settings.attribute :button_url, type: :string, required: true
-              settings.attribute :description, type: :string, translated: true, editor: true
+              settings.attribute :button_url, type: :text, translated: true
             end
 
             content_block.default!
@@ -70,9 +69,24 @@ module Decidim
             end
           end
 
-          Decidim.content_blocks.register(:participatory_process_homepage, :process_hero) do |content_block|
-            content_block.cell = "decidim/participatory_processes/content_blocks/hero"
+          Decidim.content_blocks.register(:participatory_process_homepage, :hero) do |content_block|
+            content_block.cell = "decidim/content_blocks/participatory_space_hero"
+            content_block.settings_form_cell = "decidim/content_blocks/participatory_space_hero_settings_form"
             content_block.public_name_key = "decidim.participatory_processes.content_blocks.hero.name"
+
+            content_block.images = [
+              {
+                name: :background_image,
+                uploader: "Decidim::BackgroundImageUploader"
+              }
+            ]
+
+            content_block.settings do |settings|
+              settings.attribute :button_text, type: :text, translated: true
+              settings.attribute :button_url, type: :text, translated: true
+            end
+
+            content_block.default!
           end
 
           Decidim.content_blocks.register(:participatory_process_homepage, :announcement) do |content_block|
@@ -102,7 +116,7 @@ module Decidim
             content_block.public_name_key = "decidim.content_blocks.last_activity.name"
             content_block.settings_form_cell = "decidim/content_blocks/last_activity_settings_form"
             content_block.settings do |settings|
-              settings.attribute :max_last_activity_users, type: :integer, default: Decidim::ContentBlocks::ParticipatorySpaceLastActivityCell::DEFAULT_MAX_LAST_ACTIVITY_USERS
+              settings.attribute :max_last_activity_users, type: :integer, default: Decidim.default_max_last_activity_users
             end
           end
 
@@ -152,11 +166,22 @@ module Decidim
             end
           end
 
+          register_highlighted_debates
           register_highlighted_meetings
           register_highlighted_posts
           register_highlighted_proposals
           register_highlighted_results
           register_related_assemblies
+        end
+
+        def self.register_highlighted_debates
+          return unless Decidim.module_installed?(:debates)
+
+          Decidim.content_blocks.register(:participatory_process_homepage, :highlighted_debates) do |content_block|
+            content_block.cell = "decidim/debates/content_blocks/highlighted_debates"
+            content_block.public_name_key = "decidim.debates.content_blocks.highlighted_debates.name"
+            content_block.component_manifest_name = "debates"
+          end
         end
 
         def self.register_highlighted_meetings

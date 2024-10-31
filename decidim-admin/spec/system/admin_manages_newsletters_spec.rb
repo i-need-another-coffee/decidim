@@ -7,6 +7,7 @@ end
 
 describe "Admin manages newsletters" do
   let(:organization) { create(:organization) }
+  let!(:attributes) { attributes_for(:newsletter, organization:) }
   let(:user) { create(:user, :admin, :confirmed, name: "Sarah Kerrigan", organization:) }
   let!(:deliverable_users) { create_list(:user, 5, :confirmed, newsletter_notifications_at: Time.current, organization:) }
 
@@ -21,7 +22,7 @@ describe "Admin manages newsletters" do
     it "shows the number of users subscribed to the newsletter" do
       visit decidim_admin.newsletters_path
 
-      within ".subscribed_count" do
+      within "span[data-subscribed-count]" do
         expect(page).to have_content(recipients_count)
       end
     end
@@ -34,16 +35,14 @@ describe "Admin manages newsletters" do
       find(".button.new").click
 
       within "#image_text_cta" do
-        click_link "Use this template"
+        click_on "Use this template"
       end
 
       within ".new_newsletter" do
         fill_in_i18n(
           :newsletter_subject,
           "#newsletter-subject-tabs",
-          en: "A fancy newsletter for %{name}",
-          es: "Un correo electrónico muy chulo para %{name}",
-          ca: "Un correu electrònic flipant per a %{name}"
+          **attributes[:subject].except("machine_translations")
         )
 
         fill_in_i18n_editor(
@@ -82,7 +81,10 @@ describe "Admin manages newsletters" do
       end
 
       expect(page).to have_content("Preview")
-      expect(page).to have_content("A fancy newsletter for #{user.name}")
+      expect(page).to have_content(translated(attributes[:subject]))
+
+      visit decidim_admin.root_path
+      expect(page).to have_content("created the #{translated(attributes[:subject])} newsletter")
     end
   end
 
@@ -106,7 +108,7 @@ describe "Admin manages newsletters" do
       visit decidim_admin.newsletter_path(newsletter)
 
       expect(page).to have_content("A fancy newsletter for Sarah Kerrigan")
-      expect(page).to have_css("iframe.email-preview[src=\"#{decidim_admin.preview_newsletter_path(newsletter)}\"]")
+      expect(page).to have_css("iframe[data-email-preview][src=\"#{decidim_admin.preview_newsletter_path(newsletter)}\"]")
 
       visit decidim_admin.preview_newsletter_path(newsletter)
       expect(page).to have_content("Hello Sarah Kerrigan! Relevant content.")
@@ -116,7 +118,7 @@ describe "Admin manages newsletters" do
       it "sends a test email" do
         visit decidim_admin.newsletter_path(newsletter)
         perform_enqueued_jobs do
-          click_link "Send me a test email"
+          click_on "Send me a test email"
         end
         expect(page).to have_content("Newsletter has been sent")
         expect(last_email.subject).to include("A fancy newsletter for")
@@ -127,7 +129,7 @@ describe "Admin manages newsletters" do
       it "sends a test email" do
         visit decidim_admin.newsletters_path
         perform_enqueued_jobs do
-          click_link "Send me a test email"
+          click_on "Send me a test email"
         end
         expect(page).to have_content("Newsletter has been sent")
         expect(last_email.subject).to include("A fancy newsletter for")
@@ -141,16 +143,14 @@ describe "Admin manages newsletters" do
     it "allows a newsletter to be updated" do
       visit decidim_admin.newsletters_path
       within("tr[data-newsletter-id=\"#{newsletter.id}\"]") do
-        click_link "Edit"
+        click_on "Edit"
       end
 
       within ".edit_newsletter" do
         fill_in_i18n(
           :newsletter_subject,
           "#newsletter-subject-tabs",
-          en: "A fancy newsletter",
-          es: "Un correo electrónico muy chulo",
-          ca: "Un correu electrònic flipant"
+          **attributes[:subject].except("machine_translations")
         )
 
         fill_in_i18n_editor(
@@ -165,7 +165,10 @@ describe "Admin manages newsletters" do
       end
 
       expect(page).to have_content("Preview")
-      expect(page).to have_content("A fancy newsletter")
+      expect(page).to have_content(translated(attributes[:subject]))
+
+      visit decidim_admin.root_path
+      expect(page).to have_content("updated the #{translated(attributes[:subject])} newsletter")
     end
   end
 
@@ -194,15 +197,15 @@ describe "Admin manages newsletters" do
         visit decidim_admin.select_recipients_to_deliver_newsletter_path(newsletter)
         perform_enqueued_jobs do
           within(".newsletter_deliver") do
-            find(:css, "#newsletter_send_to_all_users").set(true)
+            find_by_id("newsletter_send_to_all_users").set(true)
           end
 
           within "#recipients_count" do
             expect(page).to have_content(recipients_count)
           end
 
-          within "form.newsletter_deliver .form__wrapper-block" do
-            accept_confirm { find("*", text: "Deliver").click }
+          within "form.newsletter_deliver .item__edit-sticky" do
+            accept_confirm { click_on("Deliver newsletter") }
           end
 
           expect(page).to have_content("Newsletters")
@@ -238,8 +241,8 @@ describe "Admin manages newsletters" do
             expect(page).to have_content(recipients_count)
           end
 
-          within "form.newsletter_deliver .form__wrapper-block" do
-            accept_confirm { find("*", text: "Deliver").click }
+          within "form.newsletter_deliver .item__edit-sticky" do
+            accept_confirm { click_on("Deliver newsletter") }
           end
 
           expect(page).to have_content("Newsletters")
@@ -275,8 +278,8 @@ describe "Admin manages newsletters" do
             expect(page).to have_content(recipients_count)
           end
 
-          within "form.newsletter_deliver .form__wrapper-block" do
-            accept_confirm { find("*", text: "Deliver").click }
+          within "form.newsletter_deliver .item__edit-sticky" do
+            accept_confirm { click_on("Deliver newsletter") }
           end
 
           expect(page).to have_content("Newsletters")
@@ -319,8 +322,8 @@ describe "Admin manages newsletters" do
             expect(page).to have_content(recipients_count)
           end
 
-          within "form.newsletter_deliver .form__wrapper-block" do
-            accept_confirm { find("*", text: "Deliver").click }
+          within "form.newsletter_deliver .item__edit-sticky" do
+            accept_confirm { click_on("Deliver newsletter") }
           end
 
           expect(page).to have_content("Newsletters")
@@ -341,11 +344,11 @@ describe "Admin manages newsletters" do
       visit decidim_admin.newsletters_path
 
       within("tr[data-newsletter-id=\"#{newsletter.id}\"]") do
-        accept_confirm { click_link "Delete" }
+        accept_confirm { click_on "Delete" }
       end
 
       expect(page).to have_content("successfully")
-      expect(page).not_to have_css("tr[data-newsletter-id=\"#{newsletter.id}\"]")
+      expect(page).to have_no_css("tr[data-newsletter-id=\"#{newsletter.id}\"]")
     end
   end
 end

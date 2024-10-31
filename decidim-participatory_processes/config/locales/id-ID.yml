@@ -4,7 +4,6 @@ id:
       participatory_process:
         announcement: Pengumuman
         area_id: Daerah
-        banner_image: Gambar spanduk
         copy_categories: Salin kategori
         copy_components: Salin komponen
         copy_steps: Salin langkah
@@ -26,7 +25,6 @@ id:
         scope_id: Cakupan
         scopes_enabled: Lingkup diaktifkan
         short_description: Deskripsi Singkat
-        show_statistics: Tampilkan statistik
         slug: Siput URL
         start_date: Mulai tanggal
         subtitle: Subtitle
@@ -68,8 +66,6 @@ id:
         destroy: Menghapus
         duplicate: Duplikat
         edit: Edit
-        filter:
-          all_processes: Tampilkan semua proses
         new_process: Proses baru
         new_process_group: Grup proses baru
         new_process_step: Langkah baru
@@ -284,14 +280,11 @@ id:
             select_an_area: Pilih suatu Area
             select_process_group: Pilih grup proses
             title: Informasi Umum
-            visbility: Visibilitas
       content_blocks:
         highlighted_processes:
           name: Proses yang disorot
       index:
         title: Proses partisipatif
-      last_activity:
-        new_participatory_process: Proses partisipatif baru
       participatory_processes:
         filters:
           counters:

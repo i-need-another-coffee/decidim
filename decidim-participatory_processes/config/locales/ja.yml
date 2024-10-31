@@ -4,7 +4,6 @@ ja:
       participatory_process:
         announcement: お知らせ
         area_id: エリア
-        banner_image: バナー画像
         copy_categories: カテゴリをコピー
         copy_components: コンポーネントをコピー
         copy_steps: フェーズをコピー
@@ -34,8 +33,6 @@ ja:
         scope_type_max_depth_id: スコープフィルタの深さ
         scopes_enabled: スコープは有効です
         short_description: 短い説明
-        show_metrics: 指標を表示
-        show_statistics: 統計情報を表示
         slug: URL スラグ
         start_date: 開始日
         subtitle: サブタイトル
@@ -95,10 +92,8 @@ ja:
         destroy: 削除
         duplicate: 複製
         edit: 編集
-        filter:
-          all_processes: すべての参加型プロセスを表示
-          process_groups: グループ内のプロセスをフィルター
         import_process: インポート
+        menu_hidden: 隠す
         moderate: モデレート
         new_process: 新規参加型プロセス
         new_process_group: 新規参加型プロセスグループ
@@ -110,6 +105,9 @@ ja:
         resend_invitation: 招待を再送信する
         see_process: プロセスを見る
         unpublish: 公開しない
+      filters:
+        decidim_participatory_process_group_id_eq:
+          label: プロセスグループ別
       menu:
         participatory_process_groups: 参加型プロセスグループ
         participatory_process_groups_submenu:
@@ -175,7 +173,7 @@ ja:
           title: 重複した参加型プロセス
       participatory_process_groups:
         destroy:
-          error: 参加型プロセスグループの削除中にエラーが発生しました。
+          error: 参加型プロセスグループを削除する際に問題が発生しました。
           success: 参加型プロセスグループが正常に削除されました。
         edit:
           title: 参加型プロセスグループを編集
@@ -216,6 +214,12 @@ ja:
             last_step: プロセスの最後のフェーズを削除できません。
           success: 参加型プロセスのフェーズが正常に削除されました。
         edit:
+          cta_deprecated:
+            body_html: |-
+              参加プロセスのフェーズを通じてCTAを設定することは、新しいデザインでは非推奨となりました。
+              これは現在、<b>ランディングページ</b>にて、<b>ヒーローと画像</b>のコンテンツブロックを使用して行えます。
+              この機能を残しているのは必要なCTAを移行するためです。<i>コール・トゥ・アクションのパス</i>フィールドと<i>コール・トゥ・アクションのテキスト</i>フィールドは次のバージョンで削除されます。
+            title: CTAは非推奨です
           title: 参加型プロセスのフェーズを編集
           update: 更新
         index:
@@ -425,8 +429,9 @@ ja:
             select_participatory_process_type: プロセスの種別を選択
             select_process_group: 参加型プロセス グループを選択
             slug_help_html: 'URLスラグは、この参加型プロセスを指すURLを生成するために使用されます。英字、数字、ハイフンのみを受け付け、英字で始める必要があります。例: %{url}'
+            taxonomies: タクソノミー
             title: 一般情報
-            visbility: 公開範囲
+            visibility: 公開範囲
       content_blocks:
         extra_data:
           name: フェーズと期間
@@ -439,7 +444,7 @@ ja:
       index:
         title: 参加型プロセス
       last_activity:
-        new_participatory_process: 参加型プロセス
+        new_participatory_process: '新しい参加型プロセス:'
       pages:
         home:
           highlighted_processes:

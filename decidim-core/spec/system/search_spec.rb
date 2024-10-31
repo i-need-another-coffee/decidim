@@ -12,7 +12,7 @@ describe "Search" do
   end
 
   it "has a topbar search form" do
-    expect(page).to have_selector(".main-bar__search")
+    expect(page).to have_css(".main-bar__search")
   end
 
   context "when searching from the top bar" do
@@ -30,7 +30,7 @@ describe "Search" do
     it "displays the results page" do
       expect(page).to have_current_path decidim.search_path, ignore_query: true
       expect(page).to have_content(/results for the search: "#{term}"/i)
-      expect(page).to have_selector(".filter-search.filter-container")
+      expect(page).to have_css(".filter-search.filter-container")
     end
 
     it "has all the resources to search" do
@@ -41,7 +41,6 @@ describe "Search" do
         expect(page).to have_content("Participatory processes").once
         expect(page).to have_content("Assemblies").once
         expect(page).to have_content("Conferences").once
-        expect(page).to have_content("Votings").once
         expect(page).to have_content("Initiatives").once
         expect(page).to have_content("Meetings").once
         expect(page).to have_content("Proposals").once
@@ -59,13 +58,29 @@ describe "Search" do
       driven_by(:iphone)
       switch_to_host(organization.host)
       visit decidim.root_path
-
-      click_button(id: "dc-dialog-accept")
-      click_button(id: "dropdown-trigger-links-mobile-search")
+      click_on(id: "dc-dialog-accept")
+      click_on(id: "main-dropdown-summary-mobile")
     end
 
     it "shows the mobile version of the search form" do
       expect(page).to have_css("#input-search-mobile")
+    end
+  end
+
+  context "when there is a malformed URL" do
+    let(:participatory_space) { create(:participatory_process, :published, :with_steps, organization:) }
+    let!(:proposal_component) { create(:proposal_component, participatory_space:) }
+    let!(:proposals) { create_list(:proposal, 50, component: proposal_component) }
+
+    before do
+      proposals.each { |s| s.update(published_at: Time.current) }
+    end
+
+    it "displays the results page" do
+      visit %{/search?filter[with_resource_type]=Decidim::Proposals::Proposal&page=2&per_page=25'"()%26%25<zzz><ScRiPt >alert("XSS")</ScRiPt>}
+
+      expect(page).to have_content("100 Results for the search")
+      expect(page).to have_content("Results per page")
     end
   end
 end

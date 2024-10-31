@@ -187,6 +187,7 @@ ja:
         export: 全てエクスポート
         export-selection: 選択したものをエクスポート
         import: インポート
+        manage: 管理
         newsletter:
           new: 新しいニュースレター
         participatory_space_private_user:
@@ -201,7 +202,7 @@ ja:
         verify: 確認する
       admin_terms_of_service:
         accept:
-          error: 管理者向け利用規約に同意する際にエラーが発生しました。
+          error: 管理者の利用規約に同意中に問題が発生しました。
           success: 素晴らしい！あなたは管理者向け利用規約に同意しました。
         actions:
           accept: 利用規約に同意する
@@ -287,7 +288,7 @@ ja:
       block_user:
         new:
           action: アカウントをブロックして理由を送信
-          already_reported_html: この操作を続けると、参加者のコンテンツは全て非表示になります。 <a href="%{link}">アカウントをブロック</a>。
+          already_reported_html: このアクションを続けると、参加者のすべてのコンテンツも非表示になります。
           description: ユーザーをブロックすると、そのアカウントは利用できなくなります。ユーザーのブロックを解除することを検討する方法に関するガイドラインを判定通知に含めることができます。
           justification: 判定理由
           title: ユーザー %{name} をブロックする
@@ -328,13 +329,15 @@ ja:
           default_step_settings: デフォルトのステップ設定
           global_settings: グローバル設定
           step_settings: ステップの設定
+        hide:
+          success: コンポーネントはメニューから非表示になりました。
         index:
           add: コンポーネントを追加
           headers:
             actions: アクション
             name: コンポーネント名
-            scope: コンポーネントのスコープ
             type: コンポーネントタイプ
+            visibility: 可視性
         new:
           add: コンポーネントを追加
           title: 'コンポーネントを追加: %{name}'
@@ -346,15 +349,21 @@ ja:
         update:
           error: このコンポーネントの更新中に問題が発生しました。
           success: コンポーネントは正常に更新されました。
+        visibility_label:
+          menu_hidden: メニュー非表示
+          published: 公開済
+          unpublished: 未公開
       conflicts:
         attempts: 試行回数
         'false': 'いいえ'
+        index:
+          text: 現在のユーザーのメールアドレス、名前、ニックネームで検索します。
         managed_user_name: 管理対象ユーザー
         solved: 解決済み
         title: 確認の競合
         transfer:
           email: Eメールアドレス
-          error: 参加者から管理対象参加者への移行中に問題が発生しました。
+          error: 現在の参加者を管理対象の参加者に移行する際に問題が発生しました。
           name: 名前
           reason: 理由
           success: 現在の移転が正常に完了しました。
@@ -363,7 +372,7 @@ ja:
         user_name: ユーザー
       content_blocks:
         create:
-          error: コンテンツブロックの作成中にエラーが発生しました。
+          error: コンテンツブロックの作成中に問題が発生しました。
           success: コンテンツブロックを作成しました。
         destroy:
           error: コンテンツブロックの削除中に問題が発生しました。
@@ -377,19 +386,19 @@ ja:
           update: 更新
       dashboard:
         pending_moderations:
-          anouncement:
-            other: '%{count} 件の保留中のモデレーションがあります'
+          announcement:
+            other: 保留中のモデレーションが%{count} 件あります
           goto_moderation: グローバルモデレーションへ移動
           title: 保留中のモデレーション
         show:
           dropdown: ドロップダウン
           view_more_logs: もっとログを見る
-      domain_whitelist:
+      domain_allowlist:
         form:
           domain_too_short: ドメインが短すぎます
         update:
-          error: ドメインのホワイトリストを更新できませんでした。
-          success: ドメインのホワイトリストを更新しました。
+          error: 許可された外部ドメインのリストを更新できませんでした
+          success: 許可された外部ドメインのリストを更新しました。
       exports:
         export_as: "%{name} を %{export_format} 形式で取得"
         formats:
@@ -423,7 +432,7 @@ ja:
           reportable_type_string_eq:
             label: タイプ
         officialized_at_null:
-          label: 都道府県：
+          label: 状態
           values:
             'false': 公式化済み
             'true': 公式化されていない
@@ -448,6 +457,7 @@ ja:
           values:
             'false': 公開済み
             'true': 未公開
+        remove_all: すべて削除
         scope_id_eq:
           label: スコープ
         search_label: 検索
@@ -456,15 +466,17 @@ ja:
           report_count_eq: 報告数
           reported_id_string_or_reported_content_cont: 報告可能なIDまたはコンテンツで %{collection} を検索します。
           title_cont: '%{collection} をタイトルで検索します。'
-          user_name_or_user_email_cont: '%{collection} を名前またはメールアドレスで検索します。'
           user_name_or_user_nickname_or_user_email_cont: '%{collection} をメール、表示名、アカウントIDで検索します。'
         state_eq:
-          label: 都道府県：
+          label: 状態
           values:
             all: すべて
             pending: 保留中
             rejected: 拒否
             verified: 確認済み
+        taxonomies:
+          taxonomy_id_eq:
+            label: タクソノミー
       forms:
         file_help:
           import:
@@ -565,12 +577,14 @@ ja:
         appearance: 外観
         area_types: エリア種別
         areas: エリア
+        components: コンポーネント
         configuration: 設定
         content: 報告されたコンテンツ
-        external_domain_whitelist: 許可された外部ドメイン
+        external_domain_allowlist: 許可された外部ドメイン
         help_sections: ヘルプセクション
         homepage: ホームページ
         impersonations: なりすまし
+        manage: 管理
         moderation: グローバルモデレーション
         newsletters: ニュースレター
         participants: 参加者
@@ -581,6 +595,8 @@ ja:
         settings: 設定
         static_page_topics: トピック
         static_pages: ページ
+        taxonomies: タクソノミー
+        taxonomy_filters: タクソノミーフィルター
         user_groups: グループ
         users: 参加者
       metrics:
@@ -775,7 +791,7 @@ ja:
           success: ニュースレターは正常に更新されました。送信する前に確認してください。
       officializations:
         block:
-          error: 参加者のブロック中にエラーが発生しました。
+          error: 参加者のブロック中に問題が発生しました。
           success: 参加者をブロックしました。
         create:
           success: 参加者が公式化されました。
@@ -809,7 +825,7 @@ ja:
           show: 表示
           title: 参加者のメールアドレスを表示
         unblock:
-          error: 参加者のブロック解除中にエラーが発生しました。
+          error: 参加者のブロック解除中に問題が発生しました。
           success: 参加者のブロックを解除しました。
       organization:
         edit:
@@ -843,6 +859,7 @@ ja:
           cta_button_path_help_html: 'ホームページにあるCall to Actionボタンのリンク先を上書きすることができます。完全なURLではなく、相対パスを使用してください。 英字、数字、ハイフン、スラッシュを使用でき、英字で始まる必要があります。 Call To Actionボタンは、ホームページ内のウェルカムテキストと説明の間に表示されます。例: %{url}'
           cta_button_text_help: 組織の利用可能な言語ごとにホームページの [Call To Action] ボタンのテキストを上書きできます。 設定されていない場合は、デフォルト値が使用されます。 Call To Actionボタンは、ウェルカムテキストと説明の間のホームページに表示されます。
           header_snippets:
+            header_snippets_help_html: このフィールドはHTMLヘッダ要素内に何かを追加する際に使用します。 最も一般的な用途は、追加の JavaScript や CSS を必要とするサードパーティのサービスを統合することです。 また、HTML にメタタグを追加するためにも使用できます。 これは公開ページでのみ表示され、管理セクションでは表示されないことに注意してください。 コードが外部 API と相互作用する場合や、アプリケーション・セキュリティ・ガイドラインに準拠していない場合、コンテンツセキュリティポリシーを変更する必要があります。より詳しい使い方については、 <a href="https://docs.decidim.org/develop/en/customize/content_security_policy">ドキュメントサイト</a> をご覧ください。
             title: HTML ヘッダーのスニペット
           homepage_appearance_title: ホームページの外観を編集
           homepage_highlighted_content_banner_title: ハイライトされたコンテンツバナー
@@ -850,17 +867,17 @@ ja:
             layout_appearance_title: レイアウトを編集
             preview: プレビュー
           omnipresent_banner_appearance_title: Omnipresentバナーを編集
-      organization_external_domain_whitelist:
+      organization_external_domain_allowlist:
         edit:
           update: 更新
         external_domain:
-          down: 下げる
+          down: 下へ
           external_domain: 外部ドメイン
           remove: 削除
-          up: 上げる
+          up: 上へ
         form:
-          add: ホワイトリストに追加
-          title: 外部ドメインのホワイトリスト
+          add: 許可されたリストに追加
+          title: 許可された外部ドメインのリスト
       participatory_space_private_users:
         create:
           error: この参加型スペースにプライベート参加者を追加する際に問題が発生しました。
@@ -955,6 +972,11 @@ ja:
           help: これらのトークンは、公開されていないリソースをすべてのユーザーに公開するために使用されます。 リソースが公開されると、それらは非表示になります。共有可能なURLにアクセスするにはトークンの共有アイコンをクリックしてください。
           title: トークンを共有
       shared:
+        adjacent_navigation:
+          next: 次へ
+          next_title: 次のアイテム
+          previous: 前へ
+          previous_title: 前のアイテム
         gallery:
           add_images: 画像を追加
           edit_images: 画像を編集
@@ -1001,17 +1023,100 @@ ja:
         update:
           error: このページの更新中に問題が発生しました。
           success: ページが更新されました。
+      taxonomies:
+        actions: アクション
+        amount: 合計
+        count: カウント
+        create:
+          invalid: タクソノミーの作成中に問題が発生しました。
+          success: タクソノミーを作成しました。
+        destroy:
+          invalid: タクソノミーの削除中に問題が発生しました。
+          success: タクソノミーを削除しました。
+        edit:
+          back: 戻る
+          description: このタクソノミーのアイテムは、参加型スペースやコンポーネントなどのリソースを分類したりフィルターするために使用されます。 リストの順番を変更するにはドラッグアンドドロップを使用してください。
+          new_item: 新しい項目
+          no_items: このタクソノミーには現状アイテムがありません。アイテムのリストを作成して、参加型スペースやコンポーネントなどのリソースを分類またはフィルタリングできます。アイテムは最大3レベルまで入れ子にできます。
+          subtitle: '"%{taxonomy_name}" の項目'
+          title: タクソノミー「%{taxonomy_name} 」を編集
+          update: 更新
+        filters:
+          search_placeholder: 検索
+        index:
+          description: タクソノミーを使用すると、管理者がコンテンツを分類および整理できます。例えば、プロセスを地理的範囲で分類するためにタクソノミーを追加できます。
+          new_taxonomy: 新しいタクソノミー
+          no_items_found: 検索条件に一致するタクソノミーが見つかりませんでした。
+        name: 名前
+        new:
+          create: タクソノミーを作成
+          title: 新しいタクソノミー
+        no_taxonomies: 現在、タクソノミーはありません。ここでタクソノミーのリストを作成し、それぞれにアイテムを定義してリソースを分類またはフィルタリングします。
+        table:
+          to_next_page: 次のページにドラッグ
+          to_prev_page: 前のページにドラッグ
+        taxonomy_actions:
+          confirm_destroy: '%{name} を削除してもよろしいですか？全ての子アイテムも削除されます。'
+        update:
+          invalid: タクソノミーの更新中に問題が発生しました。
+          success: タクソノミーを更新しました。
+      taxonomy_filters:
+        actions:
+          new_taxonomy_filter: 新規タクソノミフィルター
+        callout:
+          modify_taxonomy_html: このタクソノミーまたはそのアイテムを変更する必要がある場合は、 <a href="%{url}">タクソノミー</a> セクションの設定を通して行います。
+        create:
+          error: タクソノミーフィルタの作成中に問題が発生しました。
+          success: タクソノミーフィルターを作成しました。
+        destroy:
+          error: タクソノミーフィルタの削除中に問題が発生しました。
+          success: タクソノミーフィルタを削除しました。
+        edit:
+          back: 戻る
+          items: "{count} 個のアイテムを選択中です"
+          no_items: このタクソノミーで使えるアイテムはありません。タクソノミー設定でアイテムを作成できます。
+          title: タクソノミーフィルタを編集
+          update: タクソノミーフィルタを更新
+        form:
+          select_taxonomy: タクソノミーを選択
+        index:
+          description: タクソノミーフィルターは、管理者がタクソノミーに基づいて参加型スペースを分類したりフィルタリングしたりできるようにするものです。例えば、地理的範囲でプロセスをソートするためにタクソノミーフィルターを追加することができます。
+          empty: 現在、タクソノミーフィルターはありません。タクソノミーフィルターのリストを作成し、タクソノミーに基づいて参加型スペースをソートおよびフィルタリングしてください。
+        new:
+          back: 戻る
+          create: タクソノミーフィルタを作成
+          items: "%{count} 個のアイテムがあります"
+          title: 新規タクソノミーフィルター
+        table:
+          actions: アクション
+          confirm_destroy: フィルター %{name} を削除してもよろしいですか？
+          count: アイテム数
+          destroy: 削除
+          edit: 編集
+          name: 名前
+        update:
+          error: タクソノミーフィルタの更新に問題がありました。
+          success: タクソノミーフィルターを更新しました。
+      taxonomy_items:
+        edit:
+          title: '%{taxonomy} の項目を編集'
+          update: 項目の更新
+        new:
+          create: 項目の作成
+          none: なし
+          title: '%{taxonomy} の新しいアイテム'
       titles:
         admin_log: 管理者ログ
         area_types: エリア種別
         areas: エリア
         authorization_workflows: 確認方法
         dashboard: ダッシュボード
-        edit_external_domains: 外部ドメインのホワイトリスト
+        edit_external_domains: 許可された外部ドメインのリスト
         edit_landing_page: ページ内容
         edit_organization_appearance: ホームページの外観を編集
         impersonatable_users: 管理可能な参加者
         impersonations: 参加者管理
+        menu: メニュー
         metrics: 指標
         page_topics: トピック
         pages: ページ
@@ -1020,6 +1125,8 @@ ja:
         scope_types: スコープ種別
         scopes: スコープ
         statistics: アクティビティ
+        taxonomies: タクソノミー
+        taxonomy_filters: タクソノミーフィルター
         user_groups: グループ
         users: 管理者
       user_group:

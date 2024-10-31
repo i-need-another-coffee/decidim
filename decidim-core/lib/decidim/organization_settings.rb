@@ -79,7 +79,7 @@ module Decidim
       #   Decidim.organization_settings(org).target_config_accessor
       #   #=> returns the organization specific setting
       #
-      #   Decidim.organization_settings(model_beloging_to_org).target_config_accessor
+      #   Decidim.organization_settings(model_belonging_to_org).target_config_accessor
       #   #=> returns the organization specific setting for model's organization
       #
       #   Decidim.organization_settings(nil).target_config_accessor
@@ -104,9 +104,9 @@ module Decidim
         {
           "upload" => {
             "allowed_file_extensions" => {
-              "default" => %w(jpg jpeg png pdf rtf txt),
-              "admin" => %w(jpg jpeg png pdf doc docx xls xlsx ppt pptx ppx rtf txt odt ott odf otg ods ots),
-              "image" => %w(jpg jpeg png)
+              "default" => %w(jpg jpeg png webp pdf rtf txt),
+              "admin" => %w(jpg jpeg png webp pdf doc docx xls xlsx ppt pptx ppx rtf txt odt ott odf otg ods ots csv json md),
+              "image" => %w(jpg jpeg png webp)
             },
             "allowed_content_types" => {
               "default" => %w(
@@ -125,15 +125,26 @@ module Decidim
                 application/vnd.oasis.opendocument
                 application/pdf
                 application/rtf
+                application/json
+                text/markdown
                 text/plain
+                text/csv
               )
             },
             "maximum_file_size" => {
-              "default" => 10.0,
-              "avatar" => 5.0
+              "default" => default_maximum_attachment_size,
+              "avatar" => default_maximum_avatar_size
             }
           }
         }
+      end
+
+      def default_maximum_attachment_size
+        (Rails.application.secrets.decidim[:maximum_attachment_size].presence || 10).to_f
+      end
+
+      def default_maximum_avatar_size
+        (Rails.application.secrets.decidim[:maximum_avatar_size].presence || 5).to_f
       end
     end
 
@@ -182,7 +193,7 @@ module Decidim
 
     private
 
-    # Generates a final settigns configuration struct from the given settings
+    # Generates a final settings configuration struct from the given settings
     # hash. Combines the given defaults with the settings hash.
     #
     # @param hash [Hash] The configurations hash.

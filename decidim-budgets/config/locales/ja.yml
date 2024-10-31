@@ -20,6 +20,10 @@ ja:
         scope_id: スコープ
   activerecord:
     models:
+      decidim:
+        budgets:
+          project:
+            text: 'この予算に追加されました： %{link}'
       decidim/budgets/budget:
         other: 予算
       decidim/budgets/project:
@@ -102,6 +106,9 @@ ja:
             pending_orders: 保留中の投票
             select_for_implementation: 実装のために選択
             selected: 選択済
+            selected_options:
+              'no': 'いいえ'
+              'yes': 'はい'
             title: プロジェクト
             update: 更新
             update_budget_button: プロジェクトの予算を更新
@@ -146,6 +153,7 @@ ja:
             no_components: この参加型スペースには、プロジェクトにインポートするための他の提案コンポーネントはありません。
             origin_component_id: 元のコンポーネント
             select_component: コンポーネントを選択してください
+            title: プロジェクトに提案をインポート
         reminders:
           orders:
             description: ユーザーは、保留中の指定がある予算へのリンクを含む電子メールを受け取ります。
@@ -164,7 +172,7 @@ ja:
         back_to: '%{component_name} に戻る'
         close_modal: ウィンドウを閉じる
         continue: 続行
-        more_information: 詳細情報
+        more_information: 予算に関する詳細情報
       budgets_list:
         budgets: 予算
         cancel_order:
@@ -172,15 +180,23 @@ ja:
           only_one: 投票を削除してやり直してください
         count:
           other: "%{count} 件の予算"
+        empty: 予算はまだありません
         finished_message: 投票プロセスが終了しました。ご参加ありがとうございます！
         highlighted_cta: '%{name} に投票'
         if_change_opinion: 'もし気が変わった場合は、以下を行うことができます:'
+        orders:
+          highest_cost: 価格が高い順
+          label: 予算の並び順
+          lowest_cost: 価格が低い順
+          random: ランダム
         progress: 投票を終了
         remove_vote: 投票を削除
         show: プロジェクトを表示
         vote: 投票
         voted_budgets: 投票された予算
         voted_on: '%{links} に投票しました。'
+      creation:
+        text: この予算に追加されました：
       last_activity:
         new_vote_at: 新しい予算投票日時
       limit_announcement:
@@ -196,6 +212,7 @@ ja:
           fields:
             category: カテゴリ
             id: ID
+            map: 地図
             title: タイトル
       order_summary_mailer:
         order_summary:
@@ -229,6 +246,7 @@ ja:
         count:
           projects_count:
             other: "%{count} プロジェクト"
+        empty: プロジェクトはまだありません
         exit_modal:
           cancel: 投票に戻る
           exit: 投票を終了
@@ -309,7 +327,7 @@ ja:
               errors:
                 budget_voting_rule_only_one: 有効にできる投票ルールは1つのみです。
                 budget_voting_rule_required: 投票ルールが1つ必要です。
-            geocoding_enabled: ジオコーディングを有効にする
+            geocoding_enabled: マップは有効です
             landing_page_content: 予算ランディングページ
             more_information_modal: 詳しい情報
             projects_per_page: ページあたりのプロジェクト数

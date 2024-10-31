@@ -25,11 +25,10 @@ module Decidim::Conferences
         invalid?: invalid,
         current_user:,
         title: { en: "New title" },
-        attributes: {
-          "title" => { en: "New title" },
-          "weight" => 2,
-          "description" => { en: "New description" }
-        }
+        weight: 2,
+        price: 10,
+        description: { en: "New description" },
+        attributes: {}
       )
     end
 
@@ -74,9 +73,8 @@ module Decidim::Conferences
       it "links meetings" do
         subject.call
 
-        conference_meetings = []
-        meetings.each do |meeting|
-          conference_meetings << meeting.becomes(Decidim::ConferenceMeeting)
+        conference_meetings = meetings.map do |meeting|
+          meeting.becomes(Decidim::ConferenceMeeting)
         end
 
         registration_type.conference_meetings = conference_meetings

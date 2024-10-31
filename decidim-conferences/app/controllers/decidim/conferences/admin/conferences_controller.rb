@@ -6,11 +6,11 @@ module Decidim
       # Controller that allows managing conferences.
       #
       class ConferencesController < Decidim::Conferences::Admin::ApplicationController
-        include Decidim::Admin::ParticipatorySpaceAdminBreadcrumb
-
-        helper_method :current_conference, :current_participatory_space
-        layout "decidim/admin/conferences"
+        include Decidim::Admin::ParticipatorySpaceAdminContext
         include Decidim::Conferences::Admin::Filterable
+
+        helper_method :current_conference
+        layout "decidim/admin/conferences"
 
         def index
           enforce_permission_to :read, :conference_list
@@ -52,7 +52,7 @@ module Decidim
             conference_id: current_conference.id
           )
 
-          UpdateConference.call(current_conference, @form) do
+          UpdateConference.call(@form, current_conference) do
             on(:ok) do |conference|
               flash[:notice] = I18n.t("conferences.update.success", scope: "decidim.admin")
               redirect_to edit_conference_path(conference)

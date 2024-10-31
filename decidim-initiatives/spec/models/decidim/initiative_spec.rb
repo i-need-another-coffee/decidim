@@ -64,7 +64,7 @@ module Decidim
       end
 
       it "does not enforce signature type if the type was updated" do
-        initiative = build(:initiative, :published, organization:, scoped_type: online_allowed_scope, signature_type: "online")
+        initiative = build(:initiative, organization:, scoped_type: online_allowed_scope, signature_type: "online")
 
         expect(initiative.save).to be_truthy
 
@@ -137,7 +137,7 @@ module Decidim
           expect(Decidim::Initiatives::InitiativesMailer).to receive(:notify_state_change)
             .at_least(:once)
             .and_return(message_delivery)
-          validating_initiative.published!
+          validating_initiative.publish!
         end
 
         it "Discard is notified by email" do
@@ -159,7 +159,7 @@ module Decidim
         expect(initiative).to have_authorship(initiative.author)
       end
 
-      it "returns true for aproved promotal committee members" do
+      it "returns true for approved promotal committee members" do
         expect(initiative).not_to have_authorship(pending_committee_member.user)
         expect(initiative).not_to have_authorship(rejected_committee_member.user)
 

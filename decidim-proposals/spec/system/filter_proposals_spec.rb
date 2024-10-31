@@ -6,10 +6,11 @@ describe "Filter Proposals", :slow do
   include_context "with a component"
   let(:manifest_name) { "proposals" }
 
-  let!(:category) { create(:category, participatory_space: participatory_process) }
-  let!(:scope) { create(:scope, organization:) }
+  let(:root_taxonomy) { create(:taxonomy, organization:) }
+  let!(:taxonomy) { create(:taxonomy, skip_injection: true, parent: root_taxonomy, organization:) }
+  let(:taxonomy_filter) { create(:taxonomy_filter, root_taxonomy:, space_manifest: component.participatory_space.manifest.name) }
+  let!(:taxonomy_filter_item) { create(:taxonomy_filter_item, taxonomy_item: taxonomy, taxonomy_filter:) }
   let!(:user) { create(:user, :confirmed, organization:) }
-  let(:scoped_participatory_process) { create(:participatory_process, :with_steps, organization:, scope:) }
 
   context "when caching is enabled", :caching do
     before do
@@ -22,7 +23,7 @@ describe "Filter Proposals", :slow do
       end
 
       within_language_menu do
-        click_link "Català"
+        click_on "Català"
       end
 
       within "form.new_filter" do
@@ -44,7 +45,7 @@ describe "Filter Proposals", :slow do
         end
       end
 
-      expect(page).not_to have_content("Another proposal")
+      expect(page).to have_no_content("Another proposal")
       expect(page).to have_content("Foobar proposal")
 
       filter_params = CGI.parse(URI.parse(page.current_url).query)
@@ -68,8 +69,8 @@ describe "Filter Proposals", :slow do
 
       context "with 'official' origin" do
         it "lists the filtered proposals" do
-          create_list(:proposal, 2, :official, component:, scope:)
-          create(:proposal, component:, scope:)
+          create_list(:proposal, 2, :official, component:)
+          create(:proposal, component:)
           visit_component
 
           within "#dropdown-menu-filters div.filter-container", text: "Origin" do
@@ -83,8 +84,8 @@ describe "Filter Proposals", :slow do
 
       context "with 'participants' origin" do
         it "lists the filtered proposals" do
-          create_list(:proposal, 2, component:, scope:)
-          create(:proposal, :official, component:, scope:)
+          create_list(:proposal, 2, component:)
+          create(:proposal, :official, component:)
           visit_component
 
           within "#dropdown-menu-filters div.filter-container", text: "Origin" do
@@ -106,121 +107,75 @@ describe "Filter Proposals", :slow do
         visit_component
 
         within "form.new_filter" do
-          expect(page).not_to have_content(/Official/i)
+          expect(page).to have_no_content(/Official/i)
         end
       end
     end
   end
 
-  context "when filtering proposals by SCOPE" do
-    let!(:scope2) { create(:scope, organization: participatory_process.organization) }
-    let!(:proposals) { create_list(:proposal, 2, component:, scope:) }
+  context "when filtering proposals by TAXONOMY" do
+    let!(:taxonomy2) { create(:taxonomy, skip_injection: true, name: { en: "Taxonomy name" }, parent: root_taxonomy, organization:) }
+    let!(:taxonomy_filter_item2) { create(:taxonomy_filter_item, taxonomy_item: taxonomy2, taxonomy_filter:) }
+    let!(:proposals) { create_list(:proposal, 2, component:, taxonomies: [taxonomy]) }
     let(:first_proposal) { proposals.first }
     let(:last_proposal) { proposals.last }
     let!(:proposal_comment) { create(:comment, commentable: first_proposal) }
     let!(:proposal_follow) { create(:follow, followable: last_proposal) }
 
     before do
-      create(:proposal, component:, scope: scope2)
-      create(:proposal, component:, scope: nil)
+      component.update!(settings: { taxonomy_filters: [taxonomy_filter.id] })
+      create(:proposal, component:, taxonomies: [taxonomy2])
+      create(:proposal, component:, taxonomies: [])
       visit_component
     end
 
-    it "can be filtered by scope" do
+    it "can be filtered by taxonomy" do
       within "form.new_filter" do
-        expect(page).to have_content(/Scope/i)
+        expect(page).to have_content(/Taxonomy name/i)
       end
     end
 
-    context "when selecting the global scope" do
+    context "when selecting one taxonomy" do
       it "lists the filtered proposals", :slow do
-        within "#dropdown-menu-filters div.filter-container", text: "Scope" do
+        within "#dropdown-menu-filters div.filter-container", text: "Taxonomy name" do
           uncheck "All"
-          check "Global"
-        end
-
-        expect(page).to have_css("[id^='proposals__proposal']", count: 1)
-      end
-    end
-
-    context "when selecting one scope" do
-      it "lists the filtered proposals", :slow do
-        within "#dropdown-menu-filters div.filter-container", text: "Scope" do
-          uncheck "All"
-          check scope.name[I18n.locale.to_s]
+          check decidim_sanitize_translated(taxonomy.name)
         end
 
         expect(page).to have_css("[id^='proposals__proposal']", count: 2)
       end
 
       it "can be ordered by most commented and most followed after filtering" do
-        within "#dropdown-menu-filters div.filter-container", text: "Scope" do
+        within "#dropdown-menu-filters div.filter-container", text: "Taxonomy name" do
           uncheck "All"
-          check scope.name[I18n.locale.to_s]
+          check decidim_sanitize_translated(taxonomy.name)
         end
 
         within "#dropdown-menu-order" do
-          click_link "Most commented"
+          click_on "Most commented"
         end
 
         expect(page).to have_css("[id^='proposals__proposal']", count: 2)
-        expect(page).to have_selector("[id^='proposals__proposal']:first-child", text: translated(first_proposal.title))
+        expect(page).to have_css("[id^='proposals__proposal']:first-child", text: translated(first_proposal.title))
 
         within "#dropdown-menu-order" do
-          click_link "Most followed"
+          click_on "Most followed"
         end
 
         expect(page).to have_css("[id^='proposals__proposal']", count: 2)
-        expect(page).to have_selector("[id^='proposals__proposal']:first-child", text: translated(last_proposal.title))
+        expect(page).to have_css("[id^='proposals__proposal']:first-child", text: translated(last_proposal.title))
       end
     end
 
-    context "when selecting the global scope and another scope" do
-      it "lists the filtered proposals", :slow do
-        within "#dropdown-menu-filters div.filter-container", text: "Scope" do
+    context "when unselecting the selected taxonomy" do
+      it "lists the filtered proposals" do
+        within "#dropdown-menu-filters div.filter-container", text: "Taxonomy name" do
           uncheck "All"
-          check "Global"
-          check scope.name[I18n.locale.to_s]
+          check decidim_sanitize_translated(taxonomy.name)
+          check "All"
         end
 
         expect(page).to have_css("[id^='proposals__proposal']", count: 3)
-      end
-    end
-
-    context "when unselecting the selected scope" do
-      it "lists the filtered proposals" do
-        within "#dropdown-menu-filters div.filter-container", text: "Scope" do
-          uncheck "All"
-          check scope.name[I18n.locale.to_s]
-          check "Global"
-          uncheck scope.name[I18n.locale.to_s]
-        end
-
-        expect(page).to have_css("[id^='proposals__proposal']", count: 1)
-      end
-    end
-
-    context "when process is related to a scope" do
-      let(:participatory_process) { scoped_participatory_process }
-
-      it "cannot be filtered by scope" do
-        visit_component
-
-        within "form.new_filter" do
-          expect(page).not_to have_content(/Scope/i)
-        end
-      end
-
-      context "with subscopes" do
-        let!(:subscopes) { create_list(:subscope, 5, parent: scope) }
-
-        it "can be filtered by scope" do
-          visit_component
-
-          within "form.new_filter" do
-            expect(page).to have_content(/Scope/i)
-          end
-        end
       end
     end
   end
@@ -251,7 +206,7 @@ describe "Filter Proposals", :slow do
         end
 
         it "lists accepted proposals" do
-          create(:proposal, :accepted, component:, scope:)
+          create(:proposal, :accepted, component:)
           visit_component
 
           within "#dropdown-menu-filters div.filter-container", text: "Status" do
@@ -268,7 +223,7 @@ describe "Filter Proposals", :slow do
         end
 
         it "lists the filtered proposals" do
-          create(:proposal, :rejected, component:, scope:)
+          create(:proposal, :rejected, component:)
           visit_component
 
           within "#dropdown-menu-filters div.filter-container", text: "Status" do
@@ -285,10 +240,10 @@ describe "Filter Proposals", :slow do
         end
 
         context "when there are proposals with answers not published" do
-          let!(:proposal) { create(:proposal, :accepted_not_published, component:, scope:) }
+          let!(:proposal) { create(:proposal, :accepted_not_published, component:) }
 
           before do
-            create(:proposal, :accepted, component:, scope:)
+            create(:proposal, :accepted, component:)
 
             visit_component
           end
@@ -318,7 +273,7 @@ describe "Filter Proposals", :slow do
 
             within "[id^='proposals__proposal']" do
               expect(page).to have_content(translated(proposal.title))
-              expect(page).not_to have_content("Accepted")
+              expect(page).to have_no_content("Accepted")
             end
           end
         end
@@ -339,7 +294,7 @@ describe "Filter Proposals", :slow do
           visit_component
 
           within "form.new_filter" do
-            expect(page).not_to have_content(/Status/i)
+            expect(page).to have_no_content(/Status/i)
           end
         end
       end
@@ -354,73 +309,8 @@ describe "Filter Proposals", :slow do
         visit_component
 
         within "form.new_filter" do
-          expect(page).not_to have_content(/Status/i)
+          expect(page).to have_no_content(/Status/i)
         end
-      end
-    end
-  end
-
-  context "when filtering proposals by CATEGORY", :slow do
-    context "when the user is logged in" do
-      let!(:category2) { create(:category, participatory_space: participatory_process) }
-      let!(:category3) { create(:category, participatory_space: participatory_process) }
-      let!(:proposal1) { create(:proposal, component:, category:) }
-      let!(:proposal2) { create(:proposal, component:, category: category2) }
-      let!(:proposal3) { create(:proposal, component:, category: category3) }
-      let!(:proposal4) { create(:proposal, component:, category:) }
-      let!(:proposal1_comment) { create(:comment, commentable: proposal1) }
-      let!(:proposal4_follow) { create(:follow, followable: proposal4) }
-
-      before do
-        login_as user, scope: :user
-      end
-
-      it "can be filtered by a category" do
-        visit_component
-
-        within "#dropdown-menu-filters div.filter-container", text: "Category" do
-          uncheck "All"
-          check category.name[I18n.locale.to_s]
-        end
-
-        expect(page).to have_css("[id^='proposals__proposal']", count: 2)
-      end
-
-      it "can be filtered by two categories" do
-        visit_component
-
-        within "#dropdown-menu-filters div.filter-container", text: "Category" do
-          uncheck "All"
-          check category.name[I18n.locale.to_s]
-          check category2.name[I18n.locale.to_s]
-        end
-
-        expect(page).to have_css("[id^='proposals__proposal']", count: 3)
-      end
-
-      it "can be ordered by most commented and most followed after filtering" do
-        visit_component
-
-        within "#dropdown-menu-filters div.filter-container", text: "Category" do
-          uncheck "All"
-          check category.name[I18n.locale.to_s]
-        end
-
-        expect(page).to have_css("[id^='proposals__proposal']", count: 2)
-
-        within "#dropdown-menu-order" do
-          click_link "Most commented"
-        end
-
-        expect(page).to have_css("[id^='proposals__proposal']", count: 2)
-        expect(page).to have_selector("[id^='proposals__proposal']:first-child", text: translated(proposal1.title))
-
-        within "#dropdown-menu-order" do
-          click_link "Most followed"
-        end
-
-        expect(page).to have_css("[id^='proposals__proposal']", count: 2)
-        expect(page).to have_selector("[id^='proposals__proposal']:first-child", text: translated(proposal4.title))
       end
     end
   end
@@ -463,9 +353,9 @@ describe "Filter Proposals", :slow do
           visit_component
         end
 
-        it "can be filtered by supported" do
+        it "can be filtered by voted" do
           within "form.new_filter" do
-            expect(page).to have_content(/Supported/i)
+            expect(page).to have_content(/Voted/i)
           end
         end
 
@@ -484,9 +374,9 @@ describe "Filter Proposals", :slow do
           visit_component
         end
 
-        it "cannot be filtered by supported" do
+        it "cannot be filtered by voted" do
           within "form.new_filter" do
-            expect(page).not_to have_content(/Supported/i)
+            expect(page).to have_no_content(/Voted/i)
           end
         end
       end
@@ -496,7 +386,7 @@ describe "Filter Proposals", :slow do
       it "cannot be filtered by activity" do
         visit_component
         within "form.new_filter" do
-          expect(page).not_to have_content(/Activity/i)
+          expect(page).to have_no_content(/Activity/i)
         end
       end
     end
@@ -504,8 +394,8 @@ describe "Filter Proposals", :slow do
 
   context "when filtering proposals by TYPE" do
     context "when there are amendments to proposals" do
-      let!(:proposal) { create(:proposal, component:, scope:) }
-      let!(:emendation) { create(:proposal, component:, scope:) }
+      let!(:proposal) { create(:proposal, component:) }
+      let!(:emendation) { create(:proposal, component:) }
       let!(:amendment) { create(:amendment, amendable: proposal, emendation:) }
 
       before do
@@ -544,31 +434,27 @@ describe "Filter Proposals", :slow do
       end
 
       context "when amendments_enabled component setting is enabled" do
-        before do
-          component.update!(settings: { amendments_enabled: true })
-        end
-
-        context "and amendments_visbility component step_setting is set to 'participants'" do
-          before do
-            component.update!(
-              step_settings: {
-                component.participatory_space.active_step.id => {
-                  amendments_visibility: "participants"
-                }
-              }
-            )
-          end
-
+        context "and amendments_visibility component step_setting is set to 'participants'" do
           context "when the user is logged in" do
+            before do
+              visit decidim.root_path
+
+              component.update!(settings: { amendments_enabled: true })
+              component.update!(
+                step_settings: {
+                  component.participatory_space.active_step.id => {
+                    amendments_visibility: "participants"
+                  }
+                }
+              )
+              login_as user, scope: :user
+              visit_component
+            end
+
             context "and has amended a proposal" do
-              let!(:new_emendation) { create(:proposal, component:, scope:) }
+              let!(:new_emendation) { create(:proposal, component:) }
               let!(:new_amendment) { create(:amendment, amendable: proposal, emendation: new_emendation, amender: new_emendation.creator_author) }
               let(:user) { new_amendment.amender }
-
-              before do
-                login_as user, scope: :user
-                visit_component
-              end
 
               it "can be filtered by type" do
                 within "form.new_filter" do
@@ -583,19 +469,14 @@ describe "Filter Proposals", :slow do
                 expect(page).to have_css("[id^='proposals__proposal']", count: 1)
                 expect(page).to have_content("Amendment", count: 2)
                 expect(page).to have_content(translated(new_emendation.title))
-                expect(page).not_to have_content(translated(emendation.title))
+                expect(page).to have_no_content(translated(emendation.title))
               end
             end
 
             context "and has NOT amended a proposal" do
-              before do
-                login_as user, scope: :user
-                visit_component
-              end
-
               it "cannot be filtered by type" do
                 within "form.new_filter" do
-                  expect(page).not_to have_content(/Type/i)
+                  expect(page).to have_no_content(/Type/i)
                 end
               end
             end
@@ -603,12 +484,21 @@ describe "Filter Proposals", :slow do
 
           context "when the user is NOT logged in" do
             before do
+              visit decidim.root_path
+              component.update!(settings: { amendments_enabled: true })
+              component.update!(
+                step_settings: {
+                  component.participatory_space.active_step.id => {
+                    amendments_visibility: "participants"
+                  }
+                }
+              )
               visit_component
             end
 
             it "cannot be filtered by type" do
               within "form.new_filter" do
-                expect(page).not_to have_content(/Type/i)
+                expect(page).to have_no_content(/Type/i)
               end
             end
           end
@@ -620,7 +510,7 @@ describe "Filter Proposals", :slow do
           component.update!(settings: { amendments_enabled: false })
         end
 
-        context "and amendments_visbility component step_setting is set to 'participants'" do
+        context "and amendments_visibility component step_setting is set to 'participants'" do
           before do
             component.update!(
               step_settings: {
@@ -633,7 +523,7 @@ describe "Filter Proposals", :slow do
 
           context "when the user is logged in" do
             context "and has amended a proposal" do
-              let!(:new_emendation) { create(:proposal, component:, scope:) }
+              let!(:new_emendation) { create(:proposal, component:) }
               let!(:new_amendment) { create(:amendment, amendable: proposal, emendation: new_emendation, amender: new_emendation.creator_author) }
               let(:user) { new_amendment.amender }
 

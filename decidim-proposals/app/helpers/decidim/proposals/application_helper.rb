@@ -28,16 +28,22 @@ module Decidim
         I18n.t(state, scope: "decidim.proposals.answers", default: :not_answered)
       end
 
+      def proposal_state_css_style(proposal)
+        return "" if proposal.emendation?
+
+        proposal.proposal_state&.css_style
+      end
+
       # Public: The css class applied based on the proposal state.
       #
       # proposal - The proposal to evaluate.
       #
       # Returns a String.
       def proposal_state_css_class(proposal)
-        state = proposal.state
-        state = proposal.internal_state if proposal.answered? && !proposal.published_state?
+        return "alert" if proposal.withdrawn?
+        return if proposal.state.blank?
 
-        case state
+        case proposal.state
         when "accepted"
           "success"
         when "rejected", "withdrawn"
@@ -139,12 +145,12 @@ module Decidim
       end
 
       def show_voting_rules?
-        return false unless votes_enabled?
+        return false if !votes_enabled? || current_settings.votes_blocked?
 
         return true if vote_limit_enabled?
         return true if threshold_per_proposal_enabled?
         return true if proposal_limit_enabled?
-        return true if can_accumulate_supports_beyond_threshold?
+        return true if can_accumulate_votes_beyond_threshold?
         return true if minimum_votes_per_user_enabled?
       end
 
@@ -166,7 +172,7 @@ module Decidim
         base
       end
 
-      # Explicitely commenting the used I18n keys so their are not flagged as unused
+      # Explicitly commenting the used I18n keys so their are not flagged as unused
       # i18n-tasks-use t('decidim.proposals.application_helper.filter_origin_values.official')
       # i18n-tasks-use t('decidim.proposals.application_helper.filter_origin_values.participants')
       # i18n-tasks-use t('decidim.proposals.application_helper.filter_origin_values.user_groups')
@@ -191,56 +197,57 @@ module Decidim
         Decidim::CheckBoxesTreeHelper::TreeNode.new(
           Decidim::CheckBoxesTreeHelper::TreePoint.new("", t("decidim.proposals.application_helper.filter_state_values.all")),
           [
-            Decidim::CheckBoxesTreeHelper::TreePoint.new("accepted", t("decidim.proposals.application_helper.filter_state_values.accepted")),
-            Decidim::CheckBoxesTreeHelper::TreePoint.new("evaluating", t("decidim.proposals.application_helper.filter_state_values.evaluating")),
-            Decidim::CheckBoxesTreeHelper::TreePoint.new("state_not_published", t("decidim.proposals.application_helper.filter_state_values.not_answered")),
-            Decidim::CheckBoxesTreeHelper::TreePoint.new("rejected", t("decidim.proposals.application_helper.filter_state_values.rejected"))
-          ]
+            Decidim::CheckBoxesTreeHelper::TreePoint.new("state_not_published", t("decidim.proposals.application_helper.filter_state_values.not_answered"))
+          ] +
+            Decidim::Proposals::ProposalState.where(component: current_component).where.not(token: "not_answered").map do |state|
+              Decidim::CheckBoxesTreeHelper::TreePoint.new(state.token, translated_attribute(state.title))
+            end
         )
       end
 
       # rubocop:disable Metrics/CyclomaticComplexity
-      # rubocop:disable Metrics/PerceivedComplexity
       def filter_sections
         @filter_sections ||= begin
           items = []
           if component_settings.proposal_answering_enabled && current_settings.proposal_answering_enabled
-            items.append(method: :with_any_state, collection: filter_proposals_state_values, label_scope: "decidim.proposals.proposals.filters", id: "state")
+            items.append(method: :with_any_state, collection: filter_proposals_state_values, label: t("decidim.proposals.proposals.filters.state"), id: "state")
           end
-          if current_component.has_subscopes?
-            items.append(method: :with_any_scope, collection: filter_scopes_values, label_scope: "decidim.proposals.proposals.filters", id: "scope")
-          end
-          if current_component.categories.any?
-            items.append(method: :with_any_category, collection: filter_categories_values, label_scope: "decidim.proposals.proposals.filters", id: "category")
+          current_component.available_taxonomy_filters.each do |taxonomy_filter|
+            items.append(method: "with_any_taxonomies[#{taxonomy_filter.root_taxonomy_id}]",
+                         collection: filter_taxonomy_values_for(taxonomy_filter),
+                         label: decidim_sanitize_translated(taxonomy_filter.name),
+                         id: "taxonomy-#{taxonomy_filter.root_taxonomy_id}")
           end
           if component_settings.official_proposals_enabled
-            items.append(method: :with_any_origin, collection: filter_origin_values, label_scope: "decidim.proposals.proposals.filters", id: "origin")
+            items.append(method: :with_any_origin, collection: filter_origin_values, label: t("decidim.proposals.proposals.filters.origin"), id: "origin")
           end
           if current_user
-            items.append(method: :activity, collection: activity_filter_values, label_scope: "decidim.proposals.proposals.filters", id: "activity", type: :radio_buttons)
+            items.append(method: :activity, collection: activity_filter_values, label: t("decidim.proposals.proposals.filters.activity"), id: "activity", type: :radio_buttons)
           end
           if @proposals.only_emendations.any?
-            items.append(method: :type, collection: filter_type_values, label_scope: "decidim.proposals.proposals.filters", id: "amendment_type", type: :radio_buttons)
+            items.append(method: :type, collection: filter_type_values, label: t("decidim.proposals.proposals.filters.amendment_type"), id: "amendment_type", type: :radio_buttons)
           end
           if linked_classes_for(Decidim::Proposals::Proposal).any?
             items.append(
               method: :related_to,
               collection: linked_classes_filter_values_for(Decidim::Proposals::Proposal),
-              label_scope: "decidim.proposals.proposals.filters",
+              label: t("decidim.proposals.proposals.filters.related_to"),
               id: "related_to",
               type: :radio_buttons
             )
           end
         end
-        # rubocop:enable Metrics/PerceivedComplexity
         # rubocop:enable Metrics/CyclomaticComplexity
-
         items.reject { |item| item[:collection].blank? }
       end
 
       def component_name
         i18n_key = controller_name == "collaborative_drafts" ? "decidim.proposals.collaborative_drafts.name" : "decidim.components.proposals.name"
         (defined?(current_component) && translated_attribute(current_component&.name).presence) || t(i18n_key)
+      end
+
+      def templates_available?
+        Decidim.module_installed?(:templates) && defined?(Decidim::Templates::Template) && Decidim::Templates::Template.exists?(templatable: current_component)
       end
     end
   end

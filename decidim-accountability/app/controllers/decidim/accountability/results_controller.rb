@@ -8,10 +8,16 @@ module Decidim
       helper Decidim::TraceabilityHelper
       helper Decidim::Accountability::BreadcrumbHelper
 
-      helper_method :results, :result, :first_class_categories, :count_calculator, :nav_paths
+      helper_method :results, :result, :first_class_taxonomies, :count_calculator
+
+      before_action :set_controller_breadcrumb
 
       def show
         raise ActionController::RoutingError, "Not Found" unless result
+      end
+
+      def home
+        @all_geocoded_results = results.geocoded
       end
 
       private
@@ -29,24 +35,6 @@ module Decidim
         @result ||= search_collection.includes(:timeline_entries).find_by(id: params[:id])
       end
 
-      def next_result
-        return if search_collection.size < 2
-
-        search_collection.order(:start_date, :id).where(Decidim::Accountability::Result.arel_table[:id].gt(result.id)).first
-      end
-
-      def prev_result
-        return if search_collection.size < 2
-
-        search_collection.order(:start_date, :id).where(Decidim::Accountability::Result.arel_table[:id].lt(result.id)).last
-      end
-
-      def nav_paths
-        return {} if result.blank?
-
-        { prev_path: prev_result, next_path: next_result }.compact_blank.transform_values { |result| result_path(result) }
-      end
-
       def search_collection
         Result.where(component: current_component)
       end
@@ -54,17 +42,34 @@ module Decidim
       def default_filter_params
         {
           search_text_cont: "",
-          with_scope: "",
-          with_category: ""
+          taxonomies_part_of_contains: ""
         }
       end
 
-      def first_class_categories
-        @first_class_categories ||= current_participatory_space.categories.first_class
+      def first_class_taxonomies
+        @first_class_taxonomies ||= current_organization.taxonomies.where(parent_id: current_component.available_root_taxonomies, id: current_component.available_taxonomy_ids)
       end
 
-      def count_calculator(scope_id, category_id)
-        Decidim::Accountability::ResultsCalculator.new(current_component, scope_id, category_id).count
+      def count_calculator(taxonomy_id)
+        Decidim::Accountability::ResultsCalculator.new(current_component, taxonomy_id).count
+      end
+
+      def controller_breadcrumb_items
+        @controller_breadcrumb_items ||= []
+      end
+
+      def set_controller_breadcrumb
+        controller_breadcrumb_items << breadcrumb_item
+      end
+
+      def breadcrumb_item
+        return {} if result&.parent.blank?
+
+        {
+          label: translated_attribute(result.parent.title),
+          url: result_path(result.parent),
+          active: true
+        }
       end
     end
   end

@@ -20,6 +20,11 @@ module Decidim::Assemblies
       )
     end
     let(:related_process_ids) { [participatory_processes.map(&:id)] }
+    let(:hero_image) { nil }
+    let(:banner_image) { nil }
+    let(:taxonomizations) do
+      2.times.map { build(:taxonomization, taxonomy: create(:taxonomy, :with_parent, organization:), taxonomizable: nil) }
+    end
 
     let(:form) do
       instance_double(
@@ -32,8 +37,8 @@ module Decidim::Assemblies
         slug: "slug",
         hashtag: "hashtag",
         meta_scope: { en: "meta scope" },
-        hero_image: nil,
-        banner_image: nil,
+        hero_image:,
+        banner_image:,
         promoted: nil,
         developer_group: { en: "developer group" },
         local_area: { en: "local" },
@@ -42,15 +47,15 @@ module Decidim::Assemblies
         participatory_structure: { en: "participatory structure" },
         description: { en: "description" },
         short_description: { en: "short_description" },
-        current_organization: organization,
+        organization:,
         scopes_enabled: true,
         scope:,
         area:,
+        taxonomizations:,
         parent: nil,
         private_space: false,
         errors:,
         participatory_processes_ids: related_process_ids,
-        show_statistics: false,
         purpose_of_action: { en: "purpose of action" },
         composition: { en: "composition of internal working groups" },
         assembly_type:,
@@ -83,21 +88,17 @@ module Decidim::Assemblies
     end
 
     context "when the assembly is not persisted" do
-      let(:invalid_assembly) do
-        instance_double(
-          Decidim::Assembly,
-          persisted?: false,
-          valid?: false,
-          errors: {
-            hero_image: "File resolution is too large",
-            banner_image: "File resolution is too large"
-          }
-        ).as_null_object
+      let(:hero_image) do
+        ActiveStorage::Blob.create_and_upload!(
+          io: File.open(Decidim::Dev.asset("invalid.jpeg")),
+          filename: "avatar.jpeg",
+          content_type: "image/jpeg"
+        )
       end
+      let(:banner_image) { hero_image }
 
       before do
         allow(Decidim::ActionLogger).to receive(:log).and_return(true)
-        allow(Decidim::Assembly).to receive(:create).and_return(invalid_assembly)
       end
 
       it "broadcasts invalid" do
@@ -183,6 +184,22 @@ module Decidim::Assemblies
           subject.call
 
           expect(assembly.assembly_type).to be_nil
+        end
+      end
+
+      it "links to taxonomizations" do
+        subject.call
+
+        expect(assembly.taxonomizations).to match_array(taxonomizations)
+      end
+
+      context "when no taxonomizations are set" do
+        let(:taxonomizations) { [] }
+
+        it "taxonomizations are empty" do
+          subject.call
+
+          expect(assembly.taxonomizations).to be_empty
         end
       end
 

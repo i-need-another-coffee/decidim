@@ -77,6 +77,9 @@ export default class UploadModal {
       uploader.upload.create((error, blob) => {
         if (error) {
           uploader.errors = [error]
+          this.uploadItems.replaceChild(this.createUploadItem(file, [error], { value: 100 }), item);
+          this.updateDropZone();
+
         } else {
           // attach the file hash to submit the form, when the file has been uploaded
           file.hiddenField = blob.signed_id
@@ -122,8 +125,8 @@ export default class UploadModal {
     if (src) {
       buffer = await fetch(src).then((res) => res.arrayBuffer())
       // since we cannot know the exact mime-type of the file,
-      // we assume as "image" if it has the src attribute in order to load the preview
-      type = "image"
+      // we assume as "image/*" if it has the src attribute in order to load the preview
+      type = "image/*"
     }
 
     const file = new File([buffer], element.dataset.filename, { type })
@@ -162,13 +165,13 @@ export default class UploadModal {
       this.emptyItems.querySelector("label").removeAttribute("disabled");
     } else {
       this.emptyItems.classList.add("is-disabled");
-      this.emptyItems.querySelector("label").setAttribute("disabled", true);
+      this.emptyItems.querySelector("label").disabled = true;
     }
   }
 
   createUploadItem(file, errors, opts = {}) {
     const okTemplate = `
-      <img src="" alt="${escapeQuotes(file.name)}" />
+      <img src="data:," alt="${escapeQuotes(file.name)}" />
       <span>${escapeHtml(truncateFilename(file.name))}</span>
     `
 
@@ -182,7 +185,7 @@ export default class UploadModal {
     `
 
     const titleTemplate = `
-      <img src="" alt="${escapeQuotes(file.name)}" />
+      <img src="data:," alt="${escapeQuotes(file.name)}" />
       <div>
         <div>
           <label>${this.locales.filename}</label>

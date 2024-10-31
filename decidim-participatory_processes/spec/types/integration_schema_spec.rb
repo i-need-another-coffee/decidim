@@ -9,7 +9,8 @@ describe "Decidim::Api::QueryType" do
 
   let(:locale) { "en" }
 
-  let(:participatory_process) { create(:participatory_process, organization: current_organization) }
+  let!(:taxonomy) { create(:taxonomy, :with_parent, :with_children, organization: current_organization) }
+  let(:participatory_process) { create(:participatory_process, organization: current_organization, taxonomies: [taxonomy]) }
 
   let(:participatory_process_query) do
     %(
@@ -23,7 +24,6 @@ describe "Decidim::Api::QueryType" do
           type
           thumbnail
         }
-        bannerImage
         categories{
           id
           name{
@@ -93,7 +93,7 @@ describe "Decidim::Api::QueryType" do
         promoted
         publishedAt
         reference
-        scope {
+        taxonomies {
           children {
             id
           }
@@ -105,12 +105,9 @@ describe "Decidim::Api::QueryType" do
             id
           }
         }
-        scopesEnabled
         shortDescription {
             translation(locale: "#{locale}")
           }
-        showMetrics
-        showStatistics
         slug
         startDate
         steps {
@@ -159,7 +156,6 @@ describe "Decidim::Api::QueryType" do
         "translation" => participatory_process.announcement[locale]
       },
       "attachments" => [],
-      "bannerImage" => participatory_process.attached_uploader(:banner_image).path.sub(Rails.public_path.to_s, ""),
       "categories" => [],
       "components" => components,
       "createdAt" => participatory_process.created_at.iso8601.to_s.gsub("Z", "+00:00"),
@@ -167,7 +163,6 @@ describe "Decidim::Api::QueryType" do
       "developerGroup" => { "translation" => participatory_process.developer_group[locale] },
       "endDate" => participatory_process.end_date.to_s,
       "hashtag" => "",
-      "heroImage" => participatory_process.attached_uploader(:hero_image).path.sub(Rails.public_path.to_s, ""),
       "id" => participatory_process.id.to_s,
       "linkedParticipatorySpaces" => [],
       "localArea" => { "translation" => participatory_process.local_area[locale] },
@@ -178,11 +173,8 @@ describe "Decidim::Api::QueryType" do
       "promoted" => false,
       "publishedAt" => participatory_process.published_at.iso8601.to_s.gsub("Z", "+00:00"),
       "reference" => participatory_process.reference,
-      "scope" => participatory_process.scope,
-      "scopesEnabled" => participatory_process.scopes_enabled,
+      "taxonomies" => [{ "id" => taxonomy.id.to_s, "name" => { "translation" => taxonomy.name[locale] }, "parent" => { "id" => taxonomy.parent_id.to_s }, "children" => taxonomy.children.map { |child| { "id" => child.id.to_s } } }],
       "shortDescription" => { "translation" => participatory_process.short_description[locale] },
-      "showMetrics" => participatory_process.show_metrics,
-      "showStatistics" => participatory_process.show_statistics,
       "slug" => participatory_process.slug,
       "startDate" => participatory_process.start_date.to_s,
       "steps" => participatory_process.steps.to_a,
@@ -202,11 +194,15 @@ describe "Decidim::Api::QueryType" do
   end
 
   describe "valid query" do
-    it "executes sucessfully" do
-      expect { response }.not_to raise_error(StandardError)
+    it "executes successfully" do
+      expect { response }.not_to raise_error
     end
 
-    it { expect(response["participatoryProcess"]).to eq(participatory_process_response) }
+    it "returns the correct response" do
+      data = response["participatoryProcess"]
+      expect(data).to include(participatory_process_response)
+      expect(data["heroImage"]).to be_blob_url(participatory_process.hero_image.blob)
+    end
 
     it_behaves_like "implements stats type" do
       let(:participatory_process_query) do

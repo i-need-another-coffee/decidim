@@ -3,15 +3,15 @@
 module Decidim
   # A command with all the business logic when a user creates a report.
   class CreateReport < Decidim::Command
+    delegate :current_user, to: :form
+
     # Public: Initializes the command.
     #
     # form         - A form object with the params.
     # reportable   - The resource being reported
-    # current_user - The current user.
-    def initialize(form, reportable, current_user)
+    def initialize(form, reportable)
       @form = form
       @reportable = reportable
-      @current_user = current_user
       @tool = Decidim::ModerationTools.new(reportable, current_user)
     end
 
@@ -53,7 +53,7 @@ module Decidim
     end
 
     def participatory_space_moderators
-      @participatory_space_moderators ||= participatory_space.moderators
+      @participatory_space_moderators ||= participatory_space.respond_to?(:moderators) ? participatory_space.moderators : []
     end
 
     def send_report_notification_to_moderators
@@ -83,10 +83,6 @@ module Decidim
 
         ReportedMailer.hide(moderator, @report).deliver_later
       end
-    end
-
-    def participatory_space
-      @participatory_space ||= @reportable.component&.participatory_space || @reportable.try(:participatory_space)
     end
   end
 end

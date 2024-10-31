@@ -17,6 +17,7 @@ module Decidim
 
       routes do
         resources :assemblies_types
+        resources :assembly_filters, except: [:show]
 
         resources :assemblies, param: :slug, except: [:show, :destroy] do
           resource :publish, controller: "assembly_publications", only: [:create, :destroy]
@@ -47,12 +48,17 @@ module Decidim
           resources :categories, except: [:show]
 
           resources :components do
+            collection do
+              put :reorder
+            end
             resource :permissions, controller: "component_permissions"
             member do
               put :publish
               put :unpublish
               get :share
+              put :hide
             end
+            resources :component_share_tokens, except: [:show], path: "share_tokens", as: "share_tokens"
             resources :exports, only: :create
             resources :imports, only: [:new, :create] do
               get :example, on: :collection
@@ -79,6 +85,8 @@ module Decidim
               end
             end
           end
+
+          resources :assembly_share_tokens, except: [:show], path: "share_tokens"
         end
 
         scope "/assemblies/:assembly_slug/components/:component_id/manage" do
@@ -102,21 +110,9 @@ module Decidim
 
       initializer "decidim_assemblies_admin.menu" do
         Decidim::Assemblies::Menu.register_admin_menu_modules!
-      end
-
-      initializer "decidim_assemblies_admin.attachments_menu" do
-        Decidim::Assemblies::Menu.register_assemblies_admin_attachments_menu!
-      end
-
-      initializer "decidim_assemblies_admin.components_menu" do
+        Decidim::Assemblies::Menu.register_admin_assemblies_attachments_menu!
         Decidim::Assemblies::Menu.register_admin_assemblies_components_menu!
-      end
-
-      initializer "decidim_assemblies_admin.assembly_menu" do
         Decidim::Assemblies::Menu.register_admin_assembly_menu!
-      end
-
-      initializer "decidim_assemblies_admin.assemblies_menu" do
         Decidim::Assemblies::Menu.register_admin_assemblies_menu!
       end
     end

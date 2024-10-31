@@ -99,29 +99,19 @@ module Decidim
     # Renders the cell contents.
     def cell(name, model, options = {}, &)
       options = { context: { view_context: self, current_user: } }.deep_merge(options)
-      super(name, model, options, &)
-    end
-
-    # Public: Builds the URL for the step Call To Action. Takes URL params
-    # into account.
-    #
-    # process - a ParticipatoryProcess
-    #
-    # Returns a String that can be used as a URL.
-    def step_cta_url(process)
-      return unless respond_to?(:decidim_participatory_processes)
-
-      base_url, params = decidim_participatory_processes.participatory_process_path(process).split("?")
-
-      if params.present?
-        [base_url, "/", process.active_step.cta_path, "?", params].join
-      else
-        [base_url, "/", process.active_step.cta_path].join
-      end
+      super
     end
 
     def prevent_timeout_seconds
       0
+    end
+
+    def text_initials(name)
+      name.split(/[\s.]+/).map(&:chr).slice(0, 2).join.upcase
+    end
+
+    def add_body_classes(*class_names)
+      content_for :body_class, class_names.map { |class_name| " #{class_name.strip}" }.join
     end
   end
 end

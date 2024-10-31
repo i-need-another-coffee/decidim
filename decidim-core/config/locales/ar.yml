@@ -89,11 +89,6 @@ ar:
   booleans:
     'false': 'لا'
     'true': 'نعم'
-  carrierwave:
-    errors:
-      file_resolution_too_large: دقة الملف أكبر من المسموح به
-      file_size_too_large: حجم الملف أكبر من المسموح به
-      not_inside_organization: لم يتم إرفاق الملف بأي منظمة
   date:
     formats:
       decidim_short: "%d/%m/%Y"
@@ -252,19 +247,12 @@ ar:
       dismiss: تجاهل الإشعار
     amendments:
       accepted:
-        error: حدث خطأ أثناء قبول التعديل.
         success: تم قبول التعديل بنجاح.
       amendable:
         button: تعديل %{model_name}
-        error: طرأ خطأ خلال تصليح هذا المورد.
         promote_button: ترقية إلى صفة %{model_name}
         promote_confirm_text: هل أنت متأكد من رغبتك في الترويج لهذا الإصدار؟
-      compare_draft:
-        continue: متابعة
-        no_similars_found: لم يتم العثور على أي تعديل مماثل.
-        title: تعديلات مشابهة
       created:
-        error: حدث خطأ أثناء إنشاء مسودة التعديل.
         success: تم إنشاء مسودة التعديل بنجاح.
       destroy_draft:
         error: طرأت مشكلة خلال حذف مسودة التعديل.
@@ -311,19 +299,18 @@ ar:
       wizard_step_form:
         steps:
           '1': إنشاء التعديل الخاص بك
-          '2': قارن تعديلك
-          '3': اكمل تعديلك
-          '4': انشر تعديلك
     anonymous_user: مجهول
     application:
       document:
         download: نزّل الملف
       documents:
+        documents: المستندات
         related_documents: الوثائق ذات الصلة
       photo:
         alt: صورة الوسائط
         title: الصورة
       photos:
+        photos: الصور
         related_photos: الصور ذات الصلة
     author:
       avatar: 'الصورة الرمزية: %{name}'
@@ -463,8 +450,6 @@ ar:
         description: الوصف
       footer_sub_hero:
         name: تذييل البطل الفرعي راية
-      hero:
-        name: صورة البطل
       hero_settings_form:
         background_image: الصورة الخلفية
         welcome_text: نص الترحيب
@@ -486,6 +471,10 @@ ar:
         view_all: عرض الكل
       metrics:
         name: مقاييس المنظمة
+      participatory_space_stats:
+        name: الإحصائيات
+      social_networks_metadata:
+        name: الشبكات الاجتماعية
       static_page:
         section:
           name: قسم
@@ -506,15 +495,13 @@ ar:
           complete_profile: الملف الشخصي الكامل
           nickname_help: الاسم المستعار الخاص بك في %{organization}. يمكن أن يحتوي فقط على أحرف وأرقام '-' و '_'.
           sign_up: يرجى استكمال ملف التعريف الخاص بك
-          subtitle: يرجى ملء النموذج التالي من أجل استكمال التسجيل
           username_help: الاسم العام الذي يظهر في مشاركاتك. بهدف ضمان عدم الكشف عن هويته ، يمكن أن يكون أي اسم.
       registrations:
         new:
           already_have_an_account?: هل لديك حساب؟
           newsletter: تلقي رسالة إخبارية من حين لآخر مع المعلومات ذات الصلة
           newsletter_title: الاتصال إذن
-          sign_up: انشئ حسابًا
-          subtitle: اشترك للمشاركة في المناقشات ودعم المقترحات.
+          terms: شروط الخدمة
           tos_agreement: بالتسجيل فإنك توافق على %{link}.
           tos_title: شروط الخدمة
           username_help: الاسم العام الذي يظهر في مشاركاتك. بهدف ضمان عدم الكشف عن هويته ، يمكن أن يكون أي اسم.
@@ -530,6 +517,11 @@ ar:
           title: الإخطارات الإخبارية
         omniauth_buttons:
           or: أو
+        password_fields:
+          hidden_password: كلمة المرور الخاصة بك مخفية
+          hide_password: إخفاء كلمة المرور
+          show_password: إظهار كلمة المرور
+        placeholder_email: hi@example.org
     doorkeeper:
       authorizations:
         new:
@@ -691,8 +683,6 @@ ar:
           email_outro: تلقيت هذا الإشعار لأنك مدير في هذه المنصة.
           email_subject: قامت مجموعة من المستخدمين بتحديث ملفاتها الشخصية
           notification_title: قامت مجموعة المستخدمين %{user_group_name} بتحديث الملف الشخصي الخاص بها، تاركة ذلك غير مؤكد. يمكنك الآن تأكيدها في لوحة <a href="%{groups_admin_path}">المشرف</a>.
-      notification_event:
-        notification_title: حدث حدث ل <a href="%{resource_path}">%{resource_title}</a>.
       reports:
         resource_hidden:
           email_intro: قام مسؤول بحذف %{resource_type} لأنه تم الإبلاغ عنه كـ %{report_reasons}.
@@ -761,7 +751,6 @@ ar:
       create:
         button: إتبع
         error: حدثت مشكلة بعد هذا المورد.
-        participatory_space: متابعة <span class="show-for-sr">%{resource_name}</span>
       destroy:
         button: إيقاف المتابَعة
         error: حدثت مشكلة في إلغاء متابعة هذا المورد.
@@ -774,14 +763,12 @@ ar:
         file:
           explanation: 'إرشادات الملف:'
           message_1: يجب أن تكون صورة أو وثيقة.
-          message_2: بالنسبة للصور، يُفضل استخدام صور بالوضع العرضي، تقوم الخدمة باقتصاص الصورة.
         icon:
           explanation: 'إرشادات للأيقونة:'
           message_1: يجب أن تكون صورة مربعة.
           message_2: الحجم الموصى به لهذه الصورة هو 512 × 512.
         image:
           explanation: 'إرشادات للصورة:'
-          message_1: يفضل أن تكون صورة بالوضع العرضي لا تحتوي على أي نص.
           message_2: تقوم الخدمة باقتصاص الصورة.
       file_validation:
         allowed_file_extensions: 'ملحقات الملف المسموح بها: %{extensions}'
@@ -800,11 +787,11 @@ ar:
           filename: اسم الملف
           remove: حذف
           replace: إستبدال
+          save: حفظ
           title: العنوان
           title_required: العنوان مطلوب!
           uploaded: تم التحميل
           validating: جارية المصادقة...
-          validation_error: خطأ في المصادقة!
         select_file: اختيار ملف
       upload_help:
         dropzone: قم بإسقاط الملفات هنا أو انقر للتحميل
@@ -881,11 +868,11 @@ ar:
         default_page:
           content: "<p>في %{organization} يمكنك المشاركة واتخاذ قرار بشأن مواضيع مختلفة ، من خلال المساحات التي تراها في القائمة العليا: العمليات ، والجمعيات ، والمبادرات ، والمشاورات.</p> <p>في كل منها ، ستجد خيارات مختلفة للمشاركة: تقديم مقترحات - بشكل فردي أو مع أشخاص آخرين - والمشاركة في المناقشات ، وتحديد أولويات المشاريع للتنفيذ ، وحضور الاجتماعات وجهاً لوجه وغيرها من الإجراءات.</p>\n"
           title: ماذا يمكنني أن أفعل في %{organization}؟
-        title: المساعدة العامة
     last_activities:
       all: جميع أنواع النشاط
       index:
         last_activity: النشاط الاخير
+      name: الأنشطة الأخيرة
     links:
       invalid_url: URL غير صالح
       warning:
@@ -1104,6 +1091,7 @@ ar:
           register: تسجيل
         hero:
           participate: مشاركة
+          participate_title: المشاركة في مسارات المنصة
           welcome: مرحبًا بكم على %{organization}!
         statistics:
           headline: الحالة الحالية لـ %{organization}
@@ -1118,8 +1106,9 @@ ar:
         metrics:
           headline: المشاركة في الأرقام
           link: عرض جميع الإحصاءات
-    participatory_space_private_users:
-      not_allowed: غير مسموح لك بمشاهدة هذا المحتوى
+      terms_of_service:
+        form:
+          agreement: أوافق على هذه الشروط
     profile:
       deleted: مشارك محذوف
     profiles:
@@ -1144,6 +1133,8 @@ ar:
           edit_user_group: تعديل الملف الشخصي للمجموعة
           invite_user: دعوة مشارك
           join_user_group: طلب الانضمام للمجموعة
+          leave_user_group: مغادرة الفريق
+          manage_user_group: إدارة الفريق
           manage_user_group_admins: إدارة المدراء
           manage_user_group_users: إدارة الاعضاء
           message: الرسالة
@@ -1177,7 +1168,6 @@ ar:
         subject: تم الإبلاغ عن مورد
     reports:
       create:
-        error: حدث خطأ أثناء إنشاء التقرير. من فضلك حاول مرة أخرى.
         success: تم إنشاء التقرير بنجاح وسيتم مراجعته بواسطة مسؤول.
     resource_endorsements:
       create:
@@ -1195,12 +1185,14 @@ ar:
       scopes_picker_input:
         select_scope: 'يرجى تحديد نطاق (حالياً: %{current})'
     search:
+      name: البحث
       results: نتائج البحث
       results_found_for_term: '%{count} نتائج البحث: "%{term}"'
       term_input_placeholder: بحث
     searches:
       filters:
         jump_to: 'اقفز إلى:'
+        search: البحث
         state:
           active: نشيط
           all: الكل
@@ -1249,7 +1241,7 @@ ar:
       floating_help:
         help: المساعدة
       login_modal:
-        sign_up: انشئ حسابًا
+        please_log_in: برجى تسجيل الدخول
       mentions_modal:
         remove_recipient: إزالة المستلم %{name}
       participatory_space_filters:
@@ -1422,8 +1414,6 @@ ar:
       updated_not_active: كلمة السر الخاصة بك تم تغييرها بنجاح.
     registrations:
       destroyed: تم إلغاء حسابك بنجاح. نحن نأمل ان نراك قريبا مره اخرى.
-      new:
-        sign_up: انشئ حسابًا
       signed_up: أهلا بك! لقد اشتركت بنجاح
       signed_up_but_inactive: لقد اشتركت بنجاح ومع ذلك ، لم نتمكن من تسجيل الدخول لأن حسابك لم يتم تنشيطه بعد.
       signed_up_but_locked: لقد اشتركت بنجاح ومع ذلك ، لم نتمكن من تسجيل الدخول لأن حسابك مغلق.
@@ -1434,7 +1424,8 @@ ar:
       links:
         back: الى الخلف
         forgot_your_password: نسيت رقمك السري؟
-        sign_up: انشئ حسابًا
+        log_in: تسجيل الدخول
+        log_in_with_provider: تسجيل الدخول باستخدام %{provider}
       minimum_password_length:
         zero: "(%{count} حرف كحد أدنى)"
         one: "(%{count} حرف كحد أدنى)"
@@ -1450,30 +1441,39 @@ ar:
   doorkeeper:
     scopes:
       public: معلوماتك العامة.
+  editor:
+    extensions:
+      link:
+        bubbleMenu:
+          edit: تعديل
+          remove: حذف
+          url: العنوان الشبكي
+        hrefLabel: رابط URL
+        targetLabel: الهدف
+        targets:
+          blank: لسان جديد
+      videoEmbed:
+        titleLabel: العنوان
+        urlLabel: الرابط التشعبي للفيديو
+    inputDialog:
+      buttons:
+        cancel: إلغاء
+        remove: حذف
+        save: حفظ
+      close: اغلاق النموذج
+    toolbar:
+      control:
+        blockquote: اقتباس
+        bold: خط غليظ
   emojis:
+    add_custom: إضافة إيموجي مخصص جديد
     button: إضافة Emoji
     categories:
-      activities: أنشطة
-      animals-nature: الحيوانات والطبيعة
+      activity: النشاط
       custom: طباع
       flags: الأعلام
-      food-drink: الطعام والشراب
       objects: أشياء
-      people-body: أشخاص و أجسام
-      recents: تم استخدامه مؤخراً
-      smileys-emotion: وجوه تعبيرية (Smileys) و عواطف
       symbols: الرموز
-      travel-places: الأماكن والسفر
-    error:
-      load: فشل تحميل الرموز التعبيرية
-    recents:
-      clear: مسح الرموز التعبيرية الأخيرة
-    retry: يرجى المحاولة مرة أخرى
-    search:
-      _: البحث في الرموز التعبيرية...
-      clear: مسح البحث
-      error: لم ينجح البحث في الرموز التعبيرية
-      not_found: لم يتم العثور على أي نتائج
   errors:
     messages:
       allowed_file_content_types: 'يسمح فقط بالملفات ذات الإضافات التالية: %{types}'
@@ -1484,15 +1484,7 @@ ar:
       invalid_time_zone: ليست بمنطقة زمنية صالحة
       long_words: يحتوي على كلمات طويلة جدًا (أكثر من 35 حرفًا)
       must_start_with_caps: يجب أن تبدأ بحرف كبير
-      not_found: تعذر العثور عليه. هل قمت بالتسجيل سابقاً؟
       not_locked: لم يكن مغلقا
-      not_saved:
-        zero: 'طرأت عدة أخطاء خلال معالجة طلبك:'
-        one: 'طرأ خطأ خلال معالجة طلبك:'
-        two: 'طرأ خطئان خلال معالجة طلبك:'
-        few: 'طرأت عدة أخطاء خلال معالجة طلبك:'
-        many: 'طرأت عدة أخطاء خلال معالجة طلبك:'
-        other: 'طرأت عدة أخطاء خلال معالجة طلبك:'
       too_many_marks: يستخدم الكثير من علامات الترقيم المتتالية (مثل! و؟)
       too_much_caps: يستخدم عددًا كبيرًا جدًا من الأحرف الكبيرة (أكثر من 25٪ من النص)
       too_short: قصير للغاية (أقل من %{count} حروف)
@@ -1513,6 +1505,8 @@ ar:
     timestamp_error_message: آسف ، كان ذلك سريعًا جدًا! يرجى إعادة تقديم.
   layouts:
     decidim:
+      announcements:
+        view_more: المزيد من المعلومات
       data_consent:
         details:
           columns:
@@ -1568,9 +1562,11 @@ ar:
         cc_by_license: رخصة المشاع الإبداعي
         data_consent_settings: إعدادات ملفات تعريف الارتباط
         decidim_logo: شعار Decidim
+        decidim_title: Decidim
         download_open_data: تحميل ملفات البيانات المفتوحة
+        log_in: تسجيل الدخول
         made_with_open_source: موقع تم إنشاؤه <a target="_blank" href="https://github.com/decidim/decidim">بالبرمجيات الحرة</a>.
-        sign_up: انشئ حسابًا
+        resources: الموارد
       header:
         main_menu: القائمة الرئيسية
         user_menu: قائمة المستخدم
@@ -1591,11 +1587,14 @@ ar:
       timeout_modal:
         body: لقد كنت غير نشط لمدة %{minutes} دقائق. إذا استمريت في كونك غير نشط، سيتم تسجيل خروجك تلقائيًا من أجل الأمان الخاص بك.
         continue_session: متابعة الجلسة
+        log_out: الخروج
         title: هل ترغب في متابعة جلستك؟
       user_menu:
         account: 'حساب المستخدم: %{name}'
         admin_dashboard: لوحة القيادة الادارية
+        configuration: الإعدادات
         conversations: المحادثات
+        log_out: الخروج
         notifications: إخطارات
         profile: حسابي
         public_profile: ملفي الشخصي العام
@@ -1607,6 +1606,7 @@ ar:
         my_data: بياناتي
         my_interests: اهتماماتي
         notifications_settings: إعدادات الإخطارات
+        profile: الملف الشخصي
         title: إعدادات المشارك
         user_groups: المجموعات
   locale:

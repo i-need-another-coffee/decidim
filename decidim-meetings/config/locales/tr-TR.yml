@@ -198,14 +198,8 @@ tr:
             non_user: Mevcut olmayan katılımcı
             select_user: Katılımcı seç
           index:
-            filter:
-              accepted: Kabul edilmiş
-              all: Tümü
-              rejected: Reddedildi
-              sent: Gönderildi
             invite_attendee: Katılımcı davet et
             invites: Davetler
-            search: Arama
         meeting_closes:
           edit:
             close: Kapat
@@ -274,6 +268,9 @@ tr:
           value_types:
             organizer_presenter:
               not_found: 'Organizatör veritabanında bulunamadı (ID: %{id})'
+      calendar:
+        meeting_to_event:
+          read_more: Bu toplantı hakkında daha fazlasını okuyun
       calendar_modal:
         calendar_url: Takvim URL'si
         export_calendar: Takvimi dışa aktar

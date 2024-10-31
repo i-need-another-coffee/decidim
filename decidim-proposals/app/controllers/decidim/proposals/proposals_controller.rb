@@ -7,6 +7,7 @@ module Decidim
       helper ProposalWizardHelper
       helper ParticipatoryTextsHelper
       helper UserGroupHelper
+      helper Decidim::Admin::IconLinkHelper
       include Decidim::ApplicationHelper
       include Flaggable
       include Withdrawable
@@ -18,18 +19,17 @@ module Decidim
 
       helper_method :proposal_presenter, :form_presenter, :tab_panel_items
 
-      before_action :authenticate_user!, only: [:new, :create, :complete]
-      before_action :ensure_is_draft, only: [:compare, :complete, :preview, :publish, :edit_draft, :update_draft, :destroy_draft]
+      before_action :authenticate_user!, only: [:new, :create]
+      before_action :ensure_is_draft, only: [:preview, :publish, :edit_draft, :update_draft, :destroy_draft]
       before_action :set_proposal, only: [:show, :edit, :update, :withdraw]
       before_action :edit_form, only: [:edit_draft, :edit]
+      before_action :set_view_mode, only: [:index]
 
       before_action :set_participatory_text
 
       # rubocop:disable Naming/VariableNumber
       STEP1 = :step_1
       STEP2 = :step_2
-      STEP3 = :step_3
-      STEP4 = :step_4
       # rubocop:enable Naming/VariableNumber
 
       def index
@@ -39,7 +39,7 @@ module Decidim
                        .published
                        .not_hidden
                        .only_amendables
-                       .includes(:category, :scope, :attachments, :coauthorships)
+                       .includes(:taxonomies, :attachments, :coauthorships)
                        .order(position: :asc)
           render "decidim/proposals/proposals/participatory_texts/participatory_text"
         else
@@ -54,7 +54,7 @@ module Decidim
           @voted_proposals = if current_user
                                ProposalVote.where(
                                  author: current_user,
-                                 proposal: @proposals.pluck(:id)
+                                 proposal: @proposals.pluck("decidim_proposals_proposals.id")
                                ).pluck(:decidim_proposal_id)
                              else
                                []
@@ -74,20 +74,21 @@ module Decidim
         if proposal_draft.present?
           redirect_to edit_draft_proposal_path(proposal_draft, component_id: proposal_draft.component.id, question_slug: proposal_draft.component.participatory_space.slug)
         else
-          @form = form(ProposalWizardCreateStepForm).from_params(body: translated_proposal_body_template)
+          @form = form(ProposalForm).from_params(body: translated_proposal_body_template)
         end
       end
 
       def create
         enforce_permission_to :create, :proposal
         @step = STEP1
-        @form = form(ProposalWizardCreateStepForm).from_params(proposal_creation_params)
+        @form = form(ProposalForm).from_params(proposal_creation_params)
 
         CreateProposal.call(@form, current_user) do
           on(:ok) do |proposal|
             flash[:notice] = I18n.t("proposals.create.success", scope: "decidim")
 
-            redirect_to "#{Decidim::ResourceLocatorPresenter.new(proposal).path}/compare"
+            @proposal = proposal
+            redirect_to "#{Decidim::ResourceLocatorPresenter.new(proposal).path}/preview"
           end
 
           on(:invalid) do
@@ -97,37 +98,15 @@ module Decidim
         end
       end
 
-      def compare
-        enforce_permission_to :edit, :proposal, proposal: @proposal
-        @step = STEP2
-        @similar_proposals ||= Decidim::Proposals::SimilarProposals
-                               .for(current_component, @proposal)
-                               .all
-
-        if @similar_proposals.blank?
-          flash[:notice] = I18n.t("proposals.proposals.compare.no_similars_found", scope: "decidim")
-          redirect_to "#{Decidim::ResourceLocatorPresenter.new(@proposal).path}/complete"
-        end
-      end
-
-      def complete
-        enforce_permission_to :edit, :proposal, proposal: @proposal
-        @step = STEP3
-
-        @form = form_proposal_model
-
-        @form.attachment = form_attachment_new
-      end
-
       def preview
         enforce_permission_to :edit, :proposal, proposal: @proposal
-        @step = STEP4
+        @step = STEP2
         @form = form(ProposalForm).from_model(@proposal)
       end
 
       def publish
         enforce_permission_to :edit, :proposal, proposal: @proposal
-        @step = STEP4
+        @step = STEP2
         PublishProposal.call(@proposal, current_user) do
           on(:ok) do
             flash[:notice] = I18n.t("proposals.publish.success", scope: "decidim")
@@ -142,7 +121,7 @@ module Decidim
       end
 
       def edit_draft
-        @step = STEP3
+        @step = STEP1
         enforce_permission_to :edit, :proposal, proposal: @proposal
       end
 
@@ -209,8 +188,8 @@ module Decidim
             flash[:notice] = I18n.t("proposals.update.success", scope: "decidim")
             redirect_to Decidim::ResourceLocatorPresenter.new(@proposal).path
           end
-          on(:has_supports) do
-            flash[:alert] = I18n.t("proposals.withdraw.errors.has_supports", scope: "decidim")
+          on(:has_votes) do
+            flash[:alert] = I18n.t("proposals.withdraw.errors.has_votes", scope: "decidim")
             redirect_to Decidim::ResourceLocatorPresenter.new(@proposal).path
           end
         end
@@ -227,12 +206,18 @@ module Decidim
           search_text_cont: "",
           with_any_origin: nil,
           activity: "all",
-          with_any_category: nil,
-          with_any_state: %w(accepted evaluating state_not_published),
-          with_any_scope: nil,
+          with_any_taxonomies: nil,
+          with_any_state: default_states,
           related_to: "",
           type: "all"
         }
+      end
+
+      def default_states
+        [
+          Decidim::Proposals::ProposalState.where(component: current_component).pluck(:token).map(&:to_s),
+          %w(state_not_published)
+        ].flatten - ["rejected"]
       end
 
       def proposal_draft
@@ -300,38 +285,23 @@ module Decidim
       def tab_panel_items
         @tab_panel_items ||= [
           {
-            enabled: @proposal.linked_resources(:projects, "included_proposals").present?,
-            id: "included_projects",
-            text: t("decidim/budgets/project", scope: "activerecord.models", count: 2),
-            icon: resource_type_icon_key("Decidim::Budgets::Project"),
+            enabled: ProposalHistoryCell.new(@proposal).render?,
+            id: "included_history",
+            text: t("decidim.history", scope: "activerecord.models", count: 2),
+            icon: resource_type_icon_key("history"),
             method: :cell,
-            args: ["decidim/linked_resources_for", @proposal, { type: :projects, link_name: "included_proposals" }]
-          },
-          {
-            enabled: @proposal.linked_resources(:results, "included_proposals").present?,
-            id: "included_results",
-            text: t("decidim/accountability/result", scope: "activerecord.models", count: 2),
-            icon: resource_type_icon_key("Decidim::Accountability::Result"),
-            method: :cell,
-            args: ["decidim/linked_resources_for", @proposal, { type: :results, link_name: "included_proposals" }]
-          },
-          {
-            enabled: @proposal.linked_resources(:meetings, "proposals_from_meeting").present?,
-            id: "included_meetings",
-            text: t("decidim/meetings/meeting", scope: "activerecord.models", count: 2),
-            icon: resource_type_icon_key("Decidim::Meetings::Meeting"),
-            method: :cell,
-            args: ["decidim/linked_resources_for", @proposal, { type: :meetings, link_name: "proposals_from_meeting" }]
-          },
-          {
-            enabled: @proposal.linked_resources(:proposals, "copied_from_component").present?,
-            id: "included_proposals",
-            text: t("decidim/proposals/proposal", scope: "activerecord.models", count: 2),
-            icon: resource_type_icon_key("Decidim::Proposals::Proposal"),
-            method: :cell,
-            args: ["decidim/linked_resources_for", @proposal, { type: :proposals, link_name: "copied_from_component" }]
+            args: ["decidim/proposals/proposal_history", @proposal]
           }
         ] + attachments_tab_panel_items(@proposal)
+      end
+
+      def set_view_mode
+        @view_mode ||= params[:view_mode] || session[:view_mode] || default_view_mode
+        session[:view_mode] = @view_mode
+      end
+
+      def default_view_mode
+        @default_view_mode ||= current_component.settings.attachments_allowed? ? "grid" : "list"
       end
     end
   end

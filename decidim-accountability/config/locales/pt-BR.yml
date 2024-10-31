@@ -7,11 +7,9 @@ pt-BR:
         decidim_scope_id: Âmbito
         description: Descrição
         end_date: Data final
-        meetings_ids: Reuniões incluídas
         progress: Progresso
-        project_ids: Projetos incluídos
-        proposals: Propostas incluídas
         start_date: Data de início
+        subresults: Subresultados
         title: Título
         updated_at: Atualizado em
       status:
@@ -28,6 +26,10 @@ pt-BR:
       decidim/accountability/result_progress_updated_event: Progresso do resultado atualizado
   activerecord:
     models:
+      decidim:
+        accountability:
+          result:
+            text: 'Foi adicionado a este resultado: %{link}'
       decidim/accountability/result:
         one: Resultado
         other: Resultados
@@ -39,6 +41,11 @@ pt-BR:
         confirm_destroy: Deseja mesmo excluir %{name}?
         destroy: Excluir
         edit: Editar
+        import: Projetos importantes para outro componente
+        import_csv: Importar resultados de arquivo CSV
+        new_result: Novo resultado
+        new_status: Novo status
+        new_timeline_entry: Nova entrada da linha de tempo
         preview: Pré-visualização
         timeline_entries: Evolução do projeto
         title: Ações
@@ -71,8 +78,10 @@ pt-BR:
                 </ul>
               </li>
               </ol>
+            title: Importar resultados de arquivo CSV
         imports:
           create:
+            invalid: Houve um problema ao importar resultados.
             success: O arquivo começou a importar. Você receberá um e-mail nos próximos minutos com o resultado da importação.
         models:
           result:
@@ -94,6 +103,7 @@ pt-BR:
             success:
               one: Projetos na fila para ser importado. Você será notificado no seu endereço eletrônico quando estiver completo.
               other: "Projetos na fila para importar. Você sera notificado em seu endereço eletrônico quando estiver completo."
+            title: Projetos importantes para outro componente
         results:
           create:
             invalid: Houve um problema criando esse resultado.
@@ -167,6 +177,8 @@ pt-BR:
       content_blocks:
         highlighted_results:
           results: Resultados
+      creation:
+        text: Este resultado foi criado
       import_mailer:
         import:
           errors: Erros
@@ -214,24 +226,19 @@ pt-BR:
           all: Todos
         home:
           categories_label: Categorias
+          empty: Não existem resultados ainda.
+          empty_filters: Não há resultados com este critério.
           subcategories_label: Subcategorias
         home_header:
           global_status: Status de execução global
         nav_breadcrumb:
           global: Execução global
+        no_results: Não há projetos
         search:
           search: Procure ações
         show:
           stats:
-            attendees: Participantes
             back_to_resource: Volte ao resultado
-            comments: Comentários
-            contributions: Contribuições
-            last_edited_by: Editado pela última vez por
-            last_updated_at: Última atualização em
-            meetings: Reuniões
-            proposals: Propostas
-            votes: Suporta
         timeline:
           title: Evolução do projeto
     admin:
@@ -250,16 +257,12 @@ pt-BR:
         name: Prestação de contas
         settings:
           global:
-            categories_label: Nome para "Categorias"
             comments_enabled: Comentários ativados
             comments_max_length: Tamanho máximo de comentários (deixe 0 para o valor padrão)
             display_progress_enabled: Mostrar progresso
-            heading_leaf_level_results: Nome para "Projetos"
-            heading_parent_level_results: Nome para "Resultados"
             intro: Introdução
             scope_id: Escopo
             scopes_enabled: Escopos habilitados
-            subcategories_label: Nome para "Subcategorias"
           step:
             comments_blocked: Comentários bloqueados
     events:

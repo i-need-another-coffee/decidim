@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 shared_examples "manage categories examples" do
+  let(:attributes) { attributes_for(:category) }
   it "lists all the categories for the process" do
     within "#categories table" do
       expect(page).to have_content(translated(category.name, locale: :en))
@@ -9,25 +10,23 @@ shared_examples "manage categories examples" do
 
   it "can view a category detail" do
     within "#categories table" do
-      click_link translated(category.name, locale: :en)
+      click_on translated(category.name, locale: :en)
     end
 
-    expect(page).to have_selector("input#category_name_en[value='#{translated(category.name, locale: :en)}']")
-    expect(page).to have_selector("input#category_weight[value='#{category.weight}']")
+    expect(page).to have_css("input#category_name_en[value='#{translated(category.name, locale: :en)}']")
+    expect(page).to have_css("input#category_weight[value='#{category.weight}']")
 
     expect(page).to have_select(id: "category_parent_id")
   end
 
   it "creates a new category" do
-    click_link "New category"
+    click_on "New category"
 
     within ".new_category" do
       fill_in_i18n(
         :category_name,
         "#category-name-tabs",
-        en: "My category",
-        es: "Mi categoría",
-        ca: "La meva categoria"
+        **attributes[:name].except("machine_translations")
       )
 
       find("*[type=submit]").click
@@ -36,14 +35,17 @@ shared_examples "manage categories examples" do
     expect(page).to have_admin_callout("successfully")
 
     within "#categories table" do
-      expect(page).to have_content("My category")
+      expect(page).to have_content(translated(attributes[:name]))
     end
+
+    visit decidim_admin.root_path
+    expect(page).to have_content("added the #{translated(attributes[:name])} category to the")
   end
 
   it "updates a category" do
     within "#categories" do
-      within find("tr", text: translated(category.name)) do
-        click_link "Edit"
+      within "tr", text: translated(category.name) do
+        click_on "Edit"
       end
     end
 
@@ -51,9 +53,7 @@ shared_examples "manage categories examples" do
       fill_in_i18n(
         :category_name,
         "#category-name-tabs",
-        en: "My new name",
-        es: "Mi nuevo nombre",
-        ca: "El meu nou nom"
+        **attributes[:name].except("machine_translations")
       )
 
       find("*[type=submit]").click
@@ -62,8 +62,11 @@ shared_examples "manage categories examples" do
     expect(page).to have_admin_callout("successfully")
 
     within "#categories table" do
-      expect(page).to have_content("My new name")
+      expect(page).to have_content(translated(attributes[:name]))
     end
+
+    visit decidim_admin.root_path
+    expect(page).to have_content("updated the #{translated(attributes[:name])} category in the")
   end
 
   context "when deleting a category" do
@@ -76,14 +79,14 @@ shared_examples "manage categories examples" do
         end
 
         it "deletes a category" do
-          within find("tr", text: translated(category2.name)) do
-            accept_confirm { click_link "Delete" }
+          within "tr", text: translated(category2.name) do
+            accept_confirm { click_on "Delete" }
           end
 
           expect(page).to have_admin_callout("successfully")
 
           within "#categories table" do
-            expect(page).not_to have_content(translated(category2.name))
+            expect(page).to have_no_content(translated(category2.name))
           end
         end
       end
@@ -96,8 +99,8 @@ shared_examples "manage categories examples" do
         end
 
         it "deletes a category" do
-          within find("tr", text: translated(category2.name)) do
-            accept_confirm { click_link "Delete" }
+          within "tr", text: translated(category2.name) do
+            accept_confirm { click_on "Delete" }
           end
 
           expect(page).to have_admin_callout("problem deleting")
@@ -116,8 +119,8 @@ shared_examples "manage categories examples" do
       it "cannot delete it" do
         visit current_path
 
-        within find("tr", text: translated(category.name)) do
-          expect(page).not_to have_selector("a.action-icon--remove")
+        within "tr", text: translated(category.name) do
+          expect(page).to have_no_css("a.action-icon--remove")
         end
       end
     end

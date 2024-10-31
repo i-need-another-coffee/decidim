@@ -15,13 +15,18 @@ module Decidim
       def call
         component = create_component!
 
+        Decidim::Proposals.create_default_states!(component, admin_user)
+
         5.times do |n|
           proposal = create_proposal!(component:)
 
-          emendation = create_emendation!(proposal:) if proposal.state.nil?
+          if proposal.state.nil? && component.settings.amendments_enabled?
+            emendation = create_emendation!(proposal:)
+            create_proposal_votes!(proposal: emendation)
+          end
 
           (n % 3).times do |_m|
-            create_proposal_votes!(proposal:, emendation:)
+            create_proposal_votes!(proposal:)
           end
 
           (n % 3).times do
@@ -34,6 +39,9 @@ module Decidim
         end
 
         update_traceability!(component:)
+
+        create_report!(reportable: Decidim::Proposals::Proposal.take, current_user: Decidim::User.take)
+        hide_report!(reportable: Decidim::Proposals::Proposal.take)
       end
 
       def organization
@@ -54,6 +62,8 @@ module Decidim
           participatory_space:,
           settings: {
             vote_limit: 0,
+            attachments_allowed: [true, false].sample,
+            amendments_enabled: participatory_space.id.odd?,
             collaborative_drafts_enabled: true
           },
           step_settings:
@@ -70,18 +80,8 @@ module Decidim
       end
 
       def create_proposal!(component:)
-        n = rand(5)
-        state, answer, state_published_at = if n > 3
-                                              ["accepted", Decidim::Faker::Localized.sentence(word_count: 10), Time.current]
-                                            elsif n > 2
-                                              ["rejected", nil, Time.current]
-                                            elsif n > 1
-                                              ["evaluating", nil, Time.current]
-                                            elsif n.positive?
-                                              ["accepted", Decidim::Faker::Localized.sentence(word_count: 10), nil]
-                                            else
-                                              ["not_answered", nil, nil]
-                                            end
+        proposal_state, answer, state_published_at = random_state_answer
+        proposal_state = Decidim::Proposals::ProposalState.where(component:, token: proposal_state).first
 
         params = {
           component:,
@@ -89,9 +89,9 @@ module Decidim
           scope: random_scope(participatory_space:),
           title: { en: ::Faker::Lorem.sentence(word_count: 2) },
           body: { en: ::Faker::Lorem.paragraphs(number: 2).join("\n") },
-          state:,
+          proposal_state:,
           answer:,
-          answered_at: state.present? ? Time.current : nil,
+          answered_at: proposal_state.present? ? Time.current : nil,
           state_published_at:,
           published_at: Time.current
         }
@@ -103,21 +103,56 @@ module Decidim
           visibility: "all"
         ) do
           proposal = Decidim::Proposals::Proposal.new(params)
-          meeting_component = participatory_space.components.find_by(manifest_name: "meetings")
-
-          coauthor = case n
-                     when 0
-                       Decidim::User.where(organization:).sample
-                     when 1
-                       Decidim::UserGroup.where(organization:).sample
-                     when 2
-                       Decidim::Meetings::Meeting.where(component: meeting_component).sample
-                     else
-                       organization
-                     end
+          coauthor = random_coauthor
           proposal.add_coauthor(coauthor)
           proposal.save!
+
+          Decidim::EventsManager.publish(
+            event: "decidim.events.proposals.proposal_published_for_space",
+            event_class: Decidim::Proposals::PublishProposalEvent,
+            resource: proposal,
+            followers: proposal.participatory_space.followers
+          )
+
           proposal
+        end
+
+        create_attachment(attached_to: proposal, filename: "city.jpeg") if component.settings.attachments_allowed?
+
+        proposal
+      end
+
+      def random_state_answer
+        n = rand(5)
+
+        if n > 3
+          [:accepted, Decidim::Faker::Localized.sentence(word_count: 10), Time.current]
+        elsif n > 2
+          [:rejected, nil, Time.current]
+        elsif n > 1
+          [:evaluating, nil, Time.current]
+        elsif n.positive?
+          [:accepted, Decidim::Faker::Localized.sentence(word_count: 10), nil]
+        else
+          [:not_answered, nil, nil]
+        end
+      end
+
+      def random_coauthor
+        n = rand(5)
+        n = 3 if n == 2 && !Decidim.module_installed?(:meetings)
+
+        case n
+        when 0
+          Decidim::User.where(organization:).sample
+        when 1
+          Decidim::UserGroup.where(organization:).sample
+        when 2
+          meeting_component = participatory_space.components.find_by(manifest_name: "meetings")
+
+          Decidim::Meetings::Meeting.where(component: meeting_component).sample
+        else
+          organization
         end
       end
 
@@ -132,15 +167,7 @@ module Decidim
       end
 
       def create_emendation!(proposal:)
-        author = Decidim::User.find_or_initialize_by(email: random_email(suffix: "amendment"))
-        author.update!(
-          password: "decidim123456789",
-          name: "#{::Faker::Name.name} #{participatory_space.id}",
-          nickname: random_nickname,
-          organization:,
-          tos_agreement: "1",
-          confirmed_at: Time.current
-        )
+        author = find_or_initialize_user_by(email: random_email(suffix: "amendment"))
 
         group = Decidim::UserGroup.create!(
           name: ::Faker::Name.name,
@@ -167,7 +194,7 @@ module Decidim
           scope: random_scope(participatory_space:),
           title: { en: "#{proposal.title["en"]} #{::Faker::Lorem.sentence(word_count: 1)}" },
           body: { en: "#{proposal.body["en"]} #{::Faker::Lorem.sentence(word_count: 3)}" },
-          state: "evaluating",
+          proposal_state: Decidim::Proposals::ProposalState.where(component: proposal.component, token: :evaluating).first,
           answer: nil,
           answered_at: Time.current,
           published_at: Time.current
@@ -195,21 +222,10 @@ module Decidim
         emendation
       end
 
-      def create_proposal_votes!(proposal:, emendation: nil)
-        author = Decidim::User.find_or_initialize_by(email: random_email(suffix: "vote"))
-        author.update!(
-          password: "decidim123456789",
-          name: "#{::Faker::Name.name} #{participatory_space.id}",
-          nickname: random_nickname,
-          organization:,
-          tos_agreement: "1",
-          confirmed_at: Time.current,
-          personal_url: ::Faker::Internet.url,
-          about: ::Faker::Lorem.paragraph(sentence_count: 2)
-        )
+      def create_proposal_votes!(proposal:)
+        author = find_or_initialize_user_by(email: random_email(suffix: "vote"))
 
         Decidim::Proposals::ProposalVote.create!(proposal:, author:) unless proposal.published_state? && proposal.rejected?
-        Decidim::Proposals::ProposalVote.create!(proposal: emendation, author:) if emendation
       end
 
       def create_proposal_notes!(proposal:)

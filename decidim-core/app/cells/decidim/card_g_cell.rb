@@ -52,12 +52,15 @@ module Decidim
       @id_base_name ||= resource.class.name.gsub(/\ADecidim::/, "").underscore.split("/").join("__")
     end
 
-    def resource_image_path
+    def resource_image_url
+      # Backwards compatibility.
+      return resource_image_path if respond_to?(:resource_image_path)
+
       nil
     end
 
     def has_image?
-      resource_image_path.present?
+      resource_image_url.present?
     end
 
     def show_description?
@@ -73,11 +76,11 @@ module Decidim
     end
 
     def title
-      decidim_html_escape(translated_attribute(resource.title))
+      decidim_escape_translated(resource.title)
     end
 
     def alt_title
-      [t("decidim.application.photo.alt"), decidim_html_escape(translated_attribute(resource.title))].join(": ")
+      [t("decidim.application.photo.alt"), decidim_escape_translated(resource.title)].join(": ")
     end
 
     def title_tag

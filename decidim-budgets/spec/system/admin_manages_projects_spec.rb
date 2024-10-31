@@ -3,20 +3,25 @@
 require "spec_helper"
 
 describe "Admin manages projects" do
+  include_context "when managing a component as an admin"
   let(:manifest_name) { "budgets" }
-  let(:budget) { create(:budget, component: current_component) }
+  let!(:budget) { create(:budget, component: current_component) }
   let!(:project) { create(:project, budget:) }
   let!(:destination_budget) { create(:budget, component: current_component) }
+  let(:root_taxonomy) { create(:taxonomy, organization:) }
+  let!(:taxonomy) { create(:taxonomy, parent: root_taxonomy, organization:) }
+  let(:taxonomy_filter) { create(:taxonomy_filter, root_taxonomy:) }
+  let!(:taxonomy_filter_item) { create(:taxonomy_filter_item, taxonomy_filter:, taxonomy_item: taxonomy) }
+  let(:taxonomy_filter_ids) { [taxonomy_filter.id] }
 
-  include_context "when managing a component as an admin"
+  let!(:component) { create(:component, manifest:, participatory_space:, settings: { taxonomy_filters: taxonomy_filter_ids }) }
 
   before do
-    budget
     switch_to_host(organization.host)
     login_as user, scope: :user
     visit_component_admin
 
-    within find("tr", text: translated(budget.title)) do
+    within "tr", text: translated(budget.title) do
       page.find(".action-icon--edit-projects").click
     end
   end
@@ -36,50 +41,60 @@ describe "Admin manages projects" do
 
     it "changes projects category" do
       find(".js-resource-id-#{project.id}").set(true)
-      find("#js-bulk-actions-button").click
-      click_button "Change category"
+      find_by_id("js-bulk-actions-button").click
+      click_on "Change category"
       select translated(category.name), from: "category_id"
-      click_button "Update"
+      click_on "Update"
 
       expect(page).to have_admin_callout "Projects successfully updated to the category"
-      within "tr[data-id='#{project.id}']" do
-        expect(page).to have_content(translated(category.name))
-      end
       expect(Decidim::Budgets::Project.find(project.id).category).to eq(category)
       expect(Decidim::Budgets::Project.find(project2.id).category).to be_nil
     end
 
     it "changes projects scope" do
       find(".js-resource-id-#{project.id}").set(true)
-      find("#js-bulk-actions-button").click
-      click_button "Change scope"
+      find_by_id("js-bulk-actions-button").click
+      click_on "Change scope"
       select translated(scope.name), from: :scope_id
-      click_button "Update"
+      click_on "Update"
 
       expect(page).to have_admin_callout "Projects successfully updated to the scope"
-      within "tr[data-id='#{project.id}']" do
-        expect(page).to have_content(translated(scope.name))
-      end
       expect(Decidim::Budgets::Project.find(project.id).scope).to eq(scope)
       expect(Decidim::Budgets::Project.find(project2.id).scope).to be_nil
     end
 
     it "selects projects to implementation" do
-      find("#projects_bulk").set(true)
-      find("#js-bulk-actions-button").click
-      click_button "Change selected"
+      within "tr[data-id='#{project.id}']" do
+        expect(page).to have_content("No")
+      end
+      within "tr[data-id='#{project2.id}']" do
+        expect(page).to have_content("No")
+      end
+
+      find_by_id("projects_bulk").set(true)
+      find_by_id("js-bulk-actions-button").click
+      click_on "Change selected"
       select "Select", from: "selected_value"
-      click_button "Update"
+      click_on "Update"
 
       expect(page).to have_admin_callout "These projects were successfully selected for implementation"
       within "tr[data-id='#{project.id}']" do
-        expect(page).to have_content("Selected")
+        expect(page).to have_content("Yes")
       end
       within "tr[data-id='#{project2.id}']" do
-        expect(page).to have_content("Selected")
+        expect(page).to have_content("Yes")
       end
       expect(Decidim::Budgets::Project.find(project.id).selected_at).to eq(Time.zone.today)
       expect(Decidim::Budgets::Project.find(project2.id).selected_at).to eq(Time.zone.today)
+    end
+
+    describe "when managing a project with scopes" do
+      let!(:project) { create(:project, component: current_component) }
+      let!(:scope) { create(:scope, organization: current_component.organization) }
+
+      it "does not display subscopes" do
+        expect(page).to have_no_content(scope.name)
+      end
     end
 
     describe "update projects budget" do
@@ -88,24 +103,24 @@ describe "Admin manages projects" do
 
       it "shows all of the budgets within the participatory_space" do
         visit current_path
-        find("#projects_bulk").set(true)
-        find("#js-bulk-actions-button").click
-        click_button "Change budget"
+        find_by_id("projects_bulk").set(true)
+        find_by_id("js-bulk-actions-button").click
+        click_on "Change budget"
         options = ["Select budget", format_title(destination_budget), format_title(budget), format_title(another_budget)]
         expect(page).to have_select("reference_id", options:)
       end
 
       it "changes project budget" do
-        find("#projects_bulk").set(true)
-        find("#js-bulk-actions-button").click
-        click_button "Change budget"
+        find_by_id("projects_bulk").set(true)
+        find_by_id("js-bulk-actions-button").click
+        click_on "Change budget"
         select translated(destination_budget.title), from: "reference_id"
-        click_button "Update project's budget"
+        click_on "Update project's budget"
         within_flash_messages do
           expect(page).to have_content("Projects successfully updated to the budget: #{translated(project.title)} and #{translated(project2.title)}")
         end
-        expect(page).not_to have_css("tr[data-id='#{project.id}']")
-        expect(page).not_to have_css("tr[data-id='#{project2.id}']")
+        expect(page).to have_no_css("tr[data-id='#{project.id}']")
+        expect(page).to have_no_css("tr[data-id='#{project2.id}']")
 
         expect(project.reload.budget).to eq(destination_budget)
         expect(project2.reload.budget).to eq(destination_budget)

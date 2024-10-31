@@ -17,6 +17,8 @@ module Decidim
         helper Decidim::Initiatives::InitiativeHelper
         helper Decidim::Initiatives::SignatureTypeOptionsHelper
 
+        helper_method :show_initiative_type_callout?
+
         # GET /admin/initiatives
         def index
           enforce_permission_to :list, :initiative
@@ -46,7 +48,7 @@ module Decidim
           @form = form(Decidim::Initiatives::Admin::InitiativeForm)
                   .from_params(params, initiative: current_initiative)
 
-          Decidim::Initiatives::Admin::UpdateInitiative.call(current_initiative, @form, current_user) do
+          Decidim::Initiatives::Admin::UpdateInitiative.call(@form, current_initiative) do
             on(:ok) do |initiative|
               flash[:notice] = I18n.t("initiatives.update.success", scope: "decidim.initiatives.admin")
               redirect_to edit_initiative_path(initiative)
@@ -65,6 +67,7 @@ module Decidim
 
           PublishInitiative.call(current_initiative, current_user) do
             on(:ok) do
+              flash[:notice] = I18n.t("initiatives.publish.success", scope: "decidim.initiatives.admin")
               redirect_to decidim_admin_initiatives.edit_initiative_path(current_initiative)
             end
           end
@@ -76,6 +79,7 @@ module Decidim
 
           UnpublishInitiative.call(current_initiative, current_user) do
             on(:ok) do
+              flash[:notice] = I18n.t("initiatives.unpublish.success", scope: "decidim.initiatives.admin")
               redirect_to decidim_admin_initiatives.edit_initiative_path(current_initiative)
             end
           end
@@ -86,6 +90,7 @@ module Decidim
           enforce_permission_to :discard, :initiative, initiative: current_initiative
           DiscardInitiative.call(current_initiative, current_user) do
             on(:ok) do
+              flash[:notice] = I18n.t("initiatives.discard.success", scope: "decidim.initiatives.admin")
               redirect_to decidim_admin_initiatives.edit_initiative_path(current_initiative)
             end
           end
@@ -96,6 +101,7 @@ module Decidim
           enforce_permission_to :accept, :initiative, initiative: current_initiative
           AcceptInitiative.call(current_initiative, current_user) do
             on(:ok) do
+              flash[:notice] = I18n.t("initiatives.accept.success", scope: "decidim.initiatives.admin")
               redirect_to decidim_admin_initiatives.edit_initiative_path(current_initiative)
             end
           end
@@ -106,6 +112,7 @@ module Decidim
           enforce_permission_to :reject, :initiative, initiative: current_initiative
           RejectInitiative.call(current_initiative, current_user) do
             on(:ok) do
+              flash[:notice] = I18n.t("initiatives.reject.success", scope: "decidim.initiatives.admin")
               redirect_to decidim_admin_initiatives.edit_initiative_path(current_initiative)
             end
           end
@@ -182,6 +189,10 @@ module Decidim
         end
 
         private
+
+        def show_initiative_type_callout?
+          Decidim::InitiativesType.where(organization: current_organization).none?
+        end
 
         def collection
           @collection ||= ManageableInitiatives.for(current_user)

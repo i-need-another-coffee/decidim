@@ -9,6 +9,7 @@ module Decidim
     let(:organization) { create(:organization) }
     let(:component) { create(:component, organization:) }
     let(:image) { create(:attachment, attached_to: organization) }
+    let(:image_path) { image.attached_uploader(:file).path }
 
     let(:content) { original_content }
     let(:original_content) do
@@ -46,10 +47,10 @@ module Decidim
         </ul>
         <p>
           Paragraph content with an inline image.
-          <img src="#{image.url}">
+          <img src="#{image_path}">
           And some text after that.
         </p>
-        <p><img src="#{image.url}" alt="This image had an alternative text"></p>
+        <p><img src="#{image_path}" alt="This image had an alternative text"></p>
         <iframe class="ql-video" frameborder="0" allowfullscreen="true" src="https://www.youtube.com/embed/f6JMgJAQ2tc?showinfo=0"></iframe>
         <div><span>Here we had some unrecognized node.</span></div>
         <blockquote>Blockquote element content <br>should be <strong>wrapped inside</strong> a paragraph.</blockquote>
@@ -151,11 +152,11 @@ module Decidim
         </ul>
         <p>Paragraph content with an inline image.</p>
         <div class="editor-content-image" data-image="">
-          <img src="#{image.url}" alt="">
+          <img src="#{image_path}" alt="">
         </div>
         <p>And some text after that.</p>
         <div class="editor-content-image" data-image="">
-          <img src="#{image.url}" alt="This image had an alternative text">
+          <img src="#{image_path}" alt="This image had an alternative text">
         </div>
         <div class="editor-content-videoEmbed" data-video-embed="https://www.youtube.com/embed/f6JMgJAQ2tc?showinfo=0">
           <div>
@@ -211,6 +212,13 @@ module Decidim
           expect(subject).to eq(en: expected_content, es: "<p>Castellano</p>#{expected_content}")
         end
       end
+
+      context "when we have \\n inside a list" do
+        let(:original_content) { "<p>Vivamus rhoncus pretium neque et posuere:<ul>\n<li>Suspendisse gravida justo nec ornare rhoncus.</li>\n<li>Morbi venenatis metus augue.</li>\n</ul></p>" }
+        let(:expected_content) { "<p>Vivamus rhoncus pretium neque et posuere:</p><ul><li><p>Suspendisse gravida justo nec ornare rhoncus.</p></li><li><p>Morbi venenatis metus augue.</p></li></ul>" }
+
+        it_behaves_like "HTML content migration"
+      end
     end
 
     describe ".register_model" do
@@ -243,7 +251,7 @@ module Decidim
 
     describe ".update_records_batches" do
       let!(:data) { create_list(:dummy_resource, 149, component:) }
-      let(:klass) { Decidim::DummyResources::DummyResource }
+      let(:klass) { Decidim::Dev::DummyResource }
       let(:value_converter) do
         lambda do |_v, column|
           if column == :title
@@ -273,7 +281,7 @@ module Decidim
 
     describe ".convert_model_data" do
       let!(:data) { create_list(:dummy_resource, 12, component:) }
-      let(:query) { Decidim::DummyResources::DummyResource.where(component:).order(:id) }
+      let(:query) { Decidim::Dev::DummyResource.where(component:).order(:id) }
       let(:converted_title) { { "en" => "Foobar", "machine_translations" => { "es" => "Foobar ES" } } }
       let(:converted_body) { "Baz" }
 
@@ -324,7 +332,7 @@ module Decidim
 
     describe ".update_models" do
       let!(:data) { create_list(:dummy_resource, 149, title: { en: content }, component:) }
-      let(:klass) { Decidim::DummyResources::DummyResource }
+      let(:klass) { Decidim::Dev::DummyResource }
 
       before do
         described_class.register_model(klass, [:title])
@@ -443,7 +451,7 @@ module Decidim
         allow(Decidim).to receive(:component_manifests).and_return([component.manifest])
       end
 
-      it "updates the component settings for all defined manifets" do
+      it "updates the component settings for all defined manifest" do
         expect { |b| described_class.update_component_settings(&b) }.to yield_with_args(:dummy, 1..1)
 
         component.reload

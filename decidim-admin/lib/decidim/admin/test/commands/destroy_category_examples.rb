@@ -19,8 +19,17 @@ module Decidim
           end
         end
 
+        context "when the category is being used by a resource" do
+          let(:component) { create(:dummy_component, participatory_space:) }
+          let!(:resource) { create(:dummy_resource, component:, category:) }
+
+          it "broadcasts invalid" do
+            expect { command.call }.to broadcast(:invalid)
+          end
+        end
+
         context "when the category is not empty" do
-          let!(:subcategory) { create :subcategory, parent: category }
+          let!(:subcategory) { create(:subcategory, parent: category) }
 
           it "does not destroy the category" do
             expect do
@@ -30,7 +39,7 @@ module Decidim
         end
 
         context "when the category is a subcategory" do
-          let!(:parent_category) { create :category, participatory_space: }
+          let!(:parent_category) { create(:category, participatory_space:) }
 
           before do
             category.parent = parent_category

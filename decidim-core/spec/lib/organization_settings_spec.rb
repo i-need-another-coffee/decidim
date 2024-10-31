@@ -11,9 +11,9 @@ module Decidim
     let(:default_settings) do
       {
         "allowed_file_extensions" => {
-          "default" => %w(jpg jpeg png pdf rtf txt),
-          "admin" => %w(jpg jpeg png pdf doc docx xls xlsx ppt pptx ppx rtf txt odt ott odf otg ods ots),
-          "image" => %w(jpg jpeg png)
+          "default" => %w(jpg jpeg png webp pdf rtf txt),
+          "admin" => %w(jpg jpeg png webp pdf doc docx xls xlsx ppt pptx ppx rtf txt odt ott odf otg ods ots csv json md),
+          "image" => %w(jpg jpeg png webp)
         },
         "allowed_content_types" => {
           "default" => %w(
@@ -32,7 +32,10 @@ module Decidim
             application/vnd.oasis.opendocument
             application/pdf
             application/rtf
+            application/json
+            text/markdown
             text/plain
+            text/csv
           )
         },
         "maximum_file_size" => {
@@ -70,9 +73,9 @@ module Decidim
       let(:updated_settings) do
         {
           "allowed_file_extensions" => {
-            "default" => %w(jpg jpeg pdf),
-            "admin" => %w(jpg jpeg pdf docx),
-            "image" => %w(jpg jpeg)
+            "default" => %w(jpg jpeg webp pdf),
+            "admin" => %w(jpg jpeg webp pdf docx),
+            "image" => %w(jpg jpeg webp)
           },
           "allowed_content_types" => {
             "default" => %w(
@@ -142,6 +145,21 @@ module Decidim
       it "returns a new instance of the class with the default configurations" do
         expect(subject).to be_a(described_class)
         expect(struct_to_hash(subject)).to eq("upload" => default_settings)
+      end
+
+      context "when the configuration from the secret has changed" do
+        let(:maximum_attachment_size) { 20 }
+
+        before do
+          allow(Rails.application.secrets.decidim).to receive(:[]).and_call_original
+          allow(Rails.application.secrets.decidim).to receive(:[]).with(:maximum_attachment_size).and_return(maximum_attachment_size)
+          # defaults method is memoized, we need to reset it to make sure it uses the stubbed values
+          described_class.instance_variable_set(:@defaults, nil)
+        end
+
+        it "returns a new instance using the values from the secrets" do
+          expect(subject.upload_maximum_file_size).to eq(maximum_attachment_size.megabytes.to_f)
+        end
       end
     end
 

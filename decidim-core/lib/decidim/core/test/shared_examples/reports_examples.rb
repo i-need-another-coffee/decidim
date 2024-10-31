@@ -9,13 +9,13 @@ shared_examples "logged in user reports content" do
     context "and the user has not reported the resource yet" do
       it "reports the resource" do
         visit reportable_path
-
+        find("#dropdown-trigger-resource-#{reportable.id}").click
         expect(page).to have_css(%(button[data-dialog-open="flagModal"]))
         find(%(button[data-dialog-open="flagModal"])).click
         expect(page).to have_css(".flag-modal", visible: :visible)
 
         within ".flag-modal" do
-          click_button "Report"
+          click_on "Report"
         end
 
         expect(page).to have_content "report has been created"
@@ -44,13 +44,14 @@ shared_examples "higher user role hides" do
     it "reports the resource" do
       visit reportable_path
 
+      find("#dropdown-trigger-resource-#{reportable.id}").click
       expect(page).to have_css(%(button[data-dialog-open="flagModal"]))
       find(%(button[data-dialog-open="flagModal"])).click
       expect(page).to have_css(".flag-modal", visible: :visible)
 
       within ".flag-modal" do
         find(:css, "input[name='report[hide]']").set(true)
-        click_button "Hide"
+        click_on "Hide"
       end
 
       expect(reportable.reload).to be_hidden
@@ -67,12 +68,13 @@ shared_examples "higher user role does not have hide" do
     it "reports the resource" do
       visit reportable_path
 
+      find("#dropdown-trigger-resource-#{reportable.id}").click
       expect(page).to have_css(%(button[data-dialog-open="flagModal"]))
       find(%(button[data-dialog-open="flagModal"])).click
       expect(page).to have_css(".flag-modal", visible: :visible)
 
       within ".flag-modal" do
-        expect(page).not_to have_field(name: "report[hide]")
+        expect(page).to have_no_field(name: "report[hide]")
       end
     end
   end
@@ -83,9 +85,10 @@ shared_examples "reports" do
     it "gives the option to sign in" do
       visit reportable_path
 
-      expect(page).not_to have_css("html.is-disabled")
+      expect(page).to have_no_css("html.is-disabled")
 
-      click_button "Report"
+      find("#dropdown-trigger-resource-#{reportable.id}").click
+      click_on "Report"
 
       expect(page).to have_css("html.is-disabled")
     end
@@ -103,6 +106,7 @@ shared_examples "reports" do
     it "cannot report it twice" do
       visit reportable_path
 
+      find("#dropdown-trigger-resource-#{reportable.id}").click
       expect(page).to have_css(%(button[data-dialog-open="flagModal"]))
       find(%(button[data-dialog-open="flagModal"])).click
       expect(page).to have_css(".flag-modal", visible: :visible)
@@ -122,23 +126,23 @@ shared_examples "reports by user type" do
     include_examples "higher user role hides"
   end
   context "When reporting user is process admin" do
-    let!(:user) { create :process_admin, :confirmed, participatory_process: }
+    let!(:user) { create(:process_admin, :confirmed, participatory_process:) }
 
     include_examples "higher user role reports"
     include_examples "higher user role hides"
   end
   context "When reporting user is process collaborator" do
-    let!(:user) { create :process_collaborator, :confirmed, participatory_process: }
+    let!(:user) { create(:process_collaborator, :confirmed, participatory_process:) }
     include_examples "higher user role reports"
     include_examples "higher user role does not have hide"
   end
   context "When reporting user is process moderator" do
-    let!(:user) { create :process_moderator, :confirmed, participatory_process: }
+    let!(:user) { create(:process_moderator, :confirmed, participatory_process:) }
     include_examples "higher user role reports"
     include_examples "higher user role hides"
   end
   context "When reporting user is process valuator" do
-    let!(:user) { create :process_valuator, :confirmed, participatory_process: }
+    let!(:user) { create(:process_valuator, :confirmed, participatory_process:) }
     include_examples "higher user role reports"
     include_examples "higher user role does not have hide"
   end

@@ -9,7 +9,6 @@ describe "Explore Collaborative Drafts", versioning: true do
   include_context "with a component"
 
   let(:manifest_name) { "proposals" }
-  let!(:scope) { create(:scope, organization:) }
   let!(:author) { create(:user, :confirmed, organization:) }
   let!(:user) { create(:user, :confirmed, organization:) }
   let(:participatory_process) { create(:participatory_process, :with_steps, organization:) }
@@ -21,19 +20,23 @@ describe "Explore Collaborative Drafts", versioning: true do
            organization:,
            settings: {
              collaborative_drafts_enabled: true,
-             scopes_enabled: true,
-             scope_id: participatory_process.scope&.id
+             taxonomy_filters: [taxonomy_filter.id]
            })
   end
-  let!(:category) { create(:category, participatory_space: participatory_process) }
-  let!(:category2) { create(:category, participatory_space: participatory_process) }
-  let!(:category3) { create(:category, participatory_space: participatory_process) }
-  let!(:collaborative_draft) { create(:collaborative_draft, :open, component:, category:, scope:, users: [author]) }
+  let(:root_taxonomy) { create(:taxonomy, organization:) }
+  let!(:taxonomy) { create(:taxonomy, skip_injection: true, parent: root_taxonomy, organization:) }
+  let!(:taxonomy2) { create(:taxonomy, skip_injection: true, parent: root_taxonomy, organization:) }
+  let!(:taxonomy3) { create(:taxonomy, skip_injection: true, parent: root_taxonomy, organization:) }
+  let(:taxonomies) { [taxonomy] }
+  let(:taxonomy_filter) { create(:taxonomy_filter, root_taxonomy:) }
+  let!(:taxonomy_filter_item2) { create(:taxonomy_filter_item, taxonomy_filter:, taxonomy_item: taxonomy2) }
+  let!(:taxonomy_filter_item3) { create(:taxonomy_filter_item, taxonomy_filter:, taxonomy_item: taxonomy3) }
+  let!(:collaborative_draft) { create(:collaborative_draft, :open, component:, taxonomies:, users: [author]) }
   let!(:collaborative_draft_no_tags) { create(:collaborative_draft, :open, component:) }
 
-  let!(:open_collaborative_draft) { create(:collaborative_draft, :open, component:, category:) }
-  let!(:withdrawn_collaborative_draft) { create(:collaborative_draft, :withdrawn, component:, category: category2) }
-  let!(:published_collaborative_draft) { create(:collaborative_draft, :published, component:, category: category3) }
+  let!(:open_collaborative_draft) { create(:collaborative_draft, :open, component:, taxonomies:) }
+  let!(:withdrawn_collaborative_draft) { create(:collaborative_draft, :withdrawn, component:, taxonomies: [taxonomy2]) }
+  let!(:published_collaborative_draft) { create(:collaborative_draft, :published, component:, taxonomies: [taxonomy3]) }
 
   let(:request_access_form) { Decidim::Proposals::RequestAccessToCollaborativeDraftForm.from_params(state: collaborative_draft.state, id: collaborative_draft.id) }
   let!(:other_user) { create(:user, :confirmed, organization:) }
@@ -44,7 +47,7 @@ describe "Explore Collaborative Drafts", versioning: true do
   context "with collaborative drafts enabled" do
     before do
       visit main_component_path(component)
-      click_link "Access collaborative drafts"
+      click_on "Access collaborative drafts"
     end
 
     describe "Renders collaborative drafts index" do
@@ -71,11 +74,11 @@ describe "Explore Collaborative Drafts", versioning: true do
         end
       end
 
-      it "shows category filters" do
+      it "shows taxonomy filters" do
         within "[data-filters]" do
           expect(page).to have_field("All")
-          [category, category2, category3].each do |cat|
-            expect(page).to have_field(cat.name[I18n.locale.to_s])
+          [taxonomy, taxonomy2, taxonomy3].each do |tax|
+            expect(page).to have_field(decidim_sanitize_translated(tax.name))
           end
         end
       end
@@ -83,11 +86,11 @@ describe "Explore Collaborative Drafts", versioning: true do
 
     describe "renders collaborative draft details" do
       before do
-        click_link "proposals__collaborative_draft_#{collaborative_draft.id}"
+        click_on "proposals__collaborative_draft_#{collaborative_draft.id}"
       end
 
       let(:html_body) { strip_tags(collaborative_draft.body).gsub(/\n/, " ").strip }
-      let(:stripped_body) { %(alert("BODY"); #{html_body}) }
+      let(:stripped_body) { %(alert("collaborative_draft_body"); #{html_body}) }
 
       it "shows the title" do
         expect(page).to have_content(collaborative_draft.title)
@@ -110,12 +113,10 @@ describe "Explore Collaborative Drafts", versioning: true do
                  organization:,
                  settings: {
                    collaborative_drafts_enabled: true,
-                   geocoding_enabled: true,
-                   scopes_enabled: true,
-                   scope_id: participatory_process.scope&.id
+                   geocoding_enabled: true
                  })
         end
-        let!(:collaborative_draft) { create(:collaborative_draft, :open, component:, address:, category:, scope:, users: [author]) }
+        let!(:collaborative_draft) { create(:collaborative_draft, :open, component:, address:, taxonomies:, users: [author]) }
         let(:address) { "Some address" }
         let(:latitude) { 40.1234 }
         let(:longitude) { 2.1234 }
@@ -137,32 +138,23 @@ describe "Explore Collaborative Drafts", versioning: true do
         end
       end
 
-      context "without category or scope" do
+      context "without taxonomies" do
         before do
           visit_component
-          click_link "Access collaborative drafts"
-          click_link "proposals__collaborative_draft_#{collaborative_draft_no_tags.id}"
+          click_on "Access collaborative drafts"
+          click_on "proposals__collaborative_draft_#{collaborative_draft_no_tags.id}"
         end
 
         it "does not show any tag" do
-          expect(page).not_to have_selector("ul.tags")
+          expect(page).to have_no_selector("ul.tags")
         end
       end
 
-      context "with a category" do
-        it "shows tags for category" do
-          expect(page).to have_selector("ul.tag-container")
+      context "with a taxonomy" do
+        it "shows tags for taxonomy" do
+          expect(page).to have_css("ul.tag-container")
           within "ul.tag-container" do
-            expect(page).to have_content(translated(collaborative_draft.category.name))
-          end
-        end
-      end
-
-      context "with a scope" do
-        it "shows tags for scope" do
-          expect(page).to have_selector("ul.tag-container")
-          within "ul.tag-container" do
-            expect(page).to have_content(translated(collaborative_draft.scope.name))
+            expect(page).to have_content(decidim_sanitize_translated(taxonomy.name))
           end
         end
       end
@@ -200,7 +192,7 @@ describe "Explore Collaborative Drafts", versioning: true do
 
         context "when the publish button is clicked" do
           before do
-            click_button "Publish"
+            click_on "Publish"
           end
 
           it "shows the a modal" do
@@ -208,7 +200,7 @@ describe "Explore Collaborative Drafts", versioning: true do
               expect(page).to have_css("h3", text: "The following action is irreversible")
               expect(page).to have_button(text: "Publish as a Proposal")
             end
-            click_button "Publish as a Proposal"
+            click_on "Publish as a Proposal"
             expect(page).to have_content("Collaborative draft published successfully as a proposal.")
           end
         end
@@ -246,7 +238,7 @@ describe "Explore Collaborative Drafts", versioning: true do
 
         context "when the user requests access" do
           before do
-            click_button "Request access"
+            click_on "Request access"
             expect(page).to have_button("Access requested", disabled: true)
           end
 
@@ -258,7 +250,7 @@ describe "Explore Collaborative Drafts", versioning: true do
           end
 
           it "removes the announcement to collaborate" do
-            expect(page).not_to have_css("[data-alert-box].secondary")
+            expect(page).to have_no_css("[data-alert-box].secondary")
           end
 
           it "shows that access has been requested" do
@@ -292,7 +284,7 @@ describe "Explore Collaborative Drafts", versioning: true do
 
             context "when the request is accepted and the contributor visits the draft" do
               before do
-                click_button "Accept"
+                click_on "Accept"
                 expect(page).to have_content("@#{user.nickname} has been accepted as a collaborator successfully")
                 relogin_as user, scope: :user
                 visit current_path
@@ -304,13 +296,13 @@ describe "Explore Collaborative Drafts", versioning: true do
               end
 
               it "removes the announcement to collaborate" do
-                expect(page).not_to have_css("#new_accept_access_to_collaborative_draft_")
-                expect(page).not_to have_css("#new_reject_access_to_collaborative_draft_")
+                expect(page).to have_no_css("#new_accept_access_to_collaborative_draft_")
+                expect(page).to have_no_css("#new_reject_access_to_collaborative_draft_")
               end
 
               it "does not show the buttons to publish or withdraw" do
-                expect(page).not_to have_button("Publish")
-                expect(page).not_to have_button("withdraw the draft")
+                expect(page).to have_no_button("Publish")
+                expect(page).to have_no_button("withdraw the draft")
               end
 
               it "shows a button to edit" do
@@ -321,7 +313,7 @@ describe "Explore Collaborative Drafts", versioning: true do
                 request_access_from_other_user.call
                 visit current_path
 
-                expect(page).not_to have_content("Collaboration requests")
+                expect(page).to have_no_content("Collaboration requests")
               end
             end
           end
@@ -341,7 +333,7 @@ describe "Explore Collaborative Drafts", versioning: true do
         end
 
         it "removes the announcement to collaborate" do
-          expect(page).not_to have_css("callout")
+          expect(page).to have_no_css("callout")
         end
 
         it "shows the buttons to publish or withdraw" do
@@ -364,7 +356,7 @@ describe "Explore Collaborative Drafts", versioning: true do
     end
 
     it "does not show the Collaborative drafts access button" do
-      expect(page).not_to have_content("Access collaborative drafts")
+      expect(page).to have_no_content("Access collaborative drafts")
     end
   end
 end

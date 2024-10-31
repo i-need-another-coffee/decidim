@@ -127,6 +127,10 @@ module Decidim
             it "traces the action", versioning: true do
               expect(Decidim.traceability)
                 .to receive(:perform_action!)
+                .with(:publish, kind_of(Decidim::Proposals::Proposal), kind_of(Decidim::User), visibility: "all")
+                .and_call_original
+              expect(Decidim.traceability)
+                .to receive(:perform_action!)
                 .with(:create, Decidim::Proposals::Proposal, kind_of(Decidim::User), visibility: "all")
                 .and_call_original
 
@@ -211,7 +215,7 @@ module Decidim
                 }
               end
 
-              it "creates an atachment for the proposal" do
+              it "creates an attachment for the proposal" do
                 expect { command.call }.to change(Decidim::Attachment, :count).by(1)
                 last_proposal = Decidim::Proposals::Proposal.last
                 last_attachment = Decidim::Attachment.last

@@ -1,17 +1,23 @@
 <% add_decidim_page_title(t(".title")) %>
 <div class="card">
-  <div class="item_show__header">
-    <h2 class="item_show__header-title">
+  <div class="item_show__header item_show__header--with-action-options">
+    <h1 class="item_show__header-title">
       <div>
         <%= t(".title") %>
-        <span id="js-selected-proposals-count" class="component-counter component-counter--inline" title="<%= t("decidim.proposals.admin.proposals.index.selected") %>"></span>
+        <span id="js-selected-proposals-count" class="component-counter " title="<%= t("decidim.proposals.admin.proposals.index.selected") %>"></span>
       </div>
+      <div class="flex items-center gap-x-4">
         <%= render partial: "bulk-actions" %>
+        <%= link_to t(".statuses"), proposal_states_path, class: "button button__sm button__secondary" %>
         <%= render partial: "decidim/admin/components/resource_action" %>
-    </h2>
+      </div>
+    </h1>
+
+    <%= render partial: "decidim/proposals/admin/proposals/bulk_actions/assign_to_valuator" %>
+    <%= render partial: "decidim/proposals/admin/proposals/bulk_actions/unassign_from_valuator" %>
   </div>
-  <%= admin_filter_selector(:proposals) %>
-  <div class="table-scroll mt-16">
+  <%= admin_filter_selector(filter_prefix_key) %>
+  <div class="table-scroll mt-8">
     <table class="table-list">
       <thead>
         <tr>
@@ -55,7 +61,7 @@
             <%= sort_link(query, :state, [:state, :is_emendation], t("models.proposal.fields.state", scope: "decidim.proposals") ) %>
           </th>
 
-          <th class="actions"><%= t("actions.title", scope: "decidim.proposals") %></th>
+          <th><%= t("actions.title", scope: "decidim.proposals") %></th>
         </tr>
       </thead>
       <tbody>

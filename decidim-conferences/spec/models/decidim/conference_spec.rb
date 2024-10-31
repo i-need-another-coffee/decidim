@@ -28,5 +28,53 @@ module Decidim
 
       it { is_expected.to be_valid }
     end
+
+    describe "#has_published_registration_types?" do
+      subject { conference.has_published_registration_types? }
+
+      context "when conference has no registration type" do
+        it { is_expected.to be_falsey }
+      end
+
+      context "when conference has registration types" do
+        let!(:registration_types) do
+          create_list(:registration_type, 5, conference:)
+        end
+
+        it { is_expected.to be_truthy }
+
+        context "and the registration types are unpublished" do
+          let!(:registration_types) do
+            create_list(:registration_type, 5, :unpublished, conference:)
+          end
+
+          it { is_expected.to be_falsey }
+        end
+      end
+    end
+
+    describe "taxonomies" do
+      let!(:taxonomy) { create(:taxonomy, :with_parent) }
+      let(:conference) { build(:conference, taxonomies: [taxonomy], organization: taxonomy.organization) }
+
+      it { is_expected.to be_valid }
+
+      context "when a root taxonomy is assigned" do
+        let(:taxonomy) { create(:taxonomy) }
+
+        it "is not valid" do
+          expect(subject).not_to be_valid
+        end
+      end
+
+      context "when a taxonomy from another organization is assigned" do
+        let!(:organization) { create(:organization) }
+        let(:conference) { build(:conference, taxonomies: [taxonomy]) }
+
+        it "is not valid" do
+          expect(subject).not_to be_valid
+        end
+      end
+    end
   end
 end

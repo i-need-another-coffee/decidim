@@ -89,10 +89,8 @@ module Decidim
       initializer "decidim_initiatives.register_icons" do
         Decidim.icons.register(name: "Decidim::Initiative", icon: "lightbulb-flash-line", description: "Initiative", category: "activity", engine: :initiatives)
         Decidim.icons.register(name: "apps-line", icon: "apps-line", category: "system", description: "", engine: :initiatives)
-        Decidim.icons.register(name: "add-fill", icon: "add-fill", category: "system", description: "", engine: :initiatives)
         Decidim.icons.register(name: "printer-line", icon: "printer-line", category: "system", description: "", engine: :initiatives)
         Decidim.icons.register(name: "forbid-line", icon: "forbid-line", category: "system", description: "", engine: :initiatives)
-        Decidim.icons.register(name: "clipboard-line", icon: "clipboard-line", category: "system", description: "", engine: :initiatives)
       end
 
       initializer "decidim_initiatives.content_blocks" do
@@ -106,6 +104,7 @@ module Decidim
 
       initializer "decidim_initiatives.menu" do
         Decidim::Initiatives::Menu.register_menu!
+        Decidim::Initiatives::Menu.register_mobile_menu!
         Decidim::Initiatives::Menu.register_home_content_block_menu!
       end
 

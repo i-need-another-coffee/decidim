@@ -10,8 +10,7 @@ module Decidim
       end
 
       let!(:proposal) { create(:proposal, :accepted, body:) }
-      let!(:category) { create(:category, participatory_space: component.participatory_space) }
-      let!(:scope) { create(:scope, organization: component.participatory_space.organization) }
+      let!(:taxonomies) { create_list(:taxonomy, 2, :with_parent, organization: component.organization) }
       let(:participatory_process) { component.participatory_space }
       let(:component) { proposal.component }
 
@@ -34,8 +33,7 @@ module Decidim
       end
 
       before do
-        proposal.update!(category:)
-        proposal.update!(scope:)
+        proposal.update!(taxonomies:)
         proposal.link_resources(meetings, "proposals_from_meeting")
         proposal.link_resources(other_proposals, "copied_from_component")
       end
@@ -47,14 +45,90 @@ module Decidim
           expect(serialized).to include(id: proposal.id)
         end
 
-        it "serializes the category" do
-          expect(serialized[:category]).to include(id: category.id)
-          expect(serialized[:category]).to include(name: category.name)
+        it "serializes the taxonomies" do
+          expect(serialized[:taxonomies].length).to eq(2)
+          expect(serialized[:taxonomies][:id]).to match_array(taxonomies.map(&:id))
+          expect(serialized[:taxonomies][:name]).to match_array(taxonomies.map(&:name))
         end
 
-        it "serializes the scope" do
-          expect(serialized[:scope]).to include(id: scope.id)
-          expect(serialized[:scope]).to include(name: scope.name)
+        describe "author" do
+          context "when it is an official proposal" do
+            let!(:proposal) { create(:proposal, :official) }
+
+            before do
+              component.participatory_space.organization.update!(name: { en: "My organization" })
+              proposal.reload
+            end
+
+            it "serializes the organization name" do
+              expect(serialized[:author]).to include(name: ["My organization"])
+            end
+
+            it "serializes the link to the organization" do
+              expect(serialized[:author]).to include(url: [root_url])
+            end
+          end
+
+          context "when it is a user" do
+            let!(:proposal) { create(:proposal, :participant_author) }
+
+            before do
+              proposal.creator_author.update!(name: "John Doe")
+              proposal.reload
+            end
+
+            it "serializes the user name" do
+              expect(serialized[:author]).to include(name: ["John Doe"])
+            end
+
+            it "serializes the link to its profile" do
+              expect(serialized[:author]).to include(url: [profile_url(proposal.creator_author.nickname)])
+            end
+          end
+
+          context "when it is multiple users" do
+            let!(:coauthorships) { create_list(:coauthorship, 3, coauthorable: proposal) }
+
+            it "serializes the user names" do
+              expect(serialized[:author]).to include(name: proposal.authors.map(&:name))
+            end
+
+            it "serializes the link to the profiles" do
+              urls = proposal.authors.map { |author| profile_url(author.nickname) }
+              expect(serialized[:author]).to include(url: urls)
+            end
+          end
+
+          context "when it is a meeting" do
+            let!(:proposal) { create(:proposal, :official_meeting) }
+
+            it "serializes the title of the meeting" do
+              title = proposal.authors.map { |author| translated_attribute(author.title) }
+              expect(serialized[:author]).to include(name: title)
+            end
+
+            it "serializes the link to the meeting" do
+              urls = proposal.authors.map { |meeting| meeting_url(meeting) }
+              expect(serialized[:author]).to include(url: urls)
+            end
+          end
+
+          context "when it is a user group" do
+            let!(:proposal) { create(:proposal, :user_group_author) }
+
+            before do
+              proposal.coauthorships.first.user_group.update!(name: "ACME", nickname: "acme")
+              proposal.reload
+            end
+
+            it "serializes the user name of the user group" do
+              expect(serialized[:author]).to include(name: ["ACME"])
+            end
+
+            it "serializes the link to the profile of the user group" do
+              expect(serialized[:author]).to include(url: [profile_url("acme")])
+            end
+          end
         end
 
         it "serializes the title" do
@@ -77,8 +151,8 @@ module Decidim
           expect(serialized).to include(longitude: proposal.longitude)
         end
 
-        it "serializes the amount of supports" do
-          expect(serialized).to include(supports: proposal.proposal_votes_count)
+        it "serializes the amount of votes" do
+          expect(serialized).to include(votes: proposal.proposal_votes_count)
         end
 
         it "serializes the amount of comments" do
@@ -117,6 +191,18 @@ module Decidim
 
         it "serializes the answer" do
           expect(serialized).to include(answer: expected_answer)
+        end
+
+        it "serializes the date of the answer" do
+          expect(serialized).to include(answered_at: proposal.answered_at)
+        end
+
+        it "serializes withdrawn status" do
+          expect(serialized).to include(withdrawn: proposal.withdrawn?)
+        end
+
+        it "serializes withdrawn date" do
+          expect(serialized).to include(withdrawn_at: proposal.withdrawn_at)
         end
 
         it "serializes the amount of attachments" do
@@ -222,6 +308,22 @@ module Decidim
             end
           end
         end
+      end
+
+      def profile_url(nickname)
+        Decidim::Core::Engine.routes.url_helpers.profile_url(nickname, host:)
+      end
+
+      def meeting_url(meeting)
+        Decidim::EngineRouter.main_proxy(meeting.component).meeting_url(id: meeting.id, host:)
+      end
+
+      def root_url
+        Decidim::Core::Engine.routes.url_helpers.root_url(host:)
+      end
+
+      def host
+        proposal.organization.host
       end
     end
   end

@@ -96,7 +96,6 @@ lt:
               accepted: Parašų užtenka
               created: Sukurta
               discarded: Atmesta
-              published: Publikuota
               rejected: Parašų neužtenka
               validating: Techninis patvirtinimas
           type_id_eq:
@@ -105,12 +104,10 @@ lt:
           title_or_description_or_id_string_or_author_name_or_author_nickname_cont: Ieškoti %{collection} pagal pavadinimą, aprašymą, ID ar autoriaus vardą ir pavardę.
       initiatives_settings:
         update:
-          error: Įvyko klaida.
           success: Iniciatyvų nustatymai atnaujinti.
       menu:
         attachments: Priedai
         committee_members: Komiteto nariai
-        components: Komponentai
         information: Informacija
         initiatives: Iniciatyvos
         initiatives_settings: Nustatymai
@@ -262,7 +259,6 @@ lt:
             new: Naujas
             photos: Nuotraukos
           update:
-            error: Įvyko klaida.
             success: Iniciatyva sėkmingai atnaujinta.
         initiatives_settings:
           edit:
@@ -276,7 +272,6 @@ lt:
             title: Nustatymai iniciatyvoms
         initiatives_type_scopes:
           create:
-            error: Įvyko klaida.
             success: Sukurta nauja sritis šiam iniciatyvų tipui.
           destroy:
             success: Sritis sėkmingai pašalinta.
@@ -287,12 +282,8 @@ lt:
             create: Sukurti
             title: Sukurti iniciatyvos tipo sritį
           update:
-            error: Įvyko klaida.
             success: Sritis atnaujinta.
         initiatives_types:
-          create:
-            error: Įvyko klaida.
-            success: Naujas iniciatyvos tipas sukurtas.
           destroy:
             success: Iniciatyvos tipas sėkmingai pašalintas.
           edit:
@@ -306,7 +297,6 @@ lt:
             create: Sukurti
             title: Naujas iniciatyvos tipas
           update:
-            error: Įvyko klaida.
             success: Iniciatyvos tipas sėkmingai atnaujintas.
       admin_log:
         initiative:
@@ -324,7 +314,6 @@ lt:
         accepted: Parašų užtenka
         created: Sukurta
         discarded: Atmesta
-        published: Paskelbta
         rejected: Parašų neužtenka
         validating: Techninis patvirtinimas
       application_helper:
@@ -465,6 +454,7 @@ lt:
           invite_to_committee_help: Pasidalinkite šia nuoroda norėdami pakvieti kitus į remėjų komitetą.
           link: Nuoroda
           no_members_yet: Rėmėjų komitete nėra narių.
+          revoke: Atšaukti
           title: Komiteto nariai
         count:
           title:
@@ -541,7 +531,6 @@ lt:
           other: " parašai"
         vote_cabin:
           already_voted: Jau pasirašyta
-          supports_required: "%{total_supports} – reikalingas parašų skaičius"
           verification_required: Norėdami pasirašyti iniciatyvą, patvirtinkite savo paskyrą
           vote: Pasirašyti
           votes_blocked: Pasirašymas išjungtas
@@ -579,7 +568,6 @@ lt:
           accepted: Parašų užtenka
           created: Sukurta
           discarded: Atmesta
-          published: Publikuota
           rejected: Parašų neužtenka
           validating: Techninis patvirtinimas
       states:
@@ -587,7 +575,6 @@ lt:
         expired: Nebegalioja
       unavailable_scope: Sritis nepasiekiama
       update:
-        error: Įvyko klaida.
         success: Iniciatyva sėkmingai atnaujinta.
     menu:
       initiatives: Iniciatyvos

@@ -45,8 +45,7 @@ RSpec.describe "Proposal search" do
   end
 
   it_behaves_like "a resource search", :proposal
-  it_behaves_like "a resource search with scopes", :proposal
-  it_behaves_like "a resource search with categories", :proposal
+  it_behaves_like "a resource search with taxonomies", :proposal
   it_behaves_like "a resource search with origin", :proposal
 
   it "displays all non-withdrawn and non-rejected proposals without any filters" do
@@ -165,7 +164,7 @@ RSpec.describe "Proposal search" do
     end
 
     context "and related to is set to resources" do
-      let(:related_to) { "Decidim::DummyResources::DummyResource".underscore }
+      let(:related_to) { "Decidim::Dev::DummyResource".underscore }
 
       it "displays only proposals related to resources" do
         expect(subject).not_to have_escaped_html(translated(proposal1.title))

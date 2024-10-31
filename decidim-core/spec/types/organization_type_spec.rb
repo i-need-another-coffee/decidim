@@ -15,10 +15,10 @@ module Decidim
       end
 
       describe "name" do
-        let(:query) { "{ name }" }
+        let(:query) { %({ name { translation(locale: "en") }}) }
 
         it "returns the organization's name" do
-          expect(response).to eq("name" => model.name)
+          expect(response["name"]["translation"]).to eq(translated(model.name))
         end
       end
 
@@ -29,6 +29,16 @@ module Decidim
 
         it "show all the stats for this organization" do
           expect(response["stats"]).to include("name" => "users_count", "value" => 5)
+        end
+      end
+
+      describe "taxonomies" do
+        let(:query) { %({ taxonomies { id } }) }
+        let!(:root_taxonomy) { create(:taxonomy, organization: model) }
+        let!(:taxonomy) { create(:taxonomy, parent: root_taxonomy, organization: model) }
+
+        it "has root taxonomies only" do
+          expect(response["taxonomies"]).to contain_exactly("id" => root_taxonomy.id.to_s)
         end
       end
     end

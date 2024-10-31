@@ -1,11 +1,32 @@
 # frozen_string_literal: true
 
 RSpec.shared_examples "manage debates" do
-  let!(:debate) { create(:debate, category:, component: current_component) }
+  include_context "with taxonomy filters context"
+  let(:space_manifest) { participatory_process.manifest.name }
+  let(:taxonomies) { [taxonomy] }
+  let!(:debate) { create(:debate, taxonomies:, component: current_component) }
+  let(:attributes) { attributes_for(:debate, :closed, component: current_component) }
 
-  before { visit_component_admin }
+  before do
+    current_component.update!(settings: { taxonomy_filters: [taxonomy_filter.id] })
+    visit_component_admin
+  end
 
   describe "listing" do
+    context "with hidden debates" do
+      let!(:my_other_debate) { create(:debate, taxonomies:, component: current_component) }
+
+      before do
+        my_other_debate.update!(title: { en: "Debate <strong>title</strong>" })
+        create(:moderation, :hidden, reportable: my_other_debate)
+      end
+
+      it "does not list the hidden debates" do
+        visit current_path
+        expect(page).to have_no_content(translated(my_other_debate.title))
+      end
+    end
+
     context "with enriched content" do
       before do
         debate.update!(title: { en: "Debate <strong>title</strong>" })
@@ -25,19 +46,15 @@ RSpec.shared_examples "manage debates" do
   end
 
   describe "updating a debate" do
-    it "updates a debate" do
-      within find("tr", text: translated(debate.title)) do
+    it "updates a debate", versioning: true do
+      within "tr", text: translated(debate.title) do
         page.find(".action-icon--edit").click
       end
 
       within ".edit_debate" do
-        fill_in_i18n(
-          :debate_title,
-          "#debate-title-tabs",
-          en: "My new title",
-          es: "Mi nuevo título",
-          ca: "El meu nou títol"
-        )
+        fill_in_i18n(:debate_title, "#debate-title-tabs", **attributes[:title].except("machine_translations"))
+        fill_in_i18n_editor(:debate_description, "#debate-description-tabs", **attributes[:description].except("machine_translations"))
+        fill_in_i18n_editor(:debate_instructions, "#debate-instructions-tabs", **attributes[:instructions].except("machine_translations"))
 
         find("*[type=submit]").click
       end
@@ -45,16 +62,19 @@ RSpec.shared_examples "manage debates" do
       expect(page).to have_admin_callout "Debate successfully updated"
 
       within "table" do
-        expect(page).to have_content("My new title")
+        expect(page).to have_content(translated(attributes[:title]))
       end
+
+      visit decidim_admin.root_path
+      expect(page).to have_content("updated the #{translated(attributes[:title])} debate on the")
     end
 
     context "when the debate has an author" do
       let!(:debate) { create(:debate, :participant_author, component: current_component) }
 
       it "cannot edit the debate" do
-        within find("tr", text: translated(debate.title)) do
-          expect(page).not_to have_selector(".action-icon--edit")
+        within "tr", text: translated(debate.title) do
+          expect(page).to have_no_selector(".action-icon--edit")
         end
       end
     end
@@ -62,7 +82,7 @@ RSpec.shared_examples "manage debates" do
 
   describe "previewing debates" do
     it "links the debate correctly" do
-      within find("tr", text: translated(debate.title)) do
+      within "tr", text: translated(debate.title) do
         link = find("a", class: "action-icon--preview")
         expect(link[:href]).to include(resource_locator(debate).path)
       end
@@ -74,40 +94,24 @@ RSpec.shared_examples "manage debates" do
     end
   end
 
-  it "creates a new finite debate" do
-    click_link "New debate"
+  it "creates a new finite debate", versioning: true do
+    click_on "New debate"
 
     within ".new_debate" do
-      fill_in_i18n(
-        :debate_title,
-        "#debate-title-tabs",
-        en: "My debate",
-        es: "Mi debate",
-        ca: "El meu debat"
-      )
-      fill_in_i18n_editor(
-        :debate_description,
-        "#debate-description-tabs",
-        en: "Long description",
-        es: "Descripción más larga",
-        ca: "Descripció més llarga"
-      )
-      fill_in_i18n_editor(
-        :debate_instructions,
-        "#debate-instructions-tabs",
-        en: "Long instructions",
-        es: "Instrucciones más largas",
-        ca: "Instruccions més llargues"
-      )
+      fill_in_i18n(:debate_title, "#debate-title-tabs", **attributes[:title].except("machine_translations"))
+      fill_in_i18n_editor(:debate_description, "#debate-description-tabs", **attributes[:description].except("machine_translations"))
+      fill_in_i18n_editor(:debate_instructions, "#debate-instructions-tabs", **attributes[:instructions].except("machine_translations"))
 
       choose "Finite"
     end
 
-    fill_in :debate_start_time, with: Time.current.change(day: 12, hour: 10, min: 50)
-    fill_in :debate_end_time, with: Time.current.change(day: 12, hour: 12, min: 50)
+    fill_in_datepicker :debate_start_time_date, with: Time.current.change(day: 12).strftime("%d/%m/%Y")
+    fill_in_timepicker :debate_start_time_time, with: "10:50"
+    fill_in_datepicker :debate_end_time_date, with: Time.current.change(day: 12).strftime("%d/%m/%Y")
+    fill_in_timepicker :debate_end_time_time, with: "12:50"
 
     within ".new_debate" do
-      select translated(category.name), from: :debate_decidim_category_id
+      select(decidim_sanitize_translated(taxonomy.name), from: "taxonomies-#{taxonomy_filter.id}")
 
       find("*[type=submit]").click
     end
@@ -115,44 +119,37 @@ RSpec.shared_examples "manage debates" do
     expect(page).to have_admin_callout "Debate successfully created"
 
     within "table" do
-      expect(page).to have_content("My debate")
+      expect(page).to have_content(translated(attributes[:title]))
     end
+
+    visit decidim_admin.root_path
+    expect(page).to have_content("created the #{translated(attributes[:title])} debate on the")
+
+    visit decidim.last_activities_path
+    expect(page).to have_content("New debate: #{decidim_sanitize_translated(attributes[:title])}")
+
+    within "#filters" do
+      find("a", class: "filter", text: "Debate", match: :first).click
+    end
+    expect(page).to have_content("New debate: #{decidim_sanitize_translated(attributes[:title])}")
   end
 
   it "creates a new open debate" do
-    click_link "New debate"
+    click_on "New debate"
 
     within ".new_debate" do
-      fill_in_i18n(
-        :debate_title,
-        "#debate-title-tabs",
-        en: "My debate",
-        es: "Mi debate",
-        ca: "El meu debat"
-      )
-      fill_in_i18n_editor(
-        :debate_description,
-        "#debate-description-tabs",
-        en: "Long description",
-        es: "Descripción más larga",
-        ca: "Descripció més llarga"
-      )
-      fill_in_i18n_editor(
-        :debate_instructions,
-        "#debate-instructions-tabs",
-        en: "Long instructions",
-        es: "Instrucciones más largas",
-        ca: "Instruccions més llargues"
-      )
+      fill_in_i18n(:debate_title, "#debate-title-tabs", **attributes[:title].except("machine_translations"))
+      fill_in_i18n_editor(:debate_description, "#debate-description-tabs", **attributes[:description].except("machine_translations"))
+      fill_in_i18n_editor(:debate_instructions, "#debate-instructions-tabs", **attributes[:instructions].except("machine_translations"))
 
       choose "Open"
     end
 
-    expect(page).not_to have_selector "#debate_start_time"
-    expect(page).not_to have_selector "#debate_end_time"
+    expect(page).to have_no_selector "#debate_start_time"
+    expect(page).to have_no_selector "#debate_end_time"
 
     within ".new_debate" do
-      select translated(category.name), from: :debate_decidim_category_id
+      select(decidim_sanitize_translated(taxonomy.name), from: "taxonomies-#{taxonomy_filter.id}")
 
       find("*[type=submit]").click
     end
@@ -160,8 +157,11 @@ RSpec.shared_examples "manage debates" do
     expect(page).to have_admin_callout "Debate successfully created"
 
     within "table" do
-      expect(page).to have_content("My debate")
+      expect(page).to have_content(translated(attributes[:title]))
     end
+
+    visit decidim_admin.root_path
+    expect(page).to have_content("created the #{translated(attributes[:title])} debate on the")
   end
 
   describe "deleting a debate" do
@@ -172,7 +172,7 @@ RSpec.shared_examples "manage debates" do
     end
 
     it "deletes a debate" do
-      within find("tr", text: translated(debate2.title)) do
+      within "tr", text: translated(debate2.title) do
         accept_confirm do
           page.find(".action-icon--remove").click
         end
@@ -181,7 +181,7 @@ RSpec.shared_examples "manage debates" do
       expect(page).to have_admin_callout "Debate successfully deleted"
 
       within "table" do
-        expect(page).not_to have_content(translated(debate2.title))
+        expect(page).to have_no_content(translated(debate2.title))
       end
     end
 
@@ -189,27 +189,21 @@ RSpec.shared_examples "manage debates" do
       let!(:debate2) { create(:debate, :participant_author, component: current_component) }
 
       it "cannot delete the debate" do
-        within find("tr", text: translated(debate2.title)) do
-          expect(page).not_to have_selector(".action-icon--remove")
+        within "tr", text: translated(debate2.title) do
+          expect(page).to have_no_selector(".action-icon--remove")
         end
       end
     end
   end
 
-  describe "closing a debate" do
+  describe "closing a debate", versioning: true do
     it "closes a debate" do
-      within find("tr", text: translated(debate.title)) do
+      within "tr", text: translated(debate.title) do
         page.find(".action-icon--close").click
       end
 
       within ".edit_close_debate" do
-        fill_in_i18n_editor(
-          :debate_conclusions,
-          "#debate-conclusions-tabs",
-          en: "The debate was great",
-          es: "El debate fué genial",
-          ca: "El debat ha anat molt bé"
-        )
+        fill_in_i18n_editor(:debate_conclusions, "#debate-conclusions-tabs", **attributes[:conclusions].except("machine_translations"))
 
         find("*[type=submit]").click
       end
@@ -217,21 +211,24 @@ RSpec.shared_examples "manage debates" do
       expect(page).to have_admin_callout "Debate successfully closed"
 
       within "table" do
-        within find("tr", text: translated(debate.title)) do
-          expect(page).not_to have_selector(".action-icon--edit")
+        within "tr", text: translated(debate.title) do
+          expect(page).to have_no_selector(".action-icon--edit")
           page.find(".action-icon--close").click
         end
       end
 
-      expect(page).to have_content("The debate was great")
+      expect(page).to have_content(strip_tags(translated(attributes[:conclusions])).strip)
+
+      visit decidim_admin.root_path
+      expect(page).to have_content("performed some action on #{translated(debate.title)} in")
     end
 
     context "when the debate has an author" do
       let!(:debate) { create(:debate, :participant_author, component: current_component) }
 
       it "cannot close the debate" do
-        within find("tr", text: translated(debate.title)) do
-          expect(page).not_to have_selector(".action-icon--close")
+        within "tr", text: translated(debate.title) do
+          expect(page).to have_no_selector(".action-icon--close")
         end
       end
     end

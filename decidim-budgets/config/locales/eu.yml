@@ -20,6 +20,10 @@ eu:
         scope_id: Esparrua
   activerecord:
     models:
+      decidim:
+        budgets:
+          project:
+            text: '%{link} aurrekontuari gehutu zaio'
       decidim/budgets/budget:
         one: Aurrekontua
         other: Aurrekontuak
@@ -104,6 +108,9 @@ eu:
             pending_orders: Zain dauden botoak
             select_for_implementation: Hautatu gauzatzeko
             selected: Hautatua
+            selected_options:
+              'no': 'Ez'
+              'yes': 'Bai'
             title: Proiektuak
             update: Eguneratu
             update_budget_button: Eguneratu proiektuaren aurrekontua
@@ -165,7 +172,7 @@ eu:
         back_to: Itzuli hona %{component_name}
         close_modal: Itxi modala
         continue: Jarraitu
-        more_information: Informazio gehiago
+        more_information: Informazio gehiago aurrekontuaz
       budgets_list:
         budgets: Aurrekontuak
         cancel_order:
@@ -175,12 +182,19 @@ eu:
         finished_message: Amaitu duzu bozkatzeko prozesua. Eskerrik asko parte hartzeagatik!
         highlighted_cta: Botoa eman hemen %{name}
         if_change_opinion: Iritzia aldatu baduzu, ahal duzu
+        orders:
+          highest_cost: Kosturik handiena
+          label: Ordenatu aurrekontuak honen arabera
+          lowest_cost: Kosturik txikiena
+          random: Ausazko ordena
         progress: Amaitu bozketa
         remove_vote: Kendu botoa
         show: Ikusi proiektuak
         vote: Eman botoa
         voted_budgets: Bozkatutako aurrekontuak
         voted_on: Botoa eman duzu hemen %{links}.
+      creation:
+        text: Aurrekontu honi gehitu zaizkio
       last_activity:
         new_vote_at: 'Beste aurrekontu-bozketa bat hemen:'
       limit_announcement:
@@ -196,6 +210,7 @@ eu:
           fields:
             category: Kategoria
             id: ID
+            map: Mapa
             title: Titulua
       order_summary_mailer:
         order_summary:
@@ -310,7 +325,7 @@ eu:
               errors:
                 budget_voting_rule_only_one: Soilik bozketa-arau bat gaitu behar da.
                 budget_voting_rule_required: Bozketarako arau bat behar da.
-            geocoding_enabled: Geokodifikazioa gaitua
+            geocoding_enabled: Mapak gaituta
             landing_page_content: Aurrekontuen hasierako orria
             more_information_modal: '"Informazio gehiago"ren modala'
             projects_per_page: Orrialde bakoitzeko proiektuak

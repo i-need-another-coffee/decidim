@@ -72,9 +72,6 @@ ar:
         start_exploring: البدء في استكشاف
       csv_census:
         admin:
-          census:
-            create:
-              error: حدث خطأ أثناء استيراد التعداد.
           destroy:
             title: احذف جميع بيانات التعداد
           index:
@@ -136,8 +133,6 @@ ar:
           new:
             send: طلب التحقق
             title: قم بتحميل مستند هويتك
-        dni: DNI
-        nie: NIE
         passport: جواز سفر
       postal_letter:
         admin:
@@ -158,8 +153,6 @@ ar:
             title: اطلب رمز التحقق
       sms:
         authorizations:
-          destroy:
-            success: رمز التحقق إعادة تعيين بنجاح. يرجى إعادة إدخال رقم هاتفك.
           edit:
             confirm_destroy: هل أنت متأكد من أنك تريد إعادة تعيين رمز التحقق؟
             destroy: إعادة تعيين رمز التحقق

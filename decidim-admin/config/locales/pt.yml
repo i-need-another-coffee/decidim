@@ -150,6 +150,7 @@ pt:
         export: Exportar tudo
         export-selection: Exportar selecção
         import: Importar
+        manage: Gerir
         newsletter:
           new: Novo boletim informativo
         participatory_space_private_user:
@@ -269,7 +270,6 @@ pt:
           headers:
             actions: Ações
             name: Nome do componente
-            scope: Âmbito do componente
             type: Tipo de componente
         new:
           add: Adicionar componente
@@ -290,7 +290,6 @@ pt:
         title: Conflitos de verificação
         transfer:
           email: e-Mail
-          error: Houve um problema ao transferir o utilizador actual para utilizador gerido.
           name: Nome
           reason: Motivo
           success: A transferência actual foi completada com êxito.
@@ -300,9 +299,6 @@ pt:
       dashboard:
         show:
           view_more_logs: Ver mais registos
-      domain_whitelist:
-        form:
-          domain_too_short: Domínio demasiado curto
       exports:
         export_as: "%{name} como %{export_format}"
         formats:
@@ -360,7 +356,6 @@ pt:
           name_or_nickname_or_email_cont: Pesquisar %{collection} por e-mail, nome ou alcunha.
           reported_id_string_or_reported_content_cont: Pesquisar %{coleção} por identificador de denúncia ou conteúdo.
           title_cont: Pesquisar %{collection} por título.
-          user_name_or_user_email_cont: Pesquisar %{coleção} por nome ou e-mail.
         state_eq:
           label: Estado
           values:
@@ -435,10 +430,10 @@ pt:
         area_types: Tipos de área
         areas: Áreas
         configuration: Configuração
-        external_domain_whitelist: Domínios externos autorizados
         help_sections: Secções de ajuda
         homepage: Página inicial
         impersonations: Personificações
+        manage: Gerir
         moderation: Moderações globais
         newsletters: Boletins informativos
         participants: Participantes
@@ -683,17 +678,6 @@ pt:
             layout_appearance_title: Editar aparência do layout
             preview: Pré-visualização
           omnipresent_banner_appearance_title: Editar faixa omnipresente
-      organization_external_domain_whitelist:
-        edit:
-          update: Actualização
-        external_domain:
-          down: Para baixo
-          external_domain: Domínio externo
-          remove: Remover
-          up: Para cima
-        form:
-          add: Adicionar à lista branca
-          title: Lista branca de domínio externo
       participatory_space_private_users:
         create:
           error: Ocorreu um problema ao adicionar um participante privado neste espaço participativo.
@@ -799,6 +783,8 @@ pt:
           without_topic: Páginas sem tópico
         update:
           error: Ocorreu um problema ao atualizar esta página.
+      taxonomies:
+        count: Contagem
       titles:
         admin_log: Registo de administrador
         area_types: Tipos de área
@@ -899,3 +885,8 @@ pt:
   errors:
     messages:
       invalid_json: JSON inválido
+  layouts:
+    decidim:
+      admin:
+        global_moderations:
+          title: Moderações globais

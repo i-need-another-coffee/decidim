@@ -16,10 +16,15 @@ module Decidim
       def create
         @form = form(RegisterOrganizationForm).from_params(params)
 
-        RegisterOrganization.call(@form) do
+        CreateOrganization.call(@form) do
           on(:ok) do
             flash[:notice] = t("organizations.create.success_html", scope: "decidim.system", host: @form.host, email: @form.organization_admin_email)
             redirect_to organizations_path
+          end
+
+          on(:invalid_invitation) do
+            flash.now[:alert] = t("organizations.create.error_invitation", scope: "decidim.system")
+            render :new
           end
 
           on(:invalid) do
@@ -33,16 +38,13 @@ module Decidim
         @organizations = Organization.all
       end
 
-      def show
-        @organization = Organization.find(params[:id])
-      end
-
       def edit
         @organization = Organization.find(params[:id])
         @form = form(UpdateOrganizationForm).from_model(@organization)
       end
 
       def update
+        @organization = Organization.find(params[:id])
         @form = form(UpdateOrganizationForm).from_params(params)
 
         UpdateOrganization.call(params[:id], @form) do

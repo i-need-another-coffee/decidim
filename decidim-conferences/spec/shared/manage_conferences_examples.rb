@@ -7,46 +7,28 @@ shared_examples "manage conferences" do
 
     let(:image2_filename) { "city2.jpeg" }
     let(:image2_path) { Decidim::Dev.asset(image2_filename) }
+    let(:attributes) { attributes_for(:conference) }
+    let(:last_conference) { Decidim::Conference.last }
 
     before do
-      click_link "New conference"
+      click_on "New conference"
     end
 
     %w(description short_description objectives).each do |field|
       it_behaves_like "having a rich text editor for field", ".tabs-content[data-tabs-content='conference-#{field}-tabs']", "full"
     end
     it_behaves_like "having a rich text editor for field", "#conference_registrations_terms", "content"
+    it_behaves_like "having no taxonomy filters defined"
 
-    it "creates a new conference" do
+    it "creates a new conference", versioning: true do
       within ".new_conference" do
-        fill_in_i18n(
-          :conference_title,
-          "#conference-title-tabs",
-          en: "My conference",
-          es: "Mi proceso participativo",
-          ca: "El meu procés participatiu"
-        )
-        fill_in_i18n(
-          :conference_slogan,
-          "#conference-slogan-tabs",
-          en: "Slogan",
-          es: "Eslogan",
-          ca: "Eslógan"
-        )
-        fill_in_i18n_editor(
-          :conference_short_description,
-          "#conference-short_description-tabs",
-          en: "Short description",
-          es: "Descripción corta",
-          ca: "Descripció curta"
-        )
-        fill_in_i18n_editor(
-          :conference_description,
-          "#conference-description-tabs",
-          en: "A longer description",
-          es: "Descripción más larga",
-          ca: "Descripció més llarga"
-        )
+        fill_in_i18n(:conference_title, "#conference-title-tabs", **attributes[:title].except("machine_translations"))
+        fill_in_i18n(:conference_slogan, "#conference-slogan-tabs", **attributes[:slogan].except("machine_translations"))
+        fill_in_i18n_editor(:conference_short_description, "#conference-short_description-tabs", **attributes[:short_description].except("machine_translations"))
+        fill_in_i18n_editor(:conference_description, "#conference-description-tabs", **attributes[:description].except("machine_translations"))
+        fill_in_i18n_editor(:conference_objectives, "#conference-objectives-tabs", **attributes[:objectives].except("machine_translations"))
+
+        select(decidim_sanitize_translated(taxonomy.name), from: "taxonomies-#{taxonomy_filter.id}")
 
         fill_in :conference_weight, with: 1
         fill_in :conference_slug, with: "slug"
@@ -57,58 +39,68 @@ shared_examples "manage conferences" do
       dynamically_attach_file(:conference_banner_image, image2_path)
 
       within ".new_conference" do
-        fill_in :conference_start_date, with: 1.month.ago
-        fill_in :conference_end_date, with: 1.month.ago + 3.days
+        fill_in_datepicker :conference_start_date_date, with: 1.month.ago.strftime("%d/%m/%Y")
+        fill_in_datepicker :conference_end_date_date, with: (1.month.ago + 3.days).strftime("%d/%m/%Y")
 
         find("*[type=submit]").click
       end
 
       expect(page).to have_admin_callout("successfully")
+      expect(last_conference.taxonomies).to contain_exactly(taxonomy)
 
       within "[data-content]" do
         expect(page).to have_current_path decidim_admin_conferences.conferences_path
-        expect(page).to have_content("My conference")
+        expect(page).to have_content(translated(attributes[:title]))
       end
+
+      visit decidim_admin.root_path
+      expect(page).to have_content("created the #{translated(attributes[:title])} conference")
     end
   end
 
   describe "updating a conference" do
     let(:image3_filename) { "city3.jpeg" }
     let(:image3_path) { Decidim::Dev.asset(image3_filename) }
+    let(:attributes) { attributes_for(:conference) }
 
     before do
-      within find("tr", text: translated(conference.title)) do
-        click_link "Configure"
+      within "tr", text: translated(conference.title) do
+        click_on "Configure"
       end
     end
 
-    it "updates a conference" do
-      fill_in_i18n(
-        :conference_title,
-        "#conference-title-tabs",
-        en: "My new title",
-        es: "Mi nuevo título",
-        ca: "El meu nou títol"
-      )
+    it "updates a conference", versioning: true do
       dynamically_attach_file(:conference_banner_image, image3_path, remove_before: true)
 
       within ".edit_conference" do
+        fill_in_i18n(:conference_title, "#conference-title-tabs", **attributes[:title].except("machine_translations"))
+        fill_in_i18n(:conference_slogan, "#conference-slogan-tabs", **attributes[:slogan].except("machine_translations"))
+        fill_in_i18n_editor(:conference_short_description, "#conference-short_description-tabs", **attributes[:short_description].except("machine_translations"))
+        fill_in_i18n_editor(:conference_description, "#conference-description-tabs", **attributes[:description].except("machine_translations"))
+        fill_in_i18n_editor(:conference_objectives, "#conference-objectives-tabs", **attributes[:objectives].except("machine_translations"))
+        select(decidim_sanitize_translated(taxonomy.name), from: "taxonomies-#{taxonomy_filter.id}")
         find("*[type=submit]").click
       end
 
       expect(page).to have_admin_callout("successfully")
+      expect(page).to have_select("taxonomies-#{taxonomy_filter.id}", selected: decidim_sanitize_translated(taxonomy.name))
+      expect(page).to have_select("taxonomies-#{another_taxonomy_filter.id}", selected: "Select from \"#{decidim_sanitize_translated(another_root_taxonomy.name)}\"")
+      expect(conference.reload.taxonomies).to contain_exactly(taxonomy)
 
       within "[data-content]" do
-        expect(page).to have_selector("input[value='My new title']")
+        expect(page).to have_css("input[value='#{translated(attributes[:title])}']")
         expect(page).to have_css("img[src*='#{image3_filename}']")
       end
+
+      visit decidim_admin.root_path
+      expect(page).to have_content("updated the #{translated(attributes[:title])} conference")
     end
   end
 
   describe "updating a conference without images" do
     before do
-      within find("tr", text: translated(conference.title)) do
-        click_link "Configure"
+      within "tr", text: translated(conference.title) do
+        click_on "Configure"
       end
     end
 
@@ -119,14 +111,23 @@ shared_examples "manage conferences" do
 
     it "update an conference without images does not delete them" do
       within_admin_sidebar_menu do
-        click_link "About this conference"
+        click_on "About this conference"
       end
-      click_button "Update"
+      click_on "Update"
 
       expect(page).to have_admin_callout("successfully")
 
-      expect(page).to have_css("img[src*='#{conference.attached_uploader(:hero_image).path}']")
-      expect(page).to have_css("img[src*='#{conference.attached_uploader(:banner_image).path}']")
+      hero_blob = conference.hero_image.blob
+      within %([data-active-uploads] [data-filename="#{hero_blob.filename}"]) do
+        src = page.find("img")["src"]
+        expect(src).to be_blob_url(hero_blob)
+      end
+
+      banner_blob = conference.banner_image.blob
+      within %([data-active-uploads] [data-filename="#{banner_blob.filename}"]) do
+        src = page.find("img")["src"]
+        expect(src).to be_blob_url(banner_blob)
+      end
     end
   end
 
@@ -135,8 +136,8 @@ shared_examples "manage conferences" do
       let!(:conference) { create(:conference, :unpublished, organization:) }
 
       it "allows the user to preview the unpublished conference" do
-        within find("tr", text: translated(conference.title)) do
-          click_link "Preview"
+        within "tr", text: translated(conference.title) do
+          click_on "Preview"
         end
 
         expect(page).to have_content(translated(conference.title))
@@ -148,8 +149,8 @@ shared_examples "manage conferences" do
 
       it "allows the user to preview the unpublished conference" do
         new_window = window_opened_by do
-          within find("tr", text: translated(conference.title)) do
-            click_link "Preview"
+          within "tr", text: translated(conference.title) do
+            click_on "Preview"
           end
         end
 
@@ -171,13 +172,13 @@ shared_examples "manage conferences" do
     let!(:conference) { create(:conference, :unpublished, organization:) }
 
     before do
-      within find("tr", text: translated(conference.title)) do
-        click_link "Configure"
+      within "tr", text: translated(conference.title) do
+        click_on "Configure"
       end
     end
 
     it "publishes the conference" do
-      click_link "Publish"
+      click_on "Publish"
       expect(page).to have_content("successfully published")
       expect(page).to have_content("Unpublish")
       expect(page).to have_current_path decidim_admin_conferences.edit_conference_path(conference)
@@ -191,13 +192,13 @@ shared_examples "manage conferences" do
     let!(:conference) { create(:conference, organization:) }
 
     before do
-      within find("tr", text: translated(conference.title)) do
-        click_link "Configure"
+      within "tr", text: translated(conference.title) do
+        click_on "Configure"
       end
     end
 
     it "unpublishes the conference" do
-      click_link "Unpublish"
+      click_on "Unpublish"
       expect(page).to have_content("successfully unpublished")
       expect(page).to have_content("Publish")
       expect(page).to have_current_path decidim_admin_conferences.edit_conference_path(conference)
@@ -212,7 +213,7 @@ shared_examples "manage conferences" do
 
     it "does not let the admin manage conferences form other organizations" do
       within "table" do
-        expect(page).not_to have_content(external_conference.title["en"])
+        expect(page).to have_no_content(external_conference.title["en"])
       end
     end
   end
@@ -225,13 +226,13 @@ shared_examples "manage conferences" do
     end
 
     it "disables the scope for the conference" do
-      within find("tr", text: translated(conference.title)) do
-        click_link "Configure"
+      within "tr", text: translated(conference.title) do
+        click_on "Configure"
       end
 
       uncheck :conference_scopes_enabled
 
-      expect(page).to have_selector("select#conference_scope_id[disabled]")
+      expect(page).to have_css("select#conference_scope_id[disabled]")
 
       within ".edit_conference" do
         find("*[type=submit]").click

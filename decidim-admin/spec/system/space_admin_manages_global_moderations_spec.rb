@@ -36,7 +36,7 @@ describe "Space admin manages global moderations" do
 
     it "has the main navigation empty" do
       within ".layout-nav" do
-        expect(page).not_to have_selector("li a")
+        expect(page).to have_no_css("li a")
       end
     end
 
@@ -75,7 +75,7 @@ describe "Space admin manages global moderations" do
     end
 
     it_behaves_like "sorted moderations" do
-      let!(:reportables) { create_list(:dummy_resource, 17, component: current_component) }
+      let!(:reportables) { create_list(:dummy_resource, 27, component: current_component) }
       let(:moderations_link_text) { "Global moderations" }
       let(:moderations_link_in_admin_menu) { false }
     end
@@ -92,7 +92,7 @@ describe "Space admin manages global moderations" do
       within "[data-content]" do
         expect(page).to have_content("Reported content")
 
-        expect(page).not_to have_selector("table.table-list tbody tr")
+        expect(page).to have_no_css("table.table-list tbody tr")
       end
     end
   end

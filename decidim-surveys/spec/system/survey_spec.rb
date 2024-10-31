@@ -33,7 +33,7 @@ describe "Answer a survey" do
 
   include_context "with a component"
 
-  it_behaves_like "preview component with share_token"
+  it_behaves_like "preview component with a share_token"
 
   context "when the survey does not allow answers" do
     it "does not allow answering the survey" do
@@ -62,7 +62,9 @@ describe "Answer a survey" do
       visit_component
     end
 
-    it "shows a modal dialog" do
+    it_behaves_like "accessible page"
+
+    it "shows a page" do
       expect(page).to have_content("Authorization required")
     end
   end

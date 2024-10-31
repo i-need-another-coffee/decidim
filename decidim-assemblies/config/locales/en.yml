@@ -51,7 +51,6 @@ en:
         scope_id: Scope
         scopes_enabled: Scopes enabled
         short_description: Short description
-        show_statistics: Show statistics
         slug: URL slug
         special_features: Special features
         subtitle: Subtitle
@@ -210,7 +209,7 @@ en:
           info: About this assembly
           landing_page: Landing page
           moderations: Moderations
-          private_users: Private users
+          private_users: Private participants
           see_assembly: See assembly
         assemblies_types: Assemblies types
       models:
@@ -283,12 +282,14 @@ en:
         assemblies:
           form:
             announcement_help: The text you enter here will be shown to the user right below the assembly information.
+            define_taxonomy_filters: Please define some filters for this participatory space before using this setting.
             duration: Duration
             duration_help: If the duration of this assembly is limited, select the end date. Otherwise, it will appear as indefinite.
             filters: Filters
             images: Images
             included_at_help: Select the date when this assembly was added to the platform. It does not necessarily have to be the same as the creation date.
             metadata: Metadata
+            no_taxonomy_filters_found: No taxonomy filters found.
             other: Other
             select_a_created_by: Select a created by
             select_an_area: Select an Area
@@ -296,8 +297,9 @@ en:
             select_parent_assembly: Select parent assembly
             slug_help_html: 'URL slugs are used to generate the URLs that point to this assembly. Only accepts letters, numbers and dashes, and must start with a letter. Example: %{url}'
             social_handlers: Social
+            taxonomies: Taxonomies
             title: General Information
-            visbility: Visibility
+            visibility: Visibility
         assemblies_types:
           form:
             title: Edit assembly type
@@ -311,7 +313,7 @@ en:
           form:
             existing_user: Existing participant
             explanation: 'Guidance for image:'
-            image_guide: Preferrably a portrait image that does not have any text.
+            image_guide: Preferably a portrait image that does not have any text.
             non_user: Non participant
             non_user_avatar_help: You should get the consent of the persons before publishing them as a member.
             select_a_position: Select a position
@@ -397,11 +399,7 @@ en:
       show:
         assembly_type: Assembly type
         duration: Duration
-        is_transparent:
-          'false': opaque
-          'true': transparent
         private_space: This is a private assembly
-        related_participatory_processes: Related participatory processes
         social_networks_title: Visit assembly on
     assembly_members:
       assembly_member:
@@ -440,6 +438,50 @@ en:
         description: Number of assemblies created
         object: assemblies
         title: Assemblies
+    open_data:
+      help:
+        assemblies:
+          announcement: The announcement (callout) information
+          area: The area of the assembly
+          assembly_type: The type of the assembly
+          closing_date: The closing date of the assembly
+          closing_date_reason: Why the assembly was closed
+          composition: The composition of the assembly
+          created_by: Who has created this assembly
+          created_by_other: Other creator of the assembly
+          creation_date: The date of creation of this assembly
+          decidim_scope_id: The scope of the assembly
+          description: A long description of the assembly
+          developer_group: The developer group of the assembly
+          duration: The duration of the assembly
+          facebook_handler: Social media handler for Facebook
+          github_handler: Social media handler for GitHub
+          hashtag: The assembly hashtag, used for Twitter/X
+          id: The unique identifier of this assembly
+          included_at: The date when the assembly was included
+          instagram_handler: Social media handler for Instagram
+          internal_organisation: The internal organisation of this assembly
+          is_transparent: Where the assembly is transparent or not
+          local_area: The local area of the assembly
+          meta_scope: The scope metadata of the assembly
+          participatory_scope: The participatory scope of the assembly
+          participatory_structure: The participatory structure of the assembly
+          promoted: Wheter the assembly is promoted or not
+          purpose_of_action: The purpose of action of the assembly
+          reference: The reference of the assembly. An unique identifier for this platform.
+          remote_banner_image_url: The URL of the assembly banner image
+          remote_hero_image_url: The URL of the assembly hero image
+          scope: The scope of the assembly
+          scopes_enabled: Weather the scopes are enabled or not
+          short_description: A short description of the assembly
+          slug: The assembly slug (used for identification purposes, for the URL)
+          special_features: Which special features this assembly has
+          subtitle: The subtitle of the assembly
+          target: The target of the assembly
+          taxonomies: The taxonomies of the project
+          title: The assembly title
+          twitter_handler: Social media handler for Twitter
+          youtube_handler: Social media handler for YouTube
     participatory_processes:
       show:
         related_assemblies: Related assemblies

@@ -7,11 +7,9 @@ eu:
         decidim_scope_id: Esparrua
         description: Deskribapena
         end_date: Bukaera-data
-        meetings_ids: Honekin lotutako topaketak
         progress: Aurrerapena
-        project_ids: Barne dauden proiektuak
-        proposals: Barne dauden proposamenak
         start_date: Hasiera-data
+        subresults: Azpiemaitzak
         title: Izenburua
         updated_at: Noiz eguneratua
       status:
@@ -28,6 +26,14 @@ eu:
       decidim/accountability/result_progress_updated_event: Emaitzen aurrerapena eguneratu da
   activerecord:
     models:
+      decidim:
+        accountability:
+          result:
+            budget_text: '%{link} emaitza sartu da'
+            meetings_ids: '%{link} topaketan eztabaidatu da'
+            project_ids: '%{link} proiektuan sartu da'
+            proposal_ids: '%{link} proposamenean sartu da'
+            text: '%{link} emaitzari gehitu zaio'
       decidim/accountability/result:
         one: Emaitza
         other: Emaitzak
@@ -137,11 +143,11 @@ eu:
             create: Egoera sortu
             title: Beste egoera bat
           update:
-            invalid: Arazo bat egon da egoera hau eguneratzean.
-            success: Egoera zuzen eguneratua.
+            invalid: Arazoren bat gertatu da egoera hau sortzean.
+            success: Egoera ondo eguneratu da.
         timeline_entries:
           create:
-            invalid: Arazo bat egon da sarrera hau sortzean.
+            invalid: Arazoen bat gertatu da sarrera hau sortzean.
             success: Sarrera zuzen sortua.
           destroy:
             success: Sarrera behar bezala ezabatua.
@@ -175,6 +181,8 @@ eu:
       content_blocks:
         highlighted_results:
           results: Emaitzak
+      creation:
+        text: Emaitza hau sortu da
       import_mailer:
         import:
           errors: Erroreak
@@ -234,15 +242,7 @@ eu:
           search: Bilatu ekintzak
         show:
           stats:
-            attendees: Bertaratuak
             back_to_resource: Itzuli emaitzetara
-            comments: Iruzkinak
-            contributions: Ekarpenak
-            last_edited_by: Azken editorea
-            last_updated_at: Azken eguneraketa
-            meetings: Topaketak
-            proposals: Proposamenak
-            votes: Babesak
         timeline:
           title: Proiektuaren bilakaera
     admin:
@@ -261,16 +261,12 @@ eu:
         name: Jarraipena
         settings:
           global:
-            categories_label: '"Kategoriak" izena'
             comments_enabled: Iruzkinak gaituta
             comments_max_length: Iruzkinen gehieneko luzera (utzi 0 hasierako konfigurazioari eusteko)
             display_progress_enabled: Erakutsi aurrerapena
-            heading_leaf_level_results: '"Proiektuak" izena'
-            heading_parent_level_results: '"Emaitzak" izena'
             intro: Intro
             scope_id: Esparrua
             scopes_enabled: Esparruak gaituta
-            subcategories_label: '"Azpikategoriak" izena'
           step:
             comments_blocked: Iruzkinak blokeatuta
     events:

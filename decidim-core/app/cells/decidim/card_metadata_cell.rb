@@ -4,11 +4,7 @@ module Decidim
   # This cell is used to display metadata inside a list card
   # so other cells only have to customize a few methods or overwrite views.
   class CardMetadataCell < Decidim::ViewModel
-    include Decidim::IconHelper
-    include Decidim::ApplicationHelper
-    include Decidim::SanitizeHelper
     include Decidim::DateRangeHelper
-    include ActionView::Helpers::DateHelper
     include Cell::ViewModel::Partial
     include Decidim::ViewHooksHelper
 
@@ -33,7 +29,7 @@ module Decidim
       return unless show_space?
 
       {
-        text: decidim_html_escape(translated_attribute(participatory_space.title)),
+        text: decidim_escape_translated(participatory_space.title),
         icon: resource_type_icon_key(participatory_space.class),
         url: Decidim::ResourceLocatorPresenter.new(participatory_space).path
       }
@@ -75,7 +71,7 @@ module Decidim
 
       {
         cell: "decidim/coauthorships",
-        args: [resource, { stack: true }]
+        args: [resource, { stack: true, context_actions: [] }]
       }
     end
 
@@ -105,31 +101,24 @@ module Decidim
       }
     end
 
-    def duration_item
+    def start_date_item
       return if dates_blank?
 
       {
-        text: distance_of_time_in_words(start_date, end_date, scope: "datetime.distance_in_words.short"),
+        text: I18n.l(start_date, format: "%H:%M %p %Z"),
         icon: "time-line"
       }
     end
 
-    def scope_item
-      return unless resource.is_a?(Decidim::ScopableResource) && has_visible_scopes?(resource)
+    def taxonomy_items
+      return [] unless resource.is_a?(Taxonomizable) && resource.taxonomies.any?
 
-      {
-        icon: resource_type_icon_key("Decidim::Scope"),
-        text: translated_attribute(resource.scope.name)
-      }
-    end
-
-    def category_item
-      return unless resource.is_a?(Decidim::HasCategory) && resource.category.present?
-
-      {
-        text: resource.category.translated_name,
-        icon: resource_type_icon_key("Decidim::Category")
-      }
+      resource.taxonomies.map do |taxonomy|
+        {
+          text: translated_attribute(taxonomy.name),
+          icon: resource_type_icon_key("Decidim::Taxonomy")
+        }
+      end
     end
 
     def enable_links?

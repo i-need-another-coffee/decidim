@@ -9,7 +9,7 @@ module Decidim
     Option = Struct.new(:id, :name)
 
     # Checks if the resource should show its scope or not.
-    # resource - the resource to analize
+    # resource - the resource to analyze
     #
     # Returns boolean.
     def has_visible_scopes?(resource)
@@ -53,11 +53,14 @@ module Decidim
     # options       - An optional Hash with options:
     #
     # Returns nothing.
-    def scopes_select_field(form, name, root: false, options: {})
+    def scopes_select_field(form, name, root: false, options: {}, html_options: {})
+      options = options.merge(include_blank: I18n.t("decidim.scopes.prompt")) unless options.has_key?(:include_blank)
+
       form.select(
         name,
         ordered_scopes_descendants_for_select(root),
-        options.merge(include_blank: I18n.t("decidim.scopes.prompt"))
+        options,
+        html_options
       )
     end
 

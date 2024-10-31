@@ -4,7 +4,7 @@ require "spec_helper"
 
 module Decidim::Conferences
   describe Admin::CreateRegistrationType do
-    subject { described_class.new(form, current_user, conference) }
+    subject { described_class.new(form) }
 
     let(:conference) { create(:conference) }
     let(:user) { nil }
@@ -26,14 +26,14 @@ module Decidim::Conferences
       double(
         Admin::RegistrationTypeForm,
         invalid?: invalid,
+        participatory_space: conference,
         current_user:,
         title: { en: "title" },
-        attributes: {
-          "title" => { en: "title" },
-          "weight" => 1,
-          "price" => 300,
-          "description" => { en: "registration type description" }
-        }
+        weight: 1,
+        price: 300,
+        description: { en: "registration type description" },
+        attributes: {},
+        conference_meeting_ids: meeting_ids
       )
     end
 
@@ -77,9 +77,8 @@ module Decidim::Conferences
       it "links meetings" do
         subject.call
 
-        conference_meetings = []
-        meetings.each do |meeting|
-          conference_meetings << meeting.becomes(Decidim::ConferenceMeeting)
+        conference_meetings = meetings.map do |meeting|
+          meeting.becomes(Decidim::ConferenceMeeting)
         end
 
         registration_type.conference_meetings = conference_meetings

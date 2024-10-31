@@ -10,13 +10,12 @@ module Decidim
       include ::Decidim::MultipleAttachmentsMethods
       include ::Decidim::GalleryMethods
 
+      delegate :current_user, to: :form
       # Public: Initializes the command.
       #
       # form - A form object with the params.
-      # current_user - Current user.
-      def initialize(form, current_user)
+      def initialize(form)
         @form = form
-        @current_user = current_user
       end
 
       # Executes the command. Broadcasts these events:
@@ -47,16 +46,28 @@ module Decidim
         end
       end
 
+      protected
+
+      def event_arguments
+        {
+          resource: initiative,
+          extra: {
+            event_author: form.current_user,
+            locale:
+          }
+        }
+      end
+
       private
 
-      attr_reader :form, :current_user, :attachment
+      attr_reader :form, :attachment, :initiative
 
       # Creates the initiative and all default components
       def create_initiative
-        initiative = build_initiative
+        build_initiative
         return initiative unless initiative.valid?
 
-        initiative.transaction do
+        with_events(with_transaction: true) do
           initiative.save!
 
           @attached_to = initiative
@@ -73,7 +84,7 @@ module Decidim
       end
 
       def build_initiative
-        Initiative.new(
+        @initiative = Initiative.new(
           organization: form.current_organization,
           title: { current_locale => form.title },
           description: { current_locale => form.description },
@@ -138,7 +149,7 @@ module Decidim
                  current_user:
                )
 
-        Decidim::CreateFollow.new(form, current_user).call
+        Decidim::CreateFollow.new(form).call
       end
 
       def add_author_as_committee_member(initiative)
@@ -149,7 +160,7 @@ module Decidim
                  current_user:
                )
 
-        Decidim::Initiatives::SpawnCommitteeRequest.new(form, current_user).call
+        Decidim::Initiatives::SpawnCommitteeRequest.new(form).call
       end
     end
   end

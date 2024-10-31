@@ -9,7 +9,6 @@ eu:
   decidim:
     admin:
       menu:
-        manage: Kudeatu
         templates: Txantiloiak
       templates:
         actions:
@@ -26,6 +25,8 @@ eu:
         destroy:
           success: Txantiloia zuzen ezabatua.
         empty: Oraindik ez dago txantiloirik.
+        fetch:
+          error: Ezin da plantilla hau aurkitu. Kargatu orria, mesedez.
         missing_resource: "(baliabide galdua)"
         update:
           error: Arazo bat egon da eztabaida hau eguneratzean.
@@ -70,8 +71,8 @@ eu:
           index:
             component_constraint: Gehitu hertsapena.
             confirm_delete: Ziur zaude txantiloi hau ezabatu nahi duzula?
-            global_scope: Globala (nonahi eskuragarri)
-            internal_state: Barne egoera
+            missing_state: Egoera desagertua
+            proposal_state_id: Barne egoera
             title: Proposamenen erantzunak
           new:
             title: Proposamenaren erantzun-txantilioi berria

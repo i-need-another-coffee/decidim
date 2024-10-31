@@ -15,6 +15,11 @@ module Decidim::ParticipatoryProcesses
     let(:errors) { double.as_null_object }
     let(:related_process_ids) { [] }
     let(:weight) { 1 }
+    let(:hero_image) { nil }
+    let(:taxonomizations) do
+      2.times.map { build(:taxonomization, taxonomy: create(:taxonomy, :with_parent, organization:), taxonomizable: nil) }
+    end
+
     let(:form) do
       instance_double(
         Admin::ParticipatoryProcessForm,
@@ -25,8 +30,7 @@ module Decidim::ParticipatoryProcesses
         slug: "slug",
         hashtag: "hashtag",
         meta_scope: { en: "meta scope" },
-        hero_image: nil,
-        banner_image: nil,
+        hero_image:,
         promoted: nil,
         developer_group: { en: "developer group" },
         local_area: { en: "local" },
@@ -39,17 +43,17 @@ module Decidim::ParticipatoryProcesses
         short_description: { en: "short_description" },
         current_user:,
         current_organization: organization,
+        organization:,
         scopes_enabled: true,
         private_space: false,
         scope:,
         scope_type_max_depth: nil,
         area:,
+        taxonomizations:,
         errors:,
         related_process_ids:,
         participatory_process_group:,
         participatory_process_type:,
-        show_statistics: false,
-        show_metrics: false,
         announcement: { en: "message" }
       )
     end
@@ -64,20 +68,16 @@ module Decidim::ParticipatoryProcesses
     end
 
     context "when the process is not persisted" do
-      let(:invalid_process) do
-        instance_double(
-          Decidim::ParticipatoryProcess,
-          persisted?: false,
-          valid?: false,
-          errors: {
-            hero_image: "File resolution is too large",
-            banner_image: "File resolution is too large"
-          }
-        ).as_null_object
+      let(:hero_image) do
+        ActiveStorage::Blob.create_and_upload!(
+          io: File.open(Decidim::Dev.asset("invalid.jpeg")),
+          filename: "avatar.jpeg",
+          content_type: "image/jpeg"
+        )
       end
 
       before do
-        allow(Decidim::ParticipatoryProcess).to receive(:new).and_return(invalid_process)
+        allow(Decidim::ActionLogger).to receive(:log).and_return(true)
       end
 
       it "broadcasts invalid" do
@@ -86,7 +86,6 @@ module Decidim::ParticipatoryProcesses
 
       it "adds errors to the form" do
         expect(errors).to receive(:add).with(:hero_image, "File resolution is too large")
-        expect(errors).to receive(:add).with(:banner_image, "File resolution is too large")
         subject.call
       end
     end
@@ -98,17 +97,15 @@ module Decidim::ParticipatoryProcesses
         expect { subject.call }.to change(Decidim::ParticipatoryProcess, :count).by(1)
       end
 
-      it "traces the creation", versioning: true do
-        expect(Decidim::ActionLogger)
-          .to receive(:log)
-          .with("create", current_user, a_kind_of(Decidim::ParticipatoryProcess), a_kind_of(Integer))
+      it "traces the action", versioning: true do
+        expect(Decidim.traceability)
+          .to receive(:create)
+          .with(Decidim::ParticipatoryProcess, current_user, kind_of(Hash))
           .and_call_original
 
         expect { subject.call }.to change(Decidim::ActionLog, :count)
-
         action_log = Decidim::ActionLog.last
         expect(action_log.version).to be_present
-        expect(action_log.version.event).to eq "create"
       end
 
       it "broadcasts ok" do
@@ -121,15 +118,25 @@ module Decidim::ParticipatoryProcesses
         expect(process.steps.first).to be_active
       end
 
-      it "does not enable by default stats and metrics" do
-        subject.call
-        expect(process.show_statistics).to be(false)
-        expect(process.show_metrics).to be(false)
-      end
-
       it "adds the admins as followers" do
         subject.call
         expect(current_user.follows?(process)).to be true
+      end
+
+      it "links to taxonomizations" do
+        subject.call
+
+        expect(process.taxonomizations).to match_array(taxonomizations)
+      end
+
+      context "when no taxonomizations are set" do
+        let(:taxonomizations) { [] }
+
+        it "taxonomizations are empty" do
+          subject.call
+
+          expect(process.taxonomizations).to be_empty
+        end
       end
 
       context "with related processes" do

@@ -11,7 +11,15 @@ describe "Explore projects", :slow do
     create_list(:project, projects_count, budget:)
   end
   let!(:project) { projects.first }
-  let(:categories) { create_list(:category, 3, participatory_space: component.participatory_space) }
+  let(:taxonomy) { create(:taxonomy, :with_parent, skip_injection: true, organization:) }
+  let(:taxonomy_filter) { create(:taxonomy_filter, root_taxonomy: taxonomy.parent) }
+  let!(:taxonomy_filter_item) { create(:taxonomy_filter_item, taxonomy_filter:, taxonomy_item: taxonomy) }
+  let(:taxonomy_filter_ids) { [taxonomy_filter.id] }
+
+  before do
+    component_settings = component["settings"]["global"].merge!(taxonomy_filters: taxonomy_filter_ids)
+    component.update!(settings: component_settings)
+  end
 
   describe "show" do
     let(:description) { { en: "Short description", ca: "Descripció curta", es: "Descripción corta" } }
@@ -19,7 +27,7 @@ describe "Explore projects", :slow do
 
     before do
       visit_budget
-      click_link translated(project.title)
+      click_on translated(project.title)
     end
 
     it_behaves_like "has embedded video in description", :description
@@ -40,7 +48,7 @@ describe "Explore projects", :slow do
     it "shows all resources for the given component" do
       visit_budget
       within "#projects" do
-        expect(page).to have_selector(".card__list", count: projects_count)
+        expect(page).to have_css(".card__list", count: projects_count)
       end
 
       projects.each do |project|
@@ -55,7 +63,7 @@ describe "Explore projects", :slow do
           fill_in "filter[search_text_cont]", with: translated(project.title)
 
           within "div.filter-search" do
-            click_button
+            click_on
           end
         end
 
@@ -73,43 +81,25 @@ describe "Explore projects", :slow do
         within "aside form.new_filter" do
           fill_in("filter[search_text_cont]", with: "foobar")
           within "div.filter-search" do
-            click_button
+            click_on
           end
         end
 
-        expect(page).not_to have_content("Another project")
+        expect(page).to have_no_content("Another project")
         expect(page).to have_content("Foobar project")
 
         filter_params = CGI.parse(URI.parse(page.current_url).query)
         expect(filter_params["filter[search_text_cont]"]).to eq(["foobar"])
       end
 
-      it "allows filtering by scope" do
-        scope = create(:scope, organization:)
-        project.scope = scope
+      it "allows filtering by taxonomy" do
+        project.taxonomies = [taxonomy]
         project.save
 
         visit_budget
 
-        within "#panel-dropdown-menu-scope" do
-          click_filter_item translated(scope.name)
-        end
-
-        within "#projects" do
-          expect(page).to have_css(".card__list", count: 1)
-          expect(page).to have_content(translated(project.title))
-        end
-      end
-
-      it "allows filtering by category" do
-        category = categories.first
-        project.category = category
-        project.save
-
-        visit_budget
-
-        within "#panel-dropdown-menu-category" do
-          click_filter_item translated(category.name)
+        within "#panel-dropdown-menu-taxonomy-#{taxonomy.parent.id}" do
+          click_filter_item decidim_escape_translated(taxonomy.name)
         end
 
         within "#projects" do

@@ -2,6 +2,8 @@
 /* eslint no-unused-vars: 0 */
 /* eslint id-length: ["error", { "exceptions": ["e"] }] */
 
+import TomSelect from "tom-select/dist/cjs/tom-select.popular";
+
 $(() => {
   const selectedProposalsCount = function() {
     return $(".table-list .js-check-all-proposal:checked").length
@@ -11,11 +13,19 @@ $(() => {
     return $(".table-list [data-published-state=false] .js-check-all-proposal:checked").length
   }
 
+  const selectedProposalsAllowsAnswerCount = function() {
+    return $(".table-list [data-allow-answer=true] .js-check-all-proposal:checked").length
+  }
+
   const selectedProposalsCountUpdate = function() {
     const selectedProposals = selectedProposalsCount();
     const selectedProposalsNotPublishedAnswer = selectedProposalsNotPublishedAnswerCount();
+    const allowAnswerProposals = selectedProposalsAllowsAnswerCount();
+
     if (selectedProposals === 0) {
       $("#js-selected-proposals-count").text("")
+      $("#js-assign-proposals-to-valuator-actions").addClass("hide");
+      $("#js-unassign-proposals-from-valuator-actions").addClass("hide");
     } else {
       $("#js-selected-proposals-count").text(selectedProposals);
     }
@@ -32,6 +42,13 @@ $(() => {
     } else {
       $('button[data-action="publish-answers"]').parent().hide();
     }
+
+    if (allowAnswerProposals > 0) {
+      $('button[data-action="apply-answer-template"]').parent().show();
+      $("#js-form-apply-answer-template-number").text(allowAnswerProposals);
+    } else {
+      $('button[data-action="apply-answer-template"]').parent().hide();
+    }
   }
 
   const showBulkActionsButton = function() {
@@ -47,6 +64,12 @@ $(() => {
     }
   }
 
+  const resetForms = function() {
+    $("#js-bulk-actions-dropdown button").each(function() {
+      $(`#js-form-${$(this).data("action")}`)[0].reset();
+    })
+  }
+
   const showOtherActionsButtons = function() {
     $("#js-other-actions-wrapper").removeClass("hide");
   }
@@ -59,7 +82,7 @@ $(() => {
     $(".js-bulk-action-form").addClass("hide");
   }
 
-  // Expose functions to make them avaialble in .js.erb templates
+  // Expose functions to make them available in .js.erb templates
   window.selectedProposalsCount = selectedProposalsCount;
   window.selectedProposalsNotPublishedAnswerCount = selectedProposalsNotPublishedAnswerCount;
   window.selectedProposalsCountUpdate = selectedProposalsCountUpdate;
@@ -68,25 +91,42 @@ $(() => {
   window.showOtherActionsButtons = showOtherActionsButtons;
   window.hideOtherActionsButtons = hideOtherActionsButtons;
   window.hideBulkActionForms = hideBulkActionForms;
+  window.resetForms = resetForms;
 
   if ($(".js-bulk-action-form").length) {
     hideBulkActionForms();
     $("#js-bulk-actions-button").addClass("hide");
 
-    $("#js-bulk-actions-dropdown ul li button").click(function(e) {
-      e.preventDefault();
-      let action = $(e.target).data("action");
+    $("#js-bulk-actions-dropdown ul li button").click(function (e) {
+      $("#js-bulk-actions-dropdown").removeClass("is-open");
+      hideBulkActionForms();
 
-      if (action) {
-        $(`#js-form-${action}`).submit(function() {
-          $(".layout-content > .callout-wrapper").html("");
-        })
+      let action = $(e.target).data("action");
+      const panelActions = [
+        "assign-proposals-to-valuator",
+        "unassign-proposals-from-valuator"
+      ];
+
+      if (!action) {
+        return;
+      }
+
+      if (panelActions.includes(action)) {
+        $(`#js-form-${action}`).submit(function () {
+          $(".layout-content > div[data-callout-wrapper]").html("");
+        });
+
+        $(`#js-${action}-actions`).removeClass("hide");
+      } else {
+        $(`#js-form-${action}`).submit(function () {
+          $(".layout-content > div[data-callout-wrapper]").html("");
+        });
 
         $(`#js-${action}-actions`).removeClass("hide");
         hideBulkActionsButton(true);
         hideOtherActionsButtons();
       }
-    })
+    });
 
     // select all checkboxes
     $(".js-check-all").change(function() {
@@ -140,4 +180,19 @@ $(() => {
       showOtherActionsButtons();
     });
   }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const valuatorMultiselectContainers = document.querySelectorAll(
+    ".js-valuator-multiselect"
+  );
+
+  valuatorMultiselectContainers.forEach((container) => {
+    const config = {
+      plugins: ["remove_button", "dropdown_input"],
+      allowEmptyOption: true
+    };
+
+    return new TomSelect(container, config);
+  });
 });

@@ -21,9 +21,9 @@ ja:
               too_long: 長すぎます
             choices:
               missing: は完全ではありません
-              too_many: 多すぎます
+              too_many: 最大 %{count} 個まで選択できます。
         questionnaire:
-          request_invalid: リクエストの処理中にエラーが発生しました。もう一度やり直してください。
+          request_invalid: リクエストの処理中に問題が発生しました。もう一度やり直してください。
   decidim:
     forms:
       admin:
@@ -161,6 +161,7 @@ ja:
             sign_up_description: アンケートに答えるために参加者アカウントを作成します
             title: フォームに回答
           current_step: ステップ %{step}
+          empty: このフォームに設定された質問はまだありません。
           of_total_steps: / %{total_steps}
           questionnaire_answered:
             body: このフォームには既に回答済みです。

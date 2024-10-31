@@ -24,6 +24,8 @@ module Decidim
     include Decidim::HasResourcePermission
     include Decidim::HasArea
     include Decidim::FilterableResource
+    include Decidim::Reportable
+    include Decidim::ShareableWithToken
 
     translatable_fields :title, :description, :answer
 
@@ -63,7 +65,7 @@ module Decidim
              as: :participatory_space
 
     enum signature_type: [:online, :offline, :any], _suffix: true
-    enum state: [:created, :validating, :discarded, :published, :rejected, :accepted]
+    enum state: [:created, :validating, :discarded, :open, :rejected, :accepted]
 
     validates :title, :description, :state, :signature_type, presence: true
     validates :hashtag,
@@ -72,8 +74,8 @@ module Decidim
     validate :signature_type_allowed
 
     scope :open, lambda {
-      where.not(state: [:discarded, :rejected, :accepted, :created])
-           .currently_signable
+      where(state: [:open])
+        .currently_signable
     }
     scope :closed, lambda {
       where(state: [:discarded, :rejected, :accepted])
@@ -85,12 +87,12 @@ module Decidim
     scope_search_multi :with_any_state, [:accepted, :rejected, :answered, :open, :closed]
 
     scope :currently_signable, lambda {
-      where("signature_start_date <= ?", Date.current)
-        .where("signature_end_date >= ?", Date.current)
+      where(signature_start_date: ..Date.current)
+        .where(signature_end_date: Date.current..)
     }
     scope :currently_unsignable, lambda {
       where("signature_start_date > ?", Date.current)
-        .or(where("signature_end_date < ?", Date.current))
+        .or(where(signature_end_date: ...Date.current))
     }
 
     scope :answered, -> { where.not(answered_at: nil) }
@@ -159,6 +161,18 @@ module Decidim
       Decidim::Initiatives::AdminLog::InitiativePresenter
     end
 
+    def self.ransackable_attributes(auth_object = nil)
+      base = %w(search_text title description id id_string supports_count author_name author_nickname)
+
+      return base unless auth_object&.admin?
+
+      base + %w(published_at state decidim_area_id type_id)
+    end
+
+    def self.ransackable_associations(_auth_object = nil)
+      %w(area scope categories)
+    end
+
     def self.ransackable_scopes(_auth_object = nil)
       [:with_any_state, :with_any_type, :with_any_scope, :with_any_area]
     end
@@ -184,32 +198,22 @@ module Decidim
       decidim_user_group_id.nil?
     end
 
-    # Public: check if an initiative is open
-    #
-    # Returns a Boolean
-    def open?
-      !closed?
-    end
-
-    # Public: Checks if an initiative is closed. An initiative is closed when
-    # at least one of the following conditions is true:
-    #
-    # * It has been discarded.
-    # * It has been rejected.
-    # * It has been accepted.
-    # * Signature collection period has finished.
-    #
-    # Returns a Boolean
-    def closed?
-      discarded? || rejected? || accepted? || !votes_enabled?
-    end
-
     # Public: Returns the author name. If it has been created by an organization it will
     # return the organization's name. Otherwise it will return author's name.
     #
     # Returns a string
     def author_name
       user_group&.name || author.name
+    end
+
+    # Public: Overrides the `reported_content_url` Reportable concern method.
+    def reported_content_url
+      ResourceLocatorPresenter.new(self).url
+    end
+
+    # Public: Overrides the `reported_attributes` Reportable concern method.
+    def reported_attributes
+      [:title, :description]
     end
 
     def votes_enabled?
@@ -254,7 +258,7 @@ module Decidim
 
       update(
         published_at: Time.current,
-        state: "published",
+        state: "open",
         signature_start_date: Date.current,
         signature_end_date: signature_end_date || (Date.current + Decidim::Initiatives.default_signature_time_period_length)
       )
@@ -269,7 +273,7 @@ module Decidim
       update(published_at: nil, state: "discarded")
     end
 
-    # Public: Returns wether the signature interval is already defined or not.
+    # Public: Returns whether the signature interval is already defined or not.
     def has_signature_interval_defined?
       signature_end_date.present? && signature_start_date.present?
     end
@@ -463,6 +467,10 @@ module Decidim
 
     def user_allowed_to_comment?(user)
       ActionAuthorizer.new(user, "comment", self, nil).authorize.ok?
+    end
+
+    def shareable_url(share_token)
+      EngineRouter.main_proxy(self).initiative_url(self, share_token: share_token.token)
     end
 
     def self.ransack(params = {}, options = {})

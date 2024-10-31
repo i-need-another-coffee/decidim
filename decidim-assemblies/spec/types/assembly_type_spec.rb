@@ -4,6 +4,7 @@ require "spec_helper"
 require "decidim/api/test/type_context"
 
 require "decidim/core/test/shared_examples/attachable_interface_examples"
+require "decidim/core/test/shared_examples/taxonomizable_interface_examples"
 require "decidim/core/test/shared_examples/participatory_space_resourcable_interface_examples"
 
 module Decidim
@@ -12,10 +13,11 @@ module Decidim
       include_context "with a graphql class type"
 
       let(:model) { create(:assembly) }
+      let(:organization) { model.organization }
 
       include_examples "attachable interface"
       include_examples "participatory space resourcable interface"
-      include_examples "categories container interface"
+      include_examples "taxonomizable interface"
 
       describe "id" do
         let(:query) { "{ id }" }
@@ -93,7 +95,7 @@ module Decidim
         let(:query) { "{ heroImage }" }
 
         it "returns the hero image field" do
-          expect(response["heroImage"]).to eq(model.attached_uploader(:hero_image).path)
+          expect(response["heroImage"]).to be_blob_url(model.hero_image.blob)
         end
       end
 
@@ -101,7 +103,7 @@ module Decidim
         let(:query) { "{ bannerImage }" }
 
         it "returns the banner image field" do
-          expect(response["bannerImage"]).to eq(model.attached_uploader(:banner_image).path)
+          expect(response["bannerImage"]).to be_blob_url(model.banner_image.blob)
         end
       end
 
@@ -158,22 +160,6 @@ module Decidim
 
         it "returns the participatoryStructure field" do
           expect(response["participatoryStructure"]["translation"]).to eq(model.participatory_structure["en"])
-        end
-      end
-
-      describe "showStatistics" do
-        let(:query) { "{ showStatistics }" }
-
-        it "returns the showStatistics field" do
-          expect(response["showStatistics"]).to eq(model.show_statistics)
-        end
-      end
-
-      describe "scopesEnabled" do
-        let(:query) { "{ scopesEnabled }" }
-
-        it "returns the scopesEnabled field" do
-          expect(response["scopesEnabled"]).to eq(model.scopes_enabled)
         end
       end
 
@@ -265,7 +251,7 @@ module Decidim
       context "when there is type" do
         let(:model) { create(:assembly, :with_type) }
 
-        describe "assemblyeType" do
+        describe "assemblyType" do
           let(:query) { "{ assemblyType { id } }" }
 
           it "returns the assemblyType field" do

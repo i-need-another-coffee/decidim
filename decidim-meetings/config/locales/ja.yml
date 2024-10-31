@@ -22,6 +22,7 @@ ja:
         id: ID
         iframe_access_level: iframeアクセスレベル：
         iframe_embed_type: Iframe 埋め込みタイプ
+        iframe_embed_type_html: '「ミーティングページに埋め込む」または「配信イベントページで開く」を許可しているサービスはわずかしかありません。 モバイルでの「ミーティングページに埋め込む」オプションに注意してください。画面が異なる寸法を継承するため、実際には「配信イベントで開く」として機能します。'
         location: 場所
         location_hints: 位置情報のヒント
         online_meeting_url: オンラインミーティングURL
@@ -56,7 +57,7 @@ ja:
         meeting:
           attributes:
             iframe_embed_type:
-              not_embeddable: このURLは、ミーティングやライブイベントのページに埋め込むことはできません。
+              not_embeddable: このURLは、ミーティングや配信イベントのページに埋め込むことはできません。
             online_meeting_url:
               url_format: 有効な URL でなければなりません
         meeting_agenda:
@@ -77,6 +78,10 @@ ja:
       decidim/meetings/update_meeting_event: ミーティングが更新されました
   activerecord:
     models:
+      decidim:
+        meetings:
+          meeting:
+            text: 'このミーティングで議論されました: %{link}'
       decidim/meetings/meeting:
         other: ミーティング
       decidim/meetings/minutes:
@@ -86,6 +91,11 @@ ja:
   decidim:
     admin:
       filters:
+        accepted_at_not_null:
+          label: 承認済み
+          values:
+            'false': 未承認
+            'true': 承認済み
         meetings:
           category_id_eq:
             label: カテゴリ
@@ -113,6 +123,18 @@ ja:
               hybrid: ハイブリッド
               in_person: 対面
               online: オンライン
+        rejected_at_not_null:
+          label: 却下済み
+          values:
+            'false': 未却下
+            'true': 却下済み
+        search_placeholder:
+          user_name_or_user_email_cont: 名前またはメールアドレスで検索
+        sent_at_not_null:
+          label: 送信済み
+          values:
+            'false': 未送信
+            'true': 送信済み
       meeting_copies:
         create:
           error: このミーティングを複製する際に問題が発生しました。
@@ -125,6 +147,7 @@ ja:
         actions:
           comment: コメント
           join: 参加する
+          reply_poll: 投票
         name: ミーティング
         settings:
           global:
@@ -276,15 +299,9 @@ ja:
             non_user: 非参加者
             select_user: 参加者を選択
           index:
-            filter:
-              accepted: 承認済み
-              all: すべて
-              rejected: 拒否
-              sent: 送信済み
             invite_attendee: 参加者を招待
             invites: 招待
             registrations_disabled: 登録が無効になっているため、参加者を招待することはできません。
-            search: 検索
         meeting_closes:
           edit:
             close: 閉じる
@@ -307,6 +324,7 @@ ja:
           form:
             address_help: 'アドレス: ジオコーダーが場所を見つけるために使用'
             disclaimer: '免責事項: 外部の登録システムを使用する場合、ユーザーが外部サービスに提供したデータについて%{organization} の主催者が責任を負わないことをあらかじめご了承ください。'
+            iframe_embed_type_html: 'ミーティングまたは配信イベントに埋め込めるサービスは以下のドメインに限定されています: %{domains}'
             location_help: '場所: ユーザーにメッセージが表示されます。'
             location_hints_help: '位置情報のヒント：追加情報。 例: 対面ミーティングでの建物のフロア、またはアクセス制限のあるオンラインミーティングでのミーティングパスワード。'
             online_meeting_url_help: 'リンク: 参加者があなたのミーティングに直接接続できるようにします'
@@ -344,6 +362,13 @@ ja:
           update:
             invalid: このミーティングの投票の更新に問題がありました．
             success: ミーティングの投票を更新しました。
+        poll:
+          form:
+            announcement_html:
+              - 質問が回答を受信または公開/閉じた場合、編集できなくなります。
+              - 質問はいつでも追加できます。
+              - 作成されたすべての質問の結果が公開されると、投票は終了します。
+              - 質問を送信し、結果を公開するには、 <a href='%{admin_link}'>投票管理ページ</a> にアクセスしてください。
         registrations:
           edit:
             save: 保存
@@ -387,6 +412,9 @@ ja:
           all: すべて
         filter_meeting_space_values:
           all: すべて
+      calendar:
+        meeting_to_event:
+          read_more: このミーティングについてもっと読む
       calendar_modal:
         calendar_url: カレンダー URL
         copy_calendar_url: コピー
@@ -401,7 +429,7 @@ ja:
           body: ミーティング <a href="%{meeting_path}">"%{meeting_title}"</a> はクローズされます．「ミーティングを閉じる」ボタンを使ってミーティングのレポートを追加してください．
           greetings: こんにちは、<br/>%{organization_name}<br/><a href="%{organization_url}">%{organization_url}</a>
           hello: こんにちは、 %{username} さん。
-          subject: '%{organization_name} プラットフォーム上のレポートでミーティングを閉じることができます。'
+          subject: ミーティング「%{meeting_title}」を終了してレポートを追加できます
       conference_venues: カンファレンス会場
       content_blocks:
         upcoming_meetings:
@@ -418,16 +446,14 @@ ja:
       iframe_embed_type:
         embed_in_meeting_page: ミーティングページに埋め込む
         none: なし
-        open_in_live_event_page: ライブイベントページで開く (オプションの投票付き)
+        open_in_live_event_page: ライブイベントページで開く
         open_in_new_tab: URLを新しいタブで開く
       last_activity:
         meeting_updated: '更新されたミーティング:'
         new_meeting: '新しいミーティング:'
       layouts:
         live_event:
-          administrate: 管理
           close: 閉じる
-          questions: 質問
       mailer:
         invite_join_meeting_mailer:
           invite:
@@ -487,6 +513,7 @@ ja:
           available_slots_help: 無制限の場合は0のままにしてください
           create_as: 次のユーザとしてミーティングを作成：
           disclaimer: '免責事項: 外部の登録システムを使用する場合、ユーザーが外部サービスに提供したデータについて%{organization} の主催者が責任を負わないことをあらかじめご了承ください。'
+          iframe_embed_type_html: 'ミーティングまたは配信イベントに埋め込めるサービスは以下のドメインに限定されています: %{domains}'
           location_help: '場所: ユーザーにメッセージが表示されます。'
           location_hints_help: '位置情報のヒント：追加情報。 例: 対面ミーティングでの建物のフロア、またはアクセス制限のあるオンラインミーティングでのミーティングパスワード。'
           online_meeting_url_help: 'リンク: 参加者があなたのミーティングに直接接続できるようにします'
@@ -499,13 +526,15 @@ ja:
           click_here: すべてのミーティングを見る
           new_meeting: 新しいミーティング
           see_all: すべてのミーティングを見る
-          see_all_withdrawn: 撤回されたすべてのミーティングを見る
+          see_all_withdrawn: 取り消したすべてのミーティングを見る
           text_banner: 作成者が取り消したミーティングの一覧を表示しています． %{go_back_link}
         meeting:
           close_meeting: ミーティングを終了する
           edit_close_meeting: ミーティングレポートを編集
           edit_meeting: ミーティングを編集
           join_meeting: ミーティングに参加
+          reply_poll: 投票に返信
+          view_poll: 投票を表示
         meetings:
           no_meetings_warning: 検索条件に一致するミーティングがないか，予定されているミーティングがありません．
           upcoming_meetings_warning: 現在、スケジュールされたミーティングはありませんが、ここではリストされた過去のミーティングをすべて見つけることができます。
@@ -563,13 +592,22 @@ ja:
             start_time: 開始日
             title: タイトル
       polls:
+        answers:
+          index:
+            administrate: 管理
+            title: 投票
+          index_admin:
+            back_to_meeting: ミーティングに戻る
+            title: 投票を管理
+            view_poll: 投票を表示
         questions:
           closed_question:
-            question_results: 質問の結果
+            announcement: この質問への回答はクローズされました。
+            question: 質問
+            question_results: 結果
           index:
             empty_questions: このミーティングを通じて、いくつかの質問が送信され、回答することができます。質問はここに表示されます。
           index_admin:
-            admin_dashboard: 管理者ダッシュボード
             edit: 管理画面で編集
             question: 質問
             received_answer: 受理した回答
@@ -577,6 +615,10 @@ ja:
             results: 結果
             send: 送信
             sent: 送信済み
+            statuses:
+              closed: 結果送信済（終了）
+              published: 送信済 (受付中)
+              unpublished: 送信待ち
           published_question:
             max_choices_alert: 選択された選択肢が多すぎます
             question: 質問
@@ -616,7 +658,7 @@ ja:
         transparent: 透明性
         withdraw: 取り消し
       withdraw:
-        error: ミーティングを取り上げる際にエラーが発生しました。
+        error: ミーティングを取り消す際に問題がありました。
         success: ミーティングは正常に取り下げられました。
     metrics:
       meetings:

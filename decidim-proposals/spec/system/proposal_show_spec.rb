@@ -46,8 +46,8 @@ describe "Show a Proposal" do
 
           it "does not have a link to answer the proposal at the admin" do
             within "header" do
-              expect(page).not_to have_css("#admin-bar")
-              expect(page).not_to have_link("Answer")
+              expect(page).to have_no_css("#admin-bar")
+              expect(page).to have_no_link("Answer")
             end
           end
         end
@@ -64,7 +64,7 @@ describe "Show a Proposal" do
         context "when author does not restrict messaging" do
           it "includes a link to message the proposal author" do
             within "[data-author]" do
-              find("div.author__container").hover
+              find(".author__container").hover
             end
             expect(page).to have_link("Send private message")
           end

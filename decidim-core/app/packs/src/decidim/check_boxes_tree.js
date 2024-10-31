@@ -22,7 +22,7 @@ export default class CheckBoxesTree {
   /**
    * Set checkboxes as checked if included in given values
    * @public
-   * @param {Array} checkboxes - array of checkboxs to check
+   * @param {Array} checkboxes - array of checkboxes to check
    * @param {Array} values - values of checkboxes that should be checked
    * @returns {Void} - Returns nothing.
    */
@@ -101,7 +101,6 @@ export default class CheckBoxesTree {
     const indeterminateSiblings = totalCheckSiblings.filter((checkbox) => checkbox.indeterminate)
 
     if (checkedSiblings.length === 0 && indeterminateSiblings.length === 0) {
-      parentCheck.checked = false;
       parentCheck.indeterminate = false;
     } else if (checkedSiblings.length === totalCheckSiblings.length && indeterminateSiblings.length === 0) {
       parentCheck.checked = true;

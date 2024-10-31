@@ -286,14 +286,8 @@ tr:
             non_user: Mevcut olmayan kullanıcı
             select_user: Kullanıcı seç
           index:
-            filter:
-              accepted: Kabul edilmiş
-              all: Herşey
-              rejected: Reddedilen
-              sent: Gönderilen
             invite_attendee: Katılımcı Davet Et
             invites: Davetler
-            search: Arama
           new:
             invite: Davet et
             new_invite: Kullanıcı davet et
@@ -388,9 +382,13 @@ tr:
           collaborators: Ortaklar
           main_promotors: Organizatörler
         show:
+          already_have_an_account?: Hesabınız var mı?
+          are_you_new?: Yeni Katılımcı?
           login_as: '%{name} <%{email}> olarak giriş yaptınız'
           manage_registration: Kayıt İşlemini Yönet
           register: Kayıt olmak
+          sign_in_description: Konferansa kaydolmak için giriş yapın
+          sign_up_description: Konferansa kaydolmak için bir hesap oluşturun
       content_blocks:
         highlighted_conferences:
           name: Vurgulanan konferanslar

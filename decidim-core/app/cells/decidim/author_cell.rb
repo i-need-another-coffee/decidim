@@ -5,9 +5,7 @@ module Decidim
   # below resource titles to indicate its authorship & such, and is intended
   # for resources that have a single author.
   class AuthorCell < Decidim::ViewModel
-    include LayoutHelper
     include CellsHelper
-    include Decidim::SanitizeHelper
     include ::Devise::Controllers::Helpers
     include ::Devise::Controllers::UrlHelpers
     include Messaging::ConversationHelper
@@ -56,7 +54,7 @@ module Decidim
     end
 
     def show_icons?
-      layout != :compact
+      options[:show_icons] != false && layout != :compact
     end
 
     def context_actions
@@ -161,6 +159,12 @@ module Decidim
 
     def resource_name
       @resource_name ||= from_context.class.name.demodulize.underscore
+    end
+
+    def has_tooltip?
+      return options[:tooltip] if options.has_key?(:tooltip)
+
+      model.has_tooltip?
     end
   end
 end

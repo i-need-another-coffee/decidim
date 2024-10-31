@@ -14,13 +14,17 @@ describe "Meeting agenda" do
     visit resource_locator(meeting).path
   end
 
+  before do
+    stub_geocoding_coordinates([meeting.latitude, meeting.longitude])
+  end
+
   context "when meeting agenda is not visible" do
     let(:visible) { false }
 
     it "the section agenda is not visible" do
       visit_meeting
 
-      expect(page).not_to have_css("[data-meeting-agenda]")
+      expect(page).to have_no_css("[data-meeting-agenda]")
     end
   end
 

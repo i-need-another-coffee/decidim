@@ -60,8 +60,8 @@ module Decidim
     #
     #     # This is how you can access the image data, just like with any other
     #     # uploader field. You can use the uploader variants too.
-    #     content_block.images_container.attached_uploader(:my_image).path
-    #     content_block.images_container.attached_uploader(:my_image).path(variant: :big)
+    #     content_block.images_container.attached_uploader(:my_image).url
+    #     content_block.images_container.attached_uploader(:my_image).variant_url(:big)
     #
     #     # This will delete the attached image
     #     content_block.images_container.my_image = nil
@@ -134,7 +134,7 @@ module Decidim
       images_container.save
     end
 
-    # On instance reloading we need to remove the `images_cointainer` cached
+    # On instance reloading we need to remove the `images_container` cached
     # class so it gets regenerated with the new values.
     def reload_images
       @images_container = nil

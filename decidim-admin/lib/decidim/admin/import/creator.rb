@@ -12,7 +12,7 @@ module Decidim
       # own creator or this default will be used.
       class Creator
         class << self
-          # Retuns the resource class to be created with the provided data.
+          # Returns the resource class to be created with the provided data.
           def resource_klass
             raise NotImplementedError, "#{self.class.name} does not define resource class"
           end
@@ -28,12 +28,8 @@ module Decidim
           end
 
           def localize_headers(header, locales)
-            @localize_headers ||= begin
-              localize_headers = []
-              locales.each do |locale|
-                localize_headers << "#{header}/#{locale}".to_sym
-              end
-              localize_headers
+            @localize_headers ||= locales.map do |locale|
+              :"#{header}/#{locale}"
             end
           end
         end

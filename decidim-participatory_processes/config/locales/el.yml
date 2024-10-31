@@ -4,7 +4,6 @@ el:
       participatory_process:
         announcement: Ανακοίνωση
         area_id: Τομέας
-        banner_image: Εικόνα διαφημιστικού πλαισίου
         copy_categories: Αντιγραφή κατηγοριών
         copy_components: Αντιγραφή στοιχείων
         copy_steps: Αντιγραφή βημάτων
@@ -34,8 +33,6 @@ el:
         scope_type_max_depth_id: Βάθος φίλτρου πεδίου εφαρμογής
         scopes_enabled: Ενεργοποιημένα πεδία εφαρμογών
         short_description: Σύντομη περιγραφή
-        show_metrics: Εμφάνιση μετρικών
-        show_statistics: Εμφάνιση στατιστικών
         slug: Slug διεύθυνσης URL
         start_date: Ημερομηνία έναρξης
         subtitle: Υπότιτλος
@@ -98,8 +95,6 @@ el:
         destroy: Διαγραφή
         duplicate: Αντιγραφή
         edit: Επεξεργασία
-        filter:
-          all_processes: Εμφάνιση όλων των διαδικασιών
         import_process: Εισαγωγή
         moderate: Συντονισμός
         new_process: Νέα διαδικασία
@@ -173,7 +168,6 @@ el:
           title: Αντιγραφή διαδικασίας συμμετοχής
       participatory_process_groups:
         destroy:
-          error: Παρουσιάστηκε σφάλμα κατά την καταστροφή της ομάδας διαδικασιών συμμετοχής.
           success: Η ομάδα διαδικασιών συμμετοχής διαγράφηκε με επιτυχία.
         edit:
           title: Επεξεργασία ομάδας διαδικασιών
@@ -403,14 +397,11 @@ el:
             select_participatory_process_type: Επιλέξτε έναν τύπο διεργασίας
             select_process_group: Επιλέξτε ομάδα διαδικασίας
             title: Γενικές πληροφορίες
-            visbility: Ορατότητα
       content_blocks:
         highlighted_processes:
           name: Επισημασμένες διαδικασίες
       index:
         title: Διαδικασίες συμμετοχής
-      last_activity:
-        new_participatory_process: Νέα διαδικασία συμμετοχής
       participatory_process_steps:
         index:
           back_to_process: Πίσω στην σελίδα της διαδικασίας

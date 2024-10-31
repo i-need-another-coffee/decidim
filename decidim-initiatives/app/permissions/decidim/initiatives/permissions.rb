@@ -19,6 +19,7 @@ module Decidim
         create_initiative?
         edit_public_initiative?
         update_public_initiative?
+        print_initiative?
 
         vote_initiative?
         sign_initiative?
@@ -51,7 +52,8 @@ module Decidim
         return unless [:initiative, :participatory_space].include?(permission_action.subject) &&
                       permission_action.action == :read
 
-        return allow! if initiative.published? || initiative.rejected? || initiative.accepted?
+        return allow! if initiative.open? || initiative.rejected? || initiative.accepted?
+        return allow! if user_can_preview_space?
         return allow! if user && authorship_or_admin?
 
         disallow!
@@ -107,11 +109,11 @@ module Decidim
       end
 
       def access_request_without_user?
-        (!initiative.published? && initiative.promoting_committee_enabled?) || Decidim::Initiatives.do_not_require_authorization
+        (!initiative.open? && initiative.promoting_committee_enabled?) || Decidim::Initiatives.do_not_require_authorization
       end
 
       def access_request_membership?
-        !initiative.published? &&
+        !initiative.open? &&
           initiative.promoting_committee_enabled? &&
           !initiative.has_authorship?(user) &&
           (
@@ -119,6 +121,17 @@ module Decidim
               UserAuthorizations.for(user).any? ||
               Decidim::UserGroups::ManageableUserGroups.for(user).verified.any?
         )
+      end
+
+      def print_initiative?
+        return unless permission_action.action == :print &&
+                      permission_action.subject == :initiative
+
+        toggle_allow(Decidim::Initiatives.print_enabled && (authorship_or_admin? || committee_member?))
+      end
+
+      def committee_member?
+        InitiativesPromoted.by(user).exists?(id: initiative.id)
       end
 
       def vote_initiative?
@@ -179,6 +192,12 @@ module Decidim
         Decidim::Initiatives.do_not_require_authorization ||
             UserAuthorizations.for(user).any?
       )
+      end
+
+      def user_can_preview_space?
+        context[:share_token].present? && Decidim::ShareToken.use!(token_for: initiative, token: context[:share_token], user:)
+      rescue ActiveRecord::RecordNotFound, StandardError
+        nil
       end
 
       def initiative_committee_action?

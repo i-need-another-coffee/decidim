@@ -35,7 +35,7 @@ module Decidim
       end
 
       def base_relation
-        Decidim::Proposals::Proposal.published.not_hidden.except_withdrawn.where(component: model)
+        Decidim::Proposals::Proposal.published.not_hidden.not_withdrawn.where(component: model)
       end
 
       def decidim_proposals
@@ -49,7 +49,7 @@ module Decidim
       end
 
       def proposals_to_render
-        @proposals_to_render ||= proposals.includes([:amendable, :category, :component, :scope]).limit(Decidim::Proposals.config.participatory_space_highlighted_proposals_limit)
+        @proposals_to_render ||= proposals.includes([:amendable, :component, :taxonomies]).limit(Decidim::Proposals.config.participatory_space_highlighted_proposals_limit)
       end
 
       def cache_hash

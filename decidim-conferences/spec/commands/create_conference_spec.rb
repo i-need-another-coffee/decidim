@@ -10,6 +10,11 @@ module Decidim::Conferences
     let(:current_user) { create(:user, :admin, :confirmed, organization:) }
     let(:scope) { create(:scope, organization:) }
     let(:errors) { double.as_null_object }
+    let(:hero_image) { nil }
+    let(:taxonomizations) do
+      2.times.map { build(:taxonomization, taxonomy: create(:taxonomy, :with_parent, organization:), taxonomizable: nil) }
+    end
+    let(:banner_image) { nil }
     let!(:participatory_processes) do
       create_list(
         :participatory_process,
@@ -38,14 +43,16 @@ module Decidim::Conferences
         slug: "slug",
         hashtag: "hashtag",
         location: "location location",
-        hero_image: nil,
-        banner_image: nil,
+        hero_image:,
+        banner_image:,
         promoted: nil,
         description: { en: "description" },
         short_description: { en: "short_description" },
         current_organization: organization,
+        organization:,
         scopes_enabled: true,
         scope:,
+        taxonomizations:,
         errors:,
         show_statistics: false,
         objectives: { en: "objectives" },
@@ -69,21 +76,17 @@ module Decidim::Conferences
     end
 
     context "when the conference is not persisted" do
-      let(:invalid_conference) do
-        instance_double(
-          Decidim::Conference,
-          persisted?: false,
-          valid?: false,
-          errors: {
-            hero_image: "File resolution is too large",
-            banner_image: "File resolution is too large"
-          }
-        ).as_null_object
+      let(:hero_image) do
+        ActiveStorage::Blob.create_and_upload!(
+          io: File.open(Decidim::Dev.asset("invalid.jpeg")),
+          filename: "avatar.jpeg",
+          content_type: "image/jpeg"
+        )
       end
+      let(:banner_image) { hero_image }
 
       before do
         allow(Decidim::ActionLogger).to receive(:log).and_return(true)
-        allow(Decidim::Conference).to receive(:create).and_return(invalid_conference)
       end
 
       it "broadcasts invalid" do
@@ -134,6 +137,22 @@ module Decidim::Conferences
         subject.call
         linked_assemblies = conference.linked_participatory_space_resources(:assemblies, "included_assemblies")
         expect(linked_assemblies).to match_array(assemblies)
+      end
+
+      it "links to taxonomizations" do
+        subject.call
+
+        expect(conference.taxonomizations).to match_array(taxonomizations)
+      end
+
+      context "when no taxonomizations are set" do
+        let(:taxonomizations) { [] }
+
+        it "taxonomizations are empty" do
+          subject.call
+
+          expect(conference.taxonomizations).to be_empty
+        end
       end
 
       context "when sorting linked_participatory_space_resources" do

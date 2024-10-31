@@ -17,17 +17,13 @@ module Decidim
       def serialize
         {
           id: meeting.id,
-          category: {
-            id: meeting.category.try(:id),
-            name: meeting.category.try(:name)
-          },
-          scope: {
-            id: meeting.scope.try(:id),
-            name: meeting.scope.try(:name)
-          },
           participatory_space: {
             id: meeting.participatory_space.id,
             url: Decidim::ResourceLocatorPresenter.new(meeting.participatory_space).url
+          },
+          taxonomies: {
+            id: meeting.taxonomies.map(&:id),
+            name: meeting.taxonomies.map(&:name)
           },
           component: { id: component.id },
           title: meeting.title,
@@ -46,7 +42,9 @@ module Decidim
           url:,
           related_proposals:,
           related_results:,
-          published: meeting.published_at.present?
+          published: meeting.published_at.present?,
+          withdrawn: meeting.withdrawn?,
+          withdrawn_at: meeting.withdrawn_at
         }
       end
 

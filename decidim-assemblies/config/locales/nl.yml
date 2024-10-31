@@ -43,7 +43,6 @@ nl:
         scope_id: Scope
         scopes_enabled: Scopes ingeschakeld
         short_description: Korte beschrijving
-        show_statistics: Toon statistieken
         slug: URL pad
         special_features: Speciale functionaliteiten
         subtitle: Ondertiteling
@@ -178,7 +177,6 @@ nl:
           categories: Categorieën
           components: Onderdelen
           moderations: Moderaties
-          private_users: Particuliere gebruikers
         assemblies_types: Soorten groepen
       models:
         assemblies_types:
@@ -262,7 +260,6 @@ nl:
             select_parent_assembly: Selecteer de hoofdgroep
             social_handlers: sociaal
             title: Algemene informatie
-            visbility: Zichtbaarheid
         assemblies_types:
           form:
             title: Titel
@@ -270,7 +267,6 @@ nl:
           form:
             existing_user: Bestaande deelnemer
             explanation: 'Eigenschappen afbeelding:'
-            image_guide: Bij voorkeur een afbeelding in 'portretmodus' (staand) die geen tekst bevat.
             non_user: Niet deelnemer
             non_user_avatar_help: Je hebt de toestemming nodig van de personen voordat je ze als lid publiceert.
             select_a_position: Selecteer een positie
@@ -325,11 +321,7 @@ nl:
       show:
         assembly_type: Groepstype
         duration: Duur
-        is_transparent:
-          'false': ondoorzichtig
-          'true': Transparant
         private_space: Dit is een privé event
-        related_participatory_processes: Verwante inspraakprocessen
         social_networks_title: Bezoek groep op
     assembly_members:
       assembly_member:

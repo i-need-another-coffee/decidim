@@ -86,10 +86,16 @@ $(() => {
   if ($form.length > 0) {
     const $privateMeeting = $form.find("#private_meeting");
     const $transparent = $form.find("#transparent");
+    const $warning = $form.find(".js-private-warning");
+    const $assign = $form.find(".js-add-component");
 
     const toggleDisabledHiddenFields = () => {
       const enabledPrivateSpace = $privateMeeting.find("input[type='checkbox']").prop("checked");
+      const enabledTransparent = $transparent.find("input[type='checkbox']").prop("checked");
+
       $transparent.find("input[type='checkbox']").attr("disabled", "disabled");
+      $warning?.toggleClass("hidden", !enabledPrivateSpace || enabledTransparent);
+      $assign?.attr("disabled", enabledPrivateSpace && !enabledTransparent);
 
       if (enabledPrivateSpace) {
         $transparent.find("input[type='checkbox']").attr("disabled", !enabledPrivateSpace);
@@ -97,6 +103,8 @@ $(() => {
     };
 
     $privateMeeting.on("change", toggleDisabledHiddenFields);
+    $transparent.on("change", toggleDisabledHiddenFields);
+
     toggleDisabledHiddenFields();
 
     attachGeocoding($form.find("#meeting_address"));
@@ -117,9 +125,9 @@ $(() => {
     toggleDependsOnSelect($meetingRegistrationType, $meetingRegistrationUrl, "on_different_platform");
 
     const $meetingTypeOfMeeting = $form.find("#meeting_type_of_meeting");
-    const $meetingOnlineFields = $form.find(".field[data-meeting-type='online']");
-    const $meetingInPersonFields = $form.find(".field[data-meeting-type='in_person']");
-    const $meetingOnlineAccessLevelFields = $form.find(".field[data-meeting-type='online-access-level']");
+    const $meetingOnlineFields = $form.find("[data-meeting-type='online']");
+    const $meetingInPersonFields = $form.find("[data-meeting-type='in_person']");
+    const $meetingOnlineAccessLevelFields = $form.find("[data-meeting-type='online-access-level']");
     const $meetingIframeEmbedType = $form.find("#meeting_iframe_embed_type");
 
     const toggleTypeDependsOnSelect = ($target, $showDiv, type) => {

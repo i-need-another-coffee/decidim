@@ -150,6 +150,7 @@ lb:
         export: Alles exportéieren
         export-selection: Export Auswiel
         import: Importieren
+        manage: Verwalten
         newsletter:
           new: Neuer Newsletter
         participatory_space_private_user:
@@ -269,7 +270,6 @@ lb:
           headers:
             actions: Aktionen
             name: Komponentenname
-            scope: Komponentenbereich
             type: Komponententyp
         new:
           add: Komponente hinzufügen
@@ -290,7 +290,6 @@ lb:
         title: "Überprüfungskonflikte\n\n"
         transfer:
           email: E-Mail
-          error: Es gab ein Problem bei der Übertragung des aktuellen Teilnehmers zu den verwalteten Teilnehmern.
           name: Name
           reason: Grund
           success: Übertragung erfolgreich.
@@ -300,9 +299,6 @@ lb:
       dashboard:
         show:
           view_more_logs: Weitere Protokolle anzeigen
-      domain_whitelist:
-        form:
-          domain_too_short: Domain zu kurz
       exports:
         export_as: "%{name} als %{export_format}"
         formats:
@@ -360,7 +356,6 @@ lb:
           name_or_nickname_or_email_cont: Suche in %{collection} nach E-Mail, Name oder Benutzername.
           reported_id_string_or_reported_content_cont: Suche %{collection} nach meldbarer Id oder Inhalt.
           title_cont: In %{collection} nach Titel suchen.
-          user_name_or_user_email_cont: In %{collection} nach Name oder E-Mail suchen.
         state_eq:
           label: Bundesland
           values:
@@ -433,10 +428,10 @@ lb:
         area_types: Bereichstypen
         areas: Bereiche
         configuration: Aufbau
-        external_domain_whitelist: Erlaabt extern Domainen
         help_sections: Hilfeabschnitte
         homepage: Startseite
         impersonations: Identitätswechsel
+        manage: Verwalten
         moderation: Globale Moderationen
         newsletters: Newsletter
         participants: Teilnehmer
@@ -681,17 +676,6 @@ lb:
             layout_appearance_title: Layout-Layout bearbeiten
             preview: Vorschau
           omnipresent_banner_appearance_title: Bearbeiten Sie das allgegenwärtige Banner
-      organization_external_domain_whitelist:
-        edit:
-          update: Aktualiséieren
-        external_domain:
-          down: Runter
-          external_domain: Externe Domäne
-          remove: Löschen
-          up: Hoch
-        form:
-          add: Zur Whitelist hinzufügen
-          title: Whitelist für externe Domains
       participatory_space_private_users:
         create:
           error: Beim Hinzufügen eines privaten Benutzers für diesen partizipativen Bereich ist ein Fehler aufgetreten.
@@ -797,6 +781,8 @@ lb:
           without_topic: Seiten ohne Thema
         update:
           error: Beim Aktualisieren dieser Seite ist ein Fehler aufgetreten.
+      taxonomies:
+        count: Anzahl
       titles:
         admin_log: Adminprotokoll
         area_types: Bereichstypen
@@ -897,3 +883,8 @@ lb:
   errors:
     messages:
       invalid_json: Ungültiger JSON
+  layouts:
+    decidim:
+      admin:
+        global_moderations:
+          title: Globale Moderationen

@@ -122,6 +122,7 @@ is-IS:
         category:
           new: Nýr flokkur
         import: Flytja inn
+        manage: Stjórna
         newsletter:
           new: Nýtt fréttabréf
         per_page: Á hveri síðu
@@ -272,6 +273,7 @@ is-IS:
         areas: Svæði
         configuration: Stillingar
         impersonations: Impersonations
+        manage: Stjórna
         newsletters: Fréttabréf
         scope_types: Gildissvið
         scopes: Scopes
@@ -448,6 +450,8 @@ is-IS:
           update: Uppfæra
         new:
           title: Ný síða
+      taxonomies:
+        count: Telja
       titles:
         admin_log: Admin log
         area_types: Svæði tegundir

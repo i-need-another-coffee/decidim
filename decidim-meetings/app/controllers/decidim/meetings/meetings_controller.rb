@@ -14,10 +14,11 @@ module Decidim
       helper Decidim::ResourceVersionsHelper
       helper Decidim::ShortLinkHelper
       include Decidim::AttachmentsHelper
+      include Decidim::SanitizeHelper
 
-      helper_method :meetings, :meeting, :registration, :search, :nav_paths, :tab_panel_items
+      helper_method :meetings, :meeting, :registration, :search, :tab_panel_items
 
-      before_action :add_addtional_csp_directives, only: [:show]
+      before_action :add_additional_csp_directives, only: [:show]
 
       def new
         enforce_permission_to :create, :meeting
@@ -59,6 +60,8 @@ module Decidim
       def show
         raise ActionController::RoutingError, "Not Found" unless meeting
 
+        maybe_show_redirect_notice!
+
         return if meeting.current_user_can_visit_meeting?(current_user)
 
         flash[:alert] = I18n.t("meeting.not_allowed", scope: "decidim.meetings")
@@ -76,7 +79,7 @@ module Decidim
 
         @form = meeting_form.from_params(params)
 
-        UpdateMeeting.call(@form, current_user, meeting) do
+        UpdateMeeting.call(@form, meeting) do
           on(:ok) do |meeting|
             flash[:notice] = I18n.t("meetings.update.success", scope: "decidim.meetings")
             redirect_to Decidim::ResourceLocatorPresenter.new(meeting).path
@@ -110,36 +113,6 @@ module Decidim
         @meeting ||= Meeting.not_hidden.where(component: current_component).find_by(id: params[:id])
       end
 
-      def next_meeting
-        return if search_collection.size < 2
-
-        search_collection.order(:start_time, :id).where(
-          Decidim::Meetings::Meeting.arel_table[:start_time].gt(meeting.start_time).or(
-            Decidim::Meetings::Meeting.arel_table[:start_time].eq(meeting.start_time).and(
-              Decidim::Meetings::Meeting.arel_table[:id].gt(meeting.id)
-            )
-          )
-        ).first
-      end
-
-      def prev_meeting
-        return if search_collection.size < 2
-
-        search_collection.order(:start_time, :id).where(
-          Decidim::Meetings::Meeting.arel_table[:start_time].lt(meeting.start_time).or(
-            Decidim::Meetings::Meeting.arel_table[:start_time].eq(meeting.start_time).and(
-              Decidim::Meetings::Meeting.arel_table[:id].lt(meeting.id)
-            )
-          )
-        ).last
-      end
-
-      def nav_paths
-        return {} if meeting.blank?
-
-        { prev_path: prev_meeting, next_path: next_meeting }.compact_blank.transform_values { |meeting| meeting_path(meeting) }
-      end
-
       def meetings
         is_past_meetings = params.dig("filter", "with_any_date")&.include?("past")
         @meetings ||= paginate(search.result.order(start_time: is_past_meetings ? :desc : :asc))
@@ -150,12 +123,19 @@ module Decidim
       end
 
       def search_collection
-        Meeting.where(component: current_component).published.not_hidden.visible_for(current_user).with_availability(
-          filter_params[:with_availability]
-        ).includes(
-          :component,
-          attachments: :file_attachment
-        )
+        Meeting
+          .where(component: current_component)
+          .published
+          .not_hidden
+          .or(MeetingLink.find_meetings(component: current_component))
+          .visible_for(current_user)
+          .with_availability(
+            filter_params[:with_availability]
+          )
+          .includes(
+            :component,
+            attachments: :file_attachment
+          )
       end
 
       def meeting_form
@@ -197,6 +177,30 @@ module Decidim
             args: ["decidim/linked_resources_for", meeting, { type: :results, link_name: "meetings_through_proposals" }]
           }
         ] + attachments_tab_panel_items(@meeting)
+      end
+
+      def maybe_show_redirect_notice!
+        return unless previous_space
+
+        flash.now[:notice] = I18n.t(
+          "meetings.show.redirect_notice",
+          scope: "decidim.meetings",
+          previous_space_url: request.referer,
+          previous_space_name: decidim_escape_translated(previous_space.title),
+          current_space_name: decidim_escape_translated(current_component.participatory_space.title)
+        )
+      end
+
+      def previous_space
+        return @previous_space if @previous_space
+        return unless params[:previous_space]
+
+        previous_space_class, previous_space_id = params[:previous_space].split("#")
+
+        @previous_space = previous_space_class.constantize.find_by(id: previous_space_id)
+        @previous_space
+      rescue NameError, LoadError
+        nil
       end
     end
   end

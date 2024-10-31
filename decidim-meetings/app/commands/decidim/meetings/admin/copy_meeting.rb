@@ -44,8 +44,7 @@ module Decidim
           @copied_meeting = Decidim.traceability.create!(
             Meeting,
             form.current_user,
-            scope: form.scope,
-            category: form.category,
+            taxonomies: form.taxonomies,
             title: parsed_title,
             description: parsed_description,
             end_time: form.end_time,
@@ -89,8 +88,8 @@ module Decidim
           form.services_to_persist.map do |service|
             Decidim::Meetings::Service.create!(
               meeting: copied_meeting,
-              "title" => service.title,
-              "description" => service.description
+              title: service.title,
+              description: service.description
             )
           end
         end

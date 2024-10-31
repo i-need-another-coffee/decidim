@@ -200,6 +200,8 @@ hu:
             down: Le
             remove: Eltávolítás
             up: Fel
+          create:
+            success: Napirend létrehozása sikeres.
           edit:
             title: Napirend szerkesztése
             update: Frissítés
@@ -233,20 +235,15 @@ hu:
             non_user: Nemlétező felhasználó
             select_user: Felhasználó kiválasztása
           index:
-            filter:
-              accepted: Elfogadva
-              all: Összes
-              rejected: Elutasítva
-              sent: Elküldve
             invite_attendee: Résztvevő meghívása
             invites: Meghívottak
-            search: Keresés
         meeting_closes:
           edit:
             close: Bezárás
             title: Ttalálkozó lezárása
         meetings:
           create:
+            invalid: Probléma történt a találkozó létrehozása során.
             success: A találkozó létrehozása sikeres - a nyilvánossá tételhez manuálisan kell publikálnia.
           destroy:
             invalid:
@@ -340,7 +337,6 @@ hu:
           body: A találkozó <a href="%{meeting_path}">%{meeting_title}</a> lezárásra vár. A "találkozó lezárása" gomb segítségével adjon jelentést a megbeszélésről.
           greetings: Üdvözöljük <br/>%{organization_name}<br/><a href="%{organization_url}">%{organization_url}</a>
           hello: Hello %{username},
-          subject: Lezárhatja a megbeszélést a %{organization_name} platformon beküldött jelentéssel
       conference_venues: Konferencia helyszínek
       content_blocks:
         upcoming_meetings:
@@ -357,13 +353,10 @@ hu:
       iframe_embed_type:
         embed_in_meeting_page: Beágyazás az értekezlet oldalába
         none: Nincs
-        open_in_live_event_page: Megnyitás az élő esemény oldalán (opcionális szavazásokkal)
         open_in_new_tab: Megnyitás új fülön
       layouts:
         live_event:
-          administrate: Admin
           close: bezár
-          questions: Kérdések
       mailer:
         invite_join_meeting_mailer:
           invite:
@@ -417,6 +410,9 @@ hu:
           create_as: Ülés létrehozása mint
         meetings:
           upcoming_meetings_warning: Jelenleg nincs ütemezett találkozó, de itt megtalálhatod az összes korábbi találkozó listáját.
+        new:
+          create: Létrehoz
+          title: Találkozó létrehozása
         registration_confirm:
           cancel: Mégse
           confirm: Megerősítés
@@ -472,6 +468,7 @@ hu:
       registrations:
         create:
           invalid: Probléma történt a találkozóhoz való csatlakozáskor.
+          success: Sikeresen csatlakoztál a találkozóhoz. Mivel regisztráltál a találkozóra, értesítünk, ha frissülnek az információk.
         decline_invitation:
           invalid: Hiba történt a meghívás visszautasítása során.
           success: Meghívás elutasítása sikeres.

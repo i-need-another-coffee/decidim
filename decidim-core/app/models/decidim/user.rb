@@ -278,6 +278,18 @@ module Decidim
       false
     end
 
+    def after_confirmation
+      return unless organization.send_welcome_notification?
+
+      Decidim::EventsManager.publish(
+        event: "decidim.events.core.welcome_notification",
+        event_class: WelcomeNotificationEvent,
+        resource: self,
+        affected_users: [self],
+        extra: { force_email: true }
+      )
+    end
+
     protected
 
     # Overrides devise email required validation.
@@ -296,23 +308,11 @@ module Decidim
       super
     end
 
-    def after_confirmation
-      return unless organization.send_welcome_notification?
-
-      Decidim::EventsManager.publish(
-        event: "decidim.events.core.welcome_notification",
-        event_class: WelcomeNotificationEvent,
-        resource: self,
-        affected_users: [self],
-        extra: { force_email: true }
-      )
-    end
-
     private
 
     # Changes default Devise behaviour to use ActiveJob to send async emails.
-    def send_devise_notification(notification, *args)
-      devise_mailer.send(notification, self, *args).deliver_later
+    def send_devise_notification(notification, *)
+      devise_mailer.send(notification, self, *).deliver_later
     end
 
     def all_roles_are_valid

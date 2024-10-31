@@ -21,9 +21,7 @@ pl:
               too_long: jest zbyt długie
             choices:
               missing: nie są kompletne
-              too_many: jest zbyt wiele
-        questionnaire:
-          request_invalid: Wystąpił błąd podczas obsługi żądania. Spróbuj ponownie.
+              too_many: Możesz wybrać maksymalnie %{count}.
   decidim:
     forms:
       admin:
@@ -45,6 +43,7 @@ pl:
               back: Powrót do odpowiedzi
               export: Eksportuj
               next: Następne &rsaquo;
+              previous: "&lsaquo; Poprzedni"
               show: Pokaż odpowiedzi
             empty: Brak odpowiedzi
             export:
@@ -122,11 +121,17 @@ pl:
           update:
             invalid: Podczas zapisywania formularza wystąpił błąd.
             success: Formularz został zapisany.
+      admin_log:
+        questionnaire:
+          update: "%{user_name} zaktualizował(a) kwestionariusz %{resource_name}"
       errors:
         answer:
           body: Treść nie może być pusta
       images:
         dimensions: "%{width} × %{height} px"
+        processors:
+          resize_and_pad: Rozmiar obrazu zostanie zmieniony i dopasowany do wymiarów %{dimensions}.
+          resize_to_fit: Rozmiar obrazu zostanie zmieniony i dopasowany do wymiarów %{dimensions}.
       question_types:
         files: Pliki
         long_answer: Długa odpowiedź
@@ -154,6 +159,7 @@ pl:
             sign_up_description: Utwórz konto uczestnika, aby wziąć udział w ankiecie
             title: Wypełnij formularz
           current_step: Krok %{step}
+          empty: Nie skonfigurowano jeszcze żadnych pytań dla tego formularza.
           of_total_steps: z %{total_steps}
           questionnaire_answered:
             body: Już wypełniłeś/łaś ten formularz.

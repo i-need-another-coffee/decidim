@@ -288,7 +288,7 @@ describe Decidim::Assemblies::Permissions do
     it_behaves_like(
       "access for roles",
       org_admin: true,
-      admin: true,
+      admin: false,
       collaborator: false,
       moderator: false,
       valuator: false
@@ -558,7 +558,7 @@ describe Decidim::Assemblies::Permissions do
         it { is_expected.to be(true) }
       end
 
-      context "when the assembly has one sucessor" do
+      context "when the assembly has one successor" do
         before do
           create(:assembly_user_role, user:, assembly: assembly.parent)
         end
@@ -570,6 +570,20 @@ describe Decidim::Assemblies::Permissions do
 
         it { is_expected.to be(true) }
       end
+    end
+  end
+
+  describe "assembly taxonomy filters" do
+    let(:action) do
+      { scope: :admin, action: :something, subject: :taxonomy_filter }
+    end
+
+    it { is_expected.to be true }
+
+    context "when user is not an admin" do
+      let(:user) { assembly_collaborator }
+
+      it { is_expected.to be false }
     end
   end
 

@@ -9,13 +9,13 @@ import "core-js/stable";
 import "regenerator-runtime/runtime";
 import "jquery"
 
+// REDESIGN_PENDING: deprecated
+import "foundation-sites";
+
 // external deps that require initialization
 import Rails from "@rails/ujs"
 import svg4everybody from "svg4everybody"
 import morphdom from "morphdom"
-
-// vendor customizated scripts (bad practice: these ones should be removed eventually)
-import "./vendor/modernizr"
 
 /**
  * Local dependencies
@@ -41,15 +41,19 @@ import "src/decidim/vizzs"
 import "src/decidim/responsive_horizontal_tabs"
 import "src/decidim/security/selfxss_warning"
 import "src/decidim/session_timeouter"
-import "src/decidim/confirm"
 import "src/decidim/results_listing"
 import "src/decidim/impersonation"
 import "src/decidim/gallery"
 import "src/decidim/direct_uploads/upload_field"
 import "src/decidim/data_consent"
+import "src/decidim/abide_form_validator_fixer"
 import "src/decidim/sw"
+import "src/decidim/sticky_header"
+import "src/decidim/attachments"
 
 // local deps that require initialization
+import ConfirmDialog, { initializeConfirm } from "src/decidim/confirm"
+import formDatePicker from "src/decidim/datepicker/form_datepicker"
 import Configuration from "src/decidim/configuration"
 import ExternalLink from "src/decidim/external_link"
 import updateExternalDomainLinks from "src/decidim/external_domain_warning"
@@ -61,6 +65,7 @@ import addInputEmoji, { EmojiButton } from "src/decidim/input_emoji"
 import FocusGuard from "src/decidim/focus_guard"
 import backToListLink from "src/decidim/back_to_list"
 import markAsReadNotifications from "src/decidim/notifications"
+import handleNotificationActions from "src/decidim/notifications_actions"
 import RemoteModal from "src/decidim/remote_modal"
 import selectActiveIdentity from "src/decidim/identity_selector_dialog"
 import createTooltip from "src/decidim/tooltips"
@@ -69,12 +74,13 @@ import {
   createAccordion,
   createDialog,
   createDropdown,
+  announceForScreenReader,
   Dialogs
 } from "src/decidim/a11y"
 import changeReportFormBehavior from "src/decidim/change_report_form_behavior"
 
 // bad practice: window namespace should avoid be populated as much as possible
-// rails-translations could be referrenced through a single Decidim.I18n object
+// rails-translations could be referenced through a single Decidim.I18n object
 window.Decidim = window.Decidim || {
   config: new Configuration(),
   ExternalLink,
@@ -82,11 +88,42 @@ window.Decidim = window.Decidim || {
   FormValidator,
   addInputEmoji,
   EmojiButton,
-  Dialogs
+  Dialogs,
+  ConfirmDialog,
+  announceForScreenReader
 };
 
 window.morphdom = morphdom
 
+// REDESIGN_PENDING: deprecated
+window.initFoundation = (element) => {
+  $(element).foundation();
+
+  // Fix compatibility issue with the `a11y-accordion-component` package that
+  // uses the `data-open` attribute to indicate the open state for the accordion
+  // trigger.
+  //
+  // In Foundation, these listeners are initiated on the document node always,
+  // regardless of the element for which foundation is initiated. Therefore, we
+  // need the document node here instead of the `element` passed to this
+  // function.
+  const $document = $(document);
+
+  $document.off("click.zf.trigger", window.Foundation.Triggers.Listeners.Basic.openListener);
+  $document.on("click.zf.trigger", "[data-open]", (ev, ...restArgs) => {
+    // Do not apply for the accordion triggers.
+    const accordion = ev.currentTarget?.closest("[data-component='accordion']");
+    if (accordion) {
+      return;
+    }
+
+    // Otherwise call the original implementation
+    Reflect.apply(window.Foundation.Triggers.Listeners.Basic.openListener, ev.currentTarget, [ev, ...restArgs]);
+  });
+};
+
+// Confirm initialization needs to happen before Rails.start()
+initializeConfirm();
 Rails.start()
 
 /**
@@ -101,9 +138,11 @@ const initializer = (element = document) => {
   window.focusGuard = window.focusGuard || new FocusGuard(document.body);
 
   // REDESIGN_PENDING: deprecated
-  $(element).foundation();
+  window.initFoundation(element);
 
   svg4everybody();
+
+  element.querySelectorAll('input[type="datetime-local"],input[type="date"]').forEach((elem) => formDatePicker(elem))
 
   element.querySelectorAll(".editor-container").forEach((container) => window.createEditor(container));
 
@@ -137,6 +176,7 @@ const initializer = (element = document) => {
   backToListLink(element.querySelectorAll(".js-back-to-list"));
 
   markAsReadNotifications(element)
+  handleNotificationActions(element)
 
   scrollToLastChild(element)
 
@@ -159,6 +199,8 @@ const initializer = (element = document) => {
   element.querySelectorAll("[data-toggle]").forEach((elem) => createToggle(elem))
 
   element.querySelectorAll(".new_report").forEach((elem) => changeReportFormBehavior(elem))
+
+  document.dispatchEvent(new CustomEvent("decidim:loaded", { detail: { element } }));
 }
 
 // If no jQuery is used the Tribute feature used in comments to autocomplete

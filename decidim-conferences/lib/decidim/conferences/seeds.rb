@@ -17,7 +17,7 @@ module Decidim
         )
 
         2.times do |_n|
-          conference = Decidim::Conference.create!(
+          params = {
             title: Decidim::Faker::Localized.sentence(word_count: 5),
             slogan: Decidim::Faker::Localized.sentence(word_count: 2),
             slug: Decidim::Faker::Internet.unique.slug(words: nil, glue: "-"),
@@ -43,23 +43,22 @@ module Decidim
             registration_terms: Decidim::Faker::Localized.wrapped("<p>", "</p>") do
               Decidim::Faker::Localized.paragraph(sentence_count: 3)
             end
-          )
+          }
+
+          conference = Decidim.traceability.perform_action!(
+            "publish",
+            Decidim::Conference,
+            organization.users.first,
+            visibility: "all"
+          ) do
+            Decidim::Conference.create!(params)
+          end
           conference.add_to_index_as_search_resource
 
           # Create users with specific roles
           Decidim::ConferenceUserRole::ROLES.each do |role|
             email = "conference_#{conference.id}_#{role}@example.org"
-
-            user = Decidim::User.find_or_initialize_by(email:)
-            user.update!(
-              name: ::Faker::Name.name,
-              nickname: ::Faker::Twitter.unique.screen_name,
-              password: "decidim123456789",
-              organization:,
-              confirmed_at: Time.current,
-              locale: I18n.default_locale,
-              tos_agreement: true
-            )
+            user = find_or_initialize_user_by(email:)
 
             Decidim::ConferenceUserRole.find_or_create_by!(
               user:,
@@ -94,6 +93,7 @@ module Decidim
               end,
               twitter_handle: ::Faker::Twitter.unique.screen_name,
               personal_url: ::Faker::Internet.url,
+              published_at: Time.current,
               conference:
             )
           end

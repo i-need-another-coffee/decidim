@@ -15,6 +15,8 @@ module Decidim
       paths["lib/tasks"] = nil
 
       routes do
+        resources :initiative_filters, except: [:show]
+
         resources :initiatives_types, except: :show do
           resource :permissions, controller: "initiatives_types_permissions"
           resources :initiatives_type_scopes, except: [:index, :show]
@@ -54,12 +56,17 @@ module Decidim
 
         scope "/initiatives/:initiative_slug" do
           resources :components do
+            collection do
+              put :reorder
+            end
             resource :permissions, controller: "component_permissions"
             member do
               put :publish
               put :unpublish
               get :share
+              put :hide
             end
+            resources :component_share_tokens, except: [:show], path: "share_tokens", as: "share_tokens"
             resources :exports, only: :create
           end
 
@@ -71,6 +78,8 @@ module Decidim
             end
             resources :reports, controller: "moderations/reports", only: [:index, :show]
           end
+
+          resources :initiative_share_tokens, except: [:show], path: "share_tokens"
         end
 
         scope "/initiatives/:initiative_slug/components/:component_id/manage" do
@@ -86,21 +95,9 @@ module Decidim
 
       initializer "decidim_initiatives_admin.menu" do
         Decidim::Initiatives::Menu.register_admin_menu_modules!
-      end
-
-      initializer "decidim_initiatives_admin.components_menu" do
         Decidim::Initiatives::Menu.register_admin_initiatives_components_menu!
-      end
-
-      initializer "decidim_initiatives_admin.initiative_menu" do
         Decidim::Initiatives::Menu.register_admin_initiative_menu!
-      end
-
-      initializer "decidim_initiatives_admin.initiative_actions_menu" do
         Decidim::Initiatives::Menu.register_admin_initiative_actions_menu!
-      end
-
-      initializer "decidim_initiatives_admin.initiatives_menu" do
         Decidim::Initiatives::Menu.register_admin_initiatives_menu!
       end
     end

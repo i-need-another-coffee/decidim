@@ -14,41 +14,31 @@ module Decidim
         # sortition - a sortition to select proposals
         def initialize(sortition)
           @sortition = sortition
-          @category = sortition.category
+          @taxonomies = sortition.taxonomies
           @request_timestamp = sortition.request_timestamp
         end
 
-        # Given a particpiatory process retrieves its proposals
+        # Given a participatory process retrieves its proposals
         #
         # Returns an ActiveRecord::Relation.
         def query
-          if category.nil?
-            return Decidim::Proposals::Proposal
-                   .except_withdrawn
-                   .published
-                   .except_rejected
-                   .not_hidden
-                   .where("decidim_proposals_proposals.created_at < ?", request_timestamp)
-                   .where(component: sortition.decidim_proposals_component)
-                   .order(id: :asc)
-          end
+          proposals = Decidim::Proposals::Proposal
+                      .not_withdrawn
+                      .published
+                      .not_hidden
+                      .where(decidim_proposals_proposals: { created_at: ...request_timestamp })
+                      .where(component: sortition.decidim_proposals_component)
+          proposals = proposals.where.not(id: proposals.only_status(:rejected))
 
-          # categorization -> category
-          Decidim::Proposals::Proposal
-            .joins(:categorization)
-            .except_withdrawn
-            .published
-            .except_rejected
-            .not_hidden
-            .where(component: sortition.decidim_proposals_component)
-            .where("decidim_proposals_proposals.created_at < ?", request_timestamp)
-            .where(decidim_categorizations: { decidim_category_id: category.id })
-            .order(id: :asc)
+          return proposals.order(id: :asc) if taxonomies.blank?
+
+          # taxonomization -> taxonomy
+          proposals.with_taxonomies(*taxonomies.map(&:id)).order(id: :asc)
         end
 
         private
 
-        attr_reader :sortition, :category, :request_timestamp
+        attr_reader :sortition, :taxonomies, :request_timestamp
       end
     end
   end

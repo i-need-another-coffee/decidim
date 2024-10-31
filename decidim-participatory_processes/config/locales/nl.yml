@@ -4,7 +4,6 @@ nl:
       participatory_process:
         announcement: Aankondiging
         area_id: Onderwerp
-        banner_image: Bannerafbeelding
         copy_categories: Categorieën kopiëren
         copy_components: Kopieer onderdelen
         copy_steps: Kopieer stappen
@@ -27,8 +26,6 @@ nl:
         scope_type_max_depth_id: Scope filterdiepte
         scopes_enabled: Scopes ingeschakeld
         short_description: Korte beschrijving
-        show_metrics: Toon statistieken
-        show_statistics: Toon statistieken
         slug: URL pad
         start_date: Startdatum
         subtitle: Ondertitel
@@ -83,8 +80,6 @@ nl:
         destroy: Verwijder
         duplicate: Dupliceren
         edit: Bewerken
-        filter:
-          all_processes: Toon alle processen
         import_process: Importeren
         new_process: Nieuw proces
         new_process_group: Nieuwe procesgroep
@@ -150,7 +145,6 @@ nl:
           title: Inspraakproces dupliceren
       participatory_process_groups:
         destroy:
-          error: Er is een fout opgetreden tijdens het vernietigen van de Participatory procesgroep.
           success: Participatieve procesgroep succesvol verwijderd.
         edit:
           title: Bewerk groep
@@ -347,14 +341,11 @@ nl:
             select_an_area: Selecteer een onderwerp
             select_process_group: Selecteer een procesgroep
             title: Algemene informatie
-            visbility: Zichtbaarheid
       content_blocks:
         highlighted_processes:
           name: Uitgelichte processen
       index:
         title: Inspraakproces
-      last_activity:
-        new_participatory_process: Nieuw participatief proces
       participatory_process_steps:
         index:
           back_to_process: Terug naar de procespagina

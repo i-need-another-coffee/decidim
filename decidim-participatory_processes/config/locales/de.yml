@@ -4,7 +4,6 @@ de:
       participatory_process:
         announcement: Ankündigung
         area_id: Bereich
-        banner_image: Banner-Bild
         copy_categories: Kategorien kopieren
         copy_components: Komponenten kopieren
         copy_steps: Phasen kopieren
@@ -34,8 +33,6 @@ de:
         scope_type_max_depth_id: Umfang-Filtertiefe
         scopes_enabled: Themenbereiche aktiviert
         short_description: Kurzbeschreibung
-        show_metrics: Metriken anzeigen
-        show_statistics: Statistiken anzeigen
         slug: URL-Slug
         start_date: Startdatum
         subtitle: Untertitel
@@ -98,10 +95,8 @@ de:
         destroy: Löschen
         duplicate: Duplizieren
         edit: Bearbeiten
-        filter:
-          all_processes: Alle Beteiligungsprozesse anzeigen
-          process_groups: Prozesse in Gruppen filtern
         import_process: Importieren
+        menu_hidden: Verbergen
         moderate: Moderieren
         new_process: Neuer Beteiligungsprozess
         new_process_group: Neue Prozessgruppe
@@ -113,6 +108,9 @@ de:
         resend_invitation: Einladung erneut senden
         see_process: Prozess ansehen
         unpublish: Veröffentlichung rückgängig machen
+      filters:
+        decidim_participatory_process_group_id_eq:
+          label: Nach Prozessgruppe
       menu:
         participatory_process_groups: Prozessgruppen
         participatory_process_groups_submenu:
@@ -166,7 +164,7 @@ de:
             admin: Administrator
             collaborator: Mitarbeiter
             moderator: Moderator
-            valuator: Schätzer
+            valuator: Bewertende
         user:
           fields:
             invitation_accepted_at: Einladung akzeptiert am
@@ -219,6 +217,13 @@ de:
             last_step: Der letzte Schritt eines Prozesses kann nicht gelöscht werden.
           success: Participatory-Prozessschritt erfolgreich gelöscht
         edit:
+          cta_deprecated:
+            body_html: |-
+              Die Konfigurierung der Handlungsaufforderung durch die Schritte des partizipativen Prozesses ist mit dem neuen Design veraltet.
+              Neu finden Sie die Einstellung bei der Konfiguration der <b>Startseite</b> unter dem Inhaltsbaustein <b>Banner-Bild und Handlungsaufforderung</b>.
+              Sie können die benötigten Handlungsaufforderungen migrieren. Die Felder <i>Aufruf zum Aktionspfad</i> und
+              <i>Aufruf zum Aktionstext</i> werden in der nächsten Version entfernt.
+            title: Handlungsaufforderung veraltet
           title: Beteiligungsschritt bearbeiten
           update: Aktualisieren
         index:
@@ -429,8 +434,9 @@ de:
             select_participatory_process_type: Wählen Sie einen Prozesstyp aus
             select_process_group: Wählen Sie eine Prozessgruppe aus
             slug_help_html: 'URL-Slugs werden zum Generieren der URLs verwendet, die auf diesen Prozess verweisen. Akzeptiert werden nur Buchstaben, Zahlen und Bindestriche und es muss mit einem Buchstaben beginnen. Beispiel: %{url}'
+            taxonomies: Taxonomien
             title: Allgemeine Information
-            visbility: Sichtweite
+            visibility: Sichtbarkeit
       content_blocks:
         extra_data:
           name: Phase & Dauer
@@ -443,7 +449,7 @@ de:
       index:
         title: Beteiligungsprozesse
       last_activity:
-        new_participatory_process: Neuer partizipativer Prozess
+        new_participatory_process: 'Neuer partizipativer Prozess:'
       pages:
         home:
           highlighted_processes:

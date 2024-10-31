@@ -1,7 +1,10 @@
 /* eslint id-length: ["error", { "exceptions": ["$"] }] */
 
+import createOptionAttachedInputs from "src/decidim/forms/option_attached_inputs.component"
+import createMaxChoicesAlertComponent from "src/decidim/forms/max_choices_alert.component"
+
 /**
- * A plain Javascript component that handles questions from polls in meetings:
+ * A plain JavaScript component that handles questions from polls in meetings:
  *   - fetches them via Ajax
  *   - enables a polling to automatically update them
  *
@@ -21,9 +24,11 @@ export default class PollComponent {
     this.$element = $element;
     this.$counter = $counter;
     this.questionsUrl = config.questionsUrl;
-    this.pollingInterval = config.pollingInterval || 5000;
+    this.pollingInterval = config.pollingInterval || 10000;
     this.mounted = false;
     this.questions = {};
+    this.questionsStatuses = {};
+    this.answersStatuses = {};
   }
 
   /**
@@ -63,7 +68,9 @@ export default class PollComponent {
    * @returns {Void} - Returns nothing
    */
   _fetchQuestions() {
-    // Store current questions state (open / closed) before overwritting them with the Ajax call
+    $("#content").addClass("spinner-container")
+
+    // Store current questions state (open / closed) before overwriting them with the Ajax call
     // response.
     this._storeQuestionState(this.$element);
 
@@ -75,6 +82,9 @@ export default class PollComponent {
       this._updateCounter();
       this._setQuestionsState(this.$element);
       this._pollQuestions();
+      this._addValidations();
+
+      $("#content").removeClass("spinner-container")
     });
   }
 
@@ -88,6 +98,12 @@ export default class PollComponent {
     $("[data-question]", $parent).each((_i, el) => {
       const $el = $(el);
       const questionId = $el.data("question");
+      const elForm = $el.find("form");
+
+      this.questionsStatuses[questionId] = $el.data("status");
+      if (elForm.length > 0) {
+        this.answersStatuses[questionId] = Object.fromEntries(new FormData(elForm[0]));
+      }
       if ($el[0].open === true) {
         this.questions[questionId] = OPEN;
       } else {
@@ -120,11 +136,27 @@ export default class PollComponent {
     const questionId = $el.data("question");
     // Current question state
     const state = this.questions[questionId];
+    const questionStatus = this.questionsStatuses[questionId];
+    const answersStatuses = this.answersStatuses[questionId];
+
     // New questions have a special class
     if (!state) {
       $el.addClass("is-new");
     } else if (state === OPEN) {
       $el.prop(OPEN, true);
+    }
+
+    if ($el.data("status") === CLOSED && $el.data("status") !== questionStatus) {
+      $el.data("status", `${CLOSED}-new`);
+      document.getElementById(`closed-announcement-${questionId}`).hidden = false;
+    }
+
+    if (answersStatuses) {
+      for (const [key, value] of Object.entries(answersStatuses)) {
+        if (key.includes("[choices]")) {
+          $el.find(`[name='${key}'][value='${value}']`).prop("checked", true);
+        }
+      }
     }
   }
 
@@ -162,5 +194,28 @@ export default class PollComponent {
       const questionsCount = this.$element.find("details").length;
       this.$counter.html(`(${questionsCount})`);
     }
+  }
+
+  _addValidations() {
+    $(".js-radio-button-collection, .js-check-box-collection").each((idx, el) => {
+      createOptionAttachedInputs({
+        wrapperField: $(el),
+        controllerFieldSelector: "input[type=radio], input[type=checkbox]",
+        dependentInputSelector: "input[type=text], input[type=hidden]"
+      });
+    });
+
+    $.unique($(".js-check-box-collection").parents("[data-max-choices]")).each((idx, el) => {
+      const maxChoices = $(el).data("max-choices");
+      if (maxChoices) {
+        createMaxChoicesAlertComponent({
+          wrapperField: $(el),
+          controllerFieldSelector: "input[type=checkbox]",
+          controllerCollectionSelector: ".js-check-box-collection",
+          alertElement: $(el).find(".max-choices-alert"),
+          maxChoices: maxChoices
+        });
+      }
+    });
   }
 }

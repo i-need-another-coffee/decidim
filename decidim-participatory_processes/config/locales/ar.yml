@@ -4,7 +4,6 @@ ar:
       participatory_process:
         announcement: إعلان
         area_id: منطقة
-        banner_image: صورة بانر
         copy_categories: نسخ الفئات
         copy_components: نسخ المكونات
         copy_steps: نسخ الخطوات
@@ -26,8 +25,6 @@ ar:
         scope_id: نطاق
         scopes_enabled: النطاقات المُفعّلَة
         short_description: وصف قصير
-        show_metrics: اظهر المقاييس
-        show_statistics: عرض الإحصائيات
         slug: سبيكة العنوان الشبكي
         start_date: تاريخ البدء
         subtitle: عنوان فرعي
@@ -84,8 +81,6 @@ ar:
         destroy: حذف
         duplicate: مكرر
         edit: تعديل
-        filter:
-          all_processes: عرض جميع العمليات
         import_process: استيراد
         new_process: عملية جديدة
         new_process_group: مجموعة عملية جديدة
@@ -308,14 +303,11 @@ ar:
             select_an_area: اختر منطقة
             select_process_group: حدد مجموعة عملية
             title: معلومات عامة
-            visbility: رؤية
       content_blocks:
         highlighted_processes:
           name: عمليات مميزة
       index:
         title: العمليات التشاركية
-      last_activity:
-        new_participatory_process: عملية تشاركية جديدة
       participatory_processes:
         filters:
           counters:

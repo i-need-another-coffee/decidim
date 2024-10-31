@@ -18,7 +18,7 @@ describe "Admin manages help sections" do
                           "#sections_participatory_processes_content",
                           en: "<p>Well hello!</p>"
 
-      click_button "Save"
+      click_on "Save"
 
       expect(page).to have_admin_callout "Help sections updated successfully"
 
@@ -28,12 +28,15 @@ describe "Admin manages help sections" do
 
       help_content = Decidim::ContextualHelpSection.find_content(organization, :participatory_processes)
       expect(help_content).to include("en" => "<p>Well hello!</p>")
+
+      visit decidim_admin.root_path
+      expect(page).to have_content("updated the Participatory processes help section")
     end
 
     it "destroys the section when it is empty" do
       clear_i18n_editor :help_sections_sections_participatory_processes_content, "#sections_participatory_processes_content", [:en]
 
-      click_button "Save"
+      click_on "Save"
 
       expect(page).to have_admin_callout "Help sections updated successfully"
 

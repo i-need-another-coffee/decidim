@@ -2,7 +2,7 @@
 
 module Decidim
   class CommentsButtonCell < ButtonCell
-    delegate :current_settings, :component_settings, to: :controller
+    include UserRoleChecker
 
     def show
       if options.has_key?(:display)
@@ -11,13 +11,19 @@ module Decidim
         return
       end
 
-      render if component_settings.comments_enabled? && !current_settings.try(:comments_blocked?)
+      render if comments_enabled?
     end
 
     private
 
+    def comments_enabled?
+      return true if user_has_any_role?(current_user, current_participatory_space)
+
+      component_settings.comments_enabled? && !current_settings.try(:comments_blocked?)
+    end
+
     def path
-      "#comments"
+      "#add-comment-anchor"
     end
 
     def text

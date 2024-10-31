@@ -16,7 +16,7 @@ module Decidim
             current_user:
           )
       end
-      let(:command) { described_class.new(form, current_user) }
+      let(:command) { described_class.new(form) }
 
       context "when duplicated request" do
         let!(:committee_request) { create(:initiatives_committee_member, user: current_user, initiative:) }
@@ -40,7 +40,7 @@ module Decidim
               resource: initiative,
               affected_users: [initiative.author],
               force_send: true,
-              extra: { applicant: current_user }
+              extra: { applicant: { id: current_user.id } }
             )
 
           command.call

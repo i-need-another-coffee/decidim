@@ -6,8 +6,11 @@ module Decidim
       class ProposalAnswerTemplatesController < Decidim::Templates::Admin::ApplicationController
         include Decidim::TranslatableAttributes
         include Decidim::Paginable
+        include Decidim::Proposals::Admin::NeedsInterpolations
 
-        helper_method :availability_option_as_text, :availability_options_for_select
+        helper_method :availability_option_as_text, :availability_options_for_select, :available_states, :proposal_state
+
+        add_breadcrumb_item_from_menu :admin_template_types_menu
 
         def new
           enforce_permission_to :create, :template
@@ -30,6 +33,10 @@ module Decidim
               redirect_to proposal_answer_templates_path
             end
 
+            on(:component_selected) do
+              render :new
+            end
+
             on(:invalid) do
               flash.now[:alert] = I18n.t("templates.create.error", scope: "decidim.admin")
               render :new
@@ -49,11 +56,15 @@ module Decidim
         end
 
         def fetch
-          enforce_permission_to(:read, :template, template:)
+          enforce_permission_to(:read, :template, template:, proposal:)
+
+          return render json: { msg: I18n.t("templates.fetch.error", scope: "decidim.admin") }, status: :unprocessable_entity if template.blank?
+
+          state = fetch_proposal_state(template)
 
           response_object = {
-            state: template.field_values["internal_state"],
-            template: populate_template_interpolations(proposal)
+            state: state&.token,
+            template: populate_interpolations(template.description, proposal)
           }
 
           respond_to do |format|
@@ -114,18 +125,18 @@ module Decidim
 
         private
 
-        def populate_template_interpolations(proposal)
-          template.description.to_h do |language, value|
-            value.gsub!("%{organization}", proposal.organization.name)
-            value.gsub!("%{name}", author_name(proposal))
-            value.gsub!("%{admin}", current_user.name)
-
-            [language, value]
-          end
+        def fetch_proposal_state(template)
+          available_states(template.templatable_id).find_by(id: template.field_values["proposal_state_id"])
         end
 
-        def author_name(proposal)
-          proposal.creator_author.try(:title) || proposal.creator_author.try(:name)
+        def proposal_state(template)
+          state = fetch_proposal_state(template)
+
+          state ? translated_attribute(state&.title) : I18n.t("decidim.templates.admin.proposal_answer_templates.index.missing_state")
+        end
+
+        def available_states(component_id = nil)
+          Decidim::Proposals::ProposalState.where(decidim_component_id: component_id)
         end
 
         def proposal
@@ -134,25 +145,22 @@ module Decidim
 
         def availability_option_as_text(template)
           return unless template.templatable_type
-          return t("global_scope", scope: "decidim.templates.admin.proposal_answer_templates.index") if template.templatable == current_organization
 
-          avaliablity_options.select { |a| a.last == template.templatable_id }&.flatten&.first || t("templates.missing_resource", scope: "decidim.admin")
+          availability_options.select { |a| a.last == template.templatable_id }.flatten.first || t("templates.missing_resource", scope: "decidim.admin")
         end
 
         def availability_options_for_select
-          avaliablity_options
+          availability_options
         end
 
-        def avaliablity_options
-          @avaliablity_options = []
-          @avaliablity_options.push [t("global_scope", scope: "decidim.templates.admin.proposal_answer_templates.index"), 0]
-
+        def availability_options
+          @availability_options = []
           Decidim::Component.includes(:participatory_space).where(manifest_name: [:proposals])
                             .select { |a| a.participatory_space.decidim_organization_id == current_organization.id }.each do |component|
-            @avaliablity_options.push [formatted_name(component), component.id]
+            @availability_options.push [formatted_name(component), component.id]
           end
 
-          @avaliablity_options
+          @availability_options
         end
 
         def formatted_name(component)

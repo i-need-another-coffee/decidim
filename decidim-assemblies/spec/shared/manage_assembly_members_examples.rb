@@ -6,23 +6,23 @@ shared_examples "manage assembly members examples" do
     login_as user, scope: :user
     visit decidim_admin_assemblies.edit_assembly_path(assembly)
     within_admin_sidebar_menu do
-      click_link "Members"
+      click_on "Members"
     end
   end
 
   context "without existing user" do
     let!(:assembly_member) { create(:assembly_member, assembly:) }
+    let(:attributes) { attributes_for(:assembly_member, assembly:) }
 
-    it "creates a new assembly member" do
-      click_link "New assembly member"
+    it "creates a new assembly member", versioning: true do
+      click_on "New assembly member"
 
-      fill_in :assembly_member_designation_date, with: Time.current
+      fill_in_datepicker :assembly_member_designation_date_date, with: Time.current.strftime("%d/%m/%Y")
 
       within ".new_assembly_member" do
-        fill_in(
-          :assembly_member_full_name,
-          with: "Daisy O'connor"
-        )
+        fill_in(:assembly_member_full_name, with: attributes[:full_name])
+        fill_in(:assembly_member_gender, with: attributes[:gender])
+        fill_in(:assembly_member_birthplace, with: attributes[:birthplace])
       end
 
       dynamically_attach_file(:assembly_member_non_user_avatar, Decidim::Dev.asset("avatar.jpg")) do
@@ -39,8 +39,11 @@ shared_examples "manage assembly members examples" do
       expect(page).to have_current_path decidim_admin_assemblies.assembly_members_path(assembly)
 
       within "#assembly_members table" do
-        expect(page).to have_content("Daisy O'connor")
+        expect(page).to have_content(attributes[:full_name])
       end
+
+      visit decidim_admin.root_path
+      expect(page).to have_content("created the #{attributes[:full_name]} member")
     end
   end
 
@@ -48,9 +51,9 @@ shared_examples "manage assembly members examples" do
     let!(:member_user) { create(:user, organization: assembly.organization) }
 
     it "creates a new assembly member" do
-      click_link "New assembly member"
+      click_on "New assembly member"
 
-      fill_in :assembly_member_designation_date, with: Time.current
+      fill_in_datepicker :assembly_member_designation_date_date, with: Time.current.strftime("%d/%m/%Y")
 
       within ".new_assembly_member" do
         select "Existing participant", from: :assembly_member_existing_user
@@ -74,9 +77,9 @@ shared_examples "manage assembly members examples" do
     let!(:member_organization) { create(:user_group, :verified, organization: assembly.organization) }
 
     it "creates a new assembly member" do
-      click_link "New assembly member"
+      click_on "New assembly member"
 
-      fill_in :assembly_member_designation_date, with: Time.current
+      fill_in_datepicker :assembly_member_designation_date_date, with: Time.current.strftime("%d/%m/%Y")
 
       within ".new_assembly_member" do
         select "Existing participant", from: :assembly_member_existing_user
@@ -98,6 +101,7 @@ shared_examples "manage assembly members examples" do
 
   describe "when managing other assembly members" do
     let!(:assembly_member) { create(:assembly_member, assembly:) }
+    let(:attributes) { attributes_for(:assembly_member, assembly:) }
 
     before do
       visit current_path
@@ -109,16 +113,15 @@ shared_examples "manage assembly members examples" do
       end
     end
 
-    it "updates an assembly member" do
-      within find("#assembly_members tr", text: assembly_member.full_name) do
-        click_link "Edit"
+    it "updates an assembly member", versioning: true do
+      within "#assembly_members tr", text: assembly_member.full_name do
+        click_on "Edit"
       end
 
       within ".edit_assembly_member" do
-        fill_in(
-          :assembly_member_full_name,
-          with: "Alicia O'connor"
-        )
+        fill_in(:assembly_member_full_name, with: attributes[:full_name])
+        fill_in(:assembly_member_gender, with: attributes[:gender])
+        fill_in(:assembly_member_birthplace, with: attributes[:birthplace])
 
         find("*[type=submit]").click
       end
@@ -127,25 +130,28 @@ shared_examples "manage assembly members examples" do
       expect(page).to have_current_path decidim_admin_assemblies.assembly_members_path(assembly)
 
       within "#assembly_members table" do
-        expect(page).to have_content("Alicia O'connor")
+        expect(page).to have_content(attributes[:full_name])
       end
+
+      visit decidim_admin.root_path
+      expect(page).to have_content("updated the #{assembly_member.full_name} member")
     end
 
     it "deletes the assembly member" do
-      within find("#assembly_members tr", text: assembly_member.full_name) do
+      within "#assembly_members tr", text: assembly_member.full_name do
         accept_confirm { find("a.action-icon--remove").click }
       end
 
       expect(page).to have_admin_callout("successfully")
 
       within "#assembly_members table" do
-        expect(page).not_to have_content(assembly_member.full_name)
+        expect(page).to have_no_content(assembly_member.full_name)
       end
     end
   end
 
   context "when paginating" do
-    let!(:collection_size) { 20 }
+    let!(:collection_size) { 30 }
     let!(:collection) { create_list(:assembly_member, collection_size, assembly:) }
     let!(:resource_selector) { "#assembly_members tbody tr" }
 
@@ -153,11 +159,11 @@ shared_examples "manage assembly members examples" do
       visit current_path
     end
 
-    it "lists 15 members per page by default" do
-      expect(page).to have_css(resource_selector, count: 15)
+    it "lists 25 members per page by default" do
+      expect(page).to have_css(resource_selector, count: 25)
       expect(page).to have_css("[data-pages] [data-page]", count: 2)
-      click_link "Next"
-      expect(page).to have_selector("[data-pages] [data-page][aria-current='page']", text: "2")
+      click_on "Next"
+      expect(page).to have_css("[data-pages] [data-page][aria-current='page']", text: "2")
       expect(page).to have_css(resource_selector, count: 5)
     end
   end

@@ -4,7 +4,6 @@ zh-CN:
       participatory_process:
         announcement: 通 知
         area_id: 区域
-        banner_image: 横幅图像
         copy_categories: 复制类别
         copy_components: 复制组件
         copy_steps: 复制步骤
@@ -27,8 +26,6 @@ zh-CN:
         scope_type_max_depth_id: 范围过滤器深度：
         scopes_enabled: 范围已启用
         short_description: 简短描述
-        show_metrics: 显示指标
-        show_statistics: 显示统计
         slug: URL 名称
         start_date: 开始日期
         subtitle: 字幕
@@ -70,8 +67,6 @@ zh-CN:
         destroy: 删除
         duplicate: Duplicate
         edit: 编辑
-        filter:
-          all_processes: 显示所有进程
         import_process: 导入
         new_process: 新建进程
         new_process_group: 新建流程组
@@ -132,7 +127,6 @@ zh-CN:
           title: 重复的参与进程
       participatory_process_groups:
         destroy:
-          error: 销毁参与性进程小组时出错。
           success: 参与进程组已成功删除。
         edit:
           title: 编辑流程组
@@ -311,14 +305,11 @@ zh-CN:
             select_an_area: 选择区域
             select_process_group: 选择一个流程组
             title: 一般信息
-            visbility: 可见性
       content_blocks:
         highlighted_processes:
           name: 高亮的进程
       index:
         title: 参与进程
-      last_activity:
-        new_participatory_process: 新的参与进程
       participatory_process_steps:
         index:
           back_to_process: 返回进程页面

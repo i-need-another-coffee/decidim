@@ -31,6 +31,10 @@ ja:
           attributes:
             redirect_uri:
               must_be_ssl: リダイレクト URI は SSL が有効な URI でなければなりません
+        organization:
+          attributes:
+            password:
+              secret_key: このフィールドを保存するには、環境変数 SECRET_KEY_BASE を定義する必要があります
   decidim:
     system:
       actions:
@@ -61,7 +65,9 @@ ja:
           success: 管理者が正常に更新されました。
       dashboard:
         show:
+          admins: 管理者
           current_organizations: 現在の組織
+          system_checks: システムチェック
       default_pages:
         placeholders:
           content: 管理ダッシュボードの %{page} 静的ページに意味のあるコンテンツを追加してください。
@@ -82,7 +88,7 @@ ja:
             did_not_receive_unlock_instructions?: ロック解除メールを受信できませんでしたか？
             forgot_your_password?: パスワードをお忘れですか？
             log_in: ログイン
-            sign_up: 新規登録
+            sign_up: アカウントを作成
       menu:
         admins: 管理者
         dashboard: ダッシュボード
@@ -137,6 +143,22 @@ ja:
           show: 詳細設定を表示
         create:
           error: 新しい組織を作成する際に問題が発生しました。
+          error_invitation: 新しい組織を作成する際に問題が発生しました。組織の管理者名を確認してください。
+          success_html: |
+            <p>
+              組織を作成しました。
+            </p>
+            <ol>
+              <li>アプリケーションのコードを更新する必要があるかもしれません。%{host}へのリクエストを許可するには、環境設定 (例: <code>config/environment/production.rb</code>) または <code>config/application.rb</code> に以下を追加する必要があります：
+                <p> config.hosts << "%{host}" </p>
+              </li>
+              <li>
+                これが完了すると、<a href="http://%{host}">http://%{host}</a> からプラットフォームにアクセスできるようになります。
+              </li>
+              <li>
+                <b>%{email}</b>宛にメールを送信しましたので、ご確認ください。
+              </li>
+            </ol>
         csp_settings:
           connect_src: Connect src
           connect_src_hint: |
@@ -170,7 +192,10 @@ ja:
             style-srcディレクティブは、<style>要素を使用して読み込むURLを制限します。
             Decidimは"'self' 'unsafe-inline'"を追加しますが、他の設定を指定することも可能です。よく分からない場合は、空白のままにしておいてください。
         edit:
+          confirm_resend_invitation: 招待を再送信してもよろしいですか？
+          resend_invitation: 招待を再送信する
           secondary_hosts_hint: 新しい行にそれぞれ入力してください
+          title: 組織の編集
         file_upload_settings:
           content_types:
             admin_hint: これらの MIME タイプは、管理者セクションのアップロードで許可されています。 管理者ユーザーは、ドキュメント形式をアップロードする際のリスクを認識している必要があります。 ファイルのアップロードに注意を払う必要があります
@@ -195,6 +220,7 @@ ja:
           default: デフォルト?
           enabled: 有効
           locale: 地域
+          organization_admin_email_hint: このアドレスにメールを送信しますので、ご確認の上、パスワードを設定してください。
           reference_prefix_hint: 参照プレフィックスは、すべての組織をまたがってリソースを一意に識別するために使用されます。
           secondary_hosts_hint: 新しい行にそれぞれ入力します。
           title: 新しい組織
@@ -216,11 +242,14 @@ ja:
           twitter:
             api_key: API キー
             api_secret: APIシークレット
+        resend_invitation:
+          error: 招待の送信中に問題が発生しました。
+          success: 招待を送信しました。
         smtp_settings:
           fieldsets:
             sender: 送信者
           instructions:
-            from_label: 'メール送信者は以下のようになります: "あなたの組織名 <your-organization@example.org>". ''メールアドレス'' をラベルとして使用する場合は空白のままにします.'
+            from_label: 'メール送信者は "your-organization-name <your-organization@example.org>" になります。空白の場合、組織に定義された名前と同じ名前を使用します。'
           placeholder:
             from_email: your-organization@example.org
             from_label: 組織名
@@ -229,12 +258,28 @@ ja:
           success: 組織が更新されました。
         users_registration_mode:
           disabled: 外部アカウントでのみアクセスできます
-          enabled: 参加者に登録とログインを許可する
-          existing: 参加者が登録することはできませんが、既存の参加者はログインできるようにします
+          enabled: 参加者がアカウントを作成してログインできるようにする
+          existing: 参加者が新しくアカウントを作成することはできませんが、既存の参加者はログインできるようにします
       shared:
         notices:
           no_organization_warning_html: 開始するには組織を作成する必要があります。先に進む前に %{guide} を読んでください。
           our_getting_started_guide: 入門ガイド
+        organizations_list:
+          confirm_resend_invitation: 招待を再送信してもよろしいですか？
+          resend_invitation: 招待を再送信する
+      system_checks:
+        active_job_queue:
+          decidim_documentation: Decidimドキュメント
+          error: ActiveJob キューが設定されていません。これは本番環境では推奨されるセットアップではありません。詳細は %{error_extra} をご覧ください。
+          success: ActiveJob キューが正しく設定されています。
+        secret_key:
+          error: 'シークレットキーが正しく定義されていません。環境変数 SECRET_KEY_BASE に保存し、サーバーを再起動してください: %{error_extra}'
+          success: 秘密鍵が正しく設定されています。
       titles:
         dashboard: ダッシュボード
         decidim: Decidim
+  layouts:
+    decidim:
+      system:
+        login_items:
+          logout: ログアウト

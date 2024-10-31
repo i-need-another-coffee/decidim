@@ -8,9 +8,14 @@ describe "Admin copies meetings" do
   let(:latitude) { 40.1234 }
   let(:longitude) { 2.1234 }
   let(:service_titles) { ["This is the first service", "This is the second service"] }
-  let!(:meeting) { create(:meeting, type_of_meeting, :published, scope:, services: [], component: current_component) }
+  let!(:meeting) { create(:meeting, type_of_meeting, :published, taxonomies:, services: [], component: current_component) }
+  let(:base_date) { Time.new.utc }
+  let(:meeting_start_date) { base_date.strftime("%d/%m/%Y") }
+  let(:meeting_start_time) { base_date.utc.strftime("%H:%M") }
+  let(:meeting_end_date) { ((base_date + 2.days) + 1.month).strftime("%d/%m/%Y") }
+  let(:meeting_end_time) { (base_date + 4.hours).strftime("%H:%M") }
+  let(:taxonomies) { [taxonomy] }
 
-  include Decidim::SanitizeHelper
   include_context "when managing a component as an admin"
 
   before do
@@ -23,8 +28,8 @@ describe "Admin copies meetings" do
     let(:type_of_meeting) { :online }
 
     it "creates a new Online meeting", :slow do
-      within find("tr", text: Decidim::Meetings::MeetingPresenter.new(meeting).title) do
-        click_link "Duplicate"
+      within "tr", text: Decidim::Meetings::MeetingPresenter.new(meeting).title do
+        click_on "Duplicate"
       end
 
       fill_in_i18n(
@@ -51,8 +56,10 @@ describe "Admin copies meetings" do
 
       fill_in :meeting_online_meeting_url, with: "https://google.com"
 
-      fill_in :meeting_start_time, with: Time.current.change(day: 12, hour: 10, min: 50)
-      fill_in :meeting_end_time, with: Time.current.change(day: 12, hour: 12, min: 50)
+      fill_in_datepicker :meeting_start_time_date, with: meeting_start_date
+      fill_in_timepicker :meeting_start_time_time, with: meeting_start_time
+      fill_in_datepicker :meeting_end_time_date, with: meeting_end_date
+      fill_in_timepicker :meeting_end_time_time, with: meeting_end_time
 
       within ".copy_meetings" do
         find("*[type=submit]").click
@@ -74,8 +81,8 @@ describe "Admin copies meetings" do
     end
 
     it "creates a new hybrid meeting", :serves_geocoding_autocomplete, :slow do
-      within find("tr", text: Decidim::Meetings::MeetingPresenter.new(meeting).title) do
-        click_link "Duplicate"
+      within "tr", text: Decidim::Meetings::MeetingPresenter.new(meeting).title do
+        click_on "Duplicate"
       end
 
       fill_in_i18n(
@@ -110,8 +117,10 @@ describe "Admin copies meetings" do
       fill_in_geocoding :meeting_address, with: address
       fill_in :meeting_online_meeting_url, with: "https://google.com"
 
-      fill_in :meeting_start_time, with: Time.current.change(day: 12, hour: 10, min: 50)
-      fill_in :meeting_end_time, with: Time.current.change(day: 12, hour: 12, min: 50)
+      fill_in_datepicker :meeting_start_time_date, with: meeting_start_date
+      fill_in_timepicker :meeting_start_time_time, with: meeting_start_time
+      fill_in_datepicker :meeting_end_time_date, with: meeting_end_date
+      fill_in_timepicker :meeting_end_time_time, with: meeting_end_time
 
       within ".copy_meetings" do
         find("*[type=submit]").click
@@ -133,8 +142,8 @@ describe "Admin copies meetings" do
     end
 
     it "creates a new In person meeting", :serves_geocoding_autocomplete, :slow do
-      within find("tr", text: Decidim::Meetings::MeetingPresenter.new(meeting).title) do
-        click_link "Duplicate"
+      within "tr", text: Decidim::Meetings::MeetingPresenter.new(meeting).title do
+        click_on "Duplicate"
       end
 
       fill_in_i18n(
@@ -168,8 +177,10 @@ describe "Admin copies meetings" do
 
       fill_in_geocoding :meeting_address, with: address
 
-      fill_in :meeting_start_time, with: Time.current.change(day: 12, hour: 10, min: 50)
-      fill_in :meeting_end_time, with: Time.current.change(day: 12, hour: 12, min: 50)
+      fill_in_datepicker :meeting_start_time_date, with: meeting_start_date
+      fill_in_timepicker :meeting_start_time_time, with: meeting_start_time
+      fill_in_datepicker :meeting_end_time_date, with: meeting_end_date
+      fill_in_timepicker :meeting_end_time_time, with: meeting_end_time
 
       within ".copy_meetings" do
         find("*[type=submit]").click

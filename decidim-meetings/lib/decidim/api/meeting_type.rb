@@ -7,8 +7,7 @@ module Decidim
 
       implements Decidim::Comments::CommentableInterface
       implements Decidim::Core::AuthorableInterface
-      implements Decidim::Core::CategorizableInterface
-      implements Decidim::Core::ScopableInterface
+      implements Decidim::Core::TaxonomizableInterface
       implements Decidim::Core::AttachableInterface
       implements Decidim::Core::TimestampsInterface
       implements Decidim::Meetings::ServicesInterface
@@ -44,6 +43,9 @@ module Decidim
       def audio_url
         object.audio_url if object.closing_visible?
       end
+
+      field :withdrawn_at, Decidim::Core::DateTimeType, description: "The date and time this meeting was withdrawn", null: true
+      field :withdrawn, GraphQL::Types::Boolean, "Whether this meeting has been withdrawn or not", method: :withdrawn?, null: true
 
       field :created_at, Decidim::Core::DateTimeType, description: "The date and time this minutes was created", null: true
       field :updated_at, Decidim::Core::DateTimeType, description: "The date and time this minutes was updated", null: true

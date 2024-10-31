@@ -7,7 +7,7 @@ Decidim::Admin::Engine.routes.draw do
       resource :homepage, only: [:edit, :update], controller: "organization_homepage" do
         resources :content_blocks, only: [:edit, :update, :destroy, :create], controller: "organization_homepage_content_blocks"
       end
-      resource :external_domain_whitelist, only: [:edit, :update], controller: "organization_external_domain_whitelist"
+      resource :external_domain_allowlist, only: [:edit, :update], controller: "organization_external_domain_allowlist"
 
       member do
         get :users
@@ -109,8 +109,6 @@ Decidim::Admin::Engine.routes.draw do
       put :accept
     end
 
-    resources :share_tokens, only: :destroy
-
     resources :moderations, controller: "global_moderations" do
       member do
         put :unreport
@@ -121,6 +119,11 @@ Decidim::Admin::Engine.routes.draw do
     end
 
     resources :conflicts, only: [:index, :edit, :update], controller: "conflicts"
+
+    resources :taxonomies, except: [:show] do
+      patch :reorder, on: :collection
+      resources :items, only: [:new, :create, :edit, :update], controller: "taxonomy_items"
+    end
 
     root to: "dashboard#show"
   end

@@ -7,11 +7,9 @@ ja:
         decidim_scope_id: スコープ
         description: 説明
         end_date: 終了日
-        meetings_ids: 含まれるミーティング
         progress: 進捗状況
-        project_ids: 含まれるプロジェクト
-        proposals: 含まれる提案
         start_date: 開始日
+        subresults: 結果（サブ）
         title: タイトル
         updated_at: 更新日時
       status:
@@ -28,6 +26,14 @@ ja:
       decidim/accountability/result_progress_updated_event: 結果の進捗状況が更新されました
   activerecord:
     models:
+      decidim:
+        accountability:
+          result:
+            budget_text: 結果 %{link} は含まれていました
+            meetings_ids: 'このミーティングで議論されました: %{link}'
+            project_ids: 'このプロジェクトに含まれていました： %{link}'
+            proposal_ids: 'この提案に含まれました： %{link}'
+            text: 'この結果に追加されました： %{link}'
       decidim/accountability/result:
         other: 結果
   decidim:
@@ -38,6 +44,8 @@ ja:
         confirm_destroy: この %{name} を削除してもよろしいですか？
         destroy: 削除
         edit: 編集
+        import: 別のコンポーネントからプロジェクトをインポート
+        import_csv: CSVファイルから結果をインポート
         new_result: 新しい結果
         new_status: 新しいステータス
         new_timeline_entry: 新しいタイムラインのエントリ
@@ -73,6 +81,7 @@ ja:
                 </ul>
               </li>
               </ol>
+            title: CSVファイルから結果をインポート
         imports:
           create:
             invalid: 結果のインポート中に問題が発生しました。
@@ -95,6 +104,7 @@ ja:
             select_component: コンポーネントを選択
             success:
               other: "%{count} 件のプロジェクトがインポートする準備を行いました。完了次第、メールで通知します。"
+            title: 別のコンポーネントからプロジェクトをインポート
         results:
           create:
             invalid: 結果の作成中に問題がありました。
@@ -168,6 +178,8 @@ ja:
       content_blocks:
         highlighted_results:
           results: 結果
+      creation:
+        text: 結果が作成されました
       import_mailer:
         import:
           errors: エラー
@@ -225,15 +237,7 @@ ja:
           search: アクションを検索
         show:
           stats:
-            attendees: 参加者
             back_to_resource: 結果に戻る
-            comments: コメント
-            contributions: 貢献
-            last_edited_by: '最終編集者:'
-            last_updated_at: 最終更新日時
-            meetings: ミーティング
-            proposals: 提案
-            votes: サポート
         timeline:
           title: プロジェクトの進化
     admin:
@@ -252,16 +256,12 @@ ja:
         name: アカウンタビリティ
         settings:
           global:
-            categories_label: '「カテゴリ」の名前'
             comments_enabled: コメントを有効にする
             comments_max_length: コメント最大長 (デフォルト値は 0 のまま)
             display_progress_enabled: 進行状況を表示
-            heading_leaf_level_results: プロジェクトの名前
-            heading_parent_level_results: 検索結果の名前
             intro: はじめに
             scope_id: スコープ
             scopes_enabled: スコープが有効
-            subcategories_label: サブカテゴリの名前
           step:
             comments_blocked: コメントをブロック
     events:

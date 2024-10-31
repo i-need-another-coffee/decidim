@@ -3,16 +3,18 @@
 require "spec_helper"
 
 describe "Admin manages budgets" do
-  let(:budget) { create(:budget, component: current_component) }
+  let!(:budget) { create(:budget, component: current_component) }
   let(:manifest_name) { "budgets" }
+  let(:attributes) { attributes_for(:budget) }
 
   include_context "when managing a component as an admin"
   before do
-    budget
     switch_to_host(organization.host)
     login_as user, scope: :user
     visit_component_admin
   end
+
+  it_behaves_like "manage taxonomy filters in settings"
 
   describe "admin form" do
     before { click_on "New budget" }
@@ -20,61 +22,51 @@ describe "Admin manages budgets" do
     it_behaves_like "having a rich text editor", "new_budget", "content"
   end
 
-  it "creates a new budget" do
-    click_link "New budget"
+  it "creates a new budget", versioning: true do
+    click_on "New budget"
 
     within ".new_budget" do
-      fill_in_i18n(
-        :budget_title,
-        "#budget-title-tabs",
-        en: "My Budget",
-        es: "Mi Presupuesto",
-        ca: "El meu Pressupost"
-      )
-      fill_in_i18n_editor(
-        :budget_description,
-        "#budget-description-tabs",
-        en: "Long description",
-        es: "Descripción más larga",
-        ca: "Descripció més llarga"
-      )
+      fill_in_i18n(:budget_title, "#budget-title-tabs", **attributes[:title].except("machine_translations"))
+      fill_in_i18n_editor(:budget_description, "#budget-description-tabs", **attributes[:description].except("machine_translations"))
+
       fill_in :budget_weight, with: 1
       fill_in :budget_total_budget, with: 100_000_00
       select translated(scope.name), from: :budget_decidim_scope_id
     end
 
-    click_button "Create budget"
+    click_on "Create budget"
 
     expect(page).to have_admin_callout("Budget successfully created.")
 
     within "table" do
-      expect(page).to have_content("My Budget")
+      expect(page).to have_content(translated(attributes[:title]))
     end
+
+    visit decidim_admin.root_path
+    expect(page).to have_content("created the #{translated(attributes[:title])} budget")
   end
 
-  describe "updating a budget" do
+  describe "updating a budget", versioning: true do
     it "updates a budget" do
-      within find("tr", text: translated(budget.title)) do
+      within "tr", text: translated(budget.title) do
         page.find(".action-icon--edit").click
       end
 
       within ".edit_budget" do
-        fill_in_i18n(
-          :budget_title,
-          "#budget-title-tabs",
-          en: "My new title",
-          es: "Mi nuevo título",
-          ca: "El meu nou títol"
-        )
+        fill_in_i18n(:budget_title, "#budget-title-tabs", **attributes[:title].except("machine_translations"))
+        fill_in_i18n_editor(:budget_description, "#budget-description-tabs", **attributes[:description].except("machine_translations"))
       end
 
-      click_button "Update budget"
+      click_on "Update budget"
 
       expect(page).to have_admin_callout("Budget successfully updated.")
 
       within "table" do
-        expect(page).to have_content("My new title")
+        expect(page).to have_content(translated(attributes[:title]))
       end
+
+      visit decidim_admin.root_path
+      expect(page).to have_content("updated the #{translated(attributes[:title])} budget")
     end
   end
 
@@ -87,7 +79,7 @@ describe "Admin manages budgets" do
 
   describe "deleting a budget" do
     it "deletes a budget" do
-      within find("tr", text: translated(budget.title)) do
+      within "tr", text: translated(budget.title) do
         accept_confirm do
           page.find(".action-icon--remove").click
         end
@@ -96,7 +88,7 @@ describe "Admin manages budgets" do
       expect(page).to have_admin_callout("Budget successfully deleted.")
 
       within "table" do
-        expect(page).not_to have_content(translated(budget.title))
+        expect(page).to have_no_content(translated(budget.title))
       end
     end
 
@@ -104,8 +96,8 @@ describe "Admin manages budgets" do
       let!(:budget) { create(:budget, :with_projects, component: current_component) }
 
       it "cannot delete the budget" do
-        within find("tr", text: translated(budget.title)) do
-          expect(page).not_to have_selector(".action-icon--remove")
+        within "tr", text: translated(budget.title) do
+          expect(page).to have_no_css(".action-icon--remove")
         end
       end
     end

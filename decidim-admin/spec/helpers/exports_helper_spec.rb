@@ -18,8 +18,10 @@ module Decidim
       end
 
       it "creates links for each format" do
-        link = subject.css("li.exports--format--csv.exports--dummies a")[0]
-        expect(link["href"]).to eq("/admin/participatory_processes/#{component.participatory_space.slug}/components/#{component.id}/exports.CSV?id=dummies")
+        csv_path = "/admin/participatory_processes/#{component.participatory_space.slug}/components/#{component.id}/exports.CSV?id=dummies"
+        link = subject.at_css("a[href='#{csv_path}'][data-method='post']")
+
+        expect(link["href"]).to eq(csv_path)
         expect(link["data-method"]).to eq("post")
       end
 
@@ -43,21 +45,21 @@ module Decidim
 
         context "with no query" do
           it "does not create link for selection" do
-            expect(subject).to have_selector("#export-dropdown")
-            expect(subject).not_to have_selector("#export-selection-dropdown")
+            expect(subject).to have_css("#export-dropdown")
+            expect(subject).to have_no_css("#export-selection-dropdown")
             expect(subject).to have_content("Export all")
-            expect(subject).not_to have_content("Export selectioin")
+            expect(subject).to have_no_content("Export selection")
             expect(helper).to have_received(:render_dropdown).with(component:, resource_id: nil, filters: {}).once
             expect(helper).not_to have_received(:render_dropdown).with(component:, resource_id: nil, filters: { id_in: [1] })
           end
         end
 
         context "with query" do
-          let(:conditions) { "dummt condition" }
+          let(:conditions) { "dummy condition" }
 
           it "creates link for selection and all" do
-            expect(subject).to have_selector("#export-dropdown")
-            expect(subject).to have_selector("#export-selection-dropdown")
+            expect(subject).to have_css("#export-dropdown")
+            expect(subject).to have_css("#export-selection-dropdown")
             expect(subject).to have_content("Export all")
             expect(subject).to have_content("Export selection")
             expect(helper).to have_received(:render_dropdown).with(component:, resource_id: nil, filters: { id_in: [1] }).once

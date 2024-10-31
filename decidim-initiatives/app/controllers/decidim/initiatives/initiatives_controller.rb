@@ -93,7 +93,7 @@ module Decidim
         @form = form(Decidim::Initiatives::InitiativeForm)
                 .from_params(params, initiative_type: current_initiative.type, initiative: current_initiative)
 
-        UpdateInitiative.call(current_initiative, @form, current_user) do
+        UpdateInitiative.call(current_initiative, @form) do
           on(:ok) do |initiative|
             flash[:notice] = I18n.t("success", scope: "decidim.initiatives.update")
             redirect_to initiative_path(initiative)
@@ -107,7 +107,7 @@ module Decidim
       end
 
       def print
-        enforce_permission_to :read, :initiative, initiative: current_initiative
+        enforce_permission_to :print, :initiative, initiative: current_initiative
       end
 
       private

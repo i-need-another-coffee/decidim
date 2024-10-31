@@ -59,6 +59,12 @@ module Decidim
           allow! if permission_action.subject == :help_sections
           allow! if permission_action.subject == :share_token
           allow! if permission_action.subject == :reminder
+
+          if permission_action.subject == :taxonomy
+            permission_action.action == :destroy ? allow_destroy_taxonomy? : allow!
+          end
+
+          allow! if permission_action.subject == :taxonomy_item
         end
 
         permission_action
@@ -218,11 +224,11 @@ module Decidim
         @organization ||= context.fetch(:organization, nil) || context.fetch(:current_organization, nil)
       end
 
-      def user_can_enter_space_area?(**args)
+      def user_can_enter_space_area?(**)
         return unless permission_action.action == :enter &&
                       permission_action.subject == :space_area
 
-        space_allows_admin_access_to_current_action?(**args)
+        space_allows_admin_access_to_current_action?(**)
       end
 
       def space_allows_admin_access_to_current_action?(require_admin_terms_accepted: false)
@@ -252,6 +258,14 @@ module Decidim
 
       def available_authorization_handlers?
         user.organization.available_authorization_handlers.any?
+      end
+
+      def allow_destroy_taxonomy?
+        return unless permission_action.action == :destroy
+
+        taxonomy = context.fetch(:taxonomy, nil)
+
+        toggle_allow(taxonomy&.removable?)
       end
     end
   end

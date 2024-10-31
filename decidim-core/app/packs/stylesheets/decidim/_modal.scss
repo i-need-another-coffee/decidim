@@ -2,7 +2,7 @@
   @apply invisible opacity-0 fixed z-50 inset-0 bg-[rgba(0,0,0,0.25)] transition duration-300;
 
   & > * {
-    @apply absolute inset-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] lg:max-w-[900px] max-h-[95vh] h-fit overflow-y-auto p-6 bg-white z-50 rounded shadow-[0_4px_6px_rgba(211,211,211,0.25)];
+    @apply absolute inset-1/2 ltr:-translate-x-1/2 rtl:translate-x-1/2 -translate-y-1/2 w-[90%] lg:max-w-[900px] max-h-[95vh] h-fit overflow-y-auto p-6 bg-white z-50 rounded shadow-[0_4px_6px_rgba(211,211,211,0.25)];
 
     & > svg:only-child {
       @apply w-8 h-8 mx-auto text-gray-2 fill-current animate-spin;
@@ -40,6 +40,44 @@
     & > *:first-child:nth-last-child(n + 3),
     & > *:first-child:nth-last-child(n + 3) ~ * {
       @apply w-full md:w-auto;
+    }
+  }
+
+  &[data-drawer] {
+    & > * {
+      @apply h-full max-h-full w-0 inset-0 translate-x-0 translate-y-0 right-0 left-auto max-w-[90%] lg:max-w-[900px] transition-none transition-[width] duration-500 overflow-visible;
+    }
+
+    &[aria-hidden="false"] {
+      > * {
+        @apply w-[60%];
+      }
+    }
+
+    [data-dialog-container] {
+      @apply grid-cols-none;
+
+      &.layout-content {
+        @apply bg-white;
+
+        > .spinner-container {
+          @apply sticky h-screen;
+        }
+      }
+    }
+
+    [data-dialog-closable] {
+      @apply absolute top-0 right-auto -left-10 p-4 py-2 bg-white rounded-bl;
+    }
+
+    .form-defaults {
+      h1 {
+        @apply text-2xl font-semibold text-black my-10 mx-4 border-b border-gray border-b-[1px] pb-8;
+
+        > .button {
+          @apply text-sm float-right;
+        }
+      }
     }
   }
 }

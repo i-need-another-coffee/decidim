@@ -29,7 +29,7 @@ module Decidim
           return @query if @query
 
           components = Decidim::Component.where(participatory_space: retrieve_participatory_spaces).published
-          proposals = Decidim::Proposals::Proposal.where(component: components).except_withdrawn
+          proposals = Decidim::Proposals::Proposal.where(component: components).not_withdrawn
           join_components = "INNER JOIN decidim_components ON decidim_components.manifest_name = 'proposals' AND proposals.decidim_component_id = decidim_components.id"
           join_categories = <<~EOJOINCATS
             LEFT OUTER JOIN decidim_categorizations
@@ -41,7 +41,7 @@ module Decidim
                                        .joins(join_categories)
                                        .where(resource_id: proposals.pluck(:id))
                                        .where(resource_type: Decidim::Proposals::Proposal.name)
-          @query = @query.where("decidim_endorsements.created_at <= ?", end_time)
+          @query = @query.where(decidim_endorsements: { created_at: ..end_time })
           @query = @query.group("decidim_categorizations.id",
                                 :participatory_space_type,
                                 :participatory_space_id,
@@ -50,7 +50,7 @@ module Decidim
         end
 
         def quantity
-          @quantity ||= query.where("decidim_endorsements.created_at >= ?", start_time).count
+          @quantity ||= query.where(decidim_endorsements: { created_at: start_time.. }).count
         end
       end
     end

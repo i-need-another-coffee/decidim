@@ -13,6 +13,7 @@ describe "Admin manages proposals" do
   include_context "when managing a component as an admin"
 
   it_behaves_like "manage settings"
+  it_behaves_like "manage taxonomy filters in settings"
   it_behaves_like "manage proposals"
   it_behaves_like "manage moderations"
   it_behaves_like "export proposals"
@@ -27,6 +28,6 @@ describe "Admin manages proposals" do
   it_behaves_like "publish answers"
 
   it_behaves_like "sorted moderations" do
-    let!(:reportables) { create_list(:proposal, 17, component: current_component) }
+    let!(:reportables) { create_list(:proposal, 27, component: current_component) }
   end
 end

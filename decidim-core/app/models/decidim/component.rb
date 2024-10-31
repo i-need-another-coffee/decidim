@@ -6,15 +6,20 @@ module Decidim
   # component that spans over several steps.
   class Component < ApplicationRecord
     include HasSettings
+    include HasTaxonomySettings
     include Publicable
     include Traceable
     include Loggable
     include Decidim::ShareableWithToken
     include ScopableComponent
+    include TranslatableAttributes
 
     belongs_to :participatory_space, polymorphic: true
 
-    default_scope { order(arel_table[:weight].asc, arel_table[:manifest_name].asc) }
+    scope :registered_component_manifests, -> { where(manifest_name: Decidim.component_registry.manifests.collect(&:name)) }
+    scope :registered_space_manifests, -> { where(participatory_space_type: Decidim.participatory_space_registry.manifests.collect(&:model_class_name)) }
+
+    default_scope { registered_component_manifests.registered_space_manifests.order(arel_table[:weight].asc, arel_table[:manifest_name].asc) }
 
     delegate :organization, :categories, to: :participatory_space
 
@@ -56,9 +61,9 @@ module Decidim
     # Public: The hash of contextual params when the component is mounted.
     def mounted_params
       {
-        host: organization.host,
-        component_id: id,
-        "#{participatory_space.underscored_name}_slug".to_sym => participatory_space.slug
+        :host => organization.host,
+        :component_id => id,
+        :"#{participatory_space.underscored_name}_slug" => participatory_space.slug
       }
     end
 
@@ -79,6 +84,14 @@ module Decidim
       name
     end
 
+    def hierarchy_title
+      [
+        I18n.t("decidim.admin.menu.#{participatory_space.class.name.demodulize.underscore.pluralize}"),
+        translated_attribute(participatory_space.title),
+        translated_attribute(name)
+      ].join(" / ")
+    end
+
     # Public: Returns an empty description
     def resource_description; end
 
@@ -89,9 +102,19 @@ module Decidim
       participatory_space.can_participate?(user)
     end
 
+    def private_non_transparent_space?
+      return false unless participatory_space.private_space?
+
+      if participatory_space.respond_to?(:is_transparent?)
+        !participatory_space.is_transparent?
+      else
+        true
+      end
+    end
+
     # Public: Public URL for component with given share token as query parameter
     def shareable_url(share_token)
-      EngineRouter.main_proxy(self).root_path(self, share_token: share_token.token)
+      EngineRouter.main_proxy(self).root_url(self, share_token: share_token.token)
     end
 
     delegate :serializes_specific_data?, to: :manifest

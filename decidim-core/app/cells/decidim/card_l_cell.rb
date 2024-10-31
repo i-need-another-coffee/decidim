@@ -5,9 +5,7 @@ module Decidim
   # so other cells only have to customize a few methods or overwrite views.
   class CardLCell < Decidim::ViewModel
     include Cell::ViewModel::Partial
-    include Decidim::ApplicationHelper
     include Decidim::TooltipHelper
-    include Decidim::SanitizeHelper
     include Decidim::CardHelper
     include Decidim::LayoutHelper
     include Decidim::SearchesHelper
@@ -68,12 +66,15 @@ module Decidim
       "#{class_base_name}__#{class_name}"
     end
 
-    def resource_image_path
+    def resource_image_url
+      # Backwards compatibility.
+      return resource_image_path if respond_to?(:resource_image_path)
+
       nil
     end
 
     def has_image?
-      resource_image_path.present?
+      resource_image_url.present?
     end
 
     def has_link_to_resource?
@@ -104,7 +105,7 @@ module Decidim
     end
 
     def title
-      decidim_html_escape(translated_attribute(resource.title))
+      decidim_escape_translated(resource.title)
     end
 
     def title_tag

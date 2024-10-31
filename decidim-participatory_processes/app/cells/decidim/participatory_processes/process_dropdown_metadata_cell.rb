@@ -20,13 +20,20 @@ module Decidim
         hash << "decidim/process_dropdown_metadata"
         hash << id
         hash << current_user.try(:id).to_s
+        hash << nav_items_hashes.join("-")
         hash << I18n.locale.to_s
 
         hash.join(Decidim.cache_key_separator)
       end
 
+      def nav_items_hashes
+        nav_items.map do |item|
+          item[:id]
+        end
+      end
+
       def step_title
-        translated_attribute process.active_step&.title
+        decidim_html_escape translated_attribute(process.active_step&.title)
       end
 
       def display_steps?

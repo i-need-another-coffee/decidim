@@ -7,11 +7,9 @@ es-PY:
         decidim_scope_id: Ámbito
         description: Descripción
         end_date: Fin
-        meetings_ids: Encuentros relacionados
         progress: Progreso
-        project_ids: Proyectos incluidos
-        proposals: Propuestas incluidas
         start_date: Inicio
+        subresults: Subresultados
         title: Título
         updated_at: Actualizado en
       status:
@@ -28,6 +26,14 @@ es-PY:
       decidim/accountability/result_progress_updated_event: Progreso del resultado actualizado
   activerecord:
     models:
+      decidim:
+        accountability:
+          result:
+            budget_text: Se incluyó este resultado %{link}
+            meetings_ids: 'Se debatió en este encuentro: %{link}'
+            project_ids: 'Fue incluida en este proyecto: %{link}'
+            proposal_ids: 'Fue incluida en esta propuesta: %{link}'
+            text: 'Fue añadida a este resultado: %{link}'
       decidim/accountability/result:
         one: Resultado
         other: Resultados
@@ -41,9 +47,9 @@ es-PY:
         edit: Editar
         import: Importar proyectos desde otro componente
         import_csv: Importar resultados desde un archivo CSV
-        new_result: Añadir resultado
-        new_status: Añadir estado
-        new_timeline_entry: Añadir entrada de la cronología
+        new_result: Nuevo resultado
+        new_status: Nuevo estado
+        new_timeline_entry: Nueva entrada de cronología
         preview: Previsualizar
         timeline_entries: Evolución del proyecto
         title: Acciones
@@ -175,6 +181,8 @@ es-PY:
       content_blocks:
         highlighted_results:
           results: Resultados
+      creation:
+        text: Se creó este resultado
       import_mailer:
         import:
           errors: Errores
@@ -223,7 +231,7 @@ es-PY:
         home:
           categories_label: Categorías
           empty: Aún no hay ningún resultado.
-          empty_filters: No hay ningún resultado con este criterio.
+          empty_filters: No hay resultados con estos criterios.
           subcategories_label: Subcategorías
         home_header:
           global_status: Estado de ejecución global
@@ -234,15 +242,7 @@ es-PY:
           search: Buscar actuaciones
         show:
           stats:
-            attendees: Asistentes
             back_to_resource: Volver al resultado
-            comments: Comentarios
-            contributions: Aportes
-            last_edited_by: Última edición por
-            last_updated_at: Última actualización en
-            meetings: Lista de encuentros
-            proposals: Propuestas
-            votes: Soportes
         timeline:
           title: Evolución del proyecto
     admin:
@@ -261,16 +261,12 @@ es-PY:
         name: Seguimiento
         settings:
           global:
-            categories_label: Nombre para "Categorías"
             comments_enabled: Comentarios habilitados
             comments_max_length: Longitud máxima de los comentarios (deja 0 si quieres mantener la configuración por defecto)
             display_progress_enabled: Mostrar progreso
-            heading_leaf_level_results: Nombre para "Proyectos"
-            heading_parent_level_results: Nombre para "Resultados"
             intro: Introducción
             scope_id: Ámbito
             scopes_enabled: Ámbitos habilitados
-            subcategories_label: Nombre para "Subcategorías"
           step:
             comments_blocked: Comentarios bloqueados
     events:

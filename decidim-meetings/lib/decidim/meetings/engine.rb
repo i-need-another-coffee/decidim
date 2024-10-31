@@ -32,7 +32,11 @@ module Decidim
           resource :live_event, only: :show
           namespace :polls do
             resources :questions, only: [:index, :update]
-            resources :answers, only: [:index, :create]
+            resources :answers, only: [:index, :create] do
+              collection do
+                get :admin
+              end
+            end
           end
         end
         scope "/meetings" do
@@ -54,11 +58,9 @@ module Decidim
         Decidim.icons.register(name: "calendar-check-line", icon: "calendar-check-line", category: "system", description: "", engine: :meetings)
         Decidim.icons.register(name: "community-line", icon: "community-line", category: "system", description: "", engine: :meetings)
         Decidim.icons.register(name: "webcam-line", icon: "webcam-line", category: "system", description: "", engine: :meetings)
-        Decidim.icons.register(name: "login-circle-line", icon: "login-circle-line", category: "system", description: "", engine: :meetings)
         Decidim.icons.register(name: "download-cloud-2-line", icon: "download-cloud-2-line", category: "system", description: "", engine: :meetings)
         Decidim.icons.register(name: "share-forward-2-line", icon: "share-forward-2-line", category: "system", description: "", engine: :meetings)
         Decidim.icons.register(name: "home-wifi-line", icon: "home-wifi-line", category: "system", description: "", engine: :meetings)
-        Decidim.icons.register(name: "drag-move-2-fill", icon: "drag-move-2-fill", category: "system", description: "", engine: :meetings)
         Decidim.icons.register(name: "coupon-line", icon: "coupon-line", category: "system", description: "", engine: :meetings)
         Decidim.icons.register(name: "door-open-line", icon: "door-open-line", category: "system", description: "", engine: :meetings)
         Decidim.icons.register(name: "broadcast-line", icon: "broadcast-line", category: "system", description: "", engine: :meetings)

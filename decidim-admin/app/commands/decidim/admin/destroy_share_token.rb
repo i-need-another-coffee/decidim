@@ -3,43 +3,19 @@
 module Decidim
   module Admin
     # A command with all the business logic to destroy a share token.
-    class DestroyShareToken < Decidim::Command
-      # Public: Initializes the command.
-      #
-      # share_token - The share_token to destroy
-      # current_user - the user performing the action
-      def initialize(share_token, current_user)
-        @share_token = share_token
-        @current_user = current_user
-      end
+    # This command is called from the controller.
+    class DestroyShareToken < Decidim::Commands::DestroyResource
+      delegate :participatory_space, :component, to: :resource
 
-      # Executes the command. Broadcasts these events:
-      #
-      # - :ok when everything is valid.
-      # - :invalid if the form was not valid and we could not proceed.
-      #
-      # Returns nothing.
-      def call
-        begin
-          destroy_share_token
-        rescue StandardError
-          broadcast(:invalid)
-        end
-        broadcast(:ok)
-      end
-
-      private
-
-      attr_reader :current_user
-
-      def destroy_share_token
-        Decidim.traceability.perform_action!(
-          "delete",
-          @share_token,
-          current_user
-        ) do
-          @share_token.destroy!
-        end
+      def extra_params
+        {
+          participatory_space: {
+            title: participatory_space&.title
+          },
+          resource: {
+            title: component&.name
+          }
+        }
       end
     end
   end

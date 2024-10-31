@@ -10,6 +10,13 @@ describe "Comments" do
 
   include_examples "comments"
 
+  context "with comments blocked" do
+    let!(:component) { create(:budgets_component, participatory_space:, organization:) }
+    let(:participatory_space) { create(:participatory_process, :with_steps, organization:) }
+
+    include_examples "comments blocked"
+  end
+
   context "when requesting the comments index with a non-XHR request" do
     it "redirects the user to the correct commentable path" do
       visit decidim_comments.comments_path(commentable_gid: commentable.to_signed_global_id.to_s)
@@ -27,14 +34,14 @@ describe "Comments" do
       another_window = window_opened_by do
         within(".comment", match: :first) do
           page.find("[id^='dropdown-trigger']").click
-          click_link "Get link"
+          click_on "Get link"
         end
       end
 
       within_window(another_window) do
-        expect(page).to have_content(commentable.title["en"])
-        expect(page).to have_content(comments.first.body["en"])
-        expect(page).not_to have_content(comments.second.body["en"])
+        expect(page).to have_content(decidim_sanitize_translated(commentable.title))
+        expect(page).to have_content(decidim_sanitize_translated(comments.first.body))
+        expect(page).to have_no_content(decidim_sanitize_translated(comments.second.body))
       end
     end
   end

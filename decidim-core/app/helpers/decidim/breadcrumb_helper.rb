@@ -22,7 +22,7 @@ module Decidim
     #   HasBreadcrumbItems concern with the add_breadcrumb_item_from_menu
     #   method. The list contains the identifier of a menu to insert its items
     #   in the breadcrumb displaying the active element.
-    # * controller_breadcrumb_items: A list of additional breadrumb items
+    # * controller_breadcrumb_items: A list of additional breadcrumb items
     #   which is expected to receive its elements from controllers and contains
     #   the last items of the breadcrumb.
     def breadcrumb_items(context = :public)
@@ -55,6 +55,12 @@ module Decidim
         url: active_item.url,
         active: active_item.active?
       }
+    end
+
+    def render_schema_org_breadcrumb_list(breadcrumb_items)
+      exporter_options = { breadcrumb_items:, base_url: request.base_url, organization_name: current_organization_name }
+      exported_breadcrumb_list = Decidim::Exporters::JSON.new([exporter_options], Decidim::SchemaOrgBreadcrumbListSerializer).export.read
+      JSON.pretty_generate(JSON.parse(exported_breadcrumb_list).first)
     end
   end
 end

@@ -181,6 +181,7 @@ zh-TW:
         export: 全部匯出
         export-selection: 匯出選擇
         import: 匯入
+        manage: 管理
         newsletter:
           new: 新電子報
         participatory_space_private_user:
@@ -194,7 +195,6 @@ zh-TW:
         verify: 驗證
       admin_terms_of_service:
         accept:
-          error: 點選同意管理員服務條款時發生錯誤
           success: 太好了，已經同意管理員服務條款！
         actions:
           accept: 我同意這些條款
@@ -280,7 +280,6 @@ zh-TW:
       block_user:
         new:
           action: 封鎖帳號並且發送理由
-          already_reported_html: 繼續操作也會隱藏所有參與者內容， <a href="%{link}">封鎖這個帳號</a>。
           description: 封鎖一個使用者會讓他的帳號無法使用，可以在此提供建議說明如何取消封鎖
           justification: 理由
           title: 封鎖使用者 %{name}
@@ -325,7 +324,6 @@ zh-TW:
           headers:
             actions: 操作
             name: 組件名稱
-            scope: 組件作用域
             type: 組件類型
         new:
           add: 新增元件
@@ -346,7 +344,6 @@ zh-TW:
         title: 驗證衝突
         transfer:
           email: 電子郵件
-          error: 轉移現在參與者到管理參與者時發生錯誤
           name: 名稱
           reason: 理由
           success: 目前的轉換完成
@@ -355,18 +352,10 @@ zh-TW:
         user_name: 使用者
       dashboard:
         pending_moderations:
-          anouncement:
-            other: 有 %{count} 個操作等待中
           goto_moderation: 前往全域管理
           title: 等待的操作
         show:
           view_more_logs: 檢視更多記錄
-      domain_whitelist:
-        form:
-          domain_too_short: 網址太短
-        update:
-          error: 網址白名單更新失敗
-          success: 網址白名單更新成功.
       exports:
         export_as: "%{name} 成為 %{export_format}"
         formats:
@@ -433,7 +422,6 @@ zh-TW:
           report_count_eq: 報告數量等於
           reported_id_string_or_reported_content_cont: 按報告 Id 或內容搜索%{collection}。
           title_cont: 按標題搜索%{collection}。
-          user_name_or_user_email_cont: 按名稱或電子郵件搜索%{collection}。
           user_name_or_user_nickname_or_user_email_cont: 按電子郵件、姓名或暱稱搜索%{collection}。
         state_eq:
           label: 狀態
@@ -542,12 +530,13 @@ zh-TW:
         appearance: 外觀
         area_types: 區域類型
         areas: 區域
+        components: 组件
         configuration: 配置
         content: 被檢舉的內容
-        external_domain_whitelist: 允許的外部域名
         help_sections: 幫助部分
         homepage: 首頁
         impersonations: 模擬登錄
+        manage: 管理
         moderation: 全局審查
         newsletters: 電子報
         participants: 參與者
@@ -746,7 +735,6 @@ zh-TW:
           success: 通訊更新成功。請在發送前檢查一下。
       officializations:
         block:
-          error: 封鎖參與者時發生錯誤.
           success: 參與者已成功封鎖.
         create:
           success: 參與者已成功成為正式成員.
@@ -780,7 +768,6 @@ zh-TW:
           show: 顯示
           title: 顯示參與者的電子郵件地址
         unblock:
-          error: 解除參與者封鎖時出現錯誤.
           success: 參與者已成功解除封鎖.
       organization:
         edit:
@@ -811,17 +798,6 @@ zh-TW:
             layout_appearance_title: 編輯版面外觀
             preview: 預覽
           omnipresent_banner_appearance_title: 編輯無處不在的橫幅
-      organization_external_domain_whitelist:
-        edit:
-          update: 更新
-        external_domain:
-          down: 向下
-          external_domain: 外部網域
-          remove: 移除
-          up: 往上
-        form:
-          add: 新增到白名單
-          title: 外部域名白名單
       participatory_space_private_users:
         create:
           error: 在此參與空間中添加私人參與者時出現問題。
@@ -957,6 +933,8 @@ zh-TW:
         update:
           error: 更新此頁面時出現問題。
           success: 頁面已更新成功.
+      taxonomies:
+        count: 計數
       titles:
         admin_log: 管理日誌
         area_types: 區域類型

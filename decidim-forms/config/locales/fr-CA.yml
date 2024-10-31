@@ -21,9 +21,9 @@ fr-CA:
               too_long: est trop long
             choices:
               missing: ne sont pas complets
-              too_many: sont trop nombreux
+              too_many: Vous pouvez choisir un maximum de %{count}.
         questionnaire:
-          request_invalid: Une erreur s'est produite. Veuillez réessayer.
+          request_invalid: Une erreur s'est produite lors du traitement de la requête. Veuillez essayer à nouveau.
   decidim:
     forms:
       admin:
@@ -161,6 +161,7 @@ fr-CA:
             sign_up_description: Créez votre compte utilisateur pour répondre à l'enquête
             title: Répondez au questionnaire
           current_step: Étape %{step}
+          empty: Aucune question configurée pour ce formulaire pour le moment.
           of_total_steps: de %{total_steps}
           questionnaire_answered:
             body: Vous avez déjà répondu à ce questionnaire.

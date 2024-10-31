@@ -16,13 +16,9 @@ module Decidim
       def serialize
         {
           id: project.id,
-          category: {
-            id: project.category.try(:id),
-            name: project.category.try(:name) || empty_translatable
-          },
-          scope: {
-            id: project.scope.try(:id),
-            name: project.scope.try(:name) || empty_translatable
+          taxonomies: {
+            id: project.taxonomies.map(&:id),
+            name: project.taxonomies.map(&:name)
           },
           participatory_space: {
             id: project.participatory_space.id,
@@ -37,6 +33,7 @@ module Decidim
           comments: project.comments_count,
           created_at: project.created_at,
           url: project.polymorphic_resource_url({}),
+          address: project.address,
           related_proposals:,
           related_proposal_titles:,
           related_proposal_urls:

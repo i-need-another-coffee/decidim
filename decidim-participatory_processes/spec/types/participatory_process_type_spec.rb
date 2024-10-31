@@ -4,16 +4,18 @@ require "spec_helper"
 require "decidim/api/test/type_context"
 
 require "decidim/core/test/shared_examples/attachable_interface_examples"
+require "decidim/core/test/shared_examples/taxonomizable_interface_examples"
 
 module Decidim
   module ParticipatoryProcesses
     describe ParticipatoryProcessType, type: :graphql do
       include_context "with a graphql class type"
 
-      let(:model) { create(:participatory_process, :with_scope) }
+      let(:model) { create(:participatory_process) }
+      let(:organization) { model.organization }
 
       include_examples "attachable interface"
-      include_examples "categories container interface"
+      include_examples "taxonomizable interface"
 
       describe "id" do
         let(:query) { "{ id }" }
@@ -111,19 +113,11 @@ module Decidim
         end
       end
 
-      describe "bannerImage" do
-        let(:query) { "{ bannerImage }" }
-
-        it "returns the banner image of the process" do
-          expect(response["bannerImage"]).to eq(model.attached_uploader(:banner_image).path)
-        end
-      end
-
       describe "heroImage" do
         let(:query) { "{ heroImage }" }
 
         it "returns the hero image of the process" do
-          expect(response["heroImage"]).to eq(model.attached_uploader(:hero_image).path)
+          expect(response["heroImage"]).to be_blob_url(model.hero_image.blob)
         end
       end
 
@@ -181,41 +175,6 @@ module Decidim
 
         it "returns all the required fields" do
           expect(response["participatoryStructure"]["translation"]).to eq(model.participatory_structure["en"])
-        end
-      end
-
-      describe "showMetrics" do
-        let(:query) { "{ showMetrics }" }
-
-        it "returns if the process has metrics available" do
-          expect(response["showMetrics"]).to be_in([true, false])
-          expect(response["showMetrics"]).to eq(model.show_metrics)
-        end
-      end
-
-      describe "showStatistics" do
-        let(:query) { "{ showStatistics }" }
-
-        it "returns if the process has stats available" do
-          expect(response["showStatistics"]).to be_in([true, false])
-          expect(response["showStatistics"]).to eq(model.show_statistics)
-        end
-      end
-
-      describe "scopesEnabled" do
-        let(:query) { "{ scopesEnabled }" }
-
-        it "returns if the process has scopes enabled" do
-          expect(response["scopesEnabled"]).to be_in([true, false])
-          expect(response["scopesEnabled"]).to eq(model.scopes_enabled)
-        end
-      end
-
-      describe "scope" do
-        let(:query) { "{ scope { id } }" }
-
-        it "has a scope" do
-          expect(response).to include("scope" => { "id" => model.scope.id.to_s })
         end
       end
 

@@ -28,7 +28,7 @@ module Decidim
           false
         end
 
-        # Public: Whether the object's comments can have have votes or not. It enables the
+        # Public: Whether the object's comments can have votes or not. It enables the
         # upvote and downvote buttons for comments.
         def comments_have_votes?
           false
@@ -58,7 +58,7 @@ module Decidim
         end
 
         # Public: Updates the comments counter cache. We have to do it these
-        # way in order to properly calculate the coutner with hidden
+        # way in order to properly calculate the counter with hidden
         # comments.
         #
         # rubocop:disable Rails/SkipsModelValidations
@@ -67,6 +67,17 @@ module Decidim
           update_columns(comments_count:, updated_at: Time.current)
         end
         # rubocop:enable Rails/SkipsModelValidations
+
+        # Public: Returns an array with extra actions available for a comment and a user.
+        # Returns an array of hashes with the following keys:
+        #   - label: The label to be displayed in the UI.
+        #   - url: The action to be performed when the user clicks the label.
+        #   - method: The HTTP method to be used when performing the action (optional).
+        #   - icon: The icon to be displayed next to the label (optional).
+        #   - data: Any "data-*" attributes to be included in the link (optional).
+        def actions_for_comment(_comment, _current_user)
+          []
+        end
       end
     end
   end

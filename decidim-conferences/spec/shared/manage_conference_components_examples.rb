@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 shared_examples "manage conference components" do
+  let!(:attributes) { attributes_for(:component, participatory_space: conference) }
+
   before do
     switch_to_host(organization.host)
     login_as user, scope: :user
@@ -20,9 +22,7 @@ shared_examples "manage conference components" do
         fill_in_i18n(
           :component_name,
           "#component-name-tabs",
-          en: "My component",
-          ca: "La meva funcionalitat",
-          es: "Mi funcionalitat"
+          **attributes[:name].except("machine_translations")
         )
 
         within ".global-settings" do
@@ -43,19 +43,24 @@ shared_examples "manage conference components" do
           all("input[type=checkbox]").first.click
         end
 
-        click_button "Add component"
+        click_on "Add component"
       end
     end
 
     it "is successfully created" do
       expect(page).to have_admin_callout("successfully")
-      expect(page).to have_content("My component")
+      expect(page).to have_content(translated(attributes[:name]))
+    end
+
+    it "has a successful admin log" do
+      visit decidim_admin.root_path
+      expect(page).to have_content("created #{translated(attributes[:name])} in #{translated(conference.title)}")
     end
 
     context "and then edit it" do
       before do
-        within find("tr", text: "My component") do
-          click_link "Configure"
+        within "tr", text: translated(attributes[:name]) do
+          click_on "Configure"
         end
       end
 
@@ -70,7 +75,7 @@ shared_examples "manage conference components" do
       end
 
       it "successfully edits it" do
-        click_button "Update"
+        click_on "Update"
 
         expect(page).to have_admin_callout("successfully")
       end
@@ -96,16 +101,14 @@ shared_examples "manage conference components" do
 
     it "updates the component" do
       within ".component-#{component.id}" do
-        click_link "Configure"
+        click_on "Configure"
       end
 
       within ".edit_component" do
         fill_in_i18n(
           :component_name,
           "#component-name-tabs",
-          en: "My updated component",
-          ca: "La meva funcionalitat actualitzada",
-          es: "Mi funcionalidad actualizada"
+          **attributes[:name].except("machine_translations")
         )
 
         within ".global-settings" do
@@ -116,14 +119,14 @@ shared_examples "manage conference components" do
           all("input[type=checkbox]").first.click
         end
 
-        click_button "Update"
+        click_on "Update"
       end
 
       expect(page).to have_admin_callout("successfully")
-      expect(page).to have_content("My updated component")
+      expect(page).to have_content(translated(attributes[:name]))
 
-      within find("tr", text: "My updated component") do
-        click_link "Configure"
+      within "tr", text: translated(attributes[:name]) do
+        click_on "Configure"
       end
 
       within ".global-settings" do
@@ -133,6 +136,9 @@ shared_examples "manage conference components" do
       within ".default-step-settings" do
         expect(all("input[type=checkbox]").first).to be_checked
       end
+
+      visit decidim_admin.root_path
+      expect(page).to have_content("updated #{translated(attributes[:name])} in #{translated(conference.title)}")
     end
   end
 
@@ -155,19 +161,20 @@ shared_examples "manage conference components" do
 
     it "removes the component" do
       within ".component-#{component.id}" do
-        click_link "Delete"
+        click_on "Delete"
       end
 
-      expect(page).not_to have_content("My component")
+      expect(page).to have_no_content("My component")
     end
   end
 
   describe "publish and unpublish a component" do
     let!(:component) do
-      create(:component, participatory_space: conference, published_at:)
+      create(:component, participatory_space: conference, published_at:, visible:)
     end
 
     let(:published_at) { nil }
+    let(:visible) { true }
 
     before do
       visit decidim_admin_conferences.components_path(conference)
@@ -176,7 +183,7 @@ shared_examples "manage conference components" do
     context "when the component is unpublished" do
       it "publishes the component" do
         within ".component-#{component.id}" do
-          click_link "Publish"
+          click_on "Publish"
         end
 
         within ".component-#{component.id}" do
@@ -189,21 +196,43 @@ shared_examples "manage conference components" do
         create(:follow, followable: conference, user: follower)
 
         within ".component-#{component.id}" do
-          click_link "Publish"
+          click_on "Publish"
         end
 
-        expect(enqueued_jobs.last[:args]).to include("decidim.events.components.component_published")
+        expect(Decidim::EventPublisherJob).to(have_been_enqueued.with(
+                                                "decidim.events.components.component_published", {
+                                                  resource: component,
+                                                  event_class: "Decidim::ComponentPublishedEvent",
+                                                  affected_users: [],
+                                                  followers: [follower],
+                                                  force_send: false,
+                                                  extra: {}
+                                                }
+                                              ))
       end
-
-      it_behaves_like "manage component share tokens"
     end
 
     context "when the component is published" do
       let(:published_at) { Time.current }
 
+      it "hides the component from the menu" do
+        within ".component-#{component.id}" do
+          click_on "Hide"
+        end
+
+        within ".component-#{component.id}" do
+          expect(page).to have_css(".action-icon--menu-hidden")
+        end
+      end
+    end
+
+    context "when the component is hidden from the menu" do
+      let(:published_at) { Time.current }
+      let(:visible) { false }
+
       it "unpublishes the component" do
         within ".component-#{component.id}" do
-          click_link "Unpublish"
+          click_on "Unpublish"
         end
 
         within ".component-#{component.id}" do

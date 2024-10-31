@@ -90,9 +90,6 @@ sk:
         start_exploring: začať skúmať
       csv_census:
         admin:
-          census:
-            create:
-              error: Pri importe sčítaní došlo k chybe.
           destroy:
             title: Zmazať všetky dáta sčítania
           index:
@@ -153,8 +150,6 @@ sk:
           new:
             send: Požiadajte o overenie
             title: Nahrajte svoj doklad totožnosti
-        dni: IČO
-        nie: DIČ
         passport: Cestovný pas
       postal_letter:
         admin:
@@ -175,8 +170,6 @@ sk:
             title: Požiadajte o overovací kód
       sms:
         authorizations:
-          destroy:
-            success: Overovací kód úspešne resetovať. Opäť zadajte svoje telefónne číslo.
           edit:
             confirm_destroy: Naozaj chcete obnoviť overovací kód?
             destroy: Obnoviť overovací kód

@@ -20,27 +20,25 @@ shared_examples "a proposal form" do |options|
       { en: "Everything would be better" }
     end
   end
+  let(:body_template) { nil }
   let(:author) { create(:user, organization:) }
   let(:user_group) { create(:user_group, :verified, users: [author], organization:) }
   let(:user_group_id) { user_group.id }
-  let(:category) { create(:category, participatory_space:) }
-  let(:parent_scope) { create(:scope, organization:) }
-  let(:scope) { create(:subscope, parent: parent_scope) }
-  let(:category_id) { category.try(:id) }
-  let(:scope_id) { scope.try(:id) }
   let(:latitude) { 40.1234 }
   let(:longitude) { 2.1234 }
   let(:address) { nil }
   let(:suggested_hashtags) { [] }
   let(:attachment_params) { nil }
   let(:meeting_as_author) { false }
+  let(:taxonomies) { [] }
+
   let(:params) do
     {
       title:,
       body:,
+      body_template:,
+      taxonomies:,
       author:,
-      category_id:,
-      scope_id:,
       address:,
       meeting_as_author:,
       attachment: attachment_params,
@@ -56,10 +54,10 @@ shared_examples "a proposal form" do |options|
     )
   end
 
-  describe "scope" do
+  describe "taxonomies" do
     let(:current_component) { component }
 
-    it_behaves_like "a scopable resource"
+    it_behaves_like "a taxonomizable resource"
   end
 
   context "when everything is OK" do
@@ -125,22 +123,31 @@ shared_examples "a proposal form" do |options|
     it { is_expected.to be_invalid }
   end
 
-  context "when no category_id" do
-    let(:category_id) { nil }
+  context "when the body exceeds the permitted length" do
+    let(:component) { create(:proposal_component, :with_proposal_length, participatory_space:, proposal_length: allowed_length) }
+    let(:allowed_length) { 15 }
+    let(:body) { "A body longer than the permitted" }
 
-    it { is_expected.to be_valid }
+    it { is_expected.to be_invalid } unless options[:admin]
+
+    context "with carriage return characters that cause it to exceed" do
+      let(:allowed_length) { 80 }
+      let(:body) { "This text is just the correct length\r\nwith the carriage return characters removed" }
+
+      it { is_expected.to be_valid }
+    end
   end
 
-  context "when no scope_id" do
-    let(:scope_id) { nil }
+  context "when there is a body template set" do
+    let(:body_template) { "This is the template" }
 
     it { is_expected.to be_valid }
-  end
 
-  context "with invalid category_id" do
-    let(:category_id) { 987 }
+    context "when the template and the body are the same" do
+      let(:body) { body_template }
 
-    it { is_expected.to be_invalid }
+      it { is_expected.to be_invalid } unless options[:admin]
+    end
   end
 
   context "when geocoding is enabled" do
@@ -203,8 +210,7 @@ shared_examples "a proposal form" do |options|
             title:,
             body:,
             author: previous_proposal.authors.first,
-            category_id: previous_proposal.try(:category_id),
-            scope_id: previous_proposal.try(:scope_id),
+            taxonomies: previous_proposal.try(:taxonomies),
             address:,
             attachment: previous_proposal.try(:attachment_params),
             latitude:,
@@ -221,32 +227,6 @@ shared_examples "a proposal form" do |options|
     end
   end
 
-  describe "category" do
-    subject { form.category }
-
-    context "when the category exists" do
-      it { is_expected.to be_a(Decidim::Category) }
-    end
-
-    context "when the category does not exist" do
-      let(:category_id) { 7654 }
-
-      it { is_expected.to be_nil }
-    end
-
-    context "when the category is from another process" do
-      let(:category_id) { create(:category).id }
-
-      it { is_expected.to be_nil }
-    end
-  end
-
-  it "properly maps category id from model" do
-    proposal = create(:proposal, component:, category:)
-
-    expect(described_class.from_model(proposal).category_id).to eq(category_id)
-  end
-
   if options && options[:user_group_check]
     it "properly maps user group id from model" do
       proposal = create(:proposal, component:, users: [author], user_groups: [user_group])
@@ -258,14 +238,13 @@ shared_examples "a proposal form" do |options|
   context "when the attachment is present" do
     let(:params) do
       {
-        title:,
-        body:,
-        author:,
-        category_id:,
-        scope_id:,
-        address:,
-        meeting_as_author:,
-        suggested_hashtags:,
+        :title => title,
+        :body => body,
+        :author => author,
+        :taxonomies => taxonomies,
+        :address => address,
+        :meeting_as_author => meeting_as_author,
+        :suggested_hashtags => suggested_hashtags,
         attachments_key => [Decidim::Dev.test_file("city.jpeg", "image/jpeg")]
       }
     end

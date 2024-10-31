@@ -31,6 +31,8 @@ hu:
         update:
           error: Hiba történt a hozzászólás frissítése során.
       comments_title: Hozzászólás
+      last_activity:
+        new_comment: 'Új megjegyzés:'
       votes:
         create:
           error: Hiba történt a megjegyzésre való szavazáskor.
@@ -41,6 +43,8 @@ hu:
             label: Megjegyzés
             placeholder: Mit gondolsz erről?
           form_error: Kötelező kitölteni, és nem lehet hosszabb, mint %{length} karakter.
+          submit_reply: Válasz publikálása
+          submit_root_comment: Megjegyzés publikálása
           user_group_id:
             label: 'Megjegyzés mint:'
         opinion:
@@ -58,13 +62,13 @@ hu:
         alignment:
           against: Ellenzem
           in_favor: Támogatom
+        cancel_reply: Válasz visszavonása
         confirm_destroy: Biztosan szeretné törölni ezt a hozzászólást?
         delete: Törlés
         deleted_at: 'Hozzászólás törölve ekkor:  %{date}'
         deleted_user: Törölt felhasználó
         edit: Szerkesztés
         edited: Szerkesztve
-        hide_replies: Válaszok elrejtése
         moderated_at: Hozzászólás moderálva %{date}
         reply: Válasz
         report:
@@ -89,7 +93,6 @@ hu:
       comments:
         blocked_comments_for_unauthorized_user_warning: Ebben a pillanatban nem tud megjegyzéseket tenni, de elolvashatja az előzőeket.
         blocked_comments_for_user_warning: Ebben a pillanatban nem tud megjegyzéseket tenni, de elolvashatja az előzőeket.
-        blocked_comments_warning: A megjegyzések jelenleg le vannak tiltva, de a korábbiakat elolvashatod.
         comment_details_title: Megjegyzés részletei
         loading: Hozzászólások betöltése ...
         single_comment_warning: <a href="%{url}"><a href="%{url}">Minden hozzászólás megtekintése</a>

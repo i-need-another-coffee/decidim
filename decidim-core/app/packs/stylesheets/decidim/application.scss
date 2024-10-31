@@ -57,7 +57,11 @@
   @import "stylesheets/decidim/_toggle_switch.scss";
   @import "stylesheets/decidim/_hero.scss";
   @import "stylesheets/decidim/_actions.scss";
+  @import "stylesheets/decidim/_emoji.scss";
 }
+
+@import "stylesheets/decidim/vendor/datepicker_light.scss";
+@import "stylesheets/decidim/datepicker.scss";
 
 // On the other hand, the following styles match with specific routes
 @import "stylesheets/decidim/_header.scss";
@@ -71,6 +75,7 @@
 @import "stylesheets/decidim/_home.scss";
 @import "stylesheets/decidim/_search.scss";
 @import "stylesheets/decidim/_cookies.scss";
+@import "stylesheets/decidim/_open_data.scss";
 // participatory spaces are quite similar between processes and assemblies (different modules), so their stylesheets are placed in the core
 @import "stylesheets/decidim/_participatory_spaces.scss";
 @import "stylesheets/decidim/_omnipresent_banner.scss";
@@ -78,6 +83,3 @@
 // This imports all the Decidim module stylesheet imports registered at
 // `config/assets.rb` of the module for the "app" group.
 @import "!decidim-style-imports[app]";
-
-// Application specific styles: https://docs.decidim.org/en/customize/styles/#_webpacker
-@import "stylesheets/decidim/decidim_application";

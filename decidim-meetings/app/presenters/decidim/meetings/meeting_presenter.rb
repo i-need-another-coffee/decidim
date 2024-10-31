@@ -10,12 +10,20 @@ module Decidim
       include ActionView::Helpers::UrlHelper
       include Decidim::SanitizeHelper
 
+      alias super_title title
+
       def meeting
         __getobj__
       end
 
       def meeting_path
         Decidim::ResourceLocatorPresenter.new(meeting).path
+      end
+
+      def taxonomy_names(html_escape: false, all_locales: false)
+        meeting.taxonomies.map do |taxonomy|
+          super_title(taxonomy.name, false, html_escape, all_locales)
+        end
       end
 
       def display_mention
@@ -25,7 +33,7 @@ module Decidim
       def title(links: false, html_escape: false, all_locales: false)
         return unless meeting
 
-        super meeting.title, links, html_escape, all_locales
+        super(meeting.title, links, html_escape, all_locales)
       end
 
       def description(links: false, extras: true, strip_tags: false, all_locales: false)
@@ -64,13 +72,10 @@ module Decidim
         end
       end
 
-      def closing_report(links: false, all_locales: false)
+      def closing_report(links: false, extras: false, strip_tags: false, all_locales: false)
         return unless meeting
 
-        handle_locales(meeting.closing_report, all_locales) do |content|
-          renderer = Decidim::ContentRenderers::HashtagRenderer.new(sanitized(content))
-          renderer.render(links:).html_safe
-        end
+        content_handle_locale(meeting.closing_report, all_locales, extras, links, strip_tags)
       end
 
       def registration_email_custom_content(links: false, all_locales: false)
@@ -104,6 +109,10 @@ module Decidim
 
       def badge
         ""
+      end
+
+      def space_title
+        translated_attribute component.participatory_space.title
       end
 
       def profile_path

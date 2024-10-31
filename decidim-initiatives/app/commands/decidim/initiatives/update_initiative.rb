@@ -8,15 +8,15 @@ module Decidim
       include ::Decidim::MultipleAttachmentsMethods
       include ::Decidim::GalleryMethods
       include CurrentLocale
+      delegate :current_user, to: :form
 
       # Public: Initializes the command.
       #
       # initiative - Decidim::Initiative
       # form       - A form object with the params.
-      def initialize(initiative, form, current_user)
+      def initialize(initiative, form)
         @form = form
         @initiative = initiative
-        @current_user = current_user
         @attached_to = initiative
       end
 
@@ -39,25 +39,39 @@ module Decidim
           return broadcast(:invalid) if gallery_invalid?
         end
 
-        @initiative = Decidim.traceability.update!(
-          initiative,
-          current_user,
-          attributes
-        )
+        with_events(with_transaction: true) do
+          @initiative = Decidim.traceability.update!(
+            initiative,
+            current_user,
+            attributes
+          )
 
-        photo_cleanup!
-        document_cleanup!
-        create_attachments if process_attachments?
-        create_gallery if process_gallery?
+          photo_cleanup!
+          document_cleanup!
+          create_attachments if process_attachments?
+          create_gallery if process_gallery?
+        end
 
         broadcast(:ok, initiative)
       rescue ActiveRecord::RecordInvalid
         broadcast(:invalid, initiative)
       end
 
+      protected
+
+      def event_arguments
+        {
+          resource: initiative,
+          extra: {
+            event_author: form.current_user,
+            locale:
+          }
+        }
+      end
+
       private
 
-      attr_reader :form, :initiative, :current_user
+      attr_reader :form, :initiative
 
       def attributes
         attrs = {

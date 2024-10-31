@@ -79,7 +79,6 @@ fi-pl:
   decidim:
     admin:
       actions:
-        manage: Hallinnoi
         new_initiative_type: Uusi aloitetyyppi
         new_initiative_type_scope: Uusi aloitetyypin teema
       filters:
@@ -92,7 +91,7 @@ fi-pl:
               accepted: Tarpeeksi allekirjoituksia
               created: Luotu
               discarded: Hylätyt
-              published: Julkaistut
+              open: Avoimet
               rejected: Liian vähän allekirjoituksia
               validating: Teknisessä validoinnissa
           type_id_eq:
@@ -101,12 +100,11 @@ fi-pl:
           title_or_description_or_id_string_or_author_name_or_author_nickname_cont: Etsi kohteita %{collection} otsikon, kuvauksen, ID-numeron tai laatijan nimellä.
       initiatives_settings:
         update:
-          error: Tapahtui virhe.
+          error: Aloitteiden asetusten päivittäminen epäonnistui.
           success: Aloitteiden asetusten päivitys onnistui.
       menu:
         attachments: Liitteet
         committee_members: Komitean jäsenet
-        components: Komponentit
         information: Tiedot
         initiative_type_scopes: Aloitetyypin teemat
         initiatives: Aloitteet
@@ -238,7 +236,15 @@ fi-pl:
               most_recent: Uusimmat
         exports:
           initiatives: Aloitteet
+        index:
+          initiatives_types:
+            alert_html: "<p>Sinun tulee luoda vähintään yksi aloitetyyppi, jotta osallistujat voivat luoda aloitteita.</p><p>%{link}</p>"
+            button: Uusi aloitetyyppi
         initiatives:
+          accept:
+            success: Aloitteen hyväksyminen onnistui.
+          discard:
+            success: Aloitteen peruminen onnistui.
           edit:
             accept: Hyväksy aloite
             confirm: Oletko varma?
@@ -262,8 +268,14 @@ fi-pl:
             edit: Muokkaa
             new: Uusi
             photos: Kuvat
+          publish:
+            success: Aloitteen julkaisu onnistui.
+          reject:
+            success: Aloitteen hylkääminen onnistui.
+          unpublish:
+            success: Aloitteen julkaisun lopetus onnistui.
           update:
-            error: Tapahtui virhe.
+            error: Aloitteen päivittäminen epäonnistui.
             success: Aloitteen päivitys onnistui.
         initiatives_settings:
           edit:
@@ -277,7 +289,7 @@ fi-pl:
             title: Aloitteiden asetukset
         initiatives_type_scopes:
           create:
-            error: Tapahtui virhe.
+            error: Teeman luominen aloitteelle epäonnistui.
             success: Aloitetyypille on luotu uusi teema.
           destroy:
             success: Teeman poisto onnistui.
@@ -288,12 +300,12 @@ fi-pl:
             create: Luo
             title: Luo aloitetyypin teema
           update:
-            error: Tapahtui virhe.
+            error: Teeman päivittäminen epäonnistui.
             success: Teeman päivitys onnistui.
         initiatives_types:
           create:
-            error: Tapahtui virhe.
-            success: Uuden aloitetyypin luonti onnistui.
+            error: Aloitetyypin luonti epäonnistui.
+            success: Uuden aloitetyypin luonti onnistui. Sinun on määritettävä vähintään yksi teema tälle aloitetyypille, jotta sitä voi käyttää.
           destroy:
             success: Aloitetyypin poisto onnistui.
           edit:
@@ -309,7 +321,7 @@ fi-pl:
             create: Luo
             title: Uusi aloitetyyppi
           update:
-            error: Tapahtui virhe.
+            error: Aloitetyypin päivitys epäonnistui.
             success: Aloitetyypin päivitys onnistui.
       admin_log:
         initiative:
@@ -327,7 +339,7 @@ fi-pl:
         accepted: Tarpeeksi allekirjoituksia
         created: Luotu
         discarded: Hylätty
-        published: Julkaistu
+        open: Avoimet
         rejected: Liian vähän allekirjoituksia
         validating: Teknisessä validoinnissa
       application_helper:
@@ -468,7 +480,7 @@ fi-pl:
           invite_to_committee_help: Jaa tämä linkki ja kutsu muita käyttäjiä kannatuskomiteaan.
           link: Linkki
           no_members_yet: Kannatuskomiteassa ei ole jäseniä.
-          revoke: Poista
+          revoke: Peruuta
           title: Komitean jäsenet
         count:
           title:
@@ -541,7 +553,6 @@ fi-pl:
           other: " allekirjoitusta"
         vote_cabin:
           already_voted: Allekirjoitettu aikaisemmin
-          supports_required: "%{total_supports} allekirjoitusta vaaditaan"
           verification_required: Vahvista tilisi allekirjoittamaan aloite
           vote: Allekirjoita
           votes_blocked: Allekirjoitus poistettu käytöstä
@@ -577,7 +588,7 @@ fi-pl:
           accepted: Tarpeeksi allekirjoituksia
           created: Luotu
           discarded: Hylätty
-          published: Julkaistu
+          open: Avoimet
           rejected: Liian vähän allekirjoituksia
           validating: Teknisessä tarkastuksessa
       states:
@@ -585,7 +596,7 @@ fi-pl:
         expired: Vanhentuneet
       unavailable_scope: Teema ei ole saatavilla
       update:
-        error: Tapahtui virhe.
+        error: Aloitteen päivitys epäonnistui.
         success: Aloitteen päivitys onnistui.
     menu:
       initiatives: Aloitteet

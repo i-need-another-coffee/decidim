@@ -4,6 +4,7 @@ require "spec_helper"
 require "decidim/api/test/type_context"
 
 require "decidim/core/test/shared_examples/attachable_interface_examples"
+require "decidim/core/test/shared_examples/taxonomizable_interface_examples"
 
 module Decidim
   module Conferences
@@ -11,9 +12,13 @@ module Decidim
       include_context "with a graphql class type"
 
       let(:model) { create(:conference) }
+      let!(:published_speaker) { create(:conference_speaker, :published, conference: model) }
+      let!(:unpublished_speaker) { create(:conference_speaker, conference: model) }
+      let(:organization) { model.organization }
 
       include_examples "attachable interface"
       include_examples "categories container interface"
+      include_examples "taxonomizable interface"
 
       describe "id" do
         let(:query) { "{ id }" }
@@ -115,7 +120,7 @@ module Decidim
         let(:query) { "{ heroImage }" }
 
         it "returns the hero image field" do
-          expect(response["heroImage"]).to eq(model.attached_uploader(:hero_image).path)
+          expect(response["heroImage"]).to be_blob_url(model.hero_image.blob)
         end
       end
 
@@ -123,7 +128,7 @@ module Decidim
         let(:query) { "{ bannerImage }" }
 
         it "returns the banner image field" do
-          expect(response["bannerImage"]).to eq(model.attached_uploader(:banner_image).path)
+          expect(response["bannerImage"]).to be_blob_url(model.banner_image.blob)
         end
       end
 
@@ -188,6 +193,14 @@ module Decidim
 
         it "returns all the required fields" do
           expect(response["registrationTerms"]["translation"]).to eq(model.registration_terms["en"])
+        end
+      end
+
+      describe "speakers" do
+        let(:query) { " { speakers { fullName } } " }
+
+        it "returns the list of published speakers" do
+          expect(response["speakers"].count).to eq(1)
         end
       end
     end

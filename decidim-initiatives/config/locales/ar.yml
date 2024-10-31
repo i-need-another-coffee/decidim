@@ -59,10 +59,13 @@ ar:
       actions:
         new_initiative_type: نوع المبادرة الجديدة
       menu:
-        components: المكونات
         information: معلومات
         initiatives: المبادرات
+        initiatives_settings: الإعدادات
+        initiatives_submenu:
+          info: عن هذه المبادرة
         initiatives_types: أنواع المبادرة
+        moderations: الإشراف
       models:
         initiatives:
           fields:
@@ -167,6 +170,7 @@ ar:
             send_to_technical_validation: إرسال إلى التحقق الفني
             update: تحديث
           form:
+            settings: الإعدادات
             title: معلومات عامة
           index:
             actions_title: عمل
@@ -196,7 +200,6 @@ ar:
       admin_states:
         created: تمّ إنشاؤه
         discarded: التخلص منها
-        published: نشرت
         validating: المصادقة الفنية
       application_helper:
         filter_state_values:
@@ -320,7 +323,6 @@ ar:
           other: " التوقيعات"
         vote_cabin:
           already_voted: وقعت بالفعل
-          supports_required: "%{total_supports} التوقيعات المطلوبة"
           verification_required: تحقق من حسابك لتوقيع المبادرة
           vote: إشارة
           votes_blocked: توقيع المعوقين

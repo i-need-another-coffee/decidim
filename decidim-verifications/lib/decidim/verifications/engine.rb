@@ -30,10 +30,6 @@ module Decidim
         end
       end
 
-      initializer "decidim_verifications.register_icons" do
-        Decidim.icons.register(name: "login-circle-line", icon: "login-circle-line", category: "system", description: "", engine: :verifications)
-      end
-
       # Initializer to include cells views paths
       initializer "decidim_verifications.add_cells_view_paths" do
         Cell::ViewModel.view_paths << File.expand_path("#{Decidim::Verifications::Engine.root}/app/cells")
@@ -41,6 +37,11 @@ module Decidim
 
       initializer "decidim_verifications.webpacker.assets_path" do
         Decidim.register_assets_path File.expand_path("app/packs", root)
+      end
+
+      initializer "decidim_verifications.register_icons" do
+        Decidim.icons.register(name: "fingerprint-2-line", icon: "fingerprint-2-line", category: "system", description: "", engine: :verifications)
+        Decidim.icons.register(name: "message-3-line", icon: "message-3-line", category: "system", description: "", engine: :verifications)
       end
     end
   end

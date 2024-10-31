@@ -4,14 +4,11 @@ require "cell/partial"
 
 module Decidim
   module Accountability
-    # This cell renders the status of a category
+    # This cell renders the status of a taxonomy or a result.
     class StatusCell < Decidim::ViewModel
-      include ApplicationHelper
-      include BreadcrumbHelper
-      include Decidim::TranslationsHelper
-      include ActiveSupport::NumberHelper
-
-      delegate :current_component, :component_settings, to: :controller
+      include Decidim::Accountability::ApplicationHelper
+      include Decidim::Accountability::BreadcrumbHelper
+      include ActionView::Helpers::NumberHelper
 
       def show
         return unless render?
@@ -29,37 +26,33 @@ module Decidim
 
       private
 
-      def scope
-        current_scope.presence
-      end
-
       def url
         options[:url]
       end
 
       def title
-        if model.is_a? Decidim::Category
-          translated_attribute(model.name)
+        if model.is_a? Decidim::Taxonomy
+          decidim_escape_translated(model.name)
         else
           options[:title]
         end
       end
 
       def results_count
-        @results_count ||= if model.is_a? Decidim::Category
-                             count_calculator(scope, model.id)
+        @results_count ||= if model.is_a? Decidim::Taxonomy
+                             count_calculator(model.id)
                            else
                              options[:count]
                            end
       end
 
       def progress
-        if model.is_a? Decidim::Category
-          progress_calculator(scope, model.id).presence
+        if model.is_a? Decidim::Taxonomy
+          progress_calculator(model.id).presence
         elsif model.respond_to?(:progress)
           model.progress
         else
-          options[:progress] || progress_calculator(scope, nil).presence
+          options[:progress] || progress_calculator(nil).presence
         end
       end
 
@@ -73,14 +66,22 @@ module Decidim
         display_count(results_count)
       end
 
+      def display_count(count)
+        heading_parent_level_results(count)
+      end
+
+      def heading_parent_level_results(count)
+        t("results.count.results_count", scope: "decidim.accountability", count:)
+      end
+
       def render_count
         return true unless options.has_key?(:render_count)
 
         options[:render_count]
       end
 
-      def count_calculator(scope_id, category_id)
-        Decidim::Accountability::ResultsCalculator.new(current_component, scope_id, category_id).count
+      def count_calculator(taxonomy_id)
+        Decidim::Accountability::ResultsCalculator.new(current_component, taxonomy_id).count
       end
 
       def decidim

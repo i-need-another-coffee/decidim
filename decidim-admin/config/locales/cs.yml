@@ -187,6 +187,7 @@ cs:
         export: Exportovat vše
         export-selection: Exportovat výběr
         import: Importovat
+        manage: Spravovat
         newsletter:
           new: Nový zpravodaj
         participatory_space_private_user:
@@ -287,7 +288,7 @@ cs:
       block_user:
         new:
           action: Blokovat účet a odeslat odůvodnění
-          already_reported_html: Pokračováním v této akci také skryjete veškerý obsah účastníků. <a href="%{link}">Blokujte účet</a>.
+          already_reported_html: Pokračováním v této akci také skryjete veškerý obsah účastníků.
           description: Blokováním uživatele bude jejich účet nepoužitelný. Ve svém zdůvodnění můžete uvést veškerá pravidla pro způsob, jakým byste uvažovali o odblokování uživatele.
           justification: Odůvodnění
           title: Blokovat uživatele %{name}
@@ -328,13 +329,15 @@ cs:
           default_step_settings: Výchozí nastavení kroku
           global_settings: Globální nastavení
           step_settings: Nastavení kroku
+        hide:
+          success: Komponenta byla úspěšně skryta z menu.
         index:
           add: Přidat komponentu
           headers:
             actions: Akce
             name: Název komponenty
-            scope: Oblast působnosti komponenty
             type: Typ komponenty
+            visibility: Viditelnost
         new:
           add: Přidat komponentu
           title: 'Přidat komponentu: %{name}'
@@ -346,9 +349,15 @@ cs:
         update:
           error: Při aktualizaci této komponenty došlo k chybě.
           success: Komponenta byla úspěšně aktualizována.
+        visibility_label:
+          menu_hidden: Menu skryto
+          published: Zveřejněno
+          unpublished: Nezveřejněno
       conflicts:
         attempts: Pokusy
         'false': 'Ne'
+        index:
+          text: Hledat podle aktuálního uživatelského e-mailu, jména nebo přezdívky.
         managed_user_name: Spravovaný uživatel
         solved: Vyřešeno
         title: Konflikty ověření
@@ -377,7 +386,7 @@ cs:
           update: Aktualizovat
       dashboard:
         pending_moderations:
-          anouncement:
+          announcement:
             one: Je zde %{count} čekající na moderování
             few: Jsou zde %{count} čekající na moderování
             many: Je zde %{count} čekajících na moderování
@@ -387,12 +396,12 @@ cs:
         show:
           dropdown: Rozbalovací nabídka
           view_more_logs: Zobrazit další protokoly
-      domain_whitelist:
+      domain_allowlist:
         form:
           domain_too_short: Doména je příliš krátká
         update:
-          error: Nepodařilo se aktualizovat seznam povolených domén.
-          success: Seznam povolených domén byl úspěšně aktualizován.
+          error: Aktualizace seznamu povolených externích domén se nezdařila
+          success: Seznam povolených externích domén byl úspěšně aktualizován.
       exports:
         export_as: "%{name} jako %{export_format}"
         formats:
@@ -451,6 +460,7 @@ cs:
           values:
             'false': Zveřejněno
             'true': Nezveřejněno
+        remove_all: Odebrat vše
         scope_id_eq:
           label: Oblast působnosti
         search_label: Hledat
@@ -459,7 +469,6 @@ cs:
           report_count_eq: Počet nahlášení
           reported_id_string_or_reported_content_cont: Hledat %{collection} podle nahlášeného Id nebo obsahu.
           title_cont: Hledat %{collection} podle názvu.
-          user_name_or_user_email_cont: Hledat %{collection} podle jména nebo e-mailu.
           user_name_or_user_nickname_or_user_email_cont: Hledat %{collection} podle e-mailu, jména nebo přezdívky.
         state_eq:
           label: Stav
@@ -468,6 +477,9 @@ cs:
             pending: Čekající
             rejected: Odmítnuto
             verified: Ověřeno
+        taxonomies:
+          taxonomy_id_eq:
+            label: Taxonomie
       forms:
         file_help:
           import:
@@ -580,12 +592,14 @@ cs:
         appearance: Vzhled
         area_types: Typy oblastí
         areas: Oblasti
+        components: Komponenty
         configuration: Konfigurace
         content: Nahlášený obsah
-        external_domain_whitelist: Povolené externí domény
+        external_domain_allowlist: Povolené externí domény
         help_sections: Sekce nápovědy
         homepage: Domovská stránka
         impersonations: V zastoupení
+        manage: Spravovat
         moderation: Globální moderace
         newsletters: Zpravodaje
         participants: Účastníci
@@ -596,6 +610,8 @@ cs:
         settings: Nastavení
         static_page_topics: Témata
         static_pages: Stránky
+        taxonomies: Taxonomie
+        taxonomy_filters: Filtry taxonomie
         user_groups: Skupiny
         users: Účastníci
       metrics:
@@ -866,17 +882,17 @@ cs:
             layout_appearance_title: Upravit vzhled zobrazení
             preview: Náhled
           omnipresent_banner_appearance_title: Upravit všudypřítomný banner
-      organization_external_domain_whitelist:
+      organization_external_domain_allowlist:
         edit:
           update: Aktualizovat
         external_domain:
           down: Dolů
           external_domain: Externí doména
-          remove: Odebrat
+          remove: Odstranit
           up: Nahoru
         form:
-          add: Přidat do seznamu povolených
-          title: Seznam externích povolených domén
+          add: Přidat na Seznam povolených
+          title: Seznam povolených externích domén
       participatory_space_private_users:
         create:
           error: Při přidávání soukromého uživatele pro tento participační prostor došlo k chybě.
@@ -974,6 +990,11 @@ cs:
           help: Tyto tokeny se používají k veřejnému sdílení tohoto nezveřejněného zdroje každému uživateli. Budou skryty, když bude dokument publikován. Klikněte na ikonu sdílení tokenu a navštivte sdílenou URL.
           title: Sdílet tokeny
       shared:
+        adjacent_navigation:
+          next: Další
+          next_title: Další položka
+          previous: Předchozí
+          previous_title: Předchozí položka
         gallery:
           add_images: Přidat obrázky
           edit_images: Upravit obrázky
@@ -1020,13 +1041,95 @@ cs:
         update:
           error: Při aktualizaci této stránky došlo k chybě.
           success: Stránka byla úspěšně aktualizována.
+      taxonomies:
+        actions: Akce
+        amount: Množství
+        count: Spočítat
+        create:
+          invalid: Při vytváření této taxonomie došlo k chybě.
+          success: Taxonomie byla úspěšně vytvořena.
+        destroy:
+          invalid: Při mazání této taxonomie došlo k chybě.
+          success: Taxonomie úspěšně zničena.
+        edit:
+          back: Zpět
+          description: Položky v této taxonomii budou použity pro klasifikaci nebo filtrování zdrojů, jako jsou participační prostory nebo komponenty. Použijte přetažení pro přeuspořádání seznamu.
+          new_item: Nová položka
+          no_items: V této taxonomii momentálně nejsou žádné položky. Vytvořte seznam položek pro klasifikaci nebo filtrování zdrojů, jako jsou participační prostory nebo komponenty. Položky mohou být vnořeny až do tří úrovní.
+          subtitle: Položky v "%{taxonomy_name}"
+          title: Upravit taxonomii "%{taxonomy_name}"
+          update: Aktualizovat
+        filters:
+          search_placeholder: Hledat
+        index:
+          description: Taxonomie umožňuje administrátorům kategorizovat a uspořádat obsah. Například přidat taxonomii pro klasifikaci procesů podle geografického rozsahu.
+          new_taxonomy: Nová taxonomie
+          no_items_found: Nebyly nalezeny žádné taxonomie odpovídající kritériím vyhledávání.
+        name: Název
+        new:
+          create: Vytvořit taxonomii
+          title: Nová taxonomie
+        no_taxonomies: Momentálně nejsou žádné taxonomie. Vytvořte zde seznam taxonomií a definovaných položek v každém z nich pro klasifikaci nebo filtrování zdrojů.
+        table:
+          to_next_page: Přetáhněte na další stránku
+          to_prev_page: Přetáhněte pro předchozí stránku
+        taxonomy_actions:
+          confirm_destroy: Opravdu chcete odstranit %{name}? Tímto odstraníte také všechny podřízené položky.
+        update:
+          invalid: Při aktualizaci této taxonomie došlo k chybě.
+          success: Taxonomie byla úspěšně aktualizována.
+      taxonomy_filters:
+        actions:
+          new_taxonomy_filter: Nový filtr taxonomie
+        callout:
+          modify_taxonomy_html: Pokud potřebujete změnit tuto taxonomii nebo její položky, proveďte to prostřednictvím nastavení konfigurace v sekci <a href="%{url}">Taxonomie</a>.
+        create:
+          error: Při vytváření tohoto filtru taxonomie došlo k chybě.
+          success: Filtr taxonomie byl úspěšně vytvořen.
+        destroy:
+          error: Při ničení tohoto filtru taxonomie došlo k chybě.
+          success: Filtr taxonomie úspěšně zničen.
+        edit:
+          back: Zpět
+          items: "%{count} položek vybráno"
+          no_items: Pro tuto taxonomii nejsou k dispozici žádné položky. Položky můžete vytvořit v nastavení taxonomie.
+          title: Upravit filtr taxonomie
+          update: Aktualizovat filtr taxonomie
+        form:
+          select_taxonomy: Vyberte taxonomii
+        index:
+          description: Filtr taxonomie umožňuje správcům seřadit a filtrovat participační prostory na základě taxonomie. Přidejte například taxonomický filtr pro řazení procesů podle geografického rozsahu.
+          empty: V současné době nejsou žádné filtry taxonomie. Vytvořte seznam taxonomických filtrů pro řazení a filtrování participačních prostor na základě taxonomie.
+        new:
+          back: Zpět
+          create: Vytvořit filtr taxonomie
+          items: "%{count} položek je k dispozici"
+          title: Nový filtr taxonomie
+        table:
+          actions: Akce
+          confirm_destroy: Opravdu chcete odstranit filtr %{name}?
+          count: Počet položek
+          destroy: Smazat
+          edit: Upravit
+          name: Název
+        update:
+          error: Při aktualizaci tohoto filtru taxonomie došlo k chybě.
+          success: Filtr taxonomie byl úspěšně aktualizován.
+      taxonomy_items:
+        edit:
+          title: Upravit položku v %{taxonomy}
+          update: Aktualizovat položku
+        new:
+          create: Vytvořit položku
+          none: Žádné
+          title: Nová položka v %{taxonomy}
       titles:
         admin_log: Správce protokolu
         area_types: Typy oblastí
         areas: Oblasti
         authorization_workflows: Metody ověření
         dashboard: Ovládací panel
-        edit_external_domains: Seznam externích povolených domén
+        edit_external_domains: Seznam povolených externích domén
         edit_landing_page: Obsah stránky
         edit_organization_appearance: Upravit vzhled domovské stránky
         impersonatable_users: Spravovatelní účastníci
@@ -1040,6 +1143,8 @@ cs:
         scope_types: Typy oblastí působnosti
         scopes: Oblasti působnosti
         statistics: Aktivita
+        taxonomies: Taxonomie
+        taxonomy_filters: Filtry taxonomie
         user_groups: Skupiny
         users: Administrátoři
       user_group:

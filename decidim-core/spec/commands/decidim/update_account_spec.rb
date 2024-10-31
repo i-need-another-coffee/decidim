@@ -4,7 +4,7 @@ require "spec_helper"
 
 module Decidim
   describe UpdateAccount do
-    let(:command) { described_class.new(user, form) }
+    let(:command) { described_class.new(form) }
     let(:user) { create(:user, :confirmed, password: user_password) }
     let(:user_password) { "decidim1234567890" }
     let(:data) do
@@ -51,6 +51,9 @@ module Decidim
     end
 
     context "when valid" do
+      it_behaves_like "fires an ActiveSupport::Notification event", "decidim.update_account:before"
+      it_behaves_like "fires an ActiveSupport::Notification event", "decidim.update_account:after"
+
       it "updates the users's name" do
         form.name = "Pepito de los palotes"
         expect { command.call }.to broadcast(:ok)
@@ -101,10 +104,10 @@ module Decidim
             expect do
               perform_enqueued_jobs { command.call }
             end.to broadcast(:ok, true)
-            recepients = emails.map(&:to)
-            expect(recepients).to include(["new@example.com"])
+            recipients = emails.map(&:to)
+            expect(recipients).to include(["new@example.com"])
             # check account update email has been sent
-            expect(recepients).to include([data[:email]])
+            expect(recipients).to include([data[:email]])
           end
         end
 
@@ -241,7 +244,7 @@ module Decidim
           it "sends email with notification about updates" do
             perform_enqueued_jobs { command.call }
             expect(last_email.to).to include(user.email)
-            expect(last_email_body).to include("The following details have been changed:")
+            expect(last_email_body).to include("Se han modificado los siguientes detalles:")
           end
         end
       end

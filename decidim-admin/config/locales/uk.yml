@@ -91,6 +91,7 @@ uk:
       actions:
         add: Додати
         browse: Переглянути
+        manage: Керувати
         permissions: Права
         reject: Відхилити
         verify: Підтвердити
@@ -271,6 +272,7 @@ uk:
         configuration: Конфігурація
         homepage: Домашня сторінка
         impersonations: Виступи в ролі учасника
+        manage: Керувати
         newsletters: Розсилання новин
         scope_types: Різновиди обсягу
         scopes: Обсяги
@@ -482,6 +484,8 @@ uk:
           title: Створити сторінку
         update:
           error: При спробі оновити цю сторінку сталася помилка.
+      taxonomies:
+        count: Кількість
       titles:
         admin_log: Журнал адміністратора
         area_types: Різновиди дільниць

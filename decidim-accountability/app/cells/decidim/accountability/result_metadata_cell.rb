@@ -4,15 +4,9 @@ module Decidim
   module Accountability
     # This cell renders metadata for an instance of a Result
     class ResultMetadataCell < Decidim::CardMetadataCell
-      include Decidim::SanitizeHelper
-      include Decidim::TranslationsHelper
-      include ActiveSupport::NumberHelper
-      include Decidim::ResourceReferenceHelper
-      include Decidim::ResourceVersionsHelper
       include Decidim::Accountability::Engine.routes.url_helpers
-      include Decidim::LayoutHelper
 
-      delegate :start_date, :end_date, :status, :category, :parent, :reference, to: :model
+      delegate :start_date, :end_date, :status, :parent, :reference, to: :model
 
       alias result model
 
@@ -32,7 +26,7 @@ module Decidim
         return [dates_item, status_item, status_description] if template == :project_aside
         return [reference, versions] if template == :show_footer
 
-        [dates_item_compact, status_item_compact, category_item]
+        [dates_item_compact, status_item_compact] + taxonomy_items
       end
 
       def template
@@ -62,28 +56,13 @@ module Decidim
         { partial: :versions }
       end
 
-      def category_item
-        return if inherited_category.blank?
-
-        {
-          text: translated_attribute(inherited_category.name),
-          icon: resource_type_icon_key(category.class)
-        }
-      end
-
       def status_item_compact
         return if status.blank?
 
         {
-          text: translated_attribute(status.name),
+          text: decidim_escape_translated(status.name),
           icon: "focus-2-line"
         }
-      end
-
-      def inherited_category
-        return category if category.present?
-
-        parent&.category
       end
 
       def dates_item
@@ -114,18 +93,33 @@ module Decidim
         {
           text: t("models.result.fields.status", scope: "decidim.accountability"),
           icon: "focus-2-line",
-          value: translated_attribute(status.name)
+          value: decidim_escape_translated(status.name)
         }
       end
 
       def status_description
-        return unless status.present? && (description = translated_attribute(status.description)).present?
+        return unless status.present? && (description = decidim_escape_translated(status.description)).present?
 
         {
           text: t("models.status.fields.description", scope: "decidim.accountability"),
           icon: "file-text-line",
           value: description
         }
+      end
+
+      def percentage_item
+        {
+          text: display_percentage(result.progress)
+        }
+      end
+
+      def result_items_for_map
+        [percentage_item].compact_blank.map do |item|
+          {
+            text: item[:text].to_s.html_safe,
+            icon: item[:icon].present? ? icon(item[:icon]).html_safe : nil
+          }
+        end
       end
 
       def has_dates?
