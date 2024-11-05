@@ -16,20 +16,6 @@ module Decidim
       isolate_namespace Decidim::Conferences
 
       routes do
-        get "/conferences", to: redirect { |_params, request|
-          [
-            (request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym,
-            request.original_fullpath
-          ].join
-        }
-        get "/conferences/*", to: redirect { |_params, request|
-          [
-            (request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym,
-            request.original_fullpath
-          ].join
-        }
-
-
         get "/:locale/conferences/:conference_id", to: redirect { |params, _request|
           conference = Decidim::Conference.find(params[:conference_id])
           conference ? "/conferences/#{conference.slug}" : "/404"
@@ -63,6 +49,9 @@ module Decidim
             end
           end
         end
+
+        get "/conferences", to: redirect { |_params, request| [(request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym, request.original_fullpath].join }
+        get "/conferences/*", to: redirect { |_params, request| [(request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym, request.original_fullpath].join }
       end
 
       initializer "decidim_conferences.register_icons" do

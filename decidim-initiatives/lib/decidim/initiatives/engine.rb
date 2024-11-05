@@ -16,32 +16,6 @@ module Decidim
       isolate_namespace Decidim::Initiatives
 
       routes do
-        get "/initiative_types/*", to: redirect { |_params, request|
-          [
-            (request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym,
-            request.original_fullpath
-          ].join
-        }
-        get "/initiative_type_scopes/*", to: redirect { |_params, request|
-          [
-            (request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym,
-            request.original_fullpath
-          ].join
-        }
-        get "/initiatives", to: redirect { |_params, request|
-          [
-            (request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym,
-            request.original_fullpath
-          ].join
-        }
-        get "/initiatives/*", to: redirect { |_params, request|
-          [
-            (request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym,
-            request.original_fullpath
-          ].join
-        }
-
-
         get "/:locale/initiative_types/search", to: "initiative_types#search", as: :initiative_types_search
         get "/:locale/initiative_type_scopes/search", to: "initiatives_type_scopes#search", as: :initiative_type_scopes_search
         get "/:locale/initiative_type_signature_types/search", to: "initiatives_type_signature_types#search", as: :initiative_type_signature_types_search
@@ -110,6 +84,15 @@ module Decidim
             end
           end
         end
+
+        get "/initiative_types/*", to: redirect { |_params, request|
+                                         [(request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym, request.original_fullpath].join
+                                       }
+        get "/initiative_type_scopes/*", to: redirect { |_params, request|
+                                               [(request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym, request.original_fullpath].join
+                                             }
+        get "/initiatives", to: redirect { |_params, request| [(request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym, request.original_fullpath].join }
+        get "/initiatives/*", to: redirect { |_params, request| [(request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym, request.original_fullpath].join }
       end
 
       initializer "decidim_initiatives.register_icons" do

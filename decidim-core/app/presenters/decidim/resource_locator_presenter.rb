@@ -98,6 +98,7 @@ module Decidim
     # Returns a String.
     def member_route(route_type, options)
       options.merge!(options_for_polymorphic)
+      options.merge!(locale: I18n.locale)
 
       route_proxy.send("#{member_route_name}_#{route_type}", target, options)
     end
@@ -107,6 +108,7 @@ module Decidim
     # Returns a String.
     def collection_route(route_type, options)
       options.merge!(options_for_polymorphic)
+      options.merge!(locale: I18n.locale)
 
       route_proxy.send("#{collection_route_name}_#{route_type}", options)
     end

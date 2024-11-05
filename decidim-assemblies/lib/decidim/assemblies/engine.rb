@@ -15,19 +15,6 @@ module Decidim
       isolate_namespace Decidim::Assemblies
 
       routes do
-        get "/assemblies", to: redirect { |_params, request|
-          [
-            (request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym,
-            request.original_fullpath
-          ].join
-        }
-        get "/assemblies/*", to: redirect { |_params, request|
-          [
-            (request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym,
-            request.original_fullpath
-          ].join
-        }
-
         get "/:locale/assemblies/:assembly_id", to: redirect { |params, _request|
           assembly = Decidim::Assembly.find(params[:assembly_id])
           assembly ? "/assemblies/#{assembly.slug}" : "/404"
@@ -51,6 +38,9 @@ module Decidim
             end
           end
         end
+
+        get "/assemblies", to: redirect { |_params, request| [(request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym, request.original_fullpath].join }
+        get "/assemblies/*", to: redirect { |_params, request| [(request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym, request.original_fullpath].join }
       end
 
       initializer "decidim_assemblies.register_icons" do

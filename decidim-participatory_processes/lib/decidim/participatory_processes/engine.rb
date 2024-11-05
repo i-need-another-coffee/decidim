@@ -15,26 +15,6 @@ module Decidim
       isolate_namespace Decidim::ParticipatoryProcesses
 
       routes do
-        get "/processes",  to: redirect { |_params, request|
-          [
-            (request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym,
-            request.original_fullpath
-          ].join
-        }
-        get "/processes/*",  to: redirect { |_params, request|
-          [
-            (request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym,
-            request.original_fullpath
-          ].join
-        }
-
-        get "/processes_groups/*",  to: redirect { |_params, request|
-          [
-            (request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym,
-            request.original_fullpath
-          ].join
-        }
-
         get "/:locale/processes/:process_id", to: redirect { |params, _request|
           process = Decidim::ParticipatoryProcess.find(params[:process_id])
           process ? "/processes/#{process.slug}" : "/404"
@@ -64,6 +44,12 @@ module Decidim
             end
           end
         end
+
+        get "/processes", to: redirect { |_params, request| [(request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym, request.original_fullpath].join }
+        get "/processes/*", to: redirect { |_params, request| [(request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym, request.original_fullpath].join }
+        get "/processes_groups/*", to: redirect { |_params, request|
+                                         [(request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym, request.original_fullpath].join
+                                       }
       end
 
       initializer "decidim_participatory_processes.register_icons" do

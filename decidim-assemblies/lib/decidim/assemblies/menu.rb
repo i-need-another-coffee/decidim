@@ -7,7 +7,7 @@ module Decidim
         Decidim.menu :menu do |menu|
           menu.add_item :assemblies,
                         I18n.t("menu.assemblies", scope: "decidim"),
-                        decidim_assemblies.assemblies_path,
+                        decidim_assemblies.assemblies_path(locale: current_locale),
                         position: 2.2,
                         if: OrganizationPublishedAssemblies.new(current_organization, current_user).any?,
                         active: :inclusive
@@ -18,7 +18,7 @@ module Decidim
         Decidim.menu :mobile_menu do |menu|
           menu.add_item :assemblies,
                         I18n.t("menu.assemblies", scope: "decidim"),
-                        decidim_assemblies.assemblies_path,
+                        decidim_assemblies.assemblies_path(locale: current_locale),
                         position: 2.2,
                         if: OrganizationPublishedAssemblies.new(current_organization, current_user).any?,
                         active: :inclusive

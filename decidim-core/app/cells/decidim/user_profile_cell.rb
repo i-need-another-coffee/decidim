@@ -28,7 +28,7 @@ module Decidim
 
     def resource_path
       # Exposes the same method, both Decidim::User and Decidim::UserGroup
-      user.try(:profile_url) || decidim.profile_path(user.nickname)
+      user.try(:profile_url) || decidim.profile_path(user.nickname, locale: current_locale)
     end
 
     def presented_resource

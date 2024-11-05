@@ -15,7 +15,7 @@ module Decidim
         end
 
         def meetings_directory_path
-          Decidim::Meetings::DirectoryEngine.routes.url_helpers.root_path
+          Decidim::Meetings::DirectoryEngine.routes.url_helpers.root_path(locale: current_locale)
         end
       end
     end

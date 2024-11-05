@@ -134,10 +134,6 @@ Decidim::Core::Engine.routes.draw do
     get "seconds_until_timeout", to: "timeouts#seconds_until_timeout"
   end
 
-  resources :pages, only: [:index, :show], format: false
-
-  get "/search", to: "searches#index", as: :search
-
   get "/link", to: "links#new", as: :link
 
   get "/scopes/picker", to: "scopes#picker", as: :scopes_picker
@@ -201,8 +197,14 @@ Decidim::Core::Engine.routes.draw do
       get "activity", to: "user_activities#index", as: "profile_activity"
       resources :conversations, except: [:destroy], controller: "user_conversations", as: "profile_conversations"
     end
+
+    resources :pages, only: [:index, :show], format: false
+
+    get "/search", to: "searches#index", as: :search
   end
 
+  get "/pages", to: redirect { |_params, request| [(request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym, request.original_fullpath].join }
+  get "/pages/*", to: redirect { |_params, request| [(request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym, request.original_fullpath].join }
   get "/profiles", to: redirect { |_params, request| [(request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym, request.original_fullpath].join }
   get "/profiles/*", to: redirect { |_params, request| [(request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym, request.original_fullpath].join }
   get "/last_activities", to: redirect { |_params, request| [(request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym, request.original_fullpath].join }
