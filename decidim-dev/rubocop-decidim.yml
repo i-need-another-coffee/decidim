@@ -11,6 +11,7 @@ require:
   - rubocop-factory_bot
 
 inherit_from:
+  - config/rubocop/obsession.yml
   - config/rubocop/performance.yml
   - config/rubocop/ruby.yml
   - config/rubocop/rails.yml
