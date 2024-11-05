@@ -34,6 +34,6 @@ shared_examples "manage proposals help texts" do
   private
 
   def new_proposal_path(component)
-    Decidim::EngineRouter.main_proxy(component).new_proposal_path(current_component.id)
+    Decidim::EngineRouter.main_proxy(component).new_proposal_path(current_component.id, locale: I18n.locale)
   end
 end

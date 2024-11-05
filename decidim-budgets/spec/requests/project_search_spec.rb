@@ -38,7 +38,7 @@ RSpec.describe "Project search" do
   let!(:project4) { create(:project, budget: budget2) }
   let!(:project5) { create(:project, budget: budget2) }
 
-  let(:request_path) { Decidim::EngineRouter.main_proxy(component).budget_projects_path(budget) }
+  let(:request_path) { Decidim::EngineRouter.main_proxy(component).budget_projects_path(budget, locale: I18n.locale) }
 
   before do
     get(

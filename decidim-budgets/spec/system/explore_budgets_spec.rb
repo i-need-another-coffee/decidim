@@ -137,11 +137,11 @@ describe "Explore Budgets", :slow do
 
   context "when directly accessing from URL with an invalid budget id" do
     it_behaves_like "a 404 page" do
-      let(:target_path) { Decidim::EngineRouter.main_proxy(component).budget_path(99_999_999) }
+      let(:target_path) { Decidim::EngineRouter.main_proxy(component).budget_path(99_999_999, locale: I18n.locale) }
     end
   end
 
   def budget_path(budget)
-    Decidim::EngineRouter.main_proxy(component).budget_path(budget.id)
+    Decidim::EngineRouter.main_proxy(component).budget_path(budget.id, locale: I18n.locale)
   end
 end

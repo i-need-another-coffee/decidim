@@ -80,7 +80,7 @@ module Decidim
       end
 
       def profile_url(nickname)
-        Decidim::Core::Engine.routes.url_helpers.profile_url(nickname, host:)
+        Decidim::Core::Engine.routes.url_helpers.profile_url(nickname, locale: I18n.locale, host:)
       end
 
       def root_url

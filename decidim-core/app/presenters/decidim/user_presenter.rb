@@ -26,7 +26,7 @@ module Decidim
     def profile_url
       return "" if respond_to?(:deleted?) && deleted?
 
-      decidim.profile_url(__getobj__.nickname)
+      decidim.profile_url(__getobj__.nickname, locale: I18n.locale)
     end
 
     def avatar

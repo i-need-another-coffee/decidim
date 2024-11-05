@@ -20,7 +20,7 @@ module Decidim
 
         # Specify the public url from which the survey can be viewed and answered
         def public_url
-          Decidim::EngineRouter.main_proxy(current_component).survey_path(survey)
+          Decidim::EngineRouter.main_proxy(current_component).survey_path(survey, locale: I18n.locale)
         end
 
         # Specify where to redirect after exporting a user response

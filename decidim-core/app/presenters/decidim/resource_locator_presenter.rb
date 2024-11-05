@@ -17,7 +17,6 @@ module Decidim
     #
     # Returns a String.
     def path(options = {})
-      options.merge!(locale: I18n.locale) unless options.has_key?(:locale)
       member_route("path", options)
     end
 
@@ -98,7 +97,7 @@ module Decidim
     # Returns a String.
     def member_route(route_type, options)
       options.merge!(options_for_polymorphic)
-      options.merge!(locale: I18n.locale)
+      options.merge!(locale: I18n.locale) unless options.has_key?(:locale)
 
       route_proxy.send("#{member_route_name}_#{route_type}", target, options)
     end

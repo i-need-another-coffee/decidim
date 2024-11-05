@@ -89,7 +89,7 @@ shared_examples "manage proposals" do
             visit decidim_admin.root_path
             expect(page).to have_content("created the #{translated(attributes[:title])} proposal")
 
-            visit decidim.last_activities_path
+            visit decidim.last_activities_path(locale: I18n.locale)
             expect(page).to have_content("New proposal: #{translated(attributes[:title])}")
 
             within "#filters" do

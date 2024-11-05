@@ -19,7 +19,7 @@ RSpec.describe "Project search" do
   end
 
   describe "POST create" do
-    let(:request_path) { Decidim::EngineRouter.main_proxy(component).budget_order_line_item_path(budget) }
+    let(:request_path) { Decidim::EngineRouter.main_proxy(component).budget_order_line_item_path(budget, locale: I18n.locale) }
 
     it "creates the order" do
       expect do

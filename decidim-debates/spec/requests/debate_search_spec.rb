@@ -44,7 +44,7 @@ RSpec.describe "Debate search" do
     )
   end
 
-  let(:request_path) { Decidim::EngineRouter.main_proxy(component).debates_path }
+  let(:request_path) { Decidim::EngineRouter.main_proxy(component).debates_path(locale: I18n.locale) }
 
   before do
     get(

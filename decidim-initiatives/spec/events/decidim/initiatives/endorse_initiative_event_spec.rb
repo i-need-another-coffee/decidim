@@ -22,7 +22,7 @@ describe Decidim::Initiatives::EndorseInitiativeEvent do
   let(:email_outro) { "You have received this notification because you are following @#{initiative_author.nickname}. You can stop receiving notifications following the previous link." }
   let(:notification_title) { <<-EOTITLE.squish }
     The <a href="#{resource_path}">#{resource_title}</a> initiative was endorsed by
-    <a href="/profiles/#{initiative_author.nickname}">#{initiative_author.name} @#{initiative_author.nickname}</a>.
+    <a href="/en/profiles/#{initiative_author.nickname}">#{initiative_author.name} @#{initiative_author.nickname}</a>.
   EOTITLE
 
   describe "types" do

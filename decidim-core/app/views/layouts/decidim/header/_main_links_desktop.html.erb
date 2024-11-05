@@ -1,5 +1,5 @@
 <div>
-  <%= link_to decidim.pages_path, class: "main-bar__links-desktop__item", "aria-label": t("decidim.menu.help") do %>
+  <%= link_to decidim.pages_path(locale: current_locale), class: "main-bar__links-desktop__item", "aria-label": t("decidim.menu.help") do %>
     <%= icon "question-line" %><span><%= t("decidim.menu.help") %></span>
   <% end %>
 </div>
@@ -12,7 +12,7 @@
     <% end %>
   </div>
   <div>
-    <%= link_to decidim.last_activities_path, class: "main-bar__links-desktop__item", "aria-label": t("decidim.profiles.show.activity") do %>
+    <%= link_to decidim.last_activities_path(locale: current_locale), class: "main-bar__links-desktop__item", "aria-label": t("decidim.profiles.show.activity") do %>
       <%= icon "bubble-chart-line" %><span><%= t("decidim.profiles.show.activity") %></span>
     <% end %>
   </div>

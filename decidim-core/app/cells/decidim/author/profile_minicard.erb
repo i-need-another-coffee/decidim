@@ -9,11 +9,11 @@
   </div>
 
   <div class="author__tooltip-links">
-    <%= link_to decidim.profile_followers_path(raw_model.nickname, locale: current_locale) do %>
+    <%= link_to decidim.profile_followers_path(raw_model.nickname, locale: I18n.locale) do %>
       <%= content_tag(:span, model.followers_count, id: dom_id(raw_model, :followers_count)) %> <%= t("decidim.profiles.show.followers") %>
     <% end %>
     <% if model.can_follow? %>
-      <%= link_to decidim.profile_following_path(raw_model.nickname, locale: current_locale) do %>
+      <%= link_to decidim.profile_following_path(raw_model.nickname, locale: I18n.locale) do %>
         <%= model.following_count %> <%= t("decidim.profiles.show.following") %>
       <% end %>
     <% end %>

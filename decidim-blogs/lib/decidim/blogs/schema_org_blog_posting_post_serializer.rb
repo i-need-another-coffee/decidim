@@ -48,7 +48,7 @@ module Decidim
         {
           "@type": "Organization",
           name: post.author.name,
-          url: EngineRouter.new("decidim", router_options).profile_url(post.author.nickname)
+          url: EngineRouter.new("decidim", router_options).profile_url(post.author.nickname, locale: I18n.locale)
         }
       end
 
@@ -64,7 +64,7 @@ module Decidim
         {
           "@type": "Person",
           name: decidim_escape_translated(post.author.name),
-          url: EngineRouter.new("decidim", router_options).profile_url(post.author.nickname)
+          url: EngineRouter.new("decidim", router_options).profile_url(post.author.nickname, locale: I18n.locale)
         }
       end
 

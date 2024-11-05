@@ -502,7 +502,7 @@ shared_examples "comments" do
       end
 
       it "shows the entry in last activities" do
-        visit decidim.last_activities_path
+        visit decidim.last_activities_path(locale: I18n.locale)
         expect(page).to have_content("New comment: #{content}")
 
         within "#filters" do
@@ -948,7 +948,7 @@ shared_examples "comments" do
 
         it "replaces the mention with a link to the user's profile" do
           expect(page).to have_comment_from(user, "A valid user mention: @#{mentioned_user.nickname}", wait: 20)
-          expect(page).to have_link "@#{mentioned_user.nickname}", href: "http://#{mentioned_user.organization.host}:#{Capybara.server_port}/profiles/#{mentioned_user.nickname}"
+          expect(page).to have_link "@#{mentioned_user.nickname}", href: "http://#{mentioned_user.organization.host}:#{Capybara.server_port}/en/profiles/#{mentioned_user.nickname}"
         end
       end
 
@@ -988,7 +988,7 @@ shared_examples "comments" do
 
       it "replaces the hashtag with a link to the hashtag search" do
         expect(page).to have_comment_from(user, "A comment with a hashtag #decidim", wait: 20)
-        expect(page).to have_link "#decidim", href: "/search?term=%23decidim"
+        expect(page).to have_link "#decidim", href: "/en/search?term=%23decidim"
       end
     end
 

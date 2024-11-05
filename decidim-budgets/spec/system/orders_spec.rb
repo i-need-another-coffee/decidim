@@ -299,7 +299,7 @@ describe "Orders" do
       end
 
       it "is alerted when trying to leave the component before completing" do
-        budget_projects_path = Decidim::EngineRouter.main_proxy(component).budget_projects_path(budget)
+        budget_projects_path = Decidim::EngineRouter.main_proxy(component).budget_projects_path(budget, locale: I18n.locale)
 
         visit_budget
 
@@ -346,7 +346,7 @@ describe "Orders" do
         let!(:expensive_project) { create(:project, budget:, budget_amount: 250_000_000) }
 
         it "cannot add the project" do
-          page.visit Decidim::EngineRouter.main_proxy(component).budget_project_path(budget, expensive_project)
+          page.visit Decidim::EngineRouter.main_proxy(component).budget_project_path(budget, expensive_project, locale: I18n.locale)
 
           within "#project-#{expensive_project.id}-budget-button" do
             click_on
@@ -433,14 +433,14 @@ describe "Orders" do
             end
 
             it "shows private-only activity log entry" do
-              page.visit decidim.profile_activity_path(nickname: user.nickname)
+              page.visit decidim.profile_activity_path(nickname: user.nickname, locale: I18n.locale)
               expect(page).to have_content("New budgeting vote at #{translated(budget.title)}")
               expect(page).to have_link(translated(budget.title), href: router.budget_path(budget))
             end
 
             it "does not show activity log entry to another user" do
               relogin_as another_user, scope: :user
-              page.visit decidim.profile_activity_path(nickname: user.nickname)
+              page.visit decidim.profile_activity_path(nickname: user.nickname, locale: I18n.locale)
               expect(page).to have_content(user.name)
               expect(page).to have_current_path "/profiles/#{user.nickname}/activity"
               expect(page).to have_no_content("New budgeting vote at")
@@ -691,6 +691,6 @@ describe "Orders" do
   end
 
   def visit_budget
-    page.visit Decidim::EngineRouter.main_proxy(component).budget_projects_path(budget)
+    page.visit Decidim::EngineRouter.main_proxy(component).budget_projects_path(budget, locale: I18n.locale)
   end
 end

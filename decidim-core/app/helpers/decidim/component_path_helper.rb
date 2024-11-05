@@ -10,6 +10,7 @@ module Decidim
     # Returns a relative url.
     def main_component_path(component)
       current_params = try(:params) || {}
+      current_params.merge!(locale: I18n.locale) unless current_params.has_key?(:locale)
       EngineRouter.main_proxy(component).root_path(locale: current_params[:locale])
     end
 
@@ -20,6 +21,7 @@ module Decidim
     # Returns an absolute url.
     def main_component_url(component)
       current_params = try(:params) || {}
+      current_params.merge!(locale: I18n.locale) unless current_params.has_key?(:locale)
       EngineRouter.main_proxy(component).root_url(locale: current_params[:locale])
     end
 

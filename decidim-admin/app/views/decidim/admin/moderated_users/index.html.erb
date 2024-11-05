@@ -28,8 +28,8 @@
     <% @moderated_users.each do |moderation| %>
       <tr data-id="<%= moderation.id %>">
         <% if moderation.user.nickname.present? %>
-          <td><%= link_to moderation.user.name, decidim.profile_path(moderation.user.nickname) %></td>
-          <td><%= link_to moderation.user.nickname, decidim.profile_path(moderation.user.nickname) %></td>
+          <td><%= link_to moderation.user.name, decidim.profile_path(moderation.user.nickname, locale: current_locale) %></td>
+          <td><%= link_to moderation.user.nickname, decidim.profile_path(moderation.user.nickname, locale: current_locale) %></td>
         <% else %>
           <td><%= moderation.user.name %></td>
           <td><%= moderation.user.nickname %></td>
