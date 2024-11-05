@@ -113,5 +113,5 @@ end
 Decidim.register_global_engine(
   :meetings_directory,
   Decidim::Meetings::DirectoryEngine,
-  at: "/meetings"
+  at: "/:locale/meetings"
 )

@@ -8,7 +8,7 @@ module Decidim
       private
 
       def resource_path
-        Decidim::Initiatives::Engine.routes.url_helpers.initiative_path(model)
+        Decidim::Initiatives::Engine.routes.url_helpers.initiative_path(model, locale: current_locale)
       end
 
       def image

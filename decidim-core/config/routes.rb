@@ -129,19 +129,6 @@ Decidim::Core::Engine.routes.draw do
     end
   end
 
-  resources :profiles, only: [:show], param: :nickname, constraints: { nickname: %r{[^/]+} }, format: false
-  scope "/profiles/:nickname", format: false, constraints: { nickname: %r{[^/]+} } do
-    get "following", to: "profiles#following", as: "profile_following"
-    get "followers", to: "profiles#followers", as: "profile_followers"
-    get "badges", to: "profiles#badges", as: "profile_badges"
-    get "groups", to: "profiles#groups", as: "profile_groups"
-    get "members", to: "profiles#members", as: "profile_members"
-    get "group_members", to: "profiles#group_members", as: "profile_group_members"
-    get "group_admins", to: "profiles#group_admins", as: "profile_group_admins"
-    get "activity", to: "user_activities#index", as: "profile_activity"
-    resources :conversations, except: [:destroy], controller: "user_conversations", as: "profile_conversations"
-  end
-
   scope :timeouts do
     post "heartbeat", to: "timeouts#heartbeat"
     get "seconds_until_timeout", to: "timeouts#seconds_until_timeout"
@@ -200,7 +187,26 @@ Decidim::Core::Engine.routes.draw do
 
   resources :upload_validations, only: [:create]
 
-  resources :last_activities, only: [:index]
+  scope "/:locale" do
+    resources :last_activities, only: [:index]
+    resources :profiles, only: [:show], param: :nickname, constraints: { nickname: %r{[^/]+} }, format: false
+    scope "/profiles/:nickname", format: false, constraints: { nickname: %r{[^/]+} } do
+      get "following", to: "profiles#following", as: "profile_following"
+      get "followers", to: "profiles#followers", as: "profile_followers"
+      get "badges", to: "profiles#badges", as: "profile_badges"
+      get "groups", to: "profiles#groups", as: "profile_groups"
+      get "members", to: "profiles#members", as: "profile_members"
+      get "group_members", to: "profiles#group_members", as: "profile_group_members"
+      get "group_admins", to: "profiles#group_admins", as: "profile_group_admins"
+      get "activity", to: "user_activities#index", as: "profile_activity"
+      resources :conversations, except: [:destroy], controller: "user_conversations", as: "profile_conversations"
+    end
+  end
+
+  get "/profiles", to: redirect { |_params, request| [(request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym, request.original_fullpath].join }
+  get "/profiles/*", to: redirect { |_params, request| [(request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym, request.original_fullpath].join }
+  get "/last_activities", to: redirect { |_params, request| [(request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym, request.original_fullpath].join }
+  get "/last_activities/*", to: redirect { |_params, request| [(request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym, request.original_fullpath].join }
 
   resources :short_links, only: [:index, :show], path: "s"
 

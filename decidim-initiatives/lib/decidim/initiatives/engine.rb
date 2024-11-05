@@ -16,9 +16,35 @@ module Decidim
       isolate_namespace Decidim::Initiatives
 
       routes do
-        get "/initiative_types/search", to: "initiative_types#search", as: :initiative_types_search
-        get "/initiative_type_scopes/search", to: "initiatives_type_scopes#search", as: :initiative_type_scopes_search
-        get "/initiative_type_signature_types/search", to: "initiatives_type_signature_types#search", as: :initiative_type_signature_types_search
+        get "/initiative_types/*", to: redirect { |_params, request|
+          [
+            (request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym,
+            request.original_fullpath
+          ].join
+        }
+        get "/initiative_type_scopes/*", to: redirect { |_params, request|
+          [
+            (request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym,
+            request.original_fullpath
+          ].join
+        }
+        get "/initiatives", to: redirect { |_params, request|
+          [
+            (request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym,
+            request.original_fullpath
+          ].join
+        }
+        get "/initiatives/*", to: redirect { |_params, request|
+          [
+            (request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym,
+            request.original_fullpath
+          ].join
+        }
+
+
+        get "/:locale/initiative_types/search", to: "initiative_types#search", as: :initiative_types_search
+        get "/:locale/initiative_type_scopes/search", to: "initiatives_type_scopes#search", as: :initiative_type_scopes_search
+        get "/:locale/initiative_type_signature_types/search", to: "initiatives_type_signature_types#search", as: :initiative_type_signature_types_search
 
         resources :create_initiative do
           collection do
@@ -31,17 +57,17 @@ module Decidim
           end
         end
 
-        get "initiatives/:initiative_id", to: redirect { |params, _request|
+        get "/:locale/initiatives/:initiative_id", to: redirect { |params, _request|
           initiative = Decidim::Initiative.find(params[:initiative_id])
           initiative ? "/initiatives/#{initiative.slug}" : "/404"
         }, constraints: { initiative_id: /[0-9]+/ }
 
-        get "/initiatives/:initiative_id/f/:component_id", to: redirect { |params, _request|
+        get "/:locale/initiatives/:initiative_id/f/:component_id", to: redirect { |params, _request|
           initiative = Decidim::Initiative.find(params[:initiative_id])
           initiative ? "/initiatives/#{initiative.slug}/f/#{params[:component_id]}" : "/404"
         }, constraints: { initiative_id: /[0-9]+/ }
 
-        resources :initiatives, param: :slug, only: [:index, :show, :edit, :update], path: "initiatives" do
+        resources :initiatives, param: :slug, only: [:index, :show, :edit, :update], path: "/:locale/initiatives" do
           resources :signatures, controller: "initiative_signatures" do
             collection do
               get :fill_personal_data
@@ -75,7 +101,7 @@ module Decidim
           resources :versions, only: [:show]
         end
 
-        scope "/initiatives/:initiative_slug/f/:component_id" do
+        scope "/:locale/initiatives/:initiative_slug/f/:component_id" do
           Decidim.component_manifests.each do |manifest|
             next unless manifest.engine
 

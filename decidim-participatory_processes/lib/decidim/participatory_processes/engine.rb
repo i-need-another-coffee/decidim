@@ -15,27 +15,47 @@ module Decidim
       isolate_namespace Decidim::ParticipatoryProcesses
 
       routes do
-        get "processes/:process_id", to: redirect { |params, _request|
+        get "/processes",  to: redirect { |_params, request|
+          [
+            (request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym,
+            request.original_fullpath
+          ].join
+        }
+        get "/processes/*",  to: redirect { |_params, request|
+          [
+            (request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym,
+            request.original_fullpath
+          ].join
+        }
+
+        get "/processes_groups/*",  to: redirect { |_params, request|
+          [
+            (request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym,
+            request.original_fullpath
+          ].join
+        }
+
+        get "/:locale/processes/:process_id", to: redirect { |params, _request|
           process = Decidim::ParticipatoryProcess.find(params[:process_id])
           process ? "/processes/#{process.slug}" : "/404"
         }, constraints: { process_id: /[0-9]+/ }
 
-        get "/processes/:process_id/f/:component_id", to: redirect { |params, _request|
+        get "/:locale/processes/:process_id/f/:component_id", to: redirect { |params, _request|
           process = Decidim::ParticipatoryProcess.find(params[:process_id])
           process ? "/processes/#{process.slug}/f/#{params[:component_id]}" : "/404"
         }, constraints: { process_id: /[0-9]+/ }
 
-        get "processes/:process_id/all-metrics", to: redirect { |params, _request|
+        get "/:locale/processes/:process_id/all-metrics", to: redirect { |params, _request|
           process = Decidim::ParticipatoryProcess.find(params[:process_id])
           process ? "/processes/#{process.slug}/all-metrics" : "/404"
         }, constraints: { process_id: /[0-9]+/ }, as: :all_metrics
 
-        resources :participatory_process_groups, only: :show, path: "processes_groups"
-        resources :participatory_processes, only: [:index, :show], param: :slug, path: "processes" do
+        resources :participatory_process_groups, only: :show, path: "/:locale/processes_groups"
+        resources :participatory_processes, only: [:index, :show], param: :slug, path: "/:locale/processes" do
           get "all-metrics", on: :member
         end
 
-        scope "/processes/:participatory_process_slug/f/:component_id" do
+        scope "/:locale/processes/:participatory_process_slug/f/:component_id" do
           Decidim.component_manifests.each do |manifest|
             next unless manifest.engine
 

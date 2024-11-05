@@ -141,6 +141,7 @@ module Decidim
     end
 
     def current_url(params = request.parameters)
+      return url_for.gsub!("/#{I18n.locale}/", "/#{params[:locale]}/") if params[:locale] && (respond_to?(:current_participatory_space) || respond_to?(:current_component))
       return url_for(params) if respond_to?(:current_participatory_space) || respond_to?(:current_component)
 
       each_decidim_engine do |helpers|

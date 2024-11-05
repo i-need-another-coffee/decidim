@@ -16,17 +16,31 @@ module Decidim
       isolate_namespace Decidim::Conferences
 
       routes do
-        get "conferences/:conference_id", to: redirect { |params, _request|
+        get "/conferences", to: redirect { |_params, request|
+          [
+            (request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym,
+            request.original_fullpath
+          ].join
+        }
+        get "/conferences/*", to: redirect { |_params, request|
+          [
+            (request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym,
+            request.original_fullpath
+          ].join
+        }
+
+
+        get "/:locale/conferences/:conference_id", to: redirect { |params, _request|
           conference = Decidim::Conference.find(params[:conference_id])
           conference ? "/conferences/#{conference.slug}" : "/404"
         }, constraints: { conference_id: /[0-9]+/ }
 
-        get "/conferences/:conference_id/f/:component_id", to: redirect { |params, _request|
+        get "/:locale/conferences/:conference_id/f/:component_id", to: redirect { |params, _request|
           conference = Decidim::Conferences.find(params[:conference_id])
           conference ? "/conferences/#{conference.slug}/f/#{params[:component_id]}" : "/404"
         }, constraints: { conference_id: /[0-9]+/ }
 
-        resources :conferences, only: [:index, :show], param: :slug, path: "conferences" do
+        resources :conferences, only: [:index, :show], param: :slug, path: "/:locale/conferences" do
           get :user, to: "conferences#user_diploma"
           resources :conference_speakers, only: :index, path: "speakers"
           resources :conference_program, only: :show, path: "program"
@@ -40,7 +54,7 @@ module Decidim
           end
           resources :media, only: :index
         end
-        scope "/conferences/:conference_slug/f/:component_id" do
+        scope "/:locale/conferences/:conference_slug/f/:component_id" do
           Decidim.component_manifests.each do |manifest|
             next unless manifest.engine
 

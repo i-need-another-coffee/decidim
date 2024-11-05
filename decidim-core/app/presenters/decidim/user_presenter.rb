@@ -47,7 +47,7 @@ module Decidim
     def profile_path
       return "" if respond_to?(:deleted?) && deleted?
 
-      decidim.profile_path(__getobj__.nickname)
+      decidim.profile_path(__getobj__.nickname, locale: I18n.locale)
     end
 
     def direct_messages_enabled?(context)

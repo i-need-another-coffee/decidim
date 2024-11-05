@@ -15,21 +15,34 @@ module Decidim
       isolate_namespace Decidim::Assemblies
 
       routes do
-        get "assemblies/:assembly_id", to: redirect { |params, _request|
+        get "/assemblies", to: redirect { |_params, request|
+          [
+            (request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym,
+            request.original_fullpath
+          ].join
+        }
+        get "/assemblies/*", to: redirect { |_params, request|
+          [
+            (request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym,
+            request.original_fullpath
+          ].join
+        }
+
+        get "/:locale/assemblies/:assembly_id", to: redirect { |params, _request|
           assembly = Decidim::Assembly.find(params[:assembly_id])
           assembly ? "/assemblies/#{assembly.slug}" : "/404"
         }, constraints: { assembly_id: /[0-9]+/ }
 
-        get "/assemblies/:assembly_id/f/:component_id", to: redirect { |params, _request|
+        get "/:locale/assemblies/:assembly_id/f/:component_id", to: redirect { |params, _request|
           assembly = Decidim::Assembly.find(params[:assembly_id])
           assembly ? "/assemblies/#{assembly.slug}/f/#{params[:component_id]}" : "/404"
         }, constraints: { assembly_id: /[0-9]+/ }
 
-        resources :assemblies, only: [:index, :show], param: :slug, path: "assemblies" do
+        resources :assemblies, only: [:index, :show], param: :slug, path: "/:locale/assemblies" do
           resources :assembly_members, only: :index, path: "members"
         end
 
-        scope "/assemblies/:assembly_slug/f/:component_id" do
+        scope "/:locale/assemblies/:assembly_slug/f/:component_id" do
           Decidim.component_manifests.each do |manifest|
             next unless manifest.engine
 
