@@ -17,7 +17,7 @@ module Decidim
     #
     # Returns a String.
     def path(options = {})
-      options.merge!(locale: I18n.locale) unless options.key?(:locale)
+      options.merge!(locale: I18n.locale) unless options.has_key?(:locale)
       member_route("path", options)
     end
 
