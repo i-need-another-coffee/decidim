@@ -103,6 +103,32 @@ describe "Answer a survey" do
       end
 
       it_behaves_like "has questionnaire"
+
+      context "when the survey allows editing answers" do
+        let(:callout_failure) { "There was a problem answering the survey." }
+        let(:callout_success) { "Survey successfully answered." }
+
+        before do
+          component.update!(
+            step_settings: {
+              component.participatory_space.active_step.id => {
+                allow_answers: true,
+                allow_editing_answers: true
+              }
+            },
+            settings: { starts_at: 1.week.ago, ends_at: 1.day.from_now }
+          )
+        end
+
+        it "shows the message when sending the answers" do
+          login_as user, scope: :user
+          visit questionnaire_public_path
+          fill_in question.body["en"], with: "My first answer"
+          check "questionnaire_tos_agreement"
+          click_on "Submit"
+          expect(page).to have_content("You will be able to edit your answers")
+        end
+      end
     end
 
     context "when displaying questionnaire rich content" do

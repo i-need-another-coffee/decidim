@@ -41,8 +41,14 @@ module Decidim
       end
 
       def confirm_data
+        confirm = if options[:allow_editing_answers?]
+                    t("decidim.forms.step_navigation.show.are_you_sure_edit")
+                  else
+                    t("decidim.forms.step_navigation.show.are_you_sure_no_edit")
+                  end
+
         { data: {
-          confirm: t("decidim.forms.step_navigation.show.are_you_sure"),
+          confirm:,
           disable: true,
           data: "survey-buttons"
         } }
