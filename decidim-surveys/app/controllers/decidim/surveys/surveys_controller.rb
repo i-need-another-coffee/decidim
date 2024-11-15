@@ -2,7 +2,7 @@
 
 module Decidim
   module Surveys
-    # Exposes the survey resource so users can view and answer them.
+    # Exposes the survey resource so users can view/answer and edit them.
     class SurveysController < Decidim::Surveys::ApplicationController
       include Decidim::Forms::Concerns::HasQuestionnaire
       include Decidim::ComponentPathHelper

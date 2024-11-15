@@ -16,13 +16,17 @@ module Decidim
           helper Decidim::Forms::ApplicationHelper
           include FormFactory
 
-          helper_method :questionnaire_for, :questionnaire, :allow_answers?, :visitor_can_answer?, :visitor_already_answered?, :update_url, :form_path
+          helper_method :questionnaire_for, :questionnaire, :allow_answers?, :visitor_can_answer?, :visitor_already_answered?, :visitor_can_edit_answers?, :update_url, :form_path
 
           invisible_captcha on_spam: :spam_detected
 
           def show
             @form = form(Decidim::Forms::QuestionnaireForm).from_model(questionnaire)
             render template: "decidim/forms/questionnaires/show"
+          end
+
+          def edit
+            render template: "decidim/forms/questionnaires/edit"
           end
 
           def answer
@@ -65,6 +69,11 @@ module Decidim
           # Public: return true if the current user (or session visitor) can answer the questionnaire
           def visitor_already_answered?
             questionnaire.answered_by?(current_user || tokenize(session[:session_id]))
+          end
+
+          # Public: return true if the component has the setting to allow editing answers
+          def visitor_can_edit_answers?
+            current_component.current_settings.allow_editing_answers
           end
 
           # Public: Returns a String or Object that will be passed to `redirect_to` after

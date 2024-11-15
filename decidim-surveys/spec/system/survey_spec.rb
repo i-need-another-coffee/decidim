@@ -118,15 +118,25 @@ describe "Answer a survey" do
             },
             settings: { starts_at: 1.week.ago, ends_at: 1.day.from_now }
           )
-        end
 
-        it "shows the message when sending the answers" do
           login_as user, scope: :user
           visit questionnaire_public_path
           fill_in question.body["en"], with: "My first answer"
           check "questionnaire_tos_agreement"
+        end
+
+        it "shows the message when sending the answers" do
           click_on "Submit"
           expect(page).to have_content("You will be able to edit your answers")
+        end
+
+        context "when the user already answered the survey" do
+          it "shows the link for editing the survey" do
+            accept_confirm { click_on "Submit" }
+
+            expect(page).to have_content("You have already answered this form.")
+            expect(page).to have_content("Edit your answers")
+          end
         end
       end
     end
