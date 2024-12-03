@@ -136,7 +136,6 @@ module Decidim
         end
       end
 
-
       def profile_url(author)
         return "" if author.respond_to?(:deleted?) && author.deleted?
 

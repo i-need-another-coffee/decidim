@@ -5,6 +5,6 @@
         **activities_options
       ) %>
 </div>
-<%= link_to last_activities_path, class: "mt-2.5 button button__text-secondary" do %>
+<%= link_to last_activities_path(locale: current_locale), class: "mt-2.5 button button__text-secondary" do %>
   <span><%= t("decidim.content_blocks.last_activity.name") %></span><%= icon "arrow-right-line" %>
 <% end %>
