@@ -1,6 +1,6 @@
 <% unread_data ||= current_user_unread_data %>
 <li>
-  <%= link_to decidim.account_path, class: "dropdown__item" do %>
+  <%= link_to decidim.account_path(locale: current_locale), class: "dropdown__item" do %>
     <%= icon "user-smile-line" %>
     <span class="text-secondary"><%= t("layouts.decidim.user_menu.profile") %></span>
   <% end %>
@@ -12,7 +12,7 @@
   <% end %>
 </li>
 <li>
-  <%= link_to decidim.notifications_path, class: "dropdown__item" do %>
+  <%= link_to decidim.notifications_path(locale: current_locale), class: "dropdown__item" do %>
     <%= icon "notification-3-line" %>
     <span class="text-secondary"><%= t("layouts.decidim.user_menu.notifications") %></span>
     <% if unread_data[:unread_notifications] %>
@@ -21,7 +21,7 @@
   <% end %>
 </li>
 <li>
-  <%= link_to decidim.conversations_path, class: "dropdown__item" do %>
+  <%= link_to decidim.conversations_path(locale: current_locale), class: "dropdown__item" do %>
     <%= icon "mail-send-line" %>
     <span class="text-secondary"><%= t("layouts.decidim.user_menu.conversations") %></span>
     <% if unread_data[:unread_conversations] %>
@@ -31,7 +31,7 @@
 </li>
 <% if allowed_to? :read, :admin_dashboard %>
   <li>
-    <%= link_to decidim_admin.root_path, class: "dropdown__item" do %>
+    <%= link_to decidim_admin.root_path(locale: current_locale), class: "dropdown__item" do %>
       <%= icon "dashboard-line" %>
       <span class="text-secondary"><%= t("layouts.decidim.user_menu.admin_dashboard") %></span>
     <% end %>

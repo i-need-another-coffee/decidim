@@ -13,6 +13,6 @@
 
 <%= render layout: "layouts/decidim/shared/layout_two_col" do %>
   <section id="notifications" class="layout-main__section">
-    <%= cell "decidim/notifications", current_user %>
+    <%= cell "decidim/notifications", current_user, locale: current_locale %>
   </section>
 <% end %>

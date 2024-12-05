@@ -15,5 +15,20 @@ module Decidim
     def locale_name(locale)
       I18n.with_locale(locale) { I18n.t("name", scope: "locale") }
     end
+
+    def alternate_url(locale)
+      return "/#{locale}" if request.path == "/"
+
+      url = request.original_url
+      current_locale = request.parameters[:locale]
+
+      if request.path == "/#{current_locale}"
+        new_url = url.gsub("/#{current_locale}", "/#{locale}")
+      else
+        new_url = url.gsub("/#{current_locale}/", "/#{locale}/")
+      end
+
+      return new_url
+    end
   end
 end

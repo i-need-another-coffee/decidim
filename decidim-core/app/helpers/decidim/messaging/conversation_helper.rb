@@ -45,7 +45,7 @@ module Decidim
       # Links to the conversation between the current user and another user
       #
       def link_to_current_or_new_conversation_with(user, title = t("decidim.contact"))
-        conversation_path = current_or_new_conversation_path_with(user)
+        conversation_path = current_or_new_conversation_path_with(user, locale: current_locale)
         if conversation_path
           link_to(conversation_path, title:) do
             icon "mail-send-line", aria_label: title, class: "icon--small"
@@ -64,7 +64,7 @@ module Decidim
       #
       # deprecated ?
       def text_link_to_current_or_new_conversation_with(user, body = t("decidim.profiles.show.send_private_message"))
-        conversation_path = current_or_new_conversation_path_with(user)
+        conversation_path = current_or_new_conversation_path_with(user, locale: current_locale)
         link_to body, conversation_path, title: body if conversation_path
       end
 
@@ -88,15 +88,15 @@ module Decidim
       #
       # @return [String] The resulting route
       #
-      def current_or_new_conversation_path_with(user)
+      def current_or_new_conversation_path_with(user, locale)
         return decidim_routes.new_user_session_path unless user_signed_in?
 
         conversation = conversation_between(current_user, user)
 
         if conversation
-          decidim_routes.conversation_path(conversation)
+          decidim_routes.conversation_path(conversation, locale: )
         elsif user.accepts_conversation?(current_user)
-          decidim_routes.new_conversation_path(recipient_id: user.id)
+          decidim_routes.new_conversation_path(recipient_id: user.id, locale: )
         end
       end
 

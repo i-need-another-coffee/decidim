@@ -87,7 +87,7 @@ module Decidim
     end
 
     def message_key
-      return :message if current_or_new_conversation_path_with(presented_profile).present?
+      return :message if current_or_new_conversation_path_with(presented_profile, locale: current_locale).present?
 
       :disabled_message
     end

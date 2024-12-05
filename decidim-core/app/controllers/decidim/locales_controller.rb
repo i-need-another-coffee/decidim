@@ -19,6 +19,7 @@ module Decidim
       query = uri.query.to_s.gsub(/locale=[a-zA-Z-]{2,5}/, "")
       params = URI.decode_www_form(query) << ["locale", current_locale]
       uri.query = URI.encode_www_form(params)
+      uri.path.gsub!(%r{/(#{I18n.available_locales.join('|')})/}, "/#{current_locale}/")
 
       uri.to_s
     end

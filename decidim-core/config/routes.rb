@@ -74,6 +74,7 @@ Decidim::Core::Engine.routes.draw do
       put "apply_password" => "devise/passwords"
     end
 
+  scope "/:locale" do
     resource :account, only: [:show, :update, :destroy], controller: "account" do
       member do
         get :delete
@@ -102,6 +103,7 @@ Decidim::Core::Engine.routes.draw do
 
     resources :notifications_subscriptions, param: :auth, only: [:create, :destroy]
     resource :user_interests, only: [:show, :update]
+  end
 
     get "/authorization_modals/:authorization_action/f/:component_id(/:resource_name/:resource_id)", to: "authorization_modals#show", as: :authorization_modal
     get(
@@ -202,6 +204,7 @@ Decidim::Core::Engine.routes.draw do
     resources :pages, only: [:index, :show], format: false
 
     get "/search", to: "searches#index", as: :search
+    get "/", to: "homepage#show"
   end
 
   get "/pages", to: redirect { |_params, request| [(request.params[:locale] || request.session[:user_locale] || I18n.locale).to_sym, request.original_fullpath].join }
