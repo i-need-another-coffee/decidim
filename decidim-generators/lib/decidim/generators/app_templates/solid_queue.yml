@@ -1,0 +1,44 @@
+# Be sure to restart your server when you modify this file.
+
+queues: &queues
+  - vote_reminder
+  - reminders
+  - newsletter
+  - newsletters_opt_in
+  - conference_diplomas
+  - translations
+  - user_report
+  - block_user
+  - metrics
+  - exports
+  - close_meeting_reminder
+  - spam_analysis
+
+decidim_default: &decidim_default
+  - queues: [ events ]
+    threads: 5
+    polling_interval: 0.1
+    processes: 3
+  - queues: [ mailers, default ]
+    threads: 3
+    polling_interval: 1
+  - queues:
+      <<: *queues
+    threads: 3
+    polling_interval: 2
+
+production:
+  dispatchers:
+    - polling_interval: 1
+      batch_size: 500
+      concurrency_maintenance_interval: 300
+  workers:
+    <<: *decidim_default
+
+development:
+  dispatchers:
+    - polling_interval: 1
+      batch_size: 500
+      concurrency_maintenance_interval: 300
+  workers:
+    <<: *decidim_default

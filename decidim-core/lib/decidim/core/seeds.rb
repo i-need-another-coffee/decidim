@@ -14,8 +14,6 @@ module Decidim
         Rails.application.reloader.reload! if Rails.application.reloader.check!
         reset_column_information
 
-        ActiveJob::Base.queue_adapter = :inline
-
         organization = create_organization!
 
         if organization.taxonomies.none?

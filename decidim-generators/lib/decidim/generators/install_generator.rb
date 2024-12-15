@@ -34,6 +34,10 @@ module Decidim
                                default: false,
                                desc: "Add the necessary gems to profile the app"
 
+      class_option :queue, type: :string,
+                           default: nil,
+                           desc: "Engine for queueing"
+
       def install
         route "mount Decidim::Core::Engine => '/'"
       end
@@ -77,6 +81,14 @@ module Decidim
         return unless options[:skip_gemfile]
 
         remove_file "Gemfile"
+      end
+
+      def install_queue
+        return unless options[:queue] == "solid_queue"
+
+        bundle_install
+
+        rails "solid_queue:install:migrations"
       end
 
       def install_decidim_webpacker

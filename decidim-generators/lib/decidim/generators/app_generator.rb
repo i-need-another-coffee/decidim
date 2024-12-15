@@ -208,28 +208,10 @@ module Decidim
       end
 
       def add_queue_adapter
-        adapter = options[:queue]
+        abort("#{options[:queue]} is not supported as a queue adapter, please use sidekiq for the moment") unless options[:queue].in?(["", "solid_queue", "sidekiq"])
 
-        abort("#{adapter} is not supported as a queue adapter, please use sidekiq for the moment") unless adapter.in?(["", "sidekiq"])
-
-        return unless adapter == "sidekiq"
-
-        template "sidekiq.yml.erb", "config/sidekiq.yml", force: true
-
-        gsub_file "config/environments/production.rb",
-                  /# config.active_job.queue_adapter     = :resque/,
-                  "config.active_job.queue_adapter = ENV['QUEUE_ADAPTER'] if ENV['QUEUE_ADAPTER'].present?"
-
-        prepend_file "config/routes.rb", "require \"sidekiq/web\"\n\n"
-        route <<~RUBY
-          authenticate :user, ->(u) { u.admin? } do
-            mount Sidekiq::Web => "/sidekiq"
-          end
-        RUBY
-
-        add_production_gems do
-          gem "sidekiq"
-        end
+        add_sidekiq_config if options[:queue] == "sidekiq"
+        add_solid_queue if options[:queue] == "solid_queue"
       end
 
       def add_production_gems(&block)
@@ -421,12 +403,62 @@ module Decidim
             "--seed_db=#{options[:seed_db]}",
             "--skip_gemfile=#{options[:skip_gemfile]}",
             "--app_name=#{app_name}",
-            "--profiling=#{options[:profiling]}"
+            "--profiling=#{options[:profiling]}",
+            "--queue=#{options[:queue]}"
           ]
         )
       end
 
       private
+
+      def add_solid_queue
+        return unless options[:queue] == "solid_queue"
+
+        template "solid_queue.yml", "config/solid_queue.yml", force: true
+
+        append_file "Gemfile", <<~RUBY
+          gem "solid_queue"
+        RUBY
+
+        gsub_file "config/environments/development.rb",
+                  /Rails.application.configure do/,
+                  "Rails.application.configure do\n  config.active_job.queue_adapter = :solid_queue\n"
+
+        gsub_file "config/environments/production.rb",
+                  /# config.active_job.queue_adapter     = :resque/,
+                  "config.active_job.queue_adapter = :solid_queue\n"
+
+        queue_config = <<-RUBY
+  config.active_job.queue_adapter = :solid_queue
+  config.solid_queue.logger = ActiveSupport::Logger.new(File.join(Rails.root, 'log', 'solid_queue.log'))
+        RUBY
+
+        gsub_file "config/environments/development.rb",
+                  /  config.active_job.queue_adapter = :solid_queue/, queue_config
+        gsub_file "config/environments/production.rb",
+                  /  config.active_job.queue_adapter = :solid_queue/, queue_config
+      end
+
+      def add_sidekiq_config
+        return unless options[:queue] == "sidekiq"
+
+        template "sidekiq.yml.erb", "config/sidekiq.yml", force: true
+
+        gsub_file "config/environments/production.rb",
+                  /# config.active_job.queue_adapter     = :resque/,
+                  "config.active_job.queue_adapter = ENV['QUEUE_ADAPTER'] if ENV['QUEUE_ADAPTER'].present?"
+
+        prepend_file "config/routes.rb", "require \"sidekiq/web\"\n\n"
+        route <<~RUBY
+          authenticate :user, ->(u) { u.admin? } do
+            mount Sidekiq::Web => "/sidekiq"
+          end
+        RUBY
+
+        add_production_gems do
+          gem "sidekiq"
+        end
+      end
 
       def gem_modifier
         @gem_modifier ||= if options[:path]

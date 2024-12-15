@@ -11,6 +11,12 @@ namespace :decidim do
         shakapacker: bin/shakapacker-dev-server
       RUBY
 
+      if defined?(SolidQueue)
+        actions :append_file, "Procfile.dev", <<~RUBY
+          solid_queue: bundle exec rake solid_queue:start
+        RUBY
+      end
+
       actions :create_file, "bin/dev", %(#!/usr/bin/env sh
 
 set -e
