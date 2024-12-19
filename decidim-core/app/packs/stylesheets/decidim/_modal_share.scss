@@ -2,7 +2,7 @@
   @apply md:pb-16 md:pr-16;
 
   &__list {
-    @apply mt-8 grid grid-cols-1 md:grid-cols-4 gap-3 md:gap-6;
+    @apply mt-8 grid grid-cols-1 md:grid-cols-5 gap-3;
 
     > * {
       @apply button button__lg border border-gray hover:border-tertiary shadow-[0_4px_6px_rgba(211,211,211,0.25)] text-md text-gray-2 gap-2;

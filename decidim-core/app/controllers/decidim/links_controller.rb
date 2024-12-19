@@ -6,6 +6,7 @@ module Decidim
   class LinksController < Decidim::ApplicationController
     skip_before_action :store_current_location
 
+    include Decidim::OrganizationHelper
     helper Decidim::ExternalDomainHelper
     helper_method :external_url
 
@@ -13,9 +14,24 @@ module Decidim
     rescue_from Decidim::InvalidUrlError, with: :modal
     rescue_from URI::InvalidURIError, with: :modal
 
+    layout false, only: :qr
+
     def new
       headers["X-Robots-Tag"] = "none"
       headers["Link"] = %(<#{url_for}>; rel="canonical")
+    end
+
+    def qr
+      raise Decidim::InvalidUrlError unless external_url.to_s.starts_with?(root_url)
+
+      @qr_code = RQRCode::QRCode.new(external_url.to_s)
+
+      if params[:download]
+        respond_to do |format|
+          format.svg { send_data @qr_code.as_svg(size: 480, use_path: true), filename: "qr-#{organization_name}.svg" }
+          format.png { send_data @qr_code.as_png(size: 480), filename: "qr-#{organization_name}.png" }
+        end
+      end
     end
 
     private

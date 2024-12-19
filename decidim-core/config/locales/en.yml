@@ -1,4 +1,5 @@
 ---
+
 en:
   activemodel:
     attributes:
@@ -1204,6 +1205,9 @@ en:
     linked_resource_from:
       included_in: Included in
     links:
+      qr:
+        download_png: Download PNG
+        download_svg: Download SVG
       invalid_url: Invalid URL
       warning:
         body_1: You are about to visit an external link and we would like you to be cautious regarding the content on the external site.

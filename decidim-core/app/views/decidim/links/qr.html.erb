@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hide on Print</title>
+  <style>
+    .hide-on-print { margin-top: 2vh; }
+
+    @media print {
+      .hide-on-print {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+
+<div style="width: 100%; text-align: center; margin: 20px;">
+  <h1><%= params[:name] %></h1>
+  <h3><%= external_url.to_s %></h3>
+  <img src="data:;base64,<%= Base64.encode64(@qr_code.as_png(size: 480).to_s) %>" />
+
+  <div class="hide-on-print">
+    <%= link_to t(".download_svg"), qr_path(name: params[:name], external_url: params[:external_url], download: true, format: :svg) %>
+    <%= link_to t(".download_png"), qr_path(name: params[:name], external_url: params[:external_url], download: true, format: :png) %>
+  </div>
+</div>
+
+</body>
+</html>
+
+
+
+

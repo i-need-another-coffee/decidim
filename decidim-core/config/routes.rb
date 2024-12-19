@@ -153,6 +153,7 @@ Decidim::Core::Engine.routes.draw do
   get "/search", to: "searches#index", as: :search
 
   get "/link", to: "links#new", as: :link
+  get "/qr-code", to: "links#qr", as: :qr
 
   get "/scopes/picker", to: "scopes#picker", as: :scopes_picker
 
