@@ -630,7 +630,6 @@ module Decidim
       # Just provide the respective icon name (unprefixed) and the brand color,
       # if a social-network icon is missing there, you can provide as well a SVG file as used to
       initializer "decidim_core.add_social_share_services" do
-
         Decidim.register_social_share_service("QR") do |service|
           service.icon = "qr-code-line"
           service.share_uri = "/qr-code?external_url=%{url}&name=%{title}"
