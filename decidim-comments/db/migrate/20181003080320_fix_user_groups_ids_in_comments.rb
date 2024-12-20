@@ -2,12 +2,13 @@
 
 class FixUserGroupsIdsInComments < ActiveRecord::Migration[5.2]
   class UserGroup < ApplicationRecord
-    self.table_name = :decidim_user_groups
+    self.table_name = :decidim_users
   end
   class Comment < ApplicationRecord
     self.table_name = :decidim_comments_comments
 
     include Decidim::Comments::Commentable
+    include Decidim::Authorable
   end
   # rubocop:disable Rails/SkipsModelValidations
   def change
