@@ -51,6 +51,7 @@ module Decidim
               # i18n-tasks-use t("decidim.forms.admin.questionnaires.answers.export_response.title")
               title = t("export_response.title", scope: i18n_scope, token: session_token)
 
+              raise "FOOBAR"
               Decidim::Forms::ExportQuestionnaireAnswersJob.perform_later(current_user, title, answers.select { |a| a.first.session_token == session_token })
 
               flash[:notice] = t("decidim.admin.exports.notice")
