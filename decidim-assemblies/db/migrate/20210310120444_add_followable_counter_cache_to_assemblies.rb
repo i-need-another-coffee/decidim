@@ -4,6 +4,8 @@ class AddFollowableCounterCacheToAssemblies < ActiveRecord::Migration[5.2]
 
   class Assembly < ApplicationRecord
     self.table_name = :decidim_assemblies
+    include Decidim::Followable
+
   end
 
   def change

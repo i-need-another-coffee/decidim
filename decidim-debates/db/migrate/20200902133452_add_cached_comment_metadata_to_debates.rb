@@ -1,14 +1,20 @@
 # frozen_string_literal: true
 
 class AddCachedCommentMetadataToDebates < ActiveRecord::Migration[5.2]
+  class Debate < ApplicationRecord
+    self.table_name = :decidim_debates_debates
+    include Decidim::HasComponent
+    include Decidim::Comments::CommentableWithComponent
+  end
+
   def change
     add_column :decidim_debates_debates, :last_comment_at, :datetime
     add_column :decidim_debates_debates, :last_comment_by_id, :integer
     add_column :decidim_debates_debates, :last_comment_by_type, :string
 
     # rubocop:disable Rails/SkipsModelValidations
-    Decidim::Debates::Debate.reset_column_information
-    Decidim::Debates::Debate.unscoped.includes(comments: [:author, :user_group]).find_each do |debate|
+    Debate.reset_column_information
+    Debate.unscoped.includes(comments: [:author, :user_group]).find_each do |debate|
       last_comment = debate.comments.order("created_at DESC").first
       next unless last_comment
 
