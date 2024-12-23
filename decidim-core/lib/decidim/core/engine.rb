@@ -446,7 +446,7 @@ module Decidim
       initializer "decidim_core.validators" do
         config.to_prepare do
           # Decidim overrides to the file content type validator
-          require "file_content_type_validator"
+          require Decidim::Core::Engine.root.join("/app/validators/file_content_type_validator")
         end
       end
 
