@@ -1,5 +1,5 @@
-@import "leaflet/dist/leaflet";
-@import "leaflet.markercluster/dist/MarkerCluster";
+@use "leaflet/dist/leaflet";
+@use "leaflet.markercluster/dist/MarkerCluster";
 @import "leaflet.markercluster/dist/MarkerCluster.Default";
 
 /* overwrite leaflet and card styles */

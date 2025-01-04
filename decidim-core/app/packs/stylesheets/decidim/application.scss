@@ -1,12 +1,12 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@use "tailwindcss/base";
+@use "tailwindcss/components";
+@use "tailwindcss/utilities";
 
 @layer base {
-  @import "stylesheets/decidim/_fonts.scss";
-  @import "stylesheets/decidim/_typography.scss";
+  @import "stylesheets/decidim/fonts";
+  @import "stylesheets/decidim/typography";
   // Keep this in separate file as long as we are maintaining Foundation compatibility
-  @import "stylesheets/decidim/_rich_text.scss";
+  @import "stylesheets/decidim/rich_text";
 }
 
 // The CSS components must work identically all along the application,
