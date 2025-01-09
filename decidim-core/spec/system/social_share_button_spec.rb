@@ -16,6 +16,12 @@ describe "Social share button" do
       end
     end
 
+    it "shows the 'Share to QR' button" do
+      within "[data-social-share]" do
+        expect(page).to have_css('a[data-site="qr"]')
+      end
+    end
+
     it "shows the 'Share to X' button" do
       within "[data-social-share]" do
         expect(page).to have_css('a[data-site="x"]')
