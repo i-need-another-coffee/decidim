@@ -188,6 +188,8 @@ PATH
     decidim-templates (0.30.0.dev)
       decidim-core (= 0.30.0.dev)
       decidim-forms (= 0.30.0.dev)
+    decidim-translation_addons (0.1.0)
+      rails (>= 7.0.8.4)
     decidim-verifications (0.30.0.dev)
       decidim-core (= 0.30.0.dev)
 
@@ -830,6 +832,7 @@ DEPENDENCIES
   decidim-dev!
   decidim-initiatives!
   decidim-templates!
+  decidim-translation_addons!
   letter_opener_web (~> 2.0)
   listen (~> 3.1)
   parallel_tests (~> 4.2)
