@@ -10,6 +10,11 @@ namespace :decidim do
     task :choose_target_plugins do
       ENV["FROM"] = "#{ENV.fetch("FROM", nil)},decidim_translation_addons"
     end
+
+    desc "Searches for missing translations"
+    task :search_missing_translations do
+      puts "Not implemented"
+    end
   end
 end
 
