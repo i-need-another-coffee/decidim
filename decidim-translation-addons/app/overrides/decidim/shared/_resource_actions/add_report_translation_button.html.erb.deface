@@ -1,2 +1,0 @@
-<!-- insert_after 'li:last-child'-->
-    <li role="menuitem"><%= cell "decidim/report_translation_button", resource %></li>
