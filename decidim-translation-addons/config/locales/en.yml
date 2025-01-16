@@ -1,0 +1,10 @@
+---
+en:
+  decidim:
+    shared:
+      flag_modal:
+        translation:
+          already_reported: This content was already reported for wrong translations and it will be reviewed by an admin.
+          description: Please select the fields that contains wrong translations.
+          report_translation: Report translation
+          title: Report wrong translation
