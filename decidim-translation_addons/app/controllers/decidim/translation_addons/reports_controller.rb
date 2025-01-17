@@ -3,7 +3,7 @@
 module Decidim
   # Exposes the report resource so users can report a reportable.
   module TranslationAddons
-    class ReportsController < Decidim::ApplicationController
+    class ReportsController < Decidim::TranslationAddons::ApplicationController
       include FormFactory
       include NeedsPermission
 
@@ -14,7 +14,7 @@ module Decidim
 
         @form = form(Decidim::ReportTrnslationForm).from_params(params, current_user)
 
-        CreateTranslateReport.call(@form, reportable) do
+        Decidim::TranslationAddons::CreateReport.call(@form, reportable) do
           on(:ok) do
             flash[:notice] = I18n.t("decidim.reports.create.success")
             redirect_back fallback_location: root_path

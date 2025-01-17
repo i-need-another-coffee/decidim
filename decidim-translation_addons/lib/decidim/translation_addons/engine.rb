@@ -3,6 +3,12 @@ module Decidim
     class Engine < ::Rails::Engine
       isolate_namespace Decidim::TranslationAddons
 
+      routes do
+        scope "/translation_addons" do
+          resource :translation_report, only: [:create], controller: "reports"
+        end
+      end
+
       initializer "decidim_translation_addons.deface" do
         Rails.application.configure do
           config.deface.enabled = true
@@ -14,6 +20,11 @@ module Decidim
         Cell::ViewModel.view_paths << File.expand_path("#{Decidim::TranslationAddons::Engine.root}/app/views") # for partials
       end
 
+      initializer "decidim_translation_addons.routing" do
+        Decidim::Core::Engine.routes do
+          mount Decidim::TranslationAddons::Engine => "/", :as => :translation_addons
+        end
+      end
     end
   end
 end

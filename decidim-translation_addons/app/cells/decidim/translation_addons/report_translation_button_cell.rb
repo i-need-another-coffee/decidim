@@ -18,7 +18,7 @@ module Decidim
 
       def user_entity?
         (model.respond_to?(:creator_author) && model.creator_author.respond_to?(:nickname)) ||
-            (model.respond_to?(:author) && model.author.respond_to?(:nickname))
+          (model.respond_to?(:author) && model.author.respond_to?(:nickname))
       end
 
       def cache_hash
@@ -73,7 +73,7 @@ module Decidim
       end
 
       def field_label(field)
-        field.name.gsub("_"," ").capitalize
+        field.name.gsub("_", " ").capitalize
       end
     end
   end
