@@ -11,10 +11,21 @@
       </div>
     </div>
 
-    <div>
-      <% fields.each do |field| %>
-        <%= f.text_field :details, label: field_label(field), id: nil, label_options: { for: "fields[#{field.name}]", class: "h6" }, class: "w-full mt-2 mb-2" %>
-        <% end %>
+    <div class="mt-5">
+      <p class="ml-10">
+        <%= f.select :fields, fields.map { |field| field_label(field) }, required: true, label: t("decidim.shared.flag_modal.translation.select_text"), label_options: { class: "h6 mr-5" }, class: "w-full", prompt: t("decidim.shared.flag_modal.translation.select_placeholder") %>
+      </p>
+      <p class="ml-10 mt-5">
+        <%= f.collection_radio_buttons :reason, [
+          [:wrong, t("decidim.shared.flag_modal.translation.wrong")],
+          [:missing, t("decidim.shared.flag_modal.translation.missing")]
+        ], :first, :last do |builder|
+          builder.label(for: nil, class: "form__wrapper-checkbox-label h6") { builder.radio_button(id: nil) + builder.text }
+        end %>
+      </p>
+      <p class="ml-10 mt-5">
+       <%= f.text_field :details, label: t("decidim.shared.flag_modal.translation.suggestion_label") , label_options: {class: "h6" }, class: "w-full mt-2 mb-2" %>
+      </p>
     </div>
 
     <div data-dialog-actions>
