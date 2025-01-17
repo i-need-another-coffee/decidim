@@ -7,26 +7,18 @@ module Decidim
 
       def flag_translation_modal
         # return render :already_reported_modal if model.reported_by?(current_user) //Implement check if there are reports for all fields of the resource
-        render :flag_translation_modal
+        render
       end
 
       def translatable_fields
-        model.class.translatable_fields_list
-      end
-
-      def frontend_administrable?
-        return true if user_reportable? && current_user&.admin?
-
-        user_entity? &&
-          model.can_be_administered_by?(current_user) &&
-          (model.respond_to?(:official?) && !model.official?)
+        model.class.translatable_fields_list || []
       end
 
       private
 
       def user_entity?
         (model.respond_to?(:creator_author) && model.creator_author.respond_to?(:nickname)) ||
-          (model.respond_to?(:author) && model.author.respond_to?(:nickname))
+            (model.respond_to?(:author) && model.author.respond_to?(:nickname))
       end
 
       def cache_hash
@@ -53,11 +45,11 @@ module Decidim
       end
 
       def report_form
-        @report_form ||= user_reportable? ? Decidim::TranslationAddons::ReportTranslationForm.from_params(reason: "wrong_translation") : Decidim::TranslationAddons::ReportTranslationForm.new(reason: "wrong_translation")
+        @report_form ||= user_reportable? ? Decidim::ReporForm.from_params(reason: "wrong") : Decidim::ReportForm.new(reason: "wrong")
       end
 
       def report_path
-        @report_path ||= user_reportable? ? decidim.report_user_path(sgid: model.to_sgid.to_s) : decidim.report_translation_path(sgid: model.to_sgid.to_s)
+        @report_path ||= user_reportable? ? decidim.report_user_path(sgid: model.to_sgid.to_s) : decidim.report_path(sgid: model.to_sgid.to_s)
       end
 
       def builder
@@ -78,6 +70,10 @@ module Decidim
 
       def html_options
         { data: { "dialog-open": current_user ? modal_id : "loginModal" } }
+      end
+
+      def field_label(field)
+        field.name.gsub("_"," ").capitalize
       end
     end
   end

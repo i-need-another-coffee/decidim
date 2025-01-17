@@ -9,6 +9,7 @@ module Decidim
       attribute :fields, String
       attribute :details, String
       validates :reason, inclusion: { in: Decidim::TranslationAddons::Report::REASONS } # Add "wrong_translation" to REASON on TranslationReport Model
+      validates :at_least_one
     end
   end
 end
