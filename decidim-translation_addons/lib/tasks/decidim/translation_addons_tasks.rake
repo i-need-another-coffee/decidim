@@ -14,6 +14,19 @@ namespace :decidim do
     desc "Searches for missing translations"
     task :search_missing_translations do
       puts "Not implemented"
+      # Get organizations - Decidim::Organization => Enumerable
+      #
+      # for each organization get available_locales
+      #
+      # Get all Resources classes that implement TranslatableResource
+      #
+      # for each resource class get translatable fields
+      #
+      # Get items of the current resource and for each
+      #
+      # for each field, check if it has all the keys as available_locales
+      #
+      # if a locale is missing create a Decidim::TranslationAddons::Report
     end
   end
 end

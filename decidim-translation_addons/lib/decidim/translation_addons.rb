@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "deface"
 require "decidim/translation_addons/version"
 require "decidim/translation_addons/engine"
