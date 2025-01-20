@@ -13,7 +13,7 @@
 
     <div class="mt-5">
       <p class="ml-10">
-        <%= f.select :field, fields.map { |field| field_label(field) }, required: true, label: t("decidim.shared.flag_modal.translation.select_text"), label_options: { class: "h6 mr-5" }, class: "w-full", prompt: t("decidim.shared.flag_modal.translation.select_placeholder") %>
+        <%= f.select :field, fields.map { |field| field_label(field) }, required: true, label: t("decidim.shared.flag_modal.translation.select_text"), label_options: { class: "h6 mr-5" }, class: "w-full", prompt: t("decidim.shared.flag_modal.translation.select_placeholder"), disabled:  -> (field) { already_reported?(field_label(field))} %>
       </p>
       <p class="ml-10 mt-5">
         <%= f.collection_radio_buttons :reason, [
@@ -29,7 +29,7 @@
       <p class="ml-10 mt-5">
        <%= f.text_field :detail, label: t("decidim.shared.flag_modal.translation.suggestion_label") , label_options: {class: "h6" }, class: "w-full mt-2 mb-2" %>
       </p>
-      <%= f.hidden_field :locale, value: current_user.locale %>
+      <%= f.hidden_field :locale, value: current_user&.locale %>
     </div>
 
     <div data-dialog-actions>

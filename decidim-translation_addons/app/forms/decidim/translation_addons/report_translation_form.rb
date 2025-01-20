@@ -7,7 +7,7 @@ module Decidim
       mimic :report
 
       attribute :field, String #F ield that was reported
-      attribute :detail, String #F ix suggestion
+      attribute :detail, String #Fix suggestion
       attribute :reason, String # Reason for reporting: missing/wrong translation
       attribute :field_translation, String # Current value for the reported field
       attribute :locale, String # Current locale of the report

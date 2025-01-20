@@ -75,6 +75,10 @@ module Decidim
       def field_label(field)
         field.name.gsub("_", " ").capitalize
       end
+
+      def already_reported?(field)
+        Decidim::TranslationAddons::Report.exists?(decidim_resource_id: model&.id, decidim_user_id: current_user&.id, field_name: field, locale: current_user&.locale)
+      end
     end
   end
 end
