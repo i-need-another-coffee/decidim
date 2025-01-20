@@ -1,6 +1,6 @@
 <% fields = translatable_fields %>
 <%= decidim_modal id: modal_id, class: "flag-modal" do %>
-  <%= form_for report_form, builder:, url: report_path, method: :post, html: { id: nil } do |f| %>
+  <%= form_for translation_report_form, builder:, url: report_translation_path, method: :post, html: { id: nil } do |f| %>
     <div data-dialog-container>
       <%= icon "flag-line" %>
       <h2 id="dialog-title-<%= modal_id %>" tabindex="-1" data-dialog-title><%= t("decidim.shared.flag_modal.translation.title") %></h2>
@@ -13,19 +13,23 @@
 
     <div class="mt-5">
       <p class="ml-10">
-        <%= f.select :fields, fields.map { |field| field_label(field) }, required: true, label: t("decidim.shared.flag_modal.translation.select_text"), label_options: { class: "h6 mr-5" }, class: "w-full", prompt: t("decidim.shared.flag_modal.translation.select_placeholder") %>
+        <%= f.select :field, fields.map { |field| field_label(field) }, required: true, label: t("decidim.shared.flag_modal.translation.select_text"), label_options: { class: "h6 mr-5" }, class: "w-full", prompt: t("decidim.shared.flag_modal.translation.select_placeholder") %>
       </p>
       <p class="ml-10 mt-5">
         <%= f.collection_radio_buttons :reason, [
-          [:wrong, t("decidim.shared.flag_modal.translation.wrong")],
-          [:missing, t("decidim.shared.flag_modal.translation.missing")]
+          [:missing, t("decidim.shared.flag_modal.translation.missing")],
+          [:wrong, t("decidim.shared.flag_modal.translation.wrong")]
         ], :first, :last do |builder|
           builder.label(for: nil, class: "form__wrapper-checkbox-label h6") { builder.radio_button(id: nil) + builder.text }
         end %>
       </p>
       <p class="ml-10 mt-5">
-       <%= f.text_field :details, label: t("decidim.shared.flag_modal.translation.suggestion_label") , label_options: {class: "h6" }, class: "w-full mt-2 mb-2" %>
+       <%= f.text_field :field_translation, value: "I think i need JS in here", disabled: true, label: t("decidim.shared.flag_modal.translation.value") , label_options: {class: "h6" }, class: "w-full mt-2 mb-2 disabled" %>
       </p>
+      <p class="ml-10 mt-5">
+       <%= f.text_field :detail, label: t("decidim.shared.flag_modal.translation.suggestion_label") , label_options: {class: "h6" }, class: "w-full mt-2 mb-2" %>
+      </p>
+      <%= f.hidden_field :locale, value: current_user.locale %>
     </div>
 
     <div data-dialog-actions>

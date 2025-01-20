@@ -12,4 +12,5 @@ en:
           suggestion_label: "Please insert the correct translation below:"
           select_text: Please select the field you want to report.
           title: Report wrong translation
+          value: "The current value of the selected field is:"
           wrong: The selected field contains a wrong translation

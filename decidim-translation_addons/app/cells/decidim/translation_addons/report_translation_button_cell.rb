@@ -44,12 +44,12 @@ module Decidim
         model.is_a?(Decidim::UserReportable)
       end
 
-      def report_form
-        @report_form ||= user_reportable? ? Decidim::ReporForm.from_params(reason: "wrong") : Decidim::ReportForm.new(reason: "wrong")
+      def translation_report_form
+        @report_form ||= Decidim::TranslationAddons::ReportTranslationForm.from_params(reason: "missing")
       end
 
-      def report_path
-        @report_path ||= user_reportable? ? decidim.report_user_path(sgid: model.to_sgid.to_s) : decidim.report_path(sgid: model.to_sgid.to_s)
+      def report_translation_path
+        @report_path ||= user_reportable? ? decidim.report_user_path(sgid: model.to_sgid.to_s) : Decidim::TranslationAddons::Engine.routes.url_helpers.translation_report_path(sgid: model.to_sgid.to_s)
       end
 
       def builder

@@ -3,16 +3,17 @@
 module Decidim
   module TranslationAddons
     class CreateReport < Decidim::Command
-      def initialize(resource_instance, field, locale, current_user, fix_suggestion, reason = "missing") # rubocop:disable Metrics/ParameterLists
+      def initialize(form, resource_instance, current_user) # rubocop:disable Metrics/ParameterLists
         @resource_instance = resource_instance
-        @field = field
-        @locale = locale
-        @reason = reason
+        @field = form.field
+        @locale = form.locale
+        @reason = form.reason
         @current_user = current_user
-        @fix_suggestion = fix_suggestion
+        @fix_suggestion = form.detail
       end
 
       def call
+
         return broadcast(:invalid) if @resource_instance.blank? || @field.blank? || @locale.blank? || @current_user.blank? || @fix_suggestion.blank? || @reason.blank?
 
         create_report
@@ -32,8 +33,9 @@ module Decidim
         ) do
           report = Decidim::TranslationAddons::Report.new(
             decidim_user_id: current_user.id,
-            decidim_resource_type: resource.class.name,
-            decidim_resource_id: resource.id,
+            decidim_resource_type: resource_instance.class.name,
+            decidim_resource_id: resource_instance.id,
+            reason: reason,
             field_name: field,
             locale: locale,
             fix_suggestion: fix_suggestion
