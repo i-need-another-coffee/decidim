@@ -4,6 +4,9 @@ require "deface"
 require "decidim/translation_addons/version"
 require "decidim/translation_addons/engine"
 
+require "decidim/translation_addons/admin"
+require "decidim/translation_addons/admin_engine"
+
 module Decidim
   module TranslationAddons
     include ActiveSupport::Configurable

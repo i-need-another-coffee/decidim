@@ -20,6 +20,10 @@ module Decidim
         Cell::ViewModel.view_paths << File.expand_path("#{Decidim::TranslationAddons::Engine.root}/app/views") # for partials
       end
 
+      # initializer "decidim_admin.menu" do
+      #   Decidim::TranslationAddons::Menu.register_admin_global_moderation_menu!
+      # end
+
       initializer "decidim_translation_addons.routing" do
         Decidim::Core::Engine.routes do
           mount Decidim::TranslationAddons::Engine => "/", :as => :translation_addons
