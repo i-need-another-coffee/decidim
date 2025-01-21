@@ -50,10 +50,18 @@ namespace :decidim do
           fields = klass.translatable_fields_list
           soft_deletable = klass.column_names.include?("deleted_at")
           resources = soft_deletable ? klass.where(deleted_at: nil) : klass.all
+          existing_reports = Decidim::TranslationAddons::Report.where(decidim_resource_id: resources.map(&:id),
+                                                                      decidim_resource_type: klass.name).each_with_object({}) do |report, hash|
+            resource_id = report.decidim_resource_id
+            field_name = report.field_name
+            locale = report.locale
+            hash[resource_id.to_s] ||= {}
+            hash[resource_id.to_s][field_name] ||= {}
+            hash[resource_id.to_s][field_name][locale] = true
+          end
           resources.each do |resource|
             next if resource.organization.id != org.id
 
-            puts "Record: #{resource.id}"
             fields.each do |field|
               next if resource[field].blank?
 
@@ -62,24 +70,28 @@ namespace :decidim do
               missing = available_locales - translations_keys
               if missing.present?
 
-                puts "Missing:"
-                puts missing.inspect
                 missing.each do |locale|
-                  puts "Creating report class: #{resource.class.name}, id: #{resource.id}, field: #{field}, locale: #{locale}"
-                  report = Decidim::TranslationAddons::Report.new(
-                    decidim_user_id: admin_user.id,
-                    decidim_resource_type: resource.class.name,
-                    decidim_resource_id: resource.id,
-                    field_name: field,
-                    reason: "missing",
-                    locale: locale
-                  )
-                  report.save!
-                rescue ActiveRecord::RecordInvalid => e
-                  puts "Failed to save report class: #{resource.class.name}, id: #{resource.id}, field: #{field}, locale: #{locale}, message: #{e.message}"
+                  if existing_reports.dig(resource.id.to_s, field.to_s, locale.to_s) == true
+                    puts "Report already exists: #{resource.class.name}, id: #{resource.id}, field: #{field}, locale: #{locale}"
+                  else
+                    puts "Creating report class: #{resource.class.name}, id: #{resource.id}, field: #{field}, locale: #{locale}"
+                    begin
+                      report = Decidim::TranslationAddons::Report.new(
+                        decidim_user_id: admin_user.id,
+                        decidim_resource_type: resource.class.name,
+                        decidim_resource_id: resource.id,
+                        field_name: field,
+                        reason: "missing",
+                        locale: locale
+                      )
+                      report.save!
+                    rescue StandardError => e
+                      puts "Failed to save report class: #{resource.class.name}, id: #{resource.id}, field: #{field}, locale: #{locale}, message: #{e.message}"
+                    end
+                  end
                 end
               else
-                puts "Nothing is missing"
+                puts "Nothing is missing: #{resource.class.name}, id: #{resource.id}, field: #{field}"
               end
             end
           end
