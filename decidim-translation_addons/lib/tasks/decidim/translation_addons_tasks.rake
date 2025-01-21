@@ -44,10 +44,8 @@ namespace :decidim do
       admin_user = Decidim::User.find 1
 
       organizations.each do |org|
-        puts "Organization: #{org.id}"
         available_locales = org.available_locales
         reportable_classes_list.each do |klass|
-          puts "Class: #{klass}"
           klass = klass.safe_constantize
           fields = klass.translatable_fields_list
           soft_deletable = klass.column_names.include?("deleted_at")
@@ -57,11 +55,9 @@ namespace :decidim do
 
             puts "Record: #{resource.id}"
             fields.each do |field|
-              puts "Field: #{field}"
               next if resource[field].blank?
 
               translations = merge_machine_translations_without_override resource[field]
-              puts "Current translations:"
               translations_keys = translations.keys
               missing = available_locales - translations_keys
               if missing.present?
@@ -69,7 +65,7 @@ namespace :decidim do
                 puts "Missing:"
                 puts missing.inspect
                 missing.each do |locale|
-                  Decidim::TranslationAddons::Report.where(decidim_resource_type: resource.class.name, decidim_resource_id: resource.id, field_name: field)
+                  puts "Creating report class: #{resource.class.name}, id: #{resource.id}, field: #{field}, locale: #{locale}"
                   report = Decidim::TranslationAddons::Report.new(
                     decidim_user_id: admin_user.id,
                     decidim_resource_type: resource.class.name,

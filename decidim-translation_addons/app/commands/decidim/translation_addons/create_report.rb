@@ -3,7 +3,7 @@
 module Decidim
   module TranslationAddons
     class CreateReport < Decidim::Command
-      def initialize(form, resource_instance, current_user) # rubocop:disable Metrics/ParameterLists
+      def initialize(form, resource_instance, current_user)
         @resource_instance = resource_instance
         @field = form.field
         @locale = form.locale
@@ -13,7 +13,6 @@ module Decidim
       end
 
       def call
-
         return broadcast(:invalid) if @resource_instance.blank? || @field.blank? || @locale.blank? || @current_user.blank? || @fix_suggestion.blank? || @reason.blank?
 
         create_report
