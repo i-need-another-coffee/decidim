@@ -13,7 +13,8 @@
 
     <div class="mt-5">
       <p class="ml-10">
-        <%= f.select :field, fields.map { |field| field_label(field) }, label: t("decidim.shared.flag_modal.translation.select_text"), label_options: { class: "h6 mr-5" }, prompt: t("decidim.shared.flag_modal.translation.select_placeholder"), class: "w-full", required: true, disabled:  -> (field) { already_reported?(field_label(field))} %>
+        <% disabled_fields = fields.filter { |field| already_reported?(field) } %>
+        <%= f.select :field, options_for_select(fields.map { |field| [field_label(field), field] }, disabled: disabled_fields), label: t("decidim.shared.flag_modal.translation.select_text"), label_options: { class: "h6 mr-5" }, prompt: t("decidim.shared.flag_modal.translation.select_placeholder"), required: true %>
       </p>
       <p class="ml-10 mt-5">
         <%= f.collection_radio_buttons :reason, [
