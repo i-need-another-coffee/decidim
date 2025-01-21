@@ -6,7 +6,7 @@ module Decidim
       include ActionView::Helpers::FormOptionsHelper
 
       def flag_translation_modal
-        # return render :already_reported_modal if model.reported_by?(current_user) //Implement check if there are reports for all fields of the resource
+        return render :already_reported_modal if already_reported_resource?
         render
       end
 
@@ -78,6 +78,12 @@ module Decidim
 
       def already_reported?(field)
         Decidim::TranslationAddons::Report.exists?(decidim_resource_id: model&.id, decidim_user_id: current_user&.id, field_name: field, locale: current_user&.locale)
+      end
+
+      def already_reported_resource?
+        already_reported_fields = Decidim::TranslationAddons::Report.where(decidim_resource_id: model&.id, decidim_user_id: current_user&.id, locale: current_user&.locale).count
+        return true if already_reported_fields == translatable_fields.count
+        false
       end
     end
   end

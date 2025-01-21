@@ -8,8 +8,8 @@ en:
           description: Please select the fields that contains wrong translations.
           missing: The selected field has a missing translation
           report_translation: Report translation
-          select_placeholder: Translation issue on...
-          suggestion_label: "Please insert the correct translation below:"
+          select_placeholder: " Choose ..."
+          suggestion_label: "Please insert your suggestion for translation below:"
           select_text: Please select the field you want to report.
           title: Report wrong translation
           value: "The current value of the selected field is:"
