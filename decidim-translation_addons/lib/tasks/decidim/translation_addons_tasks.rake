@@ -43,22 +43,22 @@ namespace :decidim do
       organizations = Decidim::Organization.all
       admin_user = Decidim::User.find 1
 
-      organizations.each do |org|
-        available_locales = org.available_locales
-        reportable_classes_list.each do |klass|
-          klass = klass.safe_constantize
-          fields = klass.translatable_fields_list
-          soft_deletable = klass.column_names.include?("deleted_at")
-          resources = soft_deletable ? klass.where(deleted_at: nil) : klass.all
-          existing_reports = Decidim::TranslationAddons::Report.where(decidim_resource_id: resources.map(&:id),
-                                                                      decidim_resource_type: klass.name).each_with_object({}) do |report, hash|
-            resource_id = report.decidim_resource_id
-            field_name = report.field_name
-            locale = report.locale
-            hash[resource_id.to_s] ||= {}
-            hash[resource_id.to_s][field_name] ||= {}
-            hash[resource_id.to_s][field_name][locale] = true
-          end
+      reportable_classes_list.each do |klass|
+        klass = klass.safe_constantize
+        fields = klass.translatable_fields_list
+        soft_deletable = klass.column_names.include?("deleted_at")
+        resources = soft_deletable ? klass.where(deleted_at: nil) : klass.all
+        existing_reports = Decidim::TranslationAddons::Report.where(decidim_resource_id: resources.map(&:id), decidim_user_id: admin_user.id,
+                                                                    decidim_resource_type: klass.name).each_with_object({}) do |report, hash|
+          resource_id = report.decidim_resource_id
+          field_name = report.field_name
+          locale = report.locale
+          hash[resource_id.to_s] ||= {}
+          hash[resource_id.to_s][field_name] ||= {}
+          hash[resource_id.to_s][field_name][locale] = true
+        end
+        organizations.each do |org|
+          available_locales = org.available_locales
           resources.each do |resource|
             next if resource.organization.id != org.id
 
