@@ -21,6 +21,13 @@ module Decidim
       field :weight, GraphQL::Types::Int, "The order of this result", null: false
       field :external_id, GraphQL::Types::String, "The external ID for this result", null: true
 
+      field :address, GraphQL::Types::String, "The physical address (location) of this result", null: true
+      field :coordinates, Decidim::Core::CoordinatesType, "Physical coordinates for this result", null: true
+
+      def coordinates
+        [object.latitude, object.longitude]
+      end
+
       field :children, [Decidim::Accountability::ResultType, { null: true }], "The children's results", null: true
       field :parent, Decidim::Accountability::ResultType, "The parent result", null: true
       field :status, Decidim::Accountability::StatusType, "The status for this result", null: true
