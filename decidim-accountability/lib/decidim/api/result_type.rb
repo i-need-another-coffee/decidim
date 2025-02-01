@@ -3,8 +3,12 @@
 module Decidim
   module Accountability
     class ResultType < Decidim::Api::Types::BaseObject
-      implements Decidim::Core::TaxonomizableInterface
       implements Decidim::Comments::CommentableInterface
+      implements Decidim::Core::AttachableInterface
+      implements Decidim::Core::LocalizableInterface
+      implements Decidim::Core::TaxonomizableInterface
+      implements Decidim::Core::TimestampsInterface
+      implements Decidim::Core::TraceableInterface
 
       description "A result"
 
@@ -15,18 +19,9 @@ module Decidim
       field :start_date, Decidim::Core::DateType, "The start date for this result", null: true
       field :end_date, Decidim::Core::DateType, "The end date for this result", null: true
       field :progress, GraphQL::Types::Float, "The progress for this result", null: true
-      field :created_at, Decidim::Core::DateTimeType, "When this result was created", null: true
-      field :updated_at, Decidim::Core::DateTimeType, "When this result was updated", null: true
       field :children_count, GraphQL::Types::Int, "The number of children results", null: true
       field :weight, GraphQL::Types::Int, "The order of this result", null: false
       field :external_id, GraphQL::Types::String, "The external ID for this result", null: true
-
-      field :address, GraphQL::Types::String, "The physical address (location) of this result", null: true
-      field :coordinates, Decidim::Core::CoordinatesType, "Physical coordinates for this result", null: true
-
-      def coordinates
-        [object.latitude, object.longitude]
-      end
 
       field :children, [Decidim::Accountability::ResultType, { null: true }], "The children's results", null: true
       field :parent, Decidim::Accountability::ResultType, "The parent result", null: true

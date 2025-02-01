@@ -3,8 +3,12 @@
 module Decidim
   module Budgets
     class ProjectType < Decidim::Api::Types::BaseObject
-      implements Decidim::Core::TaxonomizableInterface
       implements Decidim::Core::AttachableInterface
+      implements Decidim::Core::FollowableInterface
+      implements Decidim::Core::LocalizableInterface
+      implements Decidim::Core::TaxonomizableInterface
+      implements Decidim::Core::TimestampsInterface
+
       implements Decidim::Comments::CommentableInterface
 
       description "A project"
@@ -14,8 +18,6 @@ module Decidim
       field :description, Decidim::Core::TranslatedFieldType, "The description for this project", null: true
       field :budget_amount, GraphQL::Types::Int, "The budget amount for this project", null: true, camelize: false
       field :selected, GraphQL::Types::Boolean, "Whether this proposal is selected or not", method: :selected?, null: true
-      field :created_at, Decidim::Core::DateTimeType, "When this project was created", null: true
-      field :updated_at, Decidim::Core::DateTimeType, "When this project was updated", null: true
       field :reference, GraphQL::Types::String, "The reference for this project", null: true
 
       def self.authorized?(object, context)
