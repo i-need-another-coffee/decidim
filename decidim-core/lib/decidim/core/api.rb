@@ -77,6 +77,8 @@ module Decidim
     autoload :TraceableInterface, "decidim/api/interfaces/traceable_interface"
     autoload :TimestampsInterface, "decidim/api/interfaces/timestamps_interface"
     autoload :EndorsableInterface, "decidim/api/interfaces/endorsable_interface"
+    autoload :LocalizableInterface, "decidim/api/interfaces/localizable_interface"
+    autoload :FollowableInterface, "decidim/api/interfaces/followable_interface"
 
     autoload :DateTimeType, "decidim/api/scalars/date_time_type"
     autoload :DateType, "decidim/api/scalars/date_type"
