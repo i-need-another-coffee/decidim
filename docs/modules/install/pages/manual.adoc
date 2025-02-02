@@ -4,7 +4,7 @@ In order to develop on decidim, you will need:
 
 * *Git* 2.34+
 * *PostgreSQL* 14.5+
-* *Ruby* 3.1.1
+* *Ruby* 3.3.4
 * *NodeJS* 18.17.x
 * *Npm* 9.6.x
 * *ImageMagick*
@@ -27,14 +27,14 @@ First, we are going to install https://github.com/rbenv/rbenv[rbenv], for managi
 [source,bash]
 ----
 sudo apt update
-sudo apt install -y build-essential curl git libssl-dev zlib1g-dev
+sudo apt install -y build-essential curl git libssl-dev zlib1g-dev libffi-dev libyaml-dev libreadline6-dev
 git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
 echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 source ~/.bashrc
 git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-rbenv install 3.1.1
-rbenv global 3.1.1
+rbenv install 3.3.4
+rbenv global 3.3.4
 ----
 
 == 2. Installing PostgreSQL
@@ -49,7 +49,16 @@ sudo -u postgres psql -c "CREATE USER decidim_app WITH SUPERUSER CREATEDB NOCREA
 
 You need to change the password (in this example is "thepassword") and save it somewhere to configure it later with the application.
 
-== 3. Installing Node.js
+== 3. Installing Redis
+
+Now we are going to install redis server to help us with Asynchronous jobs like emails.
+
+[source, bash]
+----
+sudo apt install -y redis-server
+----
+
+== 4. Installing Node.js
 
 An important component for Decidim is Node.js and Yarn. With this commands you will install them:
 
@@ -58,13 +67,37 @@ An important component for Decidim is Node.js and Yarn. With this commands you w
 sudo mkdir -p /etc/apt/keyrings
 curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
 echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_18.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
-sudo apt-get update && sudo apt-get install -y nodejs
+sudo apt-get update && sudo apt autoremove && sudo apt-get install -y nodejs
 curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | sudo tee /usr/share/keyrings/yarnkey.gpg >/dev/null
 echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 sudo apt-get update && sudo apt-get install -y yarn
 ----
 
-== 4. Installing Decidim
+[NOTE]
+
+If you get an error like like the one below:
+
+[source, bash]
+----
+After this operation, 186 MB of additional disk space will be used.
+(Reading database ... 139373 files and directories currently installed.)
+Preparing to unpack .../nodejs_18.20.6-1nodesource1_amd64.deb ...
+Unpacking nodejs (18.20.6-1nodesource1) over (12.22.9~dfsg-1ubuntu3.6) ...
+dpkg: error processing archive /var/cache/apt/archives/nodejs_18.20.6-1nodesource1_amd64.deb (--unpack):
+ trying to overwrite '/usr/share/systemtap/tapset/node.stp', which is also in package libnode72:amd64 12.22.9~dfsg-1ubuntu3.6
+Errors were encountered while processing:
+ /var/cache/apt/archives/nodejs_18.20.6-1nodesource1_amd64.deb
+needrestart is being skipped since dpkg has failed
+E: Sub-process /usr/bin/dpkg returned an error code (1)
+----
+
+You can fix it by running
+[source, bash]
+----
+sudo apt remove libnode72 nodejs
+----
+
+== 5. Installing Decidim
 
 Next, we need to install the `decidim` gem with its dependencies:
 
@@ -122,7 +155,7 @@ Be careful where you put the `.rbenv-vars` file, as if you put it in the same fo
 echo -e "\n\n# Ignore environment variables\n.rbenv-vars" >> .gitignore
 ----
 
-== 6. Initializing your app for local development
+== 6.1. Initializing your app for local development
 
 [NOTE]
 ====
@@ -138,6 +171,38 @@ bin/rails db:seed
 ----
 
 This will also create some default data so you can start testing the app, with an administrator account with email admin@example.org and password `decidim123456789`
+
+== 6.2. Initializing your application for production environment
+
+=== 6.2.1. Additional environment variables
+Assuming that you will not mix production with development environment, you may want to export the following env variables to your system:
+[source,bash]
+----
+sudo vim /etc/environment
+----
+
+then add to your file
+
+----
+RAILS_ENV=production
+NODE_ENV=production
+BUNDLE_WITHOUT=development:test
+----
+
+Run to get the new environment variables.
+
+----
+source /etc/environment
+----
+
+=== 6.2.2. Creating your secret_key_base
+
+Any Rails application needs a `secret_key_base` parameter that is used to encrypt the session and the cookies. Run the below command to get a very long string, that you will need to add to your .rbenv-vars file under `SECRET_KEY_BASE` environment variable.
+
+[source,bash]
+----
+./bin/rails secret
+----
 
 == 7. Start your web server
 
