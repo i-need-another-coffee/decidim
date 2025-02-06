@@ -13,7 +13,6 @@ module Decidim
       def coordinates
         [object.latitude, object.longitude]
       end
-
     end
   end
 end
