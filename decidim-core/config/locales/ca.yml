@@ -496,6 +496,8 @@ ca:
             dummy_step_attribute1: Atribut de fase de prova 1
             dummy_step_attribute2: Atribut de fase de prova 2
             dummy_step_translatable_text: Text de fase traduïble de proves
+      pagination:
+        page_title: "%{component_name} - Pàgina %{current_page} de %{total_pages}"
     contact: Contacte
     content_blocks:
       announcement:
@@ -1421,6 +1423,8 @@ ca:
       create:
         error: S'ha produït un error en denunciar el contingut. Si us plau, torna-ho a intentar.
         success: El contingut s'ha denunciat amb èxit i serà revisat per una administradora.
+      parent_hidden:
+        report_details: El recurs principal estava amagat
     resource_endorsements:
       create:
         error: S'ha produït un error durant l'acció d'adhesió.
@@ -1624,11 +1628,11 @@ ca:
     failure:
       already_authenticated: Ja has iniciat la sessió.
       inactive: El teu compte encara no està activat.
-      invalid: El %{authentication_keys} o la contrasenya no són vàlids.
+      invalid: L'%{authentication_keys} o la contrasenya no són vàlids.
       invited: Tens una invitació pendent, accepta-la per acabar de crear el teu compte.
       last_attempt: Tens un intent més abans que el teu compte es bloquegi.
       locked: El teu compte està bloquejat.
-      not_found_in_database: El %{authentication_keys} o la contrasenya no són vàlids.
+      not_found_in_database: L'%{authentication_keys} o la contrasenya no són vàlids.
       timeout: La teva sessió ha expirat. Si us plau, torna a iniciar-la per continuar.
       unauthenticated: Cal iniciar sessió o crear un compte abans de continuar.
     invitations:
@@ -1674,7 +1678,7 @@ ca:
       invite_collaborator:
         subject: T'han convidat a col·laborar a %{organization}
       invite_private_user:
-        subject: T'han convidat a participar en un procés participatiu privat a%{organization}
+        subject: T'han convidat a participar en un espai de participació privat a%{organization}
       organization_admin_invitation_instructions:
         subject: T'han convidat a administrar %{organization}
       password_change:

@@ -496,6 +496,8 @@ es:
             dummy_step_attribute1: Atributo de fase de prueba 1
             dummy_step_attribute2: Atributo de fase de prueba 2
             dummy_step_translatable_text: Fase de ejemplo traducible
+      pagination:
+        page_title: "%{component_name} - Página %{current_page} de %{total_pages}"
     contact: Contacto
     content_blocks:
       announcement:
@@ -1421,6 +1423,8 @@ es:
       create:
         error: Se ha producido un error al denunciar el contenido. Por favor, inténtalo otra vez.
         success: El contenido se ha denunciado con éxito y será revisado por una administradora.
+      parent_hidden:
+        report_details: El recurso principal estaba oculto
     resource_endorsements:
       create:
         error: Se ha producido un error durante la acción de adhesión.
@@ -1674,7 +1678,7 @@ es:
       invite_collaborator:
         subject: Te han invitado a colaborar en %{organization}
       invite_private_user:
-        subject: Te han invitado a participar en un proceso participativo privado en %{organization}
+        subject: Te han invitado a participar en un espacio de participación privado en %{organization}
       organization_admin_invitation_instructions:
         subject: Te han invitado a administrar %{organization}
       password_change:

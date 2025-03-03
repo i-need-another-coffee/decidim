@@ -499,6 +499,8 @@ en:
             dummy_step_attribute1: Dummy Step Attribute 1
             dummy_step_attribute2: Dummy Step Attribute 2
             dummy_step_translatable_text: Dummy Step Translatable Text
+      pagination:
+        page_title: "%{component_name} - Page %{current_page} of %{total_pages}"
     contact: Contact
     content_blocks:
       announcement:
@@ -1430,6 +1432,8 @@ en:
       create:
         error: An error ocurred while creating the report. Please, try it again.
         success: The report has been created successfully and it will be reviewed by an admin.
+      parent_hidden:
+        report_details: The parent resource was hidden
     resource_endorsements:
       create:
         error: There was a problem during the endorsement action.

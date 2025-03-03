@@ -499,6 +499,8 @@ de:
             dummy_step_attribute1: Dummy-Schritt-Attribut 1
             dummy_step_attribute2: Dummy-Schritt-Attribut 2
             dummy_step_translatable_text: Übersetzbarer Blindtext des Schritts
+      pagination:
+        page_title: "%{component_name} - Seite %{current_page} von %{total_pages}"
     contact: Kontakt
     content_blocks:
       announcement:
@@ -1426,6 +1428,8 @@ de:
       create:
         error: Beim Erstellen des Berichts ist ein Fehler aufgetreten. Bitte, versuche es noch einmal.
         success: Der Bericht wurde erfolgreich erstellt und wird von einem Administrator überprüft.
+      parent_hidden:
+        report_details: Die übergeordnete Ressource wurde ausgeblendet
     resource_endorsements:
       create:
         error: Bei der Befürwortung ist ein Fehler aufgetreten.

@@ -57,7 +57,7 @@ fr:
         with_participatory_space: Espace participatif
       decidim/user:
         current_password: Mot de passe actuel
-        email: Email
+        email: Courriel
         name: Pseudonyme
         password: Mot de passe
         password_confirmation: Confirmation du mot de passe
@@ -498,6 +498,8 @@ fr:
             dummy_step_attribute1: Attribut d'étape factice 1
             dummy_step_attribute2: Attribut d'étape factice 2
             dummy_step_translatable_text: Texte traduisible de l'étape factice
+      pagination:
+        page_title: "%{component_name} - Page %{current_page} sur %{total_pages}"
     contact: Contact
     content_blocks:
       announcement:
@@ -1419,6 +1421,8 @@ fr:
       create:
         error: Une erreur s'est produite lors de la création du rapport. Veuillez essayer à nouveau.
         success: Le contenu a été signalé, il sera examiné par un administrateur.
+      parent_hidden:
+        report_details: La ressource parente a été masquée
     resource_endorsements:
       create:
         error: Il y a eu un problème lors de l'action de soutien.
