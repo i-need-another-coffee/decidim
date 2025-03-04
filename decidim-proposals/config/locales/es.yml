@@ -398,6 +398,17 @@ es:
         exports:
           proposal_comments: Comentarios
           proposals: Propuestas
+        import_proposals_mailer:
+          notify_failure:
+            body: Hubo un problema al importar propuestas del componente %{origin_component_name} al componente %{target_component_name}.
+            subject: Hubo un error importando propuestas
+          notify_success:
+            added_proposals:
+              one: Se ha importado una propuesta.
+              other: "Se importaron %{count} propuestas."
+            body: Propuestas importadas con éxito del componente %{origin_component_name} al componente %{target_component_name}. Puede revisar los resultados en el panel de
+             administración.
+            subject: Las propuestas se han importado con éxito
         imports:
           help:
             answers: |
@@ -572,7 +583,7 @@ es:
         proposals_imports:
           create:
             invalid: Se ha producido un error al importar las propuestas.
-            success: "%{number} propuestas importadas correctamente."
+            success: El proceso de importación ha comenzado. Te avisaremos cuando haya terminado.
           new:
             create: Importar propuestas
             no_components: No hay otros componentes de propuestas en este espacio participativo desde donde importarlas.
