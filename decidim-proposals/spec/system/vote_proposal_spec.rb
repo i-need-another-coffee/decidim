@@ -26,6 +26,18 @@ describe "Vote Proposal", slow: true do
         find(".card__list#proposals__proposal_#{proposal.id}").click
         expect_page_not_to_include_votes
       end
+
+      it "does not show the exit modal" do
+        visit_component
+        click_on proposal_title
+
+        expect_page_not_to_include_votes
+        expect(page).to have_content("Log in or create an account")
+        page.find(".main-bar__logo a").click
+        expect(page).to have_no_content("Remember you have")
+        expect(page).to have_no_content("Cancel")
+        expect(page).to have_no_content("Continue")
+      end
     end
 
     context "when the user is logged in" do
@@ -247,16 +259,14 @@ describe "Vote Proposal", slow: true do
                      participatory_space: participatory_process)
             end
 
-            it "shows the remaining votes counter" do
+            it "shows the voting rules" do
               visit_component
 
               expect(page).to have_css("#voting-rules")
-              expect(page).to have_css("#remaining-votes-count")
 
               find(".card__list#proposals__proposal_#{proposal.id}").click
 
-              expect(page).to have_css("#voting-rules")
-              expect(page).to have_css("#remaining-votes-count")
+              expect(page).to have_css("#proposal-voting-rules")
             end
           end
 
@@ -291,15 +301,13 @@ describe "Vote Proposal", slow: true do
               find(".card__list#proposals__proposal_#{proposal.id}").click
             end
 
-          it "updates the remaining votes counter" do
-            within ".proposal__aside-vote" do
-              click_on "Vote"
-              expect(page).to have_button("Already voted")
+            it "updates the remaining votes counter" do
+              within ".proposal__aside-vote" do
+                click_on "Vote"
+                expect(page).to have_button("Already voted")
+              end
             end
-
-            expect(page).to have_content("Remaining 9 votes")
           end
-        end
 
           context "when on proposals listing page" do
             before do
@@ -316,24 +324,25 @@ describe "Vote Proposal", slow: true do
         end
 
         context "when the proposal is not voted yet but the user is not authorized" do
-          before do
-            permissions = {
-              vote: {
-                authorization_handlers: {
-                  "dummy_authorization_handler" => { "options" => {} }
+          context "when there is only an authorization required" do
+            before do
+              permissions = {
+                vote: {
+                  authorization_handlers: {
+                    "dummy_authorization_handler" => { "options" => {} }
+                  }
                 }
               }
-            }
 
-            component.update!(permissions:)
-            visit_component
-            find(".card__list#proposals__proposal_#{proposal.id}").click
-          end
-
-          it "shows a modal dialog" do
-            within "#proposal-#{proposal.id}-vote-button" do
-              click_on "Vote"
+              component.update!(permissions:)
+              visit_component
+              find(".card__list#proposals__proposal_#{proposal.id}").click
             end
+
+            it "redirects to the authorization form" do
+              within "#proposal-#{proposal.id}-vote-button" do
+                click_on "Vote"
+              end
 
               expect(page).to have_content("We need to verify your identity")
               expect(page).to have_content("Verify with Example authorization")
@@ -417,8 +426,6 @@ describe "Vote Proposal", slow: true do
                 expect(page).to have_content("0\nVotes")
               end
             end
-
-            expect(page).to have_content("Remaining 10 votes")
           end
         end
 
