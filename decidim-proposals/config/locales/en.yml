@@ -106,9 +106,6 @@ en:
         other: Votes
   decidim:
     admin:
-      admin_log:
-        changeset:
-          proposals: Proposals
       filters:
         proposals:
           category_id_eq:
@@ -757,24 +754,6 @@ en:
         exit: Continue
         message: You have to give %{number} more votes between different proposals for your votes to be taken into account.
         title: Remember you have %{number} votes left
-      forms:
-        errors:
-          device_not_supported: Your device does not support location services. Please enter the address manually.
-          no_device_location: Sorry, we could not detect your location. Please enter the address manually.
-        use_my_location: Use my current location
-      invite_coauthors:
-        cancel:
-          error: There was a problem canceling the co-author invitation.
-          success: Co-author invitation successfully canceled.
-        create:
-          error: There was a problem inviting the co-author.
-          success: "%{author_name} successfully invited as a co-author."
-        destroy:
-          error: There was a problem declining the invitation.
-          success: The invitation has been declined.
-        update:
-          error: There was a problem accepting the invitation.
-          success: The invitation has been accepted.
       last_activity:
         new_proposal: 'New proposal:'
         proposal_updated: 'Proposal updated:'

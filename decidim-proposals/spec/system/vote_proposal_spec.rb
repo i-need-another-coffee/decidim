@@ -345,7 +345,7 @@ describe "Vote Proposal", slow: true do
               end
 
               expect(page).to have_content("In order to perform this action, you need to be authorized with")
-              expect(page).to have_content(%(Authorize with \"Example authorization\"))
+              expect(page).to have_content(%(Authorize with "Example authorization"))
             end
           end
 
@@ -372,7 +372,7 @@ describe "Vote Proposal", slow: true do
 
               expect(page).to have_content("In order to perform this action, you need to be authorized with")
               within "#authorizationModal" do
-                expect(page).to have_css("a[button]", count: 2)
+                expect(page).to have_css(".button", count: 2)
               end
             end
           end
