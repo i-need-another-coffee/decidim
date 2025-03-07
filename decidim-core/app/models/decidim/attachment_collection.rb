@@ -13,6 +13,8 @@ module Decidim
 
     default_scope { order(arel_table[:weight].asc) }
 
+    delegate :organization, to: :collection_for
+
     def unused?
       attachments.empty?
     end

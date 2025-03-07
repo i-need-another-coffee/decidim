@@ -5,6 +5,7 @@ module Decidim
     class ResultType < Decidim::Api::Types::BaseObject
       implements Decidim::Comments::CommentableInterface
       implements Decidim::Core::AttachableInterface
+      implements Decidim::Core::AttachableCollectionInterface
       implements Decidim::Core::LocalizableInterface
       implements Decidim::Core::TaxonomizableInterface
       implements Decidim::Core::TimestampsInterface

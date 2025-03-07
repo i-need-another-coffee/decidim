@@ -2,6 +2,8 @@
 
 require "spec_helper"
 require "decidim/api/test/type_context"
+require "decidim/core/test/shared_examples/traceable_interface_examples"
+require "decidim/core/test/shared_examples/timestamps_interface_examples"
 
 module Decidim
   module Accountability
@@ -9,6 +11,9 @@ module Decidim
       include_context "with a graphql class type"
 
       let(:model) { create(:timeline_entry) }
+
+      include_examples "traceable interface"
+      include_examples "timestamps interface"
 
       describe "id" do
         let(:query) { "{ id }" }
