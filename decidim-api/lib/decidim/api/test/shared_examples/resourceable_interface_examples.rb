@@ -4,8 +4,6 @@ require "spec_helper"
 
 shared_examples_for "resourceable interface" do
   describe "resources" do
-    # let(:query) { "{ reference }" }
-
     it "has resources" do
       pending "Not yet implemented"
     end

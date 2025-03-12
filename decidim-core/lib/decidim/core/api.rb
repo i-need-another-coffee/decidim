@@ -82,6 +82,9 @@ module Decidim
     autoload :LocalizableInterface, "decidim/api/interfaces/localizable_interface"
     autoload :FollowableInterface, "decidim/api/interfaces/followable_interface"
 
+    autoload :ResourceableInterface, "decidim/api/interfaces/resourceable_interface"
+    autoload :ReferenceableInterface, "decidim/api/interfaces/referenceable_interface"
+
     autoload :DateTimeType, "decidim/api/scalars/date_time_type"
     autoload :DateType, "decidim/api/scalars/date_type"
   end
