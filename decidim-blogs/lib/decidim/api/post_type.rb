@@ -11,6 +11,7 @@ module Decidim
       implements Decidim::Core::TraceableInterface
       implements Decidim::Core::EndorsableInterface
       implements Decidim::Core::TimestampsInterface
+      implements Decidim::Core::ResourceableInterface
 
       description "A post"
 

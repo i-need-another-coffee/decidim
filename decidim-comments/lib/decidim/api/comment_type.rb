@@ -13,6 +13,7 @@ module Decidim
       field :already_reported, GraphQL::Types::Boolean, "Check if the current user has reported the comment", null: false
       field :author, Decidim::Core::AuthorInterface, "The resource author", null: false
       field :body, GraphQL::Types::String, "The comment message", null: false, method: :translated_body
+      field :depth, GraphQL::Types::Integer, "The position of the comment", null: false
       field :down_voted, GraphQL::Types::Boolean, "Check if the current user has downvoted the comment", null: false
       field :down_votes, GraphQL::Types::Int, "The number of comment's downVotes", null: false, method: :down_votes_count
       field :formatted_body, GraphQL::Types::String, "The comment message ready to display (it is expected to include HTML)", null: false

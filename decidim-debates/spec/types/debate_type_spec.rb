@@ -12,7 +12,15 @@ module Decidim
       let(:organization) { model.organization }
 
       include_examples "taxonomizable interface"
+      include_examples "attachable interface"
       include_examples "authorable interface"
+      include_examples "traceable interface"
+      include_examples "timestamps interface"
+      include_examples "commentable interface"
+      include_examples "reference interface"
+      include_examples "followable interface"
+      include_examples "endorsable interface"
+      include_examples "resourceable interface"
 
       describe "id" do
         let(:query) { "{ id }" }
@@ -67,30 +75,6 @@ module Decidim
 
         it "returns the date when the debate ends" do
           expect(response["endTime"]).to eq(model.end_time.to_time.iso8601)
-        end
-      end
-
-      describe "createdAt" do
-        let(:query) { "{ createdAt }" }
-
-        it "returns when the debate was created" do
-          expect(response["createdAt"]).to eq(model.created_at.to_time.iso8601)
-        end
-      end
-
-      describe "updatedAt" do
-        let(:query) { "{ updatedAt }" }
-
-        it "returns when the debate was updated" do
-          expect(response["updatedAt"]).to eq(model.updated_at.to_time.iso8601)
-        end
-      end
-
-      describe "reference" do
-        let(:query) { "{ reference }" }
-
-        it "returns all the required fields" do
-          expect(response).to include("reference" => model.reference.to_s)
         end
       end
 

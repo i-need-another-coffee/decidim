@@ -3,10 +3,29 @@
 module Decidim
   module Debates
     class DebateType < Decidim::Api::Types::BaseObject
+      implements Decidim::Core::AttachableInterface
       implements Decidim::Core::TaxonomizableInterface
       implements Decidim::Comments::CommentableInterface
       implements Decidim::Core::AuthorableInterface
       implements Decidim::Core::TimestampsInterface
+      implements Decidim::Core::FollowableInterface
+      implements Decidim::Core::EndorsableInterface
+      implements Decidim::Core::ReferenceableInterface
+      implements Decidim::Core::TraceableInterface
+      implements Decidim::Core::ResourceableInterface
+
+      # include Decidim::HasComponent
+      # include Decidim::HasCategory
+      # include Decidim::Resourceable
+      # include Decidim::Comments::CommentableWithComponent
+      # include Decidim::Comments::HasAvailabilityAttributes
+      # include Decidim::Reportable
+      # include Decidim::HasReference
+      # include Decidim::Loggable
+      # include Decidim::NewsletterParticipant
+      # include Decidim::TranslatableResource
+      # include Decidim::Randomable
+      # include Decidim::FilterableResource
 
       description "A debate"
 
