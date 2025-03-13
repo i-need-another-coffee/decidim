@@ -8,7 +8,6 @@ module Decidim
       implements Decidim::Core::TaxonomizableInterface
       implements Decidim::Core::ResourceableInterface
 
-
       description "A budget"
 
       field :description, Decidim::Core::TranslatedFieldType, "The description for this budget", null: false
@@ -17,7 +16,6 @@ module Decidim
       field :title, Decidim::Core::TranslatedFieldType, "The title for this budget", null: false
       field :total_budget, GraphQL::Types::Int, "The total budget", null: false, camelize: false
       field :weight, GraphQL::Types::Int, "The weight for this budget", null: false
-
 
       def self.authorized?(object, context)
         super && object.visible?

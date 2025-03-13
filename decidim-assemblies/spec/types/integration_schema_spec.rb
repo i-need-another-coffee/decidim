@@ -15,14 +15,6 @@ describe "Decidim::Api::QueryType" do
 
   let(:assembly_data) do
     {
-      "area" => nil,
-      "assemblyType" => {
-        "assemblies" => assembly.assembly_type.assemblies.map { |a| { "id" => a.id.to_s } },
-        "createdAt" => assembly.assembly_type.created_at.to_time.iso8601,
-        "id" => assembly.assembly_type.id.to_s,
-        "title" => { "translation" => assembly.assembly_type.title[locale] },
-        "updatedAt" => assembly.assembly_type.updated_at.to_time.iso8601
-      },
       "attachments" => [],
       "categories" => [],
       "children" => [],
@@ -75,33 +67,6 @@ describe "Decidim::Api::QueryType" do
   let(:assemblies) do
     %(
       assemblies{
-        area {
-          id
-          areaType {
-            id
-            name{
-              translation(locale:"#{locale}")
-            }
-            plural{
-              translation(locale:"#{locale}")
-            }
-          }
-          name{
-            translation(locale:"#{locale}")
-          }
-          updatedAt
-        }
-        assemblyType {
-          id
-          assemblies {
-            id
-          }
-          createdAt
-          title{
-            translation(locale:"#{locale}")
-          }
-          updatedAt
-        }
         attachments {
           thumbnail
         }
@@ -248,33 +213,6 @@ describe "Decidim::Api::QueryType" do
     let(:assemblies) do
       %(
       assembly(id: #{assembly.id}){
-        area {
-          id
-          areaType {
-            id
-            name{
-              translation(locale:"#{locale}")
-            }
-            plural{
-              translation(locale:"#{locale}")
-            }
-          }
-          name{
-            translation(locale:"#{locale}")
-          }
-          updatedAt
-        }
-        assemblyType {
-          id
-          assemblies {
-            id
-          }
-          createdAt
-          title{
-            translation(locale:"#{locale}")
-          }
-          updatedAt
-        }
         attachments {
           thumbnail
         }
