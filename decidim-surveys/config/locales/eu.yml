@@ -1,3 +1,4 @@
+---
 eu:
   activemodel:
     models:
@@ -36,12 +37,12 @@ eu:
     events:
       surveys:
         survey_closed:
-          email_intro: '%{resource_title} inkesta %{participatory_space_title} itxi egin da.'
+          email_intro: "%{resource_title} inkesta %{participatory_space_title} itxi egin da."
           email_outro: Jakinarazpen hau jaso duzu %{participatory_space_title} jarraitzen ari zarelako. Aurreko estekan sartuz jakinarazpenak jasotzeari utzi ahal diozu.
           email_subject: Inkesta bat itxi da %{participatory_space_title} espazioan
           notification_title: <a href="%{resource_path}">%{resource_title}</a> inkesta <a href="%{participatory_space_url}">%{participatory_space_title}</a> espazioan amaitu da.
         survey_opened:
-          email_intro: '%{resource_title} inkesta ireki da %{participatory_space_title} espazioan. Orri honetan parte har dezakezu:'
+          email_intro: "%{resource_title} inkesta ireki da %{participatory_space_title} espazioan. Orri honetan parte har dezakezu:"
           email_outro: Jakinarazpen hau jaso duzu %{participatory_space_title} jarraitzen ari zarelako. Aurreko estekan sartuz jakinarazpenak jasotzeari utzi ahal diozu.
           email_subject: Beste inkesta bat %{participatory_space_title} izeneko espazioan
           notification_title: <a href="%{resource_path}">%{resource_title}</a> inkesta <a href="%{participatory_space_url}">%{participatory_space_title}</a> espazioan irekita dago.
@@ -66,15 +67,15 @@ eu:
         answers:
           index:
             no_answers: Oraindik ez dago erantzunik
-            title: "Guztira %{guztira} erantzun"
+            title: Guztira %{guztira} erantzun
           show:
-            title: '#%{number} erantzun'
+            title: "#%{number} erantzun"
         exports:
           survey_user_answers: Inkestako parte-hartzaileen erantzunak
         publish_answers:
           index:
             answers:
-              one: "Erantzun bat"
+              one: Erantzun bat
               other: "%{count} erantzun"
             description: |-
               Galderen erantzunak argitaratzean, jendaurrean ikusgai jarriko dituzu.
@@ -139,7 +140,7 @@ eu:
       survey_confirmation_mailer:
         confirmation:
           body: Zuzen erantzun duzu %{participatory_space} espazioko %{questionnaire_title} inkesta
-          subject: '%{questionnaire_title} galdetegiaren erantzun-baieztapena'
+          subject: "%{questionnaire_title} galdetegiaren erantzun-baieztapena"
         export_name: Inkestaren erantzunak
       surveys:
         answer:
@@ -148,7 +149,7 @@ eu:
           success: Inkesta ondo bete da.
         count:
           surveys_count:
-            one: "Inkesta bat"
+            one: Inkesta bat
             other: "%{count} inkesta"
         filters:
           all: Guztiak

@@ -1,3 +1,4 @@
+---
 bg:
   activemodel:
     attributes:
@@ -47,13 +48,13 @@ bg:
             empty: Все още няма отговори
             export:
               answer:
-                title: 'Отговор № %{number}'
+                title: Отговор № %{number}
             export_response:
               title: survey_user_answers_%{token}
             index:
-              title: "Общ брой отговори: %{total}"
+              title: Общ брой отговори: %{total}
             show:
-              title: 'Отговор № %{number}'
+              title: Отговор № %{number}
           display_condition:
             answer_option: Възможност за отговор
             condition_question: Въпрос

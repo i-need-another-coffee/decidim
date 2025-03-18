@@ -1,3 +1,4 @@
+---
 eu:
   activemodel:
     attributes:
@@ -85,7 +86,7 @@ eu:
           title: Izenburua
         index:
           count:
-            one: "Argitalpen %{count}"
+            one: Argitalpen %{count}
             other: "%{count} argitalpen"
           empty: Oraindik ez dago argitalpenik.
           new_post: Beste sarrera bat

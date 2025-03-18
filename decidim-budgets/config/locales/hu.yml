@@ -1,3 +1,4 @@
+---
 hu:
   activemodel:
     attributes:
@@ -86,7 +87,7 @@ hu:
             select_for_implementation: Kijelölés megvalósításra
             selected: Kiválasztva
             selected_options:
-              'yes': 'Igen'
+              'yes': Igen
             title: Projektek
             update: Frissítés
             update_budget_button: A projekt költségvetésének frissítése
@@ -246,7 +247,7 @@ hu:
         project_filter:
           added: Hozzáadva
           all: Összes
-        projects_for: '%{name} projektek'
+        projects_for: "%{name} projektek"
         select_projects: Projektek kiválasztása
         show:
           budget: Költségvetés

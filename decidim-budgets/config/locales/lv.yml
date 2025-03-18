@@ -1,3 +1,4 @@
+---
 lv:
   activemodel:
     attributes:
@@ -8,9 +9,9 @@ lv:
   activerecord:
     models:
       decidim/budgets/project:
-        zero: Projekti
         one: Projekts
         other: Projekti
+        zero: Projekti
   decidim:
     budgets:
       actions:
@@ -73,9 +74,9 @@ lv:
             title: Balsojums par budžetu pabeigts
         count:
           projects_count:
-            zero: "%{count} projekti"
             one: 1 projekts
             other: "%{count} projekti"
+            zero: "%{count} projekti"
         filters:
           search: Meklēt
         orders:

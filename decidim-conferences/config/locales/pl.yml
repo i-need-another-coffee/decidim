@@ -1,3 +1,4 @@
+---
 pl:
   activemodel:
     attributes:
@@ -75,19 +76,19 @@ pl:
   activerecord:
     models:
       decidim/conference:
-        one: Konferencja
         few: Konferencje
         many: Konferencje
+        one: Konferencja
         other: Konferencje
       decidim/conference_speaker:
-        one: Prelegent konferencyjny
         few: Prelegenci konferencyjni
         many: Prelegenci konferencyjni
+        one: Prelegent konferencyjny
         other: Prelegenci konferencyjni
       decidim/conference_user_role:
-        one: Rola użytkownika konferencyjnego
         few: Role użytkowników konferencyjnych
         many: Role użytkowników konferencyjnych
+        one: Rola użytkownika konferencyjnego
         other: Role użytkowników konferencyjnych
   decidim:
     admin:
@@ -306,7 +307,7 @@ pl:
           update: "%{user_name} zaktualizował(a) partnera %{resource_name} w konferencji %{space_name}"
         registration_type:
           create: "%{user_name} utworzył(a) typ rejestracji %{resource_name} w konferencji %{space_name}"
-          delete: "Użytkownik %{user_name} usunął typ rejestracji %{resource_name} z konferencji %{space_name}"
+          delete: Użytkownik %{user_name} usunął typ rejestracji %{resource_name} z konferencji %{space_name}
           publish: "%{user_name} opublikował(a) typ rejestracji %{resource_name} w konferencji %{space_name}"
           unpublish: "%{user_name} cofnął/cofnęła publikację typu rejestracji %{resource_name} w konferencji %{space_name}"
           update: "%{user_name} zaktualizował(a) typ rejestracji %{resource_name} w konferencji %{space_name}"
@@ -357,9 +358,9 @@ pl:
           form:
             available_slots_help: Pozostaw 0, jeśli masz dostęp do nieograniczonej liczby miejsc.
             registrations_count:
-              one: Była 1 rejestracja.
               few: Było %{count} rejestracji.
               many: Było %{count} rejestracji.
+              one: Była 1 rejestracja.
               other: Było %{count} rejestracji.
             slug_help_html: 'Slugi URL wykorzystuje się do generowania adresów URL odsyłających do tej konferencji. Można używać jedynie liter, cyfr i łączników, przy czym należy rozpocząć od litery. Przykład: %{url}'
         content_blocks:
@@ -372,7 +373,7 @@ pl:
           invite:
             decline: Odrzuć zaproszenie "%{conference_title}"
             invited_existing_user_to_join_a_conference: "%{invited_by} zaprosił(a) Cię do udziału w konferencji %{application}. Możesz odrzucić lub zaakceptować zaproszenie korzystając z poniższych linków."
-            invited_user_to_join_a_conference: "Użytkownik %{invited_by} zaprosił Cię do udziału w konferencji w %{application}. Możesz to zaakceptować za pomocą poniższego linku."
+            invited_user_to_join_a_conference: Użytkownik %{invited_by} zaprosił Cię do udziału w konferencji w %{application}. Możesz to zaakceptować za pomocą poniższego linku.
             registration: Rejestracja na "%{conference_title}"
         partners:
           index:
@@ -436,9 +437,9 @@ pl:
       conference_speakers:
         index:
           speakers:
-            one: Mówca
             few: Prelegenci
             many: Prelegenci
+            one: Mówca
             other: Mówcy
       conferences:
         partners:
@@ -574,9 +575,9 @@ pl:
           promoted_conferences: Wyróżnione konferencje
         order_by_conferences:
           conferences:
-            one: "%{count} konferencja"
             few: "%{count} konferencji"
             many: "%{count} konferencji"
+            one: "%{count} konferencja"
             other: "%{count} konferencji"
       conferences_nav:
         conference_partners_menu_item: Partnerzy

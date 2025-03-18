@@ -1,3 +1,4 @@
+---
 lv:
   activemodel:
     attributes:
@@ -50,17 +51,17 @@ lv:
   activerecord:
     models:
       decidim/participatory_process:
-        zero: Līdzdalības procesi
         one: Līdzdalības process
         other: Līdzdalības procesi
+        zero: Līdzdalības procesi
       decidim/participatory_process_group:
-        zero: Līdzdalības procesa grupas
         one: Līdzdalības procesa grupa
         other: Līdzdalības procesa grupas
+        zero: Līdzdalības procesa grupas
       decidim/participatory_process_step:
-        zero: Fāzes
         one: Fāze
         other: Fāzes
+        zero: Fāzes
   decidim:
     admin:
       actions:
@@ -250,12 +251,12 @@ lv:
           email_subject: Jūs esat norīkots par %{role} asamblejā “%{resource_title}”.
           notification_title: Jūs esat norīkots par %{role} līdzdalības procesā <a href="%{resource_url}">%{resource_title}</a>.
         step_activated:
-          email_intro: '%{resource_title} fāze tagad ir aktīva līdzdalības procesā %{participatory_space_title}. To var redzēt šajā lapā:'
+          email_intro: "%{resource_title} fāze tagad ir aktīva līdzdalības procesā %{participatory_space_title}. To var redzēt šajā lapā:"
           email_outro: Jūs saņēmāt šo paziņojumu, jo sekojat %{participatory_space_title}. Jūs varat atteikties no paziņojumu saņemšanas, sekojot iepriekšējai saitei.
           email_subject: Atjaunināts %{participatory_space_title}
           notification_title: '%{resource_title} fāze tagad ir aktīva <a href="%{resource_path}">%{participatory_space_title}</a>'
         step_changed:
-          email_intro: '%{resource_title} fāzes datumi līdzdalības procesam %{participatory_space_title} ir atjaunināti. To var redzēt šajā lapā:'
+          email_intro: "%{resource_title} fāzes datumi līdzdalības procesam %{participatory_space_title} ir atjaunināti. To var redzēt šajā lapā:"
           email_outro: Jūs saņēmāt šo paziņojumu, jo sekojat %{participatory_space_title}. Jūs varat atteikties no paziņojumu saņemšanas, sekojot iepriekšējai saitei.
           email_subject: Atjaunināts %{participatory_space_title}
           notification_title: <a href="%{resource_path}">%{resource_title}</a> fāzes datumi līdzdalības procesam <a href="%{participatory_space_url}">%{activatory_space_title}</a> ir atjaunināti.
@@ -310,17 +311,17 @@ lv:
         filters:
           counters:
             active:
-              zero: "%{count} aktīvie procesi"
               one: 1 aktīvais process
               other: "%{count} aktīvie procesi"
+              zero: "%{count} aktīvie procesi"
             past:
-              zero: "%{count} agrākie procesi"
               one: viens agrākais process
               other: "%{count} agrākie procesi"
+              zero: "%{count} agrākie procesi"
             upcoming:
-              zero: "%{count} gaidāmie procesi"
               one: viens gaidāmais process
               other: "%{count} gaidāmie procesi"
+              zero: "%{count} gaidāmie procesi"
           explanations:
             no_active_nor_upcoming_callout: Nav ne aktīvu, ne gaidāmu procesu. Šeit ir saraksts ar agrākajiem.
           names:

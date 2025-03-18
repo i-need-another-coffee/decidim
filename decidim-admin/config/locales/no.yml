@@ -1,4 +1,5 @@
-"no":
+---
+'no':
   activemodel:
     attributes:
       area:
@@ -263,7 +264,7 @@
           success: Komponenten ble oppdatert.
       conflicts:
         attempts: Forsøk
-        'false': 'Nei'
+        'false': Nei
         managed_user_name: Håndtert bruker
         solved: Løst
         title: Verifiseringskonflikter
@@ -273,7 +274,7 @@
           reason: Årsak
           success: Overføringen er gjennomført.
           title: Overfør
-        'true': 'Ja'
+        'true': Ja
         user_name: Bruker
       content_blocks:
         create:
@@ -302,13 +303,13 @@
         invitation_accepted_at_present:
           label: Invitasjonen er akseptert
           values:
-            'false': 'Nei'
-            'true': 'Ja'
+            'false': Nei
+            'true': Ja
         last_sign_in_at_present:
           label: Noensinne logget inn
           values:
-            'false': 'Nei'
-            'true': 'Ja'
+            'false': Nei
+            'true': Ja
         moderated_users:
           reports_reason_eq:
             label: Rapporter årsak

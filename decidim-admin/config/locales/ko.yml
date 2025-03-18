@@ -1,3 +1,4 @@
+---
 ko:
   activemodel:
     attributes:
@@ -271,7 +272,7 @@ ko:
           success: 구성요소가 성공적으로 업데이트 되었습니다.
       conflicts:
         attempts: 시도
-        'false': '아니오'
+        'false': 아니오
         managed_user_name: 관리된 사용자
         solved: 해결됨
         title: 인증 충돌 발생
@@ -281,7 +282,7 @@ ko:
           reason: 이유
           success: 현재 전송이 성공적으로 완료되었습니다.
           title: 전송
-        'true': '예'
+        'true': 예
         user_name: 사용자
       content_blocks:
         create:
@@ -302,12 +303,12 @@ ko:
         invitation_accepted_at_present:
           label: 초대 수락됨
           values:
-            'false': '아니오'
-            'true': '예'
+            'false': 아니오
+            'true': 예
         last_sign_in_at_present:
           values:
-            'false': '아니오'
-            'true': '예'
+            'false': 아니오
+            'true': 예
         moderated_users:
           reports_reason_eq:
             values:
@@ -575,7 +576,7 @@ ko:
             button: 모든 비공개 참가자 삭제
             confirm: 모든 비공개 참가자를 삭제하시겠습니까? 이 작업은 취소할 수 없습니다. 복구할 수 없습니다.
             empty: 비공개 참가자가 없습니다.
-            explanation: '%{count} 개의 비공개 참가자가 있습니다.'
+            explanation: "%{count} 개의 비공개 참가자가 있습니다."
             title: 비공개 참가자 삭제
           example_file: '예제 파일:'
       reminders:

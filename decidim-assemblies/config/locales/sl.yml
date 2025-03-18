@@ -1,3 +1,4 @@
+---
 sl:
   activemodel:
     attributes:
@@ -56,20 +57,20 @@ sl:
   activerecord:
     models:
       decidim/assembly:
-        one: Združba
-        two: Združbi
         few: Združb
+        one: Združba
         other: Združb
+        two: Združbi
       decidim/assembly_member:
-        one: Član združbe
-        two: Člana združbe
         few: Člani združbe
+        one: Član združbe
         other: Člani združbe
+        two: Člana združbe
       decidim/assembly_user_role:
-        one: Vloga v združbi
-        two: Vlogi v združbi
         few: Vlog v združbi
+        one: Vloga v združbi
         other: Vlog v združbi
+        two: Vlogi v združbi
   decidim:
     admin:
       actions:
@@ -172,7 +173,7 @@ sl:
           promoted_assemblies: Poudarjene združbe
         order_by_assemblies:
           assemblies:
-            one: "%{count} združba"
-            two: "%{count} združbi"
             few: "%{count} združb"
+            one: "%{count} združba"
             other: "%{count} združb"
+            two: "%{count} združbi"

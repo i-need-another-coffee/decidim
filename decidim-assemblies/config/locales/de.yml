@@ -1,3 +1,4 @@
+---
 de:
   activemodel:
     attributes:
@@ -219,7 +220,7 @@ de:
         publish: "%{user_name} hat das Gremium %{resource_name} veröffentlicht"
         restore: "%{user_name} hat das Gremium %{resource_name} wiederhergestellt"
         soft_delete: "%{user_name} hat das Gremium %{resource_name} in den Papierkorb verschoben"
-        unpublish: "%{user_name} hat das Gremium %{resource_name} auf \"unveröffentlicht\" gesetzt"
+        unpublish: '%{user_name} hat das Gremium %{resource_name} auf "unveröffentlicht" gesetzt'
         update: "%{user_name} hat das Gremium %{resource_name} aktualisiert"
       assembly_member:
         create: "%{user_name} hat das Mitglied %{resource_name} im Gremium %{space_name} erstellt"
@@ -231,7 +232,7 @@ de:
         create: "%{user_name} hat den Gremientyp %{resource_name} erstellt"
         delete: "%{user_name} hat den Gremientyp %{resource_name} entfernt"
         publish: "%{user_name} hat den Gremientyp %{resource_name} veröffentlicht"
-        unpublish: "%{user_name} hat den Gremientyp %{resource_name} auf \"unveröffentlicht\" gesetzt"
+        unpublish: '%{user_name} hat den Gremientyp %{resource_name} auf "unveröffentlicht" gesetzt'
         update: "%{user_name} hat den Gremientyp %{resource_name} aktualisiert"
       assembly_user_role:
         create: "%{user_name} hat %{resource_name} zum Gremium %{space_name} eingeladen"

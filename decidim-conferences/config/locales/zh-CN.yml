@@ -1,3 +1,4 @@
+---
 zh-CN:
   activemodel:
     attributes:
@@ -314,11 +315,11 @@ zh-CN:
       conference_registration_mailer:
         confirmation:
           confirmed_html: 您注册的会议 <a href="%{url}">%{title}</a> 已被确认。
-          details_1: '您注册的会议类型为 %{registration_type} 。它的费用为 %{price} 并且您可以参加以下活动：'
+          details_1: 您注册的会议类型为 %{registration_type} 。它的费用为 %{price} 并且您可以参加以下活动：
           details_2: 您可以在附件中找到会议的详细信息。
         pending_validation:
           confirmation_pending: 您将很快收到确认
-          details: '您已注册到 %{registration_type} 类型，费用为 %{price} 并且您可以参加以下事件：'
+          details: 您已注册到 %{registration_type} 类型，费用为 %{price} 并且您可以参加以下事件：
           pending_html: 您注册的会议 <a href="%{url}">%{title}</a> 正在等待确认。
       conference_registrations:
         create:
@@ -384,7 +385,7 @@ zh-CN:
             active_spaces: 活跃的会议
       registration_types:
         index:
-          choose_an_option: '选择您的注册选项：'
+          choose_an_option: 选择您的注册选项：
           no_registrations: 无注册
           register: 注册
           title: 注册类型
@@ -408,7 +409,7 @@ zh-CN:
         conference_updated:
           email_intro: '"%{resource_title}"会议已更新。您可以从其页面读取新版本：'
           email_outro: 您收到此通知是因为您正在关注“%{resource_title}”会议。您可以从上一个链接取消关注它。
-          email_subject: '“%{resource_title}”会议已更新'
+          email_subject: "“%{resource_title}”会议已更新"
           notification_title: <a href="%{resource_path}">%{resource_title}</a> 会议已更新。
         registrations_enabled:
           email_intro: '"%{resource_title}"会议已启用注册。您可以在其页面上注册：'

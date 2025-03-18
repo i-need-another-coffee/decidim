@@ -1,3 +1,4 @@
+---
 ca:
   activemodel:
     attributes:
@@ -365,7 +366,7 @@ ca:
           reason: Raó
           success: La transferència s'ha completat correctament.
           title: Transferir
-        'true': 'Sí'
+        'true': Sí
         user_name: Usuària
       content_blocks:
         create:
@@ -411,12 +412,12 @@ ca:
           label: 'Invitació: acceptada'
           values:
             'false': 'No'
-            'true': 'Sí'
+            'true': Sí
         last_sign_in_at_present:
           label: Alguna vegada s'ha connectat
           values:
             'false': 'No'
-            'true': 'Sí'
+            'true': Sí
         moderated_users:
           reports_reason_eq:
             label: Motiu de l'informe
@@ -652,7 +653,7 @@ ca:
           fields:
             actions: Accions
             expires_at: Caduca el
-            registered_only: '¿Només per a usuàries registrades?'
+            registered_only: "¿Només per a usuàries registrades?"
             times_used: Cops utilitzat
             token: Enllaç d'accés
         static_page:
@@ -781,7 +782,7 @@ ca:
           has_been_sent_to: 'Ha estat enviat a: '
           not_sent: No enviat
           participants: 'participants '
-          private_members: 'membres privades'
+          private_members: membres privades
           segmented_to: 'Segmentat a %{subject}: '
           subscribed_count: 'Subscrites:'
           title: Butlletins
@@ -962,7 +963,7 @@ ca:
             explanation: Hi ha %{count} participant/s privada/ades.
             title: Esborrar les participants privades
           example_file: 'Fitxer d''exemple:'
-          explanation: 'Carrega el teu arxiu CSV. Ha de tenir dues columnes amb l''adreça de correu electrònic a la primera columna i el nom a la segona de les participants que vulguis afegir a l''espai de participació, sense capçaleres. Evita emprar caràcters invàlids com `<>?%&^*#@()[]=+:;"{}\|` al nom d''usuària.'
+          explanation: Carrega el teu arxiu CSV. Ha de tenir dues columnes amb l'adreça de correu electrònic a la primera columna i el nom a la segona de les participants que vulguis afegir a l'espai de participació, sense capçaleres. Evita emprar caràcters invàlids com `<>?%&^*#@()[]=+:;"{}\|` al nom d'usuària.
           explanation_example: |
             john.doe@example.org%{csv_col_sep}John Doe
             jane.doe@example.org%{csv_col_sep}Jane Doe
@@ -972,8 +973,8 @@ ca:
         create:
           error: Hi ha hagut un problema en crear els recordatoris.
           success:
-            one: "Es recordarà a %{count} usuària."
-            other: "Es recordarà a %{count} usuàries."
+            one: Es recordarà a %{count} usuària.
+            other: Es recordarà a %{count} usuàries.
         new:
           submit: Envia
       resource_permissions:
@@ -1040,9 +1041,9 @@ ca:
           expires_at: Caduca el
           'false': 'No'
           never_expire: Mai
-          registered_only: '¿Només per a usuàries registrades?'
+          registered_only: "¿Només per a usuàries registrades?"
           token: Clau d'accés
-          'true': 'Sí'
+          'true': Sí
         index:
           back_to_share_tokens: Tornar als enllaços d'accés
           copied: Enllaç d'accés copiat!

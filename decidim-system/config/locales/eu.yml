@@ -1,3 +1,4 @@
+---
 eu:
   activemodel:
     attributes:
@@ -19,7 +20,9 @@ eu:
           admin: Administrazio-panelaren MIME motak
           default: MIME motak, lehenetsita
         allowed_file_extensions:
-          admin: "\nAdministrazio-panelaren artxibo-luzapenak"
+          admin: |2-
+
+            Administrazio-panelaren artxibo-luzapenak
           default: Artxibo-luzapenak, erantsita
           image: Irudien artxibo-luzapenak
         maximum_file_size:
@@ -168,7 +171,6 @@ eu:
           default_src_hint: |
             Default-src kanpoko eduki osorako konbentzio lehenetsia da, hala nola, JavaScript, irudiak, CSS, iturriak, dei asinkronikoak, markoak eta multimedia fitxategiak HTML5.
             Plataformak "'self' 'unsafe-inline'" erantsiko du, baina gehiago gehitzeko aukera duzu. Utzi zuriz, ziur ez bazaude.
-
           font_src: Font src
           font_src_hint: |
             font-src ereduko direktibak using @font-face erabiliz kargatu daitezkeen URLak murrizten ditu.

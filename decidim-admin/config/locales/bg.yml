@@ -1,3 +1,4 @@
+---
 bg:
   activemodel:
     attributes:
@@ -330,7 +331,7 @@ bg:
           unpublished: Непубликувано
       conflicts:
         attempts: Опити
-        'false': 'Не'
+        'false': Не
         index:
           text: Търсете по имейл, име или псевдоним на текущия потребител.
         managed_user_name: Управляван потребител
@@ -343,7 +344,7 @@ bg:
           reason: Причина
           success: Текущият трансфер е завършен успешно.
           title: Трансфер
-        'true': 'Да'
+        'true': Да
         user_name: Потребител
       content_blocks:
         create:
@@ -388,13 +389,13 @@ bg:
         invitation_accepted_at_present:
           label: Поканата е приета
           values:
-            'false': 'Не'
-            'true': 'Да'
+            'false': Не
+            'true': Да
         last_sign_in_at_present:
           label: Влизал някога
           values:
-            'false': 'Не'
-            'true': 'Да'
+            'false': Не
+            'true': Да
         moderated_users:
           reports_reason_eq:
             label: Причина за докладването

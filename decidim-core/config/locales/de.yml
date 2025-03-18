@@ -1,3 +1,4 @@
+---
 de:
   activemodel:
     attributes:
@@ -95,8 +96,8 @@ de:
         one: Benutzer
         other: Benutzer
   booleans:
-    'false': 'Nein'
-    'true': 'Ja'
+    'false': Nein
+    'true': Ja
   date:
     buttons:
       close: Schliessen
@@ -163,7 +164,7 @@ de:
     accessibility:
       external_link: Externer Link
       front_page_link: Zur Startseite gehen
-      logo: "Offizielles Logo von %{organization}"
+      logo: Offizielles Logo von %{organization}
       opens_in_new_tab: In neuem Tab öffnen
       skip_button: Zu Hauptinhalten überspringen
     account:
@@ -203,7 +204,7 @@ de:
         success: Ihr Konto wurde erfolgreich aktualisiert.
         success_with_email_confirmation: Ihr Konto wurde erfolgreich aktualisiert. Sie erhalten eine E-Mail zur Bestätigung Ihrer neuen E-Mail-Adresse.
     activity:
-      time_ago: "Vor %{time}"
+      time_ago: Vor %{time}
     admin:
       actions:
         cancel: Abbrechen
@@ -238,7 +239,7 @@ de:
         publish: "%{user_name} hat die Komponente %{resource_name} in %{space_name} veröffentlicht"
         restore: "%{user_name} hat die %{resource_name}-Komponente im %{space_name}-Bereich wiederhergestellt"
         soft_delete: "%{user_name} hat die %{resource_name}-Komponente im %{space_name}-Bereich in den Papierkorb verschoben"
-        unpublish: "%{user_name} hat die Komponente %{resource_name} in %{space_name} auf \"unveröffentlicht\" gesetzt"
+        unpublish: '%{user_name} hat die Komponente %{resource_name} in %{space_name} auf "unveröffentlicht" gesetzt'
         update_permissions_with_space: "%{user_name} hat die Berechtigungen für %{resource_name} in %{space_name} aktualisiert"
       contextual_help_section:
         update: "%{user_name} hat den Hilfebereich %{resource_name} aktualisiert"
@@ -340,7 +341,7 @@ de:
         error: Beim Akzeptieren der Änderung ist ein Problem aufgetreten.
         success: Die Änderung wurde erfolgreich angenommen.
       amendable:
-        button: '%{model_name} ändern'
+        button: "%{model_name} ändern"
         error: Bei der Änderung dieser Ressource ist ein Fehler aufgetreten.
         promote_button: Zu %{model_name} befördern
         promote_confirm_text: Möchten Sie diese Erweiterung wirklich fördern?
@@ -679,17 +680,7 @@ de:
           buttons:
             check: Kontakterlaubnis erteilen und fortfahren
             uncheck: Ohne Kontakterlaubnis fortfahren
-          notice: |-
-            <p>Hallo, sind Sie sicher, dass Sie keinen Newsletter erhalten möchten?
-            Bitte prüfen Sie noch einmal, ob Sie das Kästchen mit der Bestellung des Newsletters nicht doch ankreuzen möchten.
-            Es ist sehr wichtig für uns, dass Sie gelegentlich E-Mails erhalten können, 
-            damit wir Ihnen wichtige Informationen mitteilen können. Sie können die
-            Seite mit den Einstellungen für Mitteilungen jederzeit ändern.</p>
-            <p>Wenn Sie das Kästchen nicht ankreuzen, könnten Sie vielleicht wichtige Informationen
-             über neue Möglichkeiten der Teilnahme an der Plattform verpassen.<br>
-            Wenn Sie dennoch keinen Newsletter erhalten möchten, 
-            haben wir vollstes Verständnis für Ihre Entscheidung.</p>
-            <p>Vielen Dank, dass Sie sich die Zeit zum Lesen genommen haben!</p>
+          notice: "<p>Hallo, sind Sie sicher, dass Sie keinen Newsletter erhalten möchten?\nBitte prüfen Sie noch einmal, ob Sie das Kästchen mit der Bestellung des Newsletters nicht doch ankreuzen möchten.\nEs ist sehr wichtig für uns, dass Sie gelegentlich E-Mails erhalten können, \ndamit wir Ihnen wichtige Informationen mitteilen können. Sie können die\nSeite mit den Einstellungen für Mitteilungen jederzeit ändern.</p>\n<p>Wenn Sie das Kästchen nicht ankreuzen, könnten Sie vielleicht wichtige Informationen\n über neue Möglichkeiten der Teilnahme an der Plattform verpassen.<br>\nWenn Sie dennoch keinen Newsletter erhalten möchten, \nhaben wir vollstes Verständnis für Ihre Entscheidung.</p>\n<p>Vielen Dank, dass Sie sich die Zeit zum Lesen genommen haben!</p>"
           title: Newsletter Benachrichtigungen
         omniauth_buttons:
           or: oder
@@ -700,7 +691,9 @@ de:
           shown_password: Ihr Passwort wird angezeigt
         placeholder_email: hi@beispiel.org
     documents:
-      one: "%{count} Dokument\n%{count} Dokumente"
+      one: |-
+        %{count} Dokument
+        %{count} Dokumente
       other: "%{count} Dokumente"
     doorkeeper:
       authorizations:
@@ -831,8 +824,8 @@ de:
       endorse: Gefällt mir
     endorsers_list:
       endorsed_by:
-        one: '%{visible} stimmt zu'
-        other: '%{visible} und %{others} stimmen zu'
+        one: "%{visible} stimmt zu"
+        other: "%{visible} und %{others} stimmen zu"
       others: "%{count} weitere"
       title: Zustimmende
       you: du
@@ -1001,7 +994,7 @@ de:
       no_followers: Noch keine Follower.
     following:
       following_count:
-        one: "1 Follower"
+        one: 1 Follower
         other: "%{count} Follower"
       no_followings: Folgt noch niemanden oder nichts.
       non_public_followings: Einige der gefolgten Ressourcen sind nicht öffentlich.
@@ -1017,8 +1010,8 @@ de:
       attachment_link:
         explanation: Anleitung für Anhang-Links
         help_messages:
-          - Nur korrekte URL-Formate werden akzeptiert.
-          - Bitte beachten Sie, dass die Links öffentlich sein müssen, damit alle Teilnehmer auf sie zugreifen können.
+        - Nur korrekte URL-Formate werden akzeptiert.
+        - Bitte beachten Sie, dass die Links öffentlich sein müssen, damit alle Teilnehmer auf sie zugreifen können.
       errors:
         decidim/user:
           password: Das Passwort ist zu kurz.
@@ -1069,7 +1062,7 @@ de:
       badges:
         followers:
           conditions:
-            - Aktiv zu sein und anderen Menschen zu folgen, wird sicherlich andere Menschen dazu bringen, dir zu folgen.
+          - Aktiv zu sein und anderen Menschen zu folgen, wird sicherlich andere Menschen dazu bringen, dir zu folgen.
           description: Dieses Abzeichen wird gewährt, wenn Sie eine bestimmte Anzahl von Followern erreichen. %{organization_name} ist ein soziales und politisches Netzwerk, weben Sie Ihr Web, um mit anderen Menschen auf der Plattform zu kommunizieren.
           description_another: Diese*r Benutzer*in hat %{score} Follower.
           description_own: "%{score} Benutzer*innen folgen dir."
@@ -1347,7 +1340,7 @@ de:
           description: Diese ZIP-Datei enthält Dateien zum Studium und Recherchen über diese Mitwirkungsplattform.
           main: Kern
           spaces: Bereiche
-          title: Open Data Dateien für %{organization} 
+          title: Open Data Dateien für %{organization}
         metrics:
           cumulative: Die Gesamtzahl der Metrik an diesem Tag
           day: Erstellungsdatum dieser Metrik
@@ -1407,7 +1400,7 @@ de:
           spaces: Beteiligungsbereiche
           title: Ressourcen herunterladen
         download_open_data: Open Data Dateien herunterladen
-        download_resource: '%{resource_name} im CSV-Format herunterladen'
+        download_resource: "%{resource_name} im CSV-Format herunterladen"
         explanation:
           body_1: Diese Dateien sind Datensätze, die aus den Partizipationsprozessen von %{organization_name} exportiert wurden, wie Vorschläge, Kommentare und Treffen. Sie liefern rohe, strukturierte Daten, die zur Analyse, Forschung oder Integration mit anderen Werkzeugen verwendet werden können. Die Daten werden automatisch alle 24 Stunden aktualisiert und stellen sicher, dass Sie Zugriff auf die neuesten Informationen haben.
           body_2: Diese Dateien sind im CSV-Format (Comma-Separated Values) das ein weit verbreitetes Dateiformat ist, das von einer Vielzahl von Softwareanwendungen geöffnet und verarbeitet werden kann, einschließlich Tabellenkalkulationsprogramme, Texteditoren und Datenanalysewerkzeugen.
@@ -1671,7 +1664,7 @@ de:
     user_contact_disabled: Dieser Teilnehmer akzeptiert keine Direktnachrichten.
     user_conversations:
       index:
-        time_ago: "Vor %{time}"
+        time_ago: Vor %{time}
     user_report_mailer:
       notify:
         body_1: Benutzer %{user} wurde von %{token} gemeldet
@@ -1803,8 +1796,8 @@ de:
         confirm_new_password: Bestätige neues Passwort
         new_password: Neues Passwort
         old_password_help: Um die Änderungen an Ihrem Konto zu bestätigen, geben Sie bitte Ihr aktuelles Passwort ein.
-        password_help: "Das Passwort muss aus mindestens %{minimum_characters} Zeichen bestehen, darf nicht zu gewöhnlich sein (z. B. 123456) oder Ihren Kontonamen bzw. Ihre E-Mail-Adresse enthalten."
-        password_help_admin: "Das Passwort muss aus mindestens %{minimum_characters} Zeichen bestehen, darf nicht zu gewöhnlich sein (z. B. 123456) oder Ihren Kontonamen oder Ihre E-Mail-Adresse enthalten und muss sich von Ihren alten Passwörtern unterscheiden."
+        password_help: Das Passwort muss aus mindestens %{minimum_characters} Zeichen bestehen, darf nicht zu gewöhnlich sein (z. B. 123456) oder Ihren Kontonamen bzw. Ihre E-Mail-Adresse enthalten.
+        password_help_admin: Das Passwort muss aus mindestens %{minimum_characters} Zeichen bestehen, darf nicht zu gewöhnlich sein (z. B. 123456) oder Ihren Kontonamen oder Ihre E-Mail-Adresse enthalten und muss sich von Ihren alten Passwörtern unterscheiden.
         title: Passwort ändern
       new:
         forgot_your_password: Haben Sie Ihr Passwort vergessen?
@@ -2021,7 +2014,7 @@ de:
             title: Präferenzen
           save_settings: Einstellungen speichern
           title: Cookie Einstellungen
-          toggle: '%{consent_category} umschalten'
+          toggle: "%{consent_category} umschalten"
         warning:
           all_categories: alle Cookies
           change_settings: Cookie Einstellungen ändern

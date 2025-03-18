@@ -1,3 +1,4 @@
+---
 is:
   activemodel:
     attributes:
@@ -20,8 +21,8 @@ is:
         password_confirmation: Staðfesta lykilorð
         remember_me: Muna eftir mér
   booleans:
-    'false': 'Nei'
-    'true': 'Já'
+    'false': Nei
+    'true': Já
   carrierwave:
     errors:
       image_too_big: Myndin er of stór
@@ -197,7 +198,7 @@ is:
           notification_title: A <a href="%{resource_path}">nýtt skjal</a> hefur verið bætt við <a href="%{attached_to_url}">%{resource_title}</a>
       components:
         component_published:
-          email_intro: '%{resource_title} hluti er nú virkur fyrir %{participatory_space_title}. Þú getur séð það frá þessari síðu:'
+          email_intro: "%{resource_title} hluti er nú virkur fyrir %{participatory_space_title}. Þú getur séð það frá þessari síðu:"
           email_outro: Þú hefur fengið þessa tilkynningu vegna þess að þú fylgist með %{participatory_space_title}. Þú getur hætt við að fá tilkynningar eftir fyrri tengilinn.
           email_subject: Uppfærsla á %{participatory_space_title}
           notification_title: '%{resource_title} hluti er nú virkur fyrir <a href="%{resource_path}">%{participatory_space_title}</a>'

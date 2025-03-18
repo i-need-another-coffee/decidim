@@ -1,3 +1,4 @@
+---
 sk:
   activemodel:
     models:
@@ -5,9 +6,9 @@ sk:
   activerecord:
     models:
       decidim/blogs/post:
-        one: Príspevok
         few: Príspevky
         many: Príspevky
+        one: Príspevok
         other: Príspevky
   decidim:
     blogs:

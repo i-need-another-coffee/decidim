@@ -1,3 +1,4 @@
+---
 zh-CN:
   activemodel:
     models:
@@ -22,14 +23,14 @@ zh-CN:
     events:
       surveys:
         survey_closed:
-          email_intro: '%{resource_title} 在 %{participatory_space_title} 中的调查已被关闭。'
+          email_intro: "%{resource_title} 在 %{participatory_space_title} 中的调查已被关闭。"
           email_outro: 您收到此通知是因为您正在关注 %{participatory_space_title}。您可以停止收到跟随上一个链接的通知。
           email_subject: 调查已在 %{participatory_space_title} 完成
           notification_title: 调查 <a href="%{resource_path}">%{resource_title}</a> 在 <a href="%{participatory_space_url}">%{participatory_space_title}</a> 已完成。
         survey_opened:
-          email_intro: '调查 %{resource_title} %{participatory_space_title} 现已打开。您可以从这个页面参与：'
+          email_intro: 调查 %{resource_title} %{participatory_space_title} 现已打开。您可以从这个页面参与：
           email_outro: 您收到此通知是因为您正在关注 %{participatory_space_title}。您可以停止收到跟随上一个链接的通知。
-          email_subject: '%{participatory_space_title} 的新调查'
+          email_subject: "%{participatory_space_title} 的新调查"
           notification_title: <a href="%{resource_path}">%{resource_title}</a> 在 <a href="%{participatory_space_url}">%{participatory_space_title}</a> 中的调查现已打开。
     metrics:
       survey_answers:

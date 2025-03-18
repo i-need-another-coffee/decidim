@@ -1,3 +1,4 @@
+---
 hu:
   activemodel:
     attributes:
@@ -342,7 +343,7 @@ hu:
             available_slots_help: Hagyja 0-ra, ha van korlátlan slot.
             registrations_count:
               one: 1 regisztráció volt.
-              other: '%{count} regisztráció volt.'
+              other: "%{count} regisztráció volt."
         diplomas:
           edit:
             save: Mentés
@@ -420,7 +421,7 @@ hu:
         show:
           already_have_an_account?: Van már fiókja?
           are_you_new?: Új résztvevő?
-          login_as: '%{name} <%{email}> -ként jelentkeztél be'
+          login_as: "%{name} <%{email}> -ként jelentkeztél be"
           make_conference_registration: Regisztráció a konferenciára
           manage_registration: Regisztráció kezelése
           register: Regisztráció

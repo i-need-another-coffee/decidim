@@ -1,3 +1,4 @@
+---
 eu:
   activemodel:
     attributes:
@@ -20,7 +21,7 @@ eu:
       decidim:
         budgets:
           project:
-            text: '%{link} aurrekontuari gehitu zaio'
+            text: "%{link} aurrekontuari gehitu zaio"
       decidim/budgets/budget:
         one: Aurrekontua
         other: Aurrekontuak
@@ -106,8 +107,8 @@ eu:
             select_for_implementation: Gauzatzeko hautatua
             selected: Hautatua
             selected_options:
-              'no': 'Ez'
-              'yes': 'Bai'
+              'no': Ez
+              'yes': Bai
             title: Proiektuak
             update: Eguneratu
             update_budget_button: Eguneratu proiektuaren aurrekontua
@@ -130,7 +131,9 @@ eu:
             select_a_project: Mesedez, hautatu proiektu bat.
             select_a_selection: Mesedez, hautatu ezarpen-egoera bat.
             success:
-              selected: "Proiektu hauek arrakastaz\nProiektu hauek zuzen aukeratu dira inplementatzeko: %{successful}."
+              selected: |-
+                Proiektu hauek arrakastaz
+                Proiektu hauek zuzen aukeratu dira inplementatzeko: %{successful}.
               unselected: 'Proiektu hauek zuzen kendu dira inplementaziotik: %{successful}.'
           update_taxonomies:
             invalid: 'Taxonomiak %{taxonomies}, proiektu hauetan dagoeneko esleituak: %{errored}.'
@@ -144,7 +147,7 @@ eu:
           new:
             create: Inportatu proiektuetarako proposamenak
             default_budget: Aurrekontu lehenetsia
-            import_all_accepted_proposals: Inportatu onartutako proposamen guztiak 
+            import_all_accepted_proposals: Inportatu onartutako proposamen guztiak
             no_components: Ez dago proposamen osagairik parte hartzeko espazio honetan proposamenak proiektuetara inportatzeko.
             origin_component_id: Jatorrizko osagaia
             select_component: Meesedez, hautatu osagaia
@@ -179,7 +182,7 @@ eu:
           more_than_one: ezabatu zure babesa hemen %{name} eta hasi berriro
           only_one: ezabatu zure babesa eta hasi berriro.
         count:
-          one: "Aurrekontu %{count}"
+          one: Aurrekontu %{count}
           other: "%{count} aurrekontu"
         empty: Oraindik ez dago aurrekonturik
         finished_message: Amaitu duzu babesa emateko prozesua. Eskerrik asko parte hartzeagatik!
@@ -310,12 +313,12 @@ eu:
           add: Gehitu
           add_descriptive: Gehitu %{resource_name} proiektua zure babesari.
           added: Gehituta
-          added_descriptive: '%{resource_name} proiektua zure babesari gehituta.'
+          added_descriptive: "%{resource_name} proiektua zure babesari gehituta."
         project_filter:
           added: Gehituta
           all: Guztiak
-        projects_for: '%{name} parte-hartzailearen proiektuak'
-        select_projects: Hautatu proiektuak 
+        projects_for: "%{name} parte-hartzailearen proiektuak"
+        select_projects: Hautatu proiektuak
         show:
           budget: Aurrekontua
       prompt: Aukeratu aurrekontua
@@ -395,9 +398,9 @@ eu:
     events:
       budgets:
         budget_published:
-          email_intro: '%{resource_title} urratsa aktibo dago %{participatory_space_title} espziorako. Orrialde honetatik ikus dezakezu:'
+          email_intro: "%{resource_title} urratsa aktibo dago %{participatory_space_title} espziorako. Orrialde honetatik ikus dezakezu:"
           email_outro: Jakinarazpen hau jaso duzu %{participatory_space_title} jarraitzen ari zarelako. Jakinarazpenak jasotzeari utzi ahal diozu aurreko lotura jarraituz.
-          email_subject: '%{resource_title} osagaia orain aktibo dago %{participatory_space_title} espziorentzat.'
+          email_subject: "%{resource_title} osagaia orain aktibo dago %{participatory_space_title} espziorentzat."
           notification_title: <a href="%{resource_path}">%{resource_title}</a> aurrekontua aktibo dago hemen %{participatory_space_title}.
     open_data:
       help:

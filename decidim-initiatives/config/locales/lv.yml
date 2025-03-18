@@ -1,3 +1,4 @@
+---
 lv:
   activemodel:
     attributes:
@@ -51,13 +52,13 @@ lv:
   activerecord:
     models:
       decidim/initiative_comittee:
-        zero: Komitejas
         one: Komiteja
         other: Komitejas
+        zero: Komitejas
       decidim/initiative_vote:
-        zero: Paraksti
         one: Paraksts
         other: Paraksti
+        zero: Paraksti
   decidim:
     admin:
       actions:
@@ -132,8 +133,8 @@ lv:
       badges:
         initiatives:
           conditions:
-            - Dodieties uz iniciatīvu līdzdalības telpu
-            - Sekojiet soļiem, lai izveidotu jaunu iniciatīvu
+          - Dodieties uz iniciatīvu līdzdalības telpu
+          - Sekojiet soļiem, lai izveidotu jaunu iniciatīvu
           description: Šis žetons tiek piešķirts, kad jūs sākat jaunas iniciatīvas, sadarbojoties ar citiem, lai tās īstenotu.
           description_another: Šis dalībnieks ir publicējis %{score} iniciatīvas.
           name: Publicētās iniciatīvas
@@ -247,13 +248,13 @@ lv:
         select_initiative_type:
           back: Atpakaļ
           choose_html: Es vēlos izveidot <strong>%{title}</strong>
-          more_information: (Papildu informācija)
+          more_information: "(Papildu informācija)"
           select: Es vēlos veicināt šo iniciatīvu
       events:
         create_initiative_event:
-          email_intro: "{author_name}%{author_nickname}, kam jūs sekojat, ir izveidojis jaunu iniciatīvu \"%{resource_title}\". Aplūkojiet to un piedalieties:"
+          email_intro: '{author_name}%{author_nickname}, kam jūs sekojat, ir izveidojis jaunu iniciatīvu "%{resource_title}". Aplūkojiet to un piedalieties:'
           email_outro: Jūs saņēmāt šo paziņojumu, jo sekojat %{author_nickname}. Jūs varat atteikties no paziņojumu saņemšanas, sekojot iepriekšējai saitei.
-          email_subject: '%{author_nickname} ir jauna iniciatīva'
+          email_subject: "%{author_nickname} ir jauna iniciatīva"
           notification_title: <a href="%{author_path}">%{author_name} %{author_nickname}</a> izveidoja iniciatīvu <a href="%{resource_path}">%{resource_title}</a>.
         endorse_initiative_event:
           email_intro: "%{author_name} %{author_nickname}, kam jūs sekojat, ir atbalstījis šo iniciatīvu, iespējams, jūs vēlaties iesaistīties sarunā par to:"
@@ -280,14 +281,14 @@ lv:
       initiatives:
         author_list:
           hidden_authors_count:
-            zero: un vēl %{count} personas
             one: un vēl 1 persona
             other: un vēl %{count} personas
+            zero: un vēl %{count} personas
         count:
           title:
-            zero: "%{count} iniciatīvas"
             one: "%{count} iniciatīva"
             other: "%{count} iniciatīvas"
+            zero: "%{count} iniciatīvas"
         filters:
           any: Jebkura
           area: Joma
@@ -301,9 +302,9 @@ lv:
         interactions:
           comments_count:
             count:
-              zero: Komentēt
               one: Komentēt
               other: Komentēt
+              zero: Komentēt
         orders:
           label: 'Kārtot iniciatīvas pēc:'
           most_commented: Visvairāk komentētie
@@ -316,9 +317,9 @@ lv:
         result:
           initiative_rejected_reason: Šī iniciatīva ir noraidīta parakstu trūkuma dēļ.
         signatures_count:
-          zero: "paraksti"
-          one: "paraksts"
-          other: "paraksti"
+          one: paraksts
+          other: paraksti
+          zero: paraksti
         vote_cabin:
           already_voted: Jau parakstīta
           vote: Parakstīt

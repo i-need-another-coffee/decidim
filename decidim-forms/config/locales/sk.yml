@@ -1,3 +1,4 @@
+---
 sk:
   activemodel:
     attributes:
@@ -46,7 +47,7 @@ sk:
           update:
             invalid: Vyskytol sa problém s ukladaním formulára.
       question_types:
-        long_answer: Dlhá odpoveď 
+        long_answer: Dlhá odpoveď
         multiple_option: Viacero možností
         short_answer: Krátka odpoveď
         single_option: Jedna možnosť
@@ -74,7 +75,7 @@ sk:
         show:
           submit: Poslať
       user_answers_serializer:
-        created_at: Odpovedané na 
+        created_at: Odpovedané na
         id: ID odpovede
         registered: Registrovaný
         unregistered: Neregistrovaný

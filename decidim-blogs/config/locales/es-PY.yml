@@ -1,3 +1,4 @@
+---
 es-PY:
   activemodel:
     attributes:
@@ -21,7 +22,7 @@ es-PY:
     blogs:
       actions:
         author_id: Crear publicación como
-        confirm_delete_post: '¿Seguro que quieres eliminar esta publicación?'
+        confirm_delete_post: "¿Seguro que quieres eliminar esta publicación?"
         deleted_posts_info: Los resultados eliminados se pueden restaurar desde papelera.
         edit: Editar
         new: Nueva publicación
@@ -91,7 +92,7 @@ es-PY:
           new_post: Nueva publicación
         menu_actions:
           button_destroy: Eliminar la publicación
-          button_destroy_confirm: '¿Seguro que quieres eliminar esta publicación?'
+          button_destroy_confirm: "¿Seguro que quieres eliminar esta publicación?"
           button_edit: Editar la publicación
         new:
           back: Volver a la publicación

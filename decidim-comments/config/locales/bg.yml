@@ -1,3 +1,4 @@
+---
 bg:
   activemodel:
     models:
@@ -52,7 +53,7 @@ bg:
           neutral_selected: Вашето мнение по тази тема е неутрално
           positive: Позитивно
           positive_selected: Вашето мнение по тази тема е позитивно
-        remaining_characters: "Оставащи символи: %{count}"
+        remaining_characters: Оставащи символи: %{count}
         remaining_characters_1: "%{count} оставащ символ"
         title: Добавете Вашия коментар
       comment:

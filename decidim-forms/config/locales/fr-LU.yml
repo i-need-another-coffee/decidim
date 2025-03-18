@@ -1,3 +1,4 @@
+---
 fr-LU:
   activemodel:
     attributes:
@@ -48,13 +49,13 @@ fr-LU:
             empty: Pas encore de réponses
             export:
               answer:
-                title: 'Réponse n°%{number}'
+                title: Réponse n°%{number}
             export_response:
               title: réponses_utilisateur_sondage_%{token}
             index:
               title: "%{total} réponses totales"
             show:
-              title: 'Réponse n°%{number}'
+              title: Réponse n°%{number}
           display_condition:
             answer_option: Option de réponse
             condition_question: Question

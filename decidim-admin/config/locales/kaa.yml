@@ -1,3 +1,4 @@
+---
 kaa:
   activemodel:
     attributes:
@@ -51,11 +52,11 @@ kaa:
           headers:
             actions: Háreketler
       conflicts:
-        'false': 'Yaq'
+        'false': Yaq
         transfer:
           email: Elektron pochta
           reason: Sebep
-        'true': 'Awa'
+        'true': Awa
         user_name: Paydalanıwshı
       exports:
         formats:
@@ -67,12 +68,12 @@ kaa:
         filter_label: Filtr
         invitation_accepted_at_present:
           values:
-            'false': 'Yaq'
-            'true': 'Awa'
+            'false': Yaq
+            'true': Awa
         last_sign_in_at_present:
           values:
-            'false': 'Yaq'
-            'true': 'Awa'
+            'false': Yaq
+            'true': Awa
         search_label: Izlew
       help_sections:
         form:

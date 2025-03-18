@@ -1,10 +1,11 @@
+---
 lv:
   activerecord:
     models:
       decidim/pages/page:
-        zero: Lapas
         one: Lapa
         other: Lapas
+        zero: Lapas
   decidim:
     admin_log:
       page:

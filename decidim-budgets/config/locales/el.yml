@@ -1,3 +1,4 @@
+---
 el:
   activemodel:
     attributes:
@@ -116,9 +117,9 @@ el:
           delete: "%{user_name} διέγραψε τον προϋπολογισμό %{resource_name} στο χώρο %{space_name}"
           update: "%{user_name} ενημέρωση του προϋπολογισμού %{resource_name} στο χώρο %{space_name}"
         project:
-          create: "Ο χρήστης %{user_name} δημιούργησε το έργο %{resource_name} στον χώρο %{space_name}"
-          delete: "Ο χρήστης %{user_name} διέγραψε το έργο %{resource_name} στον χώρο %{space_name}"
-          update: "Ο χρήστης %{user_name} ενημέρωσε το έργο %{resource_name} στον χώρο %{space_name}"
+          create: Ο χρήστης %{user_name} δημιούργησε το έργο %{resource_name} στον χώρο %{space_name}
+          delete: Ο χρήστης %{user_name} διέγραψε το έργο %{resource_name} στον χώρο %{space_name}
+          update: Ο χρήστης %{user_name} ενημέρωσε το έργο %{resource_name} στον χώρο %{space_name}
       budget_information_modal:
         back_to: Πίσω στο %{component_name}
         close_modal: Κλείσιμο παραθύρου

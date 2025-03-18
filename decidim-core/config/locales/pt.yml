@@ -1,3 +1,4 @@
+---
 pt:
   activemodel:
     attributes:
@@ -58,8 +59,8 @@ pt:
         one: Participante
         other: Participantes
   booleans:
-    'false': 'Não'
-    'true': 'Sim'
+    'false': Não
+    'true': Sim
   date:
     buttons:
       select: Selecionar
@@ -72,7 +73,7 @@ pt:
   decidim:
     accessibility:
       external_link: Hiperligação externa
-      logo: "Logótipo oficial de %{organization}"
+      logo: Logótipo oficial de %{organization}
       skip_button: Avançar para o conteúdo principal
     account:
       delete:
@@ -178,13 +179,14 @@ pt:
           button_reject: Rejeitar
           help_text: Reveja as alterações e aceite ou rejeite esta modificação. Uma notificação será enviada ao(s) seu(s) autor(es).
         announcement:
-          accepted: |-
-            Esta modificação de %{amendable_type} %{proposal_link} foi aceite em <strong>%{date}</strong>.
+          accepted: Esta modificação de %{amendable_type} %{proposal_link} foi aceite em <strong>%{date}</strong>.
           evaluating: |-
             Esta modificação de %{amendable_type} %{proposal_link}
             está sob avaliação.
           promoted: Promovido a %{amendable_type}.
-          rejected: "Esta modificação de %{amendable_type} %{proposal_link}\nfoi rejeitada em <strong>%{date}</strong>."
+          rejected: |-
+            Esta modificação de %{amendable_type} %{proposal_link}
+            foi rejeitada em <strong>%{date}</strong>.
           withdrawn: |-
             Esta modificação de %{amendable_type} %{proposal_link}
             foi retirada pelo autor.
@@ -548,14 +550,14 @@ pt:
       badges:
         followers:
           conditions:
-            - Ser ativo(a) e seguir outras pessoas certamente fará com que outras pessoas o(a) sigam.
+          - Ser ativo(a) e seguir outras pessoas certamente fará com que outras pessoas o(a) sigam.
           description: Esse distintivo é-lhe concedido quando alcança um certo número de seguidores. %{organization_name} é uma rede social e política, teça a sua rede para comunicar com outras pessoas na plataforma.
           description_another: Esse usuário possui %{score} seguidores.
           description_own: "%{score} pessoas seguem-no(a)."
           name: Seguidores
           next_level_in: Obtenha mais %{score} pessoas para segui-lo(a) para alcançar o próximo nível!
         index:
-          badge_title: "Distintivo %{name}"
+          badge_title: Distintivo %{name}
           how: Como pode ganhar
           page_description: Distintivos são reconhecimentos para ações dos participantes e progresso na plataforma. Ao começar a descobrir, participar e interagir na plataforma, ganhará distintivos diferentes. Aqui está a lista de distintivos e algumas maneiras de ganhá-los.
           title: Distintivos
@@ -870,7 +872,7 @@ pt:
     user_contact_disabled: Este participante não aceita mensagens diretas.
     user_conversations:
       index:
-        time_ago: "Há %{time}"
+        time_ago: Há %{time}
     user_report_mailer:
       notify:
         body_1: O utilizador %{user} foi denunciado por %{token}
@@ -910,11 +912,11 @@ pt:
     failure:
       already_authenticated: Já está inscrito.
       inactive: A sua conta ainda não está ativa.
-      invalid: '%{authentication_keys} ou palavra-passe inválidos(as).'
+      invalid: "%{authentication_keys} ou palavra-passe inválidos(as)."
       invited: Tem um convite pendente, aceite-o para concluir a criação da sua conta.
       last_attempt: Tem mais uma tentativa antes que a sua conta seja bloqueada.
       locked: A sua conta está bloqueada.
-      not_found_in_database: '%{authentication_keys} ou palavra-passe inválidos(as).'
+      not_found_in_database: "%{authentication_keys} ou palavra-passe inválidos(as)."
     invitations:
       edit:
         header: Termine a criação da sua conta

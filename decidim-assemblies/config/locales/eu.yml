@@ -1,3 +1,4 @@
+---
 eu:
   activemodel:
     attributes:
@@ -366,7 +367,12 @@ eu:
       participatory_spaces:
         assemblies:
           contextual: "<p><strong>Batzarra </strong> erakunde bateko kideen talde bat da, aldian-aldian biltzen dena erakundearen arlo edo esparru jakin bati buruzko erabakiak hartzeko.</p> <p>Batzarrek bilerak egiten dituzte, batzuk pribatuak eta beste batzuk irekiak. Irekiak badira, parte hartzea posible da (adibidez: bertaratzea edukiera badago, gaiak agendara gehitzea, edo organo honek hartutako proposamenei eta erabakiei buruzko iruzkinak egitea). </p> <p>Adibideak: Batzar nagusia (urtean behin biltzen dena erakundearen ekintza-ildo nagusiak eta bere organo exekutiboak bozketa bidez definitzeko), berdintasun aholku-batzordea (bi hilabetean behin biltzen dena erakundearen genero-harremanak hobetzeko proposamenak egiteko), ebaluazio-batzordea (hilabetean behin biltzen dena prozesu baten jarraipena egiteko) edo berme-organoa (gorabeherak, gehiegikeriak edo erabakiak hartzeko prozedurak hobetzeko proposamenak biltzen dituena) batzordeen adibideak dira. </p>\n"
-          page: "<p><strong>Batzarra</strong> erakunde bateko kideen talde bat da, aldian-aldian biltzen dena erakundearen arlo edo esparru jakin bati buruzko erabakiak hartzeko.</p>\n\n<p>Batzarrek bilerak egiten dituzte, batzuk pribatuak eta beste batzuk irekiak. Irekiak badira, parte hartzea posible da (adibidez: bertaratzea edukiera badago, gaiak agendara gehitzea, edo organo honek hartutako proposamenei eta erabakiei buruzko iruzkinak egitea).</p>\n\n<p>Adibideak: Batzar nagusia (urtean behin biltzen dena erakundearen ekintza-ildo nagusiak eta bere organo exekutiboak bozketa bidez definitzeko), berdintasun aholku-batzordea (bi hilabetean behin biltzen dena erakundearen genero-harremanak hobetzeko proposamenak egiteko), ebaluazio-batzordea (hilabetean behin biltzen dena prozesu baten jarraipena egiteko) edo berme-organoa (gorabeherak, gehiegikeriak edo erabakiak hartzeko prozedurak hobetzeko proposamenak biltzen dituena) batzarren adibideak dira.</p>dira\n"
+          page: |
+            <p><strong>Batzarra</strong> erakunde bateko kideen talde bat da, aldian-aldian biltzen dena erakundearen arlo edo esparru jakin bati buruzko erabakiak hartzeko.</p>
+
+            <p>Batzarrek bilerak egiten dituzte, batzuk pribatuak eta beste batzuk irekiak. Irekiak badira, parte hartzea posible da (adibidez: bertaratzea edukiera badago, gaiak agendara gehitzea, edo organo honek hartutako proposamenei eta erabakiei buruzko iruzkinak egitea).</p>
+
+            <p>Adibideak: Batzar nagusia (urtean behin biltzen dena erakundearen ekintza-ildo nagusiak eta bere organo exekutiboak bozketa bidez definitzeko), berdintasun aholku-batzordea (bi hilabetean behin biltzen dena erakundearen genero-harremanak hobetzeko proposamenak egiteko), ebaluazio-batzordea (hilabetean behin biltzen dena prozesu baten jarraipena egiteko) edo berme-organoa (gorabeherak, gehiegikeriak edo erabakiak hartzeko prozedurak hobetzeko proposamenak biltzen dituena) batzarren adibideak dira.</p>dira
           title: Zer dira batzarrak?
     log:
       value_types:
@@ -449,7 +455,7 @@ eu:
             other: "%{count} batzar"
         order_by_assemblies:
           assemblies:
-            one: "batzar %{count}"
+            one: batzar %{count}
             other: "%{count} batzar"
       assembly_navigation:
         assembly_member_menu_item: Kideak

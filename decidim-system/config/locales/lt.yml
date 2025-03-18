@@ -1,8 +1,9 @@
+---
 lt:
   activemodel:
     attributes:
       oauth_application:
-        name: '„OAuth“ programos pavadinimas'
+        name: "„OAuth“ programos pavadinimas"
         organization_logo: Organizacijos logotipas (keturkampis)
         organization_name: Organizacija
         organization_url: Organizacijos URL
@@ -63,7 +64,7 @@ lt:
         placeholders:
           content: Administratoriaus suvestinės statiniame puslapyje %{page} įrašykite prasmingą turinį.
           summary: Prašome pridėti prasmingą santrauką %{page} statiniam puslapiui administravimo skydelyje.
-          title: '%{page} numatytasis pavadinimas'
+          title: "%{page} numatytasis pavadinimas"
         terms-of-service: Paslaugų teikimo sąlygos
       menu:
         admins: Administratoriai
@@ -80,7 +81,7 @@ lt:
         oauth_application:
           fields:
             created_at: Sukurta
-            name: '„OAuth“ programos pavadinimas'
+            name: "„OAuth“ programos pavadinimas"
             organization_name: Organizacija
         organization:
           actions:
@@ -90,7 +91,7 @@ lt:
             created_at: Sukurta
             file_upload_settings: Failų įkėlimo nustatymai
             name: Vardas
-            omniauth_settings: '„Omniauth“ nuostatos'
+            omniauth_settings: "„Omniauth“ nuostatos"
             smtp_settings: SMTP nustatymai
       oauth_applications:
         create:

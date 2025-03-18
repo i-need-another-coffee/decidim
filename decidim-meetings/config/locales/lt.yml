@@ -1,3 +1,4 @@
+---
 lt:
   activemodel:
     attributes:
@@ -77,19 +78,19 @@ lt:
   activerecord:
     models:
       decidim/meetings/meeting:
-        one: Susitikimas
         few: Susitikimai
         many: Susitikimų
+        one: Susitikimas
         other: Susitikimai
       decidim/meetings/minutes:
-        one: Minutė
         few: Minutės
         many: Minučių
+        one: Minutė
         other: Minutės
       decidim/meetings/registration:
-        one: Registracija
         few: Registracijos
         many: Registracijos
+        one: Registracija
         other: Registracijos
   decidim:
     admin:
@@ -156,7 +157,7 @@ lt:
             email_subject: '"%{resource_title}" susirinkimas uždarytas'
             notification_title: <a href="%{resource_path}">%{resource_title}</a> susirinkimas uždarytas.
           follower:
-            email_intro: '%{resource_title} susitikimas uždarytas. Išvadas galite perskaityti šiame puslapyje:'
+            email_intro: "%{resource_title} susitikimas uždarytas. Išvadas galite perskaityti šiame puslapyje:"
             email_outro: Šį pranešimą gavote dėl to, kad sekate „%{resource_title}“ susirinkimą. Jūs galite jo nebesekti spustelėdami ankstesnę nuorodą.
             email_subject: '"%{resource_title}" susirinkimas uždarytas'
             notification_title: <a href="%{resource_path}">%{resource_title}</a> susirinkimas uždarytas.
@@ -164,7 +165,7 @@ lt:
           button_text: Registruotis į susirinkimą
           email_intro: Erdvėje „%{participatory_space_title}“, kurią sekate, pridėtas susirinkimas „%{resource_title}“.
           email_outro: Gavote šį pranešimą nes sekate %{participatory_space_title}. Galite nebesekti paspaudę and ankstesnės nuorodos.
-          email_subject: '%{participatory_space_title} pridėtas naujas posėdis'
+          email_subject: "%{participatory_space_title} pridėtas naujas posėdis"
           notification_title: Susirinkimas<a href="%{resource_path}"><a href="%{resource_path}">%{resource_title}</a> pridėtas prie %{participatory_space_title}
         meeting_registration_confirmed:
           notification_title: Jūsų registracija į susirinkimą <a href="%{resource_url}">%{resource_title}</a> buvo patvirtinta. Jūsų registracijos kodas yra %{registration_code}.
@@ -189,7 +190,7 @@ lt:
           email_subject: '"%{resource_title}" posėdžio registracijos įjungtos.'
           notification_title: <a href="%{resource_path}">%{resource_title}</a> Susirinkimas leidžia registruotis.
         upcoming_meeting:
-          email_intro: '%{resource_title} susirinkimas prasidės už mažiau nei 48 val.'
+          email_intro: "%{resource_title} susirinkimas prasidės už mažiau nei 48 val."
           email_outro: Gavote šį pranešimą nes sekate "%{resource_title}" susirinkimą. Galite jo nebesekti paspaudę ant ankstesnės nuorodos.
           email_subject: '"%{resource_title}" susirinkimas prasidės už mažiau nei 48 val.'
           notification_title: <a href="%{resource_path}">%{resource_title}</a> Susirinkimas prasidės už mažiau nei 48 val.
@@ -200,7 +201,7 @@ lt:
       badges:
         attended_meetings:
           conditions:
-            - Registruokitės į susirinkimus, kuriuose norite dalyvauti
+          - Registruokitės į susirinkimus, kuriuose norite dalyvauti
           description: Šis ženklelis suteikiamas dalyvavus keliuose tiesioginiuose susirinkimuose.
           description_another: Šis dalyvis dalyvavo %{score} susirinkimuose (-ų).
           description_own: Jūs dalyvavote %{score} susirinkimuose (-ų).
@@ -217,9 +218,9 @@ lt:
         edit: Redaguoti
         invalid_destroy:
           proposals_count:
-            one: 'Susirinkimo negalima panaikinti, nes su juo susietas %{count} pasiūlymas:'
             few: 'Susirinkimo negalima panaikinti, nes su juo susietas %{count} pasiūlymai:'
             many: 'Susirinkimo negalima panaikinti, nes su juo susietas %{count} pasiūlymai:'
+            one: 'Susirinkimo negalima panaikinti, nes su juo susietas %{count} pasiūlymas:'
             other: 'Susirinkimo negalima panaikinti, nes su juo susietas %{count} pasiūlymai:'
         manage_poll: Tvarkyti apklausą
         preview: Peržiūra
@@ -348,9 +349,9 @@ lt:
             registration_email_help: Šis tekstas bus rodomas registracijos patvirtinimo el. laiško viduryje. Iš karto po registracijos kodo.
             registration_form: Registracijos forma
             registrations_count:
-              one: Yra %{count} registracija.
               few: Yra %{count} registracijų.
               many: Yra %{count} registracijų.
+              one: Yra %{count} registracija.
               other: Yra %{count} registracijų.
             reserved_slots_help: Palikite 0, jei vietos nerezervuotos.
             reserved_slots_less_than: Turi būti ne didesnis kaip %{count} arba jam lygus
@@ -440,9 +441,9 @@ lt:
           outlook: Įtraukti į „Outlook“ kalendorių
         count:
           meetings_count:
-            one: "%{count} susirinkimas"
             few: "%{count} susirinkimai"
             many: "%{count} susirinkimai"
+            one: "%{count} susirinkimas"
             other: "%{count} susirinkimai"
         create:
           invalid: Kuriant šį susirinkimą iškilo problema.
@@ -523,10 +524,10 @@ lt:
             validated: PATIKRINTA
             validation_pending: VYKSTA PATIKRINIMAS
           remaining_slots:
-            one: "Liko %{count} vieta"
-            few: "Liko %{count} vietos"
-            many: "Liko %{count} vietos"
-            other: "Liko %{count} vietos"
+            few: Liko %{count} vietos
+            many: Liko %{count} vietos
+            one: Liko %{count} vieta
+            other: Liko %{count} vietos
           visit_finished: Peržiūrėti susirinkimą
           withdraw_btn_hint: Galite išimti susirinkimą jei apsigalvojoje. Susirinkimas nebus ištrintas - jis atsidurs išimtų susirinkimų sąraše.
           withdraw_confirmation_html: Ar tikrai norite išimti šį susirinkimą? <br><br><strong>Šio veiksmo atšaukti negalima!</strong>
@@ -574,9 +575,9 @@ lt:
         attending_organizations: Organizacijos
         attending_participants: Dalyviai
         hidden_participants_count:
-          one: ir dar %{count} žmogus
           few: ir dar %{count} žmonės (-ių)
           many: ir dar %{count} žmonės (-ių)
+          one: ir dar %{count} žmogus
           other: ir dar %{count} žmonės (-ių)
       read_more: "(skaityti toliau)"
       registration_mailer:

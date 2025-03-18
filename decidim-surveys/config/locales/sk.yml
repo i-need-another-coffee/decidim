@@ -1,3 +1,4 @@
+---
 sk:
   activemodel:
     models:
@@ -6,14 +7,14 @@ sk:
   activerecord:
     models:
       decidim/surveys/survey:
-        one: Prieskum
         few: Prieskumy
         many: Prieskumy
+        one: Prieskum
         other: Prieskumy
       decidim/surveys/survey_answer:
-        one: Odpoveď
         few: Odpovede
         many: Odpovede
+        one: Odpoveď
         other: Odpovede
   decidim:
     components:

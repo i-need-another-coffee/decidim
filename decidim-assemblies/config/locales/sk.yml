@@ -1,3 +1,4 @@
+---
 sk:
   activemodel:
     attributes:
@@ -60,19 +61,19 @@ sk:
   activerecord:
     models:
       decidim/assembly:
-        one: Zhromaždenie
         few: Zhromaždenia
         many: Zhromaždenia
+        one: Zhromaždenie
         other: Zhromaždenia
       decidim/assembly_member:
-        one: Člen zhromaždenia
         few: Členovia zhromaždenia
         many: Členovia zhromaždenia
+        one: Člen zhromaždenia
         other: Členovia zhromaždenia
       decidim/assembly_user_role:
-        one: Rola člena zhromaždenia
         few: Role člena zhromaždenia
         many: Role člena zhromaždenia
+        one: Rola člena zhromaždenia
         other: Role člena zhromaždenia
   decidim:
     admin:

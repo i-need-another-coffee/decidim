@@ -1,3 +1,4 @@
+---
 fi:
   activemodel:
     attributes:
@@ -106,8 +107,8 @@ fi:
             select_for_implementation: Valittu toteutukseen
             selected: Valittu
             selected_options:
-              'no': 'Ei'
-              'yes': 'Kyllä'
+              'no': Ei
+              'yes': Kyllä
             title: Hankkeet
             update: Päivitä
             update_budget_button: Päivitä projektin budjetti

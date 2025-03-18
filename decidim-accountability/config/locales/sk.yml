@@ -1,3 +1,4 @@
+---
 sk:
   activemodel:
     attributes:
@@ -8,7 +9,7 @@ sk:
         description: Popis
         end_date: Koniec
         progress: Postup
-        start_date: Začiatok 
+        start_date: Začiatok
         title: Názov
         updated_at: Aktualizované
       status:
@@ -25,9 +26,9 @@ sk:
   activerecord:
     models:
       decidim/accountability/result:
-        one: Výsledok
         few: Výsledky
         many: Výsledky
+        one: Výsledok
         other: Výsledky
   decidim:
     accountability:
@@ -101,7 +102,7 @@ sk:
           fields:
             end_date: Koniec
             progress: Postup
-            start_date: Začiatok 
+            start_date: Začiatok
             status: Stav
             title: Názov
         status:
@@ -116,9 +117,9 @@ sk:
       results:
         count:
           results_count:
-            one: 1 výsledok
             few: "%{count} výsledkov"
             many: "%{count} výsledkov"
+            one: 1 výsledok
             other: "%{count} výsledkov"
         home_header:
           global_status: Globálny stav vykonávania

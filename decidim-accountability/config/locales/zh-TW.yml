@@ -1,3 +1,4 @@
+---
 zh-TW:
   activemodel:
     attributes:
@@ -135,11 +136,11 @@ zh-TW:
       import_projects_mailer:
         import:
           added_projects:
-            other: "從專案匯入 %{count} 個結果"
+            other: 從專案匯入 %{count} 個結果
           subject: 專案匯入成功
           success: 在元件 %{component_name} 成功匯入專案到結果，可以在管理介面檢視。
       last_activity:
-        new_result: '新結果：'
+        new_result: 新結果：
       models:
         result:
           fields:
@@ -194,14 +195,14 @@ zh-TW:
     events:
       accountability:
         proposal_linked:
-          email_intro: '提案 "%{proposal_title}" 已經包含在結果，可以在這個頁面檢視：'
+          email_intro: 提案 "%{proposal_title}" 已經包含在結果，可以在這個頁面檢視：
           email_outro: 收到這個提醒是因為訂閱了 "%{proposal_title}" ，透過上面連結可以停止訂閱。
-          email_subject: '%{proposal_title} 的更新'
+          email_subject: "%{proposal_title} 的更新"
           notification_title: 這個提案 <a href="%{proposal_path}">%{proposal_title}</a> 已經包含在 <a href="%{resource_path}">%{resource_title}</a> 結果
         result_progress_updated:
-          email_intro: '這個結果 "%{resource_title}" 包含提案 "%{proposal_title}" 現在完成 %{progress}% ，可以透過網頁檢視：'
+          email_intro: 這個結果 "%{resource_title}" 包含提案 "%{proposal_title}" 現在完成 %{progress}% ，可以透過網頁檢視：
           email_outro: 收到這個通知表示正在訂閱 "%{proposal_title}" ，而這個提案包含在結果 "%{resource_title}" ，透過下面連結可以停止接收通知。
-          email_subject: '%{resource_title} 的更新進度'
+          email_subject: "%{resource_title} 的更新進度"
           notification_title: 這個結果 <a href="%{resource_path}">%{resource_title}</a> 包含提案 <a href="%{proposal_path}">%{proposal_title}</a>，現在完成 %{progress}% 。
     metrics:
       results:

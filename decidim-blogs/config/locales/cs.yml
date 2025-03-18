@@ -1,3 +1,4 @@
+---
 cs:
   activemodel:
     attributes:
@@ -11,9 +12,9 @@ cs:
   activerecord:
     models:
       decidim/blogs/post:
-        one: Pošta
         few: Příspěvky
         many: Příspěvky
+        one: Pošta
         other: Příspěvky
   decidim:
     admin:
@@ -87,9 +88,9 @@ cs:
           title: Název
         index:
           count:
-            one: "%{count} příspěvek"
             few: "%{count} příspěvky"
             many: "%{count} příspěvků"
+            one: "%{count} příspěvek"
             other: "%{count} příspěvků"
           empty: Zatím nejsou žádné příspěvky.
           new_post: Nový příspěvek

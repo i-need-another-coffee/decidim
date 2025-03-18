@@ -1,3 +1,4 @@
+---
 pl:
   activemodel:
     attributes:
@@ -79,19 +80,19 @@ pl:
   activerecord:
     models:
       decidim/meetings/meeting:
-        one: Spotkanie
         few: Spotkania
         many: Spotkań
+        one: Spotkanie
         other: Spotkania
       decidim/meetings/minutes:
-        one: Minuta
         few: Minuty
         many: Minuty
+        one: Minuta
         other: Protokoły
       decidim/meetings/registration:
-        one: Rejestracja
         few: Rejestracje
         many: Rejestracji
+        one: Rejestracja
         other: Rejestracje
   decidim:
     admin:
@@ -220,7 +221,7 @@ pl:
       badges:
         attended_meetings:
           conditions:
-            - Zarejestruj się na spotkania, w których chcesz wziąć udział
+          - Zarejestruj się na spotkania, w których chcesz wziąć udział
           description: Ta odznaka jest przyznawana, gdy weźmiesz udział w kilku spotkaniach twarzą w twarz.
           description_another: Ten użytkownik uczestniczył w %{score} spotkaniach.
           description_own: Uczestniczyłeś w %{score} spotkaniach.
@@ -237,9 +238,9 @@ pl:
         edit: Edytuj
         invalid_destroy:
           proposals_count:
-            one: 'Nie można usunąć spotkania ponieważ ma ono %{count} powiązaną propozycję:'
             few: 'Nie można usunąć spotkania ponieważ ma ono %{count} powiązane propozycje:'
             many: 'Nie można usunąć spotkania ponieważ ma ono %{count} powiązanych propozycji:'
+            one: 'Nie można usunąć spotkania ponieważ ma ono %{count} powiązaną propozycję:'
             other: 'Nie można usunąć spotkania ponieważ ma ono %{count} powiązanych propozycji:'
         manage_poll: Zarządzaj głosowaniem
         new_meeting: Nowe spotkanie
@@ -360,10 +361,10 @@ pl:
         poll:
           form:
             announcement_html:
-              - Gdy pytanie otrzymuje odpowiedzi lub jest opublikowane/zamknięte, nie może być już edytowane.
-              - Możesz dodać pytanie w dowolnym momencie.
-              - Ankieta zostanie zamknięta po opublikowaniu wyników wszystkich utworzonych pytań.
-              - Odwiedź <a href='%{admin_link}'>stronę administracyjną głosowania</a>, aby wysłać pytania i opublikować wyniki.
+            - Gdy pytanie otrzymuje odpowiedzi lub jest opublikowane/zamknięte, nie może być już edytowane.
+            - Możesz dodać pytanie w dowolnym momencie.
+            - Ankieta zostanie zamknięta po opublikowaniu wyników wszystkich utworzonych pytań.
+            - Odwiedź <a href='%{admin_link}'>stronę administracyjną głosowania</a>, aby wysłać pytania i opublikować wyniki.
         registrations:
           edit:
             save: Zapisz
@@ -377,9 +378,9 @@ pl:
             registration_email_help: Ten tekst pojawi się w środku wiadomości e-mail z potwierdzeniem rejestracji. Tuż po kodzie rejestracyjnym.
             registration_form: Formularz rejestracyjny
             registrations_count:
-              one: Była%{count} rejestracja.
               few: Było %{count} rejestracji.
               many: Było %{count} rejestracji.
+              one: Była%{count} rejestracja.
               other: Było %{count} rejestracji.
             reserved_slots_help: Pozostaw 0, jeśli nie masz zarezerwowanych miejsc.
             reserved_slots_less_than: Musi być mniejszy lub równy %{count}
@@ -474,9 +475,9 @@ pl:
           outlook: Dodaj do kalendarza Outlook
         count:
           meetings_count:
-            one: "%{count} spotkanie"
             few: "%{count} spotkania"
             many: "%{count} spotkań"
+            one: "%{count} spotkanie"
             other: "%{count} spotkań"
         create:
           invalid: Wystąpił błąd podczas tworzenia tego spotkania.
@@ -560,10 +561,10 @@ pl:
             validated: ZWERYFIKOWANO
             validation_pending: OCZEKUJE NA WERYFIKACJĘ
           remaining_slots:
-            one: "Pozostało %{count} miejsce"
-            few: "Pozostało %{count} miejsc"
-            many: "Pozostało %{count} miejsc"
-            other: "Pozostało %{count} miejsc"
+            few: Pozostało %{count} miejsc
+            many: Pozostało %{count} miejsc
+            one: Pozostało %{count} miejsce
+            other: Pozostało %{count} miejsc
           visit_finished: Zobacz poprzednie spotkanie
           withdraw_btn_hint: Możesz wycofać swoje spotkanie, jeśli zmienisz zdanie. Spotkanie nie zostanie usunięte, pojawi się na liście wycofanych spotkań.
           withdraw_confirmation_html: Czy na pewno chcesz wycofać to spotkanie?<br><br><strong>Tej akcji nie można anulować!</strong>

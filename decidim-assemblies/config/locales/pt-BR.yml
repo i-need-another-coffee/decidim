@@ -1,3 +1,4 @@
+---
 pt-BR:
   activemodel:
     attributes:
@@ -313,7 +314,7 @@ pt-BR:
         home:
           highlighted_assemblies:
             active_spaces: Assembleias ativas
-            see_all_spaces: Ver todas as assembleias 
+            see_all_spaces: Ver todas as assembleias
         user_profile:
           member_of:
             member_of: Membro de
@@ -371,8 +372,8 @@ pt-BR:
           promoted_assemblies: Montagens destacadas
         metadata:
           children_item:
-            one: "Assembleia %{count}"
-            other: "Assembleia %{count}"
+            one: Assembleia %{count}
+            other: Assembleia %{count}
         order_by_assemblies:
           assemblies:
             one: "%{count} assembleia"

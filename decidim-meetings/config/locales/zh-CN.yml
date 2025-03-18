@@ -1,3 +1,4 @@
+---
 zh-CN:
   activemodel:
     attributes:
@@ -72,7 +73,7 @@ zh-CN:
       meetings:
         meeting_closed:
           affected_user:
-            email_intro: '您的会议 "%{resource_title}" 已关闭。您可以从其页面阅读结论：'
+            email_intro: 您的会议 "%{resource_title}" 已关闭。您可以从其页面阅读结论：
             email_outro: 您收到此通知是因为您组织了 "%{resource_title}" 会议。
             email_subject: '"%{resource_title}"会议已关闭'
             notification_title: <a href="%{resource_path}">%{resource_title}</a> 次会议已结束。
@@ -96,7 +97,7 @@ zh-CN:
         meeting_updated:
           email_intro: '"%{resource_title}"会议已更新。您可以从其页面读取新版本：'
           email_outro: 您收到此通知是因为您正在关注“%{resource_title}”会议。您可以从上一个链接取消关注它。
-          email_subject: '“%{resource_title}”会议已更新'
+          email_subject: "“%{resource_title}”会议已更新"
           notification_title: <a href="%{resource_path}">%{resource_title}</a> 次会议已更新。
         registration_code_validated:
           email_intro: 您的注册码%{registration_code}"%{resource_title}"会议的注册码已被验证。
@@ -117,7 +118,7 @@ zh-CN:
       badges:
         attended_meetings:
           conditions:
-            - 注册您想要参加的会议
+          - 注册您想要参加的会议
           description: 当你参加几次面对面的会议时颁发这个徽章。
           description_another: 此参与者已经参加了 %{score} 次会议。
           description_own: 您已经参加了 %{score} 次会议。
@@ -132,7 +133,7 @@ zh-CN:
         edit: 编辑
         invalid_destroy:
           proposals_count:
-            other: '会议不能被破坏，因为它有 %{count} 个建议与此相关联：'
+            other: 会议不能被破坏，因为它有 %{count} 个建议与此相关联：
         preview: 预览
         registrations: 注册
         title: 行动
@@ -191,8 +192,8 @@ zh-CN:
           edit:
             update: 更新
           form:
-            address_help: '地址：由地理编码器用来查找位置'
-            location_help: '位置：发送给用户的消息，这些消息暗示要会见的地点'
+            address_help: 地址：由地理编码器用来查找位置
+            location_help: 位置：发送给用户的消息，这些消息暗示要会见的地点
           index:
             title: 会议
           new:
@@ -282,9 +283,9 @@ zh-CN:
             official: 官方的
           search: 搜索
         form:
-          address_help: '地址：由地理编码器用来查找位置'
+          address_help: 地址：由地理编码器用来查找位置
           create_as: 创建会议为
-          location_help: '位置：发送给用户的消息，这些消息暗示要会见的地点'
+          location_help: 位置：发送给用户的消息，这些消息暗示要会见的地点
         index:
           new_meeting: 新会议
         meetings:
@@ -308,7 +309,7 @@ zh-CN:
             validated: 有效的
             validation_pending: VALIDATED
           remaining_slots:
-            other: "剩余 %{count} 个槽位"
+            other: 剩余 %{count} 个槽位
         update:
           invalid: 更新会议时出现问题。
           success: 您已成功更新会议。
@@ -361,11 +362,11 @@ zh-CN:
         upcoming_meetings: 即将举行的会议
     resource_links:
       meetings_through_proposals:
-        meeting_result: '相关结果：'
-        result_meeting: '相关会议：'
+        meeting_result: 相关结果：
+        result_meeting: 相关会议：
       proposals_from_meeting:
-        meeting_proposal: '3. 有关建议：'
-        proposal_meeting: '相关会议：'
+        meeting_proposal: 3. 有关建议：
+        proposal_meeting: 相关会议：
   devise:
     mailer:
       join_meeting:

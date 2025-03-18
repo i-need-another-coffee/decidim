@@ -1,3 +1,4 @@
+---
 lt:
   activemodel:
     attributes:
@@ -74,19 +75,19 @@ lt:
   activerecord:
     models:
       decidim/conference:
-        one: Konferencija
         few: Konferencijos
         many: Konferencijos
+        one: Konferencija
         other: Konferencijos
       decidim/conference_speaker:
-        one: Konferencijos kalbėtoja(-s)
         few: Konferencijos kalbėtojai(-os)
         many: Konferencijos kalbėtojai(-os)
+        one: Konferencijos kalbėtoja(-s)
         other: Konferencijos kalbėtojai(-os)
       decidim/conference_user_role:
-        one: Konferencijos naudotojo rolė
         few: Konferencijos naudotojų rolė
         many: Konferencijos naudotojų rolė
+        one: Konferencijos naudotojo rolė
         other: Konferencijos naudotojų rolė
   decidim:
     admin:
@@ -338,9 +339,9 @@ lt:
           form:
             available_slots_help: Jei nėra ribojimų įrašykite 0.
             registrations_count:
-              one: Yra viena registracija.
               few: Yra %{count} registracijų.
               many: Yra %{count} registracijų.
+              one: Yra viena registracija.
               other: Yra %{count} registracijų.
         diplomas:
           edit:
@@ -410,9 +411,9 @@ lt:
       conference_speakers:
         index:
           speakers:
-            one: Kalbėtoja(-s)
             few: Kalbėtojai
             many: Kalbėtojai
+            one: Kalbėtoja(-s)
             other: Kalbėtojai
       conferences:
         partners:
@@ -489,9 +490,9 @@ lt:
           email_subject: Užimta daugiau nei %{percentage}% konferencijos „%{resource_title}“ laiko tarpsnių
           notification_title: Užimta daugiau nei %{percentage}% konferencijos <a href="%{resource_path}">%{resource_title}</a> laiko tarpsnių.
         conference_updated:
-          email_intro: '„%{resource_title}“ konferencija buvo atnaujinta. Naująją versiją galite perskaityti jos puslapyje:'
+          email_intro: "„%{resource_title}“ konferencija buvo atnaujinta. Naująją versiją galite perskaityti jos puslapyje:"
           email_outro: Šį pranešimą gavote dėl to, kad sekate „%{resource_title}“ konferenciją. Jūs galite jos nebesekti spustelėdami ankstesnę nuorodą.
-          email_subject: '„%{resource_title}“ konferencija buvo atnaujinta'
+          email_subject: "„%{resource_title}“ konferencija buvo atnaujinta"
           notification_title: <a href="%{resource_path}">%{resource_title}</a> konferencija buvo atnaujinta.
         registrations_enabled:
           email_intro: 'Registracija į „%{resource_title}“ konferenciją įjungta. Galite užsiregistruoti jos tinklalapyje:'
@@ -504,9 +505,9 @@ lt:
           email_subject: Jūs paskirtas „%{resource_title}“ %{role}.
           notification_title: Jūs paskirtas <a href="%{resource_url}">%{resource_title}</a> konferencijos %{role}.
         upcoming_conference:
-          email_intro: '„%{resource_title}“ konferencija įvyks po dviejų dienų. Aprašymą galite perskaityti jos puslapyje:'
+          email_intro: "„%{resource_title}“ konferencija įvyks po dviejų dienų. Aprašymą galite perskaityti jos puslapyje:"
           email_outro: Šį pranešimą gavote dėl to, kad sekate „%{resource_title}“ konferenciją. Jūs galite jos nebesekti spustelėdami ankstesnę nuorodą.
-          email_subject: '„%{resource_title}“ konferencija artėja!'
+          email_subject: "„%{resource_title}“ konferencija artėja!"
           notification_title: <a href="%{resource_path}">%{resource_title}</a> konferencija įvyks po dviejų dienų.
     help:
       participatory_spaces:
@@ -542,9 +543,9 @@ lt:
           promoted_conferences: Paryškintos konferencijos
         order_by_conferences:
           conferences:
-            one: "%{count} konferencija"
             few: "%{count} konferencijos"
             many: "%{count} konferencijos"
+            one: "%{count} konferencija"
             other: "%{count} konferencijos"
       conferences_nav:
         conference_partners_menu_item: Partneriai

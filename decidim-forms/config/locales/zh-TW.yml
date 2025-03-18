@@ -1,3 +1,4 @@
+---
 zh-TW:
   activemodel:
     attributes:
@@ -52,7 +53,7 @@ zh-TW:
             index:
               title: "%{total} 個回應總數"
             show:
-              title: '回答#%{number}'
+              title: 回答#%{number}
           display_condition:
             answer_option: 答案選項
             condition_question: 問題
@@ -144,13 +145,13 @@ zh-TW:
           max_choices_alert: 選擇的項目太多了
           success: 表單已成功回答
         question:
-          max_choices: '最多選擇數量： %{n}'
+          max_choices: 最多選擇數量： %{n}
         show:
           answer_questionnaire:
             already_have_an_account?: 已經有帳號了嗎？
             are_you_new?: 新用戶?
             sign_up_description: 建立參與者帳號以填寫問卷
-            title: 回答表單 
+            title: 回答表單
           current_step: 步驟%{step}
           of_total_steps: 的%{total_steps}
           questionnaire_answered:

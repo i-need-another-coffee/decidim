@@ -1,3 +1,4 @@
+---
 zh-TW:
   activemodel:
     attributes:
@@ -10,7 +11,7 @@ zh-TW:
         description: 說明
         hashtag: 主題標籤
         offline_votes: 親筆簽名
-        offline_votes_for_scope: '%{scope_name} 的親筆簽名'
+        offline_votes_for_scope: "%{scope_name} 的親筆簽名"
         scope_id: 範圍
         signature_end_date: 簽名收集期限結束
         signature_start_date: 簽名收集期限開始
@@ -176,8 +177,8 @@ zh-TW:
       badges:
         initiatives:
           conditions:
-            - 前往倡議參與空間
-            - '"按照以下步驟創建新的倡議'
+          - 前往倡議參與空間
+          - "\"按照以下步驟創建新的倡議"
           description: 此徽章是當你發起新的倡議，與他人合作進行時所授予的。
           description_another: 該參與者已成功發佈 %{score} 項倡議。
           description_own: 你已經發佈了 %{score} 項倡議。
@@ -218,7 +219,7 @@ zh-TW:
             max_results: 顯示的最大元素數量
             order:
               default: 預設（最舊）
-              label: '按照順序排列元素：'
+              label: 按照順序排列元素：
               most_recent: 最近
         exports:
           initiatives: 倡議
@@ -339,7 +340,7 @@ zh-TW:
         select_initiative_type:
           back: 返回
           choose_html: 我想要創建一個<strong>%{title}</strong>
-          more_information: (更多資訊)
+          more_information: "(更多資訊)"
           select: 我想推動這個倡議
           verification_required: 驗證您的帳戶以推動這個倡議
       edit:
@@ -355,7 +356,7 @@ zh-TW:
       events:
         approve_membership_request:
           email_intro: "%{author_nickname} 同意您加入 %{resource_title} 倡議的推動委員會。"
-          email_outro: '這是您收到的通知，因為您申請參與這個倡議：%{resource_title}。'
+          email_outro: 這是您收到的通知，因為您申請參與這個倡議：%{resource_title}。
           email_subject: "%{author_nickname} 同意您加入推動委員會。"
           notification_title: <a href="%{author_profile_url}">%{author_nickname}</a> 同意您加入以下倡議的推動委員會：<a href="%{resource_url}">%{resource_title}</a>。
         create_initiative_event:
@@ -370,12 +371,12 @@ zh-TW:
           notification_title: <a href="%{resource_path}">%{resource_title}</a> 倡議已獲 %{author_name} %{author_nickname} 連署。
         revoke_membership_request:
           email_intro: "%{author_nickname} 拒絕了您加入 %{resource_title} 倡議發起委員會的申請。"
-          email_outro: '這是您收到的通知，因為您申請參與這個倡議：%{resource_title}。'
+          email_outro: 這是您收到的通知，因為您申請參與這個倡議：%{resource_title}。
           email_subject: "%{author_nickname} 拒絕了你加入推廣委員會的申請"
           notification_title: <a href="%{author_profile_url}">%{author_nickname}</a> 拒絕了您加入 %{resource_title} 倡議的推廣委員會成員的申請。
         spawn_committee_request_event:
           email_intro: "%{applicant_nickname} 申請加入您的倡議 %{resource_title} 推廣委員會。要接受或拒絕申請，請前往您的倡議編輯表單。"
-          email_outro: '你收到這個通知是因為你是該倡議 %{resource_title} 的作者。'
+          email_outro: 你收到這個通知是因為你是該倡議 %{resource_title} 的作者。
           email_subject: "%{applicant_nickname} 想加入你的倡議"
           notification_title: <a href="%{applicant_profile_url}">%{applicant_nickname}</a> 申請加入你的倡議 <a href="%{resource_url}">%{resource_title}</a> 的推動委員會。點擊<a href="%{resource_url}/edit">這裡</a>接受或拒絕申請。
       index:
@@ -406,7 +407,12 @@ zh-TW:
       initiatives:
         author_list:
           hidden_authors_count:
-            other: "one\n以及其他 %{count} 個人\n\nOther\n以及其他 %{count} 個人"
+            other: |-
+              one
+              以及其他 %{count} 個人
+
+              Other
+              以及其他 %{count} 個人
         committee_members:
           approve: 核准
           invite_to_committee_help: 透過分享此連結，邀請其他參與者加入推廣委員會。
@@ -415,7 +421,12 @@ zh-TW:
           title: 委員會成員
         count:
           title:
-            other: "One\n %{count} 倡議\n\nOther\n %{count} 倡議"
+            other: |-
+              One
+               %{count} 倡議
+
+              Other
+               %{count} 倡議
         filters:
           any: 任何
           area: 區域
@@ -434,7 +445,7 @@ zh-TW:
             count:
               other: 評論
         orders:
-          label: '按照以下方式對倡議進行排序：'
+          label: 按照以下方式對倡議進行排序：
           most_commented: 最多評論
           most_voted: 最多簽署的
           random: 隨機
@@ -483,9 +494,9 @@ zh-TW:
           here: 此處
         more_information: 這裡有更多關於倡議創建過程的資訊。
         progress_report_body_for: 倡議「%{title}」已達到所需簽署的 %{percentage}%。
-        progress_report_for: '倡議摘要：%{title}'
+        progress_report_for: 倡議摘要：%{title}
         promotal_committee_help: 請記住，您必須邀請至少 %{member_count} 人加入倡議的推廣委員會。請轉發以下連結以邀請人們加入推廣委員會。
-        status_change_body_for: '倡議「%{title}」的狀態已更改為：%{state}'
+        status_change_body_for: 倡議「%{title}」的狀態已更改為：%{state}
         status_change_for: 倡議「%{title}」的狀態已更改。
       last_activity:
         new_initiative: '新的倡議:'

@@ -1,3 +1,4 @@
+---
 el:
   activerecord:
     models:
@@ -7,7 +8,7 @@ el:
   decidim:
     admin_log:
       page:
-        update: "Ο χρήστης %{user_name} ενημέρωσε τη σελίδα %{resource_name} στον χώρο %{space_name}"
+        update: Ο χρήστης %{user_name} ενημέρωσε τη σελίδα %{resource_name} στον χώρο %{space_name}
     components:
       pages:
         name: Σελίδα

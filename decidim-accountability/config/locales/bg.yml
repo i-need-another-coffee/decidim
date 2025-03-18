@@ -1,3 +1,4 @@
+---
 bg:
   activemodel:
     attributes:
@@ -119,13 +120,13 @@ bg:
           delete: "%{user_name} изтри резултата %{resource_name} в %{space_name}"
           update: "%{user_name} обнови резултата %{resource_name} в %{space_name}"
         status:
-          create: "Статусът е създаден"
-          delete: "Статусът е изтрит"
-          update: "Статусът е обновен"
+          create: Статусът е създаден
+          delete: Статусът е изтрит
+          update: Статусът е обновен
         timeline_entry:
-          create: "Създаде запис във времевата линия"
-          delete: "Изтри запис от времевата линия"
-          update: "Обнови запис във времевата линия"
+          create: Създаде запис във времевата линия
+          delete: Изтри запис от времевата линия
+          update: Обнови запис във времевата линия
         value_types:
           parent_presenter:
             not_found: 'Родителя липсва в базата данни (ID: %{id})'

@@ -1,9 +1,10 @@
+---
 sk:
   activemodel:
     attributes:
       oauth_application:
         organization_logo: Logo organizácie (štvorec)
-        organization_url: Odkaz na stránku organizácie 
+        organization_url: Odkaz na stránku organizácie
         redirect_uri: Presmerovať URI
       organization:
         address: SMTP hostname

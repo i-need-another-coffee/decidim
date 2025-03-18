@@ -1,3 +1,4 @@
+---
 sk:
   activemodel:
     attributes:
@@ -35,16 +36,16 @@ sk:
       admin:
         id_documents:
           help:
-            - Užívatelia vyplní informácie o svojej identite a nahrajú kópiu dokumentu.
-            - Vyplníte informácie obsiahnuté v nahranom obrázku.
-            - Informácie by mali zodpovedať používateľovi, ktorý vyplnil.
-            - 
+          - Užívatelia vyplní informácie o svojej identite a nahrajú kópiu dokumentu.
+          - Vyplníte informácie obsiahnuté v nahranom obrázku.
+          - Informácie by mali zodpovedať používateľovi, ktorý vyplnil.
+          -
         postal_letter:
           help:
-            - Užívatelia požadujú, aby ich adresa bola odoslaná certifikačnému kódu.
-            - Na adresu zasielate list s overovacím kódom.
-            - Označte písmeno ako odoslaný.
-            - Akonáhle označíte odoslanej písmeno, užívateľ bude schopný kód zadať a overiť.
+          - Užívatelia požadujú, aby ich adresa bola odoslaná certifikačnému kódu.
+          - Na adresu zasielate list s overovacím kódom.
+          - Označte písmeno ako odoslaný.
+          - Akonáhle označíte odoslanej písmeno, užívateľ bude schopný kód zadať a overiť.
       csv_census:
         name: Sčítanie organizácie
       direct: Priamo
@@ -98,10 +99,10 @@ sk:
       dummy_authorization:
         extra_explanation:
           postal_codes:
+            few: Účasť je obmedzená na používateľov s niektorým z nasledujúcich poštových smerovacích čísel:%{postal_codes}.
+            many: Účasť je obmedzená na používateľov s niektorým z nasledujúcich poštových smerovacích čísel:%{postal_codes}.
             one: Účasť je obmedzená na užívateľov s poštovým smerovacím číslom%{postal_codes}.
-            few: 'Účasť je obmedzená na používateľov s niektorým z nasledujúcich poštových smerovacích čísel:%{postal_codes}.'
-            many: 'Účasť je obmedzená na používateľov s niektorým z nasledujúcich poštových smerovacích čísel:%{postal_codes}.'
-            other: 'Účasť je obmedzená na používateľov s niektorým z nasledujúcich poštových smerovacích čísel:%{postal_codes}.'
+            other: Účasť je obmedzená na používateľov s niektorým z nasledujúcich poštových smerovacích čísel:%{postal_codes}.
       id_documents:
         admin:
           config:

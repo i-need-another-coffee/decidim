@@ -1,3 +1,4 @@
+---
 lv:
   activemodel:
     attributes:
@@ -23,9 +24,9 @@ lv:
   activerecord:
     models:
       decidim/accountability/result:
-        zero: Rezultāti
         one: Rezultāts
         other: Rezultāti
+        zero: Rezultāti
   decidim:
     accountability:
       actions:
@@ -83,7 +84,7 @@ lv:
           update: "%{user_name} atjaunināja rezultātu %{resource_name} telpā %{space_name}"
         value_types:
           parent_presenter:
-            not_found: 'Saistītais datubāzē netika atrasts (ID:%{id})'
+            not_found: Saistītais datubāzē netika atrasts (ID:%{id})
       import_mailer:
         import:
           errors: Kļūdas
@@ -108,9 +109,9 @@ lv:
       results:
         count:
           results_count:
-            zero: "%{count} rezultāti"
             one: 1 rezultāts
             other: "%{count} rezultāti"
+            zero: "%{count} rezultāti"
         home_header:
           global_status: Globālais izpildes statuss
         search:
@@ -135,7 +136,7 @@ lv:
         proposal_linked:
           email_intro: 'Priekšlikums "%{proposal_title}" ir iekļauts rezultātā. Jūs varat to redzēt šajā lapā:'
           email_outro: Jūs saņēmāt šo paziņojumu, jo sekojat "%{proposal_title}". Jūs varat atteikties no paziņojumu saņemšanas, sekojot iepriekšējai saitei.
-          email_subject: '%{proposal_title} atjauninājums'
+          email_subject: "%{proposal_title} atjauninājums"
           notification_title: Priekšlikums <a href="%{proposal_path}">%{proposal_title}</a> ir iekļauts <a href="%{resource_path}">%{resource_title}</a> rezultātā.
         result_progress_updated:
           email_intro: 'Rezultāts "%{resource_title}", kas ietver priekšlikumu "%{proposal_title}", tagad ir %{progress}% pabeigts. Jūs varat to redzēt šajā lapā:'

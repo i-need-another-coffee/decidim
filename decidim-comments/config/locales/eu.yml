@@ -1,3 +1,4 @@
+---
 eu:
   activemodel:
     models:
@@ -59,14 +60,14 @@ eu:
           positive: Positiboa
           positive_selected: Zure iritzia gai honi buruz positiboa da
         remaining_characters: "%{count} kakaktere geratzen dira"
-        remaining_characters_1: "karaktere %{count} geratzen da"
+        remaining_characters_1: karaktere %{count} geratzen da
         title: Gehitu zure iruzkina
       comment:
         alignment:
           against: Aurka
           in_favor: Alde
         answers:
-          one: "Erantzun %{count}"
+          one: Erantzun %{count}
           other: "%{count} erantzun"
         cancel_reply: Erantzuna ezabatu
         comment_label: Iruzkindu %{comment_id}
@@ -117,7 +118,7 @@ eu:
         single_comment_warning: <a href="%{url}">k erakusten ditu iruzkin guztiak</a>
         single_comment_warning_title: Iruzkin bakar bat ikusten ari zara
         title:
-          one: "Iruzkin bat"
+          one: Iruzkin bat
           other: "%{count} iruzkin"
         top_comment_label: Bozkatuenak
       down_vote_button:
@@ -156,12 +157,12 @@ eu:
         comment_by_followed_user:
           email_intro: "%{author_name} egileak iruzkin bat utzi du %{resource_title} helbidean. Orri honetan irakur dezakezu:"
           email_outro: Jakinarazpen hau jaso duzu %{author_name} parte-hartzailea jarraitzen duzulako. Nahi izatekotan erabiltzaile hori bere profil-orritik jarraitzeari utz diezaiokezu.
-          email_subject: '%{author_name} egileak beste iruzkin bat egin du hemen: %{resource_title}'
+          email_subject: "%{author_name} egileak beste iruzkin bat egin du hemen: %{resource_title}"
           notification_title: '<a href="%{author_path}">%{author_name} %{author_nickname}</a> parte-hartzaileak iruzkin berri bat egin du hemen: <a href="%{resource_path}">%{resource_title}</a>.'
         comment_created:
-          email_intro: "Norbaitek iruzkin bat egin du hemen: %{resource_title}. Orri honetan irakur dezakezu:"
+          email_intro: 'Norbaitek iruzkin bat egin du hemen: %{resource_title}. Orri honetan irakur dezakezu:'
           email_outro: Jakinarazpen hau jaso duzu "%{resource_title}" edo bere egilea jarraitzen duzulako. Aurreko estekan jarrai dezakezu.
-          email_subject: '%{author_name} egileak beste iruzkin berri bat egin du hemen: %{resource_title}'
+          email_subject: "%{author_name} egileak beste iruzkin berri bat egin du hemen: %{resource_title}"
           notification_title: '<a href="%{author_path}">%{author_name} %{author_nickname}</a> parte-hartzaileak iruzkin berri bat egin du hemen: <a href="%{resource_path}">%{resource_title}</a>'
         comment_downvoted:
           email_intro: Zure iruzkina hemen "%{resource_title}" negatiboki bozkatu da. Orain %{upvotes} babes positibo eta %{downvotes} boto negatibo dituzu guztira.

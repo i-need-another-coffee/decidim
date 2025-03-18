@@ -1,3 +1,4 @@
+---
 gl:
   activemodel:
     attributes:
@@ -259,7 +260,7 @@ gl:
           success: O compoñente foi actualizado correctamente.
       conflicts:
         attempts: Tentativas
-        'false': 'Non'
+        'false': Non
         managed_user_name: Usuario xestionado
         solved: Resolto
         transfer:
@@ -268,7 +269,7 @@ gl:
           reason: Motivo
           success: A transferencia actual completouse con éxito.
           title: Transferir
-        'true': 'Si'
+        'true': Si
         user_name: Usuario
       dashboard:
         show:
@@ -285,13 +286,13 @@ gl:
         invitation_accepted_at_present:
           label: Convite aceptado
           values:
-            'false': 'Non'
-            'true': 'Si'
+            'false': Non
+            'true': Si
         last_sign_in_at_present:
           label: Sesión xa iniciada
           values:
-            'false': 'Non'
-            'true': 'Si'
+            'false': Non
+            'true': Si
         moderated_users:
           reports_reason_eq:
             label: Motivo do informe
@@ -577,7 +578,7 @@ gl:
           all: todos
           all_users: 'Todos os usuarios '
           and: 'e '
-          confirm_delete: '¿Estás seguro de que queres eliminar este boletín informativo?'
+          confirm_delete: "¿Estás seguro de que queres eliminar este boletín informativo?"
           followers: 'seguidores '
           has_been_sent_to: 'Foi enviado a: '
           not_sent: Sen enviar
@@ -591,7 +592,7 @@ gl:
         select_recipients_to_deliver:
           all_spaces: Todos
           all_users_help: Enviar boletíns a todos os usuarios confirmados.
-          confirm_deliver: '¿Estás seguro de que desexas enviar este boletín informativo? Non se pode desfacer esta acción.'
+          confirm_deliver: "¿Estás seguro de que desexas enviar este boletín informativo? Non se pode desfacer esta acción."
           deliver: Enviar boletín informativo
           followers_help: Enviar boletíns a todos os usuarios confirmados que sigan calquera dos espazos de participación seleccionados na listaxe.
           participants_help: Enviar boletíns a todos os usuarios confirmados que teñan participado en calquera dos espazos de participación seleccionados na listaxe.
@@ -684,8 +685,8 @@ gl:
         create:
           error: Produciuse un problema ao crear os recordatorios.
           success:
-            one: "Lembrarase a %{count} usuario."
-            other: "Lembrarase a %{count} usuarios."
+            one: Lembrarase a %{count} usuario.
+            other: Lembrarase a %{count} usuarios.
         new:
           submit: Enviar
       resource_permissions:

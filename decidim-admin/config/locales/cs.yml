@@ -1,3 +1,4 @@
+---
 cs:
   activemodel:
     attributes:
@@ -352,7 +353,7 @@ cs:
           unpublished: Nezveřejněno
       conflicts:
         attempts: Pokusy
-        'false': 'Ne'
+        'false': Ne
         index:
           text: Hledat podle aktuálního uživatelského e-mailu, jména nebo přezdívky.
         managed_user_name: Spravovaný uživatel
@@ -365,7 +366,7 @@ cs:
           reason: Důvod
           success: Aktuální převod byl úspěšně dokončen.
           title: Převod
-        'true': 'Ano'
+        'true': Ano
         user_name: Uživatel
       content_blocks:
         create:
@@ -384,9 +385,9 @@ cs:
       dashboard:
         pending_moderations:
           announcement:
-            one: Je zde %{count} čekající na moderování
             few: Jsou zde %{count} čekající na moderování
             many: Je zde %{count} čekajících na moderování
+            one: Je zde %{count} čekající na moderování
             other: Je tu %{count} čekajících na moderování
           goto_moderation: Přejít na globální moderaci
           title: Čekající moderování
@@ -412,13 +413,13 @@ cs:
         invitation_accepted_at_present:
           label: Pozvánka přijata
           values:
-            'false': 'Ne'
-            'true': 'Ano'
+            'false': Ne
+            'true': Ano
         last_sign_in_at_present:
           label: Vždy přihlášen
           values:
-            'false': 'Ne'
-            'true': 'Ano'
+            'false': Ne
+            'true': Ano
         moderated_users:
           reports_reason_eq:
             label: Důvod hlášení
@@ -522,31 +523,31 @@ cs:
           duplicate_headers:
             detail: Zkontrolujte, zda soubor obsahuje požadované sloupce nebo záhlaví pouze jednou.
             message:
-              one: Duplikovat sloupec %{columns}.
               few: Duplikovat sloupce %{columns}.
               many: Duplikovat sloupce %{columns}.
+              one: Duplikovat sloupec %{columns}.
               other: Duplikovat sloupce %{columns}.
           invalid_indexes:
             lines:
               detail: Zkontrolujte, zda jsou tyto řádky správně formátovány a obsahují platné záznamy.
               message:
-                one: Nalezena chyba v importním souboru na řádku %{indexes}.
                 few: Nalezena chyba v importním souboru na řádcách %{indexes}.
                 many: Nalezena chyba v importním souboru na řádcích %{indexes}.
+                one: Nalezena chyba v importním souboru na řádku %{indexes}.
                 other: Nalezeny chyby v importním souboru na řádcích %{indexes}.
             records:
               detail: Zkontrolujte, zda jsou tyto záznamy správně formátovány a obsahují platné záznamy.
               message:
-                one: Nalezena chyba v importním souboru pro záznamy s pořadovým číslem %{indexes}.
                 few: Nalezeny chyby v importním souboru pro záznamy s pořadovými čísly %{indexes}.
                 many: Nalezeny chyby v importním souboru pro záznamy s pořadovými čísly %{indexes}.
+                one: Nalezena chyba v importním souboru pro záznamy s pořadovým číslem %{indexes}.
                 other: Nalezeny chyby v importním souboru pro záznamy s pořadovými čísly %{indexes}.
           missing_headers:
             detail: Zkontrolujte, zda soubor obsahuje požadované sloupce.
             message:
-              one: Chybí sloupec %{columns}.
               few: Chybí sloupce %{columns}.
               many: Chybí sloupce %{columns}.
+              one: Chybí sloupec %{columns}.
               other: Chybí sloupce %{columns}.
         error: Při importu došlo k chybě.
         example_error: Při vytváření příkladu pro daný typ došlo k chybě.
@@ -972,7 +973,7 @@ cs:
             explanation: Máte %{count} soukromých účastníků.
             title: Odstranit soukromé účastníky
           example_file: 'Příklad souboru:'
-          explanation: 'Nahrajte soubor CSV. Musí mít dva sloupce s e-mailem v prvním sloupci souboru a jméno v posledním sloupci souboru uživatelů, které chcete přidat do participačního prostoru, bez hlaviček. Vyhněte se používání neplatných znaků jako `<>?%&^*#@()[]=+:;"{}\|` v uživatelském jméně.'
+          explanation: Nahrajte soubor CSV. Musí mít dva sloupce s e-mailem v prvním sloupci souboru a jméno v posledním sloupci souboru uživatelů, které chcete přidat do participačního prostoru, bez hlaviček. Vyhněte se používání neplatných znaků jako `<>?%&^*#@()[]=+:;"{}\|` v uživatelském jméně.
           explanation_example: |
             john.doe@example.org%{csv_col_sep}John Doe
             jane.doe@example.org%{csv_col_sep}Jane Doe
@@ -982,9 +983,9 @@ cs:
         create:
           error: Při vytváření připomenutí došlo k chybě.
           success:
-            one: "%{count} uživatel bude upozorněn."
             few: "%{count} uživatelé budou upozorněni."
             many: "%{count} uživatelů bude upozorněno."
+            one: "%{count} uživatel bude upozorněn."
             other: "%{count} uživatelů bude upozorněno."
         new:
           submit: Odeslat
@@ -1050,11 +1051,11 @@ cs:
           custom_expiration: Vlastní vypršení platnosti
           custom_token: Vlastní slovo
           expires_at: Vyprší v
-          'false': 'Ne'
+          'false': Ne
           never_expire: Nikdy
           registered_only: Pouze registrovaní?
           token: Přístupový klíč
-          'true': 'Ano'
+          'true': Ano
         index:
           back_to_share_tokens: Zpět k přístupovým odkazům
           copied: Přístupový odkaz zkopírován!
@@ -1189,9 +1190,9 @@ cs:
         form:
           all: Vše
           items:
-            one: "%{count} položka vybrána"
             few: "%{count} položky vybrány"
             many: "%{count} položek vybráno"
+            one: "%{count} položka vybrána"
             other: "%{count} položek vybráno"
           name_help: Název filtru, který má být zobrazen ve frontendu.
           no_items: Pro tuto taxonomii nejsou k dispozici žádné položky. Položky můžete vytvořit v nastavení taxonomie.

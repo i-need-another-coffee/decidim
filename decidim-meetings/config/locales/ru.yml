@@ -1,3 +1,4 @@
+---
 ru:
   activemodel:
     attributes:
@@ -33,19 +34,19 @@ ru:
   activerecord:
     models:
       decidim/meetings/meeting:
-        one: Встреча
         few: Встречи
         many: Встреч
+        one: Встреча
         other: Встреч
       decidim/meetings/minutes:
-        one: Протокол
         few: Протокола
         many: Протоколов
+        one: Протокол
         other: Протоколов
       decidim/meetings/registration:
-        one: Зарегистрировался
         few: Зарегистрировалось
         many: Зарегистрировались
+        one: Зарегистрировался
         other: Зарегистрировались
   decidim:
     admin:
@@ -119,7 +120,7 @@ ru:
       badges:
         attended_meetings:
           conditions:
-            - Зарегистрируйтесь на встречи, в которых вы хотите принять участие
+          - Зарегистрируйтесь на встречи, в которых вы хотите принять участие
           description: Этот значок будет получен, когда вы примете участие в нескольких встречах лицом к лицу.
           description_another: Этот участник принял участие в %{score} встречах.
           description_own: Вы приняли участие в %{score} встречах.

@@ -1,3 +1,4 @@
+---
 cs:
   activemodel:
     attributes:
@@ -83,28 +84,28 @@ cs:
     models:
       decidim:
         history:
-          one: Historie
           few: Historie
           many: Historie
+          one: Historie
           other: Historie
       decidim/amendment:
-        one: Pozměňovací návrh
         few: Změny
         many: Změny
+        one: Pozměňovací návrh
         other: Změny
       decidim/endorsement:
-        one: Schválení
         few: Schválení
         many: Schválení
+        one: Schválení
         other: Schválení
       decidim/user:
-        one: Žádní uživatelé
         few: Uživatelé
         many: Uživatelé
+        one: Žádní uživatelé
         other: Uživatelé
   booleans:
-    'false': 'Ne'
-    'true': 'Ano'
+    'false': Ne
+    'true': Ano
   date:
     buttons:
       close: Zavřít‏
@@ -123,25 +124,25 @@ cs:
   datetime:
     distance_in_words:
       about_x_hours:
-        one: asi 1 hodina
         few: asi %{count} hodiny
         many: asi %{count} hodin
+        one: asi 1 hodina
         other: asi %{count} hodin
       about_x_months:
-        one: asi 1 měsíc
         few: asi %{count} měsíce
         many: asi %{count} měsíců
+        one: asi 1 měsíc
         other: asi %{count} měsíců
       half_a_minute: půl minuty
       less_than_x_minutes:
-        one: méně než minuta
         few: méně než %{count} minuty
         many: méně než %{count} minut
+        one: méně než minuta
         other: méně než %{count} minut
       less_than_x_seconds:
-        one: méně než 1 sekundou
         few: méně než %{count} sekundami
         many: méně než %{count} sekundami
+        one: méně než 1 sekundou
         other: méně než %{count} sekundami
       short:
         about_x_days: "%{count}d"
@@ -161,35 +162,35 @@ cs:
         x_seconds: "%{count} s"
         x_years: "%{count} let"
       x_days:
-        one: 1 dnem
         few: "{{$count}} dny"
         many: "{{$count}} dny"
+        one: 1 dnem
         other: "{{$count}} dny"
       x_hours:
-        one: 1 hodina
         few: "%{count} hodiny"
         many: "%{count} hodin"
+        one: 1 hodina
         other: "%{count} hodin"
       x_minutes:
-        one: 1 minuta
         few: "%{count} minuty"
         many: "%{count} minut"
+        one: 1 minuta
         other: "%{count} minut"
       x_months:
-        one: 1 měsíc
         few: "%{count} měsíce"
         many: "%{count} měsíců"
+        one: 1 měsíc
         other: "%{count} měsíců"
       x_seconds:
-        one: 1 sekunda
         few: "%{count} sekundy"
         many: "%{count} sekund"
+        one: 1 sekunda
         other: "%{count} sekund"
   decidim:
     accessibility:
       external_link: Externí odkaz
       front_page_link: Přejít na titulní stránku
-      logo: "Oficiální logo %{organization}"
+      logo: Oficiální logo %{organization}
       opens_in_new_tab: Otevře se v nové kartě
       skip_button: Přeskočit na hlavní obsah
     account:
@@ -229,7 +230,7 @@ cs:
         success: Váš účet byl úspěšně aktualizován.
         success_with_email_confirmation: Váš účet byl úspěšně aktualizován. Pro potvrzení vaší nové e-mailové adresy obdržíte e-mail.
     activity:
-      time_ago: "před %{time}"
+      time_ago: před %{time}
     admin:
       actions:
         cancel: Zrušit
@@ -373,9 +374,9 @@ cs:
         promote_help_text: Můžete podpořit tuto opravu a publikovat ji jako nezávislý %{model_name}.
       amendments:
         title:
-          one: "%{count} pozměňovací návrh"
           few: "%{count} pozměňovací návrhy"
           many: "%{count} pozměňovacích návrhů"
+          one: "%{count} pozměňovací návrh"
           other: "%{count} pozměňovacích návrhů"
       created:
         error: Při vytváření pozměňovacího návrhu došlo k chybě.
@@ -400,7 +401,9 @@ cs:
             Tato změna pro hodnocení %{amendable_type} %{amendable_link}
             se hodnotí.
           promoted: Prosazováno jako %{amendable_type}.
-          rejected: "Tato změna pro %{amendable_type} %{amendable_link}\nbyla zamítnuta na <strong>%{announcement_date}</strong>."
+          rejected: |-
+            Tato změna pro %{amendable_type} %{amendable_link}
+            byla zamítnuta na <strong>%{announcement_date}</strong>.
           withdrawn: |-
             Tato změna pro číslo %{amendable_type} %{amendable_link}
             byla autorem stažena.
@@ -455,14 +458,14 @@ cs:
     author:
       avatar: 'Avatar: %{name}'
       comments:
-        one: komentář
         few: komentáře
         many: komentáře
+        one: komentář
         other: komentáře
       endorsements:
-        one: schválení
         few: schválení
         many: schválení
+        one: schválení
         other: schválení
       official_author: Oficiální
     authorization_handlers:
@@ -544,9 +547,9 @@ cs:
         subject: Váš účet byl zablokován od %{organization_name}
     collapsible_list:
       hidden_elements_count:
-        one: a %{count} dalších
         few: a %{count} dalších
         many: a %{count} dalších
+        one: a %{count} dalších
         other: a %{count} dalších
       see_less: "(viz níže)"
     components:
@@ -734,9 +737,9 @@ cs:
           shown_password: Vaše heslo je zobrazeno
         placeholder_email: hi@example.org
     documents:
-      one: "%{count} dokument"
       few: "%{count} dokumenty"
       many: "%{count} dokumentů"
+      one: "%{count} dokument"
       other: "%{count} dokumentů"
     doorkeeper:
       authorizations:
@@ -867,9 +870,9 @@ cs:
       endorse: Líbí se mi
     endorsers_list:
       endorsed_by:
-        one: Líbí se %{visible}
         few: Líbí se %{visible} a %{others}
         many: Líbí se %{visible} a %{others}
+        one: Líbí se %{visible}
         other: Líbí se %{visible} a %{others}
       others: "%{count} dalších"
       title: Líbí se
@@ -1034,16 +1037,16 @@ cs:
       value: Hodnota
     followers:
       followers_count:
-        one: "%{count} sledující"
         few: "%{count} sledující"
         many: "%{count} sledujících"
+        one: "%{count} sledující"
         other: "%{count} sledujících"
       no_followers: Zatím žádní sledující.
     following:
       following_count:
-        one: "%{count} sleduje"
         few: "%{count} sledují"
         many: "%{count} sleduje"
+        one: "%{count} sleduje"
         other: "%{count} sledujících"
       no_followings: Zatím nikoho nesleduje.
       non_public_followings: Některé z uvedených zdrojů nejsou veřejné.
@@ -1059,8 +1062,8 @@ cs:
       attachment_link:
         explanation: Pokyny pro odkazy na přílohy
         help_messages:
-          - Akceptovány jsou pouze správné formáty URL.
-          - Vezměte prosím na vědomí, že odkazy musí být veřejné, aby k nim měli přístup všichni účastníci.
+        - Akceptovány jsou pouze správné formáty URL.
+        - Vezměte prosím na vědomí, že odkazy musí být veřejné, aby k nim měli přístup všichni účastníci.
       errors:
         decidim/user:
           password: Heslo je příliš krátké.
@@ -1111,10 +1114,10 @@ cs:
       badges:
         followers:
           conditions:
-            - Buďte aktivní a sledujte jiné lidi, to určitě namotivuje ostatní lidi, aby vás sledovali.
+          - Buďte aktivní a sledujte jiné lidi, to určitě namotivuje ostatní lidi, aby vás sledovali.
           description: Tento odznak je udělen, když dosáhnete určitého počtu sledujících. %{organization_name} je společenská a politická síť, vytváří vaši síť komunikace s ostatními lidmi na platformě.
           description_another: Tento uživatel má %{score} následovníků.
-          description_own: "Uživatelé vás sledují %{score} uživatelů."
+          description_own: Uživatelé vás sledují %{score} uživatelů.
           name: Sledující
           next_level_in: Získejte %{score} dalších uživatelů, kteří vás budou následovat, abyste se dostali na další úroveň!
           unearned_another: Tento uživatel zatím nemá žádné následovatele.
@@ -1246,7 +1249,7 @@ cs:
         active: Aktivní
         finished: 'Dokončeno: %{end_date}'
         not_started: Ještě nezačalo
-        remaining: "Zbývá %{time_distance}"
+        remaining: Zbývá %{time_distance}
     metrics:
       blocked_users:
         description: Počet blokovaných účastníků
@@ -1713,7 +1716,7 @@ cs:
     user_contact_disabled: Tento uživatel nepřijímá přímé zprávy.
     user_conversations:
       index:
-        time_ago: "před %{time}"
+        time_ago: před %{time}
     user_report_mailer:
       notify:
         body_1: Uživatel %{user} byl nahlášen od %{token}
@@ -1845,8 +1848,8 @@ cs:
         confirm_new_password: Potvrďte nové heslo
         new_password: Nové heslo
         old_password_help: Chcete-li potvrdit změny vašeho účtu, zadejte prosím své aktuální heslo.
-        password_help: "minimální počet znaků je %{minimun_characters}, nesmí být příliš obvyklý (např. 123456) a musí se lišit od vašeho uživatelského jména a e-mailu."
-        password_help_admin: "minimální počet znaků je %{minimum_characters}, nesmí být příliš časté (např. 123456), musí se lišit od vaší přezdívky a e-mailu a musí se lišit od vašich starých hesel."
+        password_help: minimální počet znaků je %{minimun_characters}, nesmí být příliš obvyklý (např. 123456) a musí se lišit od vašeho uživatelského jména a e-mailu.
+        password_help_admin: minimální počet znaků je %{minimum_characters}, nesmí být příliš časté (např. 123456), musí se lišit od vaší přezdívky a e-mailu a musí se lišit od vašich starých hesel.
         title: Změna hesla
       new:
         forgot_your_password: Zapomněli jste heslo?
@@ -1882,9 +1885,9 @@ cs:
         log_in_with_provider: Přihlásit se pomocí %{provider}
         sign_up: Vytvořit účet
       minimum_password_length:
-        one: "(Minimálně%{count} znaků)"
         few: "(Minimálně%{count} znaků)"
         many: "(Minimálně%{count} znaků)"
+        one: "(Minimálně%{count} znaků)"
         other: "(Minimálně%{count} znaků)"
     unlocks:
       new:
@@ -1999,9 +2002,9 @@ cs:
       not_found: se nepodařilo najít. Vytvořili jste si účet již dříve?
       not_locked: nebyl uzamčen
       not_saved:
-        one: 'Při zpracování vašeho požadavku došlo k chybě:'
         few: 'Při zpracování vašeho požadavku došlo k několika chybám:'
         many: 'Při zpracování vašeho požadavku došlo k několika chybám:'
+        one: 'Při zpracování vašeho požadavku došlo k chybě:'
         other: 'Při zpracování vašeho požadavku došlo k několika chybám:'
       too_many_marks: používá příliš mnoho po sobě jdoucích interpunkčních znamének (např.! a?)
       too_much_caps: používá příliš mnoho velkých písmen (více než 25% textu)
@@ -2011,9 +2014,9 @@ cs:
     correct_errors: Na formuláři jsou chyby, opravte je a pokračujte.
     length_validator:
       minimum:
-        one: Alespoň %{count} znak
         few: Alespoň %{count} znaky
         many: Alespoň %{count} znaků
+        one: Alespoň %{count} znak
         other: Alespoň %{count} znaků
     required: Povinný
     required_explanation: "* Povinná pole jsou označena hvězdičkou"
@@ -2113,7 +2116,7 @@ cs:
         x: "%{organization} v X"
         youtube: "%{organization} na YouTube"
       timeout_modal:
-        body: '%{minutes} minut jste byli neaktivní. Pokud budete i nadále neaktivní, budete automaticky odhlášeni z důvodu své vlastní bezpečnosti.'
+        body: "%{minutes} minut jste byli neaktivní. Pokud budete i nadále neaktivní, budete automaticky odhlášeni z důvodu své vlastní bezpečnosti."
         continue_session: Pokračovat v relaci
         log_out: Odhlásit
         title: Chcete pokračovat v relaci?

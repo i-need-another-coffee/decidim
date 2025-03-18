@@ -1,3 +1,4 @@
+---
 sk:
   activemodel:
     attributes:
@@ -8,9 +9,9 @@ sk:
   activerecord:
     models:
       decidim/budgets/project:
-        one: Projekt
         few: Projekty
         many: Projekty
+        one: Projekt
         other: Projekty
   decidim:
     budgets:
@@ -74,9 +75,9 @@ sk:
             title: Hlasovanie o rozpočte dokončené
         count:
           projects_count:
-            one: 1 projekt
             few: "%{count} projekty"
             many: "%{count} projekty"
+            one: 1 projekt
             other: "%{count} projekty"
         filters:
           search: Hľadať

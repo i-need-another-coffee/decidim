@@ -1,3 +1,4 @@
+---
 hu:
   activemodel:
     attributes:
@@ -149,7 +150,7 @@ hu:
             endorsements_enabled: Jóváhagyások engedélyezve
             proposal_answering_enabled: Javaslat válasz engedélyezve
             publish_answers_immediately: Javaslati válaszok azonnali közzététele
-            publish_answers_immediately_help_html: 'Ne feledje, hogy ennek engedélyezése nélkül bármely javaslatot, kiválasztva őket, a művelet használatával manuálisan kell közzétennie. További információért arról, hogyan működik ez, lásd <a href="https://docs.decidim.org/en/admin/components/proposals/answers#_publication" target="_blank">proposals'' answers documentation page</a>.'
+            publish_answers_immediately_help_html: Ne feledje, hogy ennek engedélyezése nélkül bármely javaslatot, kiválasztva őket, a művelet használatával manuálisan kell közzétennie. További információért arról, hogyan működik ez, lásd <a href="https://docs.decidim.org/en/admin/components/proposals/answers#_publication" target="_blank">proposals' answers documentation page</a>.
             suggested_hashtags: Hashtagek javasolva a felhasználóknak új javaslatokra
             votes_blocked: Szavazások letiltva
             votes_enabled: Szavazások engedélyezve
@@ -211,23 +212,23 @@ hu:
       badges:
         accepted_proposals:
           conditions:
-            - Válassza ki az Ön érdeklődési körének részvételi területét a beküldött pályázati ajánlatokkal
-            - Próbáljon javaslatokat tenni, amelyeket végre lehet hajtani. Így nagyobb valószínűséggel fogadják el őket.
+          - Válassza ki az Ön érdeklődési körének részvételi területét a beküldött pályázati ajánlatokkal
+          - Próbáljon javaslatokat tenni, amelyeket végre lehet hajtani. Így nagyobb valószínűséggel fogadják el őket.
           description: Ezt a jelvényt akkor kapja meg, ha aktívan részt vesz új javaslatokkal, és ezeket elfogadják.
           description_another: A felhasználó %{score} javaslata elfogadásra került.
-          description_own: '%{score} ajánlatodat fogadták el.'
+          description_own: "%{score} ajánlatodat fogadták el."
           name: Elfogadott javaslatok
           next_level_in: Szerezz még több %{score} elfogadott ajánlatot, hogy eljuss a következő szintre!
           unearned_another: A felhasználónak még nincsenek elfogadott javaslatai.
           unearned_own: Még nincs elfogadott javaslatod.
         proposal_votes:
           conditions:
-            - Böngésszen és töltsön el egy ideig mások javaslatainak olvasását
-            - 
+          - Böngésszen és töltsön el egy ideig mások javaslatainak olvasását
+          -
         proposals:
           conditions:
-            - Válassza ki az Ön érdeklődési körének részvételi területét a beküldött pályázati ajánlatokkal
-            - Hozzon létre egy új javaslatot
+          - Válassza ki az Ön érdeklődési körének részvételi területét a beküldött pályázati ajánlatokkal
+          - Hozzon létre egy új javaslatot
           description: Ezt a jelvényt akkor kapja meg, ha aktívan részt vesz új javaslatokkal.
           description_another: A felhasználó %{score} javaslatot hozott létre.
           description_own: Eddig %{score} javaslatot hoztál létre.

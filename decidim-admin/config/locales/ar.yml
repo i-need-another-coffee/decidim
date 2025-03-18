@@ -1,3 +1,4 @@
+---
 ar:
   activemodel:
     attributes:
@@ -303,7 +304,7 @@ ar:
           success: تم تحديث المكون بنجاح.
       conflicts:
         attempts: المحاولات
-        'false': 'لا'
+        'false': لا
         managed_user_name: المستخدم المُدار
         solved: تم حلها
         title: تضارب التحقق
@@ -313,7 +314,7 @@ ar:
           reason: السبب
           success: قد اكتمل النقل الحالي بنجاح.
           title: نقل
-        'true': 'نعم'
+        'true': نعم
         user_name: المستخدم
       content_blocks:
         edit:
@@ -333,13 +334,13 @@ ar:
         invitation_accepted_at_present:
           label: تم قبول الدعوة
           values:
-            'false': 'لا'
-            'true': 'نعم'
+            'false': لا
+            'true': نعم
         last_sign_in_at_present:
           label: لم يتم تسجيل دخولهم
           values:
-            'false': 'لا'
-            'true': 'نعم'
+            'false': لا
+            'true': نعم
         moderated_users:
           reports_reason_eq:
             label: سبب الابلاغ
@@ -757,7 +758,7 @@ ar:
           edit: تعديل
           preview: معاينة
         form:
-          'true': 'نعم'
+          'true': نعم
         new:
           create: إنشاء
       shared:

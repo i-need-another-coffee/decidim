@@ -1,8 +1,9 @@
+---
 sl:
   activerecord:
     models:
       decidim/pages/page:
-        one: Stran
-        two: Strani
         few: Strani
+        one: Stran
         other: Strani
+        two: Strani

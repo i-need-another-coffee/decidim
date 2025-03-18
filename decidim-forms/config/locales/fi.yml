@@ -1,3 +1,4 @@
+---
 fi:
   activemodel:
     attributes:
@@ -196,7 +197,7 @@ fi:
             title: Vastaa kyselylomakkeeseen
           current_step: Vaihe %{step}
           empty: Tälle lomakkeelle ei ole vielä määritetty kysymyksiä.
-          of_total_steps: / %{total_steps}
+          of_total_steps: "/ %{total_steps}"
           questionnaire_answered:
             body: Olet jo vastannut tähän kyselylomakkeeseen.
             title: Olet jo vastannut

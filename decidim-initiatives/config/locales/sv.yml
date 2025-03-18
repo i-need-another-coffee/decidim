@@ -1,3 +1,4 @@
+---
 sv:
   activemodel:
     attributes:
@@ -188,8 +189,8 @@ sv:
       badges:
         initiatives:
           conditions:
-            - Gå till deltagarutrymmet för initiativ
-            - Följ stegen för att skapa ett nytt initiativ
+          - Gå till deltagarutrymmet för initiativ
+          - Följ stegen för att skapa ett nytt initiativ
           description: Detta märke beviljas när du startar nya initiativ och samarbetar med andra för att genomföra dem.
           description_another: Användaren har publicerat %{score} initiativ.
           description_own: Du har publicerat %{score} initiativ.
@@ -382,7 +383,7 @@ sv:
       events:
         approve_membership_request:
           email_intro: "%{author_nickname} accepterade din ansökan att ingå i kampanjgruppen för initiativet %{resource_title}."
-          email_outro: 'Du har fått det här meddelandet eftersom du är författaren av initiativet %{resource_title}'
+          email_outro: Du har fått det här meddelandet eftersom du är författaren av initiativet %{resource_title}
           email_subject: "%{author_nickname} godkände din ansökan till kampanjgruppen"
           notification_title: <a href="%{author_profile_url}">%{author_nickname}</a> godkände din ansökan att ingå i kampanjgruppen för följande initiativ <a href="%{resource_url}">%{resource_title}</a>.
         create_initiative_event:
@@ -393,11 +394,11 @@ sv:
         endorse_initiative_event:
           email_intro: "%{author_name} %{author_nickname}, som du följer, gillar följande initiativ. Kanske du vill bidra till diskussionen:"
           email_outro: Du har fått det här meddelandet eftersom du följer %{author_nickname}. Du kan sluta att ta emot meddelanden via föregående länk.
-          email_subject: '%{author_nickname} gillar Initiativet'
+          email_subject: "%{author_nickname} gillar Initiativet"
           notification_title: <a href="%{author_path}">%{author_name} %{author_nickname}</a> gillar initiativet <a href="%{resource_path}">%{resource_title}</a>.
         revoke_membership_request:
           email_intro: "%{author_nickname} avslog din ansökan om att ingå i kampanjgruppen för följande initiativ %{resource_title}."
-          email_outro: 'Du har fått det här meddelandet eftersom du är författaren av initiativet %{resource_title}.'
+          email_outro: Du har fått det här meddelandet eftersom du är författaren av initiativet %{resource_title}.
           email_subject: "%{author_nickname} avvisade din ansökan till kampanjgruppen"
           notification_title: <a href="%{author_profile_url}">%{author_nickname}</a> avvisade din ansökan att ingå i kampanjgruppen för följande initiativ <a href="%{resource_url}">%{resource_title}</a>.
         spawn_committee_request_event:

@@ -1,3 +1,4 @@
+---
 sk:
   activemodel:
     attributes:
@@ -14,9 +15,9 @@ sk:
   activerecord:
     models:
       decidim/sortitions/sortition:
-        one: Voľba losovaním
         few: Voľby losovaním
         many: Voľby losovaním
+        one: Voľba losovaním
         other: Voľby losovaním
   decidim:
     components:
@@ -80,9 +81,9 @@ sk:
       sortitions:
         count:
           proposals_count:
-            one: 1 návrh
             few: "%{count} návrhov"
             many: "%{count} návrhov"
+            one: 1 návrh
             other: "%{count} návrhov"
         filters:
           active: Aktívne
@@ -98,30 +99,30 @@ sk:
           recent: Nedávno
         results_count:
           count:
-            one: vybraný návrh
             few: vybrané návrhy
             many: vybrané návrhy
+            one: vybraný návrh
             other: vybrané návrhy
         show:
           algorithm: Kód algoritmu Sortition
           any_category: zo všetkých kategórií
           cancelled: Zrušené výber
           candidate_proposal_ids: žrebovacie volbaní objednávky a ID
-          candidate_proposals_info: 'Rozbor bol vykonaný medzi nasledujúcimi návrhmi (%{category_label}), s nasledujúcimi ID (označené tučne vybranými návrhy)'
+          candidate_proposals_info: Rozbor bol vykonaný medzi nasledujúcimi návrhmi (%{category_label}), s nasledujúcimi ID (označené tučne vybranými návrhy)
           category: z kategórie %{category}
-          dice_result: (1) Výsledok hodu kockou
+          dice_result: "(1) Výsledok hodu kockou"
           introduction: 'Táto stránka obsahuje výsledky voľby losovaním %{referencie}. Prostredníctvom tohto výberu bolo vybratých %{target_items} výsledkov náhodne a s rovnakým rozložením pravdepodobnosti zo súboru návrhov zobrazených nižšie. Spolu s výsledkami informácie zobrazenými na tejto stránke poskytujú všetky informácie potrebné pre maximalizáciu záruk a reprodukciu výsledkov. Kľúčom ku kvalite tejto voľby je dvojitá náhodnosť, ktorú poskytuje hod kockou (overený svedkami) a presný čas výberu, ktorý poskytuje vstup pre algoritmus, ktorý generuje náhodný výber. Časový údaj pre voľbu je tak presný (sekundy), že nie je možné ovládať ho ľudsky, a tak poskytuje dvojitý, "nekontrolovateľný" vstup, ktorý zaručí spravodlivý výsledok. '
           mathematical_result: Výsledok (1) x (2)
           proposals_selected_by_sortition: Návrhy vybrané výberom
           sortition_reproducibility_details: Detaily reprodukcie voľby losovaním
-          time_seed: (2) Časový údaj
+          time_seed: "(2) Časový údaj"
           witnesses: Svedkovia
         sortition:
           random_seed: Náhodne generovaný prvok
           selected_proposals:
-            one: vybraný návrh
             few: vybraných návrhov
             many: vybraných návrhov
+            one: vybraný návrh
             other: vybraných návrhov
         sortition_author:
           deleted: Vymazaný užívateľ
@@ -129,7 +130,7 @@ sk:
           deleted: Vymazaný užívateľ
         sortitions_count:
           count:
-            one: 1 sortie
             few: "%{count} sortitions"
             many: "%{count} sortitions"
+            one: 1 sortie
             other: "%{count} sortitions"

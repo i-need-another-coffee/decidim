@@ -1,3 +1,4 @@
+---
 cs:
   activemodel:
     attributes:
@@ -35,9 +36,9 @@ cs:
             proposal_ids: 'Byl zahrnut do tohoto návrhu: %{link}'
             text: 'Byl přidán k tomuto výsledku: %{link}'
       decidim/accountability/result:
-        one: Výsledek
         few: Výsledek
         many: Výsledek
+        one: Výsledek
         other: Výsledků
   decidim:
     accountability:
@@ -67,14 +68,14 @@ cs:
             invalid: Došlo k potížím při importu výsledků, postupujte prosím pečlivě podle pokynů a ujistěte se, že jste vybrali projekty pro realizaci.
           filters:
             new_items_projects:
-              one: 1 vybraný projekt bude importován
               few: "%{count} vybrané projekty budou importovány"
               many: "%{count} vybraných projektů bude importováno"
+              one: 1 vybraný projekt bude importován
               other: "%{count} vybraných projektů bude importováno"
             new_items_proposals:
-              one: Bude importován 1 návrh
               few: "%{count} návrhy budou importovány"
               many: "%{count} návrhů bude importováno"
+              one: Bude importován 1 návrh
               other: "%{count} návrhů bude importováno"
             proposal_state: Stav návrhu
             select_state: Vybrat status
@@ -85,9 +86,9 @@ cs:
             select_component: Vybrat komponentu
           new:
             success:
-              one: 1 výsledek ve frontě k importu. Po dokončení budete upozorněni e-mailem.
               few: "%{count} výsledky čekají ve frontě na import. Po dokončení budete informováni e-mailem."
               many: "%{count} výsledků čeká ve frontě na import. Po dokončení budete informováni e-mailem."
+              one: 1 výsledek ve frontě k importu. Po dokončení budete upozorněni e-mailem.
               other: "%{count} výsledků čeká ve frontě na import. Po dokončení budete informováni e-mailem."
             title: Importovat výsledky z jiné komponenty
         import_results:
@@ -240,18 +241,18 @@ cs:
       import_projects_mailer:
         import:
           added_projects:
-            one: Jeden výsledek byl importován z projektů.
             few: "%{count} výsledky byly importovány z projektů."
             many: "%{count} výsledků bylo importováno z projektů."
+            one: Jeden výsledek byl importován z projektů.
             other: "%{count} výsledků bylo importováno z projektů."
           subject: Úspěšný import projektů
           success: Úspěšný import projektů do výsledků v komponentě %{component_name}. Výsledky si můžete prohlédnout v administračním rozhraní.
       import_proposals_mailer:
         import:
           added_proposals:
-            one: Jeden výsledek byl importován z návrhů
             few: "%{count} výsledky byly importovány z návrhů."
             many: "%{count} výsledků bylo importováno z návrhů."
+            one: Jeden výsledek byl importován z návrhů
             other: "%{count} výsledků bylo importováno z návrhů."
           subject: Úspěšný import návrhů
           success: Úspěšně importované návrhy na výsledky v komponentě %{component_name}. Výsledky si můžete prohlédnout v administračním rozhraní.
@@ -281,9 +282,9 @@ cs:
       results:
         count:
           results_count:
-            one: 1 výsledek
             few: "%{count} výsledků"
             many: "%{count} výsledků"
+            one: 1 výsledek
             other: "%{count} výsledků"
         home_header:
           global_status: Globální stav provedení

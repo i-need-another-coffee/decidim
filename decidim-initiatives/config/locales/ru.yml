@@ -1,3 +1,4 @@
+---
 ru:
   activemodel:
     attributes:
@@ -27,14 +28,14 @@ ru:
   activerecord:
     models:
       decidim/initiative_comittee:
-        one: Рабочая группа
         few: Рабочих группы
         many: Рабочих групп
+        one: Рабочая группа
         other: Рабочих групп
       decidim/initiative_vote:
-        one: Подпись
         few: Подписи
         many: Подписей
+        one: Подпись
         other: Подписей
   decidim:
     admin:
@@ -150,7 +151,7 @@ ru:
           back: Вернуться
         select_initiative_type:
           back: Вернуться
-          more_information: (Дополнительные сведения)
+          more_information: "(Дополнительные сведения)"
       events:
         create_initiative_event:
           email_intro: "%{author_name} %{author_nickname}, за которым вы следите, создал новый почин. Прочитайте его и внесите свой вклад:"
@@ -168,15 +169,15 @@ ru:
       initiatives:
         author_list:
           hidden_authors_count:
-            one: и еще 1 человек
             few: и еще %{count} людей
             many: и еще %{count} человек
+            one: и еще 1 человек
             other: и еще %{count} человек
         count:
           title:
-            one: "%{count} почин"
             few: "%{count} почина"
             many: "%{count} починов"
+            one: "%{count} почин"
             other: "%{count} починов"
         filters:
           any: Любые
@@ -197,9 +198,9 @@ ru:
         result:
           initiative_rejected_reason: Этот почин был отвергнут из-за недостатка поддержки.
         signatures_count:
-          one: " подпись"
           few: " подписи"
           many: " подписей"
+          one: " подпись"
           other: " подписей"
         vote_cabin:
           already_voted: Уже подписали
@@ -207,9 +208,9 @@ ru:
           votes_blocked: Подписание отключено
         votes_count:
           count:
-            one: ПОДПИСЬ
             few: ПОДПИСИ
             many: ПОДПИСЕЙ
+            one: ПОДПИСЬ
             other: ПОДПИСЕЙ
       initiatives_mailer:
         creation_subject: Ваш гражданский почин '%{title}' был создан

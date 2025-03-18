@@ -1,4 +1,5 @@
-"no":
+---
+'no':
   activemodel:
     models:
       decidim/surveys/closed_survey_event: Undersøkelse avsluttet

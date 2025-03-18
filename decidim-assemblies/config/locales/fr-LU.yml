@@ -1,3 +1,4 @@
+---
 fr-LU:
   activemodel:
     attributes:
@@ -65,7 +66,9 @@ fr-LU:
         user_id: Utilisateur
       assembly_user_role:
         email: E-mail
-        name: "Nom\n"
+        name: 'Nom
+
+          '
         role: Fonction
     errors:
       models:

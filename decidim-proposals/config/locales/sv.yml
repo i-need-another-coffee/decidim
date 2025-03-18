@@ -1,3 +1,4 @@
+---
 sv:
   activemodel:
     attributes:
@@ -248,7 +249,7 @@ sv:
             endorsements_enabled: Aktivera gilla-markeringar
             proposal_answering_enabled: Aktivera svar på förslag
             publish_answers_immediately: Publicera svar på förslag omedelbart
-            publish_answers_immediately_help_html: 'Tänk på att om du svarar på förslag som inte är aktiverade, kommer du att behöva publicera dem manuellt genom att välja dem och använda åtgärden för publicering. För mer information om hur det här fungerar, se <a href="https://docs.decidim.org/en/admin/components/proposals/answers#_publication" target="_blank">proposals'' answers documentation page</a>.'
+            publish_answers_immediately_help_html: Tänk på att om du svarar på förslag som inte är aktiverade, kommer du att behöva publicera dem manuellt genom att välja dem och använda åtgärden för publicering. För mer information om hur det här fungerar, se <a href="https://docs.decidim.org/en/admin/components/proposals/answers#_publication" target="_blank">proposals' answers documentation page</a>.
             suggested_hashtags: Tips på hashtags till deltagarnas förslag
             votes_blocked: Röster blockerade
             votes_enabled: Röster aktiverade
@@ -371,19 +372,19 @@ sv:
       badges:
         accepted_proposals:
           conditions:
-            - Välj det deltagarutrymme där inlämning av förslag är aktiverat som är av intresse
-            - Försök att lägga fram förslag som kan genomföras. De har lättare att bli accepterade.
+          - Välj det deltagarutrymme där inlämning av förslag är aktiverat som är av intresse
+          - Försök att lägga fram förslag som kan genomföras. De har lättare att bli accepterade.
           description: Detta märke beviljas när du aktivt deltar med nya förslag som blir accepterade.
           description_another: Den här användaren har fått %{score} förslag accepterade.
-          description_own: '%{score} av dina förslag har accepterats.'
+          description_own: "%{score} av dina förslag har accepterats."
           name: Accepterade förslag
           next_level_in: Få %{score} fler förslag accepterade för att nå nästa nivå!
           unearned_another: Den här användaren har inte fått några förslag accepterade än.
           unearned_own: Du har inga accepterade förslag än.
         proposal_votes:
           conditions:
-            - Titta runt och ägna lite tid åt att läsa andras förslag
-            - Rösta på de förslag du gillar
+          - Titta runt och ägna lite tid åt att läsa andras förslag
+          - Rösta på de förslag du gillar
           description: Det här märket får du när du röstar på andras förslag.
           description_another: Deltagaren har röstat på %{score} förslag.
           description_own: Du har röstat på %{score} förslag.
@@ -393,8 +394,8 @@ sv:
           unearned_own: Du har ännu inte röstat på några förslag än.
         proposals:
           conditions:
-            - Välj ett deltagarutrymme du är intresserad av där inlämning av förslag är aktiverat
-            - Skapa ett nytt förslag
+          - Välj ett deltagarutrymme du är intresserad av där inlämning av förslag är aktiverat
+          - Skapa ett nytt förslag
           description: Du får det här märket när du aktivt deltar med nya förslag.
           description_another: Den här användaren har skapat %{score} förslag.
           description_own: Du har skapat %{score} förslag.

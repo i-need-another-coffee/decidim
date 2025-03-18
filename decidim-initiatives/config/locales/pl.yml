@@ -1,3 +1,4 @@
+---
 pl:
   activemodel:
     attributes:
@@ -68,19 +69,19 @@ pl:
   activerecord:
     models:
       decidim/initiative:
-        one: Inicjatywa
         few: Inicjatywy
         many: Inicjatyw
+        one: Inicjatywa
         other: Inicjatyw
       decidim/initiative_comittee:
-        one: Komitet
         few: Komitety
         many: Komitety
+        one: Komitet
         other: Komitety
       decidim/initiative_vote:
-        one: Podpis
         few: Podpisy
         many: Podpisy
+        one: Podpis
         other: Podpisy
   decidim:
     admin:
@@ -191,8 +192,8 @@ pl:
       badges:
         initiatives:
           conditions:
-            - Idź do przestrzeni partycypacyjnej Inicjatyw
-            - Postępuj zgodnie z instrukcjami, aby utworzyć nową inicjatywę
+          - Idź do przestrzeni partycypacyjnej Inicjatyw
+          - Postępuj zgodnie z instrukcjami, aby utworzyć nową inicjatywę
           description: Ta odznaka jest przyznawana, gdy tworzysz nowe inicjatywy, współpracując z innymi, aby je zrealizować.
           description_another: Ten użytkownik posiada %{score} opublikowanych inicjatyw.
           description_own: Masz %{score} opublikowanych inicjatyw.
@@ -319,7 +320,7 @@ pl:
           update: "%{user_name} zaktualizował(a) ustawienia inicjatyw"
         initiatives_type:
           create: "%{user_name} utworzył(a) typ inicjatywy %{resource_name}"
-          delete: "Użytkownik %{user_name} usunął typ inicjatywy %{resource_name}"
+          delete: Użytkownik %{user_name} usunął typ inicjatywy %{resource_name}
           update: "%{user_name} zaktualizował(a) typ inicjatyw %{resource_name}"
       admin_states:
         accepted: Wystarczająca liczba podpisów
@@ -362,7 +363,7 @@ pl:
         select_initiative_type:
           back: Wróć
           choose_html: Chcę utworzyć <strong>%{title}</strong>
-          more_information: (Więcej informacji)
+          more_information: "(Więcej informacji)"
           new: Utwórz nową inicjatywę
           select: Chcę utworzyć inicjatywę tego typu
           verification_required: Zweryfikuj swoje konto, aby promować tę inicjatywę
@@ -379,27 +380,27 @@ pl:
       events:
         approve_membership_request:
           email_intro: "%{author_nickname} zaakceptował Twoje zgłoszenie na członka komitetu organizacyjnego inicjatywy %{resource_title}."
-          email_outro: 'Otrzymałeś to powiadomienie, ponieważ zgłosiłeś się do inicjatywy %{resource_title}'
+          email_outro: Otrzymałeś to powiadomienie, ponieważ zgłosiłeś się do inicjatywy %{resource_title}
           email_subject: "%{author_nickname} zaakceptował Twoje zgłoszenie na członka komitetu organizacyjnego"
           notification_title: <a href="%{author_profile_url}">%{author_nickname}</a> zaakceptował Twoje zgłoszenie na członka komitetu organizacyjnego inicjatywy <a href="%{resource_url}">%{resource_title}</a>.
         create_initiative_event:
-          email_intro: "Użytkownik %{author_name} %{author_nickname}, którego obserwujesz, utworzył nową inicjatywę, sprawdź ją i przyłącz się:"
+          email_intro: 'Użytkownik %{author_name} %{author_nickname}, którego obserwujesz, utworzył nową inicjatywę, sprawdź ją i przyłącz się:'
           email_outro: Otrzymałeś to powiadomienie, ponieważ obserwujesz %{author_nickname}. Możesz przestać otrzymywać powiadomienia po kliknięciu w poprzedni link.
           email_subject: Nowa inicjatywa autorstwa %{author_nickname}
           notification_title: Inicjatywa <a href="%{resource_path}">%{resource_title}</a> została utworzona przez <a href="%{author_path}">%{author_name} %{author_nickname}</a>.
         endorse_initiative_event:
-          email_intro: "Użytkownika %{author_name} %{author_nickname}, którego obserwujesz, zarekomendował następującą inicjatywę, być może chcesz dołączyć i wziąć udział w rozmowie:"
+          email_intro: 'Użytkownika %{author_name} %{author_nickname}, którego obserwujesz, zarekomendował następującą inicjatywę, być może chcesz dołączyć i wziąć udział w rozmowie:'
           email_outro: Otrzymałeś to powiadomienie, ponieważ obserwujesz %{author_nickname}. Możesz przestać otrzymywać powiadomienia klikając w poprzedni link.
           email_subject: Inicjatywa rekomendowana przez %{author_nickname}
           notification_title: Inicjatywa <a href="%{resource_path}">%{resource_title}</a> została zarekomendowana przez <a href="%{author_path}">%{author_name} %{author_nickname}</a>.
         revoke_membership_request:
           email_intro: "%{author_nickname} odrzucił Twoje zgłoszenie na członka komitetu organizacyjnego inicjatywy %{resource_title}."
-          email_outro: 'Otrzymałeś to powiadomienie, ponieważ zgłosiłeś się do inicjatywy %{resource_title}.'
+          email_outro: Otrzymałeś to powiadomienie, ponieważ zgłosiłeś się do inicjatywy %{resource_title}.
           email_subject: "%{author_nickname} odrzucił Twoje zgłoszenie na członka komitetu organizacyjnego"
           notification_title: <a href="%{author_profile_url}">%{author_nickname}</a> odrzucił Twoje zgłoszenie na członka komitetu organizacyjnego inicjatywy <a href="%{resource_url}">%{resource_title}</a>.
         spawn_committee_request_event:
           email_intro: "%{applicant_nickname} złożył wniosek na członka komitetu organizacyjnego Twojej inicjatywy %{resource_title}. Aby zaakceptować lub odrzucić zgłoszenie przejdź do formularza edycji swojej inicjatywy."
-          email_outro: 'Otrzymałeś to powiadomienie, ponieważ jesteś autorem inicjatywy %{resource_title}'
+          email_outro: Otrzymałeś to powiadomienie, ponieważ jesteś autorem inicjatywy %{resource_title}
           email_subject: "%{applicant_nickname} chce dołączyć do Twojej inicjatywy"
           notification_title: <a href="%{applicant_profile_url}">%{applicant_nickname}</a> złożył wniosek na członka komitetu organizacyjnego Twojej inicjatywy <a href="%{resource_url}">%{resource_title}</a>. Aby zaakceptować lub odrzucić kliknij <a href="%{resource_url}/edit">tutaj</a>.
       form:
@@ -434,9 +435,9 @@ pl:
       initiatives:
         author_list:
           hidden_authors_count:
-            one: i jeszcze 1 osoba
             few: i jeszcze %{count} osób
             many: i jeszcze %{count} osób
+            one: i jeszcze 1 osoba
             other: i jeszcze %{count} osób
         committee_members:
           approve: Zatwierdź
@@ -449,9 +450,9 @@ pl:
           title: Członkowie komitetu
         count:
           title:
-            one: "%{count} inicjatywa"
             few: "%{count} inicjatywy"
             many: "%{count} inicjatyw"
+            one: "%{count} inicjatywa"
             other: "%{count} inicjatyw"
         filters:
           any: Wszyscy
@@ -469,9 +470,9 @@ pl:
         interactions:
           comments_count:
             count:
-              one: Komentarz
               few: Komentarze
               many: Komentarze
+              one: Komentarz
               other: Komentarze
         orders:
           label: 'Sortuj inicjatywy według:'
@@ -516,9 +517,9 @@ pl:
           state: Stan
           type: Typ
         signatures_count:
-          one: " podpis"
           few: " podpisy"
           many: " podpisy"
+          one: " podpis"
           other: " podpisy"
         vote_cabin:
           already_voted: Już podpisano
@@ -526,9 +527,9 @@ pl:
           votes_blocked: Podpisywanie wyłączone
         votes_count:
           count:
-            one: Podpis
             few: Podpisy
             many: Podpisy
+            one: Podpis
             other: Podpisy
       initiatives_mailer:
         creation_subject: Twoja inicjatywa "%{title}" została utworzona

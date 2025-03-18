@@ -1,3 +1,4 @@
+---
 sv:
   activemodel:
     attributes:
@@ -106,8 +107,8 @@ sv:
             select_for_implementation: Välj för genomförande
             selected: Valda
             selected_options:
-              'no': 'Nej'
-              'yes': 'Ja'
+              'no': Nej
+              'yes': Ja
             title: Projekt
             update: Uppdatera
             update_budget_button: Uppdatera projektets budget

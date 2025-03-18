@@ -1,3 +1,4 @@
+---
 lt:
   activemodel:
     models:
@@ -9,14 +10,14 @@ lt:
   activerecord:
     models:
       decidim/comments/comment:
-        one: Komentaras
         few: Komentarai
         many: Komentarai
+        one: Komentaras
         other: Komentarai
       decidim/comments/comment_vote:
-        one: Balsuoti
         few: Balsai
         many: Balsai
+        one: Balsuoti
         other: Balsai
   decidim:
     comments:
@@ -56,8 +57,8 @@ lt:
           neutral_selected: Jūsų nuomonė apie šią temą yra neutrali
           positive: Pozityvi
           positive_selected: Jūsų nuomonė apie šią temą yra pozityvi
-        remaining_characters: "Liko %{count} simbolių"
-        remaining_characters_1: "Liko %{count} simbolių"
+        remaining_characters: Liko %{count} simbolių
+        remaining_characters_1: Liko %{count} simbolių
         title: Pridėti komentarą
       comment:
         alignment:
@@ -84,9 +85,9 @@ lt:
             spam: Pateikiamoje informacijoje yra reklamos, antraščių mąsalo ar apgavysčių.
           title: Pranešti apie netinkamą turinį
         show_replies:
-          one: Rodyti atsakymą
           few: Rodyti %{count} atsakymus
           many: Rodyti %{count} atsakymus
+          one: Rodyti atsakymą
           other: Rodyti %{count} atsakymus
         single_comment_link_title: Gauti nuorodą
       comment_order_selector:
@@ -104,9 +105,9 @@ lt:
         single_comment_warning: <a href="%{url}">Peržiūrėti visus komentarus</a>
         single_comment_warning_title: Matote vieną komentarą
         title:
-          one: "%{count} komentaras"
           few: "%{count} komentarai"
           many: "%{count} komentarai"
+          one: "%{count} komentaras"
           other: "%{count} komentarai"
       down_vote_button:
         text: Nesutinku su šiuo komentaru
@@ -130,7 +131,7 @@ lt:
         comment_created:
           email_intro: "%{resource_title} pateiktas komentaras. Komentarą galite perskaityti šiame puslapyje:"
           email_outro: Šį pranešimą gavote dėl to, kad sekate „%{resource_title}“ arba jo autorių. Jūs galite jo nebesekti spustelėdami aukščiau esančią nuorodą.
-          email_subject: '%{author_name} paliko naują komentarą %{resource_title}'
+          email_subject: "%{author_name} paliko naują komentarą %{resource_title}"
           notification_title: <a href="%{author_path}">%{author_name} %{author_nickname}</a> paliko naują komentarą <a href="%{resource_path}">%{resource_title}</a>
         comment_downvoted:
           email_intro: Jūsų komentaras %{resource_title} buvo nepakaikyas. Komentaras dabar turi %{upvotes} palaikymus ir %{downvotes} nepalaikymus.

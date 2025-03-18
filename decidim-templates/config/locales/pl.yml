@@ -1,3 +1,4 @@
+---
 pl:
   activemodel:
     attributes:
@@ -100,10 +101,10 @@ pl:
             tos_agreement: Biorąc udział akceptujesz Warunki korzystania z Platformy
       admin_log:
         template:
-          create: "Użytkownik %{user_name} utworzył szablon kwestionariusza %{resource_name}"
-          delete: "Użytkownik %{user_name} usunął szablon kwestionariusza %{resource_name}"
-          duplicate: "Użytkownik %{user_name} zduplikował szablon kwestionariusza %{resource_name}"
-          update: "Użytkownik %{user_name} zaktualizował szablon kwestionariusza %{resource_name}"
+          create: Użytkownik %{user_name} utworzył szablon kwestionariusza %{resource_name}
+          delete: Użytkownik %{user_name} usunął szablon kwestionariusza %{resource_name}
+          duplicate: Użytkownik %{user_name} zduplikował szablon kwestionariusza %{resource_name}
+          update: Użytkownik %{user_name} zaktualizował szablon kwestionariusza %{resource_name}
       template_types:
         block_user: Blokuj wiadomości użytkownika
         proposal_answer_templates: Odpowiedzi na propozycję

@@ -1,3 +1,4 @@
+---
 fr-CA:
   activemodel:
     attributes:
@@ -106,8 +107,8 @@ fr-CA:
             select_for_implementation: Sélectionné pour implémentation
             selected: Sélectionné
             selected_options:
-              'no': 'Non'
-              'yes': 'Oui'
+              'no': Non
+              'yes': Oui
             title: Projets
             update: Mettre à jour
             update_budget_button: Mettre à jour le budget du projet

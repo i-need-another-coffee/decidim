@@ -1,3 +1,4 @@
+---
 pt-BR:
   activemodel:
     attributes:
@@ -89,8 +90,8 @@ pt-BR:
             select_for_implementation: Selecionado para implementação
             selected: Selecionado
             selected_options:
-              'no': 'Não'
-              'yes': 'Sim'
+              'no': Não
+              'yes': Sim
             title: Projetos
             update: Atualizar
             update_budget_button: Atualizar orçamento do projeto
@@ -143,7 +144,7 @@ pt-BR:
           more_than_one: exclua seu voto em %{name} e comece de novo
           only_one: exclua seu voto e comece novamente.
         count:
-          one: "Orçamento em %{count}"
+          one: Orçamento em %{count}
           other: "%{count} Orçamentos"
         empty: Ainda não há orçamentos ainda
         finished_message: Você terminou o processo de votação. Obrigado por participar!

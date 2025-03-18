@@ -1,3 +1,4 @@
+---
 zh-TW:
   activemodel:
     attributes:
@@ -65,18 +66,33 @@ zh-TW:
         participatory_process:
           attributes:
             document:
-              allowed_file_content_types: '無效文件類型。只允許使用以下副檔名的文件：%{types}'
+              allowed_file_content_types: 無效文件類型。只允許使用以下副檔名的文件：%{types}
     models:
       decidim/participatory_process_step_activated_event: 啟用階段
       decidim/participatory_process_step_changed_event: 階段已更改
   activerecord:
     models:
       decidim/participatory_process:
-        other: "One\n參與式流程\n\nOther\n參與式流程"
+        other: |-
+          One
+          參與式流程
+
+          Other
+          參與式流程
       decidim/participatory_process_group:
-        other: "One\n參與式流程群組\n\nOther\n參與式流程群組"
+        other: |-
+          One
+          參與式流程群組
+
+          Other
+          參與式流程群組
       decidim/participatory_process_step:
-        other: "One\n階段\n\nOther\n階段"
+        other: |-
+          One
+          階段
+
+          Other
+          階段
   decidim:
     admin:
       actions:
@@ -274,7 +290,7 @@ zh-TW:
       participatory_process_user_role:
         create: "%{user_name} 邀請了參與者 %{resource_name} 加入 %{space_name} 參與式流程"
         delete: "%{user_name} 將參與者 %{resource_name} 從 %{space_name} 參與式流程中移除"
-        update: "使用者 %{user_name} 變更了 %{space_name} 參與流程中參與者 %{resource_name} 的角色"
+        update: 使用者 %{user_name} 變更了 %{space_name} 參與流程中參與者 %{resource_name} 的角色
     events:
       participatory_process:
         role_assigned:
@@ -283,14 +299,14 @@ zh-TW:
           email_subject: 您已被分配為“%{resource_title}”的 %{role}。
           notification_title: 您已被分配為參與式流程<a href="%{resource_url}">%{resource_title}</a>的%{role}。
         step_activated:
-          email_intro: '現在，%{participatory_space_title} 的%{resource_title} 階段已啟動。您可以從此頁面查看：'
+          email_intro: 現在，%{participatory_space_title} 的%{resource_title} 階段已啟動。您可以從此頁面查看：
           email_outro: 你收到此通知是因為你正在追蹤 %{participatory_space_title}。你可以透過前面的連結停止接收通知。
-          email_subject: '%{participatory_space_title} 的更新'
+          email_subject: "%{participatory_space_title} 的更新"
           notification_title: 在 <a href="%{resource_path}">%{participatory_space_title}</a>，%{resource_title} 階段現在已啟動。
         step_changed:
-          email_intro: '在 %{participatory_space_title}，%{resource_title} 階段的日期已更新。您可以在此頁面上查看：'
+          email_intro: 在 %{participatory_space_title}，%{resource_title} 階段的日期已更新。您可以在此頁面上查看：
           email_outro: 你收到此通知是因為你正在追蹤 %{participatory_space_title}。你可以透過前面的連結停止接收通知。
-          email_subject: '%{participatory_space_title} 的更新'
+          email_subject: "%{participatory_space_title} 的更新"
           notification_title: 在 <a href="%{participatory_space_url}">%{participatory_space_title}</a> 的 <a href="%{resource_path}">%{resource_title}</a> 階段日期已更新。
     help:
       participatory_spaces:
@@ -301,7 +317,7 @@ zh-TW:
     log:
       value_types:
         participatory_process_type_presenter:
-          not_found: '未在資料庫(ID：%{id}) 中找到此流程類型'
+          not_found: 未在資料庫(ID：%{id}) 中找到此流程類型
     menu:
       processes: 程序
     metrics:
@@ -324,7 +340,12 @@ zh-TW:
         title:
           meta_scope: 範圍
           participatory_processes:
-            other: "One\n1 個程序\n\nOther\n%{count} 個程序"
+            other: |-
+              One
+              1 個程序
+
+              Other
+              %{count} 個程序
       show:
         title: 參與程序群組
     participatory_process_steps:
@@ -370,15 +391,32 @@ zh-TW:
           all_types: 所有類型
           counters:
             active:
-              other: "One\n1個進行中的流程\nOther\n%{count} 個進行中的流程"
+              other: |-
+                One
+                1個進行中的流程
+                Other
+                %{count} 個進行中的流程
             all:
-              other: "One\n1 個程序\n\nOther\n%{count} 個程序"
+              other: |-
+                One
+                1 個程序
+
+                Other
+                %{count} 個程序
             past:
-              other: "One\n1 個過去的程序\nOther\n%{count} 個過去的程序"
+              other: |-
+                One
+                1 個過去的程序
+                Other
+                %{count} 個過去的程序
             upcoming:
-              other: "One\n1 個即將到來的程序\nOther\n%{count} 個即將到來的程序"
+              other: |-
+                One
+                1 個即將到來的程序
+                Other
+                %{count} 個即將到來的程序
           explanations:
-            no_active: '"沒有進行中的流程'
+            no_active: "\"沒有進行中的流程"
             no_active_nor_upcoming: 沒有進行中或即將開始的流程.
             no_active_nor_upcoming_callout: 目前沒有進行中或即將開始的程序。以下是過去的程序清單
           filter_by: 顯示

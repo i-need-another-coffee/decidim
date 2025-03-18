@@ -1,3 +1,4 @@
+---
 ja:
   activemodel:
     attributes:
@@ -72,7 +73,7 @@ ja:
         placeholders:
           content: 管理ダッシュボードの %{page} 静的ページに意味のあるコンテンツを追加してください。
           summary: 管理者ダッシュボードの静的ページ %{page} に意味のある概要を追加してください。
-          title: '%{page} のデフォルトのタイトル'
+          title: "%{page} のデフォルトのタイトル"
         terms-of-service: 利用規約
       devise:
         passwords:
@@ -161,8 +162,9 @@ ja:
             </ol>
         csp_settings:
           connect_src: Connect src
-          connect_src_hint: |
-            connect-srcディレクティブは、<script>要素を使用して読み込むURLを制限します。Decidimは'self'を追加しますが、他の設定を追加することも可能です。よく分からない場合は、空白のままにしておいてください。
+          connect_src_hint: 'connect-srcディレクティブは、<script>要素を使用して読み込むURLを制限します。Decidimは''self''を追加しますが、他の設定を追加することも可能です。よく分からない場合は、空白のままにしておいてください。
+
+            '
           default_src: Default src
           default_src_hint: |
             default-srcディレクティブは、JavaScript、画像、CSS、フォント、AJAXリクエスト、フレーム、HTML5メディアなどのコンテンツを読み込むためのデフォルトポリシーです。
@@ -249,7 +251,7 @@ ja:
           fieldsets:
             sender: 送信者
           instructions:
-            from_label: 'メール送信者は "your-organization-name <your-organization@example.org>" になります。空白の場合、組織に定義された名前と同じ名前を使用します。'
+            from_label: メール送信者は "your-organization-name <your-organization@example.org>" になります。空白の場合、組織に定義された名前と同じ名前を使用します。
           placeholder:
             from_email: your-organization@example.org
             from_label: 組織名

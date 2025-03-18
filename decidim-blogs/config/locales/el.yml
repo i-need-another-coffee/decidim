@@ -1,3 +1,4 @@
+---
 el:
   activemodel:
     attributes:
@@ -39,9 +40,9 @@ el:
             success: Η ανάρτηση αποθηκεύτηκε επιτυχώς.
       admin_log:
         post:
-          create: "Ο/Η %{user_name} δημιούργησε την ανάρτηση %{resource_name} στο %{space_name}"
-          delete: "Ο/Η %{user_name} διέγραψε την ανάρτηση %{resource_name} στο %{space_name}"
-          update: "Ο/Η %{user_name} ενημέρωση την ανάρτηση %{resource_name} στο %{space_name}"
+          create: Ο/Η %{user_name} δημιούργησε την ανάρτηση %{resource_name} στο %{space_name}
+          delete: Ο/Η %{user_name} διέγραψε την ανάρτηση %{resource_name} στο %{space_name}
+          update: Ο/Η %{user_name} ενημέρωση την ανάρτηση %{resource_name} στο %{space_name}
       last_activity:
         new_post: 'Νέα ανάρτηση:'
       models:

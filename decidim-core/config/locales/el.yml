@@ -1,3 +1,4 @@
+---
 el:
   activemodel:
     attributes:
@@ -68,8 +69,8 @@ el:
         one: Συμμετέχων
         other: Συμμετέχοντες
   booleans:
-    'false': 'Όχι'
-    'true': 'Ναι'
+    'false': Όχι
+    'true': Ναι
   date:
     buttons:
       select: Επιλέξτε
@@ -113,7 +114,7 @@ el:
     accessibility:
       external_link: Εξωτερικός σύνδεσμος
       front_page_link: Μετάβαση στην αρχική σελίδα
-      logo: "Επίσημο λογότυπο του οργανισμού %{organization}"
+      logo: Επίσημο λογότυπο του οργανισμού %{organization}
       skip_button: Μετάβαση στο κύριο περιεχόμενο
     account:
       blocked: Αυτός ο λογαριασμός έχει αποκλειστεί λόγω παραβίασης όρων υπηρεσίας
@@ -160,61 +161,61 @@ el:
         notification: Οι χρήστες διαχειριστές πρέπει να αλλάζουν τον κωδικό τους κάθε %{days} ημέρες.
     admin_log:
       area:
-        create: "Ο χρήστης %{user_name} δημιούργησε τον τομέα %{resource_name}"
-        delete: "Ο χρήστης %{user_name} διέγραψε τον τομέα %{resource_name}"
-        update: "Ο χρήστης %{user_name} ενημέρωσε τον τομέα %{resource_name}"
+        create: Ο χρήστης %{user_name} δημιούργησε τον τομέα %{resource_name}
+        delete: Ο χρήστης %{user_name} διέγραψε τον τομέα %{resource_name}
+        update: Ο χρήστης %{user_name} ενημέρωσε τον τομέα %{resource_name}
       area_type:
-        create: "Ο/Η %{user_name} δημιούργησε τον τύπο περιοχής %{resource_name}"
-        delete: "Ο/Η %{user_name} διέγραψε τον τύπο περιοχής %{resource_name}"
-        update: "Ο/Η %{user_name} ενημέρωσε τον τύπο περιοχής %{resource_name}"
+        create: Ο/Η %{user_name} δημιούργησε τον τύπο περιοχής %{resource_name}
+        delete: Ο/Η %{user_name} διέγραψε τον τύπο περιοχής %{resource_name}
+        update: Ο/Η %{user_name} ενημέρωσε τον τύπο περιοχής %{resource_name}
       attachment:
-        create: "Ο/Η %{user_name} δημιούργησε το %{resource_name} συνημμένο"
+        create: Ο/Η %{user_name} δημιούργησε το %{resource_name} συνημμένο
       component:
-        create: "Ο χρήστης %{user_name} πρόσθεσε το στοιχείο %{resource_name} στον τομέα %{space_name}"
-        delete: "Ο χρήστης %{user_name} κατάργησε το στοιχείο %{resource_name} από τον χώρο %{space_name}"
-        publish: "Ο χρήστης %{user_name} δημοσίευσε το στοιχείο %{resource_name} στον χώρο %{space_name}"
-        unpublish: "Ο χρήστης %{user_name} κατάργησε τη δημοσίευση του στοιχείου %{resource_name} από τον τομέα %{space_name}"
+        create: Ο χρήστης %{user_name} πρόσθεσε το στοιχείο %{resource_name} στον τομέα %{space_name}
+        delete: Ο χρήστης %{user_name} κατάργησε το στοιχείο %{resource_name} από τον χώρο %{space_name}
+        publish: Ο χρήστης %{user_name} δημοσίευσε το στοιχείο %{resource_name} στον χώρο %{space_name}
+        unpublish: Ο χρήστης %{user_name} κατάργησε τη δημοσίευση του στοιχείου %{resource_name} από τον τομέα %{space_name}
       helpers:
         answers: απαντήσεις
         comments: σχόλιο
       moderation:
-        hide: "Ο χρήστης %{user_name} απέκρυψε έναν πόρο του τύπου %{resource_type} στον χώρο %{space_name}"
-        unreport: "Ο χρήστης %{user_name} κατάργησε την αναφορά ενός πόρου του τύπου %{resource_type} στον χώρο %{space_name}"
+        hide: Ο χρήστης %{user_name} απέκρυψε έναν πόρο του τύπου %{resource_type} στον χώρο %{space_name}
+        unreport: Ο χρήστης %{user_name} κατάργησε την αναφορά ενός πόρου του τύπου %{resource_type} στον χώρο %{space_name}
       newsletter:
-        create: "Ο χρήστης %{user_name} δημιούργησε το ενημερωτικό δελτίο %{resource_name}"
-        delete: "Ο χρήστης %{user_name} διέγραψε το ενημερωτικό δελτίο %{resource_name}"
-        deliver: "Ο χρήστης %{user_name} παράδωσε το ενημερωτικό δελτίο %{resource_name}"
-        update: "Ο χρήστης %{user_name} ενημέρωσε το ενημερωτικό δελτίο %{resource_name}"
+        create: Ο χρήστης %{user_name} δημιούργησε το ενημερωτικό δελτίο %{resource_name}
+        delete: Ο χρήστης %{user_name} διέγραψε το ενημερωτικό δελτίο %{resource_name}
+        deliver: Ο χρήστης %{user_name} παράδωσε το ενημερωτικό δελτίο %{resource_name}
+        update: Ο χρήστης %{user_name} ενημέρωσε το ενημερωτικό δελτίο %{resource_name}
       oauth_application:
-        create: "Ο χρήστης %{user_name} δημιούργησε την εφαρμογή OAuth %{resource_name}"
-        delete: "Ο χρήστης %{user_name} διέγραψε την εφαρμογή OAuth %{resource_name}"
-        update: "Ο χρήστης %{user_name} ενημέρωσε την εφαρμογή OAuth %{resource_name}"
+        create: Ο χρήστης %{user_name} δημιούργησε την εφαρμογή OAuth %{resource_name}
+        delete: Ο χρήστης %{user_name} διέγραψε την εφαρμογή OAuth %{resource_name}
+        update: Ο χρήστης %{user_name} ενημέρωσε την εφαρμογή OAuth %{resource_name}
       organization:
-        update: "Ο χρήστης %{user_name} ενημέρωσε τις ρυθμίσεις του οργανισμού"
+        update: Ο χρήστης %{user_name} ενημέρωσε τις ρυθμίσεις του οργανισμού
       participatory_space_private_user:
-        create: "Ο χρήστης %{user_name} προσκάλεσε τον χρήστη %{resource_name} να γίνει ιδιωτικός συμμετέχων"
-        delete: "Ο χρήστης %{user_name} κατάργησε τον συμμετέχοντα %{resource_name} ως ιδιωτικό συμμετέχων"
+        create: Ο χρήστης %{user_name} προσκάλεσε τον χρήστη %{resource_name} να γίνει ιδιωτικός συμμετέχων
+        delete: Ο χρήστης %{user_name} κατάργησε τον συμμετέχοντα %{resource_name} ως ιδιωτικό συμμετέχων
       scope:
-        create: "Ο χρήστης %{user_name} δημιούργησε το πεδίο εφαρμογής %{resource_name}"
-        create_with_parent: "Ο χρήστης %{user_name} δημιούργησε το πεδίο εφαρμογής %{resource_name} μέσα στο πεδίο εφαρμογής %{parent_scope}"
-        delete: "Ο χρήστης %{user_name} διέγραψε το πεδίο εφαρμογής %{resource_name}"
-        delete_with_parent: "Ο χρήστης %{user_name} διέγραψε το πεδίο εφαρμογής %{resource_name} μέσα στο πεδίο εφαρμογής %{parent_scope}"
-        update: "Ο χρήστης %{user_name} ενημέρωσε το πεδίο εφαρμογής %{resource_name}"
-        update_with_parent: "Ο χρήστης %{user_name} ενημέρωσε το πεδίο εφαρμογής %{resource_name} μέσα στο πεδίο εφαρμογής %{parent_scope}"
+        create: Ο χρήστης %{user_name} δημιούργησε το πεδίο εφαρμογής %{resource_name}
+        create_with_parent: Ο χρήστης %{user_name} δημιούργησε το πεδίο εφαρμογής %{resource_name} μέσα στο πεδίο εφαρμογής %{parent_scope}
+        delete: Ο χρήστης %{user_name} διέγραψε το πεδίο εφαρμογής %{resource_name}
+        delete_with_parent: Ο χρήστης %{user_name} διέγραψε το πεδίο εφαρμογής %{resource_name} μέσα στο πεδίο εφαρμογής %{parent_scope}
+        update: Ο χρήστης %{user_name} ενημέρωσε το πεδίο εφαρμογής %{resource_name}
+        update_with_parent: Ο χρήστης %{user_name} ενημέρωσε το πεδίο εφαρμογής %{resource_name} μέσα στο πεδίο εφαρμογής %{parent_scope}
       static_page:
-        create: "Ο χρήστης %{user_name} δημιούργησε τη στατική σελίδα %{resource_name}"
-        delete: "Ο χρήστης %{user_name} διέγραψε τη στατική σελίδα %{resource_name}"
-        update: "Ο χρήστης %{user_name} ενημέρωσε τη στατική σελίδα %{resource_name}"
+        create: Ο χρήστης %{user_name} δημιούργησε τη στατική σελίδα %{resource_name}
+        delete: Ο χρήστης %{user_name} διέγραψε τη στατική σελίδα %{resource_name}
+        update: Ο χρήστης %{user_name} ενημέρωσε τη στατική σελίδα %{resource_name}
       user:
-        invite: "Ο χρήστης %{user_name} προσκάλεσε τον συμμετέχοντα %{resource_name} με τον ρόλο: %{role}"
-        officialize: "Ο χρήστης %{user_name} επισημοποίησε τον συμμετέχοντα %{resource_name}"
-        remove_from_admin: "Ο χρήστης %{user_name} κατάργησε τον συμμετέχοντα %{resource_name} με τον ρόλο: %{role}"
-        show_email: "Ο χρήστης %{user_name} ανέκτησε τη διεύθυνση email του συμμετέχοντα %{resource_name}"
-        unofficialize: "Ο χρήστης %{user_name} κατάργησε την επισημοποίηση του συμμετέχοντα %{resource_name}"
+        invite: 'Ο χρήστης %{user_name} προσκάλεσε τον συμμετέχοντα %{resource_name} με τον ρόλο: %{role}'
+        officialize: Ο χρήστης %{user_name} επισημοποίησε τον συμμετέχοντα %{resource_name}
+        remove_from_admin: 'Ο χρήστης %{user_name} κατάργησε τον συμμετέχοντα %{resource_name} με τον ρόλο: %{role}'
+        show_email: Ο χρήστης %{user_name} ανέκτησε τη διεύθυνση email του συμμετέχοντα %{resource_name}
+        unofficialize: Ο χρήστης %{user_name} κατάργησε την επισημοποίηση του συμμετέχοντα %{resource_name}
       user_group:
-        reject: "Ο χρήστης %{user_name} απέρριψε την επαλήθευση ομάδας %{resource_name}"
-        verify: "Ο χρήστης %{user_name} επαλήθευσε την ομάδα %{resource_name}"
-        verify_via_csv: "Ο χρήστης %{user_name} επαλήθευσε την ομάδα %{resource_name} μέσω αρχείου CSV"
+        reject: Ο χρήστης %{user_name} απέρριψε την επαλήθευση ομάδας %{resource_name}
+        verify: Ο χρήστης %{user_name} επαλήθευσε την ομάδα %{resource_name}
+        verify_via_csv: Ο χρήστης %{user_name} επαλήθευσε την ομάδα %{resource_name} μέσω αρχείου CSV
     alert:
       dismiss: Απόρριψη ειδοποιήσης
     amendments:
@@ -239,14 +240,11 @@ el:
           button_reject: Απόρριψη
           help_text: Αξιολογήστε τις αλλαγές και αποδεχθείτε ή απορρίψτε αυτήν την τροποποίηση. Θα σταλεί ειδοποίηση στους συγγραφείς.
         announcement:
-          accepted: |-
-            Αυτή η τροποποίηση για το %{amendable_type} %{proposal_link} έχει γίνει αποδεκτή στις <strong>%{date}</strong>.
-          evaluating: |-
-            Αυτή η τροποποίηση για το %{amendable_type} %{proposal_link} είναι υπό αξιολόγηση.
+          accepted: Αυτή η τροποποίηση για το %{amendable_type} %{proposal_link} έχει γίνει αποδεκτή στις <strong>%{date}</strong>.
+          evaluating: Αυτή η τροποποίηση για το %{amendable_type} %{proposal_link} είναι υπό αξιολόγηση.
           promoted: Αναβαθμίστηκε σε %{amendable_type}.
           rejected: Αυτή η τροποποίηση για το %{amendable_type} %{proposal_link} απορρίφθηκε στις <strong>%{date}</strong>.
-          withdrawn: |-
-            Αυτή η τροποποίηση για το %{amendable_type} %{proposal_link} αποσύρθηκε από τους συγγραφείς.
+          withdrawn: Αυτή η τροποποίηση για το %{amendable_type} %{proposal_link} αποσύρθηκε από τους συγγραφείς.
       new:
         send: Δημιουργία
         title: Δημιουργία Πρόχειρου Τροποποίησης
@@ -333,7 +331,7 @@ el:
           title: Η εξουσιοδότηση βρίσκεται ακόμα σε εξέλιξη
         unauthorized:
           explanation: Δυστυχώς, δεν μπορείτε να εκτελέσετε αυτήν την ενέργεια, καθώς ορισμένα από τα δεδομένα εξουσιοδότησης δεν ταιριάζουν.
-          invalid_field: "Η τιμή %{field} %{value} δεν είναι έγκυρη."
+          invalid_field: Η τιμή %{field} %{value} δεν είναι έγκυρη.
           ok: ΟΚ
           title: Χωρίς εξουσιοδότηση
         unconfirmed:
@@ -484,7 +482,7 @@ el:
           this_application_will_be_able_to: 'Αυτή η εφαρμογή θα μπορεί να:'
           this_application_will_not_be_able_to: 'Αυτή η εφαρμογή δεν θα μπορεί να:'
           update_profile: Ενημερώστε το προφίλ σας
-          wants_to_use_your_account_html: "Η εφαρμογή <strong>%{application_name}</strong> θέλει να χρησιμοποιήσει τον λογαριασμό σας"
+          wants_to_use_your_account_html: Η εφαρμογή <strong>%{application_name}</strong> θέλει να χρησιμοποιήσει τον λογαριασμό σας
     download_your_data:
       export:
         ready: Έτοιμο
@@ -572,13 +570,13 @@ el:
       resource_endorsed:
         email_intro: 'Ο υποστηρικτής %{endorser_name} %{endorser_nickname}, τον οποίο ακολουθείτε, μόλις επιδοκίμασε το στοιχείο «%{resource_title}» και πιστεύουμε ότι μπορεί να σας ενδιαφέρει. Δείτε το και συνεισφέρετε:'
         email_outro: Λάβατε αυτήν την ειδοποίηση επειδή ακολουθείτε τον υποστηρικτή %{endorser_nickname}. Μπορείτε να διακόψετε τη λήψη ειδοποιήσεων ακολουθώντας τον προηγούμενο σύνδεσμο.
-        email_subject: "Ο υποστηρικτής %{endorser_nickname} πραγματοποίησε μια νέα επιδοκιμασία"
+        email_subject: Ο υποστηρικτής %{endorser_nickname} πραγματοποίησε μια νέα επιδοκιμασία
         notification_title: Το στοιχείο <a href="%{resource_path}">%{resource_title}</a> %{resource_type} επιδοκιμάστηκε από τον υποστηρικτή <a href="%{endorser_path}">%{endorser_name} %{endorser_nickname}</a>.
       users:
         profile_updated:
           email_intro: Η <a href="%{resource_url}">σελίδα προφίλ</a> του υποστηρικτή %{name} (%{nickname}), τον οποίο ακολουθείτε, έχει ενημερωθεί.
           email_outro: Λάβατε αυτήν την ειδοποίηση επειδή ακολουθείτε τον/την %{nickname}. Μπορείτε να διακόψετε τη λήψη ειδοποιήσεων ακολουθώντας τον προηγούμενο σύνδεσμο.
-          email_subject: "Ο/η %{nickname} ενημέρωσε το προφίλ του/της"
+          email_subject: Ο/η %{nickname} ενημέρωσε το προφίλ του/της
           notification_title: Η <a href="%{resource_path}">σελίδα προφίλ</a> του υποστηρικτή %{name} (%{nickname}), τον οποίο ακολουθείτε, έχει ενημερωθεί.
     export_mailer:
       download_your_data_export:
@@ -642,7 +640,7 @@ el:
       badges:
         followers:
           conditions:
-            - Εάν είστε ενεργοί και ακολουθείτε άλλα άτομα, σίγουρα θα ενθαρρύνετε άλλα άτομα να σας ακολουθήσουν.
+          - Εάν είστε ενεργοί και ακολουθείτε άλλα άτομα, σίγουρα θα ενθαρρύνετε άλλα άτομα να σας ακολουθήσουν.
           description: Αυτό το έμβλημα χορηγείται όταν φτάνετε έναν συγκεκριμένο αριθμό ακολούθων. Ο οργανισμός %{organization_name} είναι ένα κοινωνικό και πολιτικό δίκτυο. Υφάνετε τον ιστό σας για να επικοινωνήσετε με άλλα άτομα στην πλατφόρμα.
           description_another: Αυτός ο συμμετέχων έχει %{score} ακολούθους.
           description_own: "%{score} άτομα σας ακολουθούν."
@@ -651,7 +649,7 @@ el:
           unearned_another: Αυτός ο συμμετέχων δεν έχει ακόμη ακολούθους.
           unearned_own: Δεν έχετε ακόμα ακολούθους.
         index:
-          badge_title: "Έμβλημα %{name}"
+          badge_title: Έμβλημα %{name}
           how: Πώς μπορείτε να το κερδίσετε
           page_description: Τα εμβλήματα αποτελούν αναγνώριση ενεργειών των συμμετεχόντων και της προόδου στην πλατφόρμα. Καθώς αρχίζετε να ανακαλύπτετε, να συμμετέχετε και να αλληλεπιδράτε στην πλατφόρμα, θα κερδίσετε διάφορα εμβλήματα. Ακολουθεί η λίστα εμβλημάτων και ορισμένοι τρόποι με τους οποίους μπορείτε να τα κερδίσετε.
           title: Εμβλήματα
@@ -684,17 +682,17 @@ el:
         title: Άνοιγμα εξωτερικού συνδέσμου
     log:
       base_presenter:
-        create: "Ο χρήστης %{user_name} δημιούργησε το στοιχείο %{resource_name}"
-        create_with_space: "Ο χρήστης %{user_name} δημιούργησε το στοιχείο %{resource_name} στον χώρο %{space_name}"
-        delete: "Ο χρήστης %{user_name} διέγραψε το στοιχείο %{resource_name}"
-        delete_with_space: "Ο χρήστης %{user_name} διέγραψε το στοιχείο %{resource_name} στον χώρο %{space_name}"
-        publish_with_space: "Ο/Η %{user_name} δημοσίευσε το %{resource_name} στο %{space_name}"
-        unknown_action: "Ο χρήστης %{user_name} πραγματοποίησε κάποια ενέργεια στο στοιχείο %{resource_name}"
-        unknown_action_with_space: "Ο χρήστης %{user_name} πραγματοποίησε κάποια ενέργεια στο στοιχείο %{resource_name} στον χώρο %{space_name}"
-        unpublish_with_space: "Ο/Η %{user_name} κατάργησε τη δημοσίευση του %{resource_name} στο %{space_name}"
-        update: "Ο χρήστης %{user_name} ενημέρωσε το στοιχείο %{resource_name}"
-        update_permissions_with_space: "Ο/Η %{user_name} ενημέρωσε τα δικαιώματα του %{resource_name} στο %{space_name}"
-        update_with_space: "Ο χρήστης %{user_name} ενημέρωσε το στοιχείο %{resource_name} στον χώρο %{space_name}"
+        create: Ο χρήστης %{user_name} δημιούργησε το στοιχείο %{resource_name}
+        create_with_space: Ο χρήστης %{user_name} δημιούργησε το στοιχείο %{resource_name} στον χώρο %{space_name}
+        delete: Ο χρήστης %{user_name} διέγραψε το στοιχείο %{resource_name}
+        delete_with_space: Ο χρήστης %{user_name} διέγραψε το στοιχείο %{resource_name} στον χώρο %{space_name}
+        publish_with_space: Ο/Η %{user_name} δημοσίευσε το %{resource_name} στο %{space_name}
+        unknown_action: Ο χρήστης %{user_name} πραγματοποίησε κάποια ενέργεια στο στοιχείο %{resource_name}
+        unknown_action_with_space: Ο χρήστης %{user_name} πραγματοποίησε κάποια ενέργεια στο στοιχείο %{resource_name} στον χώρο %{space_name}
+        unpublish_with_space: Ο/Η %{user_name} κατάργησε τη δημοσίευση του %{resource_name} στο %{space_name}
+        update: Ο χρήστης %{user_name} ενημέρωσε το στοιχείο %{resource_name}
+        update_permissions_with_space: Ο/Η %{user_name} ενημέρωσε τα δικαιώματα του %{resource_name} στο %{space_name}
+        update_with_space: Ο χρήστης %{user_name} ενημέρωσε το στοιχείο %{resource_name} στον χώρο %{space_name}
       value_types:
         area_presenter:
           not_found: 'Ο τομέας δεν βρέθηκε στη βάση δεδομένων (αναγνωριστικό: %{id})'
@@ -720,11 +718,11 @@ el:
       conversation_mailer:
         new_conversation:
           greeting: Γεια σου, %{recipient}!
-          intro: "Ο αποστολέας %{sender} ξεκίνησε μια νέα συνομιλία μαζί σας. Κάντε κλικ εδώ για να την δείτε:"
-          subject: "Ο αποστολέας %{sender} ξεκίνησε μια συνομιλία μαζί σας"
+          intro: 'Ο αποστολέας %{sender} ξεκίνησε μια νέα συνομιλία μαζί σας. Κάντε κλικ εδώ για να την δείτε:'
+          subject: Ο αποστολέας %{sender} ξεκίνησε μια συνομιλία μαζί σας
         new_message:
           greeting: Γεια σου, %{recipient}!
-          intro: "Ο αποστολέας %{sender} δημοσίευσε νέα μηνύματα στη συνομιλία σας. Κάντε κλικ εδώ για να τα δείτε:"
+          intro: 'Ο αποστολέας %{sender} δημοσίευσε νέα μηνύματα στη συνομιλία σας. Κάντε κλικ εδώ για να τα δείτε:'
           subject: Έχετε νέα μηνύματα από τον αποστολέα %{sender}
       conversations:
         add_conversation_users:
@@ -921,7 +919,7 @@ el:
       prompt: Επιλέξτε πεδίο εφαρμογής
     search:
       results: Αποτελέσματα αναζήτησης
-      results_found_for_term: '%{count} αποτελέσματα για την αναζήτηση του όρου: «%{term}»'
+      results_found_for_term: "%{count} αποτελέσματα για την αναζήτηση του όρου: «%{term}»"
       term_input_placeholder: Αναζήτηση
     searches:
       filters:
@@ -1042,8 +1040,8 @@ el:
         accept_until: Αυτή η πρόσκληση θα λήξει στις %{due_date}.
         decline: Απόρριψη πρόσκλησης
         hello: Γεια σας %{email},
-        invited_you_as_admin: "Ο χρήστης %{invited_by} σάς προσκάλεσε ως διαχειριστή της εφαρμογής %{application}. Μπορείτε να την αποδεχτείτε μέσω του παρακάτω συνδέσμου."
-        invited_you_as_private_user: "Ο χρήστης %{invited_by} σάς προσκάλεσε ως ιδιωτικό συμμετέχοντα της εφαρμογής %{application}. Μπορείτε να την αποδεχτείτε μέσω του παρακάτω συνδέσμου."
+        invited_you_as_admin: Ο χρήστης %{invited_by} σάς προσκάλεσε ως διαχειριστή της εφαρμογής %{application}. Μπορείτε να την αποδεχτείτε μέσω του παρακάτω συνδέσμου.
+        invited_you_as_private_user: Ο χρήστης %{invited_by} σάς προσκάλεσε ως ιδιωτικό συμμετέχοντα της εφαρμογής %{application}. Μπορείτε να την αποδεχτείτε μέσω του παρακάτω συνδέσμου.
         someone_invited_you: Κάποιος σάς προσκάλεσε στην εφαρμογή %{application}. Μπορείτε να την αποδεχτείτε μέσω του παρακάτω συνδέσμου.
         someone_invited_you_as_admin: Κάποιος σάς προσκάλεσε ως διαχειριστή της εφαρμογής %{application}. Μπορείτε να την αποδεχτείτε μέσω του παρακάτω συνδέσμου.
         someone_invited_you_as_private_user: Κάποιος σάς προσκάλεσε ως ιδιωτικό συμμετέχοντα της εφαρμογής %{application}. Μπορείτε να την αποδεχτείτε μέσω του παρακάτω συνδέσμου.

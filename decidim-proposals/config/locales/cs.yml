@@ -1,3 +1,4 @@
+---
 cs:
   activemodel:
     attributes:
@@ -100,24 +101,24 @@ cs:
             split_from_proposal_text: 'Stal se z něj tento návrh: %{link}'
             split_to_proposal_text: 'Tento návrh byl vytvořen: %{link}'
       decidim/proposals/collaborative_draft:
-        one: Návrh spolupráce
         few: Společné návrhy
         many: Společné návrhy
+        one: Návrh spolupráce
         other: Společné návrhy
       decidim/proposals/proposal:
-        one: Návrh
         few: Návrhy
         many: Návrhy
+        one: Návrh
         other: Návrhy
       decidim/proposals/proposal_note:
-        one: Poznámka
         few: Poznámky
         many: Poznámky
+        one: Poznámka
         other: Poznámky
       decidim/proposals/proposal_vote:
-        one: Hlas
         few: Hlasů
         many: Hlasů
+        one: Hlas
         other: Hlasů
   decidim:
     admin:
@@ -256,7 +257,7 @@ cs:
             endorsements_enabled: Schvalování povoleno
             proposal_answering_enabled: Odpovídání návrhu je povoleno
             publish_answers_immediately: Okamžitě publikovat odpovědi návrhu
-            publish_answers_immediately_help_html: 'Mějte na paměti, že pokud odpovíte na jakýkoli návrh bez tohoto povolení, budete je muset publikovat ručně jejich výběrem a použitím publikační akce. Více informací o tom, jak to funguje, naleznete na <a href="https://docs.decidim.org/en/admin/components/proposals/answers#_publication" target="_blank">stránce odpovědi návrhů</a>.'
+            publish_answers_immediately_help_html: Mějte na paměti, že pokud odpovíte na jakýkoli návrh bez tohoto povolení, budete je muset publikovat ručně jejich výběrem a použitím publikační akce. Více informací o tom, jak to funguje, naleznete na <a href="https://docs.decidim.org/en/admin/components/proposals/answers#_publication" target="_blank">stránce odpovědi návrhů</a>.
             suggested_hashtags: Hashtagy navržené uživatelům pro nové návrhy
             votes_blocked: Hlasy blokovány
             votes_enabled: Hlasování povoleno
@@ -384,8 +385,8 @@ cs:
       badges:
         accepted_proposals:
           conditions:
-            - Zvolte participační prostor pro účast vašeho zájmu s povoleným podáním návrhů
-            - Snažte se učinit návrhy, které lze provést. Tímto způsobem je pravděpodobnější, že budou přijaty.
+          - Zvolte participační prostor pro účast vašeho zájmu s povoleným podáním návrhů
+          - Snažte se učinit návrhy, které lze provést. Tímto způsobem je pravděpodobnější, že budou přijaty.
           description: Tento odznak se uděluje, když se aktivně účastníte nových návrhů a ty jsou přijaty.
           description_another: Uživatel obdržel %{score} přijatých návrhů.
           description_own: Bylo přijato %{score} návrhů.
@@ -395,8 +396,8 @@ cs:
           unearned_own: Dosud jste žádné návrhy nepřijali.
         proposal_votes:
           conditions:
-            - Procházejte a strávte nějaký čas čtením nápadů jiných lidí
-            - Hlasujte podle návrhů, které se vám líbí nebo najdete zajímavé
+          - Procházejte a strávte nějaký čas čtením nápadů jiných lidí
+          - Hlasujte podle návrhů, které se vám líbí nebo najdete zajímavé
           description: Tento odznak se uděluje, když hlasujete pro návrhy ostatních.
           description_another: Tento účastník hlasoval pro %{score} návrhů.
           description_own: Hlasovali jste pro %{score} návrhy.
@@ -406,8 +407,8 @@ cs:
           unearned_own: Zatím jste nehlasovali pro žádné návrhy.
         proposals:
           conditions:
-            - Zvolte participační prostor pro účast vašeho zájmu s povoleným podáním návrhů
-            - Vytvořte nový návrh
+          - Zvolte participační prostor pro účast vašeho zájmu s povoleným podáním návrhů
+          - Vytvořte nový návrh
           description: Tento odznak je udělen, když se aktivně podílíte na nových návrzích.
           description_another: Tento uživatel vytvořil %{score} návrhů.
           description_own: Vytvořili jste %{score} návrhů.
@@ -538,14 +539,14 @@ cs:
             proposals: Importovat návrhy ze souboru
           resources:
             answers:
-              one: odpověď na návrh
               few: odpovědi na návrh
               many: odpovědí na návrh
+              one: odpověď na návrh
               other: odpovědi na návrh
             proposals:
-              one: návrh
               few: návrhy
               many: návrhů
+              one: návrh
               other: návrhy
           title:
             answers: Importovat odpovědi návrhu ze souboru
@@ -623,7 +624,7 @@ cs:
         proposals:
           answer:
             bulk_answer_error: Návrhy s ID [%{proposals}] nemohly být zodpovězeny kvůli chybám při použití šablony "%{template}". Můžete zkontrolovat, že šablona odpovědi odpovídá očekávanému formátu této komponenty, a to individuálně.
-            bulk_answer_success: 'Na %{count} návrhy bude odpovězeno pomocí šablony „%{template}“. Počkejte prosím několik minut a obnovte stránku, abyste viděli aktualizace.'
+            bulk_answer_success: Na %{count} návrhy bude odpovězeno pomocí šablony „%{template}“. Počkejte prosím několik minut a obnovte stránku, abyste viděli aktualizace.
             invalid: Při odpovědi na tento návrh došlo k chybě.
             success: Návrh byl úspěšně zodpovězen.
           create:
@@ -669,9 +670,9 @@ cs:
             endorsers: Schvalující
             link: Zobrazit návrh
             n_more_endorsers:
-              one: a další 1
               few: a %{count} dalších
               many: a %{count} dalších
+              one: a další 1
               other: a dalších %{count}
             photos: Fotky
             ranking: "%{ranking} z %{total}"
@@ -779,9 +780,9 @@ cs:
           unfold: Rozvinout
         index:
           count:
-            one: "%{count} návrh spolupráce"
             few: "%{count} návrh spolupráce"
             many: "%{count} návrh spolupráce"
+            one: "%{count} návrh spolupráce"
             other: "%{count} návrh spolupráce"
         name: Koncepty spolupráce
         new:
@@ -814,9 +815,9 @@ cs:
           final_proposal: konečný návrh
           final_proposal_help_text: Tento návrh je dokončen. Můžete vidět konečný konečný návrh
           hidden_authors_count:
-            one: a %{count} další osoba
             few: a %{count} dalších lidí
             many: a %{count} dalších lidí
+            one: a %{count} další osoba
             other: a %{count} dalších lidí
           info-message: Toto je <strong>návrh spolupráce</strong> pro návrh. To znamená, že můžete jeho autorům pomoci utvářet návrh pomocí sekce komentáře níže nebo jej přímo vylepšit požádáním o přístup k jeho úpravě. Jakmile vám autoři udělí přístup, budete moci provést změny tohoto konceptu.
           publish: Publikovat
@@ -936,9 +937,9 @@ cs:
           click_here: Zobrazit všechny návrhy
           collaborative_drafts_list: Přístup ke konceptům spolupráce
           count:
-            one: "%{count} návrh"
             few: "%{count} návrhů"
             many: "%{count} návrhů"
+            one: "%{count} návrh"
             other: "%{count} návrhů"
           grid_mode: Mřížka
           list_mode: Režim seznamu
@@ -968,9 +969,9 @@ cs:
           announcement_title: Váš návrh ještě nebyl zveřejněn
           modify: Upravte návrh
           proposal_edit_before_minutes:
-            one: Tento návrh budete moci upravit během první minuty po zveřejnění návrhu. Po uplynutí tohoto časového okna nebudete moci návrh upravit.
             few: Budete mít možnost upravit tento návrh během prvních %{count} minut po návrh zveřejněn. Po uplynutí tohoto časového okna nebudete moci návrh upravit.
             many: Budete mít možnost upravit tento návrh během prvních %{count} minut po návrh zveřejněn. Po uplynutí tohoto časového okna nebudete moci návrh upravit.
+            one: Tento návrh budete moci upravit během první minuty po zveřejnění návrhu. Po uplynutí tohoto časového okna nebudete moci návrh upravit.
             other: Budete mít možnost upravit tento návrh během prvních %{count} minut po návrh zveřejněn. Po uplynutí tohoto časového okna nebudete moci návrh upravit.
           publish: Publikovat
           title: Publikujte svůj návrh
@@ -983,9 +984,9 @@ cs:
           edit_proposal: Upravit
           estimated_cost: Odhadované náklady
           hidden_endorsers_count:
-            one: a %{count} další osoba
             few: a %{count} dalších lidí
             many: a %{count} dalších lidí
+            one: a %{count} další osoba
             other: a %{count} dalších lidí
           link_to_collaborative_draft_help_text: Tento návrh je výsledkem společného návrhu. Zkontrolujte historii
           link_to_collaborative_draft_text: Viz schéma spolupráce
@@ -1010,9 +1011,9 @@ cs:
           votes_blocked: Hlasovat
         votes_count:
           count:
-            one: Hlas
             few: Hlasy
             many: Hlasů
+            one: Hlas
             other: Hlasů
         voting_rules:
           already_vote:

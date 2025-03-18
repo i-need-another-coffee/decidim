@@ -1,3 +1,4 @@
+---
 pl:
   activemodel:
     attributes:
@@ -72,19 +73,19 @@ pl:
   activerecord:
     models:
       decidim/participatory_process:
-        one: Proces partycypacyjny
         few: Procesy partycypacyjne
         many: Procesy partycypacyjne
+        one: Proces partycypacyjny
         other: Procesy partycypacyjne
       decidim/participatory_process_group:
-        one: Grupa procesu partycypacyjnego
         few: Grupy procesu partycypacyjnego
         many: Grup procesu partycypacyjnego
+        one: Grupa procesu partycypacyjnego
         other: Grup procesu partycypacyjnego
       decidim/participatory_process_step:
-        one: Etap
         few: Etapów
         many: Etapy
+        one: Etap
         other: Etapy
   decidim:
     admin:
@@ -293,7 +294,7 @@ pl:
         update: "%{user_name} zaktualizował(a) etap %{resource_name} w procesie partycypacyjnym %{space_name}"
       participatory_process_type:
         create: "%{user_name} utworzył(a) typ procesu partycypacyjnego %{resource_name}"
-        delete: "Użytkownik %{user_name} usunął typ procesu partycypacyjnego %{resource_name}"
+        delete: Użytkownik %{user_name} usunął typ procesu partycypacyjnego %{resource_name}
         update: "%{user_name} zaktualizował(a) typ procesu partycypacyjnego %{resource_name}"
       participatory_process_user_role:
         create: "%{user_name} zaprosił(a) użytkownika %{resource_name} do procesu partycypacyjnego %{space_name}"
@@ -359,9 +360,9 @@ pl:
         title:
           meta_scope: Zakres
           participatory_processes:
-            one: 1 proces
             few: "%{count} procesy"
             many: "%{count} procesów"
+            one: 1 proces
             other: "%{count} procesy"
       show:
         title: Uczestniczące grupy procesów
@@ -440,24 +441,24 @@ pl:
           all_types: Wszystkie typy
           counters:
             active:
-              one: 1 aktualny proces
               few: "%{count} aktualne procesy"
               many: "%{count} aktualnych procesów"
+              one: 1 aktualny proces
               other: "%{count} aktualnych procesów"
             all:
-              one: 1 proces
               few: "%{count} procesy"
               many: "%{count} procesów"
+              one: 1 proces
               other: "%{count} procesów"
             past:
-              one: 1 przeszły proces
               few: "%{count} przeszłe procesy"
               many: "%{count} przeszłych procesów"
+              one: 1 przeszły proces
               other: "%{count} przeszłych procesów"
             upcoming:
-              one: 1 nadchodzący proces
               few: "%{count} nadchodzące procesy"
               many: "%{count} nadchodzących procesów"
+              one: 1 nadchodzący proces
               other: "%{count} nadchodzących procesów"
           date: Data
           explanations:

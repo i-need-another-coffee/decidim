@@ -1,3 +1,4 @@
+---
 ar:
   activemodel:
     attributes:
@@ -70,26 +71,26 @@ ar:
   activerecord:
     models:
       decidim/assembly:
-        zero: جمعيات
-        one: جمعية
-        two: جمعتين
         few: جمعيات
         many: جمعيات
+        one: جمعية
         other: جمعيات
+        two: جمعتين
+        zero: جمعيات
       decidim/assembly_member:
-        zero: أعضاء الجمعية
-        one: عضو الجمعية
-        two: أعضاء الجمعية
         few: أعضاء الجمعية
         many: أعضاء الجمعية
+        one: عضو الجمعية
         other: أعضاء الجمعية
+        two: أعضاء الجمعية
+        zero: أعضاء الجمعية
       decidim/assembly_user_role:
-        zero: أدوار المستخدم التجميع
-        one: دور مستخدم التجميع
-        two: أدوار المستخدم التجميع
         few: أدوار المستخدم التجميع
         many: أدوار المستخدم التجميع
+        one: دور مستخدم التجميع
         other: أدوار المستخدم التجميع
+        two: أدوار المستخدم التجميع
+        zero: أدوار المستخدم التجميع
   decidim:
     admin:
       actions:
@@ -202,9 +203,9 @@ ar:
         delete: "%{user_name} إزالة العضو %{resource_name} من الجمعية %{space_name}"
         update: "%{user_name} بتحديث العضو %{resource_name} في الجمعية %{space_name}"
       assembly_setting:
-        update: "قام %{user_name} بتحديث إعدادات الجمعية"
+        update: قام %{user_name} بتحديث إعدادات الجمعية
       assembly_type:
-        create: "قام %{user_name} بإنشاء نوع الجمعية %{resource_name}"
+        create: قام %{user_name} بإنشاء نوع الجمعية %{resource_name}
         delete: "%{user_name} حذف نوع التجمع %{resource_name}"
         publish: "%{user_name} نشر نوع الجمعية %{resource_name}"
         unpublish: "%{user_name} قام بإلغاء نشر نوع الجمعية %{resource_name}"
@@ -328,11 +329,11 @@ ar:
           promoted_assemblies: المجالس البارزة
         order_by_assemblies:
           assemblies:
-            zero: "%{count} اجتماعات"
-            one: "%{count} اجتماع"
-            two: "%{count} اجتماعَيْن"
             few: "%{count} اجتماعات"
             many: "%{count} اجتماع"
+            one: "%{count} اجتماع"
             other: "%{count} اجتماعات"
+            two: "%{count} اجتماعَيْن"
+            zero: "%{count} اجتماعات"
       assembly_navigation:
         assembly_member_menu_item: الأعضاء

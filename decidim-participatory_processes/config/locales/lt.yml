@@ -1,3 +1,4 @@
+---
 lt:
   activemodel:
     attributes:
@@ -72,19 +73,19 @@ lt:
   activerecord:
     models:
       decidim/participatory_process:
-        one: Dalyvaujamasis procesas
         few: Dalyvaujamieji procesai
         many: Dalyvaujamieji procesai
+        one: Dalyvaujamasis procesas
         other: Dalyvaujamieji procesai
       decidim/participatory_process_group:
-        one: Dalyvaujamojo proceso grupė
         few: Dalyvaujamojo proceso grupės
         many: Dalyvaujamojo proceso grupės
+        one: Dalyvaujamojo proceso grupė
         other: Dalyvaujamojo proceso grupės
       decidim/participatory_process_step:
-        one: Etapas
         few: Etapai
         many: Etapai
+        one: Etapas
         other: Etapai
   decidim:
     admin:
@@ -293,14 +294,14 @@ lt:
           email_subject: Jūs paskirtas „%{resource_title}“ %{role}.
           notification_title: Jūs paskirtas <a href="%{resource_url}">%{resource_title}</a> dalyvaujamojo proceso %{role}.
         step_activated:
-          email_intro: '%{participatory_space_title} %{resource_title} etapas dabar aktyvus. Jį galite pamatyti šiame puslapyje:'
+          email_intro: "%{participatory_space_title} %{resource_title} etapas dabar aktyvus. Jį galite pamatyti šiame puslapyje:"
           email_outro: Šį pranešimą gavote dėl to, kad sekate %{participatory_space_title}. Jeigu nebenorite gauti pranešimų, spustelėkite ankstesnę nuorodą.
-          email_subject: '%{participatory_space_title} atnaujinimas'
+          email_subject: "%{participatory_space_title} atnaujinimas"
           notification_title: '%{resource_title} etapas dabar įjungtas <a href="%{resource_path}">%{participatory_space_title}</a>'
         step_changed:
-          email_intro: '%{participatory_space_title} %{resource_title} etapo datos buvo atnaujintos. Tai galite pamatyti šiame puslapyje:'
+          email_intro: "%{participatory_space_title} %{resource_title} etapo datos buvo atnaujintos. Tai galite pamatyti šiame puslapyje:"
           email_outro: Šį pranešimą gavote dėl to, kad sekate %{participatory_space_title}. Jeigu nebenorite gauti pranešimų, spustelėkite ankstesnę nuorodą.
-          email_subject: '%{participatory_space_title} atnaujinimas'
+          email_subject: "%{participatory_space_title} atnaujinimas"
           notification_title: <a href="%{participatory_space_url}">%{participatory_space_title}</a> <a href="%{resource_path}">%{resource_title}</a> etapo datos buvo atnaujintos.
     help:
       participatory_spaces:
@@ -345,9 +346,9 @@ lt:
         title:
           meta_scope: Apimtis
           participatory_processes:
-            one: 1 procesas
             few: "%{count} procesai"
             many: "%{count} procesų"
+            one: 1 procesas
             other: "%{count} procesai"
       show:
         title: Dalyvaujamojo proceso grupės
@@ -418,24 +419,24 @@ lt:
           all_types: Visi tipai
           counters:
             active:
-              one: 1 aktyvus procesas
               few: "%{count} aktyvūs procesai"
               many: "%{count} aktyvūs procesai"
+              one: 1 aktyvus procesas
               other: "%{count} aktyvūs procesai"
             all:
-              one: 1 procesas
               few: "%{count} procesai"
               many: "%{count} procesai"
+              one: 1 procesas
               other: "%{count} procesai"
             past:
-              one: 1 buvęs procesas
               few: "%{count} buvę procesai"
               many: "%{count} buvę procesai"
+              one: 1 buvęs procesas
               other: "%{count} buvę procesai"
             upcoming:
-              one: 1 būsimas procesas
               few: "%{count} būsimi procesai"
               many: "%{count} būsimi procesai"
+              one: 1 būsimas procesas
               other: "%{count} būsimi procesai"
           date: Data
           explanations:

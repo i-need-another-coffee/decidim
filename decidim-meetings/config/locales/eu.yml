@@ -1,3 +1,4 @@
+---
 eu:
   activemodel:
     attributes:
@@ -83,7 +84,7 @@ eu:
       decidim:
         meetings:
           meeting:
-            text: '%{link} topaketan eztabaidatu da'
+            text: "%{link} topaketan eztabaidatu da"
       decidim/meetings/meeting:
         one: Topaketa
         other: Topaketak
@@ -252,12 +253,12 @@ eu:
       badges:
         attended_meetings:
           conditions:
-            - Eman izena parte hartu nahi duzun topaketan
+          - Eman izena parte hartu nahi duzun topaketan
           description: Garaikur hau aurrez aurre egiten diren bileretara joaten zarenean ematen da.
           description_another: Parte-hartzaile honek %{score} topeketatan hartu du parte.
-          description_own: '%{score} topaketatan hartu duzu parte.'
+          description_own: "%{score} topaketatan hartu duzu parte."
           name: Honekin lotutako topaketak
-          next_level_in: '%{score} topaketa gehiago hurrengo mailara iristeko!'
+          next_level_in: "%{score} topaketa gehiago hurrengo mailara iristeko!"
           unearned_another: Parte-hartzaile honek oraindik ez du topaketa batean ere parte hartu.
           unearned_own: Oraindik ez zara topaketa batere ere joan.
     meetings:
@@ -354,7 +355,7 @@ eu:
           form:
             address_help: 'Helbidea: Geocoderrek erabiltzen du kokapena aurkitzeko'
             disclaimer: 'Erantzukizun-deskargua: Kanpoko inskripzio-sistema bat erabiliz, onartzen duzu %{organization} ko antolatzaileak ez direla kanpo-zerbitzuko parte-hartzaileek emandako datuen erantzule.'
-            iframe_embed_type_html: 'Zerbitzu gutxi batzuek baino ez dute uzten topaketan edo zuzeneko gertakarietan txertatzen honako domeinu hauetatik:%{domains}'
+            iframe_embed_type_html: Zerbitzu gutxi batzuek baino ez dute uzten topaketan edo zuzeneko gertakarietan txertatzen honako domeinu hauetatik:%{domains}
             location_help: 'Kokapena: parte-hartzaileentzako mezua, non bildu behar dugun adierazten duena'
             location_hints_help: 'Kokapen-aholkuak: informazio gehigarria. Adibidez: eraikinaren solairua, aurrez aurreko topaketa bat bada, edo topaketarako pasahitza, sarbide mugatuko online topaketa bat bada.'
             online_meeting_url_help: 'Esteka: Utzi parte-hartzaileei zuzenean konektatzen zure topaketara'
@@ -408,10 +409,10 @@ eu:
         poll:
           form:
             announcement_html:
-              - Galdera batek erantzunak jasotzen dituenean edo argitaratuta/itxita dagoenean, jada ezin da editatu.
-              - Edozein unetan gehitu ahal duzu galdera bat.
-              - Inkesta itxi egingo da sortutako galdera guztien emaitzak argitaratzen direnean.
-              - Bisitatu <a href='% {admin_link}'>inkestak administratzeko orria </a>, galderak bidali eta emaitzak argitaratzeko.
+            - Galdera batek erantzunak jasotzen dituenean edo argitaratuta/itxita dagoenean, jada ezin da editatu.
+            - Edozein unetan gehitu ahal duzu galdera bat.
+            - Inkesta itxi egingo da sortutako galdera guztien emaitzak argitaratzen direnean.
+            - Bisitatu <a href='% {admin_link}'>inkestak administratzeko orria </a>, galderak bidali eta emaitzak argitaratzeko.
         registrations:
           edit:
             save: Gorde
@@ -426,9 +427,9 @@ eu:
             registration_form: Izena emateko formularioa
             registrations_count:
               one: Izen-emate bat izan da.
-              other: '%{count} izen-emate izan dira.'
+              other: "%{count} izen-emate izan dira."
             reserved_slots_help: Utzi 0, ez baduzu erreserbatutako espaziorik.
-            reserved_slots_less_than: '%{count} baino gutxiago izan behar du'
+            reserved_slots_less_than: "%{count} baino gutxiago izan behar du"
             title: Izen-emateak
           update:
             invalid: Arazo bat egon da izen-ematearen konfigurazioa gordetzean.
@@ -486,7 +487,9 @@ eu:
             space_type: Partaidetza-espazioa
       iframe_access_level:
         all: Bisitari guztiak
-        registered: "Parte hartzaile erregistratuak topaketa honetan\n"
+        registered: 'Parte hartzaile erregistratuak topaketa honetan
+
+          '
         signed_in: Soilik rregistratutako parte-hartzaileak
       iframe_embed_type:
         embed_in_meeting_page: Topaketa-orrian txertatuta
@@ -522,7 +525,7 @@ eu:
           outlook: Gehitu Outlooken egutegira
         count:
           meetings_count:
-            one: "topaketa 1"
+            one: topaketa 1
             other: "%{count} topaketa"
         create:
           invalid: Arazo bat egon da topaketa hau sortzean.
@@ -559,7 +562,7 @@ eu:
           available_slots_help: Uzti 0an erabiltzeko espazio mugatua baduzu
           create_as: Sortu topaketa honela
           disclaimer: 'Erantzukizun-deskargua: Kanpoko inskripzio-sistema bat erabiliz, onartzen duzu %{organization} ko antolatzaileak ez direla kanpo-zerbitzuko parte-hartzaileek emandako datuen erantzule.'
-          iframe_embed_type_html: 'Zerbitzu gutxi batzuek baino ez dute uzten topaketan edo zuzeneko gertakarietan txertatzen honako domeinu hauetatik:%{domains}'
+          iframe_embed_type_html: Zerbitzu gutxi batzuek baino ez dute uzten topaketan edo zuzeneko gertakarietan txertatzen honako domeinu hauetatik:%{domains}
           location_help: 'Kokapena: mezua parte-hartzaileei zuzendua biltzeko lekua adieraziz'
           location_hints_help: 'Kokapen-aholkuak: informazio gehigarria. Adibidea: eraikinaren solairua, aurrez aurreko topaketa bada, edo aretoaren pasahitza, sarrera mugatua duen online topaketa bada.'
           online_meeting_url_help: 'Lotura: Utzi parte-hartzaileei zuzenean konektatzen zure topaketara'
@@ -609,7 +612,7 @@ eu:
             validated: BALIDATUA
             validation_pending: BALIOZKOTZEKO ZAIN
           remaining_slots:
-            one: "Slot %{count} geratzen da"
+            one: Slot %{count} geratzen da
             other: "%{count} slot geratzen dira"
           visit_finished: Ikusi egindako topaketa
           withdraw_btn_hint: Topaketa bertan behera utz dezakezu iritzia aldatzen baduzu. Topaketa ez da ezabatu. Erretiratutakoen zerrendan agertuko da.
@@ -623,11 +626,11 @@ eu:
           fields:
             email: Helbide elektronikoa
             name: Izena
-            sent_at: ' Bidalketa-data: '
+            sent_at: " Bidalketa-data: "
             status: Egoera
           status:
-            accepted: (%{at})-an onartura
-            rejected: (%{at})-an baztertuta
+            accepted: "(%{at})-an onartura"
+            rejected: "(%{at})-an baztertuta"
             sent: Bidalia
         meeting:
           fields:

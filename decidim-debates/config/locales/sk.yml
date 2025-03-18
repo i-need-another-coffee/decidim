@@ -1,3 +1,4 @@
+---
 sk:
   activemodel:
     attributes:
@@ -15,9 +16,9 @@ sk:
   activerecord:
     models:
       decidim/debates/debate:
-        one: Debata
         few: Debaty
         many: Debaty
+        one: Debata
         other: Debaty
   decidim:
     components:
@@ -57,9 +58,9 @@ sk:
       debates:
         count:
           debates_count:
-            one: "%{count} debata"
             few: "%{count} debaty"
             many: "%{count} debaty"
+            one: "%{count} debata"
             other: "%{count} debaty"
         create:
           invalid: Pri vytváraní debaty sa vyskytol problém.
@@ -107,13 +108,13 @@ sk:
       badges:
         commented_debates:
           conditions:
-            - Vyberte si otvorenú debatu a zúčastnite sa
+          - Vyberte si otvorenú debatu a zúčastnite sa
           description: Tento odznak ste dostali za aktívnu participáciu komentovaním v rôznych debatách.
           description_another: Tento účastník sa zúčastnil na %{score} debatách.
           description_own: Zúčastnili ste sa na %{score} debatách.
           name: Debaty
           next_level_in: Podieľajte sa na ďalších %{score} debatách pre dosiahnutie ďalšej úrovne!
-          unearned_another: Tento účastník sa nezúčastnil na žiadnej debate. 
+          unearned_another: Tento účastník sa nezúčastnil na žiadnej debate.
     metrics:
       debates:
         description: Počet vytvorených debát

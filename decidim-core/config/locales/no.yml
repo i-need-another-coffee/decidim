@@ -1,4 +1,5 @@
-"no":
+---
+'no':
   activemodel:
     attributes:
       account:
@@ -58,8 +59,8 @@
         one: Deltaker
         other: Deltakere
   booleans:
-    'false': 'Nei'
-    'true': 'Ja'
+    'false': Nei
+    'true': Ja
   date:
     buttons:
       select: Velg
@@ -187,14 +188,11 @@
           button_reject: Avvis
           help_text: Anmeld endringene og akseptere eller avis denne endringen. Endringens forfatter(e) vil bli informert.
         announcement:
-          accepted: |-
-            Denne endringen for %{amendable_type}%{proposal_link} var akseptert på <strong>%{date}</strong>.
-          evaluating: |-
-            Denne endringen for %{amendable_type} %{proposal_link} holder på å bli evaluert.
+          accepted: Denne endringen for %{amendable_type}%{proposal_link} var akseptert på <strong>%{date}</strong>.
+          evaluating: Denne endringen for %{amendable_type} %{proposal_link} holder på å bli evaluert.
           promoted: Promotert til en %{amendable_type}.
           rejected: Denne endringen for %{amendable_type}%{proposal_link} var avslått på <strong>%{date}</strong>.
-          withdrawn: |-
-            Denne endringen for %{amendable_type} %{proposal_link} har blitt trukket av forfatteren.
+          withdrawn: Denne endringen for %{amendable_type} %{proposal_link} har blitt trukket av forfatteren.
       new:
         send: Opprett
         title: Opprett endrings utkast
@@ -559,7 +557,7 @@
       badges:
         followers:
           conditions:
-            - Å være aktiv og følge andre vil sikkert få andre til å følge deg.
+          - Å være aktiv og følge andre vil sikkert få andre til å følge deg.
           description: Dette merke er oppnådd på du når en spesifikk mengde følgere. %{organization_name} er et sosialt of politisk nettverk, veve nettet ditt for å kommunisere med andre folk på plattformen.
           description_another: Denne deltakeren har %{score} følgere.
           description_own: "%{score} folk følger deg."
@@ -1043,7 +1041,7 @@
         one: Minst %{count} tegn
         other: Minst %{count} tegn
     required: Påkrevd
-    required_explanation: "Obligatoriske felt er markert med en stjerne"
+    required_explanation: Obligatoriske felt er markert med en stjerne
   invisible_captcha:
     sentence_for_humans: Hvis du er menneske, ignorerer dette feltet
     timestamp_error_message: Beklager, det var for raskt! Vennligst, send inn på nytt.

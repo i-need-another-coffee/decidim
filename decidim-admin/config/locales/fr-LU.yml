@@ -1,3 +1,4 @@
+---
 fr-LU:
   activemodel:
     attributes:
@@ -159,7 +160,7 @@ fr-LU:
           new: Nouvelle catégorie
         import: Importer
         manage: Gérer
-        new: + %{name}
+        new: "+ %{name}"
         newsletter:
           new: Nouvelle newsletter
         participatory_space_private_user:
@@ -318,7 +319,7 @@ fr-LU:
           success: La fonctionnalité a été mise à jour avec succès.
       conflicts:
         attempts: Tentatives
-        'false': 'Non'
+        'false': Non
         managed_user_name: Utilisateur représenté
         solved: Résolu
         title: Conflits de vérification
@@ -329,7 +330,7 @@ fr-LU:
           reason: Raison
           success: Le transfert a bien été effectué.
           title: Transfert
-        'true': 'Oui'
+        'true': Oui
         user_name: Utilisateur
       dashboard:
         show:
@@ -356,13 +357,13 @@ fr-LU:
         invitation_accepted_at_present:
           label: Invitation acceptée
           values:
-            'false': 'Non'
-            'true': 'Oui'
+            'false': Non
+            'true': Oui
         last_sign_in_at_present:
           label: Déjà connecté
           values:
-            'false': 'Non'
-            'true': 'Oui'
+            'false': Non
+            'true': Oui
         moderations:
           reportable_type_string_eq:
             label: Type
@@ -638,7 +639,7 @@ fr-LU:
           error: Il y a eu une erreur lors de l'envoi de cette newsletter.
           success: Newsletter envoyée avec succès.
         destroy:
-          error_already_sent: 'Suppression impossible car la newsletter a déjà été envoyée.'
+          error_already_sent: Suppression impossible car la newsletter a déjà été envoyée.
           success: Newsletter supprimée avec succès.
         edit:
           save_and_preview: Enregistrer et prévisualiser
@@ -789,7 +790,7 @@ fr-LU:
           invalid: Il y a eu un problème de lecture du fichier CSV.
           success: Fichier CSV a été transféré avec succès, nous envoyons un courriel d'invitation aux participants. Cela peut prendre un certain temps.
         new:
-          explanation: 'Téléchargez votre fichier CSV. Il doit avoir deux colonnes avec dans la première colonne les emails, et dans la deuxième colonne les noms (email, nom) des utilisateurs que vous souhaitez ajouter à l''espace participatif, sans en-tête. Évitez les caractères spéciaux comme `<>?%&^*#@()[]=+:;"{}\|` dans les noms des utilisateurs.'
+          explanation: Téléchargez votre fichier CSV. Il doit avoir deux colonnes avec dans la première colonne les emails, et dans la deuxième colonne les noms (email, nom) des utilisateurs que vous souhaitez ajouter à l'espace participatif, sans en-tête. Évitez les caractères spéciaux comme `<>?%&^*#@()[]=+:;"{}\|` dans les noms des utilisateurs.
           title: Téléchargez votre fichier CSV
           upload: Télécharger
       resource_permissions:

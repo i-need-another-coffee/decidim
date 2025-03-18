@@ -1,3 +1,4 @@
+---
 sk:
   activemodel:
     attributes:
@@ -28,19 +29,19 @@ sk:
   activerecord:
     models:
       decidim/conference:
-        one: Konferencia
         few: Konferencie
         many: Konferencie
+        one: Konferencia
         other: Konferencie
       decidim/conference_speaker:
-        one: Rečník na konferencii
         few: Rečníci na konferencii
         many: Rečníci na konferencii
+        one: Rečník na konferencii
         other: Rečníci na konferencii
       decidim/conference_user_role:
-        one: Rola užívateľa na konferencii
         few: Roly užívateľov na konferencii
         many: Roly užívateľov na konferencii
+        one: Rola užívateľa na konferencii
         other: Roly užívateľov na konferencii
   decidim:
     admin:
@@ -283,9 +284,9 @@ sk:
           form:
             available_slots_help: Nastavte na 0, ak máte k dispozícii neobmedzený počet miest.
             registrations_count:
-              one: Je tu 1 registrácia.
               few: Sú tu %{count} registrácie.
               many: Je tu %{count} registrácií.
+              one: Je tu 1 registrácia.
               other: Je tu %{count} registrácií.
         diplomas:
           edit:
@@ -355,7 +356,7 @@ sk:
           collaborators: Partneri
           main_promotors: Organizátori
         show:
-          login_as: Ste prihlásení ako %{name} %{email} 
+          login_as: Ste prihlásení ako %{name} %{email}
           register: Registrovať
       content_blocks:
         highlighted_conferences:
@@ -412,10 +413,10 @@ sk:
         conference_registration_validation_pending:
           notification_title: Vaša registrácia na konferencii <a href="%{resource_url}">%{resource_title}</a> čaká na potvrdenie.
         conference_registrations_over_percentage:
-          email_intro: Konferencia "%{resource_title}" je obsadená na viac, než%{percentage} %. 
+          email_intro: Konferencia "%{resource_title}" je obsadená na viac, než%{percentage} %.
           email_outro: Túto notifikáciu ste dostali, pretože ste administrátorom participatívneho priestoru konferencie.
-          email_subject: Konferencia "%{resource_title}" je obsadená na viac, než%{percentage} %. 
-          notification_title: Konferencia <a href="%{resource_path}">%{resource_title}</a> je obsadená na viac, než %{percentage} %. 
+          email_subject: Konferencia "%{resource_title}" je obsadená na viac, než%{percentage} %.
+          notification_title: Konferencia <a href="%{resource_path}">%{resource_title}</a> je obsadená na viac, než %{percentage} %.
         conference_updated:
           email_intro: 'Konferencia "%{resource_title}" bola aktualizovaná. Novú verziu si môžete pozrieť na jej stránke:'
           email_outro: Túto notifikáciu ste dostali, pretože sledujete konferenciu "%{resource_title}". Notifikácie môžete zrušiť po kliknutí na predchádzajúci odkaz.
@@ -453,9 +454,9 @@ sk:
           promoted_conferences: Zvýraznené konferencie
         order_by_conferences:
           conferences:
-            one: "1 konferencia"
             few: "%{count} konferencií"
             many: "%{count} konferencií"
+            one: 1 konferencia
             other: "%{count} konferencií"
       conferences_nav:
         conference_partners_menu_item: Partneri

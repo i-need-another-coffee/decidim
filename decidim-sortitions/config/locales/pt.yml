@@ -1,3 +1,4 @@
+---
 pt:
   activemodel:
     attributes:
@@ -106,12 +107,12 @@ pt:
           candidate_proposal_ids: IDs e ordem dos sorteios de propostas
           candidate_proposals_info: 'O sorteio foi realizado entre as seguintes propostas (%{category_label}), com os seguintes IDs (em negrito as propostas selecionadas)  '
           category: da categoria %{category}
-          dice_result: (1) resultado dos dados
+          dice_result: "(1) resultado dos dados"
           introduction: 'Esta página contém os resultados da ordenação %{reference}. Por meio dessa classificação, %{target_items} número de resultados foram selecionados aleatoriamente e com uma distribuição de probabilidade igual ao conjunto de propostas exibidas abaixo. Juntamente com os resultados, as informações exibidas nesta página fornecem todas as informações necessárias para maximizar as garantias e reproduzir os resultados. A chave para a qualidade dessa classificação é a dupla aleatoriedade fornecida pela rolagem de dados (verificada por testemunhas) e o tempo preciso da classificação que fornece dados para um algoritmo que gera uma seleção aleatória. A semente do tempo para a classificação é tão precisa (segundos) que é impossível controlar pelos humanos, fornecendo assim uma entrada dupla "incontrolável" para garantir um resultado justo.  '
           mathematical_result: Resultado (1) x (2)
           proposals_selected_by_sortition: Propostas selecionadas por sorteio
           sortition_reproducibility_details: Detalhes da reprodutibilidade do sorteio
-          time_seed: (2) Semente do tempo
+          time_seed: "(2) Semente do tempo"
           witnesses: Testemunhas
         sortition:
           random_seed: Semente aleatória

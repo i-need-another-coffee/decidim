@@ -1,3 +1,4 @@
+---
 zh-CN:
   activemodel:
     attributes:
@@ -88,7 +89,7 @@ zh-CN:
         linked_sortitions:
           selected_proposals: 选定的建议
         orders:
-          label: '排序方式：'
+          label: 排序方式：
           random: 随机播放
           recent: 最近的
         results_count:
@@ -101,12 +102,12 @@ zh-CN:
           candidate_proposal_ids: 排序建议订单和 ID
           candidate_proposals_info: '排序是在下列建议中进行的 (%{category_label})，具有以下ID(以选定建议的黑体字)  '
           category: 来自 %{category} 类别
-          dice_result: (1) 致残结果
+          dice_result: "(1) 致残结果"
           introduction: '此页面包含排序 %{reference}的结果。 通过这种道歉， 已经随机选择了 %{target_items} 个结果，并且显示在下面的一组建议中同样的概率分布。 本页所显示的信息连同结果，提供了最大限度保证和复制结果所需的所有信息。 这种区分的质量的关键是由证人核实的法官滚动所提供的双倍随机性和为产生随机选择的算法提供输入的吸附确切时间。 难度的时间种子非常精确(秒)，人类无法控制，因此提供了双个“无法控制的”输入以保证结果的公允。  '
           mathematical_result: 结果(1) x (2)
           proposals_selected_by_sortition: 按排序选择的提议
           sortition_reproducibility_details: 排序详细信息
-          time_seed: (2) 时间种子
+          time_seed: "(2) 时间种子"
           witnesses: 证人
         sortition:
           random_seed: 随机种子

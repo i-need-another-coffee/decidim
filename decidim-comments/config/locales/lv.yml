@@ -1,3 +1,4 @@
+---
 lv:
   activemodel:
     models:
@@ -8,13 +9,13 @@ lv:
   activerecord:
     models:
       decidim/comments/comment:
-        zero: Komentāri
         one: Komentēt
         other: Komentāri
+        zero: Komentāri
       decidim/comments/comment_vote:
-        zero: Balsis
         one: Balsot
         other: Balsis
+        zero: Balsis
   decidim:
     comments:
       votes:
@@ -28,8 +29,8 @@ lv:
             placeholder: Ko tu domā par šo?
         opinion:
           neutral: Neitrāls
-        remaining_characters: "Palikušas %{count} rakstzīmes"
-        remaining_characters_1: "Palikusi %{count} rakstzīme"
+        remaining_characters: Palikušas %{count} rakstzīmes
+        remaining_characters_1: Palikusi %{count} rakstzīme
         title: Pievienot savu komentāru
       comment:
         alignment:
@@ -63,12 +64,12 @@ lv:
         comment_by_followed_user:
           email_intro: "%{author_name} ir atstājis komentāru %{resource_title}. Jūs to varat izlasīt šajā lapā:"
           email_outro: Jūs saņēmāt šo paziņojumu, jo sekojat %{author_name}. Jūs varat atsekot šim lietotājam viņa profila lapā.
-          email_subject: '%{resource_title} ir jauns%{author_name} komentārs'
+          email_subject: "%{resource_title} ir jauns%{author_name} komentārs"
           notification_title: <a href="%{author_path}">%{author_name}%{author_nickname}</a> ir jauns komentārs <a href="%{resource_path}">%{resource_title}</a>.
         comment_created:
           email_intro: "%{resource_title} ir komentēts. Jūs varat izlasīt komentāru šajā lapā:"
           email_outro: Jūs saņēmāt šo paziņojumu, jo sekojat "%{resource_title}" vai tā autoram. Jūs varat atsekot tam no iepriekšējās saites.
-          email_subject: '%{resource_title} ir jauns %{author_name} komentārs'
+          email_subject: "%{resource_title} ir jauns %{author_name} komentārs"
           notification_title: <a href="%{author_path}">%{author_name}%{author_nickname}</a> ir jauns komentārs <a href="%{resource_path}">%{resource_title}</a>
         reply_created:
           email_intro: "%{author_name} atbildēja uz jūsu komentāru %{resource_title}. Jūs to varat izlasīt šajā lapā:"

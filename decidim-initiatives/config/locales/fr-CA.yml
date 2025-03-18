@@ -1,3 +1,4 @@
+---
 fr-CA:
   activemodel:
     attributes:
@@ -187,8 +188,8 @@ fr-CA:
       badges:
         initiatives:
           conditions:
-            - Accéder à l'espace Initiatives
-            - Suivez les étapes pour créer une nouvelle initiative
+          - Accéder à l'espace Initiatives
+          - Suivez les étapes pour créer une nouvelle initiative
           description: Ce badge vous est attribué lorsque vous lancez de nouvelles initiatives, en partenariat avec d’autres pour les mener à bien.
           description_another: Ce participant a publié %{score} initiatives.
           description_own: Vous avez publié %{score} pétitions.
@@ -353,7 +354,7 @@ fr-CA:
         select_initiative_type:
           back: Retour
           choose_html: Je veux créer un <strong>%{title}</strong>
-          more_information: (Plus d'informations)
+          more_information: "(Plus d'informations)"
           new: Créer une nouvelle pétition
           select: Créer une initiative
           verification_required: Vérifiez votre compte pour créer une pétition

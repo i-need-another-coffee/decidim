@@ -1,3 +1,4 @@
+---
 lt:
   activemodel:
     attributes:
@@ -18,9 +19,9 @@ lt:
   activerecord:
     models:
       decidim/budgets/project:
-        one: Projektas
         few: Projektai
         many: Projektai
+        one: Projektas
         other: Projektai
   decidim:
     admin:
@@ -110,9 +111,9 @@ lt:
           orders:
             description: Naudotojai gaus el. laišką su nuorodomis į biudžetus, kuriuose laukiami jų balsai.
             title:
-              one: Ar tikrai norite išsiųsti priminimą laišku %{count} naudotojui?
               few: Ar tikrai norite išsiųsti priminimą laišku %{count} naudotojams?
               many: Ar tikrai norite išsiųsti priminimą laišku %{count} naudotojams?
+              one: Ar tikrai norite išsiųsti priminimą laišku %{count} naudotojui?
               other: Ar tikrai norite išsiųsti priminimą laišku %{count} naudotojams?
       admin_log:
         budget:
@@ -189,9 +190,9 @@ lt:
           vote: Balsuoti už biudžetą
         count:
           projects_count:
-            one: 1 projektas
             few: "%{count} projektai (-ų)"
             many: "%{count} projektai (-ų)"
+            one: 1 projektas
             other: "%{count} projektai"
         exit_modal:
           cancel: Grįžti į balsavimą
@@ -233,9 +234,9 @@ lt:
           remove: Pašalinti projektą %{resource_name} iš balsų.
           selected: Pasirinkta
           votes:
-            one: balsas
             few: balsai
             many: balsai
+            one: balsas
             other: balsai
           you_voted: Balsavote už
         project_budget_button:
@@ -257,9 +258,9 @@ lt:
           email_link: Tęsti balsavimą
           email_outro: Nepamirškite baigti balsavimo. Tam, kad balsuoti, pasirinkite pasiūlymą ar pasiūlymus už kuriuos norite balsuoti ir paspauskite mygtuką "Balsuoti".
           email_subject:
-            one: Nebaigėte balsuoti dėl dalyvaujamojo biudžeto
             few: Nebaigėte balsuoti dėl dalyvaujamojo biudžeto
             many: Nebaigėte balsuoti dėl dalyvaujamojo biudžeto
+            one: Nebaigėte balsuoti dėl dalyvaujamojo biudžeto
             other: Nebaigėte balsuoti dėl dalyvaujamojo biudžeto
     components:
       budgets:
@@ -310,9 +311,9 @@ lt:
     events:
       budgets:
         budget_published:
-          email_intro: '%{participatory_space_title} %{resource_title} biudžetas dabar aktyvus. Jį galite pamatyti šiame puslapyje:'
+          email_intro: "%{participatory_space_title} %{resource_title} biudžetas dabar aktyvus. Jį galite pamatyti šiame puslapyje:"
           email_outro: Šį pranešimą gavote dėl to, kad sekate %{participatory_space_title}. Jeigu nebenorite gauti pranešimų, spustelėkite ankstesnę nuorodą.
-          email_subject: '%{participatory_space_title} %{resource_title} biudžetas dabar aktyvus.'
+          email_subject: "%{participatory_space_title} %{resource_title} biudžetas dabar aktyvus."
           notification_title: <a href="%{resource_path}">%{resource_title} biudžetas dabar aktyvus %{participatory_space_title} erdvėje.
     orders:
       checkout:

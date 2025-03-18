@@ -1,3 +1,4 @@
+---
 pt-BR:
   activemodel:
     attributes:
@@ -40,7 +41,7 @@ pt-BR:
       admin_log:
         post:
           create: "%{user_name} criou a publicação no blog %{resource_name} do %{space_name}"
-          delete: "O %{user_name} excluiu a publicação no blog %{resource_name} do %{space_name}"
+          delete: O %{user_name} excluiu a publicação no blog %{resource_name} do %{space_name}
           update: "%{user_name} atualizou a publicação no blog %{resource_name} do %{space_name}"
       content_blocks:
         highlighted_posts:

@@ -1,3 +1,4 @@
+---
 cs:
   activemodel:
     attributes:
@@ -68,19 +69,19 @@ cs:
   activerecord:
     models:
       decidim/initiative:
-        one: Iniciativa
         few: Iniciativy
         many: Iniciativ
+        one: Iniciativa
         other: Iniciativ
       decidim/initiative_comittee:
-        one: Výbor
         few: Výbory
         many: Výbory
+        one: Výbor
         other: Výbory
       decidim/initiative_vote:
-        one: Podpis
         few: Podpisy
         many: Podpisy
+        one: Podpis
         other: Podpisy
   decidim:
     admin:
@@ -204,8 +205,8 @@ cs:
       badges:
         initiatives:
           conditions:
-            - Jít do prostoru účasti iniciativ
-            - Postupujte podle kroků k vytvoření nové iniciativy
+          - Jít do prostoru účasti iniciativ
+          - Postupujte podle kroků k vytvoření nové iniciativy
           description: Tento odznak se uděluje, když zahájíte nové iniciativy, spolupracujete s ostatními a provádíte je.
           description_another: Tento uživatel zveřejnil %{score} iniciativ.
           description_own: Máte zveřejněno %{score} iniciativ.
@@ -414,7 +415,7 @@ cs:
           choose_html: Chci vytvořit <strong>%{title}</strong>
           consult_existing_initiatives: Konzultovat existující iniciativy
           continue: Pokračovat
-          more_information: (Více informací)
+          more_information: "(Více informací)"
           new: Vytvořit novou iniciativu
           select: Chci tuto iniciativu podpořit
           select_initiative_type_help_html: "<p>Iniciativy jsou prostředkem, který mohou účastníci zasáhnout, aby organizace mohla podniknout kroky na ochranu obecného zájmu. Kterou iniciativu chcete spustit?</p>"
@@ -443,7 +444,7 @@ cs:
         approve_membership_request:
           email_intro: "%{author_nickname} přijal vaši žádost, aby se stal součástí propagačního výboru pro iniciativu %{resource_title}."
           email_outro: 'Obdrželi jste toto oznámení, protože jste podali žádost o tuto iniciativu: %{resource_title}'
-          email_subject: "Uživatel %{author_nickname} přijal vaši nabídku k propagačnímu výboru"
+          email_subject: Uživatel %{author_nickname} přijal vaši nabídku k propagačnímu výboru
           notification_title: <a href="%{author_profile_url}">%{author_nickname}</a> přijal vaši nabídku k členství v propagačním výboru pro iniciativu <a href="%{resource_url}">%{resource_title}</a>.
         create_initiative_event:
           email_intro: "%{author_name} %{author_nickname}, kterého sledujete, vytvořil novou iniciativu, omrkněte ji a přispějte:"
@@ -500,9 +501,9 @@ cs:
       initiatives:
         author_list:
           hidden_authors_count:
-            one: a 1 další osobou
             few: a %{count} dalších lidí
             many: a %{count} dalších lidí
+            one: a 1 další osobou
             other: a %{count} dalších lidí
         committee_members:
           approve: Schválit
@@ -515,9 +516,9 @@ cs:
           title: Členové výboru
         count:
           title:
-            one: "%{count} iniciativa"
             few: "%{count} iniciativ"
             many: "%{count} iniciativ"
+            one: "%{count} iniciativa"
             other: "%{count} iniciativ"
         filters:
           any: Jakýkoli
@@ -535,9 +536,9 @@ cs:
         interactions:
           comments_count:
             count:
-              one: Komentář
               few: Komentáře
               many: Komentáře
+              one: Komentář
               other: Komentáře
         orders:
           label: 'Seřadit iniciativy podle:'
@@ -584,9 +585,9 @@ cs:
           state: Stav
           type: Typ
         signatures_count:
-          one: " podpis"
           few: " podpisy"
           many: " podpisy"
+          one: " podpis"
           other: " podpisy"
         vote_cabin:
           already_voted: Již jste podepsal
@@ -594,9 +595,9 @@ cs:
           votes_blocked: Podpis zakázán
         votes_count:
           count:
-            one: Podpis
             few: Podpisy
             many: Podpisů
+            one: Podpis
             other: Podpisů
       initiatives_mailer:
         creation_subject: Vaše občanská iniciativa "%{title}" byla vytvořena

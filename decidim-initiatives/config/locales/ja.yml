@@ -1,3 +1,4 @@
+---
 ja:
   activemodel:
     attributes:
@@ -10,7 +11,7 @@ ja:
         description: 説明
         hashtag: ハッシュタグ
         offline_votes: 対面署名
-        offline_votes_for_scope: '%{scope_name} の 対面署名'
+        offline_votes_for_scope: "%{scope_name} の 対面署名"
         scope_id: スコープ
         signature_end_date: 署名の収集期間の終了
         signature_start_date: 署名の収集期間の開始
@@ -94,7 +95,7 @@ ja:
           type_id_eq:
             label: タイプ
         search_placeholder:
-          title_or_description_or_id_string_or_author_name_or_author_nickname_cont: '%{collection} をタイトル、説明、ID、または著者名で検索します。'
+          title_or_description_or_id_string_or_author_name_or_author_nickname_cont: "%{collection} をタイトル、説明、ID、または著者名で検索します。"
       initiatives_settings:
         update:
           error: イニシアチブ設定の更新中に問題が発生しました。
@@ -167,7 +168,7 @@ ja:
             notification_title: イニシアチブ %{resource_title}" が技術的な検証に提出されました。 <a href="%{admin_initiative_path}">管理者パネル</a> で確認してください。
         initiative_extended:
           email_intro: イニシアチブ %{resource_title} の署名の終了日が延長されました！
-          email_outro: '%{resource_title}をフォローしているため、この通知を受け取りました。前のリンクに続く通知の受信を停止することができます。'
+          email_outro: "%{resource_title}をフォローしているため、この通知を受け取りました。前のリンクに続く通知の受信を停止することができます。"
           email_subject: イニシアティブ署名の終了日を延長しました！
           notification_title: <a href="%{resource_path}">%{resource_title}</a> イニシアチブの署名の終了日が延長されました。
         initiative_sent_to_technical_validation:
@@ -182,8 +183,8 @@ ja:
             email_subject: 新しいマイルストーンが完了しました！
             notification_title: あなたの <a href="%{resource_path}">%{resource_title}</a> イニシアチブは署名の %{percentage}%を達成しました。
           follower:
-            email_intro: '%{resource_title} が署名の %{percentage}%を達成しました！'
-            email_outro: '%{resource_title}をフォローしているため、この通知を受け取りました。前のリンクに続く通知の受信を停止することができます。'
+            email_intro: "%{resource_title} が署名の %{percentage}%を達成しました！"
+            email_outro: "%{resource_title}をフォローしているため、この通知を受け取りました。前のリンクに続く通知の受信を停止することができます。"
             email_subject: 新しいマイルストーンが完了しました！
             notification_title: <a href="%{resource_path}">%{resource_title}</a> イニシアチブは署名の %{percentage}%を達成している。
         support_threshold_reached:
@@ -195,11 +196,11 @@ ja:
       badges:
         initiatives:
           conditions:
-            - Intiatives の参加スペースに移動
-            - 新しいイニシアチブを作成するには、手順に従ってください
+          - Intiatives の参加スペースに移動
+          - 新しいイニシアチブを作成するには、手順に従ってください
           description: このバッジは、新しいイニシアチブを開始し、他の人と提携して実行するときに付与されます。
           description_another: この参加者は %{score} のイニシアチブを公開しました。
-          description_own: '%{score} 件のイニシアチブが公開されました。'
+          description_own: "%{score} 件のイニシアチブが公開されました。"
           name: 公開されたイニシアチブ
           next_level_in: 次のレベルに到達するために公開された %{score} 件のイニシアチブを入手しましょう！
           unearned_another: この参加者はまだイニシアチブを公開していません。
@@ -217,7 +218,7 @@ ja:
         answers:
           edit:
             answer: 回答
-            title: '%{title} の回答'
+            title: "%{title} の回答"
           info_initiative:
             created_at: 作成日時
             description: 説明
@@ -317,8 +318,8 @@ ja:
             update: 更新
           form:
             authorizations: 認証設定
-            child_scope_threshold_enabled_help_html: 'この設定フラグはオフライン投票に対応していません。サブスコープを有効にし、ユーザーにスコープを関連付ける権限ハンドラと連携します。認証設定の下部で、その認証を選択することを確認してください。これを動作させるためには、スコープを階層的に設定する必要があります：1つの親 - N個の子。この設定がどのように機能するかの詳細は、 <a href="https://docs.decidim.org/en/admin/spaces/initiatives/" target="_blank">イニシアチブの管理者向けドキュメントページ</a> を参照してください。'
-            only_global_scope_enabled_help_html: '「子スコープ署名」を有効にし、グローバルスコープを親スコープとして設定した場合、このフラグをチェックします。これを有効にすると、イニシアチブ作成ウィザードでのイニシアチブタイプの選択がスキップされます。この仕組みについての詳細は、こちらの <a href="https://docs.decidim.org/en/admin/spaces/initiatives/" target="_blank">リンク</a> を参照してください。'
+            child_scope_threshold_enabled_help_html: この設定フラグはオフライン投票に対応していません。サブスコープを有効にし、ユーザーにスコープを関連付ける権限ハンドラと連携します。認証設定の下部で、その認証を選択することを確認してください。これを動作させるためには、スコープを階層的に設定する必要があります：1つの親 - N個の子。この設定がどのように機能するかの詳細は、 <a href="https://docs.decidim.org/en/admin/spaces/initiatives/" target="_blank">イニシアチブの管理者向けドキュメントページ</a> を参照してください。
+            only_global_scope_enabled_help_html: 「子スコープ署名」を有効にし、グローバルスコープを親スコープとして設定した場合、このフラグをチェックします。これを有効にすると、イニシアチブ作成ウィザードでのイニシアチブタイプの選択がスキップされます。この仕組みについての詳細は、こちらの <a href="https://docs.decidim.org/en/admin/spaces/initiatives/" target="_blank">リンク</a> を参照してください。
             options: オプション
           initiative_type_scopes:
             title: イニシアチブ種別のスコープ
@@ -390,8 +391,8 @@ ja:
           promoters_committee_title: 推進委員会
         select_initiative_type:
           back: 戻る
-          choose_html: <strong>%{title}</strong> を作成したい
-          more_information: (詳細)
+          choose_html: "<strong>%{title}</strong> を作成したい"
+          more_information: "(詳細)"
           new: 新しいイニシアチブを作成
           select: 私はこのイニシアチブを推進したいです
           verification_required: このイニシアチブを推進するためにあなたのアカウントを確認してください
@@ -411,27 +412,27 @@ ja:
       events:
         approve_membership_request:
           email_intro: "%{author_nickname} は、%{resource_title} イニシアチブの推進委員会に参加するあなたの申請を承認しました。"
-          email_outro: 'この通知を受け取ったのは、イニシアチブ %{resource_title} に応募したためです。'
+          email_outro: この通知を受け取ったのは、イニシアチブ %{resource_title} に応募したためです。
           email_subject: "%{author_nickname} が推進委員会への申請を承認しました"
           notification_title: <a href="%{author_profile_url}">%{author_nickname}</a> は、以下のイニシアチブ <a href="%{resource_url}">%{resource_title}</a> のための推進委員会の一員となるためのあなたの申請を承認しました。
         create_initiative_event:
-          email_intro: "あなたがフォローしている%{author_name} %{author_nickname}が新しいイニシアチブを作成しました。チェックして貢献してください："
-          email_outro: '%{author_nickname}をフォローしているため、この通知を受け取りました。前のリンクに続く通知の受信を停止することができます。'
-          email_subject: '%{author_nickname} による新しいイニシアチブの作成'
+          email_intro: あなたがフォローしている%{author_name} %{author_nickname}が新しいイニシアチブを作成しました。チェックして貢献してください：
+          email_outro: "%{author_nickname}をフォローしているため、この通知を受け取りました。前のリンクに続く通知の受信を停止することができます。"
+          email_subject: "%{author_nickname} による新しいイニシアチブの作成"
           notification_title: <a href="%{resource_path}">%{resource_title}</a> イニシアチブは、 <a href="%{author_path}">%{author_name} %{author_nickname}</a> によって作成されました。
         endorse_initiative_event:
-          email_intro: "あなたがフォローしている%{author_name} %{author_nickname}は、次のイニシアチブを承認しました。会話に貢献したい場合もあります："
-          email_outro: '%{author_nickname}をフォローしているため、この通知を受け取りました。前のリンクに続く通知の受信を停止することができます。'
-          email_subject: '%{author_nickname} によってオススメされたイニシアチブ'
+          email_intro: あなたがフォローしている%{author_name} %{author_nickname}は、次のイニシアチブを承認しました。会話に貢献したい場合もあります：
+          email_outro: "%{author_nickname}をフォローしているため、この通知を受け取りました。前のリンクに続く通知の受信を停止することができます。"
+          email_subject: "%{author_nickname} によってオススメされたイニシアチブ"
           notification_title: <a href="%{resource_path}">%{resource_title}</a> イニシアチブは、 <a href="%{author_path}">%{author_name} %{author_nickname}</a> によってオススメされました。
         revoke_membership_request:
           email_intro: "%{author_nickname} は、以下のイニシアチブ %{resource_title} の推進委員会に参加する申請を拒否しました。"
-          email_outro: 'この通知を受け取ったのは、イニシアチブ %{resource_title} に応募したためです。'
+          email_outro: この通知を受け取ったのは、イニシアチブ %{resource_title} に応募したためです。
           email_subject: "%{author_nickname} が推進委員会への申請を拒否しました"
           notification_title: <a href="%{author_profile_url}">%{author_nickname}</a> は、以下のイニシアチブ <a href="%{resource_url}">%{resource_title}</a> のための推進委員会の一員となるためのあなたの申請を拒否しました。
         spawn_committee_request_event:
           email_intro: "%{applicant_nickname} は、あなたのイニシアチブの推進委員会 %{resource_title} への参加を希望しました。リクエストを承認または拒否するには、イニシアチブの編集フォームに進んでください。"
-          email_outro: 'この通知を受け取ったのは、イニシアチブ %{resource_title} の作成者だからです。'
+          email_outro: この通知を受け取ったのは、イニシアチブ %{resource_title} の作成者だからです。
           email_subject: "%{applicant_nickname} があなたのイニシアチブに参加しようとしています"
           notification_title: <a href="%{applicant_profile_url}">%{applicant_nickname}</a> があなたのイニシアチブの推進委員会に申請しました <a href="%{resource_url}">%{resource_title}</a>. 受け入れるか拒否するには <a href="%{resource_url}/edit">ここ</a>をクリックしてください。
       form:
@@ -469,7 +470,7 @@ ja:
       initiatives:
         author_list:
           hidden_authors_count:
-            other: '%{count} 人以上'
+            other: "%{count} 人以上"
         committee_members:
           approve: 承認
           confirm_approve: このメンバーを承認してもよろしいですか？
@@ -558,10 +559,10 @@ ja:
           check_initiative_details: イニシアチブの詳細を見ることができます
           here: ここ
         more_information: ここでは、イニシアチブの作成プロセスについての詳細情報があります。
-        progress_report_body_for: '%{title} が必要な署名の %{percentage}%に達しました。'
+        progress_report_body_for: "%{title} が必要な署名の %{percentage}%に達しました。"
         progress_report_for: 'イニシアチブの概要: %{title}'
         promotal_committee_help: 少なくとも %{member_count} 人を推進委員会に招待する必要があります。推進委員会に招待するには、次のリンクを進めてください。
-        status_change_body_for: 'イニシアチブ %{title} がステータスを %{state}に変更しました'
+        status_change_body_for: イニシアチブ %{title} がステータスを %{state}に変更しました
         status_change_for: イニシアチブ %{title} のステータスが変更されました
       last_activity:
         new_initiative: '新しいイニシアチブ:'
@@ -642,7 +643,7 @@ ja:
         finish: 完了
         sms_code: SMSコードの検証
         sms_phone_number: 携帯電話番号
-        title: '%{initiative_title} に署名'
+        title: "%{initiative_title} に署名"
       initiatives:
         no_initiatives_yet:
           no_initiatives_yet: まだイニシアチブがありません！

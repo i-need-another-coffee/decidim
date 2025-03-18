@@ -1,16 +1,1 @@
-val:
-  decidim:
-    forms:
-      admin:
-        questionnaires:
-          title_and_description:
-            collapse: Redueix
-            description: Descripció
-            down: Baixar
-            expand: Expandeix
-            remove: Elimina
-            title: Títol
-            title_and_description: Títol i descripció
-            up: Pujar
-      question_types:
-        title_and_description: Títol i descripció
+--- {}

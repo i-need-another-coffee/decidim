@@ -1,3 +1,4 @@
+---
 ru:
   activemodel:
     attributes:
@@ -46,19 +47,19 @@ ru:
   activerecord:
     models:
       decidim/participatory_process:
-        one: Движение соучастия
         few: Движения соучастия
         many: Движений соучастия
+        one: Движение соучастия
         other: Движений соучастия
       decidim/participatory_process_group:
-        one: Группа движений соучастия
         few: Группы движений соучастия
         many: Групп движений соучастия
+        one: Группа движений соучастия
         other: Групп движений соучастия
       decidim/participatory_process_step:
-        one: Шаг
         few: Шага
         many: Шагов
+        one: Шаг
         other: Шагов
   decidim:
     admin:
@@ -266,24 +267,24 @@ ru:
         filters:
           counters:
             active:
-              one: 1 идущее движение
               few: "%{count} идущих движения"
               many: "%{count} идущих движений"
+              one: 1 идущее движение
               other: "%{count} идущих движений"
             all:
-              one: 1 движение
               few: "%{count} движения"
               many: "%{count} движений"
+              one: 1 движение
               other: "%{count} движений"
             past:
-              one: 1 прошедшее движение
               few: "%{count} прошедших движения"
               many: "%{count} прошедших движений"
+              one: 1 прошедшее движение
               other: "%{count} прошедших движений"
             upcoming:
-              one: 1 грядущее движение
               few: "%{count} грядущих движения"
               many: "%{count} грядущих движений"
+              one: 1 грядущее движение
               other: "%{count} грядущих движений"
           explanations:
             no_active_nor_upcoming_callout: Нет ни идущих, ни грядущих движений. Вот список прошедших.

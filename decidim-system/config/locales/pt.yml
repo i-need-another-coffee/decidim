@@ -1,3 +1,4 @@
+---
 pt:
   activemodel:
     attributes:
@@ -129,8 +130,9 @@ pt:
             avatar_hint: Megabytes (MB). Este limite de dimensão é utilizado para o envio de imagens de avatares.
             default_hint: Megabytes (MB). Este limite de dimensão é o utilizado por defeito para todos os ficheiros enviados a menos que outro seja especificado.
             title: Dimensão máxima de ficheiros
-          intro: |
-            Por favor seja especialmente cuidadoso quando considerar alterar estas definições. Quanto menos permitir, melhor. Permitir extensões de ficheiro ou tipos MIME pode expor o sistemas utilizadores a riscos de segurança e também pode afectar a acessibilidade deste sítio web.
+          intro: 'Por favor seja especialmente cuidadoso quando considerar alterar estas definições. Quanto menos permitir, melhor. Permitir extensões de ficheiro ou tipos MIME pode expor o sistemas utilizadores a riscos de segurança e também pode afectar a acessibilidade deste sítio web.
+
+            '
         index:
           title: Organizações
         new:

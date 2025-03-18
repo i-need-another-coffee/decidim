@@ -1,3 +1,4 @@
+---
 lb:
   activemodel:
     attributes:
@@ -158,8 +159,8 @@ lb:
       badges:
         initiatives:
           conditions:
-            - Gehe zum Teilnehmerbereich von Intiativen
-            - Befolgen Sie die Schritte, um eine neue Initiative zu erstellen
+          - Gehe zum Teilnehmerbereich von Intiativen
+          - Befolgen Sie die Schritte, um eine neue Initiative zu erstellen
           description: Dieses Abzeichen wird gewährt, wenn Sie neue Initiativen starten und mit anderen zusammenarbeiten, um sie durchzuführen.
           description_another: Dieser Benutzer hat %{score} Initiativen veröffentlicht.
           name: Veröffentlichte Initiativen
@@ -243,7 +244,7 @@ lb:
         select_initiative_type:
           back: Zréck
           choose_html: Ich möchte eine <strong>%{title}</strong> erstellen
-          more_information: (Weitere Informationen)
+          more_information: "(Weitere Informationen)"
           select: Ich möchte diese Initiative fördern
       edit:
         accept: Initiative akzeptieren
@@ -278,7 +279,7 @@ lb:
           notification_title: <a href="%{author_profile_url}">%{author_nickname}</a> hat Ihre Anfrage für das Promoter-Komittee der Initiative <a href="%{resource_url}">%{resource_title}</a> abgelehnt.
         spawn_committee_request_event:
           email_intro: "%{applicant_nickname} hat sich fürs Promoter-Komittee Ihrer Initiative %{resource_title} beworben. Um die Anfrage zu akzeptieren oder abzulehnen, besuchen Sie das Bearbeitungsformular Ihrer Initiative."
-          email_outro: 'Sie haben diese Benachrichtigung erhalten, weil Sie der Autor der Initiative %{resource_title} sind'
+          email_outro: Sie haben diese Benachrichtigung erhalten, weil Sie der Autor der Initiative %{resource_title} sind
           email_subject: "%{applicant_nickname} möchte Ihrer Initiative beitreten"
           notification_title: <a href="%{applicant_profile_url}">%{applicant_nickname}</a> hat sich für das Promoter-Komittee Ihrer Initiative <a href="%{resource_url}">%{resource_title}</a> beworben. Um anzunehmen oder abzulehnen, klicken Sie <a href="%{resource_url}/edit">hier</a>.
       initiative_signatures:

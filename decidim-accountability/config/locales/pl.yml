@@ -1,3 +1,4 @@
+---
 pl:
   activemodel:
     attributes:
@@ -27,9 +28,9 @@ pl:
   activerecord:
     models:
       decidim/accountability/result:
-        one: Wynik
         few: Wyniki
         many: Wyniki
+        one: Wynik
         other: Wyniki
   decidim:
     accountability:
@@ -145,9 +146,9 @@ pl:
       import_projects_mailer:
         import:
           added_projects:
+            few: Wyniki zostały prawidłowo zaimportowane z projektów.
+            many: Wyniki zostały prawidłowo zaimportowane z projektów.
             one: Wynik został prawidłowo zaimportowany z projektów.
-            few: "Wyniki zostały prawidłowo zaimportowane z projektów."
-            many: "Wyniki zostały prawidłowo zaimportowane z projektów."
             other: "%{count} wynik/wyniki/wyników został/zostały/zostało zaimportowanych z projektów."
           subject: Zaimportowano wyniki
           success: Pomyślnie zaimportowano projekty do wyników w komponencie %{component_name}. Możesz przejrzeć wyniki w interfejsie administracji.
@@ -176,9 +177,9 @@ pl:
       results:
         count:
           results_count:
-            one: 1 wynik
             few: "%{count} wyników"
             many: "%{count} wyników"
+            one: 1 wynik
             other: "%{count} wyników"
         home_header:
           global_status: Globalny status realizacji

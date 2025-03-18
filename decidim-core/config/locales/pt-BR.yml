@@ -1,3 +1,4 @@
+---
 pt-BR:
   activemodel:
     attributes:
@@ -72,8 +73,8 @@ pt-BR:
         one: Nenhum usuário
         other: Comercial
   booleans:
-    'false': 'Não'
-    'true': 'Sim'
+    'false': Não
+    'true': Sim
   date:
     buttons:
       close: Fechar
@@ -140,7 +141,7 @@ pt-BR:
     accessibility:
       external_link: Link externo
       front_page_link: Ir à página inicial
-      logo: "Logotipo oficial de %{organization}"
+      logo: Logotipo oficial de %{organization}
       opens_in_new_tab: Abrir em nova aba
       skip_button: Pular para o conteúdo principal
     account:
@@ -314,7 +315,9 @@ pt-BR:
             Esta emenda para o %{amendable_type} %{amendable_link}
             está sendo avaliada.
           promoted: Promovido para um %{amendable_type}.
-          rejected: "Esta emenda para o %{amendable_type} %{amendable_link}\nfoi rejeitada em <strong>%{announcement_date}</strong>."
+          rejected: |-
+            Esta emenda para o %{amendable_type} %{amendable_link}
+            foi rejeitada em <strong>%{announcement_date}</strong>.
           withdrawn: |-
             Esta emenda para o %{amendable_type} %{amendable_link}
             foi retirada pelo autor.
@@ -836,7 +839,7 @@ pt-BR:
       badges:
         followers:
           conditions:
-            - Ser ativo e seguir outras pessoas certamente fará com que outras pessoas o sigam.
+          - Ser ativo e seguir outras pessoas certamente fará com que outras pessoas o sigam.
           description: Esse selo é concedido quando você alcança um certo número de seguidores. %{organization_name} é uma rede social e política, teça sua web para se comunicar com outras pessoas na plataforma.
           description_another: Esse usuário possui %{score} seguidores.
           description_own: "%{score} usuários estão seguindo você."
@@ -845,7 +848,7 @@ pt-BR:
           unearned_another: Este usuário ainda não possui seguidores.
           unearned_own: Você ainda não tem seguidores.
         index:
-          badge_title: "Selo \"%{name}\""
+          badge_title: Selo "%{name}"
           how: Como você pode ganhar
           page_description: Os selos são reconhecimentos para ações dos participantes e progresso na plataforma. Ao começar a descobrir, participar e interagir na plataforma, você ganhará selos diferentes. Aqui está a lista de selos e algumas maneiras de ganhá-los.
           title: Selos
@@ -1309,11 +1312,11 @@ pt-BR:
     failure:
       already_authenticated: Você já está inscrito.
       inactive: Sua conta Ainda não esta ativada.
-      invalid: '%{authentication_keys} inválido ou senha.'
+      invalid: "%{authentication_keys} inválido ou senha."
       invited: Você tem um convite pendente, aceite-o para concluir a criação da sua conta.
       last_attempt: Você tem mais uma tentativa antes que sua conta seja bloqueada.
       locked: Sua conta está bloqueada.
-      not_found_in_database: '%{authentication_keys} inválido ou senha.'
+      not_found_in_database: "%{authentication_keys} inválido ou senha."
     invitations:
       edit:
         header: Termine de criar sua conta

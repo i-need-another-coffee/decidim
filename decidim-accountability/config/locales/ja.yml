@@ -1,3 +1,4 @@
+---
 ja:
   activemodel:
     attributes:
@@ -31,9 +32,9 @@ ja:
           result:
             budget_text: 結果 %{link} は含まれていました
             meetings_ids: 'このミーティングで議論されました: %{link}'
-            project_ids: 'このプロジェクトに含まれていました： %{link}'
-            proposal_ids: 'この提案に含まれました： %{link}'
-            text: 'この結果に追加されました： %{link}'
+            project_ids: このプロジェクトに含まれていました： %{link}
+            proposal_ids: この提案に含まれました： %{link}
+            text: この結果に追加されました： %{link}
       decidim/accountability/result:
         other: 結果
   decidim:
@@ -64,7 +65,7 @@ ja:
             invalid: 結果のインポートに問題が発生しました。手順を注意深く確認し、実施するプロジェクトを選択していることを確認してください。
           filters:
             new_items_projects:
-              other: "選択した %{count} 件のプロジェクトがインポートされます"
+              other: 選択した %{count} 件のプロジェクトがインポートされます
             new_items_proposals:
               other: "%{count} 件の提案がインポートされます"
             proposal_state: 提案状況
@@ -230,7 +231,7 @@ ja:
           added_projects:
             other: "%{count} 件の結果がプロジェクトからインポートされました。"
           subject: プロジェクトのインポートに成功しました
-          success: '%{component_name} コンポーネントに結果をインポートしました。管理インターフェイスで結果を確認できます。'
+          success: "%{component_name} コンポーネントに結果をインポートしました。管理インターフェイスで結果を確認できます。"
       import_proposals_mailer:
         import:
           added_proposals:
@@ -268,7 +269,7 @@ ja:
           global_status: 全体の実行状況
         no_results: プロジェクトがありません
         root_taxonomies:
-          title: '表示：'
+          title: 表示：
         search:
           search: アクションを検索
         show:
@@ -312,14 +313,14 @@ ja:
     events:
       accountability:
         proposal_linked:
-          email_intro: '提案「%{proposal_title}」が結果に含まれています。このページから見ることができます：'
-          email_outro: '「%{proposal_title}」をフォローしているため、この通知を受け取りました。前のリンクに続く通知の受信を停止できます。'
-          email_subject: '%{proposal_title} への更新'
+          email_intro: 提案「%{proposal_title}」が結果に含まれています。このページから見ることができます：
+          email_outro: "「%{proposal_title}」をフォローしているため、この通知を受け取りました。前のリンクに続く通知の受信を停止できます。"
+          email_subject: "%{proposal_title} への更新"
           notification_title: 提案 <a href="%{proposal_path}">%{proposal_title}</a> が <a href="%{resource_path}">%{resource_title}</a> の結果に含まれています。
         result_progress_updated:
-          email_intro: '提案「%{resource_title}」を含む結果「%{proposal_title}」が %{progress}%完了しました。このページから見ることができます：'
+          email_intro: 提案「%{resource_title}」を含む結果「%{proposal_title}」が %{progress}%完了しました。このページから見ることができます：
           email_outro: '"%{proposal_title}" をフォローしているため、この通知を受け取りました。この提案は結果 "%{resource_title}" に含まれています。 前のリンクに続く通知の受信を停止できます。'
-          email_subject: '%{resource_title} の進捗状況の更新'
+          email_subject: "%{resource_title} の進捗状況の更新"
           notification_title: 提案 <a href="%{resource_path}">%{resource_title}</a> <a href="%{proposal_path}">%{proposal_title}</a>を含む結果 , が %{progress}%完了しました。
     metrics:
       results:

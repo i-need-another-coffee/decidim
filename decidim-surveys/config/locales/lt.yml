@@ -1,3 +1,4 @@
+---
 lt:
   activemodel:
     models:
@@ -6,14 +7,14 @@ lt:
   activerecord:
     models:
       decidim/surveys/survey:
-        one: Apklausa
         few: Apklausos
         many: Apklausos
+        one: Apklausa
         other: Apklausos
       decidim/surveys/survey_answer:
-        one: Atsakyti
         few: Atsakymai
         many: Atsakymai
+        one: Atsakyti
         other: Atsakymai
   decidim:
     components:

@@ -1,3 +1,4 @@
+---
 pt-BR:
   activemodel:
     attributes:
@@ -195,13 +196,15 @@ pt-BR:
           new: Novo administrador
       admin_terms_of_service:
         accept:
-          error: Houve um erro ao aceitar os termos de serviço de administrador. 
+          error: Houve um erro ao aceitar os termos de serviço de administrador.
           success: Ótimo! Você aceitou os termos de uso do administrador.
         actions:
           accept: Concordo com estes termos
-          are_you_sure: Tem certeza que deseja negar os termos de Serviço para administrador? 
+          are_you_sure: Tem certeza que deseja negar os termos de Serviço para administrador?
           refuse: Recusar os termos de administrador
-          title: "Concordo com os termos de serviço\n"
+          title: 'Concordo com os termos de serviço
+
+            '
         required_review:
           alert: 'Obrigatório: Revisar nossos termos de uso para administrador'
           callout: Por favor, reserve um momento para revisar os termos de uso do Administrador. Caso contrario você não estará apto para gerenciar a plataforma.
@@ -330,7 +333,7 @@ pt-BR:
           unpublished: Não publicado
       conflicts:
         attempts: Tentativas
-        'false': 'Não'
+        'false': Não
         index:
           text: Pesquisar por e-mail, nome ou apelido do usuário.
         managed_user_name: Usuário gerenciado
@@ -342,7 +345,7 @@ pt-BR:
           reason: Motivo
           success: A transferência atual foi concluída com sucesso.
           title: Transferência
-        'true': 'Sim'
+        'true': Sim
         user_name: Usuário
       content_blocks:
         create:
@@ -383,13 +386,13 @@ pt-BR:
         invitation_accepted_at_present:
           label: Convite aceito
           values:
-            'false': 'Não'
-            'true': 'Sim'
+            'false': Não
+            'true': Sim
         last_sign_in_at_present:
           label: Já logado
           values:
-            'false': 'Não'
-            'true': 'Sim'
+            'false': Não
+            'true': Sim
         moderated_users:
           reports_reason_eq:
             label: Razão da denúncia
@@ -845,7 +848,7 @@ pt-BR:
             explanation: Você tem %{count} participantes privados.
             title: Excluir participantes privados
           example_file: 'Arquivo de exemplo:'
-          explanation: 'Envie seu arquivo CSV. Deve ter duas colunas com e-mail na primeira coluna do arquivo e nome na última coluna do arquivo dos usuários que você deseja adicionar ao espaço participativo, sem cabeçalhos. Evite usar caracteres inválidos como `<>?%&^*#@()[]=+:;"{}\├` no nome de usuário.'
+          explanation: Envie seu arquivo CSV. Deve ter duas colunas com e-mail na primeira coluna do arquivo e nome na última coluna do arquivo dos usuários que você deseja adicionar ao espaço participativo, sem cabeçalhos. Evite usar caracteres inválidos como `<>?%&^*#@()[]=+:;"{}\├` no nome de usuário.
           explanation_example: |
             joao.silva@examplo.org%{csv_col_sep}João da Silva
             maria.silva@examplo.org%{csv_col_sep}Maria da Silva

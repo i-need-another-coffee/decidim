@@ -1,3 +1,4 @@
+---
 sk:
   activemodel:
     attributes:
@@ -41,14 +42,14 @@ sk:
   activerecord:
     models:
       decidim/initiative_comittee:
-        one: Komisia
         few: Komisie
         many: Komisie
+        one: Komisia
         other: Komisie
       decidim/initiative_vote:
-        one: Podpis
         few: Podpisy
         many: Podpisy
+        one: Podpis
         other: Podpisy
   decidim:
     admin:
@@ -114,8 +115,8 @@ sk:
       badges:
         initiatives:
           conditions:
-            - Prejsť na priestor Iniciatív
-            - Nasledovať kroky pre vytvorenie novej iniciatívy
+          - Prejsť na priestor Iniciatív
+          - Nasledovať kroky pre vytvorenie novej iniciatívy
     help:
       participatory_spaces:
         initiatives:
@@ -195,7 +196,7 @@ sk:
         select_initiative_type:
           back: Späť
           choose_html: Chcem vytvoriť <strong>%{title} </strong>
-          more_information: (Viac informácií)
+          more_information: "(Viac informácií)"
           select: Chcem túto iniciatívu podporiť
       events:
         create_initiative_event:
@@ -228,15 +229,15 @@ sk:
       initiatives:
         author_list:
           hidden_authors_count:
-            one: a 1 ďalšou osobou
             few: a%{count} ďalších ľudí
             many: a%{count} ďalších ľudí
+            one: a 1 ďalšou osobou
             other: a%{count} ďalších ľudí
         count:
           title:
-            one: "%{count} iniciatíva"
             few: "%{count} iniciatív"
             many: "%{count} iniciatív"
+            one: "%{count} iniciatíva"
             other: "%{count} iniciatív"
         filters:
           any: Akýkoľvek
@@ -249,9 +250,9 @@ sk:
         interactions:
           comments_count:
             count:
-              one: Komentár
               few: Komentáre
               many: Komentáre
+              one: Komentár
               other: Komentáre
         orders:
           label: 'Triediť iniciatívy podľa:'
@@ -264,19 +265,19 @@ sk:
         result:
           initiative_rejected_reason: Táto iniciatíva bola zamietnutá z dôvodu nedostatočnej podpory.
         signatures_count:
-          one: "podpis"
-          few: "podpisy"
-          many: "podpisy"
-          other: "podpisy"
+          few: podpisy
+          many: podpisy
+          one: podpis
+          other: podpisy
         vote_cabin:
           already_voted: Už ste podpísal
           vote: Podpísať
           votes_blocked: Podpis zakázaný
         votes_count:
           count:
-            one: PODPIS
             few: PODPISY
             many: PODPISY
+            one: PODPIS
             other: PODPISY
       initiatives_mailer:
         creation_subject: Vaša občianska iniciatíva "%{title}" bola vytvorená
@@ -285,9 +286,9 @@ sk:
           here: tu
         more_information: Tu nájdete ďalšie informácie o procese vytvárania iniciatív.
         progress_report_body_for: Iniciatíva%{title} dosiahla%{percentage}% požadovanej podpory.
-        progress_report_for: 'Pokračujte v iniciatíve:%{title}'
+        progress_report_for: Pokračujte v iniciatíve:%{title}
         promotal_committee_help: Nezabudnite, že musíte vyzvať najmenej%{member_count} ľudí na organizačný výbor. Odovzdanie nasledujúceho odkazu na pozvanie osôb do výboru predkladateľov
-        status_change_body_for: 'Iniciatíva%{title} zmenila svoj stav na:%{state}'
+        status_change_body_for: Iniciatíva%{title} zmenila svoj stav na:%{state}
         status_change_for: Iniciatíva%{title} zmenila svoj stav
       states:
         accepted: Prijal

@@ -1,3 +1,4 @@
+---
 eu:
   activemodel:
     attributes:
@@ -322,19 +323,21 @@ eu:
           email_subject: '%{role} rola esleitu zaizu hemen "%{resource_title}".'
           notification_title: '%{role} rola esleitu zaizu <a href="%{resource_url}">%{resource_title}</a> partaidetza-prozesuan.'
         step_activated:
-          email_intro: '%{resource_title} urratsa orain aktibo dago honetarako: %{participatory_space_title}. Ikusi dezakezu orrialde honetatik:'
+          email_intro: "%{resource_title} urratsa orain aktibo dago honetarako: %{participatory_space_title}. Ikusi dezakezu orrialde honetatik:"
           email_outro: Jakinarazpen hau jaso duzu %{participatory_space_title} jarraitzen ari zarelako. Aurreko estekan utzi ahal diozu jarraitzeari.
           email_subject: 'Eguneraketa bat honetarako: %{participatory_space_title}'
           notification_title: '%{resource_title} urratsa aktiboa da <a href="%{resource_path}">%{participatory_space_title}</a>'
         step_changed:
-          email_intro: '%{participatory_space_title} %{resource_title} urratsen datuak eguneratu dira. Orrialde honetan ikusi dezakezu:'
+          email_intro: "%{participatory_space_title} %{resource_title} urratsen datuak eguneratu dira. Orrialde honetan ikusi dezakezu:"
           email_outro: Jakinarazpen hau jaso duzu %{participatory_space_title} jarraitzen ari zarelako. Aurreko estekan jarraitzeari utzi ahal diozu.
           email_subject: 'Eguneraketa bat honetarako: %{participatory_space_title}'
           notification_title: <a href="%{resource_path}">%{resource_title}</a> urratsean datak <a href="%{participatory_space_url}">%{participatory_space_title}</a> eguneratu dira.
     help:
       participatory_spaces:
         participatory_processes:
-          contextual: "<p>A <strong>partaidetzazko prozesu</strong> parte hartze-jardueren sekuentzia bat da (adibidez inkesta bat bete aurretik, proposamenak egin, eztabaidatu aurrez aurre edo topaketa birtualetan eta, azkenik, lehentasuna emanez) erabakiak definitzeko eta erabakiak hartzeko helburuarekin gai zehatz batean.</p> <p>Partaidetza-prozesuen adibideak hauek dira: hautagaitza batzordeak aukeratzeko prozesua (hautagaitzak aurkezten direnean, ondoren eztabaidatu eta azkenik hautagaitza hautatzen denean), partaidetzako aurrekontuak (proposamenak egiten direnean, ekonomikoki baloratuak eta dirua eskuragarri duten botoa) plangintza estrategikoko prozesua, araudi edo arau baten lankidetza-proiektua, hiri-espazio bat diseinatzea edo politika publikoko plan bat egitea.</p>\nproposamena\n"
+          contextual: |
+            <p>A <strong>partaidetzazko prozesu</strong> parte hartze-jardueren sekuentzia bat da (adibidez inkesta bat bete aurretik, proposamenak egin, eztabaidatu aurrez aurre edo topaketa birtualetan eta, azkenik, lehentasuna emanez) erabakiak definitzeko eta erabakiak hartzeko helburuarekin gai zehatz batean.</p> <p>Partaidetza-prozesuen adibideak hauek dira: hautagaitza batzordeak aukeratzeko prozesua (hautagaitzak aurkezten direnean, ondoren eztabaidatu eta azkenik hautagaitza hautatzen denean), partaidetzako aurrekontuak (proposamenak egiten direnean, ekonomikoki baloratuak eta dirua eskuragarri duten botoa) plangintza estrategikoko prozesua, araudi edo arau baten lankidetza-proiektua, hiri-espazio bat diseinatzea edo politika publikoko plan bat egitea.</p>
+            proposamena
           page: "<p>A <strong>partaidetzazko prozesu</strong> parte hartze-jardueren sekuentzia bat da (adibidez inkesta bat bete aurretik, proposamenak egin, eztabaidatu aurrez aurre edo topaketa birtualetan eta, azkenik, lehentasuna emanez) erabakiak definitzeko eta erabakiak hartzeko helburuarekin gai zehatz batean.</p> <p>Partaidetza-prozesuen adibideak hauek dira: hautagaitza batzordeak aukeratzeko prozesua (hautagaitzak aurkezten direnean, ondoren eztabaidatu eta azkenik hautagaitza hautatzen denean), partaidetzako aurrekontuak (proposamenak egiten direnean, ekonomikoki baloratuak eta dirua eskuragarri duten botoa) plangintza estrategikoko prozesua, araudi edo arau baten lankidetza-proiektua, hiri-espazio bat diseinatzea edo politika publikoko plan bat egitea.</p>\n"
           title: Zer da partaidetza-prozesu bat?
     log:
@@ -407,7 +410,7 @@ eu:
           meta_scope: Eremua
           participatory_processes:
             one: Prozesu bat
-            other: "Prozesu bat"
+            other: Prozesu bat
       show:
         title: Partaidetza-prozesuen taldeak
     participatory_process_steps:
@@ -430,7 +433,9 @@ eu:
         participatory_process_groups:
           form:
             metadata: Metadatuak
-            title: "Prozesu honi buruz\n"
+            title: 'Prozesu honi buruz
+
+              '
             visibility: Ikusgarritasuna
         participatory_process_imports:
           form:

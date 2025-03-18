@@ -1,3 +1,4 @@
+---
 sk:
   activemodel:
     models:
@@ -8,14 +9,14 @@ sk:
   activerecord:
     models:
       decidim/comments/comment:
-        one: Komentár
         few: Komentáre
         many: Komentáre
+        one: Komentár
         other: Komentáre
       decidim/comments/comment_vote:
-        one: Hlas
         few: Hlasy
         many: Hlasy
+        one: Hlas
         other: Hlasy
   decidim:
     comments:
@@ -30,8 +31,8 @@ sk:
             placeholder: Čo si myslíte o tomto?
         opinion:
           neutral: Neutrálne
-        remaining_characters: "Zostáva %{count} znakov"
-        remaining_characters_1: "Zostáva %{count} znakov"
+        remaining_characters: Zostáva %{count} znakov
+        remaining_characters_1: Zostáva %{count} znakov
         title: Pridajte svoj komentár
       comment:
         alignment:

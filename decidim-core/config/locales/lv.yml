@@ -1,3 +1,4 @@
+---
 lv:
   activemodel:
     attributes:
@@ -42,20 +43,20 @@ lv:
         remember_me: Atcerēties mani
     models:
       decidim/amendment:
-        zero: Grozījumi
         one: Grozījums
         other: Grozījumi
+        zero: Grozījumi
       decidim/endorsement:
-        zero: Atbalsts
         one: Atbalsts
         other: Atbalsts
+        zero: Atbalsts
       decidim/user:
-        zero: Dalībnieki
         one: Dalībnieks
         other: Dalībnieki
+        zero: Dalībnieki
   booleans:
-    'false': 'Nē'
-    'true': 'Jā'
+    'false': Nē
+    'true': Jā
   date:
     buttons:
       select: Izvēlēties
@@ -160,14 +161,11 @@ lv:
           button_reject: Noraidīt
           help_text: Pārskatiet izmaiņas un pieņemiet vai noraidiet šo grozījumu. Tā autoram tiks nosūtīts paziņojums.
         announcement:
-          accepted: |-
-            Šis %{amendable_type} %{proposal_link} grozījums tika pieņemts <strong>%{date}</strong>.
-          evaluating: |-
-            Šis %{amendable_type} %{proposal_link} grozījums tiek vērtēts.
+          accepted: Šis %{amendable_type} %{proposal_link} grozījums tika pieņemts <strong>%{date}</strong>.
+          evaluating: Šis %{amendable_type} %{proposal_link} grozījums tiek vērtēts.
           promoted: Paaugstināts līdz %{amendable_type}.
           rejected: Šis%{amendable_type} %{proposal_link} grozījums tika noraidīts <strong>%{date}</strong>.
-          withdrawn: |-
-            %{amendable_type} %{proposal_link} grozījumu atsaucis autors.
+          withdrawn: "%{amendable_type} %{proposal_link} grozījumu atsaucis autors."
       new:
         send: Izveidot
         title: Izveidot grozījuma melnrakstu
@@ -198,13 +196,13 @@ lv:
         related_photos: Saistītie attēli
     author:
       comments:
-        zero: komentāri
         one: komentēt
         other: komentāri
+        zero: komentāri
       endorsements:
-        zero: atbalsti
         one: atbalsts
         other: atbalsti
+        zero: atbalsti
     authorization_handlers:
       another_dummy_authorization_handler:
         fields:
@@ -252,9 +250,9 @@ lv:
           title: Apstiprināt e-pastu
     collapsible_list:
       hidden_elements_count:
-        zero: un %{count} vēl
         one: un %{count} vēl
         other: un %{count} vēl
+        zero: un %{count} vēl
       see_less: "(skatīt mazāk)"
     components:
       component_order_selector:
@@ -363,23 +361,23 @@ lv:
       amendments:
         amendment_accepted:
           affected_user:
-            email_intro: '%{amendable_title} ir pieņemts grozījums. To var redzēt šajā lapā:'
+            email_intro: "%{amendable_title} ir pieņemts grozījums. To var redzēt šajā lapā:"
             email_outro: Jūs saņēmāt šo paziņojumu, jo esat %{amendable_title} autors.
             email_subject: Pieņemts grozījums %{amendable_title} no %{emendation_author_nickname}
             notification_title: <a href="%{emendation_path}"> Grozījums </a>, ko izveidoja <a href="%{emendation_author_path}">%{emendation_author_nickname}</a>, ir pieņemts <a href="%{amendable_path}">%{amendable_title}</a>.
           follower:
-            email_intro: '%{amendable_title} ir pieņemts grozījums. To var redzēt šajā lapā:'
+            email_intro: "%{amendable_title} ir pieņemts grozījums. To var redzēt šajā lapā:"
             email_outro: Jūs saņēmāt šo paziņojumu, jo sekojat %{amendable_title}. Jūs varat atteikties no paziņojumu saņemšanas, sekojot iepriekšējai saitei.
             email_subject: Pieņemts grozījums %{amendable_title} no %{emendation_author_nickname}
             notification_title: <a href="%{emendation_path}"> Grozījums </a>, ko izveidoja <a href="%{emendation_author_path}">%{emendation_author_nickname}</a>, ir pieņemts <a href="%{amendable_path}">%{amendable_title}</a>.
         amendment_created:
           affected_user:
-            email_intro: '%{amendable_title} ir izveidots jauns grozījums. To var redzēt šajā lapā.'
+            email_intro: "%{amendable_title} ir izveidots jauns grozījums. To var redzēt šajā lapā."
             email_outro: Jūs saņēmāt šo paziņojumu, jo esat %{amendable_title} autors.
             email_subject: Jauns grozījums %{amendable_title}
             notification_title: <a href="%{amendable_path}">%{amendable_title}</a> ir izveidots jauns grozījums.
           follower:
-            email_intro: '%{amendable_title} ir izveidots jauns grozījums. To var redzēt šajā lapā.'
+            email_intro: "%{amendable_title} ir izveidots jauns grozījums. To var redzēt šajā lapā."
             email_outro: Jūs saņēmāt šo paziņojumu, jo sekojat %{amendable_title}. Jūs varat atteikties no paziņojumu saņemšanas, sekojot iepriekšējai saitei.
             email_subject: Jauns grozījums %{amendable_title}
             notification_title: <a href="%{amendable_path}">%{amendable_title}</a> ir izveidots jauns grozījums.
@@ -387,27 +385,27 @@ lv:
           affected_user:
             email_intro: 'Noraidītais %{amendable_title} grozījums ir publicēts kā jauns %{amendable_type}. To var redzēt šajā lapā:'
             email_outro: Jūs saņēmāt šo paziņojumu, jo esat %{amendable_title} autors.
-            email_subject: '%{emendation_author_nickname} grozījums ir publicēts kā jauns %{amendable_type}'
+            email_subject: "%{emendation_author_nickname} grozījums ir publicēts kā jauns %{amendable_type}"
             notification_title: <a href="%{emendation_path}">noraidītais grozījums<a href="%{amendable_path}">%{amendable_title}</a> ir publicēts kā jauns %{amendable_type}, to publicēja <a href="%{emendation_author_path}">%{emendation_author_nickname}</a>.
           follower:
             email_intro: 'Noraidītais %{amendable_title} grozījums ir publicēts kā jauns %{amendable_type}. To var redzēt šajā lapā:'
             email_outro: Jūs saņēmāt šo paziņojumu, jo sekojat %{amendable_title}. Jūs varat atteikties no paziņojumu saņemšanas, sekojot iepriekšējai saitei.
-            email_subject: '%{emendation_author_nickname} grozījums ir publicēts kā jauns %{amendable_type}'
+            email_subject: "%{emendation_author_nickname} grozījums ir publicēts kā jauns %{amendable_type}"
             notification_title: <a href="%{emendation_path}">noraidītais grozījums<a href="%{amendable_path}">%{amendable_title}</a> ir publicēts kā jauns %{amendable_type}, to publicēja <a href="%{emendation_author_path}">%{emendation_author_nickname}</a>.
         amendment_rejected:
           affected_user:
-            email_intro: '%{amendable_title} ir noraidīts grozījums. To var redzēt šajā lapā:'
+            email_intro: "%{amendable_title} ir noraidīts grozījums. To var redzēt šajā lapā:"
             email_outro: Jūs saņēmāt šo paziņojumu, jo esat %{amendable_title} autors.
             email_subject: Noraidīts grozījums %{amendable_title} no %{emendation_author_nickname}
             notification_title: <a href="%{emendation_path}"> grozījums </a>, ko izveidoja <a href="%{emendation_author_path}">%{emendation_author_nickname}</a>, ir noraidīts <a href="%{amendable_path}">%{amendable_title}</a>.
           follower:
-            email_intro: '%{amendable_title} ir noraidīts grozījums. To var redzēt šajā lapā:'
+            email_intro: "%{amendable_title} ir noraidīts grozījums. To var redzēt šajā lapā:"
             email_outro: Jūs saņēmāt šo paziņojumu, jo sekojat %{amendable_title}. Jūs varat atteikties no paziņojumu saņemšanas, sekojot iepriekšējai saitei.
             email_subject: Noraidīts grozījums %{amendable_title} no %{emendation_author_nickname}
             notification_title: <a href="%{emendation_path}"> grozījums </a>, ko izveidoja <a href="%{emendation_author_path}">%{emendation_author_nickname}</a>, ir noraidīts <a href="%{amendable_path}">%{amendable_title}</a>.
       attachments:
         attachment_created:
-          email_intro: '%{resource_title} ir pievienots jauns dokuments. Jūs to varat redzēt šajā lapā:'
+          email_intro: "%{resource_title} ir pievienots jauns dokuments. Jūs to varat redzēt šajā lapā:"
           email_outro: Jūs saņēmāt šo paziņojumu, jo sekojat %{resource_title}. Jūs varat atteikties no paziņojumu saņemšanas, sekojot iepriekšējai saitei.
           email_subject: Atjaunināts %{resource_title}
           notification_title: <a href="%{resource_path}">Jauns dokuments </a> ir pievienots <a href="%{attached_to_url}">%{resource_title}</a>
@@ -419,7 +417,7 @@ lv:
           notification_title: '%{resource_title} komponents tagad ir aktīvs <a href="%{resource_path}">%{participatory_space_title}</a>'
       email_event:
         email_greeting: Sveiki, %{user_name},
-        email_intro: '%{resource_title} ir atjaunināts. Jūs to varat redzēt šajā lapā:'
+        email_intro: "%{resource_title} ir atjaunināts. Jūs to varat redzēt šajā lapā:"
         email_outro: Jūs saņēmāt šo paziņojumu, jo sekojat "%{resource_title}". Jūs varat atsekot tai no iepriekšējās saites.
         email_subject: Atjaunināts %{resource_title}
       gamification:
@@ -476,7 +474,7 @@ lv:
       badges:
         followers:
           conditions:
-            - Aktivitāte un sekošana citiem cilvēkiem noteikti liks citiem sekot jums.
+          - Aktivitāte un sekošana citiem cilvēkiem noteikti liks citiem sekot jums.
           description: Šis žetons tiek piešķirts, kad jūs sasniedzat noteiktu skaitu sekotāju. %{Organization_name} ir sociālais un politiskais tīkls, audiet savu tīklu, lai sazinātos ar citiem platformas lietotājiem.
           description_another: Šim dalībniekam ir %{score} sekotāji.
           description_own: "%{score} cilvēki seko jums."
@@ -637,7 +635,7 @@ lv:
           participate: Piedalīties
           welcome: Laipni lūdzam %{organization}!
         statistics:
-          headline: '%{organization} pašreizējais stāvoklis'
+          headline: "%{organization} pašreizējais stāvoklis"
         sub_hero:
           register: Reģistrēties
       index:
@@ -713,7 +711,7 @@ lv:
       reference:
         reference: 'Atsauce: %{reference}'
       results_per_page:
-        label: 'Rezultāti vienā lapā'
+        label: Rezultāti vienā lapā
         title: Izvēlieties rezultātu skaitu vienā lapā
       share_modal:
         share: Kopīgot
@@ -723,7 +721,7 @@ lv:
     user_contact_disabled: Šis dalībnieks nepieņem tiešās ziņas.
     user_conversations:
       index:
-        time_ago: "Pirms %{time}"
+        time_ago: Pirms %{time}
     version:
       show:
         back_to_resource: Atgriezties
@@ -838,9 +836,9 @@ lv:
         forgot_your_password: Aizmirsāt paroli?
         log_in: Pieteikties
       minimum_password_length:
-        zero: "(vismaz %{count} rakstzīmes)"
         one: "(vismaz %{count} rakstzīme)"
         other: "(vismaz %{count} rakstzīmes)"
+        zero: "(vismaz %{count} rakstzīmes)"
     unlocks:
       new:
         resend_unlock_instructions: Atkārtoti nosūtīt atbloķēšanas norādījumus

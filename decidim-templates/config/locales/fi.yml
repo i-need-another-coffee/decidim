@@ -1,3 +1,4 @@
+---
 fi:
   activemodel:
     attributes:
@@ -106,7 +107,7 @@ fi:
             title: Uusi kyselyn mallipohja
           preview:
             current_step: Vaihe %{step}
-            of_total_steps: / %{total_steps}
+            of_total_steps: "/ %{total_steps}"
             tos_agreement: Osallistumalla hyväksyt käyttöehdot
       admin_log:
         template:

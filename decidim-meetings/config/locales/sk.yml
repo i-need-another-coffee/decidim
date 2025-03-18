@@ -1,3 +1,4 @@
+---
 sk:
   activemodel:
     attributes:
@@ -33,19 +34,19 @@ sk:
   activerecord:
     models:
       decidim/meetings/meeting:
-        one: Stretnutie
         few: Stretnutia
         many: Stretnutia
+        one: Stretnutie
         other: Stretnutia
       decidim/meetings/minutes:
-        one: Zápis
         few: Zápisy
         many: Zápisy
+        one: Zápis
         other: Zápisy
       decidim/meetings/registration:
-        one: Registrácia
         few: Registrácie
         many: Registrácie
+        one: Registrácia
         other: Registrácie
   decidim:
     admin:
@@ -120,7 +121,7 @@ sk:
       badges:
         attended_meetings:
           conditions:
-            - Registrujte sa pre stretnutia, ktorých sa chcete zúčastniť
+          - Registrujte sa pre stretnutia, ktorých sa chcete zúčastniť
           description: Tento odznak ste dostali za aktívnu účasť na stretnutiach naživo.
           description_another: Tento účastník sa zúčastnil %{score} stretnutí.
           description_own: Zúčastnili ste sa %{score} stretnutí.
@@ -219,9 +220,9 @@ sk:
             recommendation_message: Z dôvodov zachovania súkromia odporúčame, aby ste vymazali tento prihlasovací formulár, ak ho už nepoužívate. Podľa nastavenia sa vymaže 3 mesiace po ukončení stretnutia.
             registration_form: Registračný formulár
             registrations_count:
-              one: Bola tu registrácia%{count}.
               few: Bolo tu%{count} registrácií.
               many: Bolo tu%{count} registrácií.
+              one: Bola tu registrácia%{count}.
               other: Bolo tu%{count} registrácií.
             reserved_slots_less_than: Musí byť menšie alebo rovné%{count}
             title: Registrácia
@@ -244,7 +245,7 @@ sk:
           update: "% {USER_NAME} aktualizovalo% {resource_name} schôdzku v priestore% {space_name}"
           value_types:
             organizer_presenter:
-              not_found: 'Organizátor nebol nájdený v databáze (ID:%{id})'
+              not_found: Organizátor nebol nájdený v databáze (ID:%{id})
       calendar_modal:
         calendar_url: URL kalendára
         export_calendar: Exportovať kalendár
@@ -283,9 +284,9 @@ sk:
             validated: DOKÁZANÝ
             validation_pending: OVERENIE ČAKÁ NA SCHVÁLENIE
           remaining_slots:
-            one: "%{count} zostávajúceho slotu"
             few: "%{count} zostávajúcich blokov"
             many: "%{count} zostávajúcich blokov"
+            one: "%{count} zostávajúceho slotu"
             other: "%{count} zostávajúcich blokov"
       models:
         invite:

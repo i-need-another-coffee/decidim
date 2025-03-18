@@ -1,3 +1,4 @@
+---
 zh-TW:
   activemodel:
     attributes:
@@ -65,8 +66,8 @@ zh-TW:
       decidim/user:
         other: 參與者
   booleans:
-    'false': '否'
-    'true': '是'
+    'false': 否
+    'true': 是
   date:
     buttons:
       select: 選擇
@@ -79,16 +80,30 @@ zh-TW:
   datetime:
     distance_in_words:
       about_x_hours:
-        other: "one\n大約 1 小時\n\nOther\n大約 %{count} 小時"
+        other: |-
+          one
+          大約 1 小時
+
+          Other
+          大約 %{count} 小時
       about_x_months:
-        other: "one\n大約 1 月\n\nOther\n大約 %{count} 月"
+        other: |-
+          one
+          大約 1 月
+
+          Other
+          大約 %{count} 月
       half_a_minute: 半分鐘
       less_than_x_minutes:
         other: 少於 %{count} 分鐘
       less_than_x_seconds:
-        other: "< 1秒\n< %{count} 秒"
+        other: |-
+          < 1秒
+          < %{count} 秒
       x_days:
-        other: "1天\n%{count} 天"
+        other: |-
+          1天
+          %{count} 天
       x_hours:
         other: "{count} 小時"
       x_minutes:
@@ -168,7 +183,15 @@ zh-TW:
         delete: "%{user_name} 從 %{space_name} 空間中刪除了 %{resource_name} 分類"
         update: "%{user_name} 在 %{space_name} 空間中更新了 %{resource_name} 分類"
       component:
-        create: "%{user_name} 將 %{resource_name} 元件添加到 %{space_name} 空間\n\n\n\n\nCopy to Clipboard\n\nRegenerate response"
+        create: |-
+          %{user_name} 將 %{resource_name} 元件添加到 %{space_name} 空間
+
+
+
+
+          Copy to Clipboard
+
+          Regenerate response
         delete: "%{user_name} 從 %{space_name} 空間中移除了 %{resource_name} 元件"
         export_component: "%{user_name} 將 %{space_name} 空間中的 %{resource_name} %{component_name} 匯出為 %{format_name}"
         publish: "%{user_name} 在 %{space_name} 空間中發佈了 %{resource_name} 元件"
@@ -262,14 +285,11 @@ zh-TW:
           button_reject: 拒絕
           help_text: 審查更改並接受或拒絕此修正案。將向其作者發送通知。
         announcement:
-          accepted: |-
-            對於 %{amendable_type} %{proposal_link} 的這個修正案已於 <strong>%{date}</strong> 被接受。
-          evaluating: |-
-            正在評估對於 %{amendable_type} %{proposal_link} 的修正案。
+          accepted: 對於 %{amendable_type} %{proposal_link} 的這個修正案已於 <strong>%{date}</strong> 被接受。
+          evaluating: 正在評估對於 %{amendable_type} %{proposal_link} 的修正案。
           promoted: 晉升為 %{amendable_type}。
           rejected: 對於 %{amendable_type} %{proposal_link} 的修正案在 <strong>%{date}</strong> 被拒絕。
-          withdrawn: |-
-            對於 %{amendable_type} %{proposal_link} 的修正案已被作者撤回。
+          withdrawn: 對於 %{amendable_type} %{proposal_link} 的修正案已被作者撤回。
       new:
         send: 建立
         title: 創建修正案草稿
@@ -310,11 +330,15 @@ zh-TW:
       photos:
         related_photos: 相關影像
     author:
-      avatar: '頭像： %{name}'
+      avatar: 頭像： %{name}
       comments:
         other: 評論
       endorsements:
-        other: "one\n連署\nOther\n連署"
+        other: |-
+          one
+          連署
+          Other
+          連署
       official_author: 官方
     authorization_handlers:
       another_dummy_authorization_handler:
@@ -354,7 +378,7 @@ zh-TW:
           title: 授權已過期
         incomplete:
           cancel: 取消
-          explanation: '即使您目前已經經過"%{authorization}"的授權，我們需要您重新授權，因為我們缺少以下資料：'
+          explanation: 即使您目前已經經過"%{authorization}"的授權，我們需要您重新授權，因為我們缺少以下資料：
           invalid_field: "%{field}"
           reauthorize: 重新授權
           title: 請重新授權
@@ -374,7 +398,7 @@ zh-TW:
           ok: 確定
           title: 尚未授權
         unconfirmed:
-          confirmation_instructions: '如果您沒有收到確認指示，您可以再次請求：'
+          confirmation_instructions: 如果您沒有收到確認指示，您可以再次請求：
           explanation_html: 為了執行此操作，您需要進行授權。在此之前，請確認您的電子郵件地址 <strong>%{email}</strong>。
           request_confirmation_instructions: 要求確認指示
           title: 確認您的電郵
@@ -387,7 +411,12 @@ zh-TW:
         subject: 您的帳戶已被 %{organization_name} 封鎖。
     collapsible_list:
       hidden_elements_count:
-        other: "one\n和 %{count} 個\n\nOther\n和 %{count} 個"
+        other: |-
+          one
+          和 %{count} 個
+
+          Other
+          和 %{count} 個
       see_less: "(查看較少)"
     components:
       component_order_selector:
@@ -525,8 +554,8 @@ zh-TW:
           see_email: 查看您的電子郵件
           see_name: 查看你的名稱
           see_username: 查看您的暱稱
-          this_application_will_be_able_to: '此應用程式將可以：'
-          this_application_will_not_be_able_to: '這個應用程式無法：'
+          this_application_will_be_able_to: 此應用程式將可以：
+          this_application_will_not_be_able_to: 這個應用程式無法：
           update_profile: 更新您的個人檔案
           wants_to_use_your_account_html: "<strong>%{application_name}</strong> 希望使用您的帳戶"
     download_your_data:
@@ -560,65 +589,65 @@ zh-TW:
       amendments:
         amendment_accepted:
           affected_user:
-            email_intro: '已接受對於 %{amendable_title} 的修正案。您可以從此頁面中查看：'
+            email_intro: 已接受對於 %{amendable_title} 的修正案。您可以從此頁面中查看：
             email_outro: 你收到此通知，是因為你是%{amendable_title} 的作者。
             email_subject: 已接受對於 %{amendable_title} 的修正案，來自於 %{emendation_author_nickname}
             notification_title: <a href="%{emendation_path}">修正案</a>由<a href="%{emendation_author_path}">%{emendation_author_nickname}</a>創建，已被接受適用於<a href="%{amendable_path}">%{amendable_title}</a>。
           follower:
-            email_intro: '已接受對於 %{amendable_title} 的修正案。您可以從此頁面中查看：'
+            email_intro: 已接受對於 %{amendable_title} 的修正案。您可以從此頁面中查看：
             email_outro: 您收到此通知，是因為您正在關注 %{amendable_title}。您可以使用上面的連結停止接收通知。
             email_subject: 已接受對於 %{amendable_title} 的修正案，來自於 %{emendation_author_nickname}
             notification_title: <a href="%{emendation_path}">修正案</a>由<a href="%{emendation_author_path}">%{emendation_author_nickname}</a>創建，已被接受適用於<a href="%{amendable_path}">%{amendable_title}</a>。
         amendment_created:
           affected_user:
-            email_intro: '已為 %{amendable_title} 創建一個新的修正案。您可以從此頁面查看：'
+            email_intro: 已為 %{amendable_title} 創建一個新的修正案。您可以從此頁面查看：
             email_outro: 你收到此通知，是因為你是%{amendable_title} 的作者。
             email_subject: 新的修正案，針對 %{amendable_title}
             notification_title: 已為<a href="%{amendable_path}">%{amendable_title}</a>創建一個新的修正案。
           follower:
-            email_intro: '已為 %{amendable_title} 創建一個新的修正案。您可以從此頁面查看：'
+            email_intro: 已為 %{amendable_title} 創建一個新的修正案。您可以從此頁面查看：
             email_outro: 您收到此通知，是因為您正在關注 %{amendable_title}。您可以使用上面的連結停止接收通知。
             email_subject: 新的修正案，針對 %{amendable_title}
             notification_title: 已為<a href="%{amendable_path}">%{amendable_title}</a>創建一個新的修正案。
         amendment_promoted:
           affected_user:
-            email_intro: '一個被拒絕的修正案已被發佈為新的 %{amendable_type}，針對 %{amendable_title}。您可以從此頁面查看：'
+            email_intro: 一個被拒絕的修正案已被發佈為新的 %{amendable_type}，針對 %{amendable_title}。您可以從此頁面查看：
             email_outro: 你收到此通知，是因為你是%{amendable_title} 的作者。
             email_subject: 來自 %{emendation_author_nickname} 的修正案已被發佈為新的 %{amendable_type}
             notification_title: 一個<a href="%{emendation_path}">被拒絕的修正案</a>已由<a href="%{emendation_author_path}">%{emendation_author_nickname}</a>發佈為新的 %{amendable_type}，針對<a href="%{amendable_path}">%{amendable_title}</a>。
           follower:
-            email_intro: '一個被拒絕的修正案已被發佈為新的 %{amendable_type}，針對 %{amendable_title}。您可以從此頁面查看：'
+            email_intro: 一個被拒絕的修正案已被發佈為新的 %{amendable_type}，針對 %{amendable_title}。您可以從此頁面查看：
             email_outro: 您收到此通知，是因為您正在關注 %{amendable_title}。您可以使用上面的連結停止接收通知。
             email_subject: 來自 %{emendation_author_nickname} 的修正案已被發佈為新的 %{amendable_type}
             notification_title: 一個<a href="%{emendation_path}">被拒絕的修正案</a>已由<a href="%{emendation_author_path}">%{emendation_author_nickname}</a>發佈為新的 %{amendable_type}，針對<a href="%{amendable_path}">%{amendable_title}</a>。
         amendment_rejected:
           affected_user:
-            email_intro: '一個修正案已被拒絕，針對 %{amendable_title}。您可以從此頁面查看：'
+            email_intro: 一個修正案已被拒絕，針對 %{amendable_title}。您可以從此頁面查看：
             email_outro: 你收到此通知，是因為你是%{amendable_title} 的作者。
             email_subject: 修正案由 %{emendation_author_nickname} 提交，針對 %{amendable_title}，已被拒絕。
             notification_title: <a href="%{emendation_path}">%{emendation_author_nickname}</a>創建的<a href="%{emendation_path}">修正案</a>已被拒絕，針對<a href="%{amendable_path}">%{amendable_title}</a>。
           follower:
-            email_intro: '一個修正案已被拒絕，針對 %{amendable_title}。您可以從此頁面查看：'
+            email_intro: 一個修正案已被拒絕，針對 %{amendable_title}。您可以從此頁面查看：
             email_outro: 您收到此通知，是因為您正在關注 %{amendable_title}。您可以使用上面的連結停止接收通知。
             email_subject: 修正案由 %{emendation_author_nickname} 提交，針對 %{amendable_title}，已被拒絕。
             notification_title: <a href="%{emendation_path}">%{emendation_author_nickname}</a>創建的<a href="%{emendation_path}">修正案</a>已被拒絕，針對<a href="%{amendable_path}">%{amendable_title}</a>。
       attachments:
         attachment_created:
-          email_intro: '已新增一個文件至 %{resource_title}。您可以從此頁面查看：'
+          email_intro: 已新增一個文件至 %{resource_title}。您可以從此頁面查看：
           email_outro: 您收到此通知，是因為您正在關注 %{resource_title}。您可以使用上面的連結停止接收通知。
-          email_subject: '%{resource_title} 的更新'
+          email_subject: "%{resource_title} 的更新"
           notification_title: <a href="%{resource_path}">新文件</a>已新增至<a href="%{attached_to_url}">%{resource_title}</a>。
       components:
         component_published:
-          email_intro: '%{participatory_space_title} 現已啟用 %{resource_title} 元件。您可以從此頁面查看：'
+          email_intro: "%{participatory_space_title} 現已啟用 %{resource_title} 元件。您可以從此頁面查看："
           email_outro: 你收到此通知是因為你正在追蹤 %{participatory_space_title}。你可以透過前面的連結停止接收通知。
-          email_subject: '%{participatory_space_title} 的更新'
+          email_subject: "%{participatory_space_title} 的更新"
           notification_title: '%{resource_title} 元件現已對<a href="%{resource_path}">%{participatory_space_title}</a>啟用'
       email_event:
         email_greeting: 哈囉，%{user_name}!
         email_intro: '%{resource_title}" 有更新。您可以從此頁面查看更新內容：'
         email_outro: 您收到了此通知，是因為您正在關注 "%{resource_title}"。您可以通過前面的鏈接取消關注它。
-        email_subject: '%{resource_title} 的更新'
+        email_subject: "%{resource_title} 的更新"
       gamification:
         badge_earned:
           email_intro: 恭喜！您已經獲得了 <a href="%{resource_url}">%{badge_name} 徽章</a>(等級 %{current_level})。
@@ -635,8 +664,7 @@ zh-TW:
           email_intro: 一位管理員因為您的%{resource_type} 已被檢舉為%{report_reasons} 而將其移除。
           email_outro: 您收到此通知是因為您是被移除內容的作者。
           email_subject: 您的%{resource_type} 已被移除。
-          notification_title: |-
-            一位管理員因為 %{report_reasons} 的舉報，移除了您的%{resource_type}。</br> <i>%{resource_content}</i>
+          notification_title: 一位管理員因為 %{report_reasons} 的舉報，移除了您的%{resource_type}。</br> <i>%{resource_content}</i>
       resource_endorsed:
         email_intro: '%{endorser_name} %{endorser_nickname}，您正在關注的用戶，剛剛為"%{resource_title}"進行了連署，我們認為這可能對您很有興趣。請查看並做出貢獻：'
         email_outro: 您收到此通知是因為您正在關注 %{endorser_nickname}。您可以點擊上方的連結停止接收通知。
@@ -676,11 +704,19 @@ zh-TW:
       value: 數值
     followers:
       followers_count:
-        other: "One\n%{count} 位追蹤者\nOther\n%{count} 位追蹤者"
+        other: |-
+          One
+          %{count} 位追蹤者
+          Other
+          %{count} 位追蹤者
       no_followers: 還沒有追蹤者
     following:
       following_count:
-        other: "One\n%{count} 位追蹤者\nOther\n%{count} 位追蹤者"
+        other: |-
+          One
+          %{count} 位追蹤者
+          Other
+          %{count} 位追蹤者
       no_followings: 還沒有追蹤任何人或任何東西。
       non_public_followings: 一些的追蹤資源不是公開的。
     follows:
@@ -698,21 +734,21 @@ zh-TW:
         error: 輸入欄位有誤。
       file_help:
         file:
-          explanation: '檔案指南：'
+          explanation: 檔案指南：
           message_1: 必須是圖片或文件。
         icon:
-          explanation: '圖示指南：'
+          explanation: 圖示指南：
           message_1: 必須為正方形影像。
           message_2: 此圖像的建議尺寸為 512x512。
         image:
-          explanation: '圖像的指導'
+          explanation: 圖像的指導
           message_2: 該服務裁剪圖像。
       file_validation:
-        allowed_file_extensions: '允許的檔案擴展名： %{extensions}'
-        max_file_dimension: '最大檔案尺寸： %{resolution} 像素'
-        max_file_size: '最大檔案尺寸： %{megabytes} MB'
+        allowed_file_extensions: 允許的檔案擴展名： %{extensions}
+        max_file_dimension: 最大檔案尺寸： %{resolution} 像素
+        max_file_size: 最大檔案尺寸： %{megabytes} MB
       files:
-        extension_allowlist: '接受的格式： %{extensions}'
+        extension_allowlist: 接受的格式： %{extensions}
       upload:
         labels:
           add_attachment: 新增附件
@@ -720,7 +756,7 @@ zh-TW:
           add_image: 新增圖片
           edit_image: 編輯圖片
           error: 錯誤！
-          file_size_too_large: '檔案大小過大！最大檔案大小：%{megabytes}MB'
+          file_size_too_large: 檔案大小過大！最大檔案大小：%{megabytes}MB
           filename: 檔案名稱
           remove: 移除
           replace: 替換
@@ -738,10 +774,10 @@ zh-TW:
       badges:
         followers:
           conditions:
-            - 積極參與並追蹤其他人，有助於吸引其他人追蹤您。
+          - 積極參與並追蹤其他人，有助於吸引其他人追蹤您。
           description: 當您達到一定數量的追蹤者時，將獲得此徽章。%{organization_name} 是一個社交和政治網絡，藉此平台與其他人溝通，編織您的網絡。
           description_another: 這位參與者有 %{score} 位追隨者。
-          description_own: "這位參與者有 %{score} 位追隨者。"
+          description_own: 這位參與者有 %{score} 位追隨者。
           name: 追隨者
           next_level_in: 再有 %{score} 位追隨者跟隨您，就可以達到下一個等級了！
           unearned_another: 這位參與者還沒有任何追蹤者。
@@ -807,7 +843,7 @@ zh-TW:
         screen_reader_explanation: 下面的元素是一個地圖，它將此頁面上的項目呈現為地圖點。這個元素可以與螢幕閱讀器一起使用，但可能較難理解。
         skip_button: 跳過地圖
       static:
-        latlng_text: '緯度：%{latitude}，經度：%{longitude}'
+        latlng_text: 緯度：%{latitude}，經度：%{longitude}
         map_service_brand: 開放街圖
     menu:
       help: 幫助
@@ -824,7 +860,7 @@ zh-TW:
           subject: 您有來自 %{sender} 的新訊息。
       conversations:
         add_conversation_users:
-          add_max_users: '將使用者加入對話：最多可加入 9 名使用者。'
+          add_max_users: 將使用者加入對話：最多可加入 9 名使用者。
           add_users_placeholder: 搜尋...
           modal_title: 新的對話
           no_results: 無結果
@@ -834,7 +870,7 @@ zh-TW:
         error_modal:
           close: 關閉視窗
           correct_errors: 請修正錯誤後再試一次。
-          intro: '您的訊息有以下錯誤：'
+          intro: 您的訊息有以下錯誤：
           ok: 好的
         index:
           new_conversation: 新的對話
@@ -878,21 +914,21 @@ zh-TW:
         unsubscribe: 要取消接收此類郵件，<a href="%{link}" target="_blank" class="unsubscribe">取消訂閱</a>。
     newsletter_templates:
       basic_only_text:
-        body_preview: '正文的虛擬文字：Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque fringilla nisl tellus. Donec sed mi dui. Sed efficitur libero a felis tempor sollicitudin. Nullam vestibulum fringilla felis, id efficitur lorem sagittis et. Vivamus aliquam maximus velit vel dapibus. Mauris pellentesque, enim eu varius lacinia, risus ante rutrum ipsum, non lobortis augue lorem quis urna. Aenean et malesuada arcu.'
+        body_preview: 正文的虛擬文字：Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque fringilla nisl tellus. Donec sed mi dui. Sed efficitur libero a felis tempor sollicitudin. Nullam vestibulum fringilla felis, id efficitur lorem sagittis et. Vivamus aliquam maximus velit vel dapibus. Mauris pellentesque, enim eu varius lacinia, risus ante rutrum ipsum, non lobortis augue lorem quis urna. Aenean et malesuada arcu.
         name: 基礎（僅文字）
       basic_only_text_settings_form:
         body: 正文
-        interpolations_hint: '提示：您可以在郵件正文或主題中使用"%{name}"，它將被收件人的名字替換。'
+        interpolations_hint: 提示：您可以在郵件正文或主題中使用"%{name}"，它將被收件人的名字替換。
       image_text_cta:
-        body_preview: '範例正文的虛擬文本：Maecenas ac nisl vitae lectus pretium facilisis. Etiam facilisis sem nibh, sit amet rutrum mi aliquam nec. Sed id urna at nisl pretium mollis eu vel velit. Proin vitae suscipit urna, sed faucibus urna. Pellentesque id libero vulputate ipsum scelerisque suscipit. Nam aliquam sodales mi sit amet cursus. Donec mattis faucibus purus. Aenean tincidunt porta lorem ac commodo. Vestibulum in mollis mi. Morbi eros erat, cursus ut tortor sit amet, imperdiet dapibus arcu. Suspendisse id egestas enim. In eget magna sed enim efficitur elementum sit amet aliquam quam. Donec fermentum metus eget urna luctus pulvinar.'
+        body_preview: 範例正文的虛擬文本：Maecenas ac nisl vitae lectus pretium facilisis. Etiam facilisis sem nibh, sit amet rutrum mi aliquam nec. Sed id urna at nisl pretium mollis eu vel velit. Proin vitae suscipit urna, sed faucibus urna. Pellentesque id libero vulputate ipsum scelerisque suscipit. Nam aliquam sodales mi sit amet cursus. Donec mattis faucibus purus. Aenean tincidunt porta lorem ac commodo. Vestibulum in mollis mi. Morbi eros erat, cursus ut tortor sit amet, imperdiet dapibus arcu. Suspendisse id egestas enim. In eget magna sed enim efficitur elementum sit amet aliquam quam. Donec fermentum metus eget urna luctus pulvinar.
         cta_text_preview: 呼籲操作文字
-        introduction_preview: '範例引言的虛擬文本：Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque fringilla nisl tellus. Donec sed mi dui. Sed efficitur libero a felis tempor sollicitudin. Nullam vestibulum fringilla felis, id efficitur lorem sagittis et. Vivamus aliquam maximus velit vel dapibus. Mauris pellentesque, enim eu varius lacinia, risus ante rutrum ipsum, non lobortis augue lorem quis urna. Aenean et malesuada arcu.'
+        introduction_preview: 範例引言的虛擬文本：Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque fringilla nisl tellus. Donec sed mi dui. Sed efficitur libero a felis tempor sollicitudin. Nullam vestibulum fringilla felis, id efficitur lorem sagittis et. Vivamus aliquam maximus velit vel dapibus. Mauris pellentesque, enim eu varius lacinia, risus ante rutrum ipsum, non lobortis augue lorem quis urna. Aenean et malesuada arcu.
         name: 圖像、文字和呼籲操作按鈕
       image_text_cta_settings_form:
         body: 正文
         cta_text: 行動呼籲按鈕文字
         cta_url: 呼籲行動按鈕URL網址：
-        interpolations_hint: '提示：您可以在介紹、正文、CTA文字或主題中的任何地方使用 "%{name}"，它將被替換為收件人的名字。'
+        interpolations_hint: 提示：您可以在介紹、正文、CTA文字或主題中的任何地方使用 "%{name}"，它將被替換為收件人的名字。
         introduction: 介紹
         main_image: 主圖片
     newsletters:
@@ -909,7 +945,7 @@ zh-TW:
     newsletters_opt_in_mailer:
       notify:
         body_1: 個人資料的處理和保護對我們所有人來說變得越來越重要。隨著2018年5月25日新的《通用數據保護條例》（GDPR）的出台，個人對其個人資料擁有更好的控制權。因此，我們需要您的「確認」，以繼續向您發送有關 %{organization_name} 活動的相關資訊。
-        body_2: '您如何給予我們您的同意？只需點擊下面的按鈕：'
+        body_2: 您如何給予我們您的同意？只需點擊下面的按鈕：
         body_3: 通過此同意，您將能夠繼續接收有關平台服務的資訊。如果您沒有給予積極的確認，我們將停止向您發送訊息。如果您確認希望繼續收到資訊，您隨時可以選擇取消訂閱。
         button: 是的，我希望繼續接收相關資訊。
         greetings: 問候,<br/>%{organization_name}<br/><a href="%{organization_url}">%{organization_url}</a>
@@ -918,9 +954,9 @@ zh-TW:
     notification_mailer:
       event_received:
         no_translation_available: 很抱歉，無法在發送電子郵件時擷取自動翻譯。您可以在以下鏈接中檢查原始文本的翻譯：%{link}。
-        original_text: '原文：'
+        original_text: 原文：
         same_language: 內容已以您的首選語言（%{language}）發布，因此在此電子郵件中沒有顯示自動翻譯。
-        translated_text: '自動翻譯的文字：'
+        translated_text: 自動翻譯的文字：
     notifications:
       no_notifications: 還沒有收到通知
       show:
@@ -931,8 +967,8 @@ zh-TW:
         weekly: 每週通知摘要
       hello: 哈囉，%{name},
       intro:
-        daily: '這些是根據您所關注的活動在最近一天內的通知：'
-        weekly: '這些是根據您所關注的活動在最近一周內的通知：'
+        daily: 這些是根據您所關注的活動在最近一天內的通知：
+        weekly: 這些是根據您所關注的活動在最近一周內的通知：
       outro: 您收到這些通知是因為您正在關注這些內容或其作者。您可以從相應的頁面取消關注。
       see_more: 查看更多通知
       subject: 這是您的郵件摘要。
@@ -990,7 +1026,7 @@ zh-TW:
           participate_title: 參與平台的流程
           welcome: 歡迎來到 %{organization}！
         statistics:
-          headline: '%{organization} 的目前狀態'
+          headline: "%{organization} 的目前狀態"
         sub_hero:
           register: 註冊
       index:
@@ -1018,7 +1054,7 @@ zh-TW:
         required_review:
           alert: 我們已更新我們的服務條款，請您查閱。
           body: 請花一點時間檢閱我們的服務條款更新，否則您將無法使用平台。
-          title: '必須：檢閱我們的服務條款更新'
+          title: 必須：檢閱我們的服務條款更新
     passwords:
       update:
         error: 密碼更新時發生問題.
@@ -1071,11 +1107,11 @@ zh-TW:
       prompt: 選擇一個範圍
     search:
       results: 搜尋結果
-      results_found_for_term: '搜尋結果：%{term}（共找到 %{count} 個結果）'
+      results_found_for_term: 搜尋結果：%{term}（共找到 %{count} 個結果）
       term_input_placeholder: 搜尋
     searches:
       filters:
-        jump_to: '跳到：'
+        jump_to: 跳到：
         state:
           active: 啟動
           all: 全部
@@ -1131,7 +1167,7 @@ zh-TW:
       reference:
         reference: '參考資料: %{reference}'
       results_per_page:
-        label: '每頁顯示的結果：'
+        label: 每頁顯示的結果：
         title: 選擇每頁的結果數量
       share_modal:
         copy_share_link: 複製
@@ -1226,7 +1262,7 @@ zh-TW:
       confirmation_instructions:
         action: 確認我的帳戶
         greeting: 歡迎 %{recipient} ！
-        instruction: '您可以通過下面的鏈接確認您的電子郵件帳戶：'
+        instruction: 您可以通過下面的鏈接確認您的電子郵件帳戶：
         subject: 確認說明
       email_changed:
         greeting: 哈囉 %{recipient}!
@@ -1237,8 +1273,7 @@ zh-TW:
         accept_until: 此邀請的截止日期為 %{due_date}。
         decline: 拒絕邀請
         hello: 哈囉 %{email},
-        ignore: |-
-          如果您不想接受邀請，請忽略此電子郵件。<br />在您使用上述連結設置您的暱稱和密碼之前，您的帳戶不會被創建。
+        ignore: 如果您不想接受邀請，請忽略此電子郵件。<br />在您使用上述連結設置您的暱稱和密碼之前，您的帳戶不會被創建。
         invited_you_as_admin: "%{invited_by} 邀請您成為 %{application} 的管理員。您可以通過下面的連結接受邀請。"
         invited_you_as_private_user: "%{invited_by} 邀請您成為 %{application} 的私密參與者。您可以通過下面的連結接受邀請。"
         someone_invited_you: 有人邀請您加入 %{application}。您可以通過下面的連結接受邀請。
@@ -1267,7 +1302,7 @@ zh-TW:
       unlock_instructions:
         action: 解鎖我的帳戶
         greeting: 哈囉 %{recipient}!
-        instruction: '請按一下下面的網址來解鎖您的帳戶：'
+        instruction: 請按一下下面的網址來解鎖您的帳戶：
         subject: 解鎖說明
     omniauth_callbacks:
       failure: 無法驗證您的 %{kind} 因為"%{reason}"。
@@ -1305,7 +1340,12 @@ zh-TW:
         forgot_your_password: 忘記密碼了嗎？
         log_in: 登入
       minimum_password_length:
-        other: "One\n(最少%{count} 個字符)\n\nOther\n(最少%{count} 個字符)"
+        other: |-
+          One
+          (最少%{count} 個字符)
+
+          Other
+          (最少%{count} 個字符)
     unlocks:
       new:
         resend_unlock_instructions: 重新發送解鎖說明
@@ -1323,7 +1363,7 @@ zh-TW:
       symbols: 符號
   errors:
     messages:
-      allowed_file_content_types: '只允許使用以下擴展名的檔案： %{types}'
+      allowed_file_content_types: 只允許使用以下擴展名的檔案： %{types}
       blank: 不能為空白
       cannot_be_blank: 不能為空白
       confirmation: 不符合 %{attribute}
@@ -1339,7 +1379,12 @@ zh-TW:
       nesting_too_deep: 不能被放置在子類別中。
       not_locked: 未被鎖定
       not_saved:
-        other: "One\n在處理您的請求時發生了錯誤:\n\nOther\n在處理您的請求時出現了多個錯誤:"
+        other: |-
+          One
+          在處理您的請求時發生了錯誤:
+
+          Other
+          在處理您的請求時出現了多個錯誤:
       too_many_marks: 使用了過多連續的標點符號(例如！和？)
       too_much_caps: 使用了太多大寫字母（超過文本的25%）
       too_short: 太短（少於%{count} 個字符）
@@ -1347,9 +1392,14 @@ zh-TW:
     correct_errors: 表單上有錯誤，請修正後繼續。
     length_validator:
       minimum:
-        other: "One\n至少 %{count} 個字元\n\nOther\n至少 %{count} 個字元"
+        other: |-
+          One
+          至少 %{count} 個字元
+
+          Other
+          至少 %{count} 個字元
     required: 必填的欄位
-    required_explanation: "必填欄位已標示有星號(*)"
+    required_explanation: 必填欄位已標示有星號(*)
   invisible_captcha:
     sentence_for_humans: 如果你是人類，請忽略此欄位
     timestamp_error_message: 抱歉，請慢一點！請重新提交。
@@ -1437,7 +1487,7 @@ zh-TW:
         continue_session: 繼續會話
         title: 您是否想要繼續進行本次對話？
       user_menu:
-        account: '使用者帳戶： %{name}'
+        account: 使用者帳戶： %{name}
         admin_dashboard: 管理員儀表板
         conversations: 對話
         notifications: 通知訊息
@@ -1524,7 +1574,7 @@ zh-TW:
       right: 附加項
     dropdown:
       choose_diff_view_html: 'HTML 檢視模式:'
-      choose_diff_view_mode: '比較檢視模式'
+      choose_diff_view_mode: 比較檢視模式
       option_escaped: 已轉義
       option_split: 並排顯示
       option_unescaped: 未轉義

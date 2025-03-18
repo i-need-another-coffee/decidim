@@ -1,3 +1,4 @@
+---
 eu:
   activemodel:
     attributes:
@@ -29,11 +30,11 @@ eu:
       decidim:
         accountability:
           result:
-            budget_text: '%{link} emaitza sartu da'
-            meetings_ids: '%{link} topaketan eztabaidatu da'
-            project_ids: '%{link} proiektuan sartu da'
-            proposal_ids: '%{link} proposamenean sartu da'
-            text: '%{link} emaitzari gehitu zaio'
+            budget_text: "%{link} emaitza sartu da"
+            meetings_ids: "%{link} topaketan eztabaidatu da"
+            project_ids: "%{link} proiektuan sartu da"
+            proposal_ids: "%{link} proposamenean sartu da"
+            text: "%{link} emaitzari gehitu zaio"
       decidim/accountability/result:
         one: Emaitza
         other: Emaitzak
@@ -66,7 +67,7 @@ eu:
           filters:
             new_items_projects:
               one: Aukeratutako proiektu bat inportatuko da
-              other: "Hautatutako %{count} proiektu inportatuko dira"
+              other: Hautatutako %{count} proiektu inportatuko dira
             new_items_proposals:
               one: Proposamen bat inportatuko da
               other: "%{count} proposamen inportatuko dira"

@@ -1,3 +1,4 @@
+---
 cs:
   activemodel:
     attributes:
@@ -77,19 +78,19 @@ cs:
   activerecord:
     models:
       decidim/assembly:
-        one: Shromáždění
         few: Shromáždění
         many: Shromáždění
+        one: Shromáždění
         other: Shromáždění
       decidim/assembly_member:
-        one: Člen shromáždění
         few: Členové shromáždění
         many: Členové shromáždění
+        one: Člen shromáždění
         other: Členové shromáždění
       decidim/assembly_user_role:
-        one: Uživatelská role shromáždění
         few: Sestavení uživatelských rolí
         many: Sestavení uživatelských rolí
+        one: Uživatelská role shromáždění
         other: Sestavení uživatelských rolí
   decidim:
     admin:
@@ -450,15 +451,15 @@ cs:
           promoted_assemblies: Zvýrazněná shromáždění
         metadata:
           children_item:
-            one: "%{count} shromáždění"
             few: "%{count} shromáždění"
             many: "%{count} shromáždění"
+            one: "%{count} shromáždění"
             other: "%{count} shromáždění"
         order_by_assemblies:
           assemblies:
-            one: "%{count} sestav"
             few: "%{count} sestav"
             many: "%{count} sestav"
+            one: "%{count} sestav"
             other: "%{count} shromáždění"
       assembly_navigation:
         assembly_member_menu_item: Členové

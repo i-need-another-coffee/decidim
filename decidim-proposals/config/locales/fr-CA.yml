@@ -1,3 +1,4 @@
+---
 fr-CA:
   activemodel:
     attributes:
@@ -246,7 +247,9 @@ fr-CA:
             endorsements_enabled: Activer le module de soutiens
             proposal_answering_enabled: Autoriser la réponse officielle aux propositions
             publish_answers_immediately: Publier immédiatement les réponses à la proposition
-            publish_answers_immediately_help_html: "Notez que si vous répondez à une proposition sans que cette case soit activée, vous devrez publier la réponse manuellement en sélectionnant la proposition et en utilisant l'action de publication.\nPour plus d'informations sur le fonctionnement de cette action, voir <a href=\"https://docs.decidim.org/en/admin/components/proposals/answers#_publication\" target=\"_blank\">la page de documentation sur les réponses aux propositions</a>."
+            publish_answers_immediately_help_html: |-
+              Notez que si vous répondez à une proposition sans que cette case soit activée, vous devrez publier la réponse manuellement en sélectionnant la proposition et en utilisant l'action de publication.
+              Pour plus d'informations sur le fonctionnement de cette action, voir <a href="https://docs.decidim.org/en/admin/components/proposals/answers#_publication" target="_blank">la page de documentation sur les réponses aux propositions</a>.
             suggested_hashtags: Hashtags suggérés aux utilisateurs pour de nouvelles propositions
             votes_blocked: Votes bloqués
             votes_enabled: Activer le module de vote simple
@@ -375,19 +378,19 @@ fr-CA:
       badges:
         accepted_proposals:
           conditions:
-            - Choisissez l'espace de participation qui vous intéresse avec la soumission des propositions activée
-            - Essayez de faire des propositions qui peuvent être réalisées. De cette façon, ils sont plus susceptibles d'être acceptés.
+          - Choisissez l'espace de participation qui vous intéresse avec la soumission des propositions activée
+          - Essayez de faire des propositions qui peuvent être réalisées. De cette façon, ils sont plus susceptibles d'être acceptés.
           description: Ce badge est attribué lorsque vous participez activement à de nouvelles propositions et que celles-ci sont acceptées.
-          description_another: '%{score} des propositions de cet utilisateur ont été acceptées.'
-          description_own: '%{score} de vos propositions ont été acceptées.'
+          description_another: "%{score} des propositions de cet utilisateur ont été acceptées."
+          description_own: "%{score} de vos propositions ont été acceptées."
           name: Propositions acceptées
           next_level_in: Vous atteindrez le niveau suivant lorsque %{score} propositions supplémentaires seront acceptés !
           unearned_another: Aucune proposition de cet auteur n'a encore été acceptée.
           unearned_own: Aucune de vos propositions n'a encore été acceptée.
         proposal_votes:
           conditions:
-            - Parcourir et passer du temps à lire les propositions d'autres personnes
-            - Votez pour les propositions que vous aimez ou trouvez intéressantes
+          - Parcourir et passer du temps à lire les propositions d'autres personnes
+          - Votez pour les propositions que vous aimez ou trouvez intéressantes
           description: Ce badge est attribué lorsque vous votez pour les propositions d'autres personnes.
           description_another: Cet utilisateur a voté pour %{score} propositions.
           description_own: Vous avez voté pour %{score} propositions.
@@ -397,8 +400,8 @@ fr-CA:
           unearned_own: Vous n'avez voté pour aucune proposition pour le moment.
         proposals:
           conditions:
-            - Choisissez l'espace de participation qui vous intéresse avec la soumission des propositions activée
-            - Créer une nouvelle proposition
+          - Choisissez l'espace de participation qui vous intéresse avec la soumission des propositions activée
+          - Créer une nouvelle proposition
           description: Ce badge est attribué lorsque vous participez activement à de nouvelles propositions.
           description_another: Cet utilisateur a créé %{score} propositions.
           description_own: Vous avez créé %{score} propositions.
@@ -951,7 +954,7 @@ fr-CA:
           title: Règles de participation
           vote_limit:
             description: Vous pouvez voter pour %{limit} propositions au maximum.
-            votes: '%{number} votes restants'
+            votes: "%{number} votes restants"
         wizard_aside:
           back: Retour
           back_from_step_1: Retour aux propositions

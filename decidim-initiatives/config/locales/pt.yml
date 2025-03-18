@@ -1,3 +1,4 @@
+---
 pt:
   activemodel:
     attributes:
@@ -158,8 +159,8 @@ pt:
       badges:
         initiatives:
           conditions:
-            - Ir para o espaço de participação de Iniciativas
-            - Siga os passos para criar uma nova iniciativa
+          - Ir para o espaço de participação de Iniciativas
+          - Siga os passos para criar uma nova iniciativa
           description: Este distintivo é concedido quando lança novas iniciativas, estabelecendo parcerias com outras pessoas para realizá-las.
           description_another: Este participante teve %{score} iniciativas publicadas.
           name: Iniciativas publicadas
@@ -287,7 +288,7 @@ pt:
         select_initiative_type:
           back: Retroceder
           choose_html: Eu quero criar um <strong>%{title}</strong>
-          more_information: (Mais informações)
+          more_information: "(Mais informações)"
           select: Eu quero promover essa iniciativa
       edit:
         accept: Aceitar a iniciativa
@@ -390,8 +391,8 @@ pt:
           id_number: Número de identificação
           initiative:
             attachments: Documentação anexa (por favor escreva abaixo o nome de cada documento)
-            description: 'Descrição'
-            title: 'Título'
+            description: Descrição
+            title: Título
             type: Tipo de iniciativa
           legal_text: Os dados pessoais recolhidos serão incorporados e tratados com confidencialidade pela organização, em acordo com a legislação actual.
           phone_number: Número de telefone

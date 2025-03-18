@@ -1,3 +1,4 @@
+---
 es-MX:
   activemodel:
     attributes:
@@ -53,7 +54,7 @@ es-MX:
     debates:
       actions:
         close: Cerrar
-        confirm_delete_debate: '¿Seguro que quieres borrar este debate?'
+        confirm_delete_debate: "¿Seguro que quieres borrar este debate?"
         deleted_debate_info: Los debates eliminados se pueden restaurar desde papelera.
         edit: Editar
         new: Nuevo debate
@@ -99,7 +100,7 @@ es-MX:
           debates: Debates
       admin_log:
         debate:
-          close: "La participante %{user_name} ha creado el debate %{resource_name} en el espacio %{space_name}"
+          close: La participante %{user_name} ha creado el debate %{resource_name} en el espacio %{space_name}
           create: "%{user_name} creó el debate %{resource_name} en el espacio %{space_name}"
           restore: "%{user_name} restauró el debate %{resource_name} en el espacio %{space_name}"
           soft_delete: "%{user_name} ha movido el debate %{resource_name} desde %{space_name} a la papelera"
@@ -116,7 +117,7 @@ es-MX:
           success: Debate cerrado correctamente.
         close_debate_modal:
           cancel: Cancelar
-          description: '¿Cuál es el resumen o la conclusión de este debate?'
+          description: "¿Cuál es el resumen o la conclusión de este debate?"
           send: Cerrar debate
         count:
           debates_count:
@@ -212,7 +213,7 @@ es-MX:
           email_subject: Ya no se pueden crear debates en %{participatory_space_title}
           notification_title: La creación de debates ahora está deshabilitada en <a href="%{participatory_space_url}">%{participatory_space_title}</a>
         creation_enabled:
-          email_intro: '¡Ahora puedes crear nuevos debates en %{participatory_space_title}! Comienza a participar en esta página:'
+          email_intro: "¡Ahora puedes crear nuevos debates en %{participatory_space_title}! Comienza a participar en esta página:"
           email_outro: Has recibido esta notificación porque estás siguiendo %{participatory_space_title}. Puedes dejar de recibir notificaciones siguiendo el enlace anterior.
           email_subject: Debates ahora disponibles en %{participatory_space_title}
           notification_title: Ahora puedes empezar <a href="%{resource_path}">nuevos debates</a> en <a href="%{participatory_space_url}">%{participatory_space_title}</a>.
@@ -231,12 +232,12 @@ es-MX:
       badges:
         commented_debates:
           conditions:
-            - Elige un debate abierto para participar
+          - Elige un debate abierto para participar
           description: Este distintivo se otorga cuando participes activamente en los diferentes debates dejando tus comentarios.
           description_another: Este usuario ha participado en %{score} debates.
           description_own: Has participado en %{score} debates.
           name: Debates
-          next_level_in: '¡Participa en %{score} debates más para alcanzar el siguiente nivel!'
+          next_level_in: "¡Participa en %{score} debates más para alcanzar el siguiente nivel!"
           unearned_another: Este usuario aún no ha participado en ningún debate.
           unearned_own: Aún no has participado en ningún debate.
     metrics:

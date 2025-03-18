@@ -1,3 +1,4 @@
+---
 pl:
   activemodel:
     models:
@@ -9,14 +10,14 @@ pl:
   activerecord:
     models:
       decidim/comments/comment:
-        one: Komentarz
         few: Komentarze
         many: Komentarze
+        one: Komentarz
         other: Komentarze
       decidim/comments/comment_vote:
-        one: Głos
         few: Głosów
         many: Głosy
+        one: Głos
         other: Głosy
   decidim:
     comments:
@@ -56,8 +57,8 @@ pl:
           neutral_selected: Twoja opinia na ten temat jest neutralna
           positive: Pozytywna
           positive_selected: Twoja opinia na ten temat jest pozytywna
-        remaining_characters: "Pozostało %{count} znaków"
-        remaining_characters_1: "Pozostał %{count} znak"
+        remaining_characters: Pozostało %{count} znaków
+        remaining_characters_1: Pozostał %{count} znak
         title: Dodaj swój komentarz
       comment:
         alignment:
@@ -87,9 +88,9 @@ pl:
             spam: Zawiera clickbaity, reklamy, oszustwa lub skrypty botów.
           title: Zgłoś niewłaściwą treść
         show_replies:
-          one: Pokaż odpowiedź
           few: Pokaż %{count} odpowiedzi
           many: Pokaż %{count} odpowiedzi
+          one: Pokaż odpowiedź
           other: Pokaż %{count} odpowiedzi
         single_comment_link_title: Pobierz link
       comment_order_selector:
@@ -107,9 +108,9 @@ pl:
         single_comment_warning: <a href="%{url}">Zobacz wszystkie komentarze</a>
         single_comment_warning_title: Wyświetlasz teraz pojedynczy komentarz
         title:
-          one: "%{count} komentarz"
           few: "%{count} komentarze"
           many: "%{count} komentarzy"
+          one: "%{count} komentarz"
           other: "%{count} komentarze"
       down_vote_button:
         text: Nie zgadzam się z tym komentarzem
@@ -131,7 +132,7 @@ pl:
           email_subject: Jest nowy komentarz dodany przez %{author_name} do %{resource_title}
           notification_title: Pojawił się nowy komentarz dodany przez <a href="%{author_path}">%{author_name} %{author_nickname}</a> do <a href="%{resource_path}">%{resource_title}</a>.
         comment_created:
-          email_intro: "Nowy komentarz: %{resource_title}. Możesz go przeczytać na tej stronie:"
+          email_intro: 'Nowy komentarz: %{resource_title}. Możesz go przeczytać na tej stronie:'
           email_outro: Otrzymujesz to powiadomienie, ponieważ obserwujesz "%{resource_title}" lub jego autora. Możesz przestać go obserwować po kliknięciu w poprzedni link.
           email_subject: Jest nowy komentarz od %{author_name} do %{resource_title}
           notification_title: Pojawił się nowy komentarz <a href="%{author_path}">%{author_name} %{author_nickname}</a> do <a href="%{resource_path}">%{resource_title}</a>
@@ -154,7 +155,7 @@ pl:
           email_intro: Wspomniano o Tobie
           email_outro: Otrzymałeś to powiadomienie, ponieważ wspomniano o Tobie w %{resource_title}.
           email_subject: Wspomniano o Tobie w %{resource_title}
-          notification_title: <a href="%{author_path}">%{author_name} %{author_nickname}</a> wspomniał(a) o Tobie w <a href="%{resource_path}">%{resource_title}</a> 
+          notification_title: <a href="%{author_path}">%{author_name} %{author_nickname}</a> wspomniał(a) o Tobie w <a href="%{resource_path}">%{resource_title}</a>
     metrics:
       comments:
         description: Liczba komentarzy wygenerowanych przez użytkowników

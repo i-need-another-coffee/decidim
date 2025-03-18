@@ -1,3 +1,4 @@
+---
 es-PY:
   activemodel:
     attributes:
@@ -169,9 +170,9 @@ es-PY:
             email_subject: La iniciativa %{resource_title} ha solicitado validación técnica.
             notification_title: La iniciativa "%{resource_title}" ha sido enviada a la validación técnica. Compruébalo a través <a href="%{admin_initiative_path}"> panel de administración</a>
         initiative_extended:
-          email_intro: '¡La fecha de finalización de las firmas para la iniciativa %{resource_title} se ha ampliado!'
+          email_intro: "¡La fecha de finalización de las firmas para la iniciativa %{resource_title} se ha ampliado!"
           email_outro: Has recibido esta notificación porque está siguiendo %{resource_title}. Puedes dejar de recibir notificaciones siguiendo el enlace anterior.
-          email_subject: '¡Ampliado el términio de recogida de firmas para esta iniciativa!'
+          email_subject: "¡Ampliado el términio de recogida de firmas para esta iniciativa!"
           notification_title: La fecha de recogida de firmas para la iniciativa <a href="%{resource_path}">%{resource_title}</a> se ha ampliado.
         initiative_sent_to_technical_validation:
           email_intro: La iniciativa "%{resource_title}" ha sido enviada a la validación técnica. Compruébala en <a href="%{admin_initiative_url}">el panel de administración</a>
@@ -180,14 +181,14 @@ es-PY:
           notification_title: La iniciativa "%{resource_title}" ha sido enviada a validación técnica. Compruébalo en <a href="%{admin_initiative_path}">el panel de administración</a>
         milestone_completed:
           affected_user:
-            email_intro: '¡Tu iniciativa %{resource_title} ha conseguido el %{percentage}% de firmas!'
+            email_intro: "¡Tu iniciativa %{resource_title} ha conseguido el %{percentage}% de firmas!"
             email_outro: Has recibido esta notificación porque eres el autor de la iniciativa %{resource_title}.
-            email_subject: '¡Nuevo hito completado!'
+            email_subject: "¡Nuevo hito completado!"
             notification_title: Tu iniciativa <a href="%{resource_path}">%{resource_title}</a> ha conseguido el %{percentage}% de firmas.
           follower:
-            email_intro: '¡La iniciativa %{resource_title} ha logrado el %{percentage}% de firmas!'
+            email_intro: "¡La iniciativa %{resource_title} ha logrado el %{percentage}% de firmas!"
             email_outro: Has recibido esta notificación porque estás siguiendo a %{resource_title}. Puedes dejar de recibir notificaciones siguiendo el enlace anterior.
-            email_subject: '¡Nuevo hito completado!'
+            email_subject: "¡Nuevo hito completado!"
             notification_title: La iniciativa <a href="%{resource_path}">%{resource_title}</a> ha logrado el %{percentage}% de las firmas.
         support_threshold_reached:
           email_intro: La iniciativa %{resource_title} ha alcanzado el umbral de firmas
@@ -198,13 +199,13 @@ es-PY:
       badges:
         initiatives:
           conditions:
-            - Ir al espacio de participación de Iniciativas.
-            - Sigue los pasos para crear una nueva iniciativa.
+          - Ir al espacio de participación de Iniciativas.
+          - Sigue los pasos para crear una nueva iniciativa.
           description: Este distintivo se otorga cuando lanza nuevas iniciativas, asociándose con otros para llevarlas a cabo.
           description_another: Este usuario ha publicado %{score} iniciativas.
           description_own: Tienes %{score} iniciativas publicadas.
           name: Iniciativas publicadas
-          next_level_in: '¡Publica %{score} iniciativas más para llegar al siguiente nivel!'
+          next_level_in: "¡Publica %{score} iniciativas más para llegar al siguiente nivel!"
           unearned_another: Esta participante aún no ha publicado ninguna iniciativa.
           unearned_own: Aún no tienes ninguna iniciativa publicada.
     help:
@@ -212,7 +213,7 @@ es-PY:
         initiatives:
           contextual: "<p>Una iniciativa es una propuesta que puede ser promovida por cualquiera por iniciativa propia (independientemente de otros canales o espacios de participación) a través de la recopilación de firmas (digitales) para que la organización lleve a cabo una acción específica (modificar una regulación, iniciar un proyecto). , cambiar el nombre de un departamento o una calle, etc.).</p> <p>Los promotores de una iniciativa pueden definir sus objetivos, obtener apoyo, debatir, difundir y definir puntos de encuentro donde se pueden recopilar firmas de los asistentes o debates abiertos a otros participantes.</p> <p>Ejemplos: una iniciativa puede recopilar firmas para convocar una consulta entre todas las personas de una organización, o para crear o convocar una asamblea, o para iniciar un proceso de aumento de presupuesto para un territorio o área de la organización. Durante el proceso de recolección de firmas, más personas pueden sumarse a esta demanda y llevarla adelante en la organización.</p>\n"
           page: "<p>Una iniciativa es una propuesta que puede ser promovida por cualquiera por iniciativa propia (independientemente de otros canales o espacios de participación) a través de la recopilación de firmas (digitales) para que la organización lleve a cabo una acción específica (modificar una regulación, iniciar un proyecto). , cambiar el nombre de un departamento o una calle, etc.).</p> <p>Los promotores de una iniciativa pueden definir sus objetivos, obtener apoyo, debatir, difundir y definir puntos de encuentro donde se pueden recopilar firmas de los asistentes o debates abiertos a otros participantes.</p> <p>Ejemplos: una iniciativa puede recopilar firmas para convocar una consulta entre todas las personas de una organización, o para crear o convocar una asamblea, o para iniciar un proceso de aumento de presupuesto para un territorio o área de la organización. Durante el proceso de recolección de firmas, más personas pueden sumarse a esta demanda y llevarla adelante en la organización.</p>\n"
-          title: '¿Qué son las iniciativas?'
+          title: "¿Qué son las iniciativas?"
     initiatives:
       actions:
         answer: Responder
@@ -230,7 +231,7 @@ es-PY:
         committee_requests:
           index:
             approve: Aprobar
-            confirm_revoke: '¿Estás seguro?'
+            confirm_revoke: "¿Estás seguro?"
             invite_to_committee_help: Comparte este enlace para invitar a otras participantes a la comisión promotora.
             no_members_yet: La comisión promotora no tiene miembros.
             revoke: Revocar
@@ -255,8 +256,8 @@ es-PY:
             success: La iniciativa se ha descartado correctamente.
           edit:
             accept: Aceptar iniciativa
-            confirm: '¿Estás seguro?'
-            confirm_send_to_technical_validation: '¿Estás seguro/a?'
+            confirm: "¿Estás seguro?"
+            confirm_send_to_technical_validation: "¿Estás seguro/a?"
             discard: Descartar la iniciativa
             export_pdf_signatures: Exportar PDF de Firmas.
             export_votes: Soportes de exportación
@@ -376,11 +377,11 @@ es-PY:
       create_initiative:
         committee_member:
           approve: Aprobar
-          confirm_approve: '¿Seguro que quieres aprobar a este miembro?'
-          confirm_revoke: '¿Seguro que quieres revocar este miembro?'
+          confirm_approve: "¿Seguro que quieres aprobar a este miembro?"
+          confirm_revoke: "¿Seguro que quieres revocar este miembro?"
           revoke: Revocar
         fill_data:
-          confirm_discard: '¿Seguro que quieres descartar esta iniciativa?'
+          confirm_discard: "¿Seguro que quieres descartar esta iniciativa?"
           continue: Continuar
           discard: Descartar la iniciativa
           fill_data_help: "<ul> <li>Revisa el contenido de tu iniciativa. ¿Tu título es fácil de entender? ¿Está claro el objetivo de tu iniciativa?</li> <li>Tienes que elegir el tipo de firma. En persona, en línea o una combinación de ambos</li> <li>¿Cuál es el alcance geográfico de la iniciativa?</li> </ul>"
@@ -389,7 +390,7 @@ es-PY:
           select_scope: Seleccione un alcance
         finish:
           back: Volver
-          callout_text_created: '¡Enhorabuena! Tu iniciativa se ha creado correctamente.'
+          callout_text_created: "¡Enhorabuena! Tu iniciativa se ha creado correctamente."
           callout_text_validating: La iniciativa se ha enviado correctamente a validación técnica.
           go_to_initiatives: Ir a iniciativas
           publish_helper_text_html: Recuerda que para que tu iniciativa sea publicada esta debe ser enviada a validación técnica para su revisión por una administradora.
@@ -408,13 +409,13 @@ es-PY:
           choose_html: Quiero crear un <strong>%{title}</strong>
           consult_existing_initiatives: Consultar iniciativas existentes
           continue: Continuar
-          more_information: (Más información)
+          more_information: "(Más información)"
           new: Crea una nueva iniciativa
           select: Quiero promover esta iniciativa.
           select_initiative_type_help_html: "<p>Las iniciativas ciudadanas son un medio a través del cual las participantes pueden solicitar que la organización, dentro de sus competencias, adopte medidas en defensa del interés general. ¿Qué iniciativa quieres poner en marcha?</p>"
           show_less: Mostrar menos
           show_more: Mostrar más
-          subtitle: '¿Qué tipo de iniciativa quieres promover?'
+          subtitle: "¿Qué tipo de iniciativa quieres promover?"
           verification_required: Verifica tu cuenta para impulsar la iniciativa
         send_to_technical_validation_button:
           button: Enviar a validación técnica
@@ -426,7 +427,7 @@ es-PY:
       edit:
         accept: Aceptar la iniciativa
         back: Volver
-        confirm: '¿Estás seguro/a?'
+        confirm: "¿Estás seguro/a?"
         discard: Descartar la iniciativa
         export_pdf_signatures: Exportar PDF de firmas
         export_votes: Exportar firmas
@@ -456,7 +457,7 @@ es-PY:
           notification_title: <a href="%{author_profile_url}">%{author_nickname}</a> rechazó tu solicitud para formar parte del comité promotor de la siguiente iniciativa <a href="%{resource_url}">%{resource_title}</a>.
         spawn_committee_request_event:
           email_intro: "%{applicant_nickname} ha solicitado unirse al comité promotor de tu iniciativa %{resource_title}. Para aceptar o rechazar la solicitud, ve al formulario de edición de tu iniciativa."
-          email_outro: 'Has recibido esta notificación porque eres la autora de la iniciativa %{resource_title}'
+          email_outro: Has recibido esta notificación porque eres la autora de la iniciativa %{resource_title}
           email_subject: "%{applicant_nickname} quiere unirse a tu iniciativa"
           notification_title: <a href="%{applicant_profile_url}">%{applicant_nickname}</a> ha solicitado unirse al comité promotor de tu iniciativa <a href="%{resource_url}">%{resource_title}</a>. Para aceptar o rechazar la solicitud haz clic <a href="%{resource_url}/edit">aquí</a>.
       form:
@@ -484,7 +485,7 @@ es-PY:
         create:
           error: Ha habido errores al firmar la iniciativa.
           invalid: Los datos proporcionados para firmar la iniciativa no son válidos.
-          success_html: '¡Enhorabuena! Has firmado la iniciativa <strong> %{title}</strong> correctamente.'
+          success_html: "¡Enhorabuena! Has firmado la iniciativa <strong> %{title}</strong> correctamente."
         personal_data:
           invalid: Los datos personales no son consistentes con los datos proporcionados para la autorización.
         sms_code:
@@ -498,8 +499,8 @@ es-PY:
             other: y %{count} personas más
         committee_members:
           approve: Aprobar
-          confirm_approve: '¿Seguro que quieres añadir a este miembro?'
-          confirm_revoke: '¿Seguro que quieres revocar este miembro?'
+          confirm_approve: "¿Seguro que quieres añadir a este miembro?"
+          confirm_revoke: "¿Seguro que quieres revocar este miembro?"
           invite_to_committee_help: Comparte este enlace para invitar a otras participantes a la comisión promotora.
           link: Enlace
           no_members_yet: La comisión promotora no tiene miembros.
@@ -675,4 +676,4 @@ es-PY:
         title: Signo %{initiative_title}
       initiatives:
         no_initiatives_yet:
-          no_initiatives_yet: '¡No hay iniciativas todavía!'
+          no_initiatives_yet: "¡No hay iniciativas todavía!"

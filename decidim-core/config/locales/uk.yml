@@ -1,3 +1,4 @@
+---
 uk:
   activemodel:
     attributes:
@@ -26,8 +27,8 @@ uk:
         password_confirmation: Підтвердження паролю
         remember_me: Запам'ятати мене
   booleans:
-    'false': 'Ні'
-    'true': 'Так'
+    'false': Ні
+    'true': Так
   date:
     buttons:
       select: Оберіть
@@ -105,9 +106,9 @@ uk:
         related_photos: Супутні світлини
     author:
       comments:
-        one: коментар
         few: коментаря
         many: коментарів
+        one: коментар
         other: коментарів
     authorization_handlers:
       another_dummy_authorization_handler:
@@ -138,7 +139,7 @@ uk:
           explanation: Строк дії підтвердження вашої особи вичерпався. Щоб виконати цю дію, вам потрібно знову підтвердити свою особу за допомогою "%{authorization}".
           title: Строк дії підтвердження особи вичерпався
         incomplete:
-          invalid_field: "Поле %{field}"
+          invalid_field: Поле %{field}
           reauthorize: Заново підтвердити свою особу
           title: Будь ласка, заново підтвердіть свою особу
         missing:
@@ -152,9 +153,9 @@ uk:
           title: Недостатньо прав через відсутність підтвердження особи
     collapsible_list:
       hidden_elements_count:
-        one: і ще %{count}
         few: і ще %{count}
         many: і ще %{count}
+        one: і ще %{count}
         other: і ще %{count}
       see_less: "(читати менше)"
     components:

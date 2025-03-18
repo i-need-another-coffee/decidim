@@ -1,3 +1,4 @@
+---
 el:
   activemodel:
     attributes:
@@ -261,37 +262,37 @@ el:
         conferences: Διασκέψεις
     admin_log:
       conference:
-        create: "Ο χρήστης %{user_name} δημιούργησε τη διάσκεψη %{resource_name}"
-        publish: "Ο χρήστης %{user_name} δημοσίευσε τη διάσκεψη %{resource_name}"
-        send_conference_diplomas: "Ο χρήστης %{user_name} έστειλε πιστοποιητικά παρακολούθησης στους συμμετέχοντες της διάσκεψης %{resource_name}"
-        unpublish: "Ο χρήστης %{user_name} κατάργησε τη δημοσίευση της διάσκεψης %{resource_name}"
-        update: "Ο χρήστης %{user_name} ενημέρωσε τη διάσκεψη %{resource_name}"
-        update_diploma: "Ο χρήστης %{user_name} ενημέρωσε τη διαμόρφωση των πιστοποιητικών παρακολούθησης για τη διάσκεψη %{resource_name}"
+        create: Ο χρήστης %{user_name} δημιούργησε τη διάσκεψη %{resource_name}
+        publish: Ο χρήστης %{user_name} δημοσίευσε τη διάσκεψη %{resource_name}
+        send_conference_diplomas: Ο χρήστης %{user_name} έστειλε πιστοποιητικά παρακολούθησης στους συμμετέχοντες της διάσκεψης %{resource_name}
+        unpublish: Ο χρήστης %{user_name} κατάργησε τη δημοσίευση της διάσκεψης %{resource_name}
+        update: Ο χρήστης %{user_name} ενημέρωσε τη διάσκεψη %{resource_name}
+        update_diploma: Ο χρήστης %{user_name} ενημέρωσε τη διαμόρφωση των πιστοποιητικών παρακολούθησης για τη διάσκεψη %{resource_name}
       conference_speaker:
-        create: "Ο χρήστης %{user_name} δημιούργησε τον ομιλητή %{resource_name} στη διάσκεψη %{space_name}"
-        delete: "Ο χρήστης %{user_name} κατάργησε τον ομιλητή %{resource_name} από τη διάσκεψη %{space_name}"
-        update: "Ο χρήστης %{user_name} ενημέρωσε τον ομιλητή %{resource_name} στη διάσκεψη %{space_name}"
+        create: Ο χρήστης %{user_name} δημιούργησε τον ομιλητή %{resource_name} στη διάσκεψη %{space_name}
+        delete: Ο χρήστης %{user_name} κατάργησε τον ομιλητή %{resource_name} από τη διάσκεψη %{space_name}
+        update: Ο χρήστης %{user_name} ενημέρωσε τον ομιλητή %{resource_name} στη διάσκεψη %{space_name}
       conference_user_role:
-        create: "Ο χρήστης %{user_name} προσκάλεσε τον/την %{resource_name} στη διάσκεψη %{space_name}"
-        delete: "Ο χρήστης %{user_name} κατάργησε τον διαχειριστή %{resource_name} από τη διάσκεψη %{space_name}"
-        update: "Ο χρήστης %{user_name} άλλαξε τον ρόλο του/της %{resource_name} στη διάσκεψη %{space_name}"
+        create: Ο χρήστης %{user_name} προσκάλεσε τον/την %{resource_name} στη διάσκεψη %{space_name}
+        delete: Ο χρήστης %{user_name} κατάργησε τον διαχειριστή %{resource_name} από τη διάσκεψη %{space_name}
+        update: Ο χρήστης %{user_name} άλλαξε τον ρόλο του/της %{resource_name} στη διάσκεψη %{space_name}
       conferences:
         conference_registration:
-          confirm: "Ο χρήστης %{user_name} επιβεβαίωση μια εγγραφή διάσκεψης στη διάσκεψη %{resource_name}"
+          confirm: Ο χρήστης %{user_name} επιβεβαίωση μια εγγραφή διάσκεψης στη διάσκεψη %{resource_name}
         partner:
-          create: "Ο χρήστης %{user_name} δημιούργησε τον εταίρο %{resource_name} στη διάσκεψη %{space_name}"
-          delete: "Ο χρήστης %{user_name} απομάκρυνε τον εταίρο %{resource_name} από τη διάσκεψη %{space_name}"
-          update: "Ο χρήστης %{user_name} ενημέρωσε τον εταίρο %{resource_name} στη διάσκεψη %{space_name}"
+          create: Ο χρήστης %{user_name} δημιούργησε τον εταίρο %{resource_name} στη διάσκεψη %{space_name}
+          delete: Ο χρήστης %{user_name} απομάκρυνε τον εταίρο %{resource_name} από τη διάσκεψη %{space_name}
+          update: Ο χρήστης %{user_name} ενημέρωσε τον εταίρο %{resource_name} στη διάσκεψη %{space_name}
         registration_type:
-          create: "Ο χρήστης %{user_name} δημιούργησε τον τύπο εγγραφής %{resource_name} στη διάσκεψη %{space_name}"
-          delete: "Ο χρήστης %{user_name} αφαίρεσε τον τύπο εγγραφής %{resource_name} από τη διάσκεψη %{space_name}"
-          publish: "Ο χρήστης %{user_name} δημοσίευσε τον τύπο εγγραφής %{resource_name} στη διάσκεψη %{space_name}"
-          unpublish: "Ο χρήστης %{user_name} κατάργησε τη δημοσίευση του τύπου εγγραφής %{resource_name} στη διάσκεψη %{space_name}"
-          update: "Ο χρήστης %{user_name} ενημέρωσε τον τύπο εγγραφής %{resource_name} στη διάσκεψη %{space_name}"
+          create: Ο χρήστης %{user_name} δημιούργησε τον τύπο εγγραφής %{resource_name} στη διάσκεψη %{space_name}
+          delete: Ο χρήστης %{user_name} αφαίρεσε τον τύπο εγγραφής %{resource_name} από τη διάσκεψη %{space_name}
+          publish: Ο χρήστης %{user_name} δημοσίευσε τον τύπο εγγραφής %{resource_name} στη διάσκεψη %{space_name}
+          unpublish: Ο χρήστης %{user_name} κατάργησε τη δημοσίευση του τύπου εγγραφής %{resource_name} στη διάσκεψη %{space_name}
+          update: Ο χρήστης %{user_name} ενημέρωσε τον τύπο εγγραφής %{resource_name} στη διάσκεψη %{space_name}
       media_link:
-        create: "Ο χρήστης %{user_name} δημιούργησε τον σύνδεσμο πολυμέσων %{resource_name} στη διάσκεψη %{space_name}"
-        delete: "Ο χρήστης %{user_name} κατάργησε τον σύνδεσμο πολυμέσων %{resource_name} από τη διάσκεψη %{space_name}"
-        update: "Ο χρήστης %{user_name} ενημέρωσε τον σύνδεσμο πολυμέσων %{resource_name} στη διάσκεψη %{space_name}"
+        create: Ο χρήστης %{user_name} δημιούργησε τον σύνδεσμο πολυμέσων %{resource_name} στη διάσκεψη %{space_name}
+        delete: Ο χρήστης %{user_name} κατάργησε τον σύνδεσμο πολυμέσων %{resource_name} από τη διάσκεψη %{space_name}
+        update: Ο χρήστης %{user_name} ενημέρωσε τον σύνδεσμο πολυμέσων %{resource_name} στη διάσκεψη %{space_name}
     conference_program:
       index:
         title: Πρόγραμμα
@@ -340,8 +341,8 @@ el:
         invite_join_conference_mailer:
           invite:
             decline: Απόρριψη πρόσκλησης «%{conference_title}»
-            invited_existing_user_to_join_a_conference: "Ο χρήστης %{invited_by} σάς προσκάλεσε να συμμετάσχετε σε μια διάσκεψη στην εφαρμογή %{application}. Μπορείτε να την απορρίψετε ή να την αποδεχτείτε μέσω των παρακάτω συνδέσμων."
-            invited_user_to_join_a_conference: "Ο/Η %{invited_by} σας προσκάλεσε να συμμετάσχετε σε μια διάσκεψη στο %{application}. Μπορείτε να την αποδεχτείτε μέσω του παρακάτω συνδέσμου."
+            invited_existing_user_to_join_a_conference: Ο χρήστης %{invited_by} σάς προσκάλεσε να συμμετάσχετε σε μια διάσκεψη στην εφαρμογή %{application}. Μπορείτε να την απορρίψετε ή να την αποδεχτείτε μέσω των παρακάτω συνδέσμων.
+            invited_user_to_join_a_conference: Ο/Η %{invited_by} σας προσκάλεσε να συμμετάσχετε σε μια διάσκεψη στο %{application}. Μπορείτε να την αποδεχτείτε μέσω του παρακάτω συνδέσμου.
             registration: Εγγραφή για τη διάσκεψη «%{conference_title}»
         partners:
           index:

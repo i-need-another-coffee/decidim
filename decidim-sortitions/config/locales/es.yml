@@ -1,3 +1,4 @@
+---
 es:
   activemodel:
     attributes:
@@ -54,7 +55,7 @@ es:
               title: Título
         sortitions:
           confirm_destroy:
-            confirm_destroy: '¿Segura que quieres cancelar este sorteo?'
+            confirm_destroy: "¿Segura que quieres cancelar este sorteo?"
             destroy: Cancelar el sorteo
             title: Cancelación del sorteo
           create:
@@ -115,12 +116,12 @@ es:
           candidate_proposal_ids: Orden e IDs de las propuestas del sorteo
           candidate_proposals_info: 'El sorteo se realizó entre las siguientes propuestas (%{category_label}), con los siguientes ID (en negrita las propuestas seleccionadas)  '
           category: de la categoría %{category}
-          dice_result: (1) resultado de los dados
+          dice_result: "(1) resultado de los dados"
           introduction: 'Esta página contiene los resultados del sorteo %{reference}. Mediante esta clasificación, %{target_items} número de resultados se han seleccionado al azar y con una distribución de probabilidad igual del conjunto de propuestas que se muestran a continuación. Junto con los resultados, la información que se muestra en esta página proporciona toda la información necesaria para maximizar las garantías y reproducir los resultados. La clave de la calidad de esta clasificación es la doble aleatoriedad proporcionada por el lanzamiento de un dado (verificado por testigos) y el momento preciso del sorteo que proporciona la entrada para un algoritmo que genera una selección aleatoria. La semilla de tiempo del sorteo es tan precisa (segundos) que es imposible de controlar por los seres humanos, proporcionando así una doble entrada "incontrolable" para garantizar un resultado justo.  '
           mathematical_result: Resultado (1) x (2)
           proposals_selected_by_sortition: Propuestas seleccionadas por sorteo
           sortition_reproducibility_details: Detalles de reproducibilidad del sorteo
-          time_seed: (2) Semilla de tiempo
+          time_seed: "(2) Semilla de tiempo"
           witnesses: Testimonios
         sortition:
           random_seed: Semilla aleatoria

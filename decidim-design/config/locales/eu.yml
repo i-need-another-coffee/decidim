@@ -168,7 +168,7 @@ eu:
         background: Aurrekariak eta mugak
         base: Oinarria
         block_text: Erabili extr_data blokea
-        blog_cards_html: <i>Blogs</i> txartelak erabilia
+        blog_cards_html: "<i>Blogs</i> txartelak erabilia"
         blogs: Blogak
         budget_card_html: <i>Aurrekontuen proiektuak<i> txartelek erabilia. Txartel honek moduluko aktiboak behar bezala erakustea eskatzen du, hau da, <code>append_stylesheet_pack_tag\"decidim_budgets\"</code>
         budgets: Aurrekontuak
@@ -190,7 +190,7 @@ eu:
         debate_l: L Eztabaida
         debate_s: S Eztabaida
         debates: Eztabaidak
-        debates_cards_html: <i>Eztabaidak</i> txartelek erabilia
+        debates_cards_html: "<i>Eztabaidak</i> txartelek erabilia"
         debates_cards_text: Erabili txantiloi desberdinak irudi-blokerako
         default: Lehenetsia
         default_description: Deitu gelaxka argudio gehigarririk gabe, baina parte-hartzaile bera.
@@ -228,7 +228,7 @@ eu:
         meeting_l: L Topaketa
         meeting_s: S Topaketa
         meetings: Topaketak
-        meetings_html: <i>Topaketak</i> txartelek erabilia
+        meetings_html: "<i>Topaketak</i> txartelek erabilia"
         metadata_items: Metadatuen gaiak
         metadata_text: Baliabide bakoitzak bere metadatu-elementuak definitzen ditu
         participatory_process_g: G Prozesu partaidetza-prozesu

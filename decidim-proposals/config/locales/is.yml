@@ -1,3 +1,4 @@
+---
 is:
   activemodel:
     attributes:
@@ -87,7 +88,7 @@ is:
             notification_title: <a href="%{resource_path}">%{resource_title}</a> tillöguna hefur verið hafnað.
         proposal_update_category:
           email_outro: Þú hefur fengið þessa tilkynningu vegna þess að þú ert höfundur tillögunnar.
-          email_subject: '%{resource_title} tillöguflokkinn hefur verið uppfærður'
+          email_subject: "%{resource_title} tillöguflokkinn hefur verið uppfærður"
           notification_title: <a href="%{resource_path}">%{resource_title}</a> tillögu flokkurinn hefur verið uppfærður af admin.
         proposal_update_scope:
           email_outro: Þú hefur fengið þessa tilkynningu vegna þess að þú ert höfundur tillögunnar.

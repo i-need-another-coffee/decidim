@@ -1,3 +1,4 @@
+---
 hu:
   activemodel:
     attributes:
@@ -409,7 +410,7 @@ hu:
       participatory_process_groups:
         participatory_process_group:
           browse: Böngészés
-          browse_resource: '%{resource_name} folyamatcsoport böngészése'
+          browse_resource: "%{resource_name} folyamatcsoport böngészése"
           processes_count: 'Folyamatok:'
       participatory_processes:
         index:

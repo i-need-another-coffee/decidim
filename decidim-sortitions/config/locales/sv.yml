@@ -1,3 +1,4 @@
+---
 sv:
   activemodel:
     attributes:
@@ -120,13 +121,13 @@ sv:
           mathematical_result: Resultat (tärning x dragning)
           proposals_selected_by_sortition: Förslag valda genom tilldelning
           sortition_reproducibility_details: Detaljer för att reproducera lottningens resultat
-          time_seed: (2) Tidsfrö
+          time_seed: "(2) Tidsfrö"
           witnesses: Vittnen
         sortition:
           random_seed: Slumpmässigt frö
           selected_proposals:
             one: 1 valt förslag
-            other: '%{count} utvalda förslag'
+            other: "%{count} utvalda förslag"
         sortition_author:
           deleted: Raderad deltagare
         sortition_cancel_author:

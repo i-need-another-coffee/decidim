@@ -1,3 +1,4 @@
+---
 lt:
   activemodel:
     attributes:
@@ -75,19 +76,19 @@ lt:
   activerecord:
     models:
       decidim/assembly:
-        one: Asamblėja
         few: Asamblėjos
         many: Asamblėjos
+        one: Asamblėja
         other: Asamblėjos
       decidim/assembly_member:
-        one: Asamblėjos narys
         few: Asamblėjos nariai
         many: Asamblėjos nariai
+        one: Asamblėjos narys
         other: Asamblėjos nariai
       decidim/assembly_user_role:
-        one: Asamblėjos naudotojo vaidmuo
         few: Asamblėjos naudotojo vaidmenys
         many: Asamblėjos naudotojo vaidmenys
+        one: Asamblėjos naudotojo vaidmuo
         other: Asamblėjos naudotojo vaidmenys
   decidim:
     admin:
@@ -354,15 +355,15 @@ lt:
           promoted_assemblies: Paryškintos asamblėjos
         metadata:
           children_item:
-            one: "%{count} asamblėja"
             few: "%{count} asamblėjos"
             many: "%{count} asamblėjos"
+            one: "%{count} asamblėja"
             other: "%{count} asamblėjos"
         order_by_assemblies:
           assemblies:
-            one: "%{count} asamblėja"
             few: "%{count} asamblėjos"
             many: "%{count} asamblėjos"
+            one: "%{count} asamblėja"
             other: "%{count} asamblėjos"
       assembly_navigation:
         assembly_member_menu_item: Nariai

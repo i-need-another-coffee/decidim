@@ -1,3 +1,4 @@
+---
 ja:
   activemodel:
     attributes:
@@ -29,8 +30,8 @@ ja:
       sortitions:
         sortition_created:
           email_intro: あなたがフォローしている「%{resource_title}」にソート「%{participatory_space_title}」が追加されました。
-          email_outro: '「%{participatory_space_title}」をフォローしているため、この通知を受け取りました。前のリンクからこの通知をアンフォローすることができます。'
-          email_subject: '%{participatory_space_title} に新しいソートが追加されました'
+          email_outro: "「%{participatory_space_title}」をフォローしているため、この通知を受け取りました。前のリンクからこの通知をアンフォローすることができます。"
+          email_subject: "%{participatory_space_title} に新しいソートが追加されました"
           notification_title: ソート <a href="%{resource_path}">%{resource_title}</a> が %{participatory_space_title} に追加されました
     sortitions:
       admin:
@@ -111,13 +112,13 @@ ja:
           cancelled: キャンセルされた並べ替え
           candidate_proposal_ids: 並べ替え提案の順序とID
           candidate_proposals_info: '次の提案の中でソートが行われました (%{category_label}), 以下のIDを持つ(選択した提案を太字で)  '
-          category: '%{category} カテゴリから'
-          dice_result: (1)サイコロ結果
+          category: "%{category} カテゴリから"
+          dice_result: "(1)サイコロ結果"
           introduction: 'このページには、ソート %{reference} の結果が含まれています。このソートにより、%{target_items} の数の結果が、以下に表示されている提案の集合から同確率でランダムに選択されています。結果とともにこのページに表示される情報は、保証を最大化し、結果を再現するために必要なすべての情報を提供します。このソートの品質の鍵となるのは、転がるサイコロ(目撃者による検証) による二重のランダム性と、ランダムな選択を生成するアルゴリズムの入力となるソートの正確な時間です。ソートのタイムシードは、人間がコントロールすることが不可能な正確さ(秒単位) を持っているため、公平な結果を保証するための二重の「コントロール不可能な」入力を提供しています。  '
           mathematical_result: 結果 (1) x (2)
           proposals_selected_by_sortition: 並べ替えによって選択された提案
           sortition_reproducibility_details: 並べ替え再現性の詳細
-          time_seed: (2) 時間の種
+          time_seed: "(2) 時間の種"
           witnesses: 目撃者
         sortition:
           random_seed: 乱数のシード

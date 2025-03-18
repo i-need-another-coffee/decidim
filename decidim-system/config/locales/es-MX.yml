@@ -1,3 +1,4 @@
+---
 es-MX:
   activemodel:
     attributes:
@@ -38,7 +39,7 @@ es-MX:
   decidim:
     system:
       actions:
-        confirm_destroy: '¿Seguro que lo quieres eliminar?'
+        confirm_destroy: "¿Seguro que lo quieres eliminar?"
         destroy: Borrar
         edit: Editar
         new_admin: Añadir administradora
@@ -80,13 +81,13 @@ es-MX:
             change_your_password: Cambia tu contraseña
             minimum_characters: "(%{minimum} caracteres como mínimo)"
           new:
-            forgot_your_password: '¿Has olvidado tu contraseña?'
+            forgot_your_password: "¿Has olvidado tu contraseña?"
             send_me_reset_password_instructions: Envíame las instrucciones para restablecer la contraseña
         shared:
           links:
-            did_not_receive_confirmation_instructions?: '¿No has recibido las instrucciones de confirmación?'
-            did_not_receive_unlock_instructions?: '¿No has recibido las instrucciones de desbloqueo?'
-            forgot_your_password?: '¿Olvidaste tu contraseña?'
+            did_not_receive_confirmation_instructions?: "¿No has recibido las instrucciones de confirmación?"
+            did_not_receive_unlock_instructions?: "¿No has recibido las instrucciones de desbloqueo?"
+            forgot_your_password?: "¿Olvidaste tu contraseña?"
             log_in: Iniciar sesión
             sign_up: Crea una cuenta
       menu:
@@ -129,7 +130,7 @@ es-MX:
         form:
           select_organization: Seleccionar una organización
         index:
-          confirm_delete: '¿Seguro que quieres eliminar esta aplicación?'
+          confirm_delete: "¿Seguro que quieres eliminar esta aplicación?"
           title: Aplicaciones OAuth
         new:
           save: Guardar
@@ -194,7 +195,7 @@ es-MX:
             Las direcciones de estilo (style-src) limitan las URL que se pueden cargar en los elementos <style>.
             Decidim añade automáticamente el valor "'self' 'unsafe-inline'", pero, si quieres, puedes añadir otros valores. Deja el valor en blanco si no sabes lo que significa.
         edit:
-          confirm_resend_invitation: '¿Seguro que quieres reenviar la invitación?'
+          confirm_resend_invitation: "¿Seguro que quieres reenviar la invitación?"
           resend_invitation: Reenviar invitación
           secondary_hosts_hint: Introduce cada uno de ellos en una nueva línea
           title: Editar la organizacion
@@ -219,7 +220,7 @@ es-MX:
         index:
           title: Organizaciones
         new:
-          default: '¿Por defecto?'
+          default: "¿Por defecto?"
           enabled: Habilitado
           locale: Configuración regional
           organization_admin_email_hint: Te enviaremos un correo electrónico a esta dirección para que la puedas confirmar y configurar tu contraseña.
@@ -267,7 +268,7 @@ es-MX:
           no_organization_warning_html: Debes crear una organización para comenzar. Asegúrate de leer %{guide} antes de continuar.
           our_getting_started_guide: nuestra guía de inicio
         organizations_list:
-          confirm_resend_invitation: '¿Seguro que quieres reenviar la invitación?'
+          confirm_resend_invitation: "¿Seguro que quieres reenviar la invitación?"
           resend_invitation: Reenviar la invitación
       system_checks:
         active_job_queue:

@@ -1,3 +1,4 @@
+---
 cs:
   activemodel:
     attributes:
@@ -72,13 +73,13 @@ cs:
             empty: Zatím žádné odpovědi
             export:
               answer:
-                title: 'Odpověď č.%{number}'
+                title: Odpověď č.%{number}
             export_response:
               title: survey_user_answers_%{token}
             index:
               title: "%{total} odpovědí celkem"
             show:
-              title: 'Odpověď č.%{number}'
+              title: Odpověď č.%{number}
           display_condition:
             answer_option: Možnost odpovědi
             condition_question: Otázka

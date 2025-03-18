@@ -1,3 +1,4 @@
+---
 lt:
   activemodel:
     attributes:
@@ -19,9 +20,9 @@ lt:
   activerecord:
     models:
       decidim/debates/debate:
-        one: Diskusija
         few: Diskusijos
         many: Diskusijos
+        one: Diskusija
         other: Diskusijos
   decidim:
     components:
@@ -87,9 +88,9 @@ lt:
           send: Uždaryti diskusiją
         count:
           debates_count:
-            one: "%{count} diskusija"
             few: "%{count} diskusijos"
             many: "%{count} diskusijos"
+            one: "%{count} diskusija"
             other: "%{count} diskusijos"
         create:
           invalid: Kuriant šią diskusiją iškilo problema.
@@ -183,7 +184,7 @@ lt:
       badges:
         commented_debates:
           conditions:
-            - Pasirinkite atvirą diskusiją ir dalyvaukite
+          - Pasirinkite atvirą diskusiją ir dalyvaukite
           description: Šis ženklelis suteikiamas, kai aktyviai dalyvaujate įvairiose diskusijose pateikdami komentarus.
           description_another: Šis dalyvis dalyvavo %{score} diskusijose.
           description_own: Jūs dalyvavote %{score} diskusijose.

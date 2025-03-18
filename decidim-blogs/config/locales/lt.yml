@@ -1,3 +1,4 @@
+---
 lt:
   activemodel:
     attributes:
@@ -11,9 +12,9 @@ lt:
   activerecord:
     models:
       decidim/blogs/post:
-        one: Publikacija
         few: Publikacijos
         many: Publikacijos
+        one: Publikacija
         other: Publikacijos
   decidim:
     blogs:

@@ -1,3 +1,4 @@
+---
 fi:
   activemodel:
     attributes:
@@ -198,8 +199,8 @@ fi:
       badges:
         initiatives:
           conditions:
-            - Siirry aloitteiden osallistumistilaan
-            - Luo uusi aloite ohjeiden mukaisesti
+          - Siirry aloitteiden osallistumistilaan
+          - Luo uusi aloite ohjeiden mukaisesti
           description: Tämä kunniamerkki myönnetään, kun laadit uusia aloitteita ja keräät verkoston ihmisiä toteuttamaan niitä.
           description_another: Tämä käyttäjä on julkaissut %{score} aloitetta.
           description_own: Olet julkaissut %{score} aloitetta.
@@ -447,7 +448,7 @@ fi:
         endorse_initiative_event:
           email_intro: "%{author_name} %{author_nickname}, jota seuraat, on hyväksynyt seuraavan aloitteen. Voit osallistua keskusteluun seuraavan linkin avulla:"
           email_outro: Tämä ilmoitus on lähetetty sinulle, koska seuraat käyttäjää %{author_nickname}. Voit lopettaa ilmoitusten vastaanottamisen edellä esitetyn linkin kautta.
-          email_subject: '%{author_nickname} on suositellut aloitetta'
+          email_subject: "%{author_nickname} on suositellut aloitetta"
           notification_title: <a href="%{author_path}">%{author_name} %{author_nickname}</a> on suositellut aloitetta <a href="%{resource_path}">%{resource_title}</a>.
         revoke_membership_request:
           email_intro: "%{author_nickname} hylkäsi hakemuksesi kannatuskomitean jäseneksi aloitteelle %{resource_title}."
@@ -456,7 +457,7 @@ fi:
           notification_title: '<a href="%{author_profile_url}">%{author_nickname}</a> hylkäsi hakemuksesi kannatuskomitean jäseneksi aloitteelle: <a href="%{resource_url}">%{resource_title}</a>.'
         spawn_committee_request_event:
           email_intro: "%{applicant_nickname} hakee jäseneksi kannatuskomiteaan aloitteellesi %{resource_title}. Voit hyväksyä tai hylätä hakemuksen aloitteen muokkauslomakkeen kautta."
-          email_outro: 'Tämä ilmoitus on lähetetty sinulle, koska olet laatinut aloitteen %{resource_title}'
+          email_outro: Tämä ilmoitus on lähetetty sinulle, koska olet laatinut aloitteen %{resource_title}
           email_subject: "%{applicant_nickname} haluaa liittyä mukaan aloitteeseesi"
           notification_title: <a href="%{applicant_profile_url}">%{applicant_nickname}</a> haki jäseneksi aloitteesi <a href="%{resource_url}">%{resource_title}</a> kannatuskomiteaan. Voit hyväksyä tai hylätä pyynnön <a href="%{resource_url}/edit">aloitteen muokkaussivulta</a>.
       form:

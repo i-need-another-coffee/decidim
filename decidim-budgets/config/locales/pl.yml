@@ -1,3 +1,4 @@
+---
 pl:
   activemodel:
     attributes:
@@ -18,9 +19,9 @@ pl:
   activerecord:
     models:
       decidim/budgets/project:
-        one: Projekt
         few: Projekty
         many: Projektów
+        one: Projekt
         other: Projektów
   decidim:
     admin:
@@ -88,8 +89,8 @@ pl:
             select_for_implementation: Zaznacz do wdrożenia
             selected: Wybrano
             selected_options:
-              'no': 'Nie'
-              'yes': 'Tak'
+              'no': Nie
+              'yes': Tak
             title: Projekty
             update: Aktualizuj
             update_budget_button: Aktualizuj budżet projektu
@@ -204,9 +205,9 @@ pl:
           vote: Budżet poddany pod głosowanie
         count:
           projects_count:
-            one: 1 projekt
             few: "%{count} projekty"
             many: "%{count} projektów"
+            one: 1 projekt
             other: "%{count} projektów"
         empty: Nie ma jeszcze żadnych projektów
         exit_modal:
@@ -249,9 +250,9 @@ pl:
           remove: Usuń projekt %{resource_name} ze swojego głosu.
           selected: Wybrano
           votes:
-            one: głos
             few: głosów
             many: głosów
+            one: głos
             other: głosów
           you_voted: Zagłosowałeś/aś na to
         project_budget_button:

@@ -1,3 +1,4 @@
+---
 de:
   activemodel:
     attributes:
@@ -352,7 +353,7 @@ de:
           unpublished: Unveröffentlicht
       conflicts:
         attempts: Versuche
-        'false': 'Nein'
+        'false': Nein
         index:
           text: Suche nach bestehender E-Mail, Name oder Spitzname des Teilnehmenden.
         managed_user_name: Verwalteter Benutzer
@@ -365,7 +366,7 @@ de:
           reason: Grund
           success: Übertragung erfolgreich.
           title: Übertragung
-        'true': 'Ja'
+        'true': Ja
         user_name: Nutzer
       content_blocks:
         create:
@@ -410,13 +411,13 @@ de:
         invitation_accepted_at_present:
           label: Einladung angenommen
           values:
-            'false': 'Nein'
-            'true': 'Ja'
+            'false': Nein
+            'true': Ja
         last_sign_in_at_present:
           label: Zuletzt angemeldet
           values:
-            'false': 'Nein'
-            'true': 'Ja'
+            'false': Nein
+            'true': Ja
         moderated_users:
           reports_reason_eq:
             label: Grund der Meldung
@@ -460,7 +461,7 @@ de:
           report_count_eq: Anzahl Meldungen
           reported_id_string_or_reported_content_cont: Suche %{collection} nach meldbarer Id oder Inhalt.
           title_cont: In %{collection} nach Titel suchen.
-          user_name_or_user_nickname_or_user_email_cont: '%{collection} nach E-Mail, Name oder Kontoname durchsuchen.'
+          user_name_or_user_nickname_or_user_email_cont: "%{collection} nach E-Mail, Name oder Kontoname durchsuchen."
         state_eq:
           label: Status
           values:
@@ -774,7 +775,7 @@ de:
           title: Newsletter bearbeiten
         index:
           all: Alle
-          all_users: 'Alle Benutzer'
+          all_users: Alle Benutzer
           and: 'und '
           confirm_delete: Möchten Sie diesen Newsletter wirklich löschen?
           followers: 'Follower '
@@ -962,7 +963,7 @@ de:
             explanation: Sie haben %{count} private Teilnehmende.
             title: Alle private Teilnehmende entfernen
           example_file: 'Beispieldatei:'
-          explanation: 'Laden Sie Ihre CSV-Datei mit den Teilnehmenden, die Sie zum Prozess hinzufügen möchten, hoch. Sie muss zwei Spalten (ohne Kopfzeile) haben, mit der E-Mail-Adresse in der ersten Spalte und dem Namen in der zweiten Spalte der Datei. Verwenden Sie keine ungültige Zeichen wie `<>?%&^*#@()[]=+:;"{}\|` im Namen der Teilnehmenden.'
+          explanation: Laden Sie Ihre CSV-Datei mit den Teilnehmenden, die Sie zum Prozess hinzufügen möchten, hoch. Sie muss zwei Spalten (ohne Kopfzeile) haben, mit der E-Mail-Adresse in der ersten Spalte und dem Namen in der zweiten Spalte der Datei. Verwenden Sie keine ungültige Zeichen wie `<>?%&^*#@()[]=+:;"{}\|` im Namen der Teilnehmenden.
           explanation_example: |
             john.doe@example.org%{csv_col_sep}John Doe
             jane.doe@example.org%{csv_col_sep}Jane Doe
@@ -1038,11 +1039,11 @@ de:
           custom_expiration: Benutzerdefiniertes Ablaufen
           custom_token: Benutzerdefiniertes Wort
           expires_at: Läuft ab am
-          'false': 'Nein'
+          'false': Nein
           never_expire: Niemals
           registered_only: Nur registrierte?
           token: Zugangsschlüssel
-          'true': 'Ja'
+          'true': Ja
         index:
           back_to_share_tokens: Zurück zu den Zugangslinks
           copied: Zugangslink kopiert!

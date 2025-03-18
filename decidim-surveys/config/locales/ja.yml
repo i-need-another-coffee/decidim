@@ -1,3 +1,4 @@
+---
 ja:
   activemodel:
     models:
@@ -28,14 +29,14 @@ ja:
     events:
       surveys:
         survey_closed:
-          email_intro: '%{resource_title} の調査 %{participatory_space_title} はクローズされました。'
-          email_outro: '%{participatory_space_title}をフォローしているため、この通知を受け取りました。前のリンクに続く通知の受信を停止することができます。'
-          email_subject: '%{participatory_space_title} でアンケートが完了しました'
+          email_intro: "%{resource_title} の調査 %{participatory_space_title} はクローズされました。"
+          email_outro: "%{participatory_space_title}をフォローしているため、この通知を受け取りました。前のリンクに続く通知の受信を停止することができます。"
+          email_subject: "%{participatory_space_title} でアンケートが完了しました"
           notification_title: <a href="%{resource_path}">%{resource_title}の</a> <a href="%{participatory_space_url}">%{participatory_space_title}</a> の調査は終了しました。
         survey_opened:
-          email_intro: '%{resource_title} のアンケート %{participatory_space_title} が公開されました。このページから参加できます：'
-          email_outro: '%{participatory_space_title}をフォローしているため、この通知を受け取りました。前のリンクに続く通知の受信を停止することができます。'
-          email_subject: '%{participatory_space_title} での新しい調査'
+          email_intro: "%{resource_title} のアンケート %{participatory_space_title} が公開されました。このページから参加できます："
+          email_outro: "%{participatory_space_title}をフォローしているため、この通知を受け取りました。前のリンクに続く通知の受信を停止することができます。"
+          email_subject: "%{participatory_space_title} での新しい調査"
           notification_title: <a href="%{resource_path}">%{resource_title}の</a> <a href="%{participatory_space_url}">%{participatory_space_title}の調査</a> が公開されました。
     metrics:
       survey_answers:
@@ -56,7 +57,7 @@ ja:
       admin:
         answers:
           index:
-            title: "総回答数 %{total} 件"
+            title: 総回答数 %{total} 件
           show:
             title: '回答 #%{number}'
         exports:
@@ -115,7 +116,7 @@ ja:
             open: 公開
       survey_confirmation_mailer:
         confirmation:
-          body: '%{participatory_space} 内のアンケート %{questionnaire_title} に回答しました'
+          body: "%{participatory_space} 内のアンケート %{questionnaire_title} に回答しました"
           subject: アンケート %{questionnaire_title} 回答確認
         export_name: アンケートの回答
       surveys:

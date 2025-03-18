@@ -1,4 +1,5 @@
-"no":
+---
+'no':
   activemodel:
     attributes:
       config:
@@ -43,16 +44,16 @@
       admin:
         id_documents:
           help:
-            - Brukere fyller ut sin identitets-informasjon og laster opp en kopi av dokumentet.
-            - Du fyller ut informasjonen som er tilstede i det opplastede bildet.
-            - Informasjonen skal samsvare med hva brukeren fylte ut.
-            - 
+          - Brukere fyller ut sin identitets-informasjon og laster opp en kopi av dokumentet.
+          - Du fyller ut informasjonen som er tilstede i det opplastede bildet.
+          - Informasjonen skal samsvare med hva brukeren fylte ut.
+          -
         postal_letter:
           help:
-            - Deltakere ber om at en verifiseringskode sendes til adressen deres.
-            - Du sendte brevet til adressen deres med verifiseringskoden.
-            - Du merkere brevet som sendt.
-            - Når du har merket brevet som sendt, vil deltakeren kunne introdusere koden og bli bekreftet.
+          - Deltakere ber om at en verifiseringskode sendes til adressen deres.
+          - Du sendte brevet til adressen deres med verifiseringskoden.
+          - Du merkere brevet som sendt.
+          - Når du har merket brevet som sendt, vil deltakeren kunne introdusere koden og bli bekreftet.
       csv_census:
         name: Organisasjonens folketelling
       direct: Direkte
@@ -109,7 +110,7 @@
         extra_explanation:
           postal_codes:
             one: Deltakelse er begrenset til deltakere med postnummer %{postal_codes}.
-            other: 'Deltakelse er begrenset til deltakere med postnummer %{postal_codes}.'
+            other: Deltakelse er begrenset til deltakere med postnummer %{postal_codes}.
           user_postal_codes:
             one: Deltagelse er begrenset til deltakere med postnummer %{postal_codes}, og postnummeret ditt er %{user_postal_code}.
             other: 'Deltagelse er begrenset til deltakere med følgende postkoder: %{postal_codes}. Ditt postnummer er %{user_postal_code}.'

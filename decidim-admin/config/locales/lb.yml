@@ -1,3 +1,4 @@
+---
 lb:
   activemodel:
     attributes:
@@ -259,7 +260,7 @@ lb:
           success: Die Komponente wurde erfolgreich aktualisiert.
       conflicts:
         attempts: Versuche
-        'false': 'Nein'
+        'false': Nein
         managed_user_name: Verwalteter Benutzer
         solved: Gelöst
         title: "Überprüfungskonflikte\n\n"
@@ -269,7 +270,7 @@ lb:
           reason: Grund
           success: Übertragung erfolgreich.
           title: Übertragung
-        'true': 'Ja'
+        'true': Ja
         user_name: Nutzer
       dashboard:
         show:
@@ -286,13 +287,13 @@ lb:
         invitation_accepted_at_present:
           label: Einladung angenommen
           values:
-            'false': 'Nein'
-            'true': 'ja'
+            'false': Nein
+            'true': ja
         last_sign_in_at_present:
           label: Schon mal eingeloggt
           values:
-            'false': 'Nee'
-            'true': 'Ja'
+            'false': Nee
+            'true': Ja
         moderations:
           reportable_type_string_eq:
             label: Art

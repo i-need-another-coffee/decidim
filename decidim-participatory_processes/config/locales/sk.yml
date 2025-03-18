@@ -1,3 +1,4 @@
+---
 sk:
   activemodel:
     attributes:
@@ -50,19 +51,19 @@ sk:
   activerecord:
     models:
       decidim/participatory_process:
-        one: Participatívny proces
         few: Participatívne procesy
         many: Participatívne procesy
+        one: Participatívny proces
         other: Participatívne procesy
       decidim/participatory_process_group:
-        one: Skupina participatívnych procesov
         few: Skupiny participatívnych procesov
         many: Skupiny participatívnych procesov
+        one: Skupina participatívnych procesov
         other: Skupiny participatívnych procesov
       decidim/participatory_process_step:
-        one: Krok
         few: Kroky
         many: Kroky
+        one: Krok
         other: Kroky
   decidim:
     admin:
@@ -308,24 +309,24 @@ sk:
         filters:
           counters:
             active:
-              one: 1 aktívny proces
               few: "%{count} aktívnych procesov"
               many: "%{count} aktívnych procesov"
+              one: 1 aktívny proces
               other: "%{count} aktívnych procesov"
             all:
-              one: 1
               few: "%{count} procesov"
               many: "%{count} procesov"
+              one: 1
               other: "%{count} procesov"
             past:
-              one: 1 uplynulý proces
               few: "%{count} uplynulé procesy"
               many: "%{count} uplynulých procesov"
+              one: 1 uplynulý proces
               other: "%{count} uplynulých procesov"
             upcoming:
-              one: 1 nadchádzajúci proces
               few: "%{count} nadchádzajúcich procesov"
               many: "%{count} nadchádzajúcich procesov"
+              one: 1 nadchádzajúci proces
               other: "%{count} nadchádzajúcich procesov"
           explanations:
             no_active_nor_upcoming_callout: Nie sú žiadne aktívne alebo nadchádzajúce procesy. Tu je zoznam uplynulých.

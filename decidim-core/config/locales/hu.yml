@@ -1,3 +1,4 @@
+---
 hu:
   activemodel:
     attributes:
@@ -70,8 +71,8 @@ hu:
         one: Résztvevő
         other: Résztvevők
   booleans:
-    'false': 'Nem'
-    'true': 'Igen'
+    'false': Nem
+    'true': Igen
   date:
     buttons:
       close: Bezár
@@ -84,7 +85,7 @@ hu:
       decidim_with_month_name: "%d %B %Y"
       decidim_with_month_name_short: "%d %b"
       help:
-        date_format: 'Formátum nn/hh/éééé'
+        date_format: Formátum nn/hh/éééé
   datetime:
     distance_in_words:
       about_x_hours:
@@ -124,7 +125,7 @@ hu:
         file_no_exists: Fájl nem létezik
         notice: Az adatok feldolgozása folyamatban. Amint kész van, emailt küldünk.
       email_change:
-        body1: '%{unconfirmed_email} címre kiküldtük az emailt az új emailcímének megerősítéséhez.'
+        body1: "%{unconfirmed_email} címre kiküldtük az emailt az új emailcímének megerősítéséhez."
         body2: Újraküldjük a megerősítő emailt? %{resend_link} vagy %{cancel_link}.
         cancel: mégse
         cancel_error: Nem sikerült az email változást jóváhagyni.
@@ -266,13 +267,14 @@ hu:
           button_reject: Elutasít
           help_text: Tekintse át a módosításokat, és fogadja el, vagy utasítsa el ezt a módosítást. Értesítést küld a szerző (k) nek.
         announcement:
-          accepted: |-
-            A %{amendable_type}% %{proposal_link} előterjesztésre vonatkozó módosító javaslat ekkor <strong>%{date}</strong> elfogadásra került.
+          accepted: A %{amendable_type}% %{proposal_link} előterjesztésre vonatkozó módosító javaslat ekkor <strong>%{date}</strong> elfogadásra került.
           evaluating: |-
             Ezt a %{amendable_type} %{proposal_link}
             módosító javaslat értékelés alatt van.
           promoted: Felterjesztve %{amendable_type} -nak.
-          rejected: "A %{amendable_type} %{proposal_link}\nre vonatkozó módosítást <strong>%{date}</strong>én elutasították."
+          rejected: |-
+            A %{amendable_type} %{proposal_link}
+            re vonatkozó módosítást <strong>%{date}</strong>én elutasították.
           withdrawn: |-
             Ezt a %{amendable_type} %{proposal_link}
             módosítást a szerző visszavonta.
@@ -381,7 +383,7 @@ hu:
           title: Engedélyezés folyamatban
         unauthorized:
           explanation: Ez a művelet nem hajtható végre, mivel néhány engedélyezési adat nem egyezik.
-          invalid_field: "A(z) %{field} %{value} érték nem érvényes."
+          invalid_field: A(z) %{field} %{value} érték nem érvényes.
           ok: Rendben
           title: Nem engedélyezett
         unconfirmed:
@@ -757,13 +759,13 @@ hu:
         select_file: Fájl kiválasztása
       upload_help:
         dropzone: Húzza ide a fájlt vagy használja a gombot a feltöltéshez
-        explanation: '%{attribute} útmutatója'
+        explanation: "%{attribute} útmutatója"
     gamification:
       all_badges_link: Az összes elérhető jelvény megtekintése.
       badges:
         followers:
           conditions:
-            - Az aktív és más emberek követése biztosan másokat követni fog.
+          - Az aktív és más emberek követése biztosan másokat követni fog.
           description: Ez a jelvény akkor érhető el, ha bizonyos számú követőt ér el. A %{organization_name} egy társadalmi és politikai hálózat, ahol rengeteg tér van arra, hogy értelmesen kommunikáljon más emberekkel.
           description_another: Ennek a felhasználónak %{score} követője van.
           description_own: "%{score} felhasználó követi Önt."
@@ -777,7 +779,7 @@ hu:
           page_description: A jelvények megmutatják, milyen tevékenységeket végzünk a platformon. Amint a résztvevők elkezdik felfedezni mi minden módon tudnak részt venni a platformon, úgy különböző jelvényekhez juthatnak hozzá. Itt van a jelvények listája, és néhány mód, amellyel megszerezhetők.
           title: Jelvények
       description: A jelvények a résztvevők tevékenységét és előmenetelét hívatottak jelezni. Amint elkezded felfedezni a platformot és kapcsolatba kerülsz másokkal, különböző jelvényeket kapsz.
-      level: '%{level} szint'
+      level: "%{level} szint"
       reached_top: Elérted a jelvény legmagasabb szintjét.
       title: Mik a jelvények?
     groups:
@@ -1152,7 +1154,7 @@ hu:
       login_modal:
         please_log_in: Kérjük, jelentkezz be
       mentions_modal:
-        remove_recipient: '%{name} címzett eltávolítása'
+        remove_recipient: "%{name} címzett eltávolítása"
       progress: Folyamat
       public_participation:
         public_participation: Nyilvánosan mutassa a részvételemet
@@ -1191,7 +1193,7 @@ hu:
         time_ago: "%{time} ideje"
     user_report_mailer:
       notify:
-        body_1: '%{user} felhasználót jelentette %{token}'
+        body_1: "%{user} felhasználót jelentette %{token}"
         body_2: 'Indok: %{reason}'
         details: Felhasználó által megadott adatok
         greetings: Üdvözöljük, <br/>%{organization_name}<br/><a href="%{organization_url}">%{organization_url}</a>
@@ -1215,7 +1217,7 @@ hu:
         version: 'Verziószám: %{number}'
     versions_list_item:
       show:
-        version_index: '%{index} verzió'
+        version_index: "%{index} verzió"
     welcome_notification:
       default_body: <p>Hi {{név}}, köszönöm, hogy csatlakoztál a {{szervezet}}-hez és üdvözöllek!</p><ul><li>Ha szeretnél egy gyors képet kapni arról, hogy mit tehetsz itt, nézd meg a <a href="{{help_url}}">Súgó</a> szakasz.</li><li>Az elolvasás után megkapod az első jelvényt. Itt a <a href="{{badges_url}}">listája az összes jelvénynek</a> amit megszerezhetsz, mivel részt veszel a {{szervezet}}</li><li> munkájában. Végül, de nem utolsósorban, csatlakozz másokhoz, oszd meg velük az elkötelezettség és a {{szervezet}} részvételi élményét. Készíts javaslatokat, szólj hozzá, vitázz, gondolkodj azon, hogyan járulhatsz hozzá a közjóhoz, szolgáltass érveket a meggyőzéshez, hallgass és olvass, hogy meggyőzz másokat. Fejezd ki gondolataidat konkrétan és közvetlenül, válaszolj türelemmel és határozottsággal, védd meg gondolataidat, és légy nyitott az együttműködésre és mások ötleteihez való csatlakozásra.</li></ul>
       default_subject: Köszönjük, hogy csatlakoztál a {{organization}} szervezethez!
@@ -1224,7 +1226,7 @@ hu:
         back: Vissza
       wizard_header:
         see_steps: lépések megtekintése
-        step_of: '%{current_step} a(z) %{total_steps} lépésből'
+        step_of: "%{current_step} a(z) %{total_steps} lépésből"
   devise:
     confirmations:
       confirmed: E-mail címed sikeresen meg lett erősítve.
@@ -1538,7 +1540,7 @@ hu:
         user_menu: Felhasználói menü
       impersonation_warning:
         close_session: Munkamenet bezárása
-        description_html: <b>%{user_name}</b> felhasználó menedzselése.
+        description_html: "<b>%{user_name}</b> felhasználó menedzselése."
         expire_time_html: A munkamenet <b><span class="minutes">%{minutes}</span> perc múlva lejár</b>.
       language_chooser:
         choose_language: Válassz nyelvet

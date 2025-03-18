@@ -1,3 +1,4 @@
+---
 lv:
   activemodel:
     attributes:
@@ -28,17 +29,17 @@ lv:
   activerecord:
     models:
       decidim/conference:
-        zero: Konferences
         one: Konference
         other: Konferences
+        zero: Konferences
       decidim/conference_speaker:
-        zero: Konferences runātāji
         one: Konferences runātājs
         other: Konferences runātāji
+        zero: Konferences runātāji
       decidim/conference_user_role:
-        zero: Konferences lietotāju lomas
         one: Konferences lietotāja loma
         other: Konferences lietotāju lomas
+        zero: Konferences lietotāju lomas
   decidim:
     admin:
       actions:
@@ -280,9 +281,9 @@ lv:
           form:
             available_slots_help: Atstājiet 0, ja jums ir pieejams neierobežots laiks runāšanai
             registrations_count:
-              zero: Ir notikušas %{count} reģistrācijas.
               one: Ir notikusi viena reģistrācija.
               other: Ir notikušas %{count} reģistrācijas.
+              zero: Ir notikušas %{count} reģistrācijas.
         diplomas:
           edit:
             save: Saglabāt
@@ -454,9 +455,9 @@ lv:
           promoted_conferences: Izceltās konferences
         order_by_conferences:
           conferences:
-            zero: "%{count} konferences"
             one: "%{count} konference"
             other: "%{count} konferences"
+            zero: "%{count} konferences"
       conferences_nav:
         conference_partners_menu_item: Partneri
         conference_speaker_menu_item: Runātāji

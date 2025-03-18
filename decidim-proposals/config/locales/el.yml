@@ -1,3 +1,4 @@
+---
 el:
   activemodel:
     attributes:
@@ -174,7 +175,7 @@ el:
             endorsements_enabled: Επιδοκιμασίες ενεργοποιημένες
             proposal_answering_enabled: Η απάντηση στην πρόταση ενεργοποιήθηκε
             publish_answers_immediately: Άμεση δημοσίευση των απαντήσεων πρότασης
-            publish_answers_immediately_help_html: 'Έχετε υπόψη ότι αν απαντήσετε σε οποιαδήποτε πρόταση χωρίς αυτό ενεργοποιημένο, θα πρέπει να τα δημοσιεύσετε χειροκίνητα επιλέγοντάς τα και χρησιμοποιώντας την ενέργεια για δημοσίευση. Για περισσότερες πληροφορίες σχετικά με το πώς λειτουργεί αυτό, ανατρέξτε στη σελίδα τεκμηρίωσης απαντήσεων <a href="https://docs.decidim.org/en/admin/components/proposals/answers#_publication" target="_blank"></a>.'
+            publish_answers_immediately_help_html: Έχετε υπόψη ότι αν απαντήσετε σε οποιαδήποτε πρόταση χωρίς αυτό ενεργοποιημένο, θα πρέπει να τα δημοσιεύσετε χειροκίνητα επιλέγοντάς τα και χρησιμοποιώντας την ενέργεια για δημοσίευση. Για περισσότερες πληροφορίες σχετικά με το πώς λειτουργεί αυτό, ανατρέξτε στη σελίδα τεκμηρίωσης απαντήσεων <a href="https://docs.decidim.org/en/admin/components/proposals/answers#_publication" target="_blank"></a>.
             suggested_hashtags: Προτάθηκαν hashtag σε συμμετέχοντες για νέες προτάσεις
     events:
       proposals:
@@ -184,17 +185,17 @@ el:
         collaborative_draft_access_accepted:
           email_intro: '%{requester_name} έχει γίνει δεκτή η πρόσβαση ως συνεισφέρων του <a href="%{resource_url}">%{resource_title}</a> συνεργατικού σχεδίου.'
           email_outro: Έχετε λάβει αυτήν την ειδοποίηση επειδή είστε συνεργάτης του <a href="%{resource_url}">%{resource_title}</a>.
-          email_subject: "Ο αιτών %{requester_name} έγινε δεκτός για πρόσβαση ως συμβάλλων για το στοιχείο %{resource_title}."
+          email_subject: Ο αιτών %{requester_name} έγινε δεκτός για πρόσβαση ως συμβάλλων για το στοιχείο %{resource_title}.
           notification_title: Ο αιτών <a href="%{requester_path}">%{requester_name} %{requester_nickname}</a> έγινε <strong>δεκτός για πρόσβαση ως συμβάλλων</strong> στο <a href="%{resource_path}">%{resource_title}</a> προσχέδιο συνεργασίας.
         collaborative_draft_access_rejected:
           email_intro: '%{requester_name} έχει απορριφθεί για πρόσβαση ως συνεισφέρων του <a href="%{resource_url}">%{resource_title}</a> συνεργατικού σχεδίου.'
           email_outro: Έχετε λάβει αυτήν την ειδοποίηση επειδή είστε συνεργάτης του <a href="%{resource_url}">%{resource_title}</a>.
-          email_subject: "Ο αιτών %{requester_name} απορρίφθηκε για πρόσβαση ως συμβάλλων στο προσχέδιο συνεργασίας %{resource_title}."
+          email_subject: Ο αιτών %{requester_name} απορρίφθηκε για πρόσβαση ως συμβάλλων στο προσχέδιο συνεργασίας %{resource_title}.
           notification_title: Ο αιτών <a href="%{requester_path}">%{requester_name} %{requester_nickname}</a> <strong>απορρίφθηκε για πρόσβαση ως συμβάλλων</strong> στο προσχέδιο συνεργασίας <a href="%{resource_path}">%{resource_title}</a>.
         collaborative_draft_access_requested:
-          email_intro: 'Ο/Η %{requester_name} ζήτησε πρόσβαση ως συνεισφέρων. Μπορείτε να <strong>αποδεχτείτε ή να απορρίψετε το αίτημα</strong> από τη σελίδα του συνεργατικού προσχεδίου <a href="%{resource_path}">%{resource_title}</a>.'
+          email_intro: Ο/Η %{requester_name} ζήτησε πρόσβαση ως συνεισφέρων. Μπορείτε να <strong>αποδεχτείτε ή να απορρίψετε το αίτημα</strong> από τη σελίδα του συνεργατικού προσχεδίου <a href="%{resource_path}">%{resource_title}</a>.
           email_outro: Έχετε λάβει αυτήν την ειδοποίηση επειδή είστε συνεργάτης του <a href="%{resource_url}">%{resource_title}</a>.
-          email_subject: "Ο αιτών %{requester_name} ζήτησε πρόσβαση για να συνεισφέρει στο στοιχείο %{resource_title}."
+          email_subject: Ο αιτών %{requester_name} ζήτησε πρόσβαση για να συνεισφέρει στο στοιχείο %{resource_title}.
           notification_title: Ο αιτών <a href="%{requester_path}">%{requester_name} %{requester_nickname}</a> ζήτησε πρόσβαση για να συνεισφέρει στο προσχέδιο συνεργασίας <a href="%{resource_path}">%{resource_title}</a>. <strong>Αποδεχτείτε ή απορρίψτε το αίτημα</strong>.
         collaborative_draft_access_requester_accepted:
           email_intro: Έχετε γίνει δεκτός να έχετε πρόσβαση ως συνεισφέρων του συνεργατικού σχεδίου <a href="%{resource_url}">%{resource_title}</a>.
@@ -209,7 +210,7 @@ el:
         collaborative_draft_withdrawn:
           email_intro: <a href="%{author_url}">%{author_name} %{author_nickname}</a> απέσυρε το <a href="%{resource_url}">%{resource_title}</a> συνεργατικό προσχέδιο.
           email_outro: Έχετε λάβει αυτήν την ειδοποίηση επειδή είστε συνεργάτης του <a href="%{resource_url}">%{resource_title}</a>.
-          email_subject: "Ο συντάκτης %{author_name} %{author_nickname} απέσυρε το προσχέδιο συνεργασίας %{resource_title}."
+          email_subject: Ο συντάκτης %{author_name} %{author_nickname} απέσυρε το προσχέδιο συνεργασίας %{resource_title}.
           notification_title: Ο συντάκτης <a href="%{author_path}">%{author_name} %{author_nickname}</a> <strong>απέσυρε</strong> το προσχέδιο συνεργασίας <a href="%{resource_path}">%{resource_title}</a>.
         creation_enabled:
           email_intro: 'Τώρα μπορείτε να δημιουργήσετε νέες προτάσεις στον χώρο συμμετοχής %{participatory_space_title}! Ξεκινήστε να συμμετέχετε σε αυτήν τη σελίδα:'
@@ -243,8 +244,8 @@ el:
       badges:
         accepted_proposals:
           conditions:
-            - Επιλέξτε τον χώρο συμμετοχής που σας ενδιαφέρει με ενεργοποιημένη την υποβολή προτάσεων
-            - Δοκιμάστε να διατυπώσετε προτάσεις που μπορούν να πραγματοποιηθούν. Με αυτόν τον τρόπο, είναι πιο πιθανό να γίνουν δεκτές.
+          - Επιλέξτε τον χώρο συμμετοχής που σας ενδιαφέρει με ενεργοποιημένη την υποβολή προτάσεων
+          - Δοκιμάστε να διατυπώσετε προτάσεις που μπορούν να πραγματοποιηθούν. Με αυτόν τον τρόπο, είναι πιο πιθανό να γίνουν δεκτές.
           description: Αυτό το έμβλημα χορηγείται όταν συμμετέχετε ενεργά με νέες προτάσεις και αυτές γίνονται δεκτές.
           description_another: Αυτός ο συμμετέχων είχε %{score} αποδεκτές προτάσεις.
           description_own: Διατυπώσατε %{score} αποδεκτές προτάσεις.
@@ -254,12 +255,12 @@ el:
           unearned_own: Δεν έχετε ακόμη αποδεκτές προτάσεις.
         proposal_votes:
           conditions:
-            - Περιηγηθείτε και αφιερώστε λίγο χρόνο διαβάζοντας τις προτάσεις άλλων ατόμων
-            - 
+          - Περιηγηθείτε και αφιερώστε λίγο χρόνο διαβάζοντας τις προτάσεις άλλων ατόμων
+          -
         proposals:
           conditions:
-            - Επιλέξτε τον χώρο συμμετοχής που σας ενδιαφέρει με ενεργοποιημένη την υποβολή προτάσεων
-            - Δημιουργία νέας πρότασης
+          - Επιλέξτε τον χώρο συμμετοχής που σας ενδιαφέρει με ενεργοποιημένη την υποβολή προτάσεων
+          - Δημιουργία νέας πρότασης
           description: Αυτό το έμβλημα χορηγείται όταν συμμετέχετε ενεργά με νέες προτάσεις.
           description_another: Αυτός ο συμμετέχων έχει δημιουργήσει %{score} προτάσεις.
           description_own: Έχετε δημιουργήσει %{score} προτάσεις.
@@ -414,11 +415,11 @@ el:
             success: Επιτυχής διαχωρισμός των προτάσεων σε νέες.
       admin_log:
         proposal:
-          answer: "Ο χρήστης %{user_name} ενημέρωσε την πρόταση %{resource_name} στον χώρο %{space_name}"
-          publish_answer: "Ο χρήστης %{user_name} δημοσίευσε την απάντηση στην πρόταση %{resource_name} στον χώρο %{space_name}"
-          update: "Ο χρήστης %{user_name} ενημέρωσε την επίσημη πρόταση %{resource_name} στον χώρο %{space_name}"
+          answer: Ο χρήστης %{user_name} ενημέρωσε την πρόταση %{resource_name} στον χώρο %{space_name}
+          publish_answer: Ο χρήστης %{user_name} δημοσίευσε την απάντηση στην πρόταση %{resource_name} στον χώρο %{space_name}
+          update: Ο χρήστης %{user_name} ενημέρωσε την επίσημη πρόταση %{resource_name} στον χώρο %{space_name}
         proposal_note:
-          create: "Ο χρήστης %{user_name} άφησε μια ιδιωτική σημείωση στην πρόταση %{resource_name} στον χώρο %{space_name}"
+          create: Ο χρήστης %{user_name} άφησε μια ιδιωτική σημείωση στην πρόταση %{resource_name} στον χώρο %{space_name}
       answers:
         accepted: Έγινε αποδοχή
         evaluating: Αξιολόγηση...
@@ -495,7 +496,7 @@ el:
         requests:
           accepted_request:
             error: Δεν ήταν δυνατή η αποδοχή ως συνεργάτη. Δοκιμάστε ξανά αργότερα.
-            success: "Ο χρήστης @%{user} έγινε δεκτός ως συνεργάτης με επιτυχία."
+            success: Ο χρήστης @%{user} έγινε δεκτός ως συνεργάτης με επιτυχία.
           access_requested:
             error: Δεν ήταν δυνατή η ολοκλήρωση του αιτήματός σας. Δοκιμάστε ξανά αργότερα.
             success: Το αίτημά σας για συνεργασία έχει σταλεί με επιτυχία.

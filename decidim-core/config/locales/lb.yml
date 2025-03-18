@@ -1,3 +1,4 @@
+---
 lb:
   activemodel:
     attributes:
@@ -58,8 +59,8 @@ lb:
         one: Teilnehmer
         other: Teilnehmer
   booleans:
-    'false': 'Nee'
-    'true': 'Jo'
+    'false': Nee
+    'true': Jo
   date:
     buttons:
       select: Wiel
@@ -72,7 +73,7 @@ lb:
   decidim:
     accessibility:
       external_link: Externe Link
-      logo: "Offiziellen Logo vun %{organization}"
+      logo: Offiziellen Logo vun %{organization}
       skip_button: Zum Haapt-Inhalt eriwwergoen
     account:
       delete:
@@ -159,7 +160,7 @@ lb:
       accepted:
         success: D'Ännerung gouf ugeholl.
       amendable:
-        button: '%{model_name} änneren'
+        button: "%{model_name} änneren"
         promote_button: Zu engem %{model_name} befërderen
         promote_confirm_text: Möchten Sie diese Erweiterung wirklich fördern?
       created:
@@ -482,8 +483,7 @@ lb:
           email_intro: En aAdmin huet den %{resource_type} geläscht, well en als %{report_reasons} gemellt gouf.
           email_outro: Du hues dës Noriicht kritt well s'du en Auteur vum geläschten Inhalt bass.
           email_subject: Deng %{resource_type} gouf geläscht
-          notification_title: |-
-            En Admin huet däin %{resource_type} geläscht, well en als %{report_reasons}.</br><i>%{resource_content}</i> gemellt gouf
+          notification_title: En Admin huet däin %{resource_type} geläscht, well en als %{report_reasons}.</br><i>%{resource_content}</i> gemellt gouf
       resource_endorsed:
         email_intro: '%{endorser_name} %{endorser_nickname}, dem s''du nogees, huet grad "%{resource_title}" ënnerstëtzt an mir mengen dat kéint dech interesséieren. Kuck der et mol un an diskutéier mat:'
         email_outro: Du hues dës Noriicht kritt, well s'du dem %{endorser_nickname} nogees. Falls du esou Noriichten net méi wëlls kréien, géi op den Link uewen.
@@ -537,14 +537,14 @@ lb:
           explanation: 'Uleedung fir d''Bild:'
           message_2: Den Programm passt d'Bild un.
       file_validation:
-        allowed_file_extensions: 'Erlaabten Datei-Endungen %{extensions}'
+        allowed_file_extensions: Erlaabten Datei-Endungen %{extensions}
         max_file_size: 'Maximal Datei-Gréisst: %{megabytes}MB'
     gamification:
       all_badges_link: Kuck der all méiglech Ofzeechen un.
       badges:
         followers:
           conditions:
-            - Aktiv sinn an aneren Persounen nogoen dréit dozou bäi, dass aner Persounen dir och noginn.
+          - Aktiv sinn an aneren Persounen nogoen dréit dozou bäi, dass aner Persounen dir och noginn.
           description: Dëst Ofzeechen kritt een, wann eng bestëmmten Zuel vun Leit engem noginn. %{organization_name} ass en sozialt politescht Netzwierk. Spann däin Netz, fir dech mat aneren Mënschen op der der Plattform ze kommunizéieren.
           description_another: Dësen Benotzer huet %{score} Unhänger.
           description_own: "%{score} Benotzer ginn dir no."
@@ -604,7 +604,7 @@ lb:
         screen_reader_explanation: Dat nächst Element ass eng Kaart, déi d'Artikel op dëser Säit a Form vun Kaarten-Punkten duerstellt. Dëst Element kann mat engem Screen-Reader benotzt ginn, mee kann schwéier verständlech sinn.
         skip_button: Kaart iwwersprangen
       static:
-        latlng_text: 'Breedegrad:%{latitude}, Längegrad:%{longitude}'
+        latlng_text: Breedegrad:%{latitude}, Längegrad:%{longitude}
         map_service_brand: Stroosse-Kaart opmaachen
     menu:
       help: Hëllef
@@ -866,7 +866,7 @@ lb:
     user_contact_disabled: Dësen Teilnehmer refuséiert direkt Noriichten.
     user_conversations:
       index:
-        time_ago: "Virun %{time}"
+        time_ago: Virun %{time}
     user_report_mailer:
       notify:
         body_1: Den Benotzer %{user} gouf gemellt vun %{token}

@@ -1,3 +1,4 @@
+---
 it:
   activemodel:
     attributes:
@@ -59,7 +60,7 @@ it:
         other: Partecipanti
   booleans:
     'false': 'No'
-    'true': 'Si'
+    'true': Si
   date:
     buttons:
       close: Chiudere
@@ -73,7 +74,7 @@ it:
   decidim:
     accessibility:
       external_link: Collegamento esterno
-      logo: "Logo ufficiale di %{organization}"
+      logo: Logo ufficiale di %{organization}
       skip_button: Vai al contenuto principale
     account:
       delete:
@@ -186,7 +187,9 @@ it:
             Questo emendamento per il %{amendable_type} %{proposal_link}
             è in fase di valutazione.
           promoted: Promosso a un %{amendable_type}.
-          rejected: "Questa emendazione per lo %{amendable_type} %{amendable_link}\nstata respinta su <strong>%{announcement_date}</strong>."
+          rejected: |-
+            Questa emendazione per lo %{amendable_type} %{amendable_link}
+            stata respinta su <strong>%{announcement_date}</strong>.
           withdrawn: |-
             Questo emendamento per il %{amendable_type} %{proposal_link}
             è stato ritirato dall'autore.
@@ -504,7 +507,7 @@ it:
           email_subject: "%{nickname} ha aggiornato il proprio profilo"
           notification_title: La pagina <a href="%{resource_path}">profilo</a> di %{name} (%{nickname}), che stai seguendo, è stata aggiornata.
         user_officialized:
-          email_subject: ""
+          email_subject: ''
     export_mailer:
       download_your_data_export:
         download: Scaricare
@@ -557,7 +560,7 @@ it:
       badges:
         followers:
           conditions:
-            - Essere attivi e seguire altre persone sicuramente farà sì che altre persone ti seguano.
+          - Essere attivi e seguire altre persone sicuramente farà sì che altre persone ti seguano.
           description: Questo badge è concesso quando raggiungi un certo numero di follower. %{organization_name} è una rete sociale e politica, intreccia la tua rete per comunicare con altre persone nella piattaforma.
           description_another: Questo utente ha %{score} follower.
           description_own: "%{score} utenti ti stanno seguendo."
@@ -925,11 +928,11 @@ it:
     failure:
       already_authenticated: Sei già iscritto.
       inactive: Il tuo account non è ancora attivato.
-      invalid: '%{authentication_keys} o password non validi.'
+      invalid: "%{authentication_keys} o password non validi."
       invited: Hai un invito in sospeso, accettalo per completare la creazione del tuo account.
       last_attempt: Hai ancora un tentativo prima che il tuo account sia bloccato.
       locked: Il tuo account è bloccato.
-      not_found_in_database: '%{authentication_keys} o password non validi.'
+      not_found_in_database: "%{authentication_keys} o password non validi."
     invitations:
       edit:
         header: Completa la creazione del tuo account

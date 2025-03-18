@@ -1,3 +1,4 @@
+---
 zh-CN:
   activemodel:
     attributes:
@@ -5,7 +6,7 @@ zh-CN:
         decidim_user_group_id: 作者
         description: 描述
         offline_votes: 本人签名
-        offline_votes_for_scope: '%{scope_name} 的本人签名'
+        offline_votes_for_scope: "%{scope_name} 的本人签名"
         scope_id: 范围
         signature_end_date: 签名收集期结束
         signature_start_date: 签名收集期的开始
@@ -135,7 +136,7 @@ zh-CN:
             email_subject: 新里程碑已完成！
             notification_title: 您的 <a href="%{resource_path}">%{resource_title}</a> 倡议已经实现了 %{percentage}%的签名。
           follower:
-            email_intro: '%{resource_title} 的倡议已经实现了 %{percentage}%的签名！'
+            email_intro: "%{resource_title} 的倡议已经实现了 %{percentage}%的签名！"
             email_outro: 您收到此通知是因为您正在关注 %{resource_title}。您可以停止收到跟随上一个链接的通知。
             email_subject: 新里程碑已完成！
             notification_title: <a href="%{resource_path}">%{resource_title}</a> 倡议已经实现了 %{percentage}%的签名。
@@ -145,8 +146,8 @@ zh-CN:
       badges:
         initiatives:
           conditions:
-            - 转到Intiatives的参与空间
-            - 跟随步骤创建新的倡议
+          - 转到Intiatives的参与空间
+          - 跟随步骤创建新的倡议
           description: 当你发起新的倡议，与其他人合作执行这些倡议时，将颁发这个徽章。
           description_another: 此参与者已经发布了 %{score} 项倡议。
           name: 已发布的活动
@@ -165,7 +166,7 @@ zh-CN:
         answers:
           edit:
             answer: 答案
-            title: '%{title} 的答案'
+            title: "%{title} 的答案"
           info_initiative:
             created_at: 创建于
             description: 描述
@@ -264,18 +265,18 @@ zh-CN:
         select_initiative_type:
           back: 后退
           choose_html: 我想要创建 <strong>%{title}</strong>
-          more_information: (更多信息)
+          more_information: "(更多信息)"
           select: 我想促进这项倡议
       events:
         create_initiative_event:
           email_intro: "%{author_name} %{author_nickname}，您正在关注这个问题，已经创建了一个新的倡议，查看它并做出贡献："
           email_outro: 您收到此通知是因为您正在关注 %{author_nickname}。您可以停止收到跟随上一个链接的通知。
-          email_subject: '%{author_nickname} 的新举措'
+          email_subject: "%{author_nickname} 的新举措"
           notification_title: <a href="%{resource_path}">%{resource_title}</a> 倡议是由 <a href="%{author_path}">%{author_name} %{author_nickname}</a> 创建的。
         endorse_initiative_event:
           email_intro: "%{author_name} %{author_nickname}，您正在关注这个问题，已经批准了以下倡议，也许您想要为对话做出贡献："
           email_outro: 您收到此通知是因为您正在关注 %{author_nickname}。您可以停止收到跟随上一个链接的通知。
-          email_subject: '%{author_nickname} 认可的倡议'
+          email_subject: "%{author_nickname} 认可的倡议"
           notification_title: <a href="%{resource_path}">%{resource_title}</a> 倡议已被 <a href="%{author_path}">%{author_name} %{author_nickname}</a> 认可。
       initiative_signatures:
         fill_personal_data:
@@ -319,7 +320,7 @@ zh-CN:
             count:
               other: 评论
         orders:
-          label: '对倡议进行排序：'
+          label: 对倡议进行排序：
           most_commented: 最多评论
           most_voted: 最多签名
           random: 随机播放
@@ -345,9 +346,9 @@ zh-CN:
           here: 在这里
         more_information: 这里有更多关于倡议创建过程的信息。
         progress_report_body_for: 倡议 %{title} 已经达到所需签名的 %{percentage}%。
-        progress_report_for: '关于倡议的摘要： %{title}'
+        progress_report_for: 关于倡议的摘要： %{title}
         promotal_committee_help: 请记住，您必须邀请至少 %{member_count} 人加入促销委员会，转发以下链接来邀请人们加入促销者委员会
-        status_change_body_for: '倡议 %{title} 已将其状态更改为 %{state}'
+        status_change_body_for: 倡议 %{title} 已将其状态更改为 %{state}
         status_change_for: 倡议 %{title} 改变了其状态
       modal:
         not_authorized:

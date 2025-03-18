@@ -1,3 +1,4 @@
+---
 zh-TW:
   activemodel:
     attributes:
@@ -120,7 +121,7 @@ zh-TW:
           updated: 最近更新
         show:
           debate_closed: 關閉
-          debate_conclusions_are: '此辯論已於 %{date} 結束，以下是總結結論：'
+          debate_conclusions_are: 此辯論已於 %{date} 結束，以下是總結結論：
           edit_conclusions: 修改結論
           groups_count: 群組
           open: 開放性辯論
@@ -149,31 +150,31 @@ zh-TW:
             email_subject: 新辯論主題「%{resource_title}」，由 %{author_nickname} 建立
             notification_title: <a href="%{author_path}">%{author_name} %{author_nickname}</a> 建立了 <a href="%{resource_path}">%{resource_title}</a> 辯論。
         creation_disabled:
-          email_intro: '在 %{participatory_space_title} 中不再開放建立辯論。您仍可在此頁面參與開放辯論：'
+          email_intro: 在 %{participatory_space_title} 中不再開放建立辯論。您仍可在此頁面參與開放辯論：
           email_outro: 你收到此通知是因為你正在追蹤 %{participatory_space_title}。你可以透過前面的連結停止接收通知。
           email_subject: 在 %{participatory_space_title} 中已停用辯論建立
           notification_title: 辯論建立現在在<a href="%{participatory_space_url}">%{participatory_space_title}</a>已被停用
         creation_enabled:
-          email_intro: '現在您可以在 %{participatory_space_title} 開始新的辯論！在此頁面開始參與：'
+          email_intro: 現在您可以在 %{participatory_space_title} 開始新的辯論！在此頁面開始參與：
           email_outro: 你收到此通知是因為你正在追蹤 %{participatory_space_title}。你可以透過前面的連結停止接收通知。
           email_subject: 在 %{participatory_space_title} 現在可以開始新的辯論！
           notification_title: 您現在可以在<a href="%{participatory_space_url}">%{participatory_space_title}</a>中<a href="%{resource_path}">開始新的辯論</a>。
         debate_closed:
           affected_user:
-            email_intro: '在 "%{resource_title}" 辯論中已經關閉。您可以在其頁面上閱讀結論：'
+            email_intro: 在 "%{resource_title}" 辯論中已經關閉。您可以在其頁面上閱讀結論：
             email_outro: 您收到此通知是因為您正在追蹤「%{resource_title}」辯論。您可以透過上方的連結取消追蹤。
-            email_subject: '%{resource_title} 辯論已結束'
+            email_subject: "%{resource_title} 辯論已結束"
             notification_title: 這個<a href="%{resource_path}">%{resource_title}</a>辯論已經結束。
           follower:
-            email_intro: '在 "%{resource_title}" 辯論中已經關閉。您可以在其頁面上閱讀結論：'
+            email_intro: 在 "%{resource_title}" 辯論中已經關閉。您可以在其頁面上閱讀結論：
             email_outro: 您收到此通知是因為您正在追蹤「%{resource_title}」辯論。您可以透過上方的連結取消追蹤。
-            email_subject: '%{resource_title} 辯論已結束'
+            email_subject: "%{resource_title} 辯論已結束"
             notification_title: 這個<a href="%{resource_path}">%{resource_title}</a>辯論已經結束。
     gamification:
       badges:
         commented_debates:
           conditions:
-            - 選擇一個開放辯論加入
+          - 選擇一個開放辯論加入
           description: 當你在不同辯論中發表評論時，會被授予此徽章。
           description_another: 此參與者已參與了 %{score} 個辯論。
           description_own: 您已經參與了 %{score} 場辯論

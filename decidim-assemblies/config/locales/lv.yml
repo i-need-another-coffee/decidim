@@ -1,3 +1,4 @@
+---
 lv:
   activemodel:
     attributes:
@@ -56,17 +57,17 @@ lv:
   activerecord:
     models:
       decidim/assembly:
-        zero: Asambleja
         one: Asambleja
         other: Asambleja
+        zero: Asambleja
       decidim/assembly_member:
-        zero: Asamblejas dalībnieki
         one: Asamblejas dalībnieks
         other: Asamblejas dalībnieki
+        zero: Asamblejas dalībnieki
       decidim/assembly_user_role:
-        zero: Asamblejas lietotāju lomas
         one: Asamblejas lietotāja loma
         other: Asamblejas lietotāju lomas
+        zero: Asamblejas lietotāju lomas
   decidim:
     admin:
       actions:
@@ -272,8 +273,8 @@ lv:
           promoted_assemblies: Izceltās asamblejas
         order_by_assemblies:
           assemblies:
-            zero: "%{count} asamblejas"
             one: "%{count} asamblejas"
             other: "%{count} asamblejas"
+            zero: "%{count} asamblejas"
       assembly_navigation:
         assembly_member_menu_item: Dalībnieki

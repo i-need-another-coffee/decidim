@@ -1,3 +1,4 @@
+---
 el:
   activemodel:
     attributes:
@@ -182,29 +183,29 @@ el:
         assemblies_types: Τύποι συνέλευσης
     admin_log:
       assembly:
-        create: "Ο χρήστης %{user_name} δημιούργησε τη συνέλευση %{resource_name}"
-        duplicate: "Ο χρήστης %{user_name} αντέγραψε τη συνέλευση %{resource_name}"
-        export: "Ο χρήστης %{user_name} εξήγαγε τη συνέλευση %{resource_name}"
-        import: "Ο χρήστης %{user_name} εισήγαγε τη συνέλευση %{resource_name}"
-        publish: "Ο χρήστης %{user_name} δημοσίευσε τη συνέλευση %{resource_name}"
-        unpublish: "Ο χρήστης %{user_name} κατάργησε τη δημοσίευση της συνέλευσης %{resource_name}"
-        update: "Ο χρήστης %{user_name} ενημέρωσε τη συνέλευση %{resource_name}"
+        create: Ο χρήστης %{user_name} δημιούργησε τη συνέλευση %{resource_name}
+        duplicate: Ο χρήστης %{user_name} αντέγραψε τη συνέλευση %{resource_name}
+        export: Ο χρήστης %{user_name} εξήγαγε τη συνέλευση %{resource_name}
+        import: Ο χρήστης %{user_name} εισήγαγε τη συνέλευση %{resource_name}
+        publish: Ο χρήστης %{user_name} δημοσίευσε τη συνέλευση %{resource_name}
+        unpublish: Ο χρήστης %{user_name} κατάργησε τη δημοσίευση της συνέλευσης %{resource_name}
+        update: Ο χρήστης %{user_name} ενημέρωσε τη συνέλευση %{resource_name}
       assembly_member:
-        create: "Ο χρήστης %{user_name} δημιούργησε το μέλος %{resource_name} στη συνέλευση %{space_name}"
-        delete: "Ο χρήστης %{user_name} κατάργησε το μέλος %{resource_name} από τη συνέλευση %{space_name}"
-        update: "Ο χρήστης %{user_name} ενημέρωσε το μέλος %{resource_name} στη συνέλευση %{space_name}"
+        create: Ο χρήστης %{user_name} δημιούργησε το μέλος %{resource_name} στη συνέλευση %{space_name}
+        delete: Ο χρήστης %{user_name} κατάργησε το μέλος %{resource_name} από τη συνέλευση %{space_name}
+        update: Ο χρήστης %{user_name} ενημέρωσε το μέλος %{resource_name} στη συνέλευση %{space_name}
       assembly_setting:
-        update: "Ο χρήστης %{user_name} ενημέρωσε τις ρυθμίσεις των συνελεύσεων"
+        update: Ο χρήστης %{user_name} ενημέρωσε τις ρυθμίσεις των συνελεύσεων
       assembly_type:
-        create: "Ο χρήστης %{user_name} δημιούργησε τον τύπο συνέλευσης %{resource_name}"
-        delete: "Ο χρήστης %{user_name} αφαίρεσε τον τύπο συνέλευσης %{resource_name}"
-        publish: "Ο χρήστης %{user_name} δημοσίευσε τον τύπο συνέλευσης %{resource_name}"
-        unpublish: "Ο χρήστης %{user_name} κατάργησε τη δημοσίευση του τύπου συνέλευσης %{resource_name}"
-        update: "Ο χρήστης %{user_name} ενημέρωσε τον τύπο συνέλευσης %{resource_name}"
+        create: Ο χρήστης %{user_name} δημιούργησε τον τύπο συνέλευσης %{resource_name}
+        delete: Ο χρήστης %{user_name} αφαίρεσε τον τύπο συνέλευσης %{resource_name}
+        publish: Ο χρήστης %{user_name} δημοσίευσε τον τύπο συνέλευσης %{resource_name}
+        unpublish: Ο χρήστης %{user_name} κατάργησε τη δημοσίευση του τύπου συνέλευσης %{resource_name}
+        update: Ο χρήστης %{user_name} ενημέρωσε τον τύπο συνέλευσης %{resource_name}
       assembly_user_role:
-        create: "Ο χρήστης %{user_name} προσκάλεσε τον/την %{resource_name} στη συνέλευση %{space_name}"
-        delete: "Ο χρήστης %{user_name} κατάργησε τον συμμετέχοντα %{resource_name} από τη συνέλευση %{space_name}"
-        update: "Ο χρήστης %{user_name} άλλαξε τον ρόλο του/της %{resource_name} στη συνέλευση %{space_name}"
+        create: Ο χρήστης %{user_name} προσκάλεσε τον/την %{resource_name} στη συνέλευση %{space_name}
+        delete: Ο χρήστης %{user_name} κατάργησε τον συμμετέχοντα %{resource_name} από τη συνέλευση %{space_name}
+        update: Ο χρήστης %{user_name} άλλαξε τον ρόλο του/της %{resource_name} στη συνέλευση %{space_name}
     assemblies:
       admin:
         assemblies:

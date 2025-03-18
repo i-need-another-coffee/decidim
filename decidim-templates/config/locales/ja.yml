@@ -1,3 +1,4 @@
+---
 ja:
   activemodel:
     attributes:
@@ -62,7 +63,7 @@ ja:
           edit:
             title: 提案回答テンプレートを編集
           form:
-            component_constraint_help: '「提案」型のコンポーネントを持つ参加型スペースのみが表示されることに注意してください。'
+            component_constraint_help: "「提案」型のコンポーネントを持つ参加型スペースのみが表示されることに注意してください。"
             hint1_html: "<strong>%{organization}</strong> は組織名に置き換えられます"
             hint2_html: "<strong>%{name}</strong> は作成者の名前に置き換えられます"
             hint3_html: "<strong>%{admin}</strong> は管理者の名前（提案に回答した者）に置き換えられます"
@@ -100,7 +101,7 @@ ja:
             title: 新しいアンケートテンプレート
           preview:
             current_step: ステップ %{step}
-            of_total_steps: / %{total_steps}
+            of_total_steps: "/ %{total_steps}"
             tos_agreement: 参加することにより、利用規約に同意します。
       admin_log:
         template:

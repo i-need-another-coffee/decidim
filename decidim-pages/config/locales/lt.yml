@@ -1,10 +1,11 @@
+---
 lt:
   activerecord:
     models:
       decidim/pages/page:
-        one: Puslapis
         few: Puslapiai
         many: Puslapiai
+        one: Puslapis
         other: Puslapiai
   decidim:
     admin_log:

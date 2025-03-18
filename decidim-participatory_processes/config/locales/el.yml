@@ -1,3 +1,4 @@
+---
 el:
   activemodel:
     attributes:
@@ -255,29 +256,29 @@ el:
           success: Η πρόσκληση στάλθηκε ξανά με επιτυχία.
     admin_log:
       participatory_process:
-        create: "Ο χρήστης %{user_name} δημιούργησε τη διαδικασία συμμετοχής %{resource_name}"
+        create: Ο χρήστης %{user_name} δημιούργησε τη διαδικασία συμμετοχής %{resource_name}
         duplicate: "%{user_name} αντέγραψε τη %{resource_name} συμμετοχική διεργασία"
         export: "%{user_name} εξήγαγε την %{resource_name} συμμετοχική διεργασία"
         import: "%{user_name} εισήγαγε την %{resource_name} συμμετοχική διεργασία"
-        publish: "Ο χρήστης %{user_name} δημοσίευσε τη διαδικασία συμμετοχής %{resource_name}"
-        unpublish: "Ο χρήστης %{user_name} κατάργησε τη δημοσίευση της διαδικασίας συμμετοχής %{resource_name}"
-        update: "Ο χρήστης %{user_name} ενημέρωσε τη διαδικασία συμμετοχής %{resource_name}"
+        publish: Ο χρήστης %{user_name} δημοσίευσε τη διαδικασία συμμετοχής %{resource_name}
+        unpublish: Ο χρήστης %{user_name} κατάργησε τη δημοσίευση της διαδικασίας συμμετοχής %{resource_name}
+        update: Ο χρήστης %{user_name} ενημέρωσε τη διαδικασία συμμετοχής %{resource_name}
       participatory_process_group:
-        create: "Ο χρήστης %{user_name} δημιούργησε την ομάδα διαδικασίας συμμετοχής %{resource_name}"
-        update: "Ο χρήστης %{user_name} ενημέρωσε την ομάδα διαδικασίας συμμετοχής %{resource_name}"
+        create: Ο χρήστης %{user_name} δημιούργησε την ομάδα διαδικασίας συμμετοχής %{resource_name}
+        update: Ο χρήστης %{user_name} ενημέρωσε την ομάδα διαδικασίας συμμετοχής %{resource_name}
       participatory_process_step:
-        activate: "Ο χρήστης %{user_name} ενεργοποίησε τη φάση %{resource_name} στη διαδικασία συμμετοχής %{space_name}"
-        create: "Ο χρήστης %{user_name} δημιούργησε τη φάση %{resource_name} στη διαδικασία συμμετοχής %{space_name}"
-        delete: "Ο χρήστης %{user_name} διέγραψε τη φάση %{resource_name} στη διαδικασία συμμετοχής %{space_name}"
-        update: "Ο χρήστης %{user_name} ενημέρωσε τη φάση %{resource_name} στη διαδικασία συμμετοχής %{space_name}"
+        activate: Ο χρήστης %{user_name} ενεργοποίησε τη φάση %{resource_name} στη διαδικασία συμμετοχής %{space_name}
+        create: Ο χρήστης %{user_name} δημιούργησε τη φάση %{resource_name} στη διαδικασία συμμετοχής %{space_name}
+        delete: Ο χρήστης %{user_name} διέγραψε τη φάση %{resource_name} στη διαδικασία συμμετοχής %{space_name}
+        update: Ο χρήστης %{user_name} ενημέρωσε τη φάση %{resource_name} στη διαδικασία συμμετοχής %{space_name}
       participatory_process_type:
         create: "%{user_name} δημιούργησε τον %{resource_name} τύπο συμμετοχικής διεργασίας"
         delete: "%{user_name} διέγραψε τον %{resource_name} τύπο συμμετοχικής διεργασίας"
         update: "%{user_name} ενημέρωσε τον %{resource_name} τύπο συμμετοχικής διεργασίας"
       participatory_process_user_role:
-        create: "Ο χρήστης %{user_name} προσκάλεσε τον συμμετέχοντα %{resource_name} στη διαδικασία συμμετοχής %{space_name}"
-        delete: "Ο χρήστης %{user_name} κατάργησε τον συμμετέχοντα %{resource_name} από τη διαδικασία συμμετοχής %{space_name}"
-        update: "Ο χρήστης %{user_name} άλλαξε τον ρόλο του συμμετέχοντα %{resource_name} στη διαδικασία συμμετοχής %{space_name}"
+        create: Ο χρήστης %{user_name} προσκάλεσε τον συμμετέχοντα %{resource_name} στη διαδικασία συμμετοχής %{space_name}
+        delete: Ο χρήστης %{user_name} κατάργησε τον συμμετέχοντα %{resource_name} από τη διαδικασία συμμετοχής %{space_name}
+        update: Ο χρήστης %{user_name} άλλαξε τον ρόλο του συμμετέχοντα %{resource_name} στη διαδικασία συμμετοχής %{space_name}
     events:
       participatory_process:
         role_assigned:

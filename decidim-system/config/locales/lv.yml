@@ -1,3 +1,4 @@
+---
 lv:
   activemodel:
     attributes:
@@ -40,7 +41,7 @@ lv:
       default_pages:
         placeholders:
           content: Lūdzu, pievienojiet nozīmīgu saturu statiskajai lapai %{page} administratora informācijas panelī.
-          title: '%{page} noklusējuma nosaukums'
+          title: "%{page} noklusējuma nosaukums"
       menu:
         admins: Administratori
         dashboard: Informācijas panelis

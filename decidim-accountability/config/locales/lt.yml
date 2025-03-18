@@ -1,3 +1,4 @@
+---
 lt:
   activemodel:
     attributes:
@@ -26,9 +27,9 @@ lt:
   activerecord:
     models:
       decidim/accountability/result:
-        one: Rezultatas
         few: Rezultatai
         many: Rezultatai
+        one: Rezultatas
         other: Rezultatai
   decidim:
     accountability:
@@ -138,9 +139,9 @@ lt:
       import_projects_mailer:
         import:
           added_projects:
-            one: Vienas rezultatas buvo importuotas iš projektų.
             few: "%{count} rezultatai buvo importuoti iš projektų."
             many: "%{count} rezultatų buvo importuoti iš projektų."
+            one: Vienas rezultatas buvo importuotas iš projektų.
             other: "%{count} rezultatai buvo importuoti iš projektų."
           subject: Projektai sėkmingai importuoti
           success: Sėkmingai importuoti projektai į komponento %{component_name} rezultatus. Rezultatus galite peržiūrėti administravimo sąsajoje.
@@ -169,9 +170,9 @@ lt:
       results:
         count:
           results_count:
-            one: 1 rezultatas
             few: "%{count} rezultatai"
             many: "%{count} rezultatai"
+            one: 1 rezultatas
             other: "%{count} rezultatai"
         home_header:
           global_status: Bendra vykdymo būsena
@@ -206,12 +207,12 @@ lt:
         proposal_linked:
           email_intro: 'Pasiūlymas „%{proposal_title}“ įtrauktas į rezultatą. Jį galite pamatyti šiame puslapyje:'
           email_outro: Šį pranešimą gavote dėl to, kad sekate „%{proposal_title}“. Jeigu nebenorite gauti pranešimų, spustelėkite ankstesnę nuorodą.
-          email_subject: '%{proposal_title} atnaujinimas'
+          email_subject: "%{proposal_title} atnaujinimas"
           notification_title: Pasiūlymas <a href="%{proposal_path}">%{proposal_title}</a> įtrauktas į <a href="%{resource_path}">%{resource_title}</a> rezultatą.
         result_progress_updated:
           email_intro: 'Rezultatas „%{resource_title}“, kuris apima pasiūlymą „%{proposal_title}“, dabar %{progress}% gautas. Jį galite pamatyti šiame puslapyje:'
           email_outro: Šį pranešimą gavote dėl to, kad sekate „%{proposal_title}“ ir šis pasiūlymas įtrauktas į rezultatą „%{resource_title}“. Jeigu nebenorite gauti pranešimų, spustelėkite ankstesnę nuorodą.
-          email_subject: '%{resource_title} eigos atnaujinimas'
+          email_subject: "%{resource_title} eigos atnaujinimas"
           notification_title: Rezultatas <a href="%{resource_path}">%{resource_title}</a>, kuris įtraukia pasiūlymą <a href="%{proposal_path}">%{proposal_title}</a>, dabar %{progress}% gautas.
     metrics:
       results:

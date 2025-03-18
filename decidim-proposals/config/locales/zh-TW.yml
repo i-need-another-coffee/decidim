@@ -1,3 +1,4 @@
+---
 zh-TW:
   activemodel:
     attributes:
@@ -38,7 +39,7 @@ zh-TW:
         participatory_text:
           attributes:
             document:
-              allowed_file_content_types: '無效文件類型。只允許使用以下副檔名的文件：%{types}'
+              allowed_file_content_types: 無效文件類型。只允許使用以下副檔名的文件：%{types}
         proposal:
           attributes:
             add_documents:
@@ -108,7 +109,7 @@ zh-TW:
             amendments_wizard_help_text: 修改向導説明文字
             announcement: 公告
             attachments_allowed: 允許附檔
-            collaborative_drafts_enabled: ' 啟用協作草稿'
+            collaborative_drafts_enabled: " 啟用協作草稿"
             comments_enabled: 已啟用留言
             comments_max_length: 評論字數最大長度(若要使用預設值請輸入0)
             default_sort_order: 預設提案排序
@@ -165,7 +166,7 @@ zh-TW:
             endorsements_enabled: 連署已啟用
             proposal_answering_enabled: 提案回答已啟用
             publish_answers_immediately: 立即發布提案回答
-            publish_answers_immediately_help_html: '請注意，如果您在未啟用此功能的情況下回答任何提案，您將需要手動選擇它們並使用發布操作進行發布。有關此操作的更多信息，請參閱 <a href="https://docs.decidim.org/en/admin/components/proposals/answers#_publication" target="_blank">提案答案文檔頁面</a>。'
+            publish_answers_immediately_help_html: 請注意，如果您在未啟用此功能的情況下回答任何提案，您將需要手動選擇它們並使用發布操作進行發布。有關此操作的更多信息，請參閱 <a href="https://docs.decidim.org/en/admin/components/proposals/answers#_publication" target="_blank">提案答案文檔頁面</a>。
             suggested_hashtags: 為新提案建議參與者使用的標籤
     events:
       proposals:
@@ -203,12 +204,12 @@ zh-TW:
           email_subject: "%{author_name} %{author_nickname} 撤回了 %{resource_title} 的協作草稿。"
           notification_title: <a href="%{author_path}">%{author_name} %{author_nickname}</a> <strong>撤回了</strong> <a href="%{resource_path}">%{resource_title}</a> 的協作草稿。
         creation_enabled:
-          email_intro: '你現在可以在 %{participatory_space_title} 中建立新的提案了！開始參與此頁面：'
+          email_intro: 你現在可以在 %{participatory_space_title} 中建立新的提案了！開始參與此頁面：
           email_outro: 你收到此通知是因為你正在追蹤 %{participatory_space_title}。你可以透過前面的連結停止接收通知。
           email_subject: 現在可以在 %{participatory_space_title} 中建立新的提案了！
           notification_title: 現在您可以在<a href="%{participatory_space_url}">%{participatory_space_title}</a>中提出<a href="%{resource_path}">新提案</a>。
         endorsing_enabled:
-          email_intro: '您可以連署 %{participatory_space_title} 中的提案！請點擊以下連結參與：'
+          email_intro: 您可以連署 %{participatory_space_title} 中的提案！請點擊以下連結參與：
           email_outro: 你收到此通知是因為你正在追蹤 %{participatory_space_title}。你可以透過前面的連結停止接收通知。
           email_subject: 已開始對於 %{participatory_space_title} 的提案進行連署
           notification_title: 現在您可以在<a href="%{participatory_space_url}">%{participatory_space_title}</a>中開始<a href="%{resource_path}">連署提案</a>。
@@ -218,7 +219,7 @@ zh-TW:
           email_subject: 你的提案「%{mentioned_proposal_title}」已被提及。
           notification_title: 你的提案「%{mentioned_proposal_title}」在評論中被提及，<a href="%{resource_path}">請至此空間查看</a>。
         proposal_published:
-          email_intro: '%{author_name} %{author_nickname}，你正在關注的用戶，已經發布了一個名為“%{resource_title}”的新提案。快去看看並參與：'
+          email_intro: "%{author_name} %{author_nickname}，你正在關注的用戶，已經發布了一個名為“%{resource_title}”的新提案。快去看看並參與："
           email_outro: 您收到此通知，是因為您正在關注 %{author_nickname}。您可以使用上面的連結停止接收通知。
           email_subject: 新提案「%{resource_title}」由 %{author_nickname} 提交
           notification_title: 提案 <a href="%{resource_path}">%{resource_title}</a> 由 <a href="%{author_path}">%{author_name} %{author_nickname}</a> 提出。
@@ -234,8 +235,8 @@ zh-TW:
       badges:
         accepted_proposals:
           conditions:
-            - 選擇您有興趣的參與空間並啟用提交提案功能
-            - 嘗試提出可以實現的提案，這樣它們更有可能被接受。
+          - 選擇您有興趣的參與空間並啟用提交提案功能
+          - 嘗試提出可以實現的提案，這樣它們更有可能被接受。
           description: 這個徽章是當你積極參與提出新的提案並且這些提案被接受時授予的。
           description_another: 這個參與者有 %{score} 個被接受的提案。
           description_own: 您有 %{score} 個提案被接受。
@@ -245,12 +246,12 @@ zh-TW:
           unearned_own: 你尚未有任何提案被接受。
         proposal_votes:
           conditions:
-            - 瀏覽並花些時間閱讀其他人的提案
-            - 
+          - 瀏覽並花些時間閱讀其他人的提案
+          -
         proposals:
           conditions:
-            - 選擇您有興趣的參與空間並啟用提交提案功能
-            - 提出新的提案
+          - 選擇您有興趣的參與空間並啟用提交提案功能
+          - 提出新的提案
           description: 當您積極參與新提案時，將獲得此徽章。
           description_another: 這個參與者已經創建了 %{score} 個提案。
           description_own: 您已經建立了 %{score} 個提案。
@@ -475,7 +476,7 @@ zh-TW:
         new_collaborative_draft_button:
           new_collaborative_draft: 新的協作草稿
         orders:
-          label: '依序排列草稿：'
+          label: 依序排列草稿：
           most_contributed: 最多貢獻度
           random: 隨機
           recent: 最近
@@ -497,7 +498,12 @@ zh-TW:
           final_proposal: 最終提案
           final_proposal_help_text: 此草案已完成。請查看最終提案。
           hidden_authors_count:
-            other: "one\n以及其他 %{count} 個人\n\nOther\n以及其他 %{count} 個人"
+            other: |-
+              one
+              以及其他 %{count} 個人
+
+              Other
+              以及其他 %{count} 個人
           info-message: 這是一份提案的<strong>共同合作稿件</strong>，這表示您可以使用下面的評論區幫助作者們塑造提案，或直接請求編輯權限以對其進行改進。一旦作者們授予您訪問權限，您便可以對此起草稿進行更改。
           publish: 發布
           publish_info: 發佈這個版本的草案或
@@ -524,7 +530,7 @@ zh-TW:
         success: 提案草案已成功刪除。
       last_activity:
         new_proposal: '新提案:'
-        proposal_updated: '提案更新：'
+        proposal_updated: 提案更新：
       models:
         proposal:
           fields:
@@ -580,7 +586,7 @@ zh-TW:
           send: 繼續
           title: 創建你的提案
         orders:
-          label: '依順序排序提案：'
+          label: 依順序排序提案：
           most_commented: 最多評論
           most_endorsed: 最多已連署
           most_followed: 最多追蹤者
@@ -594,7 +600,11 @@ zh-TW:
           announcement_title: 您的提案尚未發布
           modify: 修改提案
           proposal_edit_before_minutes:
-            other: "One\n提案發布後的前1分鐘內，您可以對其進行編輯。此時間窗口過後，您將無法編輯提案。\nOther\n提案發布後的前 %{count} 分鐘內，您可以對其進行編輯。此時間窗口過後，您將無法編輯提案。"
+            other: |-
+              One
+              提案發布後的前1分鐘內，您可以對其進行編輯。此時間窗口過後，您將無法編輯提案。
+              Other
+              提案發布後的前 %{count} 分鐘內，您可以對其進行編輯。此時間窗口過後，您將無法編輯提案。
           publish: 發布
           title: 發佈您的提案
         proposals:
@@ -605,16 +615,21 @@ zh-TW:
           changes_at_title: 修正案 "%{title}"
           estimated_cost: 預估成本
           hidden_endorsers_count:
-            other: "one\n以及其他 %{count} 個人\n\nOther\n以及其他 %{count} 個人"
+            other: |-
+              one
+              以及其他 %{count} 個人
+
+              Other
+              以及其他 %{count} 個人
           link_to_collaborative_draft_help_text: 這個提案是由協作草稿所產生的。請查看歷史記錄。
           link_to_collaborative_draft_text: 查看協作草稿
           link_to_promoted_emendation_help_text: 這份提案是一項推動性的修正案
           link_to_promoted_emendation_text: 查看被拒絕的修正案。
           link_to_proposal_from_emendation_help_text: 這是一個被拒絕的修改動議
           link_to_proposal_from_emendation_text: 查看提案
-          proposal_accepted_reason: '這個提案已經被接受，因為：'
+          proposal_accepted_reason: 這個提案已經被接受，因為：
           proposal_in_evaluation_reason: 這個提案正在被評估中
-          proposal_rejected_reason: '這個提案被拒絕了，因為：'
+          proposal_rejected_reason: 這個提案被拒絕了，因為：
           withdraw_confirmation_html: 您確定要撤回此提案嗎？<br><br><strong>此操作無法取消！</strong>
         update:
           title: 更新提案
@@ -651,10 +666,10 @@ zh-TW:
       copied_from_component:
         proposal_proposal: 相關提案
       included_projects:
-        project_result: '此專案中顯示的結果：'
+        project_result: 此專案中顯示的結果：
       included_proposals:
-        proposal_project: '出現在這些專案中的提案：'
-        proposal_result: '這些結果中出現的提案：'
+        proposal_project: 出現在這些專案中的提案：
+        proposal_result: 這些結果中出現的提案：
     statistics:
       proposals_accepted: 已通過的提案
       proposals_count: 提案

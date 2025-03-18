@@ -1,3 +1,4 @@
+---
 fr-CA:
   activemodel:
     attributes:
@@ -144,22 +145,7 @@ fr-CA:
         create:
           error: Une erreur s'est produite lors de la création d'une nouvelle organisation.
           error_invitation: Il y a eu un problème lors de la création d'une nouvelle organisation. Vérifiez le nom de l'administrateur de votre organisation.
-          success_html: |
-            <p>
-              Organisation créée avec succès. 
-            </p>
-            <ol>
-              <li>Vous devrez peut-être mettre à jour le code de votre application pour autoriser les requêtes à %{host}, vous devez ajouter ce qui suit à la configuration de votre environnement
-              (ex: <code>config/environment/production.rb</code>) ou votre <code>config/application.rb</code>:
-                <p> config.hosts << "%{host}" </p>
-              </li>
-              <li>
-            Une fois cela fait, vous pourrez accéder à votre plateforme via <a href="http://%{host}">http://%{host}</a>
-              </li>
-              <li>
-                Nous vous avons envoyé un e-mail à <b>%{email}</b> que vous devez confirmer.
-              </li>
-            </ol>
+          success_html: "<p>\n  Organisation créée avec succès. \n</p>\n<ol>\n  <li>Vous devrez peut-être mettre à jour le code de votre application pour autoriser les requêtes à %{host}, vous devez ajouter ce qui suit à la configuration de votre environnement\n  (ex: <code>config/environment/production.rb</code>) ou votre <code>config/application.rb</code>:\n    <p> config.hosts << \"%{host}\" </p>\n  </li>\n  <li>\nUne fois cela fait, vous pourrez accéder à votre plateforme via <a href=\"http://%{host}\">http://%{host}</a>\n  </li>\n  <li>\n    Nous vous avons envoyé un e-mail à <b>%{email}</b> que vous devez confirmer.\n  </li>\n</ol>\n"
         csp_settings:
           connect_src: Connecter src
           connect_src_hint: |

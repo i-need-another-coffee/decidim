@@ -1,3 +1,4 @@
+---
 zh-CN:
   activemodel:
     attributes:
@@ -134,12 +135,12 @@ zh-CN:
     events:
       accountability:
         proposal_linked:
-          email_intro: '提议 "%{proposal_title}" 已被包含在结果中。您可以从这个页面查看：'
+          email_intro: 提议 "%{proposal_title}" 已被包含在结果中。您可以从这个页面查看：
           email_outro: 您收到此通知是因为您正在关注 "%{proposal_title}"。您可以停止收到跟随上一个链接的通知。
           email_subject: 更新到 %{proposal_title}
           notification_title: 提议 <a href="%{proposal_path}">%{proposal_title}</a> 已被包含在 <a href="%{resource_path}">%{resource_title}</a> 结果中。
         result_progress_updated:
-          email_intro: '结果"%{resource_title}", 其中包括"%{proposal_title}", 现在完成了 %{progress}%。你可以从这个页面看到它：'
+          email_intro: 结果"%{resource_title}", 其中包括"%{proposal_title}", 现在完成了 %{progress}%。你可以从这个页面看到它：
           email_outro: 您收到此通知是因为您正在关注"%{proposal_title}"，此建议包含在结果"%{resource_title}"中。 您可以停止接收跟随上一个链接的通知。
           email_subject: 更新到 %{resource_title} 进度
           notification_title: 结果 <a href="%{resource_path}">%{resource_title}</a>, 其中包括提议 <a href="%{proposal_path}">%{proposal_title}</a>, 现在已完成 %{progress}%。

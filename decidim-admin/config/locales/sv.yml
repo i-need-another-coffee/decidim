@@ -1,3 +1,4 @@
+---
 sv:
   activemodel:
     attributes:
@@ -352,7 +353,7 @@ sv:
           unpublished: Ej publicerad
       conflicts:
         attempts: Försök
-        'false': 'Nej'
+        'false': Nej
         index:
           text: Sök efter e-post, namn eller användarnamn.
         managed_user_name: Hanterad användare
@@ -365,7 +366,7 @@ sv:
           reason: Anledning
           success: Överföringen har slutförts.
           title: Överföring
-        'true': 'Ja'
+        'true': Ja
         user_name: Användare
       content_blocks:
         create:
@@ -384,8 +385,8 @@ sv:
       dashboard:
         pending_moderations:
           announcement:
-            one: '%{count} inlägg väntar på moderering'
-            other: '%{count} inlägg väntar på moderering'
+            one: "%{count} inlägg väntar på moderering"
+            other: "%{count} inlägg väntar på moderering"
           goto_moderation: Gå till global moderering
           title: Inväntar moderering
         show:
@@ -410,13 +411,13 @@ sv:
         invitation_accepted_at_present:
           label: Inbjudan har accepterats
           values:
-            'false': 'Nej'
-            'true': 'Ja'
+            'false': Nej
+            'true': Ja
         last_sign_in_at_present:
           label: Senast inloggad
           values:
-            'false': 'Nej'
-            'true': 'Ja'
+            'false': Nej
+            'true': Ja
         moderated_users:
           reports_reason_eq:
             label: Anledning till anmälan
@@ -961,7 +962,7 @@ sv:
             explanation: Det finns %{count} privata deltagare.
             title: Radera privata deltagare
           example_file: 'Exempelfil:'
-          explanation: 'Skicka din CSV-fil. Den behöver ha två kolumner för användare som du vill lägga till, utan rubriker, med e-postadressen i den första kolumnen och namnet i den sista kolumnen. Undvik specialtecken som `<>?%&^*#@()[]=+:;"{}\|` i användarnamn.'
+          explanation: Skicka din CSV-fil. Den behöver ha två kolumner för användare som du vill lägga till, utan rubriker, med e-postadressen i den första kolumnen och namnet i den sista kolumnen. Undvik specialtecken som `<>?%&^*#@()[]=+:;"{}\|` i användarnamn.
           explanation_example: |
             jon.andersson@example.org%{csv_col_sep}Jon Andersson
             jenny.andersson@example.org%{csv_col_sep}Jenny Andersson
@@ -1037,11 +1038,11 @@ sv:
           custom_expiration: Anpassat utgångsdatum
           custom_token: Anpassat ord
           expires_at: Förfaller
-          'false': 'Nej'
+          'false': Nej
           never_expire: Aldrig
           registered_only: Endast registrerade?
           token: Åtkomstkod
-          'true': 'Ja'
+          'true': Ja
         index:
           back_to_share_tokens: Tillbaka till åtkomstlänkar
           copied: Åtkomstlänken har kopierats!

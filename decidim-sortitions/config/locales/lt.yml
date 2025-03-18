@@ -1,3 +1,4 @@
+---
 lt:
   activemodel:
     attributes:
@@ -14,9 +15,9 @@ lt:
   activerecord:
     models:
       decidim/sortitions/sortition:
-        one: Sprendimas burtų keliu
         few: Sprendimai burtų keliu
         many: Sprendimai burtų keliu
+        one: Sprendimas burtų keliu
         other: Sprendimai burtų keliu
   decidim:
     components:
@@ -33,7 +34,7 @@ lt:
         sortition_created:
           email_intro: Erdvėje „%{participatory_space_title}“, kurią sekate, pridėta sprendimo burtų keliu funkcija „%{resource_title}“.
           email_outro: Gavote šį pranešimą nes sekate %{participatory_space_title}. Galite nebesekti paspaudę and ankstesnės nuorodos.
-          email_subject: '%{participatory_space_title} pridėtas nauja sprendimo burtų keliu funkcija'
+          email_subject: "%{participatory_space_title} pridėtas nauja sprendimo burtų keliu funkcija"
           notification_title: '%{participatory_space_title} pridėta <a href="%{resource_path}">%{resource_title}</a> sprendimo burtų keliu funkcija'
     sortitions:
       admin:
@@ -89,9 +90,9 @@ lt:
       sortitions:
         count:
           proposals_count:
-            one: 1 pasiūlymas
             few: "%{count} pasiūlymai"
             many: "%{count} pasiūlymai"
+            one: 1 pasiūlymas
             other: "%{count} pasiūlymai"
         filters:
           active: Aktyvūs
@@ -107,9 +108,9 @@ lt:
           recent: Naujausi
         results_count:
           count:
-            one: pasirinktas pasiūlymas
             few: pasirinkti pasiūlymai
             many: pasirinkti pasiūlymai
+            one: pasirinktas pasiūlymas
             other: pasirinkti pasiūlymai
         show:
           algorithm: Galimybės spręsti burtų keliu algoritmo kodas
@@ -123,14 +124,14 @@ lt:
           mathematical_result: Rezultatas (1) x (2)
           proposals_selected_by_sortition: Pasiūlymai pasirinkti burtų keliu
           sortition_reproducibility_details: Rūšiavimo atkuriamumo detalės
-          time_seed: (2) Time seed
+          time_seed: "(2) Time seed"
           witnesses: Liudytojai
         sortition:
           random_seed: Atsitiktinė vertė
           selected_proposals:
-            one: pasiūlymas pasirinktas
             few: pasiūlymai pasirinkti
             many: pasiūlymai pasirinkti
+            one: pasiūlymas pasirinktas
             other: pasiūlymai pasirinkti
         sortition_author:
           deleted: Ištrintas dalyvis
@@ -138,9 +139,9 @@ lt:
           deleted: Ištrintas dalyvis
         sortitions_count:
           count:
-            one: 1 pasirinkimas burtų keliu
             few: "%{count} pasirinkimai burtų keliu"
             many: "%{count} pasirinkimų burtų keliu"
+            one: 1 pasirinkimas burtų keliu
             other: "%{count} pasirinkimai burtų keliu"
     statistics:
       sortitions_count: Pasirinkimai burtų keliu

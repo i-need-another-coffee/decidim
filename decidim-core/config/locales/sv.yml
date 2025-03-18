@@ -1,3 +1,4 @@
+---
 sv:
   activemodel:
     attributes:
@@ -77,8 +78,8 @@ sv:
         one: Deltagare
         other: Deltagare
   booleans:
-    'false': 'Nej'
-    'true': 'Ja'
+    'false': Nej
+    'true': Ja
   date:
     buttons:
       close: Stäng
@@ -354,9 +355,10 @@ sv:
             Detta ändringsförslag till %{amendable_type} %{proposal_link}
             utvärderas just nu.
           promoted: Gör till ett %{amendable_type}.
-          rejected: "Detta ändringsförslag till %{amendable_type} %{amendable_link}\navslogs <strong>%{announcement_date}</strong>."
-          withdrawn: |-
-            Detta ändringsförslag till %{amendable_type} %{proposal_link} har dragits tillbaka av författaren.
+          rejected: |-
+            Detta ändringsförslag till %{amendable_type} %{amendable_link}
+            avslogs <strong>%{announcement_date}</strong>.
+          withdrawn: Detta ändringsförslag till %{amendable_type} %{proposal_link} har dragits tillbaka av författaren.
       name: Ändringsförslag
       new:
         send: Skapa
@@ -910,8 +912,8 @@ sv:
       no_followers: Inga följare än.
     following:
       following_count:
-        one: "Följer %{count}"
-        other: "Följer %{count}"
+        one: Följer %{count}
+        other: Följer %{count}
       no_followings: Följer inte någon eller något än.
       non_public_followings: Vissa resurser som följs är inte offentliga.
     follows:
@@ -926,8 +928,8 @@ sv:
       attachment_link:
         explanation: Instruktioner för bifogade länkar
         help_messages:
-          - Endast korrekta URL-format accepteras.
-          - Observera att länkarna måste vara offentliga så att alla deltagare kan komma åt dem.
+        - Endast korrekta URL-format accepteras.
+        - Observera att länkarna måste vara offentliga så att alla deltagare kan komma åt dem.
       errors:
         decidim/user:
           password: Lösenordet är för kort.
@@ -976,7 +978,7 @@ sv:
       badges:
         followers:
           conditions:
-            - Bästa sättet att få andra att följa dig är att vara aktiv och följa andra människor.
+          - Bästa sättet att få andra att följa dig är att vara aktiv och följa andra människor.
           description: Du får detta märke när du når ett visst antal följare. %{organization_name} är ett socialt och politiskt nätverk, spinn ditt nät genom att kommunicera med andra personer på plattformen.
           description_another: Deltagaren har %{score} följare.
           description_own: "%{score} personer följer dig."
@@ -1565,8 +1567,8 @@ sv:
         confirm_new_password: Bekräfta nytt lösenord
         new_password: Nytt lösenord
         old_password_help: För att bekräfta ändringarna av ditt konto, vänligen ange ditt nuvarande lösenord.
-        password_help: "Minst %{minimum_characters} tecken, får inte vara för vanligt (som 123456) och måste skilja sig från ditt användarnamn och din e-postadress."
-        password_help_admin: "Minst %{minimum_characters} tecken, får inte vara för vanligt (som 123456) och måste skilja sig från ditt användarnamn och din e-postadress."
+        password_help: Minst %{minimum_characters} tecken, får inte vara för vanligt (som 123456) och måste skilja sig från ditt användarnamn och din e-postadress.
+        password_help_admin: Minst %{minimum_characters} tecken, får inte vara för vanligt (som 123456) och måste skilja sig från ditt användarnamn och din e-postadress.
         title: Ändra lösenord
       new:
         forgot_your_password: Glömt ditt lösenord?

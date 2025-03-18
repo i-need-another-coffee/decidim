@@ -1,3 +1,4 @@
+---
 cs:
   activemodel:
     attributes:
@@ -72,19 +73,19 @@ cs:
   activerecord:
     models:
       decidim/participatory_process:
-        one: Participační proces
         few: Participativní procesy
         many: Participativní procesy
+        one: Participační proces
         other: Participativní procesy
       decidim/participatory_process_group:
-        one: Skupina účastnických procesů
         few: Skupiny účastnických procesů
         many: Skupiny účastnických procesů
+        one: Skupina účastnických procesů
         other: Skupiny účastnických procesů
       decidim/participatory_process_step:
-        one: Krok
         few: Kroky
         many: Kroky
+        one: Krok
         other: Kroky
   decidim:
     admin:
@@ -411,9 +412,9 @@ cs:
         title:
           meta_scope: Oblast působnosti
           participatory_processes:
-            one: 1 proces
             few: "%{count} procesy"
             many: "%{count} procesů"
+            one: 1 proces
             other: "%{count} procesy"
       show:
         title: Skupiny účastnických procesů
@@ -498,24 +499,24 @@ cs:
           all_types: Všechny typy
           counters:
             active:
-              one: 1 aktivní proces
               few: "%{count} aktivních procesů"
               many: "%{count} aktivních procesů"
+              one: 1 aktivní proces
               other: "%{count} aktivních procesů"
             all:
-              one: 1
               few: "%{count} procesů"
               many: "%{count} procesů"
+              one: 1
               other: "%{count} procesů"
             past:
-              one: 1 minulý proces
               few: "%{count} minulých procesů"
               many: "%{count} minulých procesů"
+              one: 1 minulý proces
               other: "%{count} minulých procesů"
             upcoming:
-              one: 1 nadcházející proces
               few: "%{count} nadcházejících procesů"
               many: "%{count} nadcházejících procesů"
+              one: 1 nadcházející proces
               other: "%{count} nadcházejících procesů"
           date: Datum
           explanations:

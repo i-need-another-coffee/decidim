@@ -1,3 +1,4 @@
+---
 eo:
   activemodel:
     attributes:
@@ -41,8 +42,8 @@ eo:
         password_confirmation: Pasvorta konfirmo
         remember_me: Memori min
   booleans:
-    'false': 'Ne'
-    'true': 'Jes'
+    'false': Ne
+    'true': Jes
   date:
     formats:
       decidim_short: "%d/%m/%Y"

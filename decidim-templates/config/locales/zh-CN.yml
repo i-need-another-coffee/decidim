@@ -1,3 +1,4 @@
+---
 zh-CN:
   decidim:
     admin:
@@ -44,7 +45,7 @@ zh-CN:
             title: 问卷模板
           preview:
             current_step: 步骤 %{step}
-            of_total_steps: '%{total_steps}'
+            of_total_steps: "%{total_steps}"
             tos_agreement: 通过参与您接受其服务条款
       template_types:
         questionnaires: Questionnaires

@@ -1,3 +1,4 @@
+---
 zh-TW:
   activemodel:
     models:
@@ -27,7 +28,7 @@ zh-TW:
           email_subject: 在 %{participatory_space_title} 中的調查已完成。
           notification_title: 在<a href="%{participatory_space_url}">%{participatory_space_title}</a>中的調查<a href="%{resource_path}">%{resource_title}</a>已結束。
         survey_opened:
-          email_intro: '在<a href="%{participatory_space_url}">%{participatory_space_title}</a>中開始了新的調查。'
+          email_intro: 在<a href="%{participatory_space_url}">%{participatory_space_title}</a>中開始了新的調查。
           email_outro: 你收到此通知是因為你正在追蹤 %{participatory_space_title}。你可以透過前面的連結停止接收通知。
           email_subject: 在%{participatory_space_title} 中的新調查
           notification_title: 現在開放在<a href="%{participatory_space_url}">%{participatory_space_title}</a>中的<a href="%{resource_path}">%{resource_title}</a>調查。
@@ -47,7 +48,7 @@ zh-TW:
             invalid: 儲存問卷時出現問題。
             success: 問卷成功儲存
       last_activity:
-        new_survey: '新問卷調查'
+        new_survey: 新問卷調查
       surveys:
         answer:
           invalid: 回答問卷時出現問題。

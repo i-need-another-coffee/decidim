@@ -1,3 +1,4 @@
+---
 eu:
   activemodel:
     attributes:
@@ -403,7 +404,7 @@ eu:
             decline: Baztertu gonbidapena '%{conference_title}'
             invited_existing_user_to_join_a_conference: "%{invited_by} k zu gonbidatu zaitu %{application} jardunaldira. Beheko esteken bidez baztertu edo onartu dezakezu."
             invited_user_to_join_a_conference: "%{invited_by} k zu gonbidatu zaitu %{application} jardunaldira. Beheko estekan onartu dezakezu."
-            registration: '''%{conference_title}'' izen-ematea'
+            registration: "'%{conference_title}' izen-ematea"
         partners:
           index:
             title: Kideak
@@ -436,7 +437,7 @@ eu:
       conference_registration_mailer:
         confirmation:
           confirmed_html: Zure jardunaldirako izena emateko <a href="%{url}">%{title}</a> baieztatu da.
-          details_1: '%{registration_type} motako jardunaldian erregistratuta zaude. %{price} kostua dauka eta ondorengo ekitaldietara jo dezakezu:'
+          details_1: "%{registration_type} motako jardunaldian erregistratuta zaude. %{price} kostua dauka eta ondorengo ekitaldietara jo dezakezu:"
           details_2: Jardunaldiaren xehetasunak eranskinean aurkituko dituzu.
         pending_validation:
           confirmation_pending: Berrespena jasoko duzu laster
@@ -476,7 +477,7 @@ eu:
         show:
           already_have_an_account?: Ba al duzu kontu bat?
           are_you_new?: Beste parte-hartzaile bat?
-          login_as: '%{name} <%{email}> gisa erregistratuta zaude'
+          login_as: "%{name} <%{email}> gisa erregistratuta zaude"
           make_conference_registration: Eman izena jardunaldian
           manage_registration: Erregistroa kudeatu
           register: Eman izena
@@ -651,7 +652,7 @@ eu:
           promoted_conferences: Sustatutako jardunaldiak
         order_by_conferences:
           conferences:
-            one: "Jardunaldi %{count}"
+            one: Jardunaldi %{count}
             other: "%{count} jardunaldi"
       conferences_nav:
         conference_partners_menu_item: Kideak

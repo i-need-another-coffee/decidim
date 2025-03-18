@@ -1,3 +1,4 @@
+---
 hu:
   activemodel:
     attributes:
@@ -176,11 +177,11 @@ hu:
       badges:
         initiatives:
           conditions:
-            - Menjen az Intiatives részvételi helyére
-            - Kövesse az új kezdeményezés létrehozásához szükséges lépéseket
+          - Menjen az Intiatives részvételi helyére
+          - Kövesse az új kezdeményezés létrehozásához szükséges lépéseket
           description: Ezt a jelvényt akkor kapja meg, ha új kezdeményezéseket indít el, és másokkal partnerséget hajt végre.
           description_another: Ez a résztvevő %{score} kezdeményezést tett közzé.
-          description_own: '%{score} kezdeményezésed van közzétéve.'
+          description_own: "%{score} kezdeményezésed van közzétéve."
           name: Közzétett kezdeményezések
           next_level_in: Szerezz még %{score} kezdeményezéseket a következő szint eléréséhez!
           unearned_another: Ez a résztvevő még nem tett közzé semmilyen kezdeményezést.
@@ -339,7 +340,7 @@ hu:
         select_initiative_type:
           back: Vissza
           choose_html: Szeretnék létrehozni egy <strong>%{title}</strong>
-          more_information: (További információk)
+          more_information: "(További információk)"
           new: Új kezdeményezés létrehozása
           select: Szeretném támogatni ezt a kezdeményezést
       edit:
@@ -355,27 +356,27 @@ hu:
       events:
         approve_membership_request:
           email_intro: "%{author_nickname} elfogadta a jelentkezésedet, hogy részt vegyen a %{resource_title} kezdeményezést előterjesztő bizottságban."
-          email_outro: 'Ezt az értesítést azért kaptad, mert jelentkeztél a %{resource_title} kezdeményezéshez'
+          email_outro: Ezt az értesítést azért kaptad, mert jelentkeztél a %{resource_title} kezdeményezéshez
           email_subject: "%{author_nickname} elfogadta a jelentkezésedet az előterjesztő bizottságba"
           notification_title: <a href="%{author_profile_url}">%{author_nickname}</a> elfogadta a jelentkezésedet a <a href="%{resource_url}">%{resource_title}</a> kezdeményezés előterjesztő bizottságába.
         create_initiative_event:
           email_intro: "%{author_name} %{author_nickname} (akit követsz) új kezdeményezést hozott létre, nézd meg és tegyél hozzá valamit:"
           email_outro: 'Ezt az értesítést azért kaptad, mert őt követed: "%{author_nickname}". Az értesítéseket a következő linkre kattintva kapcsolhatod ki.'
-          email_subject: '%{author_nickname} új kezdeményezést indított'
+          email_subject: "%{author_nickname} új kezdeményezést indított"
           notification_title: 'A(z) <a href="%{resource_path}">%{resource_title}</a>kezdeményezés létrejött itt, általa: <a href="%{author_path}">%{author_name} %{author_nickname}</a>.'
         endorse_initiative_event:
           email_intro: "%{author_name} %{author_nickname} (akit követsz) támogatta a következő kezdeményezést, nézd meg és tegyél hozzá te is valamit a beszélgetéshez:"
           email_outro: 'Ezt az értesítést azért kaptad, mert őt követed: "%{author_nickname}". Az értesítéseket a következő linkre kattintva kapcsolhatod ki.'
-          email_subject: '%{author_nickname} támogatta a kezdeményezést'
+          email_subject: "%{author_nickname} támogatta a kezdeményezést"
           notification_title: 'A(z) <a href="%{resource_path}">%{resource_title}</a>kezdeményezést támogatta: <a href="%{author_path}">%{author_name} %{author_nickname}</a>.'
         revoke_membership_request:
           email_intro: "%{author_nickname} visszautasította a jelentkezésedet, hogy részt vegyél a %{resource_title} kezdeményezést előterjesztő bizottságban."
-          email_outro: 'Ezt az értesítést azért kaptad, mert jelentkeztél a %{resource_title} kezdeményezéshez.'
+          email_outro: Ezt az értesítést azért kaptad, mert jelentkeztél a %{resource_title} kezdeményezéshez.
           email_subject: "%{author_nickname} visszautasította a jelentkezésedet az előterjesztő bizottságba"
           notification_title: <a href="%{author_profile_url}">%{author_nickname}</a> visszautasította a jelentkezésedet a <a href="%{resource_url}">%{resource_title}</a> kezdeményezés előterjesztő bizottságába.
         spawn_committee_request_event:
           email_intro: "%{applicant_nickname} a %{resource_title} kezdeményezésed előterjesztő bizottságába jelentkezett. Az elfogadást vagy visszautasítását a kezdeményezésed szerkesztésénél teheted meg."
-          email_outro: 'Ezt az értesítést azért kaptad, mert Te vagy a %{resource_title} kezdeményezés elindítója.'
+          email_outro: Ezt az értesítést azért kaptad, mert Te vagy a %{resource_title} kezdeményezés elindítója.
           email_subject: "%{applicant_nickname} szeretne csatlakozni a kezdeményezésedhez"
           notification_title: <a href="%{applicant_profile_url}">%{applicant_nickname}</a> a <a href="%{resource_url}"> %{resource_title}</a> kezdeményezésed előterjesztő bizottságába jelentkezett. Az elfogadáshoz vagy elutasításhoz kattints <a href="%{resource_url}/edit">ide</a>.
       initiative_signatures:
@@ -516,7 +517,7 @@ hu:
         finish: Befejezés
         sms_code: SMS-kód ellenőrzése
         sms_phone_number: Mobiltelefonszám
-        title: '%{initiative_title} kezdeményezés aláírása'
+        title: "%{initiative_title} kezdeményezés aláírása"
       initiatives:
         no_initiatives_yet:
           no_initiatives_yet: Még nincs kezdeményezés!

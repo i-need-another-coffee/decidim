@@ -1,3 +1,4 @@
+---
 hu:
   activemodel:
     attributes:
@@ -283,7 +284,7 @@ hu:
           already_reported_html: Ezt a műveletet folytatva elrejti a résztvevők összes tartalmát is.
           description: Egy felhasználó letiltása használhatatlanná teszi a fiókját. Az indoklásban megadhat bármilyen iránymutatást arra vonatkozóan, hogy miként lehetne feloldani a felhasználó blokkolását.
           justification: Indoklás
-          title: '%{name} felhasználó blokkolása'
+          title: "%{name} felhasználó blokkolása"
       categories:
         index:
           categories_title: Kategóriák
@@ -310,7 +311,7 @@ hu:
             type: Elem típusa
         new:
           add: Elem hozzáadása
-          title: '%{name} nevű elem hozzáadása'
+          title: "%{name} nevű elem hozzáadása"
         publish:
           success: Az elem közzététele sikeres volt.
         title: Elemek
@@ -321,7 +322,7 @@ hu:
           success: Az elem frissítése sikeres volt.
       conflicts:
         attempts: Próbálkozások
-        'false': 'Nincs'
+        'false': Nincs
         managed_user_name: Kezelt felhasználó
         solved: Megoldva
         title: Ellenőrzési konfliktusok
@@ -332,7 +333,7 @@ hu:
           reason: Ok
           success: Az átvitel sikeresen befejezve.
           title: Átvezetés
-        'true': 'Igen'
+        'true': Igen
         user_name: Felhasználó
       content_blocks:
         create:
@@ -373,13 +374,13 @@ hu:
         invitation_accepted_at_present:
           label: Meghívás elfogadva
           values:
-            'false': 'Nem'
-            'true': 'Igen'
+            'false': Nem
+            'true': Igen
         last_sign_in_at_present:
           label: Valaha bejelentkezett
           values:
-            'false': 'Nincs'
-            'true': 'Igen'
+            'false': Nincs
+            'true': Igen
         moderated_users:
           reports_reason_eq:
             label: A jelentés oka
@@ -480,7 +481,7 @@ hu:
             detail: Kérjük, csak egyszer ellenőrizze, hogy a fájl tartalmazza-e a szükséges oszlopokat vagy fejléceket.
             message:
               one: Oszlop megkettőzése %{columns}.
-              other: '%{columns} Oszlopok megkettőzése.'
+              other: "%{columns} Oszlopok megkettőzése."
           invalid_indexes:
             lines:
               detail: Ellenőrizze a sorok helyes formázását, valamint hogy érvényes rekordokat tartalmaznak.
@@ -832,10 +833,10 @@ hu:
             button: Az összes privát felhasználó törlése
             confirm: Biztos, hogy törölni szeretné az összes privát résztvevőt? Ezt a műveletet nem lehet visszacsinálni, nem tudja majd visszaállítani őket.
             empty: Nincsenek privát résztvevők.
-            explanation: '%{count} privát résztvevője van.'
+            explanation: "%{count} privát résztvevője van."
             title: Privát felhasználók törlése
           example_file: 'Példa fájl:'
-          explanation: 'Töltse fel a CSV-fájlt. Két oszlopnak kell lennie, a fájl első oszlopában az e-mail címmel, a fájl utolsó oszlopában pedig a nevével azoknak a felhasználóknak, akiket hozzá szeretne adni a részvételi térhez, fejlécek nélkül. Kerülje az olyan érvénytelen karakterek használatát, mint a `<>?%&^*#@()[]=+:;"{}\|` a felhasználói névben.'
+          explanation: Töltse fel a CSV-fájlt. Két oszlopnak kell lennie, a fájl első oszlopában az e-mail címmel, a fájl utolsó oszlopában pedig a nevével azoknak a felhasználóknak, akiket hozzá szeretne adni a részvételi térhez, fejlécek nélkül. Kerülje az olyan érvénytelen karakterek használatát, mint a `<>?%&^*#@()[]=+:;"{}\|` a felhasználói névben.
           explanation_example: |
             ohn.doe@example.org%{csv_col_sep}John Doe
             jane.doe@example.org%{csv_col_sep}Jane Doe

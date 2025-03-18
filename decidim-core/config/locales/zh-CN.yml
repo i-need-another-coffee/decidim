@@ -1,3 +1,4 @@
+---
 zh-CN:
   activemodel:
     attributes:
@@ -50,8 +51,8 @@ zh-CN:
       decidim/user:
         other: 参加者
   booleans:
-    'false': '否'
-    'true': '否'
+    'false': 否
+    'true': 否
   date:
     buttons:
       select: 选择
@@ -159,7 +160,7 @@ zh-CN:
           help_text: 审查更改并接受或拒绝此修正案。通知将发送给其作者。
         announcement:
           promoted: 晋升到 %{amendable_type}。
-          rejected: '%{amendable_type} %{proposal_link} 的这个修改在 <strong>%{date}</strong> 被拒绝。'
+          rejected: "%{amendable_type} %{proposal_link} 的这个修改在 <strong>%{date}</strong> 被拒绝。"
       new:
         send: 创建
         title: 创建修正草稿
@@ -259,7 +260,7 @@ zh-CN:
           post: 帖子
           proposal: 建议
           question: 问
-        title: '显示：'
+        title: 显示：
       dummy:
         actions:
           bar: 条形图
@@ -341,8 +342,8 @@ zh-CN:
           see_email: 查看您的电子邮件
           see_name: 查看您的名字
           see_username: 查看您的昵称
-          this_application_will_be_able_to: '此应用程序将能够：'
-          this_application_will_not_be_able_to: '此应用程序将无法：'
+          this_application_will_be_able_to: 此应用程序将能够：
+          this_application_will_not_be_able_to: 此应用程序将无法：
           update_profile: 更新您的个人资料
           wants_to_use_your_account_html: "<strong>%{application_name}</strong> 想要使用您的帐户"
     download_your_data:
@@ -358,55 +359,55 @@ zh-CN:
       amendments:
         amendment_accepted:
           affected_user:
-            email_intro: '%{amendable_title}的修改已被接受。您可以从这个页面查看：'
+            email_intro: "%{amendable_title}的修改已被接受。您可以从这个页面查看："
             email_outro: 您收到此通知是因为您是 %{amendable_title} 的作者。
             email_subject: 接受来自 %{amendable_title} 的 %{emendation_author_nickname} 修正案
             notification_title: 由 <a href="%{emendation_author_path}">%{emendation_author_nickname}</a> 创建的 <a href="%{emendation_path}">修正</a> 已被接受 <a href="%{amendable_path}">%{amendable_title}</a>。
           follower:
-            email_intro: '%{amendable_title}的修改已被接受。您可以从这个页面查看：'
+            email_intro: "%{amendable_title}的修改已被接受。您可以从这个页面查看："
             email_outro: 您收到此通知是因为您正在关注 %{amendable_title}。您可以停止收到跟随上一个链接的通知。
             email_subject: 接受来自 %{amendable_title} 的 %{emendation_author_nickname} 修正案
             notification_title: 由 <a href="%{emendation_author_path}">%{emendation_author_nickname}</a> 创建的 <a href="%{emendation_path}">修正</a> 已被接受 <a href="%{amendable_path}">%{amendable_title}</a>。
         amendment_created:
           affected_user:
-            email_intro: '已经为 %{amendable_title}创建了一个新的版本。您可以从这个页面查看它：'
+            email_intro: 已经为 %{amendable_title}创建了一个新的版本。您可以从这个页面查看它：
             email_outro: 您收到此通知是因为您是 %{amendable_title} 的作者。
-            email_subject: '%{amendable_title} 的新修改'
+            email_subject: "%{amendable_title} 的新修改"
             notification_title: 已为 <a href="%{amendable_path}">%{amendable_title}</a> 创建了一个新的修正。
           follower:
-            email_intro: '已经为 %{amendable_title}创建了一个新的版本。您可以从这个页面查看它：'
+            email_intro: 已经为 %{amendable_title}创建了一个新的版本。您可以从这个页面查看它：
             email_outro: 您收到此通知是因为您正在关注 %{amendable_title}。您可以停止收到跟随上一个链接的通知。
-            email_subject: '%{amendable_title} 的新修改'
+            email_subject: "%{amendable_title} 的新修改"
             notification_title: 已为 <a href="%{amendable_path}">%{amendable_title}</a> 创建了一个新的修正。
         amendment_promoted:
           affected_user:
-            email_intro: '%{amendable_title} 的被拒绝的修订已经发布为新的 %{amendable_type}。您可以从这个页面查看：'
+            email_intro: "%{amendable_title} 的被拒绝的修订已经发布为新的 %{amendable_type}。您可以从这个页面查看："
             email_outro: 您收到此通知是因为您是 %{amendable_title} 的作者。
             email_subject: 来自 %{emendation_author_nickname} 的修订已经发布为新的 %{amendable_type}
           follower:
-            email_intro: '%{amendable_title} 的被拒绝的修订已经发布为新的 %{amendable_type}。您可以从这个页面查看：'
+            email_intro: "%{amendable_title} 的被拒绝的修订已经发布为新的 %{amendable_type}。您可以从这个页面查看："
             email_outro: 您收到此通知是因为您正在关注 %{amendable_title}。您可以停止收到跟随上一个链接的通知。
             email_subject: 来自 %{emendation_author_nickname} 的修订已经发布为新的 %{amendable_type}
         amendment_rejected:
           affected_user:
-            email_intro: '%{amendable_title}的修订已被拒绝。您可以从这个页面查看：'
+            email_intro: "%{amendable_title}的修订已被拒绝。您可以从这个页面查看："
             email_outro: 您收到此通知是因为您是 %{amendable_title} 的作者。
-            email_subject: '%{amendable_title} 的 %{emendation_author_nickname} 修正案被拒绝'
+            email_subject: "%{amendable_title} 的 %{emendation_author_nickname} 修正案被拒绝"
             notification_title: 由 <a href="%{emendation_author_path}">%{emendation_author_nickname}</a> 创建的 <a href="%{emendation_path}">项修正</a> 已被 <a href="%{amendable_path}">%{amendable_title}</a> 拒绝。
           follower:
-            email_intro: '%{amendable_title}的修订已被拒绝。您可以从这个页面查看：'
+            email_intro: "%{amendable_title}的修订已被拒绝。您可以从这个页面查看："
             email_outro: 您收到此通知是因为您正在关注 %{amendable_title}。您可以停止收到跟随上一个链接的通知。
-            email_subject: '%{amendable_title} 的 %{emendation_author_nickname} 修正案被拒绝'
+            email_subject: "%{amendable_title} 的 %{emendation_author_nickname} 修正案被拒绝"
             notification_title: 由 <a href="%{emendation_author_path}">%{emendation_author_nickname}</a> 创建的 <a href="%{emendation_path}">项修正</a> 已被 <a href="%{amendable_path}">%{amendable_title}</a> 拒绝。
       attachments:
         attachment_created:
-          email_intro: '一个新文档已添加到 %{resource_title}。您可以从这个页面查看：'
+          email_intro: 一个新文档已添加到 %{resource_title}。您可以从这个页面查看：
           email_outro: 您收到此通知是因为您正在关注 %{resource_title}。您可以停止收到跟随上一个链接的通知。
           email_subject: 更新到 %{resource_title}
           notification_title: <a href="%{resource_path}">新文档</a> 已添加到 <a href="%{attached_to_url}">%{resource_title}</a>
       components:
         component_published:
-          email_intro: '%{resource_title} 组件已经对 %{participatory_space_title}激活。您可以从这个页面查看：'
+          email_intro: "%{resource_title} 组件已经对 %{participatory_space_title}激活。您可以从这个页面查看："
           email_outro: 您收到此通知是因为您正在关注 %{participatory_space_title}。您可以停止收到跟随上一个链接的通知。
           email_subject: 更新到 %{participatory_space_title}
           notification_title: '%{resource_title} 组件现已启用 <a href="%{resource_path}">%{participatory_space_title}</a>'
@@ -469,10 +470,10 @@ zh-CN:
           password_confirmation: 密码确认必须匹配密码。
       file_help:
         file:
-          explanation: '文件指南：'
+          explanation: 文件指南：
           message_1: 必须是图像或文档。
         image:
-          explanation: '图像指南：'
+          explanation: 图像指南：
           message_2: 服务裁剪图像。
       file_validation:
         allowed_file_extensions: '允许的文件扩展名: %{extensions}'
@@ -482,7 +483,7 @@ zh-CN:
       badges:
         followers:
           conditions:
-            - 积极关注其他人必将使其他人跟随你。
+          - 积极关注其他人必将使其他人跟随你。
           description: 当您到达一定数量的追随者时，将颁发这个徽章。 %{organization_name} 是一个社交和政治网络，编织您的网络来与平台上的其他人进行交流。
           description_another: 此参与者有 %{score} 个关注者。
           description_own: "%{score} 个人正在关注你。"
@@ -551,14 +552,14 @@ zh-CN:
           subject: 您有来自 %{sender} 的新消息
       conversations:
         add_conversation_users:
-          add_max_users: '将用户添加到对话中：最大9个用户'
+          add_max_users: 将用户添加到对话中：最大9个用户
           add_users_placeholder: 搜索...
           modal_title: 新建对话
           no_results: 没有结果
         error_modal:
           close: 关闭模式
           correct_errors: 请更正错误，然后重试。
-          intro: '您的消息有以下错误：'
+          intro: 您的消息有以下错误：
           ok: 好的
         index:
           new_conversation: 新建对话
@@ -594,7 +595,7 @@ zh-CN:
         name: 基本(仅文本)
       basic_only_text_settings_form:
         body: 正文内容
-        interpolations_hint: '提示：您可以在任何物体或主题中使用"%{name}"，它将被收件人的名字所取代。'
+        interpolations_hint: 提示：您可以在任何物体或主题中使用"%{name}"，它将被收件人的名字所取代。
       image_text_cta:
         body_preview: 'Dummy text for body: Maecenas ac nisl vitae lectus pretium facilisis. Etiam facilisis sem nibh, sit amet rutrum mi aliquam nec. Sed id urna at nisl pretium mollis eu vel velit. Proin vitae suscipit urna, sed faucibus urna. Pellentesque id libero vulputate ipsum scelerisque suscipit. Nam aliquam sodales mi sit amet cursus. Donec mattis faucibus purus. Aenean tincidunt porta lorem ac commodo. Vestibulum in mollis mi. Morbi eros erat, cursus ut tortor sit amet, imperdiet dapibus arcu. Suspendisse id egestas enim. In eget magna sed enim efficitur elementum sit amet aliquam quam. Donec fermentum metus eget urna luctus pulvinar.'
         cta_text_preview: 呼叫动作文本
@@ -604,7 +605,7 @@ zh-CN:
         body: 正文内容
         cta_text: 呼叫动作按钮文本
         cta_url: 调用动作按钮 URL
-        interpolations_hint: '提示：您可以在导入、主体、CTA文本或主题的任何地方使用"%{name}"，它将被收件人的名字所取代。'
+        interpolations_hint: 提示：您可以在导入、主体、CTA文本或主题的任何地方使用"%{name}"，它将被收件人的名字所取代。
         introduction: 一. 导言
         main_image: 主图像
     newsletters:
@@ -615,7 +616,7 @@ zh-CN:
     newsletters_opt_in_mailer:
       notify:
         body_1: 个人数据的处理和对数据的保护对我们大家都越来越重要。 根据2018年5月25日新的《一般数据保护条例》，个人可以更好地控制自己的个人数据。 为此原因，我们需要您的“确定”继续发送有关 %{organization_name} 活动的信息。
-        body_2: '你如何能够给予我们同意？只需点击下面的按钮：'
+        body_2: 你如何能够给予我们同意？只需点击下面的按钮：
         body_3: 如果您同意，您将能够继续接收有关平台服务的信息。 相反，如果我们没有得到你的肯定确认，我们将停止向你发送我们的信息。 如果您确认要随时收到通知，您将随时有取消的选项。
         button: 是的，我想继续收到相关信息
         greetings: 问候，<br/>%{organization_name}<br/><a href="%{organization_url}">%{organization_url}</a>
@@ -715,7 +716,7 @@ zh-CN:
       term_input_placeholder: 搜索
     searches:
       filters:
-        jump_to: '跳转到：'
+        jump_to: 跳转到：
         state:
           active: 已启用
           all: 所有的
@@ -755,7 +756,7 @@ zh-CN:
       reference:
         reference: '引用: %{reference}'
       results_per_page:
-        label: '每页结果：'
+        label: 每页结果：
         title: 选择每页结果数
       share_modal:
         share: 分享
@@ -825,7 +826,7 @@ zh-CN:
       confirmation_instructions:
         action: 确认我的帐户
         greeting: 欢迎 %{recipient}！
-        instruction: '您可以通过下面的链接确认您的电子邮件帐户：'
+        instruction: 您可以通过下面的链接确认您的电子邮件帐户：
         subject: 确认说明
       email_changed:
         greeting: 你好 %{recipient}！
@@ -852,7 +853,7 @@ zh-CN:
       unlock_instructions:
         action: 解锁我的帐户
         greeting: 你好 %{recipient}！
-        instruction: '点击下面的链接解锁您的帐户：'
+        instruction: 点击下面的链接解锁您的帐户：
         subject: 解锁指令
     omniauth_callbacks:
       failure: 无法认证您来自 %{kind} 的身份，因为“%{reason}”。
@@ -1009,8 +1010,8 @@ zh-CN:
       left: 删除
       right: 添加
     dropdown:
-      choose_diff_view_html: 'HTML 视图模式：'
-      choose_diff_view_mode: '比较视图模式：'
+      choose_diff_view_html: HTML 视图模式：
+      choose_diff_view_mode: 比较视图模式：
       option_escaped: 逃逸的
       option_split: 并侧的
       option_unescaped: 未转义的

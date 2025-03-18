@@ -1,3 +1,4 @@
+---
 cs:
   activemodel:
     models:
@@ -9,14 +10,14 @@ cs:
   activerecord:
     models:
       decidim/comments/comment:
-        one: Komentář
         few: Komentáře
         many: Komentáře
+        one: Komentář
         other: Komentáře
       decidim/comments/comment_vote:
-        one: Hlasovat
         few: Hlasy
         many: Hlasy
+        one: Hlasovat
         other: Hlasy
   decidim:
     admin:
@@ -62,17 +63,17 @@ cs:
           neutral_selected: Váš názor na toto téma je neutrální
           positive: Pozitivní
           positive_selected: Váš názor na toto téma je pozitivní
-        remaining_characters: "Zbývá %{count} znaků"
-        remaining_characters_1: "Zbývá %{count} znak"
+        remaining_characters: Zbývá %{count} znaků
+        remaining_characters_1: Zbývá %{count} znak
         title: Přidejte svůj komentář
       comment:
         alignment:
           against: Proti
           in_favor: Ve prospěch
         answers:
-          one: "%{count} odpověď"
           few: "%{count} odpovědi"
           many: "%{count} odpovědí"
+          one: "%{count} odpověď"
           other: "%{count} odpovědí"
         cancel_reply: Zrušit odpověď
         comment_label: Komentář %{comment_id}
@@ -85,9 +86,9 @@ cs:
         edit: Upravit
         edited: Upraveno
         hide_replies:
-          one: Skrýt odpověď
           few: Skrýt {count} odpovědi
           many: Skrýt {count} odpovědí
+          one: Skrýt odpověď
           other: Skrýt {count} odpovědí
         moderated_at: Komentář moderován dne %{date}
         reply: Odpověď
@@ -103,9 +104,9 @@ cs:
             spam: Obsahuje clickbait, reklamu, podvody nebo škodlivé skripty.
           title: Nahlásit nevhodný obsah
         show_replies:
-          one: Zobrazit odpověď
           few: Zobrazit %{count} odpovědi
           many: Zobrazit %{count} odpovědí
+          one: Zobrazit odpověď
           other: Zobrazit %{count} odpovědí
         single_comment_link_title: Získat odkaz
         sort_by: 'Řadit podle: '
@@ -127,9 +128,9 @@ cs:
         single_comment_warning: <a href="%{url}">Zobrazit všechny komentáře</a>
         single_comment_warning_title: Vidíte jeden komentář
         title:
-          one: "%{count} komentář"
           few: "%{count} komentáře"
           many: "%{count} komentářů"
+          one: "%{count} komentář"
           other: "%{count} komentářů"
         top_comment_label: Nejvíce hlasovalo
       down_vote_button:

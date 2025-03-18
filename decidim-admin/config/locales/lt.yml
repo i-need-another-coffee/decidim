@@ -1,3 +1,4 @@
+---
 lt:
   activemodel:
     attributes:
@@ -49,12 +50,12 @@ lt:
         description: Aprašymas
         enable_omnipresent_banner: Rodyti visur naudojamą reklamjuostę
         enable_participatory_space_filters: Leisti dalyvaujamosios erdvės filtrus
-        facebook_handler: '„Facebook“ tvarkyklė'
+        facebook_handler: "„Facebook“ tvarkyklė"
         favicon: Piktograma
         force_authentication: Priversti autentifikuotis
         force_users_to_authenticate_before_access_organization: Priversti naudotojus autentifikuotis prieš gaunant prieigą prie organizacijos
         from: Siuntėjo elektroninis paštas
-        github_handler: '„GitHub“ tvarkyklė'
+        github_handler: "„GitHub“ tvarkyklė"
         header_snippets: Antraštės fragmentai
         highlight_alternative_color: Paryškinti, alternatyva
         highlight_color: Paryškinimai
@@ -66,7 +67,7 @@ lt:
         highlighted_content_banner_short_description: Trumpas aprašymas
         highlighted_content_banner_title: Pavadinimas
         host: Šeimininkas
-        instagram_handler: '„Instagram“ tvarkyklė'
+        instagram_handler: "„Instagram“ tvarkyklė"
         logo: Logotipas
         machine_translation_display_priority: Mašininio vertimo pateikimo pirmenybė
         machine_translation_display_priority_original: Pirma - originalus tekstas
@@ -94,7 +95,7 @@ lt:
         warning_color: Perspėjimas
         welcome_notification_body: Pasisveikinimo pranešimo tekstas
         welcome_notification_subject: Pasisveikinimo pranešimo antraštė
-        youtube_handler: '„YouTube“ tvarkyklė'
+        youtube_handler: "„YouTube“ tvarkyklė"
       participatory_space_private_user:
         email: El. paštas
         name: Pavadinimas
@@ -316,7 +317,7 @@ lt:
           success: Komponentas atnaujintas sėkmingai.
       conflicts:
         attempts: Bandymai
-        'false': 'Ne'
+        'false': Ne
         managed_user_name: Tvarkomas Dalyvis
         solved: Išspręsta
         title: Patikros konfliktai
@@ -326,7 +327,7 @@ lt:
           reason: Priežastis
           success: Perkėlimas sėkmingai baigtas.
           title: Perkelti
-        'true': 'Taip'
+        'true': Taip
         user_name: Naudotojas
       dashboard:
         pending_moderations:
@@ -347,13 +348,13 @@ lt:
         invitation_accepted_at_present:
           label: Pakvietimas priimtas
           values:
-            'false': 'Ne'
-            'true': 'Taip'
+            'false': Ne
+            'true': Taip
         last_sign_in_at_present:
           label: Ar yra prisijungę
           values:
-            'false': 'Ne'
-            'true': 'Taip'
+            'false': Ne
+            'true': Taip
         moderated_users:
           reports_reason_eq:
             label: Raporto priežastis
@@ -453,31 +454,31 @@ lt:
           duplicate_headers:
             detail: Prašau patikrinkit ar dokumentas turi vieną viršutinę dalį (angl. header) arba vienus stulpelius (angl. columns).
             message:
-              one: Dublikuoti stulpelį %{columns}.
               few: Dublikuoti stulpelius %{columns}.
               many: Dublikuoti stulpelius %{columns}.
+              one: Dublikuoti stulpelį %{columns}.
               other: Dublikuoti stulpelius %{columns}.
           invalid_indexes:
             lines:
               detail: Prašau patikrinkit ar šios eilutės suformatuotos teisingai ir turi teisingus įrašus.
               message:
-                one: Importuoto dokumento %{indexes} eilutėje rasta klaida.
                 few: Importuoto dokumento %{indexes} eilutėje rastos klaidos.
                 many: Importuoto dokumento %{indexes} eilutėje rastos klaidos.
+                one: Importuoto dokumento %{indexes} eilutėje rasta klaida.
                 other: Importuoto dokumento %{indexes} eilutėje rastos klaidos.
             records:
               detail: Prašau patikrinkit ar šie įrašai suformatuoti teisingai ir turi teisingus įrašus.
               message:
-                one: Importuotame dokumente su įrašais rasta klaida su eilės numeriais %{indexes}.
                 few: Importuotame dokumente su įrašais rasta klaida su eilės numeriais %{indexes}.
                 many: Importuotame dokumente su įrašais rasta klaida su eilės numeriais %{indexes}.
+                one: Importuotame dokumente su įrašais rasta klaida su eilės numeriais %{indexes}.
                 other: Importuotame dokumente su įrašais rasta klaida su eilės numeriais %{indexes}.
           missing_headers:
             detail: Prašau patikrinkit ar dokumentas turi būtinus stulpelius.
             message:
-              one: Trūksta stulpelio %{columns}.
               few: Trūksta stulpelių %{columns}.
               many: Trūksta stulpelių %{columns}.
+              one: Trūksta stulpelio %{columns}.
               other: Trūksta stulpelių %{columns}.
         error: Importuojant iškilo problema.
         example_error: Kilo problema kuriant pavyzdį nurodytam tipui.
@@ -659,7 +660,7 @@ lt:
           error: Siunčiant šį naujienlaiškį iškilo problema.
           success: Naujienlaiškis išsiųstas.
         destroy:
-          error_already_sent: 'Naujienlaiškio negalima panaikinti. Jis jau išsiųstas.'
+          error_already_sent: Naujienlaiškio negalima panaikinti. Jis jau išsiųstas.
           success: Naujienlaiškis panaikintas.
         edit:
           save_and_preview: Išsaugoti ir peržiūrėti
@@ -801,7 +802,7 @@ lt:
             explanation: Turite %{count} privačių dalyvių.
             title: Ištrinti privačius dalyvius
           example_file: 'Pavyzdinė rinkmena:'
-          explanation: 'Įkelkite CSV dokumentą. Jis turi turėti du stulpelius su naudotojų el. paštu pirmajame ir vardu paskutiniąjame. Dokumente neturėtų būti laukų pavadinimų ir šių simbolių naudotojų varduose "<>?%&^*#@()[]=+:;"{}\|".'
+          explanation: Įkelkite CSV dokumentą. Jis turi turėti du stulpelius su naudotojų el. paštu pirmajame ir vardu paskutiniąjame. Dokumente neturėtų būti laukų pavadinimų ir šių simbolių naudotojų varduose "<>?%&^*#@()[]=+:;"{}\|".
           explanation_example: |
             john.doe@example.org%{csv_col_sep}John Doe
             jane.doe@example.org%{csv_col_sep}Jane Doe
@@ -810,9 +811,9 @@ lt:
         create:
           error: Kuriant priminimus iškilo problema.
           success:
-            one: "%{count} naudotojui bus priminta."
             few: "%{count} naudotojams bus priminta."
             many: "%{count} naudotojų bus priminta."
+            one: "%{count} naudotojui bus priminta."
             other: "%{count} naudotojams bus priminta."
         new:
           submit: Siųsti

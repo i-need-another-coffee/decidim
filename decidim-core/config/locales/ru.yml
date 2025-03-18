@@ -1,3 +1,4 @@
+---
 ru:
   activemodel:
     attributes:
@@ -40,8 +41,8 @@ ru:
         password_confirmation: Подтверждение пароля
         remember_me: Запомнить меня
   booleans:
-    'false': 'Нет'
-    'true': 'Да'
+    'false': Нет
+    'true': Да
   date:
     buttons:
       select: Выбрать
@@ -147,9 +148,9 @@ ru:
         related_photos: Сопутствующие фотографии
     author:
       comments:
-        one: комментарий
         few: комментария
         many: комментариев
+        one: комментарий
         other: комментариев
     authorization_handlers:
       another_dummy_authorization_handler:
@@ -197,9 +198,9 @@ ru:
           title: Подтвердите вашу электронную почту
     collapsible_list:
       hidden_elements_count:
-        one: и еще %{count}
         few: и еще %{count}
         many: и еще %{count}
+        one: и еще %{count}
         other: и еще %{count}
       see_less: "(читать меньше)"
     components:
@@ -310,7 +311,7 @@ ru:
           notification_title: Теперь в <a href="%{resource_path}">%{participatory_space_title}</a> приведена в действие составляющая %{resource_title}
       email_event:
         email_greeting: Здравствуйте, %{user_name}!
-        email_intro: '«%{resource_title}» обновили. Вы можете посмотреть его на странице:'
+        email_intro: "«%{resource_title}» обновили. Вы можете посмотреть его на странице:"
         email_outro: Вы получили это уведомление, потому что вы следите за «%{resource_title}». Вы можете перестать за ним следить, перейдя по приведенной выше ссылке.
         email_subject: Обновление %{resource_title}
       users:

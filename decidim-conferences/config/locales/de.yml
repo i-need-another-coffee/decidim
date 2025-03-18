@@ -1,3 +1,4 @@
+---
 de:
   activemodel:
     attributes:
@@ -313,7 +314,7 @@ de:
         restore: "%{user_name} hat die Konferenz %{resource_name} wiederhergestellt"
         send_conference_diplomas: "%{user_name} hat Teilnahmebescheinigungen an die Teilnehmenden der Konferenz %{resource_name} gesendet"
         soft_delete: "%{user_name} hat die Konferenz %{resource_name} in den Papierkorb verschoben"
-        unpublish: "%{user_name} hat die Konferenz %{resource_name} auf \"unveröffentlicht\" gesetzt"
+        unpublish: '%{user_name} hat die Konferenz %{resource_name} auf "unveröffentlicht" gesetzt'
         update: "%{user_name} hat die Konferenz %{resource_name} aktualisiert"
         update_diploma: "%{user_name} hat die Konfiguration der Teilnahmebescheinigungen für die Konferenz %{resource_name} aktualisiert"
       conference_speaker:
@@ -335,7 +336,7 @@ de:
           create: "%{user_name} hat den Registrierungstyp %{resource_name} in der Konferenz %{space_name} erstellt"
           delete: "%{user_name} hat den Registrierungstyp %{resource_name} in der Konferenz %{space_name} entfernt"
           publish: "%{user_name} hat den Registrierungstyp %{resource_name} in der Konferenz %{space_name} veröffentlicht"
-          unpublish: "%{user_name} hat den Registrierungstyp %{resource_name} in der Konferenz %{space_name} auf \"unveröffentlicht\" gesetzt"
+          unpublish: '%{user_name} hat den Registrierungstyp %{resource_name} in der Konferenz %{space_name} auf "unveröffentlicht" gesetzt'
           update: "%{user_name} hat den Registrierungstyp %{resource_name} in der Konferenz %{space_name} aktualisiert"
       media_link:
         create: "%{user_name} hat den Medienlink %{resource_name} in der Konferenz %{space_name} erstellt"

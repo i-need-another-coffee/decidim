@@ -1,3 +1,4 @@
+---
 zh-TW:
   activemodel:
     attributes:
@@ -195,7 +196,7 @@ zh-TW:
           refuse: 拒絕管理員條款
           title: 我同意服務條款
         required_review:
-          alert: '必填：請審閱我們的管理者服務條款'
+          alert: 必填：請審閱我們的管理者服務條款
           callout: 請花點時間審閱管理者服務條款，否則將無法管理平台
           cta: 現在審閱
         title: 管理者服務條款
@@ -302,7 +303,7 @@ zh-TW:
             type: 組件類型
         new:
           add: 新增元件
-          title: '新增元件： %{name}'
+          title: 新增元件： %{name}
         publish:
           success: 這個元件已經成功發佈
         title: 元件
@@ -313,7 +314,7 @@ zh-TW:
           success: 元件更新成功
       conflicts:
         attempts: 嘗試
-        'false': '否'
+        'false': 否
         managed_user_name: 管理的使用者
         solved: 已解決
         title: 驗證衝突
@@ -323,7 +324,7 @@ zh-TW:
           reason: 理由
           success: 目前的轉換完成
           title: 轉換
-        'true': '是'
+        'true': 是
         user_name: 使用者
       dashboard:
         pending_moderations:
@@ -344,13 +345,13 @@ zh-TW:
         invitation_accepted_at_present:
           label: 邀請已接受
           values:
-            'false': '否'
-            'true': '是'
+            'false': 否
+            'true': 是
         last_sign_in_at_present:
           label: 曾經登入
           values:
-            'false': '否'
-            'true': '是'
+            'false': 否
+            'true': 是
         moderated_users:
           reports_reason_eq:
             label: 回報原因
@@ -404,7 +405,7 @@ zh-TW:
       forms:
         file_help:
           import:
-            explanation: '檔案指南：'
+            explanation: 檔案指南：
             message_1: 支援 CSV、JSON 和 Excel (.xlsx) 檔案格式。
             message_2: 對於 CSV 檔案，列之間的分隔符號必須是分號 (";")
       help_sections:
@@ -450,20 +451,40 @@ zh-TW:
           duplicate_headers:
             detail: 請確認檔案包含所需的欄位或標題，且每個欄位或標題只出現一次。
             message:
-              other: "One\n重複的欄位 %{columns}。\n\nOther\n重複的欄位 %{columns}。"
+              other: |-
+                One
+                重複的欄位 %{columns}。
+
+                Other
+                重複的欄位 %{columns}。
           invalid_indexes:
             lines:
               detail: 請檢查這些行是否格式正確並包含有效的記錄。
               message:
-                other: "One\n找到了一個錯誤，位於匯入檔案的第 %{indexes} 行。\n\nOther\n找到了多個錯誤，位於匯入檔案的第 %{indexes} 行。"
+                other: |-
+                  One
+                  找到了一個錯誤，位於匯入檔案的第 %{indexes} 行。
+
+                  Other
+                  找到了多個錯誤，位於匯入檔案的第 %{indexes} 行。
             records:
               detail: 請檢查這些記錄是否格式正確且包含有效的資料。
               message:
-                other: "One\n訂單編號為 %{indexes} 的記錄在導入文件中發現錯誤。\n\nOther\n多個訂單編號為 %{indexes} 的記錄在導入文件中發現錯誤。"
+                other: |-
+                  One
+                  訂單編號為 %{indexes} 的記錄在導入文件中發現錯誤。
+
+                  Other
+                  多個訂單編號為 %{indexes} 的記錄在導入文件中發現錯誤。
           missing_headers:
             detail: 請確認文件包含所需的欄位。
             message:
-              other: "One\n缺少欄位 %{columns}。\n\nOther\n缺少欄位 %{columns}。"
+              other: |-
+                One
+                缺少欄位 %{columns}。
+
+                Other
+                缺少欄位 %{columns}。
         error: 匯入過程中發生問題.
         example_error: 建立範例時發生問題。
         new:
@@ -477,7 +498,7 @@ zh-TW:
           download_example_format: 範例：%{name}
           file_legend: 新增一個將被解析的導入檔案。
           import: 匯入
-        notice: "成功匯入%{count} 個%{resource_name}."
+        notice: 成功匯入%{count} 個%{resource_name}.
       logs:
         filters:
           participatory_space: 尋找參與空間
@@ -634,7 +655,7 @@ zh-TW:
           title: 通訊範本
           use_template: 使用這個範本
         show:
-          preview: '預覽範本： %{template_name}'
+          preview: 預覽範本： %{template_name}
           use_template: 使用這個範本
       newsletters:
         create:
@@ -644,7 +665,7 @@ zh-TW:
           error: 發送這封通訊時出現問題。
           success: 通訊已成功發送。
         destroy:
-          error_already_sent: '無法刪除通訊：已經發送。'
+          error_already_sent: 無法刪除通訊：已經發送。
           success: 通訊已成功刪除。
         edit:
           save_and_preview: 儲存並預覽
@@ -654,7 +675,7 @@ zh-TW:
           all_users: '所有用戶 '
           and: '和 '
           confirm_delete: 您確定要刪除這份通訊嗎？
-          followers: '追隨者'
+          followers: 追隨者
           has_been_sent_to: '已發送至： '
           not_sent: 未發送
           participants: '參與者 '
@@ -777,7 +798,7 @@ zh-TW:
             explanation: 您有 %{count} 位私人參與者。
             title: 刪除私人參與者
           example_file: '示例文件:'
-          explanation: '請上傳您的 CSV 檔案。檔案的第一欄應為電子郵件，最後一欄應為要添加到參與空間的使用者的名稱，檔案中不應包含標題。請避免在使用者名稱中使用無效字元，例如 <>?%&^*#@()[]=+:;"{}\|。'
+          explanation: 請上傳您的 CSV 檔案。檔案的第一欄應為電子郵件，最後一欄應為要添加到參與空間的使用者的名稱，檔案中不應包含標題。請避免在使用者名稱中使用無效字元，例如 <>?%&^*#@()[]=+:;"{}\|。
           explanation_example: |
             john.doe@example.org%{csv_col_sep}John Doe
             jane.doe@example.org%{csv_col_sep}Jane Doe
@@ -786,7 +807,12 @@ zh-TW:
         create:
           error: 在創建提醒時遇到問題。
           success:
-            other: "One\n將提醒 %{count} 位使用者。\n\nOther\n將提醒 %{count} 位使用者。"
+            other: |-
+              One
+              將提醒 %{count} 位使用者。
+
+              Other
+              將提醒 %{count} 位使用者。
         new:
           submit: 發送
       resource_permissions:

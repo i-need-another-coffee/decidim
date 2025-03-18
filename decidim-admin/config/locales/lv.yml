@@ -1,3 +1,4 @@
+---
 lv:
   activemodel:
     attributes:
@@ -387,20 +388,20 @@ lv:
           error: Šī informatīvā biļetena nosūtīšanas laikā radās problēma.
           success: Informatīvais biļetens ir veiksmīgi nosūtīts.
         destroy:
-          error_already_sent: 'Nevar dzēst informatīvo biļetenu – tas jau ir nosūtīts.'
+          error_already_sent: Nevar dzēst informatīvo biļetenu – tas jau ir nosūtīts.
           success: Informatīvais biļetens ir veiksmīgi dzēsts.
         edit:
           save_and_preview: Saglabāt un priekšskatīt
           title: Labot informatīvo biļetenu
         index:
           all: visi
-          all_users: 'Visi lietotāji'
-          and: 'un'
+          all_users: Visi lietotāji
+          and: un
           confirm_delete: Vai tiešām vēlaties dzēst šo informatīvo biļetenu?
           followers: 'sekotāji '
           has_been_sent_to: 'Nosūtīts:'
           not_sent: Nav nosūtīts
-          participants: 'dalībnieki'
+          participants: dalībnieki
           segmented_to: 'Segmentēts līdz %{subject}: '
           subscribed_count: 'Parakstījušies:'
           title: Informatīvie biļeteni

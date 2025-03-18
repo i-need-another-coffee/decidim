@@ -1,3 +1,4 @@
+---
 pl:
   activemodel:
     attributes:
@@ -76,19 +77,19 @@ pl:
   activerecord:
     models:
       decidim/assembly:
-        one: Zespół
         few: Zespoły
         many: Zespoły
+        one: Zespół
         other: Zespoły
       decidim/assembly_member:
-        one: Członek zespołu
         few: Członkowie zespołu
         many: Członkowie zespołu
+        one: Członek zespołu
         other: Członkowie zespołu
       decidim/assembly_user_role:
-        one: Rola użytkownika zespołu
         few: Role użytkowników zespołu
         many: Role użytkowników zespołu
+        one: Rola użytkownika zespołu
         other: Role użytkowników zespołu
   decidim:
     admin:
@@ -379,15 +380,15 @@ pl:
           promoted_assemblies: Wyróżnione zespoły
         metadata:
           children_item:
-            one: "%{count} zespół"
             few: "%{count} zespoły"
             many: "%{count} zespołów"
+            one: "%{count} zespół"
             other: "%{count} zespołów"
         order_by_assemblies:
           assemblies:
-            one: "%{count} zespół"
             few: "%{count} zespoły"
             many: "%{count} zespołów"
+            one: "%{count} zespół"
             other: "%{count} zespołów"
       assembly_navigation:
         assembly_member_menu_item: Członkowie

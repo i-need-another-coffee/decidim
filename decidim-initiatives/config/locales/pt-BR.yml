@@ -1,3 +1,4 @@
+---
 pt-BR:
   activemodel:
     attributes:
@@ -167,8 +168,8 @@ pt-BR:
       badges:
         initiatives:
           conditions:
-            - Ir para o espaço de participação de Iniciativas
-            - Siga os passos para criar uma nova iniciativa
+          - Ir para o espaço de participação de Iniciativas
+          - Siga os passos para criar uma nova iniciativa
           description: Esse selo é concedido quando você lança novas iniciativas, estabelecendo parcerias com outras pessoas para realizá-las.
           description_another: Este usuário obteve %{score} iniciativas publicadas.
           name: Iniciativas publicadas
@@ -312,7 +313,7 @@ pt-BR:
         select_initiative_type:
           back: Costas
           choose_html: Eu quero criar um <strong>%{title}</strong>
-          more_information: (Mais Informações)
+          more_information: "(Mais Informações)"
           new: Criar iniciativa
           select: Eu quero promover essa iniciativa
       edit:

@@ -1,3 +1,4 @@
+---
 ru:
   activemodel:
     attributes:
@@ -8,9 +9,9 @@ ru:
   activerecord:
     models:
       decidim/budgets/project:
-        one: Проект
         few: Проекта
         many: Проектов
+        one: Проект
         other: Проектов
   decidim:
     budgets:
@@ -70,9 +71,9 @@ ru:
             title: Голосование по бюджету завершено
         count:
           projects_count:
-            one: 1 проект
             few: "%{count} проекта"
             many: "%{count} проектов"
+            one: 1 проект
             other: "%{count} проектов"
         filters:
           search: Поиск

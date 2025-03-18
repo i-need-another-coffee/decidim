@@ -1,3 +1,4 @@
+---
 lt:
   activemodel:
     attributes:
@@ -68,19 +69,19 @@ lt:
   activerecord:
     models:
       decidim/initiative:
-        one: Iniciatyva
         few: Iniciatyvos
         many: Iniciatyvos
+        one: Iniciatyva
         other: Iniciatyvos
       decidim/initiative_comittee:
-        one: Komitetas
         few: Komitetai
         many: Komitetai
+        one: Komitetas
         other: Komitetai
       decidim/initiative_vote:
-        one: Parašas
         few: Prašai
         many: Prašai
+        one: Parašas
         other: Prašai
   decidim:
     admin:
@@ -185,8 +186,8 @@ lt:
       badges:
         initiatives:
           conditions:
-            - Eiti į iniciatyvų dalyvaujamąją erdvę
-            - Sekti žingsnius naujos iniciatyvos sukūrimui
+          - Eiti į iniciatyvų dalyvaujamąją erdvę
+          - Sekti žingsnius naujos iniciatyvos sukūrimui
           description: Šis ženklelis suteikiamas, kai pradedate naujas iniciatyvas ir bendradarbiaujate su kitais, kad jas įgyvendintumėte.
           description_another: Šis dalyvis paskelbė %{score} iniciatyvas (-ų).
           description_own: Jūs paskelbėte %{score} iniciatyvas (-ų).
@@ -207,7 +208,7 @@ lt:
         answers:
           edit:
             answer: Atsakymas
-            title: '%{title} atsakymas'
+            title: "%{title} atsakymas"
           info_initiative:
             created_at: Sukurta
             description: Aprašymas
@@ -348,7 +349,7 @@ lt:
         select_initiative_type:
           back: Atgal
           choose_html: Noriu sukurti <strong>%{title}</strong>
-          more_information: (Daugiau informacijos)
+          more_information: "(Daugiau informacijos)"
           new: Sukurti naują iniciatyvą
           select: Noriu paremti šią iniciatyvą
           verification_required: Norėdami pasirašyti iniciatyvą, patvirtinkite savo paskyrą
@@ -385,7 +386,7 @@ lt:
           notification_title: <a href="%{author_profile_url}">%{author_nickname}</a> atmetė Jūsų aplikaciją tapti remėjų komiteto dalimi šiai iniciatyvai:<a href="%{resource_url}">%{resource_title}</a>.
         spawn_committee_request_event:
           email_intro: "%{applicant_nickname} pateikė paraišką prisijungti prie %{resource_title} iniciatyvos remėjų komiteto. Norėdami priimti ar atmesti paraišką, eikite į iniciatyvos redagavimo formą."
-          email_outro: 'Šį pranešimą gavote dėl to, kad esate %{resource_title} iniciatyvos autorius'
+          email_outro: Šį pranešimą gavote dėl to, kad esate %{resource_title} iniciatyvos autorius
           email_subject: "%{applicant_nickname} nori prisijungti prie Jūsų iniciatyvos"
           notification_title: <a href="%{applicant_profile_url}">%{applicant_nickname}</a> pateikė paraišką prisijungti prie <a href="%{resource_url}">%{resource_title}</a> iniciatyvos remėjų komiteto. Norėdami priimti ar atmesti paraišką, spauskite <a href="%{resource_url}/edit">čia</a>.
       form:
@@ -420,9 +421,9 @@ lt:
       initiatives:
         author_list:
           hidden_authors_count:
-            one: ir dar 1 žmogus
             few: ir dar %{count} žmonės (-ių)
             many: ir dar %{count} žmonės (-ių)
+            one: ir dar 1 žmogus
             other: ir dar %{count} žmonės (-ių)
         committee_members:
           approve: Patvirtinti
@@ -433,9 +434,9 @@ lt:
           title: Komiteto nariai
         count:
           title:
-            one: "%{count} iniciatyva"
             few: "%{count} iniciatyvos"
             many: "%{count} iniciatyvos"
+            one: "%{count} iniciatyva"
             other: "%{count} iniciatyvos"
         filters:
           any: Bet kas
@@ -453,9 +454,9 @@ lt:
         interactions:
           comments_count:
             count:
-              one: Komentaras
               few: Komentarai
               many: Komentarai
+              one: Komentaras
               other: Komentarai
         orders:
           label: 'Rūšiuoti iniciatyvas pagal:'
@@ -498,9 +499,9 @@ lt:
           state: Būsena
           type: Tipas
         signatures_count:
-          one: " parašas"
           few: " parašai"
           many: " parašai"
+          one: " parašas"
           other: " parašai"
         vote_cabin:
           already_voted: Jau pasirašyta
@@ -508,9 +509,9 @@ lt:
           votes_blocked: Pasirašymas išjungtas
         votes_count:
           count:
-            one: Parašas
             few: Parašai
             many: Parašai
+            one: Parašas
             other: Parašai
       initiatives_mailer:
         creation_subject: Jūsų iniciatyva „%{title}“ sukurta

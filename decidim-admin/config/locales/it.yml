@@ -1,3 +1,4 @@
+---
 it:
   activemodel:
     attributes:
@@ -271,7 +272,7 @@ it:
           reason: Motivazione
           success: Il trasferimento è stato completato con successo.
           title: Trasferimento
-        'true': 'Si'
+        'true': Si
         user_name: Utente
       dashboard:
         show:
@@ -289,12 +290,12 @@ it:
           label: Invito accettato
           values:
             'false': 'No'
-            'true': 'Sì'
+            'true': Sì
         last_sign_in_at_present:
           label: Accesso mai effettuato
           values:
             'false': 'No'
-            'true': 'Sì'
+            'true': Sì
         moderated_users:
           reports_reason_eq:
             values:

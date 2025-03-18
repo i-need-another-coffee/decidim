@@ -1,3 +1,4 @@
+---
 el:
   activemodel:
     attributes:
@@ -190,7 +191,7 @@ el:
       badges:
         attended_meetings:
           conditions:
-            - Εγγραφείτε στις συσκέψεις που θέλετε να παρακολουθήσετε
+          - Εγγραφείτε στις συσκέψεις που θέλετε να παρακολουθήσετε
           description: Αυτό το έμβλημα χορηγείται όταν παρακολουθείτε σε διάφορες συσκέψεις πρόσωπο με πρόσωπο.
           description_another: Αυτός ο συμμετέχων έχει παρακολουθήσει %{score} συσκέψεις.
           description_own: Έχετε παρακολουθήσει %{score} συσκέψεις.
@@ -252,7 +253,7 @@ el:
         invite_join_meeting_mailer:
           invite:
             decline: Απόρριψη πρόσκλησης
-            invited_you_to_join_a_meeting: "Ο χρήστης %{invited_by} σάς προσκάλεσε να συμμετάσχετε σε μια σύσκεψη στην εφαρμογή %{application}. Μπορείτε να την απορρίψετε ή να την αποδεχτείτε μέσω των παρακάτω συνδέσμων."
+            invited_you_to_join_a_meeting: Ο χρήστης %{invited_by} σάς προσκάλεσε να συμμετάσχετε σε μια σύσκεψη στην εφαρμογή %{application}. Μπορείτε να την απορρίψετε ή να την αποδεχτείτε μέσω των παρακάτω συνδέσμων.
             join: Συμμετοχή στη σύσκεψη «%{meeting_title}»
         invites:
           create:
@@ -349,20 +350,20 @@ el:
             success: Ο κωδικός εγγραφής επικυρώθηκε με επιτυχία.
       admin_log:
         invite:
-          create: "Ο χρήστης %{user_name} προσκάλεσε τον συμμετέχοντα %{attendee_name} στη σύσκεψη %{resource_name} στον χώρο %{space_name}"
-          deleted: "Ο χρήστης %{user_name} κατάργησε την πρόσκληση του συμμετέχοντα %{attendee_name} από τη σύσκεψη %{resource_name} στον χώρο %{space_name}"
-          update: "Ο χρήστης %{user_name} προσκάλεσε τον συμμετέχοντα %{attendee_name} στη σύσκεψη %{resource_name} στον χώρο %{space_name}"
+          create: Ο χρήστης %{user_name} προσκάλεσε τον συμμετέχοντα %{attendee_name} στη σύσκεψη %{resource_name} στον χώρο %{space_name}
+          deleted: Ο χρήστης %{user_name} κατάργησε την πρόσκληση του συμμετέχοντα %{attendee_name} από τη σύσκεψη %{resource_name} στον χώρο %{space_name}
+          update: Ο χρήστης %{user_name} προσκάλεσε τον συμμετέχοντα %{attendee_name} στη σύσκεψη %{resource_name} στον χώρο %{space_name}
         meeting:
-          close: "Ο χρήστης %{user_name} έκλεισε τη σύσκεψη %{resource_name} στον χώρο %{space_name}"
-          create: "Ο χρήστης %{user_name} δημιούργησε τη σύσκεψη %{resource_name} στον χώρο %{space_name}"
-          delete: "Ο χρήστης %{user_name} διέγραψε τη σύσκεψη %{resource_name} στον χώρο %{space_name}"
-          export_registrations: "Ο χρήστης %{user_name} εξήγαγε τις εγγραφές της σύσκεψης %{resource_name} στον χώρο %{space_name}"
-          update: "Ο χρήστης %{user_name} ενημέρωσε τη σύσκεψη %{resource_name} στον χώρο %{space_name}"
+          close: Ο χρήστης %{user_name} έκλεισε τη σύσκεψη %{resource_name} στον χώρο %{space_name}
+          create: Ο χρήστης %{user_name} δημιούργησε τη σύσκεψη %{resource_name} στον χώρο %{space_name}
+          delete: Ο χρήστης %{user_name} διέγραψε τη σύσκεψη %{resource_name} στον χώρο %{space_name}
+          export_registrations: Ο χρήστης %{user_name} εξήγαγε τις εγγραφές της σύσκεψης %{resource_name} στον χώρο %{space_name}
+          update: Ο χρήστης %{user_name} ενημέρωσε τη σύσκεψη %{resource_name} στον χώρο %{space_name}
           value_types:
             organizer_presenter:
               not_found: 'Ο διοργανωτής δεν βρέθηκε στη βάση δεδομένων (αναγνωριστικό: %{id})'
         questionnaire:
-          update: "Ο/Η %{user_name} ενημέρωσε το ερωτηματολόγιο για τη συνάντηση %{meeting_name}"
+          update: Ο/Η %{user_name} ενημέρωσε το ερωτηματολόγιο για τη συνάντηση %{meeting_name}
       application_helper:
         filter_meeting_space_values:
           all: Όλα

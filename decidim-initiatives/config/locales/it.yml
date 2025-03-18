@@ -1,3 +1,4 @@
+---
 it:
   activemodel:
     attributes:
@@ -158,8 +159,8 @@ it:
       badges:
         initiatives:
           conditions:
-            - Vai allo spazio di partecipazione delle iniziative
-            - Segui i passaggi per creare una nuova iniziativa
+          - Vai allo spazio di partecipazione delle iniziative
+          - Segui i passaggi per creare una nuova iniziativa
           description: Questo badge viene concesso quando si lanciano nuove iniziative, collaborando con gli altri per realizzarle.
           description_another: Questo utente ha ottenuto %{score} iniziative pubblicate.
           name: Iniziative pubblicate
@@ -287,7 +288,7 @@ it:
         select_initiative_type:
           back: Indietro
           choose_html: Voglio creare uno <strong>%{title}</strong>
-          more_information: (Maggiori informazioni)
+          more_information: "(Maggiori informazioni)"
           select: Voglio promuovere questa iniziativa
       edit:
         accept: Accetta l'iniziativa

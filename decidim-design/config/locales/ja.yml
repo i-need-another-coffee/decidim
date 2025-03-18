@@ -29,7 +29,7 @@ ja:
         author:
           title: 筆者
         buttons:
-          description_html: 'ボタンは、 <code>ボタン</code> クラス、サイズ、色など、さまざまなCSSクラスの組み合わせで構築されます。'
+          description_html: ボタンは、 <code>ボタン</code> クラス、サイズ、色など、さまざまなCSSクラスの組み合わせで構築されます。
           title: ボタン
         cards:
           title: カード
@@ -37,7 +37,7 @@ ja:
           dialog_demo_description_html: ダイアログまたはモーダルコンポーネントは、rails helper <code>decidim_modal</code> を介して実装されます。
           dialogs_description_html: ダイアログは <a href="https://github.com/jonathanlevaillant/a11y-dialog-component" target="_blank" rel="noopener noreferrer">a11y-dialog-component</a> という外部ライブラリにより利用できるjavascriptの機能です。
           tips_description: '複雑なモーダルを表示し、スタイルを合わせるためには、以下のマークアップを使います:'
-          tips_description_html: <i>data-attributes</i> と <i>ids</i>に注意してください. 例えば、<code>[data-dialog-title]</code>のidは<i>dialog-title</i> で始まり、その後に <i>modal id</i>が続きます.
+          tips_description_html: "<i>data-attributes</i> と <i>ids</i>に注意してください. 例えば、<code>[data-dialog-title]</code>のidは<i>dialog-title</i> で始まり、その後に <i>modal id</i>が続きます."
           title: ダイアログ
           usage_description: ダイアログには2つの要素が必要です
           usage_description_2_html: 2. その要素の <code>id</code> がトリガーの参照するdata-targetの値に一致するモーダル要素。
@@ -96,7 +96,7 @@ ja:
           heading_on: 重要なセクションの見出し
           here_link: こちら
           illogical_heading_order: 非論理的な見出しの順序
-          illogical_heading_paragraph: <h1>, <h2>, <h3>, <h4>, <h5>, <h6> の見出し要素を使用する場合、すべてのページは論理的な見出し順序を持つ必要があります。
+          illogical_heading_paragraph: "<h1>, <h2>, <h3>, <h4>, <h5>, <h6> の見出し要素を使用する場合、すべてのページは論理的な見出し順序を持つ必要があります。"
           important_sections_heading: 重要なセクションの見出し
           important_sections_paragraph: ページの重要なセクションごとに見出しがあることが非常に重要です。これにより、見出しを流し読みするだけでページ内にどのような重要なセクションがあるのかが分かりやすくなります。
           links_and_buttons: リンクとボタン
@@ -168,7 +168,7 @@ ja:
         background: 背景とボーダー
         base: 基本
         block_text: extra_data ブロックを使用
-        blog_cards_html: <i>ブログ</i> カードで使用
+        blog_cards_html: "<i>ブログ</i> カードで使用"
         blogs: ブログ
         budget_card_html: <i>予算プロジェクト</i> カードで使用されます。このカードを正しく表示させるにはモジュールアセットが必要です。例えば、 <code>append_stylesheet_pack_tag "decidim_budgets"</code>などとします
         budgets: 予算
@@ -190,12 +190,12 @@ ja:
         debate_l: ディベートL
         debate_s: ディベートS
         debates: ディベート
-        debates_cards_html: <i>ディベート</i> カードで使用
+        debates_cards_html: "<i>ディベート</i> カードで使用"
         debates_cards_text: 画像ブロックに異なるテンプレートを使用する
         default: デフォルト
         default_description: 追加の引数なしで、そのユーザー自身を指定してセルを呼び出します。
         demo: デモ
-        demo_text: 'このセルは LastActivity アイテムのモデルを受け取り、以下の要素を表示します。'
+        demo_text: このセルは LastActivity アイテムのモデルを受け取り、以下の要素を表示します。
         demo_text_2: 最近のアクティビティページ、コンテンツブロック、ドロップダウン内で使用されます。
         description: 説明
         disabled: 無効
@@ -210,7 +210,7 @@ ja:
         dummy_description: Dummy resource description
         dummy_title: Dummy resource title
         follow_button: フォローボタン
-        follower_description_html: <code>decidim/shared/login_modal</code> partial が DOM に存在していることを確認してください。 このpartialは、ログイン時にアプリケーションのレイアウトに配置されます。
+        follower_description_html: "<code>decidim/shared/login_modal</code> partial が DOM に存在していることを確認してください。 このpartialは、ログイン時にアプリケーションのレイアウトに配置されます。"
         form_elements: フォーム要素
         generic_cards: 汎用カード
         grid: グリッド
@@ -228,7 +228,7 @@ ja:
         meeting_l: ミーティングL
         meeting_s: ミーティングS
         meetings: ミーティング
-        meetings_html: <i>ミーティング</i> カードで使用
+        meetings_html: "<i>ミーティング</i> カードで使用"
         metadata_items: メタデータ項目
         metadata_text: 各リソースは独自のメタデータ項目を定義します
         participatory_process_g: 参加プロセス G
@@ -254,7 +254,7 @@ ja:
         search: 検索
         send: 送信
         share_button: シェアボタン
-        share_usage_description_html: <code>decidim/shared/share_modal</code> partialがDOMに存在することを確認してください。このpartialはアプリケーションレイアウトに配置されます。
+        share_usage_description_html: "<code>decidim/shared/share_modal</code> partialがDOMに存在することを確認してください。このpartialはアプリケーションレイアウトに配置されます。"
         sizes: サイズ
         sortition_l: 並べ替えL
         sortitions: 並べ替え

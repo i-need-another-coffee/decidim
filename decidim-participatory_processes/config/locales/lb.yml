@@ -1,3 +1,4 @@
+---
 lb:
   activemodel:
     attributes:
@@ -212,7 +213,7 @@ lb:
       participatory_process:
         create: "%{user_name} hat den Partizipationsprozess %{resource_name} erstellt"
         publish: "%{user_name} hat den Partizipationsprozess %{resource_name} veröffentlicht"
-        unpublish: "%{user_name} hat den Partizipationsprozess %{resource_name} auf \"unveröffentlicht\" gesetzt"
+        unpublish: '%{user_name} hat den Partizipationsprozess %{resource_name} auf "unveröffentlicht" gesetzt'
         update: "%{user_name} hat den Partizipationsprozess %{resource_name} aktualisiert"
       participatory_process_group:
         create: "%{user_name} hat die Partizipationsprozess-Gruppe %{resource_name} erstellt"

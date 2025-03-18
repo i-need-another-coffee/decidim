@@ -1,3 +1,4 @@
+---
 el:
   activemodel:
     attributes:
@@ -314,7 +315,7 @@ el:
           success: Το στοιχείο ενημερώθηκε με επιτυχία.
       conflicts:
         attempts: Προσπάθειες
-        'false': 'Όχι'
+        'false': Όχι
         managed_user_name: Διαχειριζόμενα χρήστης
         solved: Λύθηκε
         title: Διενέξεις επαλήθευσης
@@ -324,7 +325,7 @@ el:
           reason: Αιτία
           success: Η τρέχουσα μεταφορά έχει ολοκληρωθεί με επιτυχία.
           title: Μεταφορά
-        'true': 'Ναι'
+        'true': Ναι
         user_name: Χρήστης
       dashboard:
         pending_moderations:
@@ -333,7 +334,7 @@ el:
         show:
           view_more_logs: Προβολή περισσότερων αρχείων καταγραφής
       exports:
-        export_as: "Όνομα %{name} ως μορφή %{export_format}"
+        export_as: Όνομα %{name} ως μορφή %{export_format}
         formats:
           CSV: CSV
           Excel: Excel
@@ -345,13 +346,13 @@ el:
         invitation_accepted_at_present:
           label: Πρόσκληση αποδεκτή
           values:
-            'false': 'Όχι'
-            'true': 'Ναι'
+            'false': Όχι
+            'true': Ναι
         last_sign_in_at_present:
           label: Έχει συνδεθεί ποτέ
           values:
-            'false': 'Όχι'
-            'true': 'Ναι'
+            'false': Όχι
+            'true': Ναι
         moderated_users:
           reports_reason_eq:
             label: Λόγος αναφοράς
@@ -655,10 +656,10 @@ el:
           title: Επεξεργασία ενημερωτικού δελτίου
         index:
           all: όλα
-          all_users: 'Όλοι οι χρήστες'
-          and: 'και'
+          all_users: Όλοι οι χρήστες
+          and: και
           confirm_delete: Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το ενημερωτικό δελτίο;
-          followers: 'ακόλουθοι'
+          followers: ακόλουθοι
           has_been_sent_to: 'Έχει σταλεί στο: '
           not_sent: Δεν έχει σταλεί
           participants: 'συμμετέχοντες '

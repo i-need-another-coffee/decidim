@@ -1,3 +1,4 @@
+---
 eu:
   activemodel:
     attributes:
@@ -181,13 +182,7 @@ eu:
         attachment_collection:
           new: Beste eranskin-bilduma bat
         browse: Arakatu
-        confirm_delete_component: |
-          Ziur zaude osagai hau ezabatu nahi duzula?
-          Osagai honek honako hauek ditu: 
-          <ul class="list-disc ml-6 my-2">
-           <li class="font-bold">%{baliabide_kopurua} resources</li>
-          </ul>
-          Iritziz aldatzen baduzu, geroago berreskuratu ahal izango duzu.
+        confirm_delete_component: "Ziur zaude osagai hau ezabatu nahi duzula?\nOsagai honek honako hauek ditu: \n<ul class=\"list-disc ml-6 my-2\">\n <li class=\"font-bold\">%{baliabide_kopurua} resources</li>\n</ul>\nIritziz aldatzen baduzu, geroago berreskuratu ahal izango duzu.\n"
         export: Esportatu dena
         export-selection: Esportatu hautaketa
         import: Inportatu
@@ -272,7 +267,9 @@ eu:
           success: Karpeta zuzen eguneratua.
       attachments:
         create:
-          error: "Arazo bat egon da beste eranskin bat sortzean.\n"
+          error: 'Arazo bat egon da beste eranskin bat sortzean.
+
+            '
           success: Fitxategi erantsia zuzen sortua.
         destroy:
           success: Fitxategi erantsia behar bezala ezabatua.
@@ -337,7 +334,7 @@ eu:
           title: Ezabatutako osagaiak
         new:
           add: Gehitu osagaia
-          title: 'Gehitu %{name} osagaia'
+          title: Gehitu %{name} osagaia
         publish:
           success: Osagaia zuzen argitaratua.
         title: Osagaiak
@@ -352,7 +349,7 @@ eu:
           unpublished: Desargitaratuta
       conflicts:
         attempts: Saiakerak
-        'false': 'Ez'
+        'false': Ez
         index:
           text: Bilatu egungo parte-hartzailearen posta elektronikoaren, izenaren edo ezizenaren bidez.
         managed_user_name: Parte-hartzailearen kudeatua
@@ -365,7 +362,7 @@ eu:
           reason: Arrazoia
           success: Egungo transferentzia zuzen egina.
           title: Transferentzia
-        'true': 'Bai'
+        'true': Bai
         user_name: Parte-hartzailea
       content_blocks:
         create:
@@ -384,13 +381,13 @@ eu:
       dashboard:
         pending_moderations:
           announcement:
-            one: '%{count} moderazio falta dira'
-            other: '%{count} moderazio falta dira'
+            one: "%{count} moderazio falta dira"
+            other: "%{count} moderazio falta dira"
           goto_moderation: Joan moderazio globaletara
           title: Zain dauden moderazioak
         show:
           dropdown: Goitibeherako zerrrenda
-          view_more_logs: Ikusi erregistro gehiago 
+          view_more_logs: Ikusi erregistro gehiago
       domain_allowlist:
         form:
           domain_too_short: Domeinu laburregia
@@ -410,13 +407,13 @@ eu:
         invitation_accepted_at_present:
           label: Gonbidapena onartua
           values:
-            'false': 'Ez'
-            'true': 'Bai'
+            'false': Ez
+            'true': Bai
         last_sign_in_at_present:
           label: Inoiz konektatu da
           values:
-            'false': 'Ez'
-            'true': 'Bai'
+            'false': Ez
+            'true': Bai
         moderated_users:
           reports_reason_eq:
             label: Arrazoiaren berri eman
@@ -524,12 +521,16 @@ eu:
               other: Bikoiztu %{columns} zutabe.
           invalid_indexes:
             lines:
-              detail: "\nEgiaztatu erregistro horiek formatu zuzena dutela eta baliozko erregistroak dituztela."
+              detail: |2-
+
+                Egiaztatu erregistro horiek formatu zuzena dutela eta baliozko erregistroak dituztela.
               message:
                 one: Errore bat aurkitu da inportazio-fitxategiko %{indexes} lerroan.
                 other: Erroreak aurkitu dira inportazio-fitxategiko %{indexes} lerroetan.
             records:
-              detail: "\nEgiaztatu erregistro horiek formatu zuzena dutela eta baliozko erregistroak dituztela."
+              detail: |2-
+
+                Egiaztatu erregistro horiek formatu zuzena dutela eta baliozko erregistroak dituztela.
               message:
                 one: Errore bat aurkitu da %{indexes} ordenazio-zenbakiak dituzten erregistroetarako inportazio-fitxategian.
                 other: Erroreak aurkitu dira %{indexes} ordenazio-zenbakiak dituzten erregistroetarako inportazio-fitxategian.
@@ -598,7 +599,7 @@ eu:
         static_pages: Orriak
         taxonomies: Taxonomiak
         taxonomy_filters: Taxonomia-iragazkiak
-        users: Parte-hartzaileak 
+        users: Parte-hartzaileak
       metrics:
         metrics:
           see_more_metrics: Ikusi metrika gehiago
@@ -633,8 +634,8 @@ eu:
         newsletter:
           fields:
             created_at: Noiz sortua
-            progress: ' Aurrerapena '
-            sent_at: ' Bidaltze-data:'
+            progress: " Aurrerapena "
+            sent_at: " Bidaltze-data:"
             sent_to: Hona bidalia
             subject: Gaia
           name: Buletina
@@ -775,7 +776,7 @@ eu:
         index:
           all: guztiak
           all_users: 'Parte-hartzaile guztiak '
-          and: 'eta'
+          and: eta
           confirm_delete: Ziur zaude buletin hau ezabatu nahi duzula?
           followers: 'jarraitzaileak '
           has_been_sent_to: 'Honi bidalia: '
@@ -899,7 +900,7 @@ eu:
             saturation: Saturazioa
             title: Kolore-hautatzailea
             update_suggested_colors: Eguneratu iradokitako koloreak
-          cta_button_path_help_html: 'Hasierako orriko ekintzara deitzeko botoia nora estekatzen den gainidatz dezakezu. Erabili hemen ibilbide partzialak, ez URL osoak. Letrak, zenbakiak, gidoiak eta barrak onartzen ditu, eta letra batez hasi behar du. Ekintzara deitzeko botoia hasierako orrian agertuko da, ongi etorri testuaren eta deskribapenaren artean. Adibidez:%{url}'
+          cta_button_path_help_html: Hasierako orriko ekintzara deitzeko botoia nora estekatzen den gainidatz dezakezu. Erabili hemen ibilbide partzialak, ez URL osoak. Letrak, zenbakiak, gidoiak eta barrak onartzen ditu, eta letra batez hasi behar du. Ekintzara deitzeko botoia hasierako orrian agertuko da, ongi etorri testuaren eta deskribapenaren artean. Adibidez:%{url}
           cta_button_text_help: Hasierako pantailako Call To Action botoian testua gainidatz dezakezu zure erakundean eskuragarri dagoen hizkuntza bakoitzarentzat. Ezarrita ez badago, balio lehenetsia erabiliko da. The Call To Action botoia hasierako orrian erakusten da ongi etorri testua eta azalpenaren artean.
           header_snippets:
             header_snippets_help_html: Eremu hau erabili HTML goiburuari gauzak gehitzeko. Erabilera ohikoena da JavaScript edo CSS osagarriak behar dituzten hirugarrenen zerbitzuak integratzea. HTMLri meta-etiketa gehigarriak gehitzeko ere erabil dezakezu. Kontuan izan hori orrialde publikoetan soilik renderizatuko dela, ez administrazio-atalean. Kodeak kanpoko APIekin elkarreragiten badu edo aplikazioaren segurtasun-jarraibideak betetzen ez baditu, Edukiaren Segurtasun Politika aldatu beharko da. Irakurri gehiago honi buruz<a href="https://docs.decidim.org/develop/en/customize/content_security_policy"> dokumentazioaren kokalekuan</a>.
@@ -959,7 +960,7 @@ eu:
             button: Ezabatu parte-hartzaile pribatu guztiak
             confirm: Ziur zaude parte-hartzaile pribatu guztiak ezabatu nahi dituzula? Ekintza hau ezin da desegin, ezin izango dituzu berreskuratu.
             empty: Ez duzu parte-hartzaile pribaturik.
-            explanation: '%{count} parte-hartzaile pribatu dituzu.'
+            explanation: "%{count} parte-hartzaile pribatu dituzu."
             title: Ezabatu parte-hartzaile pribatuak
           example_file: 'Fitxategi eredua:'
           explanation: 'Igo zure CSV fitxategia. Bi zutabe izan behar ditu. Lehenengo zutabean posta elektronikoa jarri behar da, eta azken zutabean partaidetza-prozesura gehitu nahi dituzun parte-hartzaileen izena, goibururik gabe. Ez erabili holako karaktererik erabiltzaileen izenetan: `<>?%&^*#@()[]=+:;"{}\|`.'
@@ -1038,11 +1039,11 @@ eu:
           custom_expiration: Iraungitze pertsonalizatua
           custom_token: Hitz pertsonalizatua
           expires_at: Noiz iraungia
-          'false': 'Ez'
+          'false': Ez
           never_expire: Inoiz ez
           registered_only: Bakarrik erregistratuta?
           token: Sarbide-gakoa
-          'true': 'Bai'
+          'true': Bai
         index:
           back_to_share_tokens: Itzuli sarbide-esteketara
           copied: Sarbide-esteka kopiatuta!
@@ -1179,7 +1180,7 @@ eu:
         form:
           all: Guztiak
           items:
-            one: "Item bat hautatuta"
+            one: Item bat hautatuta
             other: "%{count} item hautatuta"
           name_help: Aurrealdean erakutsiko den iragazkiaren izenburua.
           no_items: Taxonomia honetarako ez dago elementurik. Artikuluak sor ditzakezu taxonomia konfiguratzeko ezarpenetan.
@@ -1206,10 +1207,10 @@ eu:
       taxonomy_filters_selector:
         new:
           add_new_items_html: 'Beste iragazki edo elementu bat jarri behar baduzu, egin konfigurazio-ezarpenaren bidez edo klikatuz: <a href="%{url}">here</a>.'
-          items_count: "Elementu %{count}"
+          items_count: Elementu %{count}
           save: Gorde
         show:
-          items_count: "Elementu %{count}"
+          items_count: Elementu %{count}
           remove: Kendu
         taxonomies_select:
           filters: Iragazkiak
@@ -1295,7 +1296,7 @@ eu:
     moderations:
       actions:
         expand: Zabaldu
-        hidden: ' Ezkutatuta'
+        hidden: " Ezkutatuta"
         hide: Ezkutatu
         not_hidden: Ezkutatu gabe
         title: Ekintzak
@@ -1312,11 +1313,11 @@ eu:
               invalid: Ez dago moderaziorik hautatuta.
               success: Parte-hartzaileak zuzen ez erreportatuak.
             unhide:
-              failed: 'Arazo bat izan da eduki batzuk %{errored} berriro erakustean'
+              failed: Arazo bat izan da eduki batzuk %{errored} berriro erakustean
               invalid: Ez dago moderaziorik hautatuta.
               success: Edukiak zuzen berriro erakutsita.
             unreport:
-              failed: 'Arazo bat izan da eduki batzuk %{errored} berriro erakustean'
+              failed: Arazo bat izan da eduki batzuk %{errored} berriro erakustean
               invalid: Ez dago moderaziorik hautatuta.
               success: Edukiak zuzen ez erreportatuak.
           hide:

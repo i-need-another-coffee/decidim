@@ -1,3 +1,4 @@
+---
 zh-CN:
   activemodel:
     attributes:
@@ -219,7 +220,7 @@ zh-CN:
         consultative_advisory: 咨询/咨询
         executive: 行政机构
         government: 政府
-        help: '显示：'
+        help: 显示：
         others: 其 他
         participatory: 参与
         working_group: 工作组

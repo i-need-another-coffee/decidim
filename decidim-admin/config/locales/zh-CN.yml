@@ -1,3 +1,4 @@
+---
 zh-CN:
   activemodel:
     attributes:
@@ -397,7 +398,7 @@ zh-CN:
           title: 通讯模板
           use_template: 使用此模板
         show:
-          preview: '预览模板： %{template_name}'
+          preview: 预览模板： %{template_name}
           use_template: 使用此模板
       newsletters:
         create:
@@ -406,7 +407,7 @@ zh-CN:
           error: 在传送这份通讯时遇到问题。
           success: 通讯已成功发送。
         destroy:
-          error_already_sent: '无法摧毁新闻通讯：它已经发送。'
+          error_already_sent: 无法摧毁新闻通讯：它已经发送。
           success: 通讯已成功销毁。
         edit:
           save_and_preview: 保存并预览

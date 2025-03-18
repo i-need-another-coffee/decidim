@@ -1,3 +1,4 @@
+---
 fr-CA:
   activemodel:
     attributes:
@@ -351,7 +352,7 @@ fr-CA:
           unpublished: Non publié
       conflicts:
         attempts: Tentatives
-        'false': 'Non'
+        'false': Non
         index:
           text: Recherche par adresse e-mail, nom ou pseudonyme.
         managed_user_name: Utilisateur représenté
@@ -364,7 +365,7 @@ fr-CA:
           reason: Raison
           success: Le transfert a bien été effectué.
           title: Transfert
-        'true': 'Oui'
+        'true': Oui
         user_name: Utilisateur
       content_blocks:
         create:
@@ -409,13 +410,13 @@ fr-CA:
         invitation_accepted_at_present:
           label: Invitation acceptée
           values:
-            'false': 'Non'
-            'true': 'Oui'
+            'false': Non
+            'true': Oui
         last_sign_in_at_present:
           label: Déjà connecté
           values:
-            'false': 'Non'
-            'true': 'Oui'
+            'false': Non
+            'true': Oui
         moderated_users:
           reports_reason_eq:
             label: Raison du signalement
@@ -550,7 +551,7 @@ fr-CA:
           download_example_format: Exemple comme %{name}
           file_legend: Ajouter un fichier d'import qui sera analysé.
           import: Importer
-        notice: "Import réussi de %{count} %{resource_name}."
+        notice: Import réussi de %{count} %{resource_name}.
       logs:
         filters:
           participatory_space: Trouver un espace participatif
@@ -766,7 +767,7 @@ fr-CA:
           error: Il y a eu une erreur lors de l'envoi de cette newsletter.
           success: Newsletter envoyée avec succès.
         destroy:
-          error_already_sent: 'Suppression impossible car la newsletter a déjà été envoyée.'
+          error_already_sent: Suppression impossible car la newsletter a déjà été envoyée.
           success: Newsletter supprimée avec succès.
         edit:
           save_and_preview: Enregistrer et prévisualiser
@@ -961,7 +962,7 @@ fr-CA:
             explanation: Vous avez %{count} utilisateurs privés.
             title: Supprimer les utilisateurs privés
           example_file: 'Fichier d''exemple :'
-          explanation: 'Téléchargez votre fichier CSV. Il doit avoir deux colonnes avec les emails dans la première colonne, et dans la seconde colonne les noms des utilisateurs que vous souhaitez ajouter à l''espace participatif, sans en-tête. Évitez les caractères spéciaux comme `<>?%&^*#@()[]=+:;"{}\|` dans les noms des utilisateurs.'
+          explanation: Téléchargez votre fichier CSV. Il doit avoir deux colonnes avec les emails dans la première colonne, et dans la seconde colonne les noms des utilisateurs que vous souhaitez ajouter à l'espace participatif, sans en-tête. Évitez les caractères spéciaux comme `<>?%&^*#@()[]=+:;"{}\|` dans les noms des utilisateurs.
           explanation_example: |
             john.doe@example.org%{csv_col_sep}Jean Doe
             jane.doe@example.org%{csv_col_sep}Jane Doe
@@ -1037,11 +1038,11 @@ fr-CA:
           custom_expiration: Expiration personnalisée
           custom_token: Mot personnalisé
           expires_at: Expire le
-          'false': 'Non'
+          'false': Non
           never_expire: Jamais
           registered_only: Enregistrés uniquement ?
           token: Clé d'accès
-          'true': 'Oui'
+          'true': Oui
         index:
           back_to_share_tokens: Retour aux liens d'accès
           copied: Lien d'accès copié !

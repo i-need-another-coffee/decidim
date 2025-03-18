@@ -1,3 +1,4 @@
+---
 ar:
   activemodel:
     attributes:
@@ -35,12 +36,12 @@ ar:
             proposal_ids: 'تم تضمينه في هذا الاقتراح: %{link}'
             text: 'كانت مضافه في النتيجة: %{link}'
       decidim/accountability/result:
-        zero: النتائج
-        one: نتيجة
-        two: النتائج
         few: النتائج
         many: النتائج
+        one: نتيجة
         other: النتائج
+        two: النتائج
+        zero: النتائج
   decidim:
     accountability:
       actions:
@@ -167,8 +168,8 @@ ar:
         result:
           create: "%{user_name} أنشأ النتيجة %{resource_name} في %{space_name}"
           delete: "%{user_name} حذف النتيجة %{resource_name} في %{space_name}"
-          restore: "قام المستخدم %{user_name} باستعادة نتيجة الـ %{resource_name} في %{space_name}"
-          soft_delete: "قام المستخدم %{user_name} بنقل نتيجة الـ %{resource_name} في %{space_name} إلى سلة المحذوفات"
+          restore: قام المستخدم %{user_name} باستعادة نتيجة الـ %{resource_name} في %{space_name}
+          soft_delete: قام المستخدم %{user_name} بنقل نتيجة الـ %{resource_name} في %{space_name} إلى سلة المحذوفات
           update: "%{user_name} حدث النتيجة %{resource_name} في %{space_name}"
         status:
           create: "%{user_name} أنشأ حالة %{resource_name}"
@@ -196,12 +197,12 @@ ar:
       import_projects_mailer:
         import:
           added_projects:
-            zero: "لم يتم استيراد أي نتيجة من المشاريع."
+            few: تم استيراد عدد %{count} من النتائج من المشاريع.
+            many: تم استيراد عدد %{count} من النتائج من المشاريع.
             one: تم استيراد نتيجة واحدة من المشاريع.
-            two: "تم استيراد نتيجتين من المشاريع."
-            few: "تم استيراد عدد %{count} من النتائج من المشاريع."
-            many: "تم استيراد عدد %{count} من النتائج من المشاريع."
-            other: "تم استيراد عدد %{count} من النتائج من المشاريع."
+            other: تم استيراد عدد %{count} من النتائج من المشاريع.
+            two: تم استيراد نتيجتين من المشاريع.
+            zero: لم يتم استيراد أي نتيجة من المشاريع.
           subject: استيراد المشاريع بنجاح
           success: النتائج المستوردة إلى النتائج في مكون %{component_name}. يمكن معاينة النتائج في واجهة الإدارة.
       last_activity:
@@ -230,12 +231,12 @@ ar:
       results:
         count:
           results_count:
-            zero: "%{count} نتيجة 1"
-            one: نتيجة واحدة
-            two: "%{count} النتائج"
             few: "%{count} النتائج"
             many: "%{count} النتائج"
+            one: نتيجة واحدة
             other: "%{count} النتائج"
+            two: "%{count} النتائج"
+            zero: "%{count} نتيجة 1"
         home_header:
           global_status: حالة التنفيذ العالمي
         no_results: لا يوجد مشاريع

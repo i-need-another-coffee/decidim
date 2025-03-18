@@ -1,3 +1,4 @@
+---
 fi:
   activemodel:
     attributes:
@@ -143,7 +144,7 @@ fi:
               state_not_published: Ei vastattu
               state_published: Vastattu
         search_placeholder:
-          id_string_or_title_cont: '%{collection}: Hae ID-numeron tai otsikon perusteella'
+          id_string_or_title_cont: "%{collection}: Hae ID-numeron tai otsikon perusteella"
     application:
       geocoding:
         not_configured: Karttatoimintojen asetuksia ei ole määritetty!
@@ -248,7 +249,7 @@ fi:
             endorsements_enabled: Suositukset käytössä
             proposal_answering_enabled: Ehdotukseen vastaaminen käytössä
             publish_answers_immediately: Julkaise ehdotusten vastaukset heti
-            publish_answers_immediately_help_html: 'Huomioithan, että jos vastaat mihin tahansa ehdotukseen ilman tätä asetusta, sinun on julkaistava vastaukset manuaalisesti valitsemalla vastaukset sisältävät ehdotukset ja käyttämällä julkaisutoimintoa. Lisätietoja, miten tämä toimii, löytyy <a href="https://docs.decidim.org/en/admin/components/proposals/answers#_publication" target="_blank">dokumentaation osiosta ehdotuksiin vastaaminen</a>.'
+            publish_answers_immediately_help_html: Huomioithan, että jos vastaat mihin tahansa ehdotukseen ilman tätä asetusta, sinun on julkaistava vastaukset manuaalisesti valitsemalla vastaukset sisältävät ehdotukset ja käyttämällä julkaisutoimintoa. Lisätietoja, miten tämä toimii, löytyy <a href="https://docs.decidim.org/en/admin/components/proposals/answers#_publication" target="_blank">dokumentaation osiosta ehdotuksiin vastaaminen</a>.
             suggested_hashtags: Käyttäjille ehdotettavat aihetunnisteet (hashtag) uusille ehdotuksille
             votes_blocked: Äänestys estetty
             votes_enabled: Äänet käytössä
@@ -294,7 +295,7 @@ fi:
           email_subject: "%{requester_name} on hyväksytty osallistujaksi kohtaan %{resource_title}."
           notification_title: <a href="%{requester_path}">%{requester_name} %{requester_nickname}</a> on <strong>hyväksytty osallistujaksi</strong> yheistyöluonnokseen <a href="%{resource_path}">%{resource_title}</a>.
         collaborative_draft_access_rejected:
-          email_intro: 'Käyttäjän %{requester_name} pyyntö päästä yhteistyöluonnoksen <a href="%{resource_url}">%{resource_title}</a> osallistujaksi on hylätty.'
+          email_intro: Käyttäjän %{requester_name} pyyntö päästä yhteistyöluonnoksen <a href="%{resource_url}">%{resource_title}</a> osallistujaksi on hylätty.
           email_outro: Tämä ilmoitus on lähetetty sinulle, koska olet osallistujana kohteessa <a href="%{resource_url}">%{resource_title}</a>.
           email_subject: "%{requester_name} on hylätty, jotta hän voi osallistua %{resource_title} yhteistyöhankkeeseen."
           notification_title: <a href="%{requester_path}">%{requester_name} %{requester_nickname}</a> <strong>avustajaoikeudet on hylätty</strong> yhteistyöluonnoksesta <a href="%{resource_path}">%{resource_title}</a>.
@@ -376,8 +377,8 @@ fi:
       badges:
         accepted_proposals:
           conditions:
-            - Valitse kiinnostuksesi mukaan osallistumistila, jossa ehdotusten jättäminen on mahdollista
-            - Yritä luoda ehdotuksia, jotka voidaan toteuttaa. Tällä tavoin ne todennäköisesti hyväksytään.
+          - Valitse kiinnostuksesi mukaan osallistumistila, jossa ehdotusten jättäminen on mahdollista
+          - Yritä luoda ehdotuksia, jotka voidaan toteuttaa. Tällä tavoin ne todennäköisesti hyväksytään.
           description: Tämä kunniamerkki myönnetään, kun luot aktiivisesti uusia ehdotuksia ja ne hyväksytään.
           description_another: Tällä käyttäjällä on %{score} hyväksyttyä ehdotusta.
           description_own: Olet saanut %{score} ehdotusta hyväksyksi.
@@ -387,8 +388,8 @@ fi:
           unearned_own: Sinulla ei ole vielä hyväksyttyjä ehdotuksia.
         proposal_votes:
           conditions:
-            - Selaa muiden ihmisten ehdotuksia ja käytä aikaa tutustumalla niihin
-            - Äänestä ehdotuksia, joista pidät tai jotka kiinnostavat sinua
+          - Selaa muiden ihmisten ehdotuksia ja käytä aikaa tutustumalla niihin
+          - Äänestä ehdotuksia, joista pidät tai jotka kiinnostavat sinua
           description: Tämä kunniamerkki myönnetään niille, jotka ovat äänestäneet muiden ehdotuksia.
           description_another: Tämä käyttäjä on äänestänyt %{score} ehdotusta.
           description_own: Olet äänestänyt %{score} ehdotusta.
@@ -398,8 +399,8 @@ fi:
           unearned_own: Et ole vielä äänestänyt ehdotuksia.
         proposals:
           conditions:
-            - Valitse kiinnostuksesi mukaan osallistumistila, jossa ehdotusten jättäminen on mahdollista
-            - Luo uusi ehdotus
+          - Valitse kiinnostuksesi mukaan osallistumistila, jossa ehdotusten jättäminen on mahdollista
+          - Luo uusi ehdotus
           description: Tämä kunniamerkki myönnetään, kun luot aktiivisesti uusia ehdotuksia.
           description_another: Tämä käyttäjä on luonut %{score} ehdotusta.
           description_own: Olet luonut %{score} ehdotusta.
@@ -786,7 +787,7 @@ fi:
         requests:
           accepted_request:
             error: Osallistujaa ei voitu hyväksyä, yritä myöhemmin uudestaan.
-            success: "Käyttäjän @%{user} hyväksyminen muokkaajaksi onnistui."
+            success: Käyttäjän @%{user} hyväksyminen muokkaajaksi onnistui.
           access_requested:
             error: Pyyntöäsi ei voitu suorittaa, yritä myöhemmin uudestaan.
             success: Osallistumispyyntösi lähetys onnistui.
@@ -796,7 +797,7 @@ fi:
             title: Yhteistyöpyynnöt
           rejected_request:
             error: Osallistujaa ei voitu hylätä, yritä myöhemmin uudestaan.
-            success: "Käyttäjän @%{user} osallistumispyynnön hylkäys onnistui."
+            success: Käyttäjän @%{user} osallistumispyynnön hylkäys onnistui.
         show:
           edit: Muokkaa
           final_proposal: Lopullinen ehdotus
@@ -852,7 +853,7 @@ fi:
           success: Laatijakutsun peruminen onnistui.
         create:
           error: Laatijakutsun lähettäminen epäonnistui.
-          success: "Osallistujan %{author_name} kutsuminen laatijaksi onnistui."
+          success: Osallistujan %{author_name} kutsuminen laatijaksi onnistui.
         destroy:
           error: Kutsun hylkäys epäonnistui.
           success: Kutsun hylkääminen onnistui.

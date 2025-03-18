@@ -1,3 +1,4 @@
+---
 nl:
   activemodel:
     attributes:
@@ -263,7 +264,7 @@ nl:
           success: Het onderdeel is met succes bijgewerkt.
       conflicts:
         attempts: Pogingen
-        'false': 'Nee'
+        'false': Nee
         managed_user_name: Beheerde gebruiker
         solved: Opgelost
         title: Controle conflicten
@@ -273,7 +274,7 @@ nl:
           reason: Reden
           success: De overdracht is met succes voltooid.
           title: Overdracht
-        'true': 'Ja'
+        'true': Ja
         user_name: Gebruiker
       dashboard:
         show:
@@ -290,13 +291,13 @@ nl:
         invitation_accepted_at_present:
           label: Uitnodiging geaccepteerd
           values:
-            'false': 'Nee'
-            'true': 'Ja'
+            'false': Nee
+            'true': Ja
         last_sign_in_at_present:
           label: Ooit ingelogd
           values:
-            'false': 'Nee'
-            'true': 'Ja'
+            'false': Nee
+            'true': Ja
         moderated_users:
           reports_reason_eq:
             label: Reden rapportering
@@ -630,7 +631,9 @@ nl:
           name: Naam
           nickname: Gebruikersnaam
           not_officialized: Niet gevalideerd
-          officialize: "Valideren\n"
+          officialize: 'Valideren
+
+            '
           officialized: Gevalideerd
           reofficialize: Hervalideren
           reports: Rapporten

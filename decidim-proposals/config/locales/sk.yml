@@ -1,3 +1,4 @@
+---
 sk:
   activemodel:
     attributes:
@@ -51,19 +52,19 @@ sk:
   activerecord:
     models:
       decidim/proposals/collaborative_draft:
-        one: Spoločný návrh
         few: Spoločné návrhy
         many: Spoločné návrhy
+        one: Spoločný návrh
         other: Spoločné návrhy
       decidim/proposals/proposal:
-        one: Návrh
         few: Návrhy
         many: Návrhy
+        one: Návrh
         other: Návrhy
       decidim/proposals/proposal_note:
-        one: Poznámka
         few: Poznámky
         many: Poznámky
+        one: Poznámka
         other: Poznámky
   decidim:
     admin:
@@ -123,7 +124,7 @@ sk:
           notification_title: <a href="%{requester_path}">%{requester_name} %{requester_nickname} </a> je <strong> má prístup ako prispievateľ </strong> v spoločnom návrhu <a href="%{resource_path}">%{resource_title} </a>.
         collaborative_draft_access_rejected:
           email_subject: "%{requester_name} mal odmietnutý pre prístup ako prispievateľ ku %{resource_title} kolektívnemu návrhu."
-          notification_title: <a href="%{requester_path}">%{requester_name}%{requester_nickname} </a><strong> mal odmietnutý prístup ako prispievateľ </strong>ku spoločnému návrhu <a href = "%{resource_path}" >%{resource_title} </a>. 
+          notification_title: <a href="%{requester_path}">%{requester_name}%{requester_nickname} </a><strong> mal odmietnutý prístup ako prispievateľ </strong>ku spoločnému návrhu <a href = "%{resource_path}" >%{resource_title} </a>.
         collaborative_draft_access_requested:
           email_subject: "%{requester_name} požiadal o prístup ku spolupráci na %{resource_title}."
           notification_title: <a href="%{requester_path}">%{requester_name}%{requester_nickname} </a> požiadal o prístup ku spolupráci na <a href="%{resource_path}">%{resource_title} </a>. Prosíme <strong> prijmite alebo odmietnite žiadosť </strong>.
@@ -164,8 +165,8 @@ sk:
       badges:
         accepted_proposals:
           conditions:
-            - Vyberte si participatívny priestor, ktorý Vás zaujíma, ktorý umožňuje pridávanie návrhov.
-            - Skúste vytvoriť návrhy, ktoré sú realizovateľné. Tak budú mať väčšiu šancu na prijatie.
+          - Vyberte si participatívny priestor, ktorý Vás zaujíma, ktorý umožňuje pridávanie návrhov.
+          - Skúste vytvoriť návrhy, ktoré sú realizovateľné. Tak budú mať väčšiu šancu na prijatie.
           description: Tento odznak ste dostali za aktívnu participáciu novými, akceptovanými návrhmi.
           description_another: Tento účastník má %{score} prijatých návrhov.
           description_own: Máte %{score} prijatých návrhov.
@@ -175,12 +176,12 @@ sk:
           unearned_own: Zatiaľ nemáte žiadne prijaté návrhy.
         proposal_votes:
           conditions:
-            - Pozrite si a prečítajte návrhy ďalších účastníkov.
-            - 
+          - Pozrite si a prečítajte návrhy ďalších účastníkov.
+          -
         proposals:
           conditions:
-            - Vyberte si participatívny priestor, ktorý Vás zaujíma, ktorý umožňuje pridávanie návrhov.
-            - Vytvorte nový návrh
+          - Vyberte si participatívny priestor, ktorý Vás zaujíma, ktorý umožňuje pridávanie návrhov.
+          - Vytvorte nový návrh
           description: Tento odznak ste dostali za aktívnu participáciu novými návrhmi.
           description_another: Tento účastník vytvoril %{score} návrhov.
           description_own: Vytvorili ste %{score} návrhov.
@@ -287,10 +288,10 @@ sk:
             endorsements_count: Počet podporení
             endorsers: Podporovatelia
             n_more_endorsers:
+              few: "+ %{count} ďalších"
+              many: "+ %{count} ďalších"
               one: a 1 ďalší
-              few: + %{count} ďalších
-              many: + %{count} ďalších
-              other: + %{count} ďalších
+              other: "+ %{count} ďalších"
             photos: Fotografie
             ranking: "%{ranking} z celkového %{total}"
             related_meetings: Podobné stretnutia
@@ -370,9 +371,9 @@ sk:
           unfold: Rozbaliť
         index:
           count:
-            one: "%{count} návrh spolupráce"
             few: "%{count} návrh spolupráce"
             many: "%{count} návrh spolupráce"
+            one: "%{count} návrh spolupráce"
             other: "%{count} návrh spolupráce"
         new:
           send: Pokračovať
@@ -398,9 +399,9 @@ sk:
           final_proposal: konečný návrh
           final_proposal_help_text: Tento návrh je dokončený. Môžete vidieť konečný konečný návrh
           hidden_authors_count:
-            one: a%{count} ďalšia osoba
             few: a%{count} ďalších ľudí
             many: a%{count} ďalších ľudí
+            one: a%{count} ďalšia osoba
             other: a%{count} ďalších ľudí
           publish: Publikovať
           publish_info: Publikujte túto verziu konceptu alebo
@@ -463,9 +464,9 @@ sk:
         index:
           collaborative_drafts_list: Získajte prístup k spolupráci
           count:
-            one: "%{count} návrh"
             few: "%{count} návrhov"
             many: "%{count} návrhov"
+            one: "%{count} návrh"
             other: "%{count} návrhov"
           new_proposal: Nový návrh
           see_all_withdrawn: Pozrite sa na všetky stiahnuté návrhy
@@ -482,9 +483,9 @@ sk:
         preview:
           modify: Upravte návrh
           proposal_edit_before_minutes:
-            one: Tento návrh budete môcť upraviť počas prvej minúty po zverejnení návrhu. Po uplynutí tohto časového okna nebudete môcť návrh upraviť.
             few: Budete mať možnosť upraviť tento návrh počas prvých %{count} minút po návrh zverejnený. Po uplynutí tohto časového okna nebudete môcť návrh upraviť.
             many: Budete mať možnosť upraviť tento návrh počas prvých %{count} minút po návrh zverejnený. Po uplynutí tohto časového okna nebudete môcť návrh upraviť.
+            one: Tento návrh budete môcť upraviť počas prvej minúty po zverejnení návrhu. Po uplynutí tohto časového okna nebudete môcť návrh upraviť.
             other: Budete mať možnosť upraviť tento návrh počas prvých %{count} minút po návrh zverejnený. Po uplynutí tohto časového okna nebudete môcť návrh upraviť.
           publish: Publikovať
           title: Publikujte svoj návrh
@@ -493,9 +494,9 @@ sk:
           changes_at_title: doplňujúci návrh k "%{title}"
           estimated_cost: Odhadované náklady
           hidden_endorsers_count:
-            one: a%{count} ďalšia osoba
             few: a %{count} ďalší ľudia
             many: a %{count} ďalších ľudí
+            one: a%{count} ďalšia osoba
             other: a %{count} ďalších ľudí
           link_to_collaborative_draft_help_text: Tento návrh je výsledkom spoločného návrhu. Skontrolujte históriu
           link_to_collaborative_draft_text: Pozri schému spolupráca

@@ -1,3 +1,4 @@
+---
 fi:
   activemodel:
     attributes:
@@ -352,7 +353,7 @@ fi:
           unpublished: Julkaisematon
       conflicts:
         attempts: Yritykset
-        'false': 'Ei'
+        'false': Ei
         index:
           text: Etsi nykyisen käyttäjän sähköpostin, nimen tai nimimerkin perusteella.
         managed_user_name: Hallittu käyttäjä
@@ -365,7 +366,7 @@ fi:
           reason: Syy
           success: Siirto onnistui.
           title: Siirrä
-        'true': 'Kyllä'
+        'true': Kyllä
         user_name: Käyttäjä
       content_blocks:
         create:
@@ -385,7 +386,7 @@ fi:
         pending_moderations:
           announcement:
             one: Yksi moderointi odottaa käsittelyä
-            other: '%{count} moderointia odottavat käsittelyä'
+            other: "%{count} moderointia odottavat käsittelyä"
           goto_moderation: Siirry yleisiin moderointeihin
           title: Odottavat moderoinnit
         show:
@@ -410,13 +411,13 @@ fi:
         invitation_accepted_at_present:
           label: Kutsu hyväksytty
           values:
-            'false': 'Ei'
-            'true': 'Kyllä'
+            'false': Ei
+            'true': Kyllä
         last_sign_in_at_present:
           label: Kirjautunut sisään koskaan
           values:
-            'false': 'Ei'
-            'true': 'Kyllä'
+            'false': Ei
+            'true': Kyllä
         moderated_users:
           reports_reason_eq:
             label: Ilmoituksen syy
@@ -456,10 +457,10 @@ fi:
         remove_all: Poista kaikki
         search_label: Hae
         search_placeholder:
-          name_or_nickname_or_email_cont: '%{collection}: Hae sähköpostilla, nimellä tai nimimerkillä'
+          name_or_nickname_or_email_cont: "%{collection}: Hae sähköpostilla, nimellä tai nimimerkillä"
           report_count_eq: Ilmoitusten määrä
           reported_id_string_or_reported_content_cont: Etsi kohteista %{collection} raportoitavan kohteen ID:n tai sisällön perusteella.
-          title_cont: '%{collection}: Hae otsikon perusteella'
+          title_cont: "%{collection}: Hae otsikon perusteella"
           user_name_or_user_nickname_or_user_email_cont: Etsi kohteita %{collection} sähköpostiosoitteen, nimen tai nimimerkin perusteella.
         state_eq:
           label: Tila
@@ -962,7 +963,7 @@ fi:
             explanation: Tässä osallistumistilassa on %{count} yksityistä osallistujaa.
             title: Poista kaikki yksityiset osallistujat
           example_file: 'Esimerkkitiedosto:'
-          explanation: 'Lataa CSV-tiedosto. Tiedostossa on oltava kaksi saraketta ilman otsikkoriviä. Ensimmäiseen sarakkeeseen asetetaan käyttäjän sähköpostiosoite ja toiseen sarakkeeseen käyttäjän nimi, alkaen ensimmäiseltä riviltä. Jokaisesta rivistä luodaan uusi osallistumistilan käyttäjä. Vältä erikoismerkkejä nimessä, kuten `<>?%&^*#@()[]=+:;"{}\|`.'
+          explanation: Lataa CSV-tiedosto. Tiedostossa on oltava kaksi saraketta ilman otsikkoriviä. Ensimmäiseen sarakkeeseen asetetaan käyttäjän sähköpostiosoite ja toiseen sarakkeeseen käyttäjän nimi, alkaen ensimmäiseltä riviltä. Jokaisesta rivistä luodaan uusi osallistumistilan käyttäjä. Vältä erikoismerkkejä nimessä, kuten `<>?%&^*#@()[]=+:;"{}\|`.
           explanation_example: |
             matti.meikalainen@esimerkki.fi%{csv_col_sep}Matti Meikäläinen
             minna.meikalainen@esimerkki.fi%{csv_col_sep}Minna Meikäläinen
@@ -1038,11 +1039,11 @@ fi:
           custom_expiration: Mukautettu vanhentuminen
           custom_token: Mukautettu sana
           expires_at: Vanhentumisajankohta
-          'false': 'Ei'
+          'false': Ei
           never_expire: Ei koskaan
           registered_only: Ainoastaan rekisteröityneille käyttäjille?
           token: Pääsyavain
-          'true': 'Kyllä'
+          'true': Kyllä
         index:
           back_to_share_tokens: Takaisin pääsyoikeuslinkkeihin
           copied: Pääsylinkki kopioitu!
@@ -1252,10 +1253,10 @@ fi:
       trash_management:
         restore:
           invalid: Kohteen %{resource_name} palauttaminen epäonnistui.
-          success: "Kohteen %{resource_name} palauttaminen onnistui."
+          success: Kohteen %{resource_name} palauttaminen onnistui.
         soft_delete:
           invalid: Kohteen %{resource_name} poisto epäonnistui.
-          success: "Kohteen %{resource_name} poisto onnistui."
+          success: Kohteen %{resource_name} poisto onnistui.
       users:
         create:
           error: Hallintakäyttäjän kutsuminen epäonnistui.

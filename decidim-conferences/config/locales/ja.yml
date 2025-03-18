@@ -1,3 +1,4 @@
+---
 ja:
   activemodel:
     attributes:
@@ -383,7 +384,7 @@ ja:
             define_taxonomy_filters: この設定を使用する前に、参加型スペースのフィルターをいくつか定義してください。
             no_taxonomy_filters_found: タクソノミーフィルタが見つかりません。
             registrations_count:
-              other: '%{count} 件の登録がありました。'
+              other: "%{count} 件の登録がありました。"
             slug_help_html: 'URLスラグは、このカンファレンスを指すURLを生成するために使用されます。 英字、数字、ハイフンのみを受け付け、英字で始める必要があります。例: %{url}'
             taxonomies: タクソノミー
         content_blocks:
@@ -398,7 +399,7 @@ ja:
             decline: 招待を拒否する '%{conference_title}'
             invited_existing_user_to_join_a_conference: "%{invited_by} が %{application}であなたをカンファレンスに招待しました。以下のリンクから拒否または承認できます。"
             invited_user_to_join_a_conference: "%{invited_by} があなたを %{application} のカンファレンスに招待しました。以下のリンクから受付ができます。"
-            registration: '''%{conference_title} '' の登録'
+            registration: "'%{conference_title} ' の登録"
         partners:
           index:
             title: パートナー
@@ -431,11 +432,11 @@ ja:
       conference_registration_mailer:
         confirmation:
           confirmed_html: カンファレンス <a href="%{url}">%{title}</a> の登録が確認されました。
-          details_1: 'あなたは %{registration_type} タイプのカンファレンスに登録されています。 %{price} の費用がかかり、次のイベントに参加できます：'
+          details_1: あなたは %{registration_type} タイプのカンファレンスに登録されています。 %{price} の費用がかかり、次のイベントに参加できます：
           details_2: カンファレンスの詳細は添付ファイルにあります。
         pending_validation:
           confirmation_pending: まもなく確認が届きます。
-          details: '%{registration_type} 種類に %{price} の費用で登録しました。以下のイベントに参加できます：'
+          details: "%{registration_type} 種類に %{price} の費用で登録しました。以下のイベントに参加できます："
           pending_html: カンファレンス <a href="%{url}">%{title}</a> の登録は確認待ちです。
       conference_registrations:
         create:
@@ -470,7 +471,7 @@ ja:
         show:
           already_have_an_account?: すでにアカウントをお持ちですか？
           are_you_new?: 新しい参加者ですか？
-          login_as: '%{name} <%{email} >としてログインしています'
+          login_as: "%{name} <%{email} >としてログインしています"
           make_conference_registration: カンファレンスに登録する
           manage_registration: 登録の管理
           register: 登録
@@ -523,7 +524,7 @@ ja:
             see_all_spaces: すべてのカンファレンスを見る
       registration_types:
         index:
-          choose_an_option: '登録オプションを選択：'
+          choose_an_option: 登録オプションを選択：
           no_registrations: 登録なし
           register: 登録
           title: 登録種別
@@ -561,16 +562,16 @@ ja:
         conference_registrations_over_percentage:
           email_intro: '"%{resource_title}" カンファレンス参加率は %{percentage} %を超えています。'
           email_outro: あなたはカンファレンスの参加型スペースの管理者であるため、この通知を受け取りました。
-          email_subject: '「%{resource_title}」カンファレンス参加率は %{percentage} %を超えています'
+          email_subject: "「%{resource_title}」カンファレンス参加率は %{percentage} %を超えています"
           notification_title: <a href="%{resource_path}">%{resource_title}</a> カンファレンス参加率は %{percentage} %を超えています。
         conference_updated:
           email_intro: '"%{resource_title}" カンファレンスを更新しました。新しいバージョンはそのページから読むことができます：'
-          email_outro: '「%{resource_title}」カンファレンスをフォローしているため、この通知を受け取りました。前のリンクからこの通知をアンフォローすることができます。'
+          email_outro: "「%{resource_title}」カンファレンスをフォローしているため、この通知を受け取りました。前のリンクからこの通知をアンフォローすることができます。"
           email_subject: '"%{resource_title}" カンファレンスが更新されました'
           notification_title: <a href="%{resource_path}">%{resource_title}</a> カンファレンスを更新しました。
         registrations_enabled:
           email_intro: '"%{resource_title}" カンファレンスは登録を有効にしました。あなた自身をそのページに登録することができます:'
-          email_outro: '「%{resource_title}」カンファレンスをフォローしているため、この通知を受け取りました。前のリンクからこの通知をアンフォローすることができます。'
+          email_outro: "「%{resource_title}」カンファレンスをフォローしているため、この通知を受け取りました。前のリンクからこの通知をアンフォローすることができます。"
           email_subject: '"%{resource_title}" カンファレンスは登録を有効にしました。'
           notification_title: <a href="%{resource_path}">%{resource_title}</a> カンファレンスは登録を有効にしました。
         role_assigned:
@@ -580,8 +581,8 @@ ja:
           notification_title: あなたはカンファレンス<a href="%{resource_url}"ｆ>%{resource_title}</a> に、%{role} として割り当てられました。
         upcoming_conference:
           email_intro: '"%{resource_title}" カンファレンスは2日後に開催されます。そのページから説明を読むことができます:'
-          email_outro: '「%{resource_title}」カンファレンスをフォローしているため、この通知を受け取りました。前のリンクからこの通知をアンフォローすることができます。'
-          email_subject: '「%{resource_title}」カンファレンスが近づいています！'
+          email_outro: "「%{resource_title}」カンファレンスをフォローしているため、この通知を受け取りました。前のリンクからこの通知をアンフォローすることができます。"
+          email_subject: "「%{resource_title}」カンファレンスが近づいています！"
           notification_title: <a href="%{resource_path}">%{resource_title}</a> カンファレンスは2日後に開催されます。
     help:
       participatory_spaces:

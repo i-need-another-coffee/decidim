@@ -1,3 +1,4 @@
+---
 ar:
   activemodel:
     attributes:
@@ -12,12 +13,12 @@ ar:
   activerecord:
     models:
       decidim/budgets/project:
-        zero: مشاريع
-        one: مشروع
-        two: مشاريع
         few: مشاريع
         many: مشاريع
+        one: مشروع
         other: مشاريع
+        two: مشاريع
+        zero: مشاريع
   decidim:
     budgets:
       actions:
@@ -50,8 +51,8 @@ ar:
             finished_orders: الانتهاء من الأصوات
             pending_orders: في انتظار الأصوات
             selected_options:
-              'no': 'لا'
-              'yes': 'نعم'
+              'no': لا
+              'yes': نعم
             title: مشاريع
             update: تحديث
             update_budget_button: تحديث ميزانية المشروع
@@ -100,12 +101,12 @@ ar:
             title: اكتمال التصويت في الميزانية
         count:
           projects_count:
-            zero: "%{count} مشاريع"
-            one: 1 مشروع
-            two: "%{count} مشاريع"
             few: "%{count} مشاريع"
             many: "%{count} مشاريع"
+            one: 1 مشروع
             other: "%{count} مشاريع"
+            two: "%{count} مشاريع"
+            zero: "%{count} مشاريع"
         filters:
           search: بحث
         show:

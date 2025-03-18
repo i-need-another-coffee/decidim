@@ -1,3 +1,4 @@
+---
 zh-TW:
   activemodel:
     attributes:
@@ -71,15 +72,28 @@ zh-TW:
         assembly:
           attributes:
             document:
-              allowed_file_content_types: '無效文件類型。僅允許以下擴展名的文件：'
+              allowed_file_content_types: 無效文件類型。僅允許以下擴展名的文件：
   activerecord:
     models:
       decidim/assembly:
-        other: "One\n集會\n\nOther\n集會"
+        other: |-
+          One
+          集會
+
+          Other
+          集會
       decidim/assembly_member:
-        other: "One\n集會成員\nOther\n集會成員"
+        other: |-
+          One
+          集會成員
+          Other
+          集會成員
       decidim/assembly_user_role:
-        other: "One\n集會使用者角色\nOther\n集會使用者角色"
+        other: |-
+          One
+          集會使用者角色
+          Other
+          集會使用者角色
   decidim:
     admin:
       actions:
@@ -219,7 +233,7 @@ zh-TW:
             title: 基本資訊
         assembly_members:
           form:
-            explanation: '圖像的指導'
+            explanation: 圖像的指導
             non_user_avatar_help: 在發佈他們為會員之前，您應該徵得他們的同意
         content_blocks:
           highlighted_assemblies:
@@ -249,7 +263,7 @@ zh-TW:
         consultative_advisory: 諮詢/顧問
         executive: 管理人員
         government: 政府
-        help: '顯示'
+        help: 顯示
         others: 其他
         participatory: 參與式
         working_group: 工作群組
@@ -284,8 +298,12 @@ zh-TW:
     help:
       participatory_spaces:
         assemblies:
-          contextual: "<p>一個<strong>大會</strong> 是由一個組織的成員定期集會，就該組織的特定範圍或範圍進行決策。\n</p> <p>大會舉行會議，有些是私人的，有些是公開的。如果是公開的，就可以參加(例如：參加會議，如果容量允許的話，將點加入議程，或評論此機構所採取的提案和決策。)</p> <p>例如：年度大會(每年舉行一次，通過投票定義組織的主要行動方針以及執行機構)、平等顧問委員會(每兩個月舉行一次，就如何改善組織中的性別關係提出建議)、評估委員會(每月舉行一次，監督某個流程) 或保證機構(收集事件、濫用或提案以改善決策程序) 都是大會的例子。.</p>\n"
-          page: "<p>一個<strong>大會</strong> 是由一個組織的成員定期集會，就該組織的特定範圍或範圍進行決策。\n</p> <p>大會舉行會議，有些是私人的，有些是公開的。如果是公開的，就可以參加(例如：參加會議，如果容量允許的話，將點加入議程，或評論此機構所採取的提案和決策。)</p> <p>例如：年度大會(每年舉行一次，通過投票定義組織的主要行動方針以及執行機構)、平等顧問委員會(每兩個月舉行一次，就如何改善組織中的性別關係提出建議)、評估委員會(每月舉行一次，監督某個流程) 或保證機構(收集事件、濫用或提案以改善決策程序) 都是大會的例子。.</p>\n"
+          contextual: |
+            <p>一個<strong>大會</strong> 是由一個組織的成員定期集會，就該組織的特定範圍或範圍進行決策。
+            </p> <p>大會舉行會議，有些是私人的，有些是公開的。如果是公開的，就可以參加(例如：參加會議，如果容量允許的話，將點加入議程，或評論此機構所採取的提案和決策。)</p> <p>例如：年度大會(每年舉行一次，通過投票定義組織的主要行動方針以及執行機構)、平等顧問委員會(每兩個月舉行一次，就如何改善組織中的性別關係提出建議)、評估委員會(每月舉行一次，監督某個流程) 或保證機構(收集事件、濫用或提案以改善決策程序) 都是大會的例子。.</p>
+          page: |
+            <p>一個<strong>大會</strong> 是由一個組織的成員定期集會，就該組織的特定範圍或範圍進行決策。
+            </p> <p>大會舉行會議，有些是私人的，有些是公開的。如果是公開的，就可以參加(例如：參加會議，如果容量允許的話，將點加入議程，或評論此機構所採取的提案和決策。)</p> <p>例如：年度大會(每年舉行一次，通過投票定義組織的主要行動方針以及執行機構)、平等顧問委員會(每兩個月舉行一次，就如何改善組織中的性別關係提出建議)、評估委員會(每月舉行一次，監督某個流程) 或保證機構(收集事件、濫用或提案以改善決策程序) 都是大會的例子。.</p>
           title: 什麼是大會?
     log:
       value_types:

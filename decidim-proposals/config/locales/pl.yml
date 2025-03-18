@@ -1,3 +1,4 @@
+---
 pl:
   activemodel:
     attributes:
@@ -82,19 +83,19 @@ pl:
   activerecord:
     models:
       decidim/proposals/collaborative_draft:
-        one: Wspólny szkic
         few: Wspólne szkice
         many: Wspólne szkiców
+        one: Wspólny szkic
         other: Wspólne szkice
       decidim/proposals/proposal:
-        one: Propozycja
         few: Propozycje
         many: Propozycji
+        one: Propozycja
         other: Propozycje
       decidim/proposals/proposal_note:
-        one: Uwaga
         few: Uwagi
         many: Uwag
+        one: Uwaga
         other: Uwagi
   decidim:
     admin:
@@ -209,7 +210,7 @@ pl:
             endorsements_enabled: Rekomendacje włączone
             proposal_answering_enabled: Włączono odpowiadanie na propozycję
             publish_answers_immediately: Natychmiast publikuj odpowiedzi na propozycje
-            publish_answers_immediately_help_html: 'Pamiętaj, że jeśli odpowiesz na dowolną propozycję bez włączonej tej opcji, musisz ją opublikować ręcznie, wybierając ją i korzystając z akcji do publikacji. Aby uzyskać więcej informacji na temat tego, jak to działa, zobacz stronę <a href="https://docs.decidim.org/en/admin/components/proposals/answers#_publication" target="_blank">z dokumentacją odpowiedzi na propozycje</a>.'
+            publish_answers_immediately_help_html: Pamiętaj, że jeśli odpowiesz na dowolną propozycję bez włączonej tej opcji, musisz ją opublikować ręcznie, wybierając ją i korzystając z akcji do publikacji. Aby uzyskać więcej informacji na temat tego, jak to działa, zobacz stronę <a href="https://docs.decidim.org/en/admin/components/proposals/answers#_publication" target="_blank">z dokumentacją odpowiedzi na propozycje</a>.
             suggested_hashtags: Hashtagi sugerowane użytkownikom dodającym nowe propozycje
             votes_blocked: Głosy zablokowane
             votes_enabled: Głosowanie włączone
@@ -225,7 +226,7 @@ pl:
           email_subject: "%{requester_name} otrzymał(a) dostęp jako współtwórca %{resource_title}."
           notification_title: <a href="%{requester_path}">%{requester_name} %{requester_nickname}</a> otrzymał(a) <strong>dostęp jako współtwórca</strong> wspólnego szkicu <a href="%{resource_path}">%{resource_title}</a>.
         collaborative_draft_access_rejected:
-          email_intro: 'Nie przyznano Ci dostępu jako osobie uczestniczącej w tworzeniu wspólnego projektu dokumentu <a href="%{resource_path}">%{resource_title}</a>.'
+          email_intro: Nie przyznano Ci dostępu jako osobie uczestniczącej w tworzeniu wspólnego projektu dokumentu <a href="%{resource_path}">%{resource_title}</a>.
           email_outro: Otrzymujesz to powiadomienie, ponieważ współpracujesz przy dokumencie <a href="%{resource_path}">%{resource_title}</a>.
           email_subject: "%{requester_name} nie otrzymał(a) dostępu jako współtwórca wspólnego szkicu %{resource_title}."
           notification_title: <a href="%{requester_path}">%{requester_name} %{requester_nickname}</a> <strong>nie otrzymał(a) dostępu jako współtwórca</strong> wspólnego szkicu <a href="%{resource_path}">%{resource_title}</a>.
@@ -295,8 +296,8 @@ pl:
       badges:
         accepted_proposals:
           conditions:
-            - Wybierz przestrzeń partycypacyjną, która Cię interesuje, z możliwością dodawania propozycji
-            - Spróbuj przedstawić propozycje, które można zrealizować. W ten sposób szansa na ich akceptację jest większa.
+          - Wybierz przestrzeń partycypacyjną, która Cię interesuje, z możliwością dodawania propozycji
+          - Spróbuj przedstawić propozycje, które można zrealizować. W ten sposób szansa na ich akceptację jest większa.
           description: Ta odznaka jest przyznawana, gdy aktywnie uczestniczysz dodając nowe propozycje i są one akceptowane.
           description_another: Ten użytkownik ma %{score} zaakceptowanych propozycji.
           description_own: Masz %{score} zaakceptowanych propozycji.
@@ -306,8 +307,8 @@ pl:
           unearned_own: Nie masz jeszcze żadnych zaakceptowanych propozycji.
         proposal_votes:
           conditions:
-            - Przeglądaj i poświęć trochę czasu na czytanie propozycji innych osób
-            - Zagłosuj na propozycje, które lubisz lub uznasz za interesujące
+          - Przeglądaj i poświęć trochę czasu na czytanie propozycji innych osób
+          - Zagłosuj na propozycje, które lubisz lub uznasz za interesujące
           description: Ta odznaka jest przyznawana, gdy głosujesz na propozycje innych osób.
           description_another: Ten użytkownik głosował na %{score} propozycji.
           description_own: Zagłosowałeś(aś) na %{score} propozycje.
@@ -317,8 +318,8 @@ pl:
           unearned_own: Nie głosowałeś(aś) jeszcze na żadne propozycje.
         proposals:
           conditions:
-            - Wybierz przestrzeń partycypacyjną, która Cię interesuje, z możliwością dodawania propozycji
-            - Utwórz nową propozycję
+          - Wybierz przestrzeń partycypacyjną, która Cię interesuje, z możliwością dodawania propozycji
+          - Utwórz nową propozycję
           description: Ta odznaka jest przyznawana, gdy aktywnie uczestniczysz dodając nowe propozycje.
           description_another: Ten użytkownik stworzył %{score} propozycji.
           description_own: Stworzyłeś %{score} propozycji.
@@ -372,9 +373,9 @@ pl:
             proposals: Importuj propozycje z pliku
           resources:
             answers:
-              one: odpowiedź na propozycję
               few: odpowiedzi na propozycję
               many: odpowiedzi na propozycję
+              one: odpowiedź na propozycję
               other: odpowiedzi na propozycję
           title:
             answers: Importuj odpowiedzi do propozycji z pliku
@@ -485,9 +486,9 @@ pl:
             endorsers: Rekomendujący
             link: Zobacz propozycję
             n_more_endorsers:
-              one: i jeszcze 1
               few: i jeszcze %{count}
               many: i jeszcze %{count}
+              one: i jeszcze 1
               other: i jeszcze %{count}
             photos: Zdjęcia
             ranking: "%{ranking} z %{total}"
@@ -578,9 +579,9 @@ pl:
           unfold: Rozwiń
         index:
           count:
-            one: "%{count} wspólny szkic"
             few: "%{count} wspólne szkice"
             many: "%{count} wspólne szkice"
+            one: "%{count} wspólny szkic"
             other: "%{count} wspólne szkice"
         name: Wspólne szkice
         new:
@@ -597,7 +598,7 @@ pl:
         requests:
           accepted_request:
             error: Nie można zaakceptować jako współtwórcy, spróbuj ponownie później.
-            success: "Użytkownik @%{user} został pomyślnie zaakceptowany jako współpracownik."
+            success: Użytkownik @%{user} został pomyślnie zaakceptowany jako współpracownik.
           access_requested:
             error: Twoje żądanie nie może zostać zrealizowanie, spróbuj ponownie później.
             success: Twoja prośba o współpracę została wysłana.
@@ -607,14 +608,14 @@ pl:
             title: Prośby współpracy
           rejected_request:
             error: Nie można odrzucić, spróbuj ponownie później.
-            success: "Użytkownik @%{user} został odrzucony jako współtwórca."
+            success: Użytkownik @%{user} został odrzucony jako współtwórca.
         show:
           final_proposal: ostateczna propozycja
           final_proposal_help_text: Ten szkic jest zakończony. zobacz ostateczną propozycję
           hidden_authors_count:
-            one: i %{count} więcej osoba
             few: i %{count} więcej osób
             many: i %{count} więcej osób
+            one: i %{count} więcej osoba
             other: i %{count} więcej osób
           info-message: Jest to <strong>wspólny szkic</strong> dla propozycji. Oznacza to, że możesz pomóc autorom w kształtowaniu propozycji za pomocą sekcji komentarzy lub poprawić ją bezpośrednio, prosząc o dostęp do edycji. Gdy autorzy przyznają Ci dostęp, będziesz mógł wprowadzać zmiany w tym szkicu.
           publish: Publikuj
@@ -701,9 +702,9 @@ pl:
           click_here: Zobacz wszystkie propozycje
           collaborative_drafts_list: Wspólne szkice
           count:
-            one: "%{count} propozycja"
             few: "%{count} propozycji"
             many: "%{count} propozycji"
+            one: "%{count} propozycja"
             other: "%{count} propozycji"
           grid_mode: Tryb siatkowy
           list_mode: Tryb listy
@@ -733,9 +734,9 @@ pl:
           announcement_title: Twoja propozycja nie została jeszcze opublikowana
           modify: Zmodyfikuj propozycję
           proposal_edit_before_minutes:
-            one: Będziesz mógł edytować tę propozycję w pierwszej minucie po jej opublikowaniu. Gdy ten czas minie nie będzie można edytować propozycji.
             few: Będziesz mógł edytować tę propozycję w ciągu %{count} minut po jej opublikowaniu. Gdy ten czas minie nie będzie można edytować propozycji.
             many: Będziesz mógł edytować tę propozycję w ciągu %{count} minut po jej opublikowaniu. Gdy ten czas minie nie będzie można edytować propozycji.
+            one: Będziesz mógł edytować tę propozycję w pierwszej minucie po jej opublikowaniu. Gdy ten czas minie nie będzie można edytować propozycji.
             other: Będziesz mógł edytować tę propozycję w ciągu %{count} minut po jej opublikowaniu. Gdy ten czas minie nie będzie można edytować propozycji.
           publish: Publikuj
           title: Opublikuj swoją propozycję
@@ -747,9 +748,9 @@ pl:
           changes_at_title: Poprawka do „%{title}”
           estimated_cost: Szacowany koszt
           hidden_endorsers_count:
-            one: i %{count} osoba więcej
             few: i %{count} więcej osób
             many: i %{count} więcej osób
+            one: i %{count} osoba więcej
             other: i %{count} więcej osób
           link_to_collaborative_draft_help_text: Ta propozycja jest wynikiem wspólnego szkicu. Przejrzyj historię
           link_to_collaborative_draft_text: Zobacz wspólny szkic

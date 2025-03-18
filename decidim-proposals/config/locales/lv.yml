@@ -1,3 +1,4 @@
+---
 lv:
   activemodel:
     attributes:
@@ -48,17 +49,17 @@ lv:
   activerecord:
     models:
       decidim/proposals/collaborative_draft:
-        zero: Sadarbības projekti
         one: Sadarbības projekts
         other: Sadarbības projekti
+        zero: Sadarbības projekti
       decidim/proposals/proposal:
-        zero: Priekšlikumi
         one: Priekšlikums
         other: Priekšlikumi
+        zero: Priekšlikumi
       decidim/proposals/proposal_note:
-        zero: Piezīmes
         one: Piezīme
         other: Piezīmes
+        zero: Piezīmes
   decidim:
     admin:
       filters:
@@ -164,8 +165,8 @@ lv:
       badges:
         accepted_proposals:
           conditions:
-            - Izvēlieties savu līdzdalības telpu ar iespējotu priekšlikumu iesniegšanu
-            - Centieties izteikt priekšlikumus, kurus var īstenot. Tādā veidā rodas lielāka iespēja, ka tie tiks pieņemti.
+          - Izvēlieties savu līdzdalības telpu ar iespējotu priekšlikumu iesniegšanu
+          - Centieties izteikt priekšlikumus, kurus var īstenot. Tādā veidā rodas lielāka iespēja, ka tie tiks pieņemti.
           description: Šis žetons tiek piešķirts, kad jūs aktīvi līdzdarbojaties ar jauniem priekšlikumiem un tie tiek pieņemti.
           description_another: Šim dalībniekam bija %{score} pieņemti priekšlikumi.
           description_own: Jums ir %{score} priekšlikumi.
@@ -175,12 +176,12 @@ lv:
           unearned_own: Jums vēl nav neviena pieņemta priekšlikuma.
         proposal_votes:
           conditions:
-            - Pārlūkojiet un pavadiet kādu laiku, lasot citu cilvēku priekšlikumus
-            - 
+          - Pārlūkojiet un pavadiet kādu laiku, lasot citu cilvēku priekšlikumus
+          -
         proposals:
           conditions:
-            - Izvēlieties savu līdzdalības telpu ar iespējotu priekšlikumu iesniegšanu
-            - Izveidot jaunu priekšlikumu
+          - Izvēlieties savu līdzdalības telpu ar iespējotu priekšlikumu iesniegšanu
+          - Izveidot jaunu priekšlikumu
           description: Šis žetons tiek piešķirts, kad jūs aktīvi līdzdarbojaties ar jauniem priekšlikumiem.
           description_another: Šis dalībnieks ir izveidojis %{score} priekšlikumus.
           description_own: Jūs esat izveidojis %{score} priekšlikumus.
@@ -282,9 +283,9 @@ lv:
             endorsements_count: Atbalstu skaits
             endorsers: Atbalstītāji
             n_more_endorsers:
-              zero: un %{count} vēl
               one: un vēl viens
               other: un %{count} vēl
+              zero: un %{count} vēl
             photos: Fotogrāfijas
             ranking: "%{ranking} no %{total}"
             related_meetings: 'Saistītās sanāksmes:'
@@ -364,9 +365,9 @@ lv:
           unfold: Atritināt
         index:
           count:
-            zero: "%{count} sadarbības projekti"
             one: "%{count} sadarbības projekts"
             other: "%{count} sadarbības projekti"
+            zero: "%{count} sadarbības projekti"
         new:
           send: Turpināt
         new_collaborative_draft_button:
@@ -391,9 +392,9 @@ lv:
           final_proposal: galīgais priekšlikums
           final_proposal_help_text: Šis projekts ir pabeigts. Iepazīstieties ar galīgo priekšlikumu
           hidden_authors_count:
-            zero: un vēl %{count} personas
             one: un vēl %{count} persona
             other: un vēl %{count} personas
+            zero: un vēl %{count} personas
           publish: Publicēt
           publish_info: Publicējiet šo projekta versiju vai
           published_proposal: publicētais priekšlikums
@@ -454,9 +455,9 @@ lv:
         index:
           collaborative_drafts_list: Piekļūt sadarbības projektam
           count:
-            zero: "%{count} priekšlikumi"
             one: "%{count} priekšlikums"
             other: "%{count} priekšlikumi"
+            zero: "%{count} priekšlikumi"
           new_proposal: Jauns priekšlikums
           see_all_withdrawn: Skatīt visus atsauktos priekšlikumus
         new:
@@ -472,9 +473,9 @@ lv:
         preview:
           modify: Mainīt priekšlikumu
           proposal_edit_before_minutes:
-            zero: Jūs varēsiet rediģēt šo priekšlikumu pirmajās %{count} minūtēs pēc priekšlikuma publicēšanas. Kad šis laika logs būs pagājis, jūs nevarēsiet rediģēt priekšlikumu.
             one: Jūs varēsiet rediģēt šo priekšlikumu pirmajā minūtē pēc priekšlikuma publicēšanas. Kad šis laika logs būs pagājis, jūs nevarēsiet rediģēt priekšlikumu.
             other: Jūs varēsiet rediģēt šo priekšlikumu pirmajās %{count} minūtēs pēc priekšlikuma publicēšanas. Kad šis laika logs būs pagājis, jūs nevarēsiet rediģēt priekšlikumu.
+            zero: Jūs varēsiet rediģēt šo priekšlikumu pirmajās %{count} minūtēs pēc priekšlikuma publicēšanas. Kad šis laika logs būs pagājis, jūs nevarēsiet rediģēt priekšlikumu.
           publish: Publicēt
           title: Publicējiet savu priekšlikumu
         show:
@@ -482,9 +483,9 @@ lv:
           changes_at_title: Grozīts "%{title}"
           estimated_cost: Paredzamās izmaksas
           hidden_endorsers_count:
-            zero: un vēl %{count} personas
             one: un vēl %{count} persona
             other: un vēl %{count} personas
+            zero: un vēl %{count} personas
           link_to_collaborative_draft_help_text: Šis priekšlikums ir sadarbības projekta rezultāts. Pārskatiet tā vēsturi
           link_to_collaborative_draft_text: Skatīt sadarbības projektu
           link_to_promoted_emendation_help_text: Šis priekšlikums ir veicinātais uzlabojums
@@ -493,7 +494,7 @@ lv:
           link_to_proposal_from_emendation_text: Skatīt priekšlikumu
           proposal_accepted_reason: 'Šis priekšlikums ir pieņemts, jo:'
           proposal_in_evaluation_reason: Šis priekšlikums tiek vērtēts
-          proposal_rejected_reason: 'Šis priekšlikums netika pieņemts, jo'
+          proposal_rejected_reason: Šis priekšlikums netika pieņemts, jo
         voting_rules:
           proposal_limit:
             description: Jūs varat izveidot līdz %{limit} priekšlikumiem.

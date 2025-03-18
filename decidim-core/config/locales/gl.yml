@@ -1,3 +1,4 @@
+---
 gl:
   activemodel:
     attributes:
@@ -40,8 +41,8 @@ gl:
         one: Non hai usuarios
         other: Usuarios
   booleans:
-    'false': 'Non'
-    'true': 'Si'
+    'false': Non
+    'true': Si
   date:
     buttons:
       select: Seleccionar
@@ -113,7 +114,7 @@ gl:
         create: "%{user_name} invitados %{resource_name} para ser un usuario privado"
         delete: "%{user_name} eliminou o usuario %{resource_name} como usuario privado"
       scope:
-        create: "O %{user_name} creou o alcance %{resource_name}"
+        create: O %{user_name} creou o alcance %{resource_name}
         create_with_parent: "%{user_name} creou o alcance %{resource_name} no ámbito %{parent_scope}"
         delete: "%{user_name} eliminou o alcance %{resource_name}"
         delete_with_parent: "%{user_name} eliminou o alcance %{resource_name} no ámbito %{parent_scope}"
@@ -139,7 +140,7 @@ gl:
         button: Modificar %{model_name}
         error: Produciuse un erro ao modificar este recurso.
         promote_button: Promoción a %{model_name}
-        promote_confirm_text: '¿Está seguro de que quere promocionar esta enmienda?'
+        promote_confirm_text: "¿Está seguro de que quere promocionar esta enmienda?"
       emendation:
         actions:
           button_accept: Aceptar
@@ -152,7 +153,9 @@ gl:
           evaluating: |-
             Esta enquisa para o %{amendable_type} %{amendable_link}
             está sendo avaliada.
-          rejected: "Esta modificación do %{amendable_type} %{amendable_link}\nfoi rexeitada en <strong>%{announcement_date}</strong>."
+          rejected: |-
+            Esta modificación do %{amendable_type} %{amendable_link}
+            foi rexeitada en <strong>%{announcement_date}</strong>.
           withdrawn: |-
             Esta autorización foi retirada esta enmenda do %{amendable_type} %{amendable_link}
             .
@@ -446,7 +449,7 @@ gl:
       badges:
         followers:
           conditions:
-            - Ser activo e seguir a outras persoas seguramente fará que outras persoas sigan contigo.
+          - Ser activo e seguir a outras persoas seguramente fará que outras persoas sigan contigo.
           description: Este distintivo é concedido cando chega a un certo número de seguidores. %{organization_name} é unha rede social e política, tece a súa web para comunicarse con outras persoas na plataforma.
           description_another: Este usuario ten %{score} seguidores.
           description_own: "%{score} seguidores están seguindo."
@@ -583,7 +586,7 @@ gl:
         extended:
           debates: Debates
           debates_explanation: Debate e discute, comparte as túas opinións e enriquece os temas relevantes.
-          how_to_participate: '¿Como participo nun proceso?'
+          how_to_participate: "¿Como participo nun proceso?"
           meetings: Reunións
           meetings_explanation: Descubra onde e cando pode participar en reunións públicas.
           more_info: Máis información
@@ -892,7 +895,7 @@ gl:
       day_of_year: "%d.%m.%y"
       ddmm: "%d.%m"
       ddmmyyyy: "%d.%m.%Y"
-      decidim_day_of_year: "123_2_0_321 %B 123_2_2_321 |"
+      decidim_day_of_year: 123_2_0_321 %B 123_2_2_321 |
       decidim_short: "%d/%m/%Y %H:%M"
       devise:
         mailer:

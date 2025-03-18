@@ -1,3 +1,4 @@
+---
 eu:
   activemodel:
     attributes:
@@ -72,13 +73,13 @@ eu:
             empty: Oraindik ez dago erantzunik
             export:
               answer:
-                title: '#%{number} erantzun'
+                title: "#%{number} erantzun"
             export_response:
               title: survey_user_answers_%{token}
             index:
-              title: "Guztira %{total} erantzun"
+              title: Guztira %{total} erantzun
             show:
-              title: '#%{number} erantzun'
+              title: "#%{number} erantzun"
           display_condition:
             answer_option: Erantzuteko aukera
             condition_question: Galdera
@@ -162,7 +163,9 @@ eu:
           update: "%{user_name} parte-hartzaileak %{resource_name} galdetegia eguneratu du"
       errors:
         answer:
-          body: "Gorputza ezin da hutsik egon\n"
+          body: 'Gorputza ezin da hutsik egon
+
+            '
       images:
         dimensions: "%{width} x %{height} px"
         processors:
@@ -194,9 +197,9 @@ eu:
             sign_in_description: Hasi saioa inkesta egiteko
             sign_up_description: Sortu parte-hartzaileen kontua inkesta egiteko
             title: Erantzun formularioa
-          current_step: '%{step} urratsa'
+          current_step: "%{step} urratsa"
           empty: Oraindik ez dago galderarik konfiguratuta galdetegi honetan.
-          of_total_steps: '%{total_steps} etik'
+          of_total_steps: "%{total_steps} etik"
           questionnaire_answered:
             body: Dagoeneko inkesta hau erantzun duzu.
             title: Dagoeneko erantzunda

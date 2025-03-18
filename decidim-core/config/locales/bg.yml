@@ -1,3 +1,4 @@
+---
 bg:
   activemodel:
     attributes:
@@ -70,8 +71,8 @@ bg:
         one: Участник
         other: Участници
   booleans:
-    'false': 'Не'
-    'true': 'Да'
+    'false': Не
+    'true': Да
   date:
     buttons:
       close: Затвори
@@ -138,7 +139,7 @@ bg:
     accessibility:
       external_link: Външна връзка
       front_page_link: Отидете на начална страница
-      logo: "Официално лого на %{organization}"
+      logo: Официално лого на %{organization}
       opens_in_new_tab: Отваря се в нов раздел
       skip_button: Към съдържанието
     account:
@@ -177,7 +178,7 @@ bg:
         success: Профилът Ви е обновен успешно.
         success_with_email_confirmation: Профилът Ви беше актуализиран успешно. Ще получите имейл за потвърждение на Вашата нова електронна поща.
     activity:
-      time_ago: "преди %{time}"
+      time_ago: преди %{time}
     admin:
       actions:
         cancel: Отказ
@@ -304,8 +305,7 @@ bg:
           button_reject: Отхвърли
           help_text: Прегледай промените и приеми или отхвърли тази поправка. Нейните автор(и) ще бъдат известени.
         announcement:
-          accepted: |-
-            Тази поправка на %{amendable_type} %{proposal_link} беше приета на <strong>%{date}</strong>.
+          accepted: Тази поправка на %{amendable_type} %{proposal_link} беше приета на <strong>%{date}</strong>.
           evaluating: |-
             Тази поправка на %{amendable_type} %{proposal_link}
             се разглежда.
@@ -424,7 +424,7 @@ bg:
           title: Идентификацията не е завършила
         unauthorized:
           explanation: За съжаление не можете да извършите това действие, тъй като някои от вашите данни за оторизация не съвпадат.
-          invalid_field: "Стойността на %{field} %{value} не е валидна."
+          invalid_field: Стойността на %{field} %{value} не е валидна.
           ok: Добре
           title: Не сте идентифициран
         unconfirmed:
@@ -802,8 +802,8 @@ bg:
       attachment_link:
         explanation: Ръководство за прикачени линкове
         help_messages:
-          - Приемат се само правилни URL формати.
-          - Моля, имайте предвид, че линковете трябва да са публични, така че всички участници да имат достъп до тях.
+        - Приемат се само правилни URL формати.
+        - Моля, имайте предвид, че линковете трябва да са публични, така че всички участници да имат достъп до тях.
       errors:
         decidim/user:
           password: Паролата е твърде къса.
@@ -851,10 +851,10 @@ bg:
       badges:
         followers:
           conditions:
-            - Ако сте активни и следвате други хора, със сигурност ще накарате други хора да ви следват.
+          - Ако сте активни и следвате други хора, със сигурност ще накарате други хора да ви следват.
           description: Ще заслужите тази значка, ако достигнете определен брой последователи. %{organization_name} е социална и политическа мрежа. Изградете собствена мрежа, за да общувате с други хора в платформата.
           description_another: Този участник има %{score} последователи.
-          description_own: "Следват Ви %{score} човека."
+          description_own: Следват Ви %{score} човека.
           name: Последователи
           next_level_in: Остават %{score} човека до достигане на следващото ниво!
           unearned_another: Този участник все още няма последователи.
@@ -980,7 +980,7 @@ bg:
         active: Активно
         finished: 'Приключило: %{end_date}'
         not_started: Още не е започнало
-        remaining: "Остават %{time_distance}"
+        remaining: Остават %{time_distance}
     metrics:
       download:
         csv: Изтегляне на данни (CSV)
@@ -1304,7 +1304,7 @@ bg:
     user_contact_disabled: Този участник не приема директни съобщения.
     user_conversations:
       index:
-        time_ago: "преди %{time}"
+        time_ago: преди %{time}
     user_report_mailer:
       notify:
         body_1: Потребителят %{user} е докладван от %{token}
@@ -1434,8 +1434,8 @@ bg:
         confirm_new_password: Потвърди нова парола
         new_password: Нова парола
         old_password_help: За да потвърдите промените във вашия акаунт, моля, въведете текущата си парола.
-        password_help: "Минимум %{minimum_characters} символа, не трябва да са разпространени (например, 123456) и трябва да са различни от вашите име и ел. поща."
-        password_help_admin: "Минимум %{minimum_characters} символа, не трябва да са разпространени (например, 123456) и трябва да са различни от вашите име и ел. поща."
+        password_help: Минимум %{minimum_characters} символа, не трябва да са разпространени (например, 123456) и трябва да са различни от вашите име и ел. поща.
+        password_help_admin: Минимум %{minimum_characters} символа, не трябва да са разпространени (например, 123456) и трябва да са различни от вашите име и ел. поща.
         title: Промяна на паролата
       new:
         forgot_your_password: Забравили сте паролата си?

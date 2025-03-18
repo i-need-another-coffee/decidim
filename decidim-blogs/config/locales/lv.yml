@@ -1,3 +1,4 @@
+---
 lv:
   activemodel:
     models:
@@ -5,9 +6,9 @@ lv:
   activerecord:
     models:
       decidim/blogs/post:
-        zero: Ziņas
         one: Ziņa
         other: Ziņas
+        zero: Ziņas
   decidim:
     blogs:
       actions:

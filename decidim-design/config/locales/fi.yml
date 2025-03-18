@@ -284,7 +284,12 @@ fi:
         usage_background_6: Hallintapaneelin ulkoasun taustaväri
         usage_base_1: Päänavigaation taustaväri\nNavigaatiovalikot etusivulla ja osallistumistilan etusivulla
         usage_base_2: Linkkien ja painikkeiden pääväri
-        usage_base_3: "Graafiset koristeet ja korostusväri\nKorttien ja luettelomerkintöjen reunaväri väri kohdistimen ollessa niiden päällä\n\n\nkohteita leijuvat valtion raja"
+        usage_base_3: |-
+          Graafiset koristeet ja korostusväri
+          Korttien ja luettelomerkintöjen reunaväri väri kohdistimen ollessa niiden päällä
+
+
+          kohteita leijuvat valtion raja
         usage_formelements_1: Syöte-elementtien oletustaustaväri
         usage_formelements_2: Käytöstä poistettujen syöte-elementtien oletustaustaväri
         usage_state_1: Onnistumisilmoituksen reunaväri\nIlmoitusten kuvakkeen täyteväri\nPainikkeiden taustaväri onnistumisviesteissä

@@ -1,3 +1,4 @@
+---
 lv:
   activemodel:
     attributes:
@@ -72,8 +73,7 @@ lv:
       debates:
         create_debate_event:
           user_followers:
-            email_intro: |-
-              Sveiki,%{author_name}%{author_nickname}, kam jūs sekojat, ir izveidojis jaunas debates "%{resource_title}". Aplūkojiet tās un piedalieties:
+            email_intro: 'Sveiki,%{author_name}%{author_nickname}, kam jūs sekojat, ir izveidojis jaunas debates "%{resource_title}". Aplūkojiet tās un piedalieties:'
             email_outro: Jūs saņēmāt šo paziņojumu, jo sekojat %{author_nickname}. Jūs varat atteikties no paziņojumu saņemšanas, sekojot iepriekšējai saitei.
             email_subject: Jaunas debates "%{resource_title}", ko iesniedza %{author_nickname}
             notification_title: <a href="%{author_path}">%{author_name} %{author_nickname}</a> izveidoja <a href="%{resource_path}">%{resource_title}</a> debates.
@@ -90,7 +90,7 @@ lv:
       badges:
         commented_debates:
           conditions:
-            - Izvēlieties kādas no atvērtajām debatēm, lai piedalītos
+          - Izvēlieties kādas no atvērtajām debatēm, lai piedalītos
           description: Šis žetons tiek piešķirts, kad jūs aktīvi piedalāties dažādās debatēs, ievietojot tajās komentārus.
           description_another: Šis dalībnieks ir piedalījies %{score} debatēs.
           description_own: Jūs esat piedalījies %{score} debatēs.

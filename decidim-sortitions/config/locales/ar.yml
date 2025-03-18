@@ -1,3 +1,4 @@
+---
 ar:
   activemodel:
     attributes:
@@ -14,12 +15,12 @@ ar:
   activerecord:
     models:
       decidim/sortitions/sortition:
-        zero: Sortitions
-        one: Sortition
-        two: Sortitions
         few: Sortitions
         many: Sortitions
+        one: Sortition
         other: Sortitions
+        two: Sortitions
+        zero: Sortitions
   decidim:
     components:
       sortitions:
@@ -82,12 +83,12 @@ ar:
       sortitions:
         count:
           proposals_count:
-            zero: "%{count} مقترحات"
-            one: اقتراح واحد
-            two: "%{count} مقترحات"
             few: "%{count} مقترحات"
             many: "%{count} مقترحات"
+            one: اقتراح واحد
             other: "%{count} مقترحات"
+            two: "%{count} مقترحات"
+            zero: "%{count} مقترحات"
         filters:
           active: نشيط
           all: الكل
@@ -102,12 +103,12 @@ ar:
           recent: الأخيرة
         results_count:
           count:
-            zero: مقترحات مختارة
-            one: الاقتراح المحدد
-            two: مقترحات مختارة
             few: مقترحات مختارة
             many: مقترحات مختارة
+            one: الاقتراح المحدد
             other: مقترحات مختارة
+            two: مقترحات مختارة
+            zero: مقترحات مختارة
         show:
           algorithm: رمز خوارزمية التصنيف
           any_category: من جميع الفئات
@@ -115,31 +116,31 @@ ar:
           candidate_proposal_ids: ترتيب المقترحات الترتيب ومعرفات
           candidate_proposals_info: 'تم تنفيذ التصنيف بين المقترحات التالية (%{category_label}) ، مع المعرفات التالية (بالخط العريض للمقترحات المختارة)  '
           category: من %{category} الفئة
-          dice_result: (1) نتيجة النرد
+          dice_result: "(1) نتيجة النرد"
           introduction: 'تحتوي هذه الصفحة على نتائج الفرز %{reference}. من خلال هذا sortition، %{target_items} تم اختيارها عشوائيا عدد من النتائج ومع التوزيع الاحتمالي على قدم المساواة من مجموعة من المقترحات المعروضة رفع الصوت عاليا. جنبًا إلى جنب مع النتائج ، توفر المعلومات المعروضة على هذه الصفحة جميع المعلومات المطلوبة لزيادة الضمانات وإعادة إنتاج النتائج. المفتاح لجودة هذا الفرز هو العشوائية المزدوجة التي يوفرها المتداول من الزهر (التحقق من قبل الشهود) والوقت الدقيق للترتيب الذي يوفر مدخلات لخوارزمية يولد اختيار عشوائي. إن البذر الزمني للفرز دقيق للغاية (بالثواني) بحيث يستحيل على البشر التحكم فيه ، مما يوفر مدخلات مزدوجة "لا يمكن السيطرة عليها" لضمان نتيجة عادلة.  '
           mathematical_result: النتيجة (1) × (2)
           proposals_selected_by_sortition: مقترحات مختارة من قبل الفرز
           sortition_reproducibility_details: تفاصيل استنساخ الفرز
-          time_seed: (2) الوقت البذور
+          time_seed: "(2) الوقت البذور"
           witnesses: شهود عيان
         sortition:
           random_seed: البذور عشوائي
           selected_proposals:
-            zero: مقترحات مختارة
-            one: تم اختيار الاقتراح
-            two: مقترحات مختارة
             few: مقترحات مختارة
             many: مقترحات مختارة
+            one: تم اختيار الاقتراح
             other: مقترحات مختارة
+            two: مقترحات مختارة
+            zero: مقترحات مختارة
         sortition_author:
           deleted: مشارك محذوف
         sortition_cancel_author:
           deleted: مشارك محذوف
         sortitions_count:
           count:
-            zero: "%{count} التصنيف"
-            one: 1 التصنيف
-            two: "%{count} التصنيف"
             few: "%{count} التصنيف"
             many: "%{count} التصنيف"
+            one: 1 التصنيف
             other: "%{count} التصنيف"
+            two: "%{count} التصنيف"
+            zero: "%{count} التصنيف"

@@ -1,3 +1,4 @@
+---
 zh-TW:
   activemodel:
     attributes:
@@ -33,7 +34,7 @@ zh-TW:
     admin:
       menu:
         authorization_revocation:
-          before_date_info: '"如果程序已經開始進行，且您希望撤銷先前程序的權限，此選項會很有用。'
+          before_date_info: "\"如果程序已經開始進行，且您希望撤銷先前程序的權限，此選項會很有用。"
           button: 全部撤銷
           button_before: 撤銷日期之前
           destroy:
@@ -53,20 +54,20 @@ zh-TW:
       admin:
         csv_census:
           help:
-            - 管理員上傳一個包含已接受參與者電子郵件的 CSV 檔案.
-            - 只有在 CSV 檔案中的電子郵件被列出的參與者才能取得驗證。
+          - 管理員上傳一個包含已接受參與者電子郵件的 CSV 檔案.
+          - 只有在 CSV 檔案中的電子郵件被列出的參與者才能取得驗證。
         id_documents:
           help:
-            - 使用者填寫身份資訊並上傳其證件的掃描副本。
-            - 您填寫上傳圖像中的資訊。
-            - 上傳的資訊應與使用者填寫的資訊相符。
-            - 如果您無法清楚地看到該信息或無法進行驗證，您可以拒絕該請求，用戶將能夠修正它。
+          - 使用者填寫身份資訊並上傳其證件的掃描副本。
+          - 您填寫上傳圖像中的資訊。
+          - 上傳的資訊應與使用者填寫的資訊相符。
+          - 如果您無法清楚地看到該信息或無法進行驗證，您可以拒絕該請求，用戶將能夠修正它。
         postal_letter:
           help:
-            - 參與者請求將驗證碼發送至其地址。
-            - 您將信件連同驗證碼發送至其地址。
-            - 您將信件標記為已發送。
-            - 一旦您將信件標記為已發送，參與者便能輸入驗證碼並通過驗證。
+          - 參與者請求將驗證碼發送至其地址。
+          - 您將信件連同驗證碼發送至其地址。
+          - 您將信件標記為已發送。
+          - 一旦您將信件標記為已發送，參與者便能輸入驗證碼並通過驗證。
       csv_census:
         explanation: 使用組織人口普查的方式進行驗證.
         name: 組織的普查
@@ -93,7 +94,7 @@ zh-TW:
         create:
           error: 創建授權時出現問題。
           success: 你已經成功被授權。
-          transferred: '基於您的授權，我們已恢復以下參與資料：'
+          transferred: 基於您的授權，我們已恢復以下參與資料：
           unconfirmed: 您需要確認您的電子郵件以授權。
         destroy:
           error: 刪除授權時出現問題。
@@ -137,8 +138,8 @@ zh-TW:
             example: |
               john.doe@example.org
               jane.doe@example.org
-            file: "帶有電子郵件數據的.csv 文件"
-            info: '必須是一個 CSV 格式的文件，僅包含一列電子郵件地址：'
+            file: 帶有電子郵件數據的.csv 文件
+            info: 必須是一個 CSV 格式的文件，僅包含一列電子郵件地址：
             submit: 上傳檔案
             title: 上傳新的調查
         authorizations:
@@ -148,9 +149,13 @@ zh-TW:
       dummy_authorization:
         extra_explanation:
           postal_codes:
-            other: "參與僅限於具有郵政編碼%{postal_codes} 的參與者。\n參與僅限於具有以下任何郵政編碼的參與者：%{postal_codes}。"
+            other: |-
+              參與僅限於具有郵政編碼%{postal_codes} 的參與者。
+              參與僅限於具有以下任何郵政編碼的參與者：%{postal_codes}。
           user_postal_codes:
-            other: "參與資格限制於具有郵政編碼 %{postal_codes} 的參與者，而您的郵政編碼為 %{user_postal_code}。\n參與資格限制於具有以下任一郵政編碼的參與者：%{postal_codes}。而您的郵政編碼為 %{user_postal_code}。"
+            other: |-
+              參與資格限制於具有郵政編碼 %{postal_codes} 的參與者，而您的郵政編碼為 %{user_postal_code}。
+              參與資格限制於具有以下任一郵政編碼的參與者：%{postal_codes}。而您的郵政編碼為 %{user_postal_code}。
       id_documents:
         admin:
           config:

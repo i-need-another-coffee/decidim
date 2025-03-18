@@ -1,3 +1,4 @@
+---
 ja:
   activemodel:
     attributes:
@@ -216,7 +217,7 @@ ja:
           refuse: 管理者規約に同意しない
           title: 利用規約に同意する
         required_review:
-          alert: '必須：管理者の利用規約を確認してください'
+          alert: 必須：管理者の利用規約を確認してください
           callout: 管理者向け利用規約を確認してください。確認しない場合、プラットフォームを管理することはできません。
           cta: 今すぐ確認する
         title: 管理者向け利用規約
@@ -352,7 +353,7 @@ ja:
           unpublished: 未公開
       conflicts:
         attempts: 試行回数
-        'false': 'いいえ'
+        'false': いいえ
         index:
           text: 現在のユーザーのメールアドレス、名前、ニックネームで検索します。
         managed_user_name: 管理対象ユーザー
@@ -365,7 +366,7 @@ ja:
           reason: 理由
           success: 現在の移転が正常に完了しました。
           title: 移行
-        'true': 'はい'
+        'true': はい
         user_name: ユーザー
       content_blocks:
         create:
@@ -409,13 +410,13 @@ ja:
         invitation_accepted_at_present:
           label: 招待が承認されました
           values:
-            'false': 'いいえ'
-            'true': 'はい'
+            'false': いいえ
+            'true': はい
         last_sign_in_at_present:
           label: ログイン済み
           values:
-            'false': 'いいえ'
-            'true': 'はい'
+            'false': いいえ
+            'true': はい
         moderated_users:
           reports_reason_eq:
             label: 理由を報告
@@ -455,11 +456,11 @@ ja:
         remove_all: すべて削除
         search_label: 検索
         search_placeholder:
-          name_or_nickname_or_email_cont: '%{collection} をメール、表示名、アカウントIDで検索します。'
+          name_or_nickname_or_email_cont: "%{collection} をメール、表示名、アカウントIDで検索します。"
           report_count_eq: 報告数
           reported_id_string_or_reported_content_cont: 報告可能なIDまたはコンテンツで %{collection} を検索します。
-          title_cont: '%{collection} をタイトルで検索します。'
-          user_name_or_user_nickname_or_user_email_cont: '%{collection} をメール、表示名、アカウントIDで検索します。'
+          title_cont: "%{collection} をタイトルで検索します。"
+          user_name_or_user_nickname_or_user_email_cont: "%{collection} をメール、表示名、アカウントIDで検索します。"
         state_eq:
           label: 状態
           values:
@@ -519,7 +520,7 @@ ja:
           duplicate_headers:
             detail: ファイルに必須の列またはヘッダーが含まれていることを確認してください。
             message:
-              other: '%{columns} 列が重複しています。'
+              other: "%{columns} 列が重複しています。"
           invalid_indexes:
             lines:
               detail: これらの行が正しくフォーマットされ、有効なレコードが含まれていることを確認してください。
@@ -543,7 +544,7 @@ ja:
           actions:
             back: 戻る
           download_example: サンプルをダウンロードする
-          download_example_format: '%{name} の例'
+          download_example_format: "%{name} の例"
           file_legend: 解析されるインポート ファイルを追加します。
           import: インポート
         notice: "%{count} %{resource_name} が正常にインポートされました。"
@@ -777,7 +778,7 @@ ja:
           not_sent: 送信されていません
           participants: '参加者 '
           private_members: 'プライベートメンバー '
-          segmented_to: '%{subject}にセグメント : '
+          segmented_to: "%{subject}にセグメント : "
           subscribed_count: '購読済み:'
           title: ニュースレター
           verification_types: '検証の種別: %{types}'
@@ -954,10 +955,10 @@ ja:
             button: すべてのプライベート参加者を削除
             confirm: すべてのプライベート参加者を削除してもよろしいですか？この操作は元に戻せず、削除された方を復元することはできません。
             empty: プライベートの参加者はいません。
-            explanation: '%{count} 人のプライベート参加者がいます。'
+            explanation: "%{count} 人のプライベート参加者がいます。"
             title: プライベート参加者を削除
           example_file: 'サンプルファイル:'
-          explanation: 'CSV ファイルをアップロードします。 CSVにはヘッダをつけず、最初のカラムにはメールアドレスを、次のカラムにはユーザー名を入れた2カラムのCSVとして、参加スペースに追加したいユーザーの情報を並べてください。 ユーザー名には `<>?%&^*#@()[]=+:;"{}\|`のような無効な文字を使用しないでください。'
+          explanation: CSV ファイルをアップロードします。 CSVにはヘッダをつけず、最初のカラムにはメールアドレスを、次のカラムにはユーザー名を入れた2カラムのCSVとして、参加スペースに追加したいユーザーの情報を並べてください。 ユーザー名には `<>?%&^*#@()[]=+:;"{}\|`のような無効な文字を使用しないでください。
           explanation_example: |
             john.doe@example.org%{csv_col_sep}John Doe
             jane.doe@example.org%{csv_col_sep}Jane Doe
@@ -1024,7 +1025,7 @@ ja:
           error: アクセスリンクの削除中に問題が発生しました。
           success: アクセスリンクを削除しました。
         edit:
-          title: '%{name} へのアクセスリンクを編集'
+          title: "%{name} へのアクセスリンクを編集"
           update: 更新
         form:
           automatic: 自動
@@ -1032,11 +1033,11 @@ ja:
           custom_expiration: カスタム有効期限
           custom_token: カスタムワード
           expires_at: 有効期限
-          'false': 'いいえ'
+          'false': いいえ
           never_expire: 無期限
           registered_only: 登録者のみ？
           token: アクセスキー
-          'true': 'はい'
+          'true': はい
         index:
           back_to_share_tokens: アクセスリンクへ戻る
           copied: アクセスリンクをコピーしました！
@@ -1048,10 +1049,10 @@ ja:
           share_tokens_help_html: |
             この未公開リソースを他の人が閲覧できるようにするために、アクセスリンクを作成して共有してください。
             アクセスリンクは、登録済みの参加者のみが使えるようにするか、有効期限を設定するか、必要に応じて選択できます。 新しいアクセスリンクを誰かと共有するには、リンクを作成し、"%{clipboard} クリップボード" アクションアイコンを使用してリンクをコピーしてください。
-          title: '%{name} へのアクセスリンク'
+          title: "%{name} へのアクセスリンク"
         new:
           create: 作成
-          title: '%{name} への新しいアクセスリンク'
+          title: "%{name} への新しいアクセスリンク"
         update:
           error: このアクセスを更新中に問題が発生しました。
           success: アクセスリンクが更新されました。
@@ -1144,7 +1145,7 @@ ja:
           to_next_page: 次のページにドラッグ
           to_prev_page: 前のページにドラッグ
         taxonomy_actions:
-          confirm_destroy: '%{name} を削除してもよろしいですか？その場合全ての子の項目も削除されます。 注意: このタクソノミーを使用しているリソース自体は影響を受けませんが、このタクソノミーへの参照は失われます。'
+          confirm_destroy: "%{name} を削除してもよろしいですか？その場合全ての子の項目も削除されます。 注意: このタクソノミーを使用しているリソース自体は影響を受けませんが、このタクソノミーへの参照は失われます。"
         total_filters: フィルター
         total_items: タクソノミー内の項目
         update:
@@ -1208,12 +1209,12 @@ ja:
           taxonomies: タクソノミー
       taxonomy_items:
         edit:
-          title: '%{taxonomy} の項目を編集'
+          title: "%{taxonomy} の項目を編集"
           update: 項目の更新
         new:
           create: 項目の作成
           none: なし
-          title: '%{taxonomy} の新しい項目'
+          title: "%{taxonomy} の新しい項目"
       titles:
         admin_log: 管理者ログ
         area_types: エリア種別
@@ -1241,10 +1242,10 @@ ja:
         deleted_component_info: このコンポーネントは、ステータスが '未公開' の場合にのみ削除できます。
       trash_management:
         restore:
-          invalid: '%{resource_name} の復元に問題が発生しました。'
+          invalid: "%{resource_name} の復元に問題が発生しました。"
           success: "%{resource_name} は正常に復元されました。"
         soft_delete:
-          invalid: '%{resource_name} の削除中に問題が発生しました。'
+          invalid: "%{resource_name} の削除中に問題が発生しました。"
           success: "%{resource_name} を削除しました。"
       users:
         create:

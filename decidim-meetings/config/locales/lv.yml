@@ -1,3 +1,4 @@
+---
 lv:
   activemodel:
     attributes:
@@ -33,17 +34,17 @@ lv:
   activerecord:
     models:
       decidim/meetings/meeting:
-        zero: Sanāksmes
         one: Sanāksme
         other: Sanāksmes
+        zero: Sanāksmes
       decidim/meetings/minutes:
-        zero: Protokols
         one: Protokols
         other: Protokols
+        zero: Protokols
       decidim/meetings/registration:
-        zero: Reģistrācija
         one: Reģistrācija
         other: Reģistrācija
+        zero: Reģistrācija
   decidim:
     admin:
       meeting_copies:
@@ -84,7 +85,7 @@ lv:
         meeting_created:
           email_intro: Sanāksme "%{resource_title}" ir pievienota "%{participatory_space_title}", kurai sekojat.
           email_outro: Jūs saņēmāt šo paziņojumu, jo sekojat "%{participatory_space_title}". Jūs varat atsekot tai no iepriekšējās saites.
-          email_subject: '%{participatory_space_title} pievienota jauna sanāksme'
+          email_subject: "%{participatory_space_title} pievienota jauna sanāksme"
           notification_title: Sanāksme <a href="%{resource_path}">%{resource_title}</a> ir pievienota %{participatory_space_title}
         meeting_registration_confirmed:
           notification_title: Jūsu reģistrācija sanāksmei <a href="%{resource_url}">%{resource_title}</a> ir apstiprināta. Jūsu reģistrācijas kods ir %{registration_code}.
@@ -117,7 +118,7 @@ lv:
       badges:
         attended_meetings:
           conditions:
-            - Reģistrējieties sanāksmēm, kuras vēlaties apmeklēt
+          - Reģistrējieties sanāksmēm, kuras vēlaties apmeklēt
           description: Šis žetons tiek piešķirts, apmeklējot vairākas klātienes sanāksmes.
           description_another: Šis dalībnieks ir apmeklējis %{score} sanāksmes.
           description_own: Jūs esat apmeklējis %{score} sanāksmes.
@@ -188,7 +189,7 @@ lv:
           edit:
             update: Atjaunināt
           form:
-            address_help: 'Adresi Geocoder izmanto atrašanās vietas noteikšanai'
+            address_help: Adresi Geocoder izmanto atrašanās vietas noteikšanai
             location_help: 'Atrašanās vieta: ziņojums, kas paredzēts lietotājiem, norādot tikšanās vietu'
           index:
             title: Sanāksmes
@@ -216,9 +217,9 @@ lv:
             recommendation_message: Privātuma apsvērumu dēļ mēs jums iesakām izdzēst šo ierakstu veidlapu, kad jums tā vairs nav vajadzīga. Pēc noklusējuma tas ir trīs mēnešus pēc sanāksmes beigām.
             registration_form: Reģistrācijas veidlapa
             registrations_count:
-              zero: Ir notikušas %{count} reģistrācijas.
               one: Ir notikusi %{count} reģistrācija.
               other: Ir notikušas %{count} reģistrācijas.
+              zero: Ir notikušas %{count} reģistrācijas.
             reserved_slots_less_than: Jābūt mazāk vai vienādam ar %{count}
             title: Reģistrācija
           update:
@@ -279,9 +280,9 @@ lv:
             validated: VALIDĒTS
             validation_pending: GAIDA VALIDĀCIJU
           remaining_slots:
-            zero: "Atlicis %{count} laiks runāšanai"
-            one: "Atlicis %{count} laiks runāšanai"
-            other: "Atlicis %{count} laiks runāšanai"
+            one: Atlicis %{count} laiks runāšanai
+            other: Atlicis %{count} laiks runāšanai
+            zero: Atlicis %{count} laiks runāšanai
       models:
         invite:
           fields:

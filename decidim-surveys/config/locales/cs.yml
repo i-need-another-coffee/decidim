@@ -1,3 +1,4 @@
+---
 cs:
   activemodel:
     models:
@@ -6,14 +7,14 @@ cs:
   activerecord:
     models:
       decidim/surveys/survey:
-        one: Průzkum
         few: Průzkumy
         many: Průzkumy
+        one: Průzkum
         other: Průzkumy
       decidim/surveys/survey_answer:
-        one: Odpovědět
         few: Odpovědi
         many: Odpovědi
+        one: Odpovědět
         other: Odpovědi
   decidim:
     admin:
@@ -72,15 +73,15 @@ cs:
             no_answers: Zatím nejsou žádné odpovědi
             title: "%{total} odpovědí celkem"
           show:
-            title: 'Odpověď č.%{number}'
+            title: Odpověď č.%{number}
         exports:
           survey_user_answers: Odpovědi účastníka na průzkum
         publish_answers:
           index:
             answers:
-              one: "%{count} odpověď"
               few: "%{count} odpovědi"
               many: "%{count} odpovědí"
+              one: "%{count} odpověď"
               other: "%{count} odpovědí"
             description: |-
               Zveřejněním odpovědí na otázky je veřejnosti zviditelníte.
@@ -154,9 +155,9 @@ cs:
           success: Průzkum úspěšně odpověděl.
         count:
           surveys_count:
-            one: "%{count} anketa"
             few: "%{count} ankety"
             many: "%{count} anket"
+            one: "%{count} anketa"
             other: "%{count} anket"
         filters:
           all: Vše

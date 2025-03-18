@@ -1,3 +1,4 @@
+---
 zh-CN:
   activemodel:
     attributes:
@@ -244,12 +245,12 @@ zh-CN:
           email_subject: 您已被分配为 %{role} 给 "%{resource_title}"。
           notification_title: 您已被分配为 %{role} 用于参与进程 <a href="%{resource_url}">%{resource_title}</a>。
         step_activated:
-          email_intro: '%{resource_title} 阶段现在对 %{participatory_space_title}生效。您可以从这个页面查看：'
+          email_intro: "%{resource_title} 阶段现在对 %{participatory_space_title}生效。您可以从这个页面查看："
           email_outro: 您收到此通知是因为您正在关注 %{participatory_space_title}。您可以停止收到跟随上一个链接的通知。
           email_subject: 更新到 %{participatory_space_title}
           notification_title: '%{resource_title} 阶段现在已对 <a href="%{resource_path}">%{participatory_space_title}</a> 激活'
         step_changed:
-          email_intro: '%{resource_title} 阶段 %{participatory_space_title} 的日期已更新。您可以从这个页面查看：'
+          email_intro: "%{resource_title} 阶段 %{participatory_space_title} 的日期已更新。您可以从这个页面查看："
           email_outro: 您收到此通知是因为您正在关注 %{participatory_space_title}。您可以停止收到跟随上一个链接的通知。
           email_subject: 更新到 %{participatory_space_title}
           notification_title: <a href="%{resource_path}">%{resource_title}</a> 阶段 <a href="%{participatory_space_url}">%{participatory_space_title}</a> 的日期已更新。
@@ -331,7 +332,7 @@ zh-CN:
         participatory_process_group:
           browse: 浏览
           browse_resource: 浏览流程组 %{resource_name}
-          processes_count: '进程：'
+          processes_count: 进程：
       participatory_processes:
         index:
           promoted_processes: 高亮的进程

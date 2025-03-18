@@ -1,3 +1,4 @@
+---
 lt:
   activemodel:
     attributes:
@@ -164,7 +165,7 @@ lt:
             title: Forma uždaryta
           questionnaire_js_disabled:
             body: Kai kurie šios formos funkcionalumai bus neaktyvūs. Kad pagerintumėte naudojimo patirtį, naršyklėje įjunkite „JavaScript“.
-            title: '„JavaScript“ išjungta'
+            title: "„JavaScript“ išjungta"
           questionnaire_not_published:
             body: Ši forma dar nepaskelbta.
           tos_agreement: Dalyvaudami sutinkate su paslaugos teikimo sąlygomis

@@ -1,3 +1,4 @@
+---
 zh-CN:
   activemodel:
     models:
@@ -24,8 +25,8 @@ zh-CN:
             placeholder: 你对此有什么看法？
         opinion:
           neutral: 中性的
-        remaining_characters: "剩余 %{count} 个字符"
-        remaining_characters_1: "剩余 %{count} 个字符"
+        remaining_characters: 剩余 %{count} 个字符
+        remaining_characters_1: 剩余 %{count} 个字符
         title: 添加您的评论
       comment:
         alignment:
@@ -49,7 +50,7 @@ zh-CN:
           most_discussed: 最多讨论
           older: 更旧的
           recent: 最近的
-        title: '排序方式：'
+        title: 排序方式：
       comments:
         blocked_comments_for_user_warning: 您此时无法评论，但您可以阅读前面的评论。
         comment_details_title: 评论详情
@@ -64,12 +65,12 @@ zh-CN:
         comment_by_followed_user:
           email_intro: "%{author_name} 在 %{resource_title}留下了一条评论。您可以在这个页面阅读："
           email_outro: 您收到此通知是因为您正在关注 %{author_name}。您可以从其个人资料页面取消关注此用户。
-          email_subject: '%{author_name} 在 %{resource_title} 有一个新评论'
+          email_subject: "%{author_name} 在 %{resource_title} 有一个新评论"
           notification_title: <a href="%{author_path}">%{author_name} %{author_nickname}</a> 在 <a href="%{resource_path}">%{resource_title}</a> 有新的评论。
         comment_created:
           email_intro: "%{resource_title} 已被评论。您可以阅读此页面中的评论："
           email_outro: 您收到此通知是因为您正在关注"%{resource_title}"或其作者。您可以从上一个链接取消关注它。
-          email_subject: '%{author_name} 在 %{resource_title} 有一个新评论'
+          email_subject: "%{author_name} 在 %{resource_title} 有一个新评论"
           notification_title: 来自 <a href="%{author_path}">%{author_name} %{author_nickname}</a> 的新评论 <a href="%{resource_path}">%{resource_title}</a>
         reply_created:
           email_intro: "%{author_name} 在 %{resource_title}回复了您的评论。您可以在这个页面阅读："

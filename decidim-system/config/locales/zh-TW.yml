@@ -1,8 +1,9 @@
+---
 zh-TW:
   activemodel:
     attributes:
       oauth_application:
-        name: '"OAuth應用程式名稱'
+        name: "\"OAuth應用程式名稱"
         organization_logo: 組織標誌 (方形)
         organization_name: 組織
         organization_url: 組織網址 URL

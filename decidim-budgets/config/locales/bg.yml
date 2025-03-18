@@ -1,3 +1,4 @@
+---
 bg:
   activemodel:
     attributes:
@@ -89,8 +90,8 @@ bg:
             select_for_implementation: Избрано за внедряване
             selected: Избрани
             selected_options:
-              'no': 'Не'
-              'yes': 'Да'
+              'no': Не
+              'yes': Да
             title: Проекти
             update: Актуализация
             update_budget_button: Актуализирайте бюджета на проекта

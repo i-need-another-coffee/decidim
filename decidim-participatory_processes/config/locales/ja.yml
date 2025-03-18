@@ -1,3 +1,4 @@
+---
 ja:
   activemodel:
     attributes:
@@ -317,14 +318,14 @@ ja:
           email_subject: あなたは " %{role} " の%{resource_title} として割り当てられました。
           notification_title: あなたは参加型プロセス<a href="%{resource_url}">%{resource_title}</a> に、%{role} として割り当てられました。
         step_activated:
-          email_intro: '%{resource_title} フェーズが %{participatory_space_title}に有効になりました。このページから確認できます:'
-          email_outro: '%{participatory_space_title}をフォローしているため、この通知を受け取りました。前のリンクに続く通知の受信を停止することができます。'
-          email_subject: '%{participatory_space_title} への更新'
+          email_intro: "%{resource_title} フェーズが %{participatory_space_title}に有効になりました。このページから確認できます:"
+          email_outro: "%{participatory_space_title}をフォローしているため、この通知を受け取りました。前のリンクに続く通知の受信を停止することができます。"
+          email_subject: "%{participatory_space_title} への更新"
           notification_title: '%{resource_title} フェーズが <a href="%{resource_path}">%{participatory_space_title}</a> に有効になりました'
         step_changed:
-          email_intro: '%{resource_title} の %{participatory_space_title} フェーズの日付が更新されました。このページから見ることができます：'
-          email_outro: '%{participatory_space_title}をフォローしているため、この通知を受け取りました。前のリンクに続く通知の受信を停止することができます。'
-          email_subject: '%{participatory_space_title} への更新'
+          email_intro: "%{resource_title} の %{participatory_space_title} フェーズの日付が更新されました。このページから見ることができます："
+          email_outro: "%{participatory_space_title}をフォローしているため、この通知を受け取りました。前のリンクに続く通知の受信を停止することができます。"
+          email_subject: "%{participatory_space_title} への更新"
           notification_title: <a href="%{resource_path}">%{resource_title}</a> の <a href="%{participatory_space_url}">%{participatory_space_title}</a> フェーズの日付が更新されました。
     help:
       participatory_spaces:

@@ -1,3 +1,4 @@
+---
 cs:
   activemodel:
     attributes:
@@ -85,19 +86,19 @@ cs:
           meeting:
             text: 'Bylo projednáno na této schůzce: %{link}'
       decidim/meetings/meeting:
-        one: Setkání
         few: Setkání
         many: Setkání
+        one: Setkání
         other: Setkání
       decidim/meetings/minutes:
-        one: Minut
         few: Minut
         many: Minut
+        one: Minut
         other: Minut
       decidim/meetings/registration:
-        one: Registrace
         few: Registrace
         many: Registrace
+        one: Registrace
         other: Registrace
   decidim:
     admin:
@@ -258,7 +259,7 @@ cs:
       badges:
         attended_meetings:
           conditions:
-            - Zaregistrujte se na schůzkách, které chcete navštívit
+          - Zaregistrujte se na schůzkách, které chcete navštívit
           description: Tento odznak je udělen, když se účastníte několika osobních setkání.
           description_another: Tento uživatel se zúčastnil %{score} setkání.
           description_own: Zúčastnili jste se %{score} setkání.
@@ -277,9 +278,9 @@ cs:
         edit: Upravit
         invalid_destroy:
           proposals_count:
-            one: 'Schůzku nelze zničit, protože má k ní přidružený %{count} návrh:'
             few: 'Schůzku nelze zničit, protože má k ní přidruženo %{count} návrhů:'
             many: 'Schůzku nelze zničit, protože má k ní přidruženo %{count} návrhů:'
+            one: 'Schůzku nelze zničit, protože má k ní přidružený %{count} návrh:'
             other: 'Schůzka nemůže být zničena, protože s ní je spojeno %{count} návrhů:'
         manage_poll: Spravovat anketu
         new_meeting: Nová schůzka
@@ -416,10 +417,10 @@ cs:
         poll:
           form:
             announcement_html:
-              - Pokud otázka obdrží odpovědi nebo je zveřejněna/uzavřena, již ji nelze upravovat.
-              - Otázku můžete kdykoliv přidat.
-              - Průzkum bude ukončen po zveřejnění výsledků všech vytvořených otázek.
-              - Navštivte <a href='%{admin_link}'>stránku administrace anket</a> pro odeslání dotazů a publikování výsledků.
+            - Pokud otázka obdrží odpovědi nebo je zveřejněna/uzavřena, již ji nelze upravovat.
+            - Otázku můžete kdykoliv přidat.
+            - Průzkum bude ukončen po zveřejnění výsledků všech vytvořených otázek.
+            - Navštivte <a href='%{admin_link}'>stránku administrace anket</a> pro odeslání dotazů a publikování výsledků.
         registrations:
           edit:
             save: Uložit
@@ -433,9 +434,9 @@ cs:
             registration_email_help: Tento text se zobrazí uprostřed potvrzení registračním e-mailem. Hned za registračním kódem.
             registration_form: Registrační formulář
             registrations_count:
-              one: Byla zde registrace %{count}.
               few: Bylo zde %{count} registrací.
               many: Bylo zde %{count} registrací.
+              one: Byla zde registrace %{count}.
               other: Bylo zde %{count} registrací.
             reserved_slots_help: Ponechte 0, pokud nemáte vyhrazené sloty.
             reserved_slots_less_than: Musí být menší nebo rovno %{count}
@@ -532,9 +533,9 @@ cs:
           outlook: Přidat do kalendáře aplikace Outlook
         count:
           meetings_count:
-            one: "%{count} schůzka"
             few: "%{count} schůzek"
             many: "%{count} schůzek"
+            one: "%{count} schůzka"
             other: "%{count} schůzek"
         create:
           invalid: Při vytváření této schůzky došlo k chybě.
@@ -621,9 +622,9 @@ cs:
             validated: OVĚŘENÝ
             validation_pending: OVĚŘENÍ ČEKÁ NA SCHVÁLENÍ
           remaining_slots:
-            one: "%{count} zbývajícího slotu"
             few: "%{count} zbývajících bloků"
             many: "%{count} zbývajících bloků"
+            one: "%{count} zbývajícího slotu"
             other: "%{count} zbývajících bloků"
           visit_finished: Zobrazit minulou schůzku
           withdraw_btn_hint: Schůzku můžete stáhnout, pokud změníte názor. Schůzka není smazána, objeví se v seznamu stažených schůzek.
@@ -690,9 +691,9 @@ cs:
         attending_organizations: Organizace
         attending_participants: Účast účastníků
         hidden_participants_count:
-          one: a %{count} další osoba
           few: a %{count} další osoby
           many: a %{count} dalších osob
+          one: a %{count} další osoba
           other: a %{count} další osoby
       read_more: "(Přečtěte si více)"
       registration_mailer:

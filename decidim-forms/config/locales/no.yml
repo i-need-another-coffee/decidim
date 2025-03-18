@@ -1,4 +1,5 @@
-"no":
+---
+'no':
   activemodel:
     attributes:
       answer:

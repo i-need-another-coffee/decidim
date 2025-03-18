@@ -1,3 +1,4 @@
+---
 fr-CA:
   activemodel:
     attributes:
@@ -66,7 +67,9 @@ fr-CA:
         weight: Rang d'affichage
       assembly_user_role:
         email: E-mail
-        name: "Nom\n"
+        name: 'Nom
+
+          '
         role: Fonction
     errors:
       models:

@@ -1,3 +1,4 @@
+---
 cs:
   activemodel:
     attributes:
@@ -22,14 +23,14 @@ cs:
           project:
             text: 'Byl přidán do tohoto rozpočtu: %{link}'
       decidim/budgets/budget:
-        one: Rozpočet
         few: Rozpočty
         many: Rozpočtů
+        one: Rozpočet
         other: Rozpočtů
       decidim/budgets/project:
-        one: Projekt
         few: Projekty
         many: Projekty
+        one: Projekt
         other: Projekty
   decidim:
     admin:
@@ -110,8 +111,8 @@ cs:
             select_for_implementation: Vybrat pro implementaci
             selected: Vybrané
             selected_options:
-              'no': 'Ne'
-              'yes': 'Ano'
+              'no': Ne
+              'yes': Ano
             title: Projekty
             update: Aktualizovat
             update_budget_button: Aktualizovat rozpočet projektu
@@ -157,9 +158,9 @@ cs:
           orders:
             description: Uživatelé obdrží e-mail s odkazy na rozpočty, kde se čeká na vyjádření.
             title:
-              one: Chystáte se odeslat připomenutí e-mailu %{count} uživateli
               few: Chystáte se odeslat připomenutí e-mailu %{count} uživatelům
               many: Chystáte se odeslat připomenutí e-mailu %{count} uživatelům
+              one: Chystáte se odeslat připomenutí e-mailu %{count} uživateli
               other: Chystáte se odeslat připomenutí e-mailu %{count} uživatelům
       admin_log:
         budget:
@@ -185,9 +186,9 @@ cs:
           more_than_one: smažte svůj hlas na %{name} a začněte znovu
           only_one: smazat váš hlas a začít znovu.
         count:
-          one: "%{count} rozpočet"
           few: "%{count} rozpočty"
           many: "%{count} rozpočtů"
+          one: "%{count} rozpočet"
           other: "%{count} rozpočtů"
         empty: Zatím neexistují žádné rozpočty
         finished_message: Dokončili jste hlasovací proces. Děkujeme za účast!
@@ -228,21 +229,21 @@ cs:
           continue_voting: Pokračovat v hlasování
           download_vote: Stáhněte si svůj hlas
           pending_to_vote_budgets:
-            one: Můžete hlasovat v jiném rozpočtu
             few: Můžete hlasovat v jiných rozpočtech
             many: Můžete hlasovat v jiných rozpočtech
+            one: Můžete hlasovat v jiném rozpočtu
             other: Můžete hlasovat v jiných rozpočtech
           share_vote: Sdílejte svůj hlas
           title: Váš hlas byl úspěšně přijat
           view_votes:
-            one: Zobrazit hlas
             few: Zobrazit hlasy
             many: Zobrazit hlasů
+            one: Zobrazit hlas
             other: Zobrazit hlasů
           votes_count:
-            one: Váš hlas pro %{budget_name} již byl zaregistrován.
             few: Vaše %{count} hlasy pro %{budget_name} již byly zaregistrovány.
             many: Vašich %{count} hlasů pro %{budget_name} již bylo zaregistrováno.
+            one: Váš hlas pro %{budget_name} již byl zaregistrován.
             other: Vašich %{count} hlasů pro %{budget_name} již bylo zaregistrováno.
       order_summary_mailer:
         order_summary:
@@ -274,9 +275,9 @@ cs:
           vote: Hlasovat o rozpočtu
         count:
           projects_count:
-            one: 1 projekt
             few: "%{count} projektů"
             many: "%{count} projektů"
+            one: 1 projekt
             other: "%{count} projektů"
         empty: Zatím neexistují žádné projekty
         exit_modal:
@@ -319,9 +320,9 @@ cs:
           remove: Odebrat projekt %{resource_name} z vašeho hlasování.
           selected: Vybrané
           votes:
-            one: hlas
             few: hlasy
             many: hlasů
+            one: hlas
             other: hlasů
           you_voted: Hlasoval jste pro toto
         project_budget_button:
@@ -344,9 +345,9 @@ cs:
           email_link: Pokračovat v hlasování
           email_outro: Nezapomeňte prosím dokončit hlasování. Chcete-li hlasovat, musíte nejprve vybrat návrh nebo návrhy, o kterých chcete hlasovat, a potvrdit svůj hlas pomocí tlačítka "Hlasování".
           email_subject:
-            one: Máte nedokončené hlasování v participativním rozpočtovém hlasování
             few: Máte nedokončené hlasování v participativním rozpočtovém hlasování
             many: Máte nedokončená hlasování v participativním rozpočtovém hlasování
+            one: Máte nedokončené hlasování v participativním rozpočtovém hlasování
             other: Máte nedokončené hlasování v participativním rozpočtovém hlasování
     components:
       budgets:

@@ -1,3 +1,4 @@
+---
 zh-CN:
   activemodel:
     attributes:
@@ -147,20 +148,20 @@ zh-CN:
           email_subject: "%{author_name} %{author_nickname} 撤销了 %{resource_title} 协作草稿。"
           notification_title: <a href="%{author_path}">%{author_name} %{author_nickname}</a> <strong>撤回</strong> <a href="%{resource_path}">%{resource_title}</a> 协作草稿。
         creation_enabled:
-          email_intro: '您现在可以在 %{participatory_space_title}中创建新的建议 ！开始参与这个页面：'
+          email_intro: 您现在可以在 %{participatory_space_title}中创建新的建议 ！开始参与这个页面：
           email_outro: 您收到此通知是因为您正在关注 %{participatory_space_title}。您可以停止收到跟随上一个链接的通知。
           email_subject: 建议已在 %{participatory_space_title} 中可用
         endorsing_enabled:
-          email_intro: '您可以在 %{participatory_space_title}中批准提案！开始参与此页面：'
+          email_intro: 您可以在 %{participatory_space_title}中批准提案！开始参与此页面：
           email_outro: 您收到此通知是因为您正在关注 %{participatory_space_title}。您可以停止收到跟随上一个链接的通知。
-          email_subject: '%{participatory_space_title} 的建议已经开始'
+          email_subject: "%{participatory_space_title} 的建议已经开始"
         proposal_mentioned:
           email_outro: 您收到此通知是因为您是"%{resource_title} "的作者。
           email_subject: 您的提议 "%{mentioned_proposal_title}" 已被提到了
         proposal_published:
           email_intro: '%{author_name} %{author_nickname}, 你关注的人已经发布了一个叫做"%{resource_title}"的新建议。查看它并做出贡献：'
           email_outro: 您收到此通知是因为您正在关注 %{author_nickname}。您可以停止收到跟随上一个链接的通知。
-          email_subject: '%{resource_title}的 %{author_nickname} 新提案'
+          email_subject: "%{resource_title}的 %{author_nickname} 新提案"
           notification_title: <a href="%{resource_path}">%{resource_title}</a> 提议由 <a href="%{author_path}">%{author_name} %{author_nickname}</a> 发布。
         proposal_published_for_space:
           email_intro: 提议 "%{resource_title}" 已被添加到"%{participatory_space_title}"，您正在关注它。
@@ -172,8 +173,8 @@ zh-CN:
       badges:
         accepted_proposals:
           conditions:
-            - 选择您感兴趣的提交建议的参与空间
-            - 尝试提出可以执行的建议。这种方式更有可能被接受。
+          - 选择您感兴趣的提交建议的参与空间
+          - 尝试提出可以执行的建议。这种方式更有可能被接受。
           description: 当您积极参加新的建议并接受这些建议时，将颁发这个徽章。
           description_another: 此参与者有 %{score} 个已被接受的建议。
           description_own: 您获得 %{score} 条建议被接受。
@@ -183,12 +184,12 @@ zh-CN:
           unearned_own: 您尚未接受任何建议。
         proposal_votes:
           conditions:
-            - 浏览并花一些时间阅读其他人的建议
-            - 
+          - 浏览并花一些时间阅读其他人的建议
+          -
         proposals:
           conditions:
-            - 选择您感兴趣的提交建议的参与空间
-            - 创建一个新提案
+          - 选择您感兴趣的提交建议的参与空间
+          - 创建一个新提案
           description: 当您积极参与新的建议时，将颁发这个徽章。
           description_another: 此参与者已创建了 %{score} 个建议。
           description_own: 您已创建了 %{score} 个建议。
@@ -380,7 +381,7 @@ zh-CN:
         new_collaborative_draft_button:
           new_collaborative_draft: 新的协作草稿
         orders:
-          label: '订单草稿：'
+          label: 订单草稿：
           most_contributed: 贡献最多的
           random: 随机播放
           recent: 最近的
@@ -469,7 +470,7 @@ zh-CN:
         new:
           send: 继续
         orders:
-          label: '排序提议：'
+          label: 排序提议：
           most_commented: 最多评论
           most_endorsed: 最多支持
           most_followed: 关注最多的
@@ -494,9 +495,9 @@ zh-CN:
           link_to_promoted_emendation_text: 见被拒绝的修正。
           link_to_proposal_from_emendation_help_text: 这是一个被拒绝的修改
           link_to_proposal_from_emendation_text: 见提案
-          proposal_accepted_reason: '这一提议已被接受，原因是：'
+          proposal_accepted_reason: 这一提议已被接受，原因是：
           proposal_in_evaluation_reason: 这项建议正在评估
-          proposal_rejected_reason: '这一提议被否决，理由是：'
+          proposal_rejected_reason: 这一提议被否决，理由是：
           withdraw_confirmation_html: 您确定要撤回此建议吗？<br><br><strong>此操作不能取消！</strong>
         update:
           title: 更新提议
@@ -532,7 +533,7 @@ zh-CN:
       copied_from_component:
         proposal_proposal: 有关提议
       included_projects:
-        project_result: '此项目中出现的结果：'
+        project_result: 此项目中出现的结果：
       included_proposals:
-        proposal_project: '这些项目中的建议：'
-        proposal_result: '这些结果中出现的建议：'
+        proposal_project: 这些项目中的建议：
+        proposal_result: 这些结果中出现的建议：
