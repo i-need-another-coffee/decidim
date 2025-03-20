@@ -8,6 +8,7 @@
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 import "jquery"
+import "chartkick/chart.js"
 
 // REDESIGN_PENDING: deprecated
 import "foundation-sites";
@@ -44,15 +45,17 @@ import "src/decidim/session_timeouter"
 import "src/decidim/results_listing"
 import "src/decidim/impersonation"
 import "src/decidim/gallery"
-import "src/decidim/direct_uploads/upload_field"
 import "src/decidim/data_consent"
 import "src/decidim/abide_form_validator_fixer"
 import "src/decidim/sw"
 import "src/decidim/sticky_header"
+import "src/decidim/sticky_footer"
 import "src/decidim/attachments"
 
 // local deps that require initialization
 import ConfirmDialog, { initializeConfirm } from "src/decidim/confirm"
+import { initializeUploadFields } from "src/decidim/direct_uploads/upload_field"
+import { initializeReverseGeocoding } from "src/decidim/geocoding/reverse_geocoding"
 import formDatePicker from "src/decidim/datepicker/form_datepicker"
 import Configuration from "src/decidim/configuration"
 import ExternalLink from "src/decidim/external_link"
@@ -67,8 +70,8 @@ import backToListLink from "src/decidim/back_to_list"
 import markAsReadNotifications from "src/decidim/notifications"
 import handleNotificationActions from "src/decidim/notifications_actions"
 import RemoteModal from "src/decidim/remote_modal"
-import selectActiveIdentity from "src/decidim/identity_selector_dialog"
 import createTooltip from "src/decidim/tooltips"
+import fetchRemoteTooltip from "src/decidim/remote_tooltips"
 import createToggle from "src/decidim/toggle"
 import {
   createAccordion,
@@ -78,6 +81,7 @@ import {
   Dialogs
 } from "src/decidim/a11y"
 import changeReportFormBehavior from "src/decidim/change_report_form_behavior"
+import setOnboardingAction from "src/decidim/onboarding_pending_action"
 
 // bad practice: window namespace should avoid be populated as much as possible
 // rails-translations could be referenced through a single Decidim.I18n object
@@ -189,16 +193,20 @@ const initializer = (element = document) => {
   // Initialize available remote modals (ajax-fetched contents)
   element.querySelectorAll("[data-dialog-remote-url]").forEach((elem) => new RemoteModal(elem))
 
-  // Add event listeners to identity modal
-  element.querySelectorAll("[data-user-identity]").forEach((elem) => selectActiveIdentity(elem))
-
   // Initialize data-tooltips
   element.querySelectorAll("[data-tooltip]").forEach((elem) => createTooltip(elem))
 
   // Initialize data-toggles
   element.querySelectorAll("[data-toggle]").forEach((elem) => createToggle(elem))
 
+  element.querySelectorAll("[data-remote-tooltip]").forEach((elem) => fetchRemoteTooltip(elem))
+
   element.querySelectorAll(".new_report").forEach((elem) => changeReportFormBehavior(elem))
+
+  element.querySelectorAll("[data-onboarding-action]").forEach((elem) => setOnboardingAction(elem))
+
+  initializeUploadFields(element.querySelectorAll("button[data-upload]"));
+  initializeReverseGeocoding()
 
   document.dispatchEvent(new CustomEvent("decidim:loaded", { detail: { element } }));
 }

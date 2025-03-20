@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "spec_helper"
-require "decidim/api/test/type_context"
+require "decidim/api/test"
 
 module Decidim
   module Core
@@ -29,8 +29,8 @@ module Decidim
 
         let(:query) { %({ components { id } }) }
 
-        it "only includes the published components" do
-          component_ids = response["components"].map { |c| c["id"].to_i }
+        it "only displays the published components" do
+          component_ids = response["components"].compact.map { |c| c["id"].to_i }
 
           # Ordered by ID by default.
           expect(component_ids.sort).to eq(published_components.map(&:id))

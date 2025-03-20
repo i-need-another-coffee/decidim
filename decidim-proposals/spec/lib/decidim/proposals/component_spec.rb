@@ -7,32 +7,6 @@ describe "Proposals component" do # rubocop:disable RSpec/DescribeClass
   let(:organization) { component.organization }
   let!(:current_user) { create(:user, :confirmed, :admin, organization:) }
 
-  describe "on destroy" do
-    context "when there are no proposals for the component" do
-      it "destroys the component" do
-        expect do
-          Decidim::Admin::DestroyComponent.call(component, current_user)
-        end.to change(Decidim::Component, :count).by(-1)
-
-        expect(component).to be_destroyed
-      end
-    end
-
-    context "when there are proposals for the component" do
-      before do
-        create(:proposal, component:)
-      end
-
-      it "raises an error" do
-        expect do
-          Decidim::Admin::DestroyComponent.call(component, current_user)
-        end.to broadcast(:invalid)
-
-        expect(component).not_to be_destroyed
-      end
-    end
-  end
-
   describe "stats" do
     subject { current_stat[2] }
 
@@ -263,12 +237,12 @@ describe "Proposals component" do # rubocop:disable RSpec/DescribeClass
     let(:participatory_process) { component.participatory_space }
     let(:organization) { participatory_process.organization }
 
-    context "when the user is a valuator" do
+    context "when the user is a evaluator" do
       let!(:user) { create(:user, admin: false, organization:) }
-      let!(:valuator_role) { create(:participatory_process_user_role, role: :valuator, user:, participatory_process:) }
+      let!(:evaluator_role) { create(:participatory_process_user_role, role: :evaluator, user:, participatory_process:) }
 
       before do
-        create(:valuation_assignment, proposal: assigned_proposal, valuator_role:)
+        create(:evaluation_assignment, proposal: assigned_proposal, evaluator_role:)
       end
 
       it "only exports assigned proposals" do

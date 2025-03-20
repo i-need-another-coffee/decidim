@@ -25,10 +25,11 @@ module Decidim
       include Decidim::NewsletterParticipant
       include Decidim::Randomable
       include Decidim::Endorsable
-      include Decidim::Proposals::Valuatable
+      include Decidim::Proposals::Evaluable
       include Decidim::TranslatableResource
       include Decidim::TranslatableAttributes
       include Decidim::FilterableResource
+      include Decidim::SoftDeletable
 
       def assign_state(token)
         proposal_state = Decidim::Proposals::ProposalState.where(component:, token:).first
@@ -120,12 +121,12 @@ module Decidim
         includes(:votes).where(decidim_proposals_proposal_votes: { decidim_author_id: user })
       }
 
-      scope :sort_by_valuation_assignments_count_asc, lambda {
-        order(valuation_assignments_count: :asc)
+      scope :sort_by_evaluation_assignments_count_asc, lambda {
+        order(evaluation_assignments_count: :asc)
       }
 
-      scope :sort_by_valuation_assignments_count_desc, lambda {
-        order(valuation_assignments_count: :desc)
+      scope :sort_by_evaluation_assignments_count_desc, lambda {
+        order(evaluation_assignments_count: :desc)
       }
 
       scope :state_eq, lambda { |state|
@@ -157,11 +158,11 @@ module Decidim
         scoped_query
       }
 
-      def self.with_valuation_assigned_to(user, space)
-        valuator_roles = space.user_roles(:valuator).where(user:)
+      def self.with_evaluation_assigned_to(user, space)
+        evaluator_roles = space.user_roles(:evaluator).where(user:)
 
-        includes(:valuation_assignments)
-          .where(decidim_proposals_valuation_assignments: { valuator_role_id: valuator_roles })
+        includes(:evaluation_assignments)
+          .where(decidim_proposals_evaluation_assignments: { evaluator_role_id: evaluator_roles })
       end
 
       acts_as_list scope: :decidim_component_id
@@ -390,25 +391,21 @@ module Decidim
         ProposalSearch.new(self, params, options)
       end
 
-      # method to filter by assigned valuator role ID
-      def self.valuator_role_ids_has(value)
+      # method to filter by assigned evaluator role ID
+      def self.evaluator_role_ids_has(value)
         query = <<-SQL.squish
         :value = any(
-          (SELECT decidim_proposals_valuation_assignments.valuator_role_id
-          FROM decidim_proposals_valuation_assignments
-          WHERE decidim_proposals_valuation_assignments.decidim_proposal_id = decidim_proposals_proposals.id
+          (SELECT decidim_proposals_evaluation_assignments.evaluator_role_id
+          FROM decidim_proposals_evaluation_assignments
+          WHERE decidim_proposals_evaluation_assignments.decidim_proposal_id = decidim_proposals_proposals.id
           )
         )
         SQL
         where(query, value:)
       end
 
-      def self.ransackable_scopes(auth_object = nil)
-        base = [:with_any_origin, :with_any_state, :state_eq, :voted_by, :coauthored_by, :related_to, :with_any_taxonomies]
-        return base unless auth_object&.admin?
-
-        # Add extra scopes for admins for the admin panel searches
-        base + [:valuator_role_ids_has]
+      def self.ransackable_scopes(_auth_object = nil)
+        [:with_any_origin, :with_any_state, :state_eq, :voted_by, :coauthored_by, :related_to, :with_any_taxonomies, :evaluator_role_ids_has]
       end
 
       # Create i18n ransackers for :title and :body.
@@ -416,7 +413,7 @@ module Decidim
       ransacker_i18n_multi :search_text, [:title, :body]
 
       def self.ransackable_attributes(_auth_object = nil)
-        %w(id_string search_text title body is_emendation)
+        %w(id_string search_text title body is_emendation comments_count proposal_votes_count published_at proposal_notes_count)
       end
 
       def self.ransackable_associations(_auth_object = nil)
@@ -468,7 +465,7 @@ module Decidim
       end
 
       def self.export_serializer
-        Decidim::Proposals::ProposalSerializer
+        Decidim::Proposals::DownloadYourDataProposalSerializer
       end
 
       def self.download_your_data_images(user)

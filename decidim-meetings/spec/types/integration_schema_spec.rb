@@ -1,11 +1,93 @@
 # frozen_string_literal: true
 
 require "spec_helper"
-require "decidim/api/test/component_context"
-require "decidim/budgets/test/factories"
+require "decidim/api/test"
 
 describe "Decidim::Api::QueryType" do
-  include_context "with a graphql decidim component"
+  include_context "with a graphql decidim component" do
+    let(:component_fragment) do
+      %(
+      fragment fooComponent on Meetings {
+        meeting(id: #{meeting.id}){
+          acceptsNewComments
+          address
+          agenda {
+            id
+          }
+          attachments {
+            thumbnail
+          }
+          attendeeCount
+          attendingOrganizations
+          taxonomies {
+            id
+          }
+          closed
+          closingReport {
+            translation(locale: "#{locale}")
+          }
+          isWithdrawn
+          videoUrl
+          audioUrl
+          comments {
+            id
+          }
+          commentsHaveAlignment
+          commentsHaveVotes
+          contributionCount
+          coordinates {
+            latitude
+            longitude
+          }
+          createdAt
+          description {
+            translation(locale: "#{locale}")
+          }
+          endTime
+          hasComments
+          id
+          location {
+            translation(locale: "#{locale}")
+          }
+          locationHints {
+            translation(locale: "#{locale}")
+          }
+          privateMeeting
+          proposalsFromMeeting {
+            id
+          }
+          reference
+          registrationForm {
+            id
+          }
+          registrationsEnabled
+          registrationTerms {
+            translation(locale: "#{locale}")
+          }
+          registrationsEnabled
+          remainingSlots
+          services{
+            description {
+              translation(locale: "#{locale}")
+            }
+            title {
+              translation(locale: "#{locale}")
+            }
+          }
+          startTime
+          title {
+            translation(locale: "#{locale}")
+          }
+          totalCommentsCount
+          transparent
+          type
+          updatedAt
+          userAllowedToComment
+        }
+      }
+)
+    end
+  end
   let(:component_type) { "Meetings" }
 
   let!(:current_component) { create(:meeting_component, participatory_space: participatory_process) }
@@ -37,9 +119,9 @@ describe "Decidim::Api::QueryType" do
         "latitude" => meeting.latitude.to_f,
         "longitude" => meeting.longitude.to_f
       },
-      "createdAt" => meeting.created_at.iso8601.to_s.gsub("Z", "+00:00"),
+      "createdAt" => meeting.created_at.to_time.iso8601,
       "description" => { "translation" => meeting.description[locale] },
-      "endTime" => meeting.end_time.iso8601.to_s.gsub("Z", "+00:00"),
+      "endTime" => meeting.end_time.to_time.iso8601,
       "hasComments" => meeting.comment_threads.size.positive?,
       "id" => meeting.id.to_s,
       "location" => { "translation" => meeting.location[locale] },
@@ -57,12 +139,12 @@ describe "Decidim::Api::QueryType" do
           "title" => { "translation" => s.title[locale] }
         }
       end,
-      "startTime" => meeting.start_time.iso8601.to_s.gsub("Z", "+00:00"),
+      "startTime" => meeting.start_time.to_time.iso8601,
       "title" => { "translation" => meeting.title[locale] },
       "totalCommentsCount" => meeting.comments_count,
       "transparent" => meeting.transparent?,
       "type" => "Decidim::Meetings::Meeting",
-      "updatedAt" => meeting.updated_at.iso8601.to_s.gsub("Z", "+00:00"),
+      "updatedAt" => meeting.updated_at.to_time.iso8601,
       "userAllowedToComment" => meeting.user_allowed_to_comment?(current_user)
     }
   end
@@ -81,6 +163,26 @@ describe "Decidim::Api::QueryType" do
       },
       "weight" => 0
     }
+  end
+
+  describe "commentable" do
+    let(:component_fragment) { nil }
+
+    let(:participatory_process_query) do
+      %(
+        commentable(id: "#{meeting.id}", type: "Decidim::Meetings::Meeting", locale: "en", toggleTranslations: false) {
+          __typename
+        }
+      )
+    end
+
+    it "executes successfully" do
+      expect { response }.not_to raise_error
+    end
+
+    it do
+      expect(response).to eq({ "commentable" => { "__typename" => "Meeting" } })
+    end
   end
 
   describe "valid connection query" do
@@ -179,89 +281,6 @@ describe "Decidim::Api::QueryType" do
   end
 
   describe "valid query" do
-    let(:component_fragment) do
-      %(
-      fragment fooComponent on Meetings {
-        meeting(id: #{meeting.id}){
-          acceptsNewComments
-          address
-          agenda {
-            id
-          }
-          attachments {
-            thumbnail
-          }
-          attendeeCount
-          attendingOrganizations
-          taxonomies {
-            id
-          }
-          closed
-          closingReport {
-            translation(locale: "#{locale}")
-          }
-          isWithdrawn
-          videoUrl
-          audioUrl
-          comments {
-            id
-          }
-          commentsHaveAlignment
-          commentsHaveVotes
-          contributionCount
-          coordinates {
-            latitude
-            longitude
-          }
-          createdAt
-          description {
-            translation(locale: "#{locale}")
-          }
-          endTime
-          hasComments
-          id
-          location {
-            translation(locale: "#{locale}")
-          }
-          locationHints {
-            translation(locale: "#{locale}")
-          }
-          privateMeeting
-          proposalsFromMeeting {
-            id
-          }
-          reference
-          registrationForm {
-            id
-          }
-          registrationsEnabled
-          registrationTerms {
-            translation(locale: "#{locale}")
-          }
-          registrationsEnabled
-          remainingSlots
-          services{
-            description {
-              translation(locale: "#{locale}")
-            }
-            title {
-              translation(locale: "#{locale}")
-            }
-          }
-          startTime
-          title {
-            translation(locale: "#{locale}")
-          }
-          totalCommentsCount
-          transparent
-          type
-          updatedAt
-          userAllowedToComment
-        }
-      }
-)
-    end
-
     it "executes successfully" do
       expect { response }.not_to raise_error
     end
@@ -277,5 +296,11 @@ describe "Decidim::Api::QueryType" do
 
       it { expect(response["participatoryProcess"]["components"].first["meeting"]).to eq(meeting_single_result) }
     end
+  end
+
+  include_examples "with resource visibility" do
+    let(:component_factory) { :meeting_component }
+    let(:lookout_key) { "meeting" }
+    let(:query_result) { meeting_single_result }
   end
 end

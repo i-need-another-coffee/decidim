@@ -1,11 +1,28 @@
 # frozen_string_literal: true
 
 require "spec_helper"
-require "decidim/api/test/component_context"
-require "decidim/budgets/test/factories"
+require "decidim/api/test"
 
 describe "Decidim::Api::QueryType" do
-  include_context "with a graphql decidim component"
+  include_context "with a graphql decidim component" do
+    let(:component_fragment) do
+      %(
+      fragment fooComponent on Pages {
+        page(id: #{page.id}){
+          body {
+            translation(locale:"#{locale}")
+          }
+          createdAt
+          id
+          title {
+            translation(locale:"#{locale}")
+          }
+          updatedAt
+        }
+      }
+)
+    end
+  end
   let(:component_type) { "Pages" }
   let!(:current_component) { create(:page_component, participatory_space: participatory_process) }
   let!(:page) { create(:page, component: current_component) }
@@ -13,10 +30,10 @@ describe "Decidim::Api::QueryType" do
   let(:page_single_result) do
     {
       "body" => { "translation" => page.body[locale] },
-      "createdAt" => page.created_at.iso8601.to_s.gsub("Z", "+00:00"),
+      "createdAt" => page.created_at.to_time.iso8601,
       "id" => page.id.to_s,
       "title" => { "translation" => page.title[locale] },
-      "updatedAt" => page.updated_at.iso8601.to_s.gsub("Z", "+00:00")
+      "updatedAt" => page.updated_at.to_time.iso8601
     }
   end
 
@@ -67,28 +84,16 @@ describe "Decidim::Api::QueryType" do
   end
 
   describe "valid query" do
-    let(:component_fragment) do
-      %(
-      fragment fooComponent on Pages {
-        page(id: #{page.id}){
-          body {
-            translation(locale:"#{locale}")
-          }
-          createdAt
-          id
-          title {
-            translation(locale:"#{locale}")
-          }
-          updatedAt
-        }
-      }
-)
-    end
-
     it "executes successfully" do
       expect { response }.not_to raise_error
     end
 
     it { expect(response["participatoryProcess"]["components"].first["page"]).to eq(page_single_result) }
+  end
+
+  include_examples "with resource visibility" do
+    let(:component_factory) { :page_component }
+    let(:lookout_key) { "page" }
+    let(:query_result) { page_single_result }
   end
 end

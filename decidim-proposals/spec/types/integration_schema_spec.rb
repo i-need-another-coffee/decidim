@@ -1,11 +1,105 @@
 # frozen_string_literal: true
 
 require "spec_helper"
-require "decidim/api/test/component_context"
+require "decidim/api/test"
 require "decidim/proposals/test/factories"
 
 describe "Decidim::Api::QueryType" do
-  include_context "with a graphql decidim component"
+  include_context "with a graphql decidim component" do
+    let(:component_fragment) do
+      %(
+      fragment fooComponent on Proposals {
+        proposal(id: #{proposal.id}) {
+          acceptsNewComments
+          address
+          amendments {
+            id
+            state
+            amender { id }
+            amendable { id }
+            emendation { id }
+            emendationType
+            amendableType
+          }
+          answer {
+            translation(locale:"#{locale}")
+          }
+          answeredAt
+          attachments {
+            thumbnail
+          }
+          author {
+            id
+          }
+          authors {
+            id
+          }
+          authorsCount
+          body {
+            translation(locale:"#{locale}")
+          }
+          taxonomies {
+            id
+          }
+          comments {
+            id
+          }
+          commentsHaveAlignment
+          commentsHaveVotes
+          coordinates{
+            latitude
+            longitude
+          }
+          createdAt
+          createdInMeeting
+          endorsements {
+            id
+            deleted
+             name
+            nickname
+            organizationName { translation(locale: "en") }
+            profilePath
+          }
+          endorsementsCount
+          fingerprint{
+            source
+            value
+          }
+          hasComments
+          id
+          meeting {
+            id
+          }
+          official
+          participatoryTextLevel
+          position
+          publishedAt
+          reference
+          state
+          title {
+            translation(locale:"#{locale}")
+          }
+          totalCommentsCount
+          type
+          updatedAt
+          userAllowedToComment
+          versions {
+            id
+            changeset
+            createdAt
+            editor{
+              id
+            }
+          }
+          versionsCount
+          voteCount
+          withdrawn
+          withdrawnAt
+        }
+      }
+    )
+    end
+  end
   let(:component_type) { "Proposals" }
   let(:organization) { participatory_process.organization }
   let!(:current_component) { create(:proposal_component, participatory_space: participatory_process) }
@@ -40,7 +134,7 @@ describe "Decidim::Api::QueryType" do
       "commentsHaveAlignment" => proposal.comments_have_alignment?,
       "commentsHaveVotes" => proposal.comments_have_votes?,
       "coordinates" => { "latitude" => proposal.latitude, "longitude" => proposal.longitude },
-      "createdAt" => proposal.created_at.iso8601.to_s.gsub("Z", "+00:00"),
+      "createdAt" => proposal.created_at.to_time.iso8601,
       "createdInMeeting" => proposal.created_in_meeting?,
       "endorsements" => proposal.endorsements.map do |e|
         { "deleted" => e.author.deleted?,
@@ -58,19 +152,19 @@ describe "Decidim::Api::QueryType" do
       "official" => proposal.official?,
       "participatoryTextLevel" => proposal.participatory_text_level,
       "position" => proposal.position,
-      "publishedAt" => proposal.published_at.iso8601.to_s.gsub("Z", "+00:00"),
+      "publishedAt" => proposal.published_at.to_time.iso8601,
       "reference" => proposal.reference,
       "state" => proposal.state,
       "title" => { "translation" => proposal.title[locale] },
       "totalCommentsCount" => proposal.comments_count,
       "type" => "Decidim::Proposals::Proposal",
-      "updatedAt" => proposal.updated_at.iso8601.to_s.gsub("Z", "+00:00"),
+      "updatedAt" => proposal.updated_at.to_time.iso8601,
       "userAllowedToComment" => proposal.user_allowed_to_comment?(current_user),
       "versions" => [],
       "versionsCount" => 0,
       "voteCount" => proposal.votes.size,
       "withdrawn" => proposal.withdrawn?,
-      "withdrawnAt" => proposal.withdrawn_at&.iso8601&.to_s&.gsub("Z", "+00:00")
+      "withdrawnAt" => proposal.withdrawn_at&.to_time&.iso8601
     }
   end
 
@@ -88,6 +182,25 @@ describe "Decidim::Api::QueryType" do
       },
       "weight" => 0
     }
+  end
+
+  describe "commentable" do
+    let(:component_fragment) { nil }
+    let(:participatory_process_query) do
+      %(
+        commentable(id: "#{proposal.id}", type: "Decidim::Proposals::Proposal", locale: "en", toggleTranslations: false) {
+          __typename
+        }
+      )
+    end
+
+    it "executes successfully" do
+      expect { response }.not_to raise_error
+    end
+
+    it do
+      expect(response).to eq({ "commentable" => { "__typename" => "Proposal" } })
+    end
   end
 
   describe "valid connection query" do
@@ -195,100 +308,6 @@ describe "Decidim::Api::QueryType" do
   end
 
   describe "valid query" do
-    let(:component_fragment) do
-      %(
-      fragment fooComponent on Proposals {
-        proposal(id: #{proposal.id}) {
-          acceptsNewComments
-          address
-          amendments {
-            id
-            state
-            amender { id }
-            amendable { id }
-            emendation { id }
-            emendationType
-            amendableType
-          }
-          answer {
-            translation(locale:"#{locale}")
-          }
-          answeredAt
-          attachments {
-            thumbnail
-          }
-          author {
-            id
-          }
-          authors {
-            id
-          }
-          authorsCount
-          body {
-            translation(locale:"#{locale}")
-          }
-          taxonomies {
-            id
-          }
-          comments {
-            id
-          }
-          commentsHaveAlignment
-          commentsHaveVotes
-          coordinates{
-            latitude
-            longitude
-          }
-          createdAt
-          createdInMeeting
-          endorsements {
-            id
-            deleted
-             name
-            nickname
-            organizationName { translation(locale: "en") }
-            profilePath
-          }
-          endorsementsCount
-          fingerprint{
-            source
-            value
-          }
-          hasComments
-          id
-          meeting {
-            id
-          }
-          official
-          participatoryTextLevel
-          position
-          publishedAt
-          reference
-          state
-          title {
-            translation(locale:"#{locale}")
-          }
-          totalCommentsCount
-          type
-          updatedAt
-          userAllowedToComment
-          versions {
-            id
-            changeset
-            createdAt
-            editor{
-              id
-            }
-          }
-          versionsCount
-          voteCount
-          withdrawn
-          withdrawnAt
-        }
-      }
-    )
-    end
-
     it "executes successfully" do
       expect { response }.not_to raise_error
     end
@@ -296,5 +315,11 @@ describe "Decidim::Api::QueryType" do
     it do
       expect(response["participatoryProcess"]["components"].first["proposal"]).to eq(proposal_single_result)
     end
+  end
+
+  include_examples "with resource visibility" do
+    let(:component_factory) { :proposal_component }
+    let(:lookout_key) { "proposal" }
+    let(:query_result) { proposal_single_result }
   end
 end

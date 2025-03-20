@@ -21,6 +21,7 @@ module Decidim
       include Decidim::Searchable
       include Decidim::TranslatableResource
       include Decidim::FilterableResource
+      include Decidim::SoftDeletable
 
       component_manifest_name "accountability"
 
@@ -50,6 +51,10 @@ module Decidim
 
       def self.log_presenter_class_for(_log)
         Decidim::Accountability::AdminLog::ResultPresenter
+      end
+
+      def presenter
+        Decidim::Accountability::ResultPresenter.new(self)
       end
 
       def update_parent_progress

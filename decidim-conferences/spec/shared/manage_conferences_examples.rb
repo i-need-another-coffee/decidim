@@ -84,7 +84,7 @@ shared_examples "manage conferences" do
 
       expect(page).to have_admin_callout("successfully")
       expect(page).to have_select("taxonomies-#{taxonomy_filter.id}", selected: decidim_sanitize_translated(taxonomy.name))
-      expect(page).to have_select("taxonomies-#{another_taxonomy_filter.id}", selected: "Select from \"#{decidim_sanitize_translated(another_root_taxonomy.name)}\"")
+      expect(page).to have_select("taxonomies-#{another_taxonomy_filter.id}", selected: "Please select an option")
       expect(conference.reload.taxonomies).to contain_exactly(taxonomy)
 
       within "[data-content]" do
@@ -215,30 +215,6 @@ shared_examples "manage conferences" do
       within "table" do
         expect(page).to have_no_content(external_conference.title["en"])
       end
-    end
-  end
-
-  context "when the conference has a scope" do
-    let(:scope) { create(:scope, organization:) }
-
-    before do
-      conference.update!(scopes_enabled: true, scope:)
-    end
-
-    it "disables the scope for the conference" do
-      within "tr", text: translated(conference.title) do
-        click_on "Configure"
-      end
-
-      uncheck :conference_scopes_enabled
-
-      expect(page).to have_css("select#conference_scope_id[disabled]")
-
-      within ".edit_conference" do
-        find("*[type=submit]").click
-      end
-
-      expect(page).to have_admin_callout("successfully")
     end
   end
 end

@@ -45,11 +45,6 @@ Decidim.configure do |config|
   # sections with a two-pane view
   config.page_blocks = Rails.application.secrets.decidim[:page_blocks].presence || %w(terms-of-service)
 
-  # Sets the list of components where the "Show my current location" button will be displayed.
-  # An array of component manifests is expected (e.g., [:proposals]).
-  # If no value is specified in the environment configuration, the default is [:proposals]
-  config.show_my_location_button = Rails.application.secrets.decidim[:show_my_location_button].map(&:to_sym).presence || [:proposals]
-
   # Map and Geocoder configuration
   #
   # See Decidim docs at https://docs.decidim.org/en/develop/services/maps.html
@@ -59,7 +54,7 @@ Decidim.configure do |config|
   # config.maps = {
   #   provider: :here,
   #   api_key: Rails.application.secrets.maps[:api_key],
-  #   static: { url: "https://image.maps.ls.hereapi.com/mia/1.6/mapview" }
+  #   static: { url: "https://image.maps.hereapi.com/mia/v3/base/mc/overlay" }
   # }
   #
   # == OpenStreetMap (OSM) services ==
@@ -124,7 +119,7 @@ Decidim.configure do |config|
     dynamic_provider = Rails.application.secrets.maps[:dynamic_provider]
     dynamic_url = Rails.application.secrets.maps[:dynamic_url]
     static_url = Rails.application.secrets.maps[:static_url]
-    static_url = "https://image.maps.ls.hereapi.com/mia/1.6/mapview" if static_provider == "here" && static_url.blank?
+    static_url = "https://image.maps.hereapi.com/mia/v3/base/mc/overlay" if static_provider == "here"
     config.maps = {
       provider: static_provider,
       api_key: Rails.application.secrets.maps[:static_api_key],
@@ -410,6 +405,7 @@ Decidim.configure do |config|
   config.password_similarity_length = Rails.application.secrets.decidim[:password_similarity_length] if Rails.application.secrets.decidim[:password_similarity_length].present?
   config.denied_passwords = Rails.application.secrets.decidim[:denied_passwords] if Rails.application.secrets.decidim[:denied_passwords].present?
   config.allow_open_redirects = Rails.application.secrets.decidim[:allow_open_redirects] if Rails.application.secrets.decidim[:allow_open_redirects].present?
+  config.enable_etiquette_validator = Rails.application.secrets.decidim[:enable_etiquette_validator] if Rails.application.secrets.decidim[:enable_etiquette_validator].present?
 end
 
 if Decidim.module_installed? :api
@@ -417,6 +413,8 @@ if Decidim.module_installed? :api
     config.schema_max_per_page = Rails.application.secrets.dig(:decidim, :api, :schema_max_per_page).presence || 50
     config.schema_max_complexity = Rails.application.secrets.dig(:decidim, :api, :schema_max_complexity).presence || 5000
     config.schema_max_depth = Rails.application.secrets.dig(:decidim, :api, :schema_max_depth).presence || 15
+    config.disclose_system_version = %w(1 true yes).include?(ENV.fetch("DECIDIM_API_DISCLOSE_SYSTEM_VERSION", nil))
+    config.force_api_authentication = %w(1 true yes).include?(ENV.fetch("DECIDIM_API_FORCE_API_AUTHENTICATION", nil))
   end
 end
 

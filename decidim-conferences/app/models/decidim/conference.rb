@@ -21,6 +21,7 @@ module Decidim
     include Decidim::HasUploadValidations
     include Decidim::TranslatableResource
     include Decidim::FilterableResource
+    include Decidim::SoftDeletable
     include Decidim::ShareableWithToken
 
     translatable_fields :title, :slogan, :short_description, :description, :objectives, :registration_terms
@@ -164,7 +165,7 @@ module Decidim
     end
 
     def self.ransackable_associations(_auth_object = nil)
-      %w(categories scope)
+      %w(taxonomies)
     end
   end
 end

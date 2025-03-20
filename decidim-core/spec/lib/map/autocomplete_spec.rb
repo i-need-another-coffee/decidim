@@ -7,6 +7,11 @@ require "decidim/core/test/shared_examples/form_builder_examples"
 module Decidim
   module Map
     describe Autocomplete do
+      before do
+        Decidim::Map.reset_utility_configuration!
+        GeocoderHelpers.configure_maps
+      end
+
       include_context "with map utility" do
         subject { utility }
       end
@@ -59,30 +64,6 @@ module Decidim
         expect(form_markup).to include(%(
       <input autocomplete="off" data-decidim-geocoding="#{config}" type="text" name="test[address]" id="test_address" />
     ).strip)
-      end
-
-      context "when show_my_location_button? returns an array" do
-        before do
-          allow(Decidim).to receive(:show_my_location_button).and_return([:proposals])
-          allow(template).to receive(:current_component).and_return(double(manifest_name: :proposals))
-        end
-
-        it "renders the geocoding field with location button" do
-          expect(form_markup).to include("Use my current location")
-          expect(form_markup).to include("<svg")
-        end
-      end
-
-      context "when show_my_location_button? returns false" do
-        before do
-          allow(Decidim).to receive(:show_my_location_button).and_return([:meetings])
-          allow(template).to receive(:current_component).and_return(double(manifest_name: :proposals))
-        end
-
-        it "renders the standard geocoding field without location button" do
-          expect(form_markup).not_to include("Use my current location")
-          expect(form_markup).to include("data-decidim-geocoding")
-        end
       end
 
       context "when object responds to latitude and longitude" do

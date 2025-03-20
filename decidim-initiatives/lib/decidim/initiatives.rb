@@ -7,8 +7,14 @@ require "decidim/initiatives/admin_engine"
 require "decidim/initiatives/participatory_space"
 
 module Decidim
+  module Exporters
+    autoload :InitiativeVotesPDF, "decidim/exporters/initiative_votes_pdf"
+  end
+
   # Base module for the initiatives engine.
   module Initiatives
+    autoload :ApplicationFormPDF, "decidim/initiatives/application_form_pdf"
+
     include ActiveSupport::Configurable
 
     # Public setting that defines whether creation is allowed to any validated
@@ -32,7 +38,7 @@ module Decidim
 
     # Components enabled for a new initiative
     config_accessor :default_components do
-      [:pages, :meetings]
+      [:pages, :meetings, :blogs]
     end
 
     # Notifies when the given percentage of supports is reached for an

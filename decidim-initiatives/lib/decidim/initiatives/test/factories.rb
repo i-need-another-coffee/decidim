@@ -108,6 +108,7 @@ FactoryBot.define do
     end
     type { create(:initiatives_type, skip_injection:) }
     scope { create(:scope, organization: type.organization, skip_injection:) }
+    taxonomy { create(:taxonomy, organization: type.organization, skip_injection:) }
     supports_required { 1000 }
 
     trait :with_user_extra_fields_collection do
@@ -267,10 +268,6 @@ FactoryBot.define do
     end
     initiative { create(:initiative, skip_injection:) }
     author { create(:user, :confirmed, organization: initiative.organization, skip_injection:) }
-    decidim_user_group_id { create(:user_group, skip_injection:).id }
-    after(:create) do |support, evaluator|
-      create(:user_group_membership, user: support.author, user_group: Decidim::UserGroup.find(support.decidim_user_group_id), skip_injection: evaluator.skip_injection)
-    end
   end
 
   factory :initiatives_committee_member, class: "Decidim::InitiativesCommitteeMember" do

@@ -6,149 +6,142 @@ As usual, we recommend that you have a full backup, of the database, application
 
 To update, follow these steps:
 
-### 1.1. Update your Gemfile
+### 1.1. Update your ruby version
+
+If you're using rbenv, this is done with the following commands:
+
+```console
+rbenv install 3.x.x
+rbenv local 3.x.x
+```
+
+You may need to change your `.ruby-version` file too.
+
+If not, you need to adapt it to your environment, for instance by changing the decidim docker image to use ruby:3.x.x.
+
+### 1.2. Update your Gemfile
 
 ```ruby
 gem "decidim", github: "decidim/decidim"
 gem "decidim-dev", github: "decidim/decidim"
 ```
 
-### 1.2. Run these commands
+### 1.3. Run these commands
 
 ```console
-sudo apt install p7zip # or the alternative installation process for your operating system. See "2.1. 7zip dependency introduction"
-bundle remove spring spring-watcher-listen
 bundle update decidim
 bin/rails decidim:upgrade
 bin/rails db:migrate
-bin/rails decidim:upgrade:clean:invalid_records
-bin/rails decidim_proposals:upgrade:set_categories
+bin/rails decidim:upgrade:fix_nickname_casing
 ```
 
-### 1.3. Follow the steps and commands detailed in these notes
+### 1.4. Follow the steps and commands detailed in these notes
 
 ## 2. General notes
 
-### 2.1. 7zip dependency introduction
+### 2.1. Hiding comments of moderated resources
 
-We had to migrate from an unmaintained dependency and do a wrapper for the 7zip command line. This means that you need to install 7zip in your system. You can do it by running:
-
-```bash
-sudo apt install p7zip
-```
-
-This works for Ubuntu Linux, other operating systems would need to do other command/package.
-
-You can read more about this change on PR [#13185](https://github.com/decidim/decidim/pull/13185).
-
-### 2.2. Cleanup invalid resources
-
-While upgrading various instances to latest Decidim version, we have noticed there are some records that may not be present anymore. As a result, the application would generate a lot of errors, in both frontend and Backend.
-
-In order to fix these errors, we have introduced a new rake task, aiming to fix the errors by removing invalid data.
-
-In your console you can run:
+We have noticed that when a resource (ex: Proposal, Meeting) is being moderated, the associated comments are left visible in the search. We have added a task that would allow you to automatically remove from search any comment belonging to moderated content:
 
 ```bash
-bin/rails decidim:upgrade:clean:invalid_records
+bin/rails decidim:upgrade:clean:hidden_resources
 ```
 
-If you have a big installation having multiple records, many users etc, you can split the clean up task as follows:
+### 2.2. User Groups removal
+
+As part of our efforts to simplify the experience for organizations, the "User Groups" feature has been deprecated. All previously existing User Groups has been converted into regular participants able to sign in providing the email and a password. The users with access to the email associated with the User Group will be able to set a password.
+
+There are some tasks to notify users affected by the changes, transfer authorships and remove deprecated references to groups. All of them can be executed in a main task:
 
 ```bash
-bin/rails decidim:upgrade:clean:searchable_resources
-bin/rails decidim:upgrade:clean:notifications
-bin/rails decidim:upgrade:clean:follows
-bin/rails decidim:upgrade:clean:action_logs
+bin/rails decidim:upgrade:user_groups:remove
 ```
 
-You can read more about this change on PR [#13237](https://github.com/decidim/decidim/pull/13237).
+The tasks can also be executed one by one:
 
-### 2.3. Refactor of `decidim:upgrade:fix_orphan_categorizations` task
+* An email will be sent to the email address associated with the User Group, informing them of the deprecation of User Groups and instructing them to define a password for the newly converted profile. For this run:
 
-As of [#13380](https://github.com/decidim/decidim/pull/13380), the task named `decidim:upgrade:fix_orphan_categorizations` has been renamed to `decidim:upgrade:clean:categories` and has been included in the main `decidim:upgrade:clean:invalid_records` task.
-
-You can read more about this change on PR [#13380](https://github.com/decidim/decidim/pull/13380).
-
-### 2.4 Cells expiration time
-
-Now the cache expiration time is configurable via initializers/ENV variables.
-
-Decidim uses cache in some HTML views (usually under the `cells/` folder). In the past the cache had no expiration time, now it is configurable using the ENV var `DECIDIM_CACHE_EXPIRATION_TIME` (this var expects an integer specifying the number of minutes for which the cache is valid).
-
-Also note, that now it comes with a default value of 24 hours (1440 minutes).
-
-You can read more about this change on PR [#13402](https://github.com/decidim/decidim/pull/13402).
-
-### 2.5. Ransack upgrade
-
-As part of Rails upgrade to version 7.1, we upgraded Ransack gem to version 4.2. Ransack has introduced a new security policy that requires mandatory allowlisting for the attributes and associations needed by search engine. If you have a regular Decidim installation, you can skip this step.
-
-If you are a plugin developer, you may need to add the following methods to your searchable models.
-
-If your plugins are extending the filters or search, you may need to override the following methods.
-
-```ruby
-def self.ransackable_attributes(_auth_object = nil)
-  []
-end
-
-def self.ransackable_associations(_auth_object = nil)
-  []
-end
+```bash
+bin/rails decidim:upgrade:user_groups:send_reset_password_instructions
 ```
 
-You can read more about this change on PR [#13196](https://github.com/decidim/decidim/pull/13196).
+* To notify group members and admins associated with the User Group with an email explaining the changes and how to access the shared profile run:
 
-### 2.6. Amendments category fix
-
-We have identified a bug in the filtering system, as the amendments created did not share the category with the proposal it amended. This fix aims to fix historic data. To fix it, you need to run:
-
-```shell
-bin/rails decidim_proposals:upgrade:set_categories
+```bash
+bin/rails decidim:upgrade:user_groups:send_user_group_changes_notification_to_members
 ```
 
-You can read more about this change on PR [#13395](https://github.com/decidim/decidim/pull/13395).
+* To migrate the authorships and coauthorships of the old groups and assign to the new regular users:
+
+```bash
+bin/rails decidim:upgrade:user_groups:transfer_user_groups_authorships
+```
+
+* To avoid exceptions accessing to the activities log in the admin panel displaying activities associated with user groups:
+
+```bash
+bin/rails decidim:upgrade:user_groups:fix_user_groups_action_logs
+```
+
+* To avoid exceptions trying to display notifications associated with deprecated groups events:
+
+```bash
+bin/rails decidim:upgrade:user_groups:remove_groups_notifications
+```
+
+You can read more about this change on PR [#14130](https://github.com/decidim/decidim/pull/14130).
+
+### 2.3. [[TITLE OF THE ACTION]]
+
+You can read more about this change on PR [#xxxx](https://github.com/decidim/decidim/pull/xxx).
 
 ## 3. One time actions
 
 These are one time actions that need to be done after the code is updated in the production database.
 
-### 3.1. Remove spring and spring-watcher-listen from your Gemfile
+### 3.1. Changes in Static maps configuration when using HERE.com
 
-To simplify the upgrade process, we have decided to add `spring` and `spring-watcher-listener` as hard dependencies of `decidim-dev`.
+As of [#14180](https://github.com/decidim/decidim/pull/14180) we are migrating to here.com api V3, as V1 does not work anymore. In case your application uses Here.com as static map tile provider, you will need to change your `config/initializers/decidim.rb` to use the new url `https://image.maps.hereapi.com/mia/v3/base/mc/overlay`:
 
-Before upgrading to this version, make sure you run in your console:
-
-```bash
-bundle remove spring spring-watcher-listen
+```ruby
+  static_url = "https://image.maps.ls.hereapi.com/mia/1.6/mapview" if static_provider == "here" && static_url.blank?
 ```
 
-You can read more about this change on PR [#13235](https://github.com/decidim/decidim/pull/13235).
+to
 
-### 3.2. Clean up orphaned attachment blobs
-
-We have added a new task that helps you clean the orphaned attachment blobs. This task will remove all the attachment blobs that have been created for more than 1 hour and are not yet referenced by any attachment record. This helps cleaning your filesystem of unused files.
-
-You can run the task with the following command:
-
-```bash
-bin/rails decidim:upgrade:attachments_cleanup
+```ruby
+  static_url = "https://image.maps.hereapi.com/mia/v3/base/mc/overlay" if static_provider == "here" && static_url.blank?
 ```
 
-You can see more details about this change on PR [\#11851](https://github.com/decidim/decidim/pull/11851)
+You can read more about this change on PR [#14180](https://github.com/decidim/decidim/pull/14180).
 
-### 3.3. Add Meetings' attendees metric
+### 3.2. Change of Valuator for Evaluator
 
-We have added a new metric that indicates how many users have attended your meetings.
+We have updated the terminology of Valuator at a code base level throughout the platform. The role of Valuator is now Evaluator. With this change also affects strings, i18n translations and so on.
 
-If you want to calculate this metric you could run the following command, where 2019-01-01 is the Y-m-d format for the starting date since you want the metric to take effect.
+Implementors must run the following 3 tasks:
 
 ```bash
-./bin/rails decidim:metrics:rebuild[meetings,2019-01-01]
+./bin/rails decidim:upgrade:decidim_update_valuators
+./bin/rails decidim:upgrade:decidim_action_log_valuation_assignment
+./bin/rails decidim:upgrade:decidim_paper_trail_valuation_assignment
 ```
 
-You can see more details about this change on PR [\#13442](https://github.com/decidim/decidim/pull/13442)
+These tasks migrate the old data to the new names.
+
+More information about this change can be found on PR [#13684](https://github.com/decidim/decidim/pull/13684).
+
+### 3.3. Convert nicknames to lowercase
+
+As of [#14272](https://github.com/decidim/decidim/pull/14272) we are migrating all the nicknames to lowercase fix performance issues which affects large databases having many participants.
+
+To apply the fix on your application, you need to run the below command.
+
+```bash
+bin/rails decidim:upgrade:fix_nickname_casing
+```
+
+You can read more about this change on PR [#14272](https://github.com/decidim/decidim/pull/14272).
 
 ### 3.4. [[TITLE OF THE ACTION]]
 
@@ -169,50 +162,22 @@ You can read more about this change on PR [#XXXX](https://github.com/decidim/dec
 
 ## 5. Changes in APIs
 
-### 5.1. Decidim version number no longer disclosed through the GraphQL API by default
+### 5.1. [[TITLE OF THE CHANGE]]
 
-In previous Decidim versions, you could request the running Decidim version through the following API query against the GraphQL API:
+In order to [[REASONING (e.g. improve the maintenance of the code base)]] we have changed...
 
-```graphql
-query { decidim { version } }
-```
-
-This no longer returns the running Decidim version by default and instead it will result to `null` being reported as the version number.
-
-If you would like to re-enable exposing the Decidim version number through the GraphQL API, you may do so by setting the `DECIDIM_API_DISCLOSE_SYSTEM_VERSION` environment variable to `true`. However, this is highly discouraged but may be required for some automation or integrations.
-
-### 5.2 New configuration option for geolocation input forms
-
-Now a button to use the user's device location is enabled by default in Decidim. However this can be disabled with the new configuration option `show_my_location_button`, also available as an ENV var `DECIDIM_SHOW_MY_LOCATION_BUTTON`.
-
-You can decide to enable it in a specific component only (eg "proposals") or everywhere (by default).
-
-Example:
-
-Use only "my location button" in meetings and proposals:
-
-```bash
-DECIDIM_SHOW_MY_LOCATION_BUTTON=meetings,proposals
-```
-
-or in an initializer:
+If you have used code as such:
 
 ```ruby
-Decidim.configure do |config|
-  config.show_my_location_button = [:meetings, :proposals]
-end
+# Explain the usage of the API as it was in the previous version
+result = 1 + 1 if before
 ```
-
-the default value is `:all` equivalent to:
-
-```bash
-DECIDIM_SHOW_MY_LOCATION_BUTTON=all
-```
-
-or in an initializer:
 
 ```ruby
-Decidim.configure do |config|
-  config.show_my_location_button = [:all]
-end
+# Explain the usage of the API as it is in the new version
+result = 1 + 1 if after
 ```
+
+### 5.2. Add force_api_authentication configuration options
+
+There are times that we need to let only authenticated users to use the API. This configuration option filters out unauthenticated users from accessing the api endpoint. You need to add `DECIDIM_API_FORCE_API_AUTHENTICATION` to your environment variables if you want to enable this feature.

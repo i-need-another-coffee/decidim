@@ -47,6 +47,7 @@ FactoryBot.define do
     component { build(:meeting_component) }
     iframe_access_level { :all }
     iframe_embed_type { :none }
+    deleted_at { nil }
 
     author do
       component.try(:organization)
@@ -62,6 +63,12 @@ FactoryBot.define do
 
     trait :in_person do
       type_of_meeting { :in_person }
+    end
+
+    trait :hidden do
+      after :create do |meeting, evaluator|
+        create(:moderation, hidden_at: Time.current, reportable: meeting, skip_injection: evaluator.skip_injection)
+      end
     end
 
     trait :online do
@@ -97,15 +104,6 @@ FactoryBot.define do
     end
 
     trait(:participant_author) { not_official }
-
-    trait :user_group_author do
-      author do
-        create(:user, organization: component.organization, skip_injection:) if component
-      end
-      user_group do
-        create(:user_group, :verified, organization: component.organization, users: [author], skip_injection:) if component
-      end
-    end
 
     trait :closed do
       closing_report { generate_localized_title(:meeting_closing_report, skip_injection:) }

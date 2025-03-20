@@ -6,7 +6,7 @@ module Decidim
   module ParticipatorySpaceUser
     extend ActiveSupport::Concern
 
-    ROLES = %w(admin collaborator moderator valuator).freeze
+    ROLES = %w(admin collaborator moderator evaluator).freeze
 
     included do
       validate :user_and_space_same_organization
@@ -45,6 +45,10 @@ module Decidim
 
       def self.ransackable_associations(_auth_object = nil)
         []
+      end
+
+      def self.order_by_name
+        includes(:user).order("decidim_users.name ASC")
       end
 
       private

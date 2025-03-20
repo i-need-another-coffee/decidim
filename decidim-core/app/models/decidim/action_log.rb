@@ -5,6 +5,7 @@ module Decidim
   # for transparency reasons, to log all actions so all other users can
   # see the actions being performed.
   class ActionLog < ApplicationRecord
+    include Decidim::Taxonomizable
     include Decidim::ScopableParticipatorySpace
 
     belongs_to :organization,
@@ -254,7 +255,7 @@ module Decidim
                 elsif klass.reflect_on_association(:organization)
                   scope.where(id: relation_ids).includes(:organization)
                 elsif klass_name == "Decidim::Comments::Comment"
-                  scope.where(id: relation_ids).includes([:moderation, :root_commentable, :user_group])
+                  scope.where(id: relation_ids).includes([:moderation, :root_commentable])
                 else
                   scope
                 end

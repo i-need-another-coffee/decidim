@@ -12,6 +12,7 @@ module Decidim
     include Loggable
     include Decidim::ShareableWithToken
     include ScopableComponent
+    include Decidim::SoftDeletable
     include TranslatableAttributes
 
     belongs_to :participatory_space, polymorphic: true
@@ -21,7 +22,7 @@ module Decidim
 
     default_scope { registered_component_manifests.registered_space_manifests.order(arel_table[:weight].asc, arel_table[:manifest_name].asc) }
 
-    delegate :organization, :categories, to: :participatory_space
+    delegate :organization, to: :participatory_space
 
     def self.log_presenter_class_for(_log)
       Decidim::AdminLog::ComponentPresenter
@@ -103,6 +104,7 @@ module Decidim
     end
 
     def private_non_transparent_space?
+      return false unless participatory_space.respond_to?(:private_space?)
       return false unless participatory_space.private_space?
 
       if participatory_space.respond_to?(:is_transparent?)

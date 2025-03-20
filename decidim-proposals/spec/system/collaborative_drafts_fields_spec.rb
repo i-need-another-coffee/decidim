@@ -8,7 +8,7 @@ describe "Collaborative drafts" do
 
   let(:root_taxonomy) { create(:taxonomy, organization:) }
   let!(:taxonomy) { create(:taxonomy, parent: root_taxonomy, organization:) }
-  let(:taxonomy_filter) { create(:taxonomy_filter, root_taxonomy:, space_manifest: participatory_process.manifest.name) }
+  let(:taxonomy_filter) { create(:taxonomy_filter, root_taxonomy:, participatory_space_manifests: [participatory_process.manifest.name]) }
   let!(:taxonomy_filter_item) { create(:taxonomy_filter_item, taxonomy_filter:, taxonomy_item: taxonomy) }
   let!(:user) { create(:user, :confirmed, organization:) }
   let(:taxonomy_filter_ids) { [taxonomy_filter.id] }
@@ -208,81 +208,50 @@ describe "Collaborative drafts" do
           end
         end
 
-        context "when the user has verified organizations" do
-          let(:user_group) { create(:user_group, :verified, organization:) }
-
-          before do
-            create(:user_group_membership, user:, user_group:)
-          end
-
-          it "creates a new collaborative draft as a user group", :slow do
-            visit new_collaborative_draft_path
-
-            within ".new_collaborative_draft" do
-              fill_in :collaborative_draft_title, with: "More sidewalks and less roads"
-              fill_in :collaborative_draft_body, with: "Cities need more people, not more cars"
-              select user_group.name, from: :collaborative_draft_user_group_id
-
-              find("*[type=submit]").click
-            end
-
-            expect(page).to have_content("successfully")
-            expect(page).to have_content("More sidewalks and less roads")
-            expect(page).to have_content("Cities need more people, not more cars")
-            expect(page).to have_author(user_group.name)
-          end
-
-          context "when geocoding is enabled", :serves_geocoding_autocomplete do
-            let!(:component) do
-              create(:proposal_component,
-                     :with_creation_enabled,
-                     manifest:,
-                     participatory_space: participatory_process,
-                     settings: {
-                       geocoding_enabled: true,
-                       collaborative_drafts_enabled: true
-                     })
-            end
-
-            it "creates a new collaborative draft as a user group", :slow do
-              visit new_collaborative_draft_path
-
-              within ".new_collaborative_draft" do
-                fill_in :collaborative_draft_title, with: "More sidewalks and less roads"
-                fill_in :collaborative_draft_body, with: "Cities need more people, not more cars"
-                fill_in :collaborative_draft_address, with: address
-                select user_group.name, from: :collaborative_draft_user_group_id
-
-                find("*[type=submit]").click
-              end
-
-              expect(page).to have_content("successfully")
-              expect(page).to have_content("More sidewalks and less roads")
-              expect(page).to have_content("Cities need more people, not more cars")
-              expect(page).to have_content(address)
-              expect(page).to have_author(user_group.name)
-            end
-          end
-        end
-
         context "when the user is not authorized" do
-          before do
-            permissions = {
-              create: {
-                authorization_handlers: {
-                  "dummy_authorization_handler" => { "options" => {} }
+          context "and there is only an authorization required" do
+            before do
+              permissions = {
+                create: {
+                  authorization_handlers: {
+                    "dummy_authorization_handler" => { "options" => {} }
+                  }
                 }
               }
-            }
 
-            component.update!(permissions:)
+              component.update!(permissions:)
+            end
+
+            it "redirects to the authorization form" do
+              visit_component
+              click_on "Access collaborative drafts"
+              click_on "New collaborative draft"
+              expect(page).to have_content("We need to verify your identity")
+              expect(page).to have_content("Verify with Example authorization")
+            end
           end
 
-          it "shows a modal dialog" do
-            visit_component
-            click_on "Access collaborative drafts"
-            click_on "New collaborative draft"
-            expect(page).to have_content("Authorization required")
+          context "and there are more than one authorization required" do
+            before do
+              permissions = {
+                create: {
+                  authorization_handlers: {
+                    "dummy_authorization_handler" => { "options" => {} },
+                    "another_dummy_authorization_handler" => { "options" => {} }
+                  }
+                }
+              }
+
+              component.update!(permissions:)
+            end
+
+            it "redirects to pending onboarding authorizations page" do
+              visit_component
+              click_on "Access collaborative drafts"
+              click_on "New collaborative draft"
+              expect(page).to have_content("You are almost ready to create a proposal")
+              expect(page).to have_css("a[data-verification]", count: 2)
+            end
           end
         end
 

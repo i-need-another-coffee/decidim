@@ -41,7 +41,6 @@ module Decidim
           allow! if user_action?
           allow! if admin_user_action?
 
-          allow! if permission_action.subject == :category
           allow! if permission_action.subject == :component
           allow! if permission_action.subject == :attachment
           allow! if permission_action.subject == :editor_image
@@ -50,7 +49,6 @@ module Decidim
           allow! if permission_action.subject == :scope_type
           allow! if permission_action.subject == :area
           allow! if permission_action.subject == :area_type
-          allow! if permission_action.subject == :user_group
           allow! if permission_action.subject == :officialization
           allow! if permission_action.subject == :moderate_users
           allow! if permission_action.subject == :authorization
@@ -60,10 +58,20 @@ module Decidim
           allow! if permission_action.subject == :share_token
           allow! if permission_action.subject == :reminder
 
+          if permission_action.action.in? [:manage_trash, :restore, :soft_delete]
+            if permission_action.action == :soft_delete
+              toggle_allow(trashable_deleted_resource.respond_to?(:deleted?) && !trashable_deleted_resource.deleted?)
+            elsif permission_action.action == :restore
+              toggle_allow(trashable_deleted_resource&.deleted?)
+            else
+              allow!
+            end
+          end
+
           if permission_action.subject == :taxonomy
             permission_action.action == :destroy ? allow_destroy_taxonomy? : allow!
           end
-
+          allow! if permission_action.subject == :taxonomy_filter
           allow! if permission_action.subject == :taxonomy_item
         end
 
@@ -71,6 +79,10 @@ module Decidim
       end
 
       private
+
+      def trashable_deleted_resource
+        context.fetch(:trashable_deleted_resource, nil)
+      end
 
       def user_manager?
         user && !user.admin? && user.role?("user_manager")
@@ -266,6 +278,10 @@ module Decidim
         taxonomy = context.fetch(:taxonomy, nil)
 
         toggle_allow(taxonomy&.removable?)
+      end
+
+      def component
+        context.fetch(:component, nil)
       end
     end
   end

@@ -24,6 +24,7 @@ module Decidim
     include Decidim::TranslatableResource
     include Decidim::HasArea
     include Decidim::FilterableResource
+    include Decidim::SoftDeletable
     include Decidim::ShareableWithToken
 
     translatable_fields :title, :subtitle, :short_description, :description, :developer_group, :meta_scope, :local_area,
@@ -99,8 +100,6 @@ module Decidim
         )
       end
     }
-
-    scope :with_any_type, ->(*type_ids) { where(decidim_participatory_process_type_id: type_ids) }
 
     searchable_fields({
                         scope_id: :decidim_scope_id,
@@ -210,7 +209,7 @@ module Decidim
     ransacker_i18n :title
 
     def self.ransackable_scopes(_auth_object = nil)
-      [:with_date, :with_any_taxonomies, :with_any_type]
+      [:with_date, :with_any_taxonomies]
     end
 
     def self.ransackable_attributes(auth_object = nil)
@@ -221,7 +220,7 @@ module Decidim
     end
 
     def self.ransackable_associations(_auth_object = nil)
-      %w(area scope participatory_process_type participatory_process_group)
+      %w(participatory_process_type participatory_process_group taxonomies)
     end
   end
 end

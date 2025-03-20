@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "spec_helper"
-require "decidim/api/test/type_context"
+require "decidim/api/test"
 
 describe "Decidim::Api::QueryType" do
   include_context "with a graphql class type"
@@ -32,8 +32,11 @@ describe "Decidim::Api::QueryType" do
       expect(response["organization"]["name"]["translation"]).to eq(translated(current_organization.name))
     end
 
+    it "displays the admin in the stats" do
+      expect(response["organization"]["stats"].select { |hash| hash["name"] == "users_count" }).to eq(["name" => "users_count", "value" => 1])
+    end
+
     %w(
-      users_count
       processes_count
       comments_count
       assemblies_count

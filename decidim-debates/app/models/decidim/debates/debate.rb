@@ -16,6 +16,7 @@ module Decidim
       include Decidim::ScopableResource
       include Decidim::Authorable
       include Decidim::Reportable
+      include Decidim::HasAttachments
       include Decidim::HasReference
       include Decidim::Traceable
       include Decidim::Loggable
@@ -27,6 +28,7 @@ module Decidim
       include Decidim::Endorsable
       include Decidim::Randomable
       include Decidim::FilterableResource
+      include Decidim::SoftDeletable
 
       belongs_to :last_comment_by, polymorphic: true, foreign_type: "last_comment_by_type", optional: true
       component_manifest_name "debates"
@@ -138,6 +140,16 @@ module Decidim
         self.class.name
       end
 
+      # Public: Checks whether the comments are displayed in a single-column layout.
+      def single_column_layout?
+        comments_layout == "single_column"
+      end
+
+      # Public: Checks whether the comments are displayed in a two-column layout.
+      def two_columns_layout?
+        comments_layout == "two_columns"
+      end
+
       # Public: Override Commentable concern method `users_to_notify_on_comment_created`
       def users_to_notify_on_comment_created
         return Decidim::User.where(id: followers).or(Decidim::User.where(id: component.participatory_space.admins)).distinct if official?
@@ -195,7 +207,7 @@ module Decidim
 
         update_columns(
           last_comment_at: last_comment&.created_at,
-          last_comment_by_id: last_comment&.decidim_user_group_id || last_comment&.decidim_author_id,
+          last_comment_by_id: last_comment&.decidim_author_id,
           last_comment_by_type: last_comment&.decidim_author_type,
           comments_count:,
           updated_at: Time.current

@@ -20,6 +20,7 @@ module Decidim
       include Decidim::Searchable
       include Decidim::TranslatableResource
       include Decidim::FilterableResource
+      include Decidim::SoftDeletable
 
       translatable_fields :title, :description
 
@@ -68,6 +69,12 @@ module Decidim
 
       def self.log_presenter_class_for(_log)
         Decidim::Budgets::AdminLog::ProjectPresenter
+      end
+
+      # Returns the presenter for this project, to be used in the views.
+      # Required by ResourceRenderer.
+      def presenter
+        Decidim::Budgets::ProjectPresenter.new(self)
       end
 
       def resource_locator

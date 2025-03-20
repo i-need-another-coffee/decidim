@@ -30,6 +30,23 @@ FactoryBot.define do
         }
       end
     end
+
+    trait :with_creation_enabled do
+      settings do
+        {
+          creation_enabled_for_participants: true
+        }
+      end
+    end
+
+    trait :with_attachments_allowed_and_creation_enabled do
+      settings do
+        {
+          attachments_allowed: true,
+          creation_enabled_for_participants: true
+        }
+      end
+    end
   end
 
   factory :post, class: "Decidim::Blogs::Post" do
@@ -41,6 +58,7 @@ FactoryBot.define do
     body { generate_localized_description(:blog_body, skip_injection:) }
     component { build(:post_component, skip_injection:) }
     author { build(:user, :confirmed, skip_injection:, organization: component.organization) }
+    deleted_at { nil }
 
     trait :with_endorsements do
       after :create do |post, evaluator|
@@ -48,8 +66,14 @@ FactoryBot.define do
           create(:endorsement,
                  resource: post,
                  skip_injection: evaluator.skip_injection,
-                 author: build(:user, skip_injection: evaluator.skip_injection, organization: post.participatory_space.organization))
+                 author: build(:user, :confirmed, skip_injection: evaluator.skip_injection, organization: post.participatory_space.organization))
         end
+      end
+    end
+
+    trait :hidden do
+      after :create do |post, evaluator|
+        create(:moderation, hidden_at: Time.current, reportable: post, skip_injection: evaluator.skip_injection)
       end
     end
   end
