@@ -56,7 +56,7 @@ module Decidim
         return if user.email.blank?
 
         @organization = initiative.organization
-        @link = initiative_url(initiative, host: @organization.host)
+        @link = initiative_url(initiative, locale: I18n.locale, host: @organization.host)
 
         with_user(user) do
           @body = I18n.t(
