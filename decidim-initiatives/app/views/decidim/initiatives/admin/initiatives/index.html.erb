@@ -69,7 +69,7 @@
 
               <% if allowed_to? :print, :initiative, initiative: initiative %>
                 <%= icon_link_to "printer-line",
-                                 decidim_initiatives.print_initiative_path(initiative),
+                                 decidim_initiatives.print_initiative_path(initiative, locale: current_locale),
                                  t(".print"),
                                  class: "action-icon--print",
                                  target: "_blank",
