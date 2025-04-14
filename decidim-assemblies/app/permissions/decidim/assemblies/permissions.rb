@@ -122,7 +122,7 @@ module Decidim
         return true unless assembly.private_space && !assembly.is_transparent?
         return false unless user
 
-        user.admin || assembly.users.include?(user)
+        user.admin || user_has_any_role?(user, assembly, broad_check: true) || process.users.include?(user)
       end
 
       def public_list_members_action?
