@@ -55,7 +55,7 @@ describe "Meeting registrations" do
     context "and registration form is also enabled" do
       let(:registration_form_enabled) { true }
 
-      it "cannot answer the registration form" do
+      it "cannot response the registration form" do
         visit questionnaire_public_path
 
         expect(page).to have_i18n_content(questionnaire.title)
@@ -63,7 +63,7 @@ describe "Meeting registrations" do
 
         expect(page).to have_no_i18n_content(question.body)
 
-        expect(page).to have_content("The form is closed and cannot be answered")
+        expect(page).to have_content("The form is closed and cannot be responded")
       end
     end
   end
@@ -76,10 +76,10 @@ describe "Meeting registrations" do
         create(:registration, meeting:, user:)
       end
 
-      it "the registration button is disabled" do
+      it "shows the waitlist button" do
         visit_meeting
 
-        expect(page).to have_css("button[disabled]", text: "No slots available")
+        expect(page).to have_text("Join waitlist")
         expect(page).to have_text("0 slots remaining")
       end
 
@@ -90,7 +90,7 @@ describe "Meeting registrations" do
           login_as user, scope: :user
         end
 
-        it "cannot answer the registration form" do
+        it "cannot response the registration form" do
           visit questionnaire_public_path
 
           expect(page).to have_i18n_content(questionnaire.title)
@@ -98,7 +98,7 @@ describe "Meeting registrations" do
 
           expect(page).to have_no_i18n_content(question.body)
 
-          expect(page).to have_content("The form is closed and cannot be answered")
+          expect(page).to have_content("The form is closed and cannot be responded")
         end
       end
     end
@@ -145,7 +145,7 @@ describe "Meeting registrations" do
             expect(page).to have_i18n_content(questionnaire.title)
             expect(page).to have_i18n_content(questionnaire.description, strip_tags: true)
 
-            expect(page).to have_no_css(".form.answer-questionnaire")
+            expect(page).to have_no_css(".form.response-questionnaire")
 
             within "[data-question-readonly]" do
               expect(page).to have_i18n_content(question.body)
@@ -188,7 +188,7 @@ describe "Meeting registrations" do
           end
 
           expect(page).to have_css(".button", text: "Cancel your registration")
-          expect(page).to have_text("19 slots remaining")
+          expect(page).to have_no_text("19 slots remaining")
           find("#dropdown-trigger-resource-#{meeting.id}").click
 
           expect(page).to have_text("Stop following")
@@ -210,7 +210,7 @@ describe "Meeting registrations" do
 
           expect(page).to have_content("successfully")
 
-          expect(page).to have_text("19 slots remaining")
+          expect(page).to have_no_text("19 slots remaining")
           find("#dropdown-trigger-resource-#{meeting.id}").click
           expect(page).to have_text("Stop following")
           expect(page).to have_text("Participants")
@@ -238,7 +238,7 @@ describe "Meeting registrations" do
           end
 
           expect(page).to have_css(".button", text: "Cancel your registration")
-          expect(page).to have_text("19 slots remaining")
+          expect(page).to have_no_text("19 slots remaining")
           find("#dropdown-trigger-resource-#{meeting.id}").click
           expect(page).to have_text("Stop following")
         end
@@ -247,7 +247,7 @@ describe "Meeting registrations" do
 
     context "and has a registration form" do
       let(:registration_form_enabled) { true }
-      let(:callout_failure) { "There was a problem answering the form" }
+      let(:callout_failure) { "There was a problem responding the form" }
       let(:callout_success) { <<~EOCONTENT.strip.gsub("\n", " ") }
         You have joined the meeting successfully.
         Because you have registered for this meeting, you will be notified if there are updates on it.
@@ -312,7 +312,7 @@ describe "Meeting registrations" do
     end
 
     context "and the user is going to the meeting" do
-      let!(:answer) { create(:answer, questionnaire:, question:, user:) }
+      let!(:response) { create(:response, questionnaire:, question:, user:) }
       let!(:registration) { create(:registration, meeting:, user:) }
 
       before do
@@ -351,10 +351,10 @@ describe "Meeting registrations" do
           component.update!(settings: { registration_code_enabled: true })
         end
 
-        it "shows the registration code" do
+        it "allows user to see the registration code" do
           visit_meeting
 
-          expect(page).to have_content("Your registration code")
+          click_on("Your registration and QR code")
           expect(page).to have_content(registration.code)
         end
       end
@@ -369,67 +369,14 @@ describe "Meeting registrations" do
 
           expect(page).to have_no_css(".registration_code")
           expect(page).to have_no_content(registration.code)
-        end
-      end
-
-      context "when showing the registration code validation state with registration code enabled" do
-        before do
-          component.update!(settings: { registration_code_enabled: true })
-        end
-
-        it "shows validation pending if not validated" do
-          visit_meeting
-
-          expect(registration.validated_at).to be_nil
-          expect(page).to have_content("VALIDATION PENDING")
-        end
-      end
-
-      context "when not showing the registration code validation state with registration code disabled" do
-        before do
-          component.update!(settings: { registration_code_enabled: false })
-        end
-
-        it "shows validation pending if not validated" do
-          visit_meeting
-
-          expect(registration.validated_at).to be_nil
-          expect(page).to have_no_content("VALIDATION PENDING")
-        end
-      end
-
-      context "when showing the registration code validated for registration code enabled" do
-        before do
-          component.update!(settings: { registration_code_enabled: true })
-        end
-
-        it "shows validated if validated" do
-          registration.update validated_at: Time.current
-          visit_meeting
-
-          expect(registration.validated_at).not_to be_nil
-          expect(page).to have_content("VALIDATED")
-        end
-      end
-
-      context "when not showing the registration code validated for registration code disabled" do
-        before do
-          component.update!(settings: { registration_code_enabled: false })
-        end
-
-        it "shows validated if validated" do
-          registration.update validated_at: Time.current
-          visit_meeting
-
-          expect(registration.validated_at).not_to be_nil
-          expect(page).to have_no_content("VALIDATED")
+          expect(page).to have_no_content("Your registration and QR code")
         end
       end
 
       context "and registration form is enabled" do
         let(:registration_form_enabled) { true }
 
-        it "cannot answer the registration again" do
+        it "cannot response the registration again" do
           visit questionnaire_public_path
 
           expect(page).to have_i18n_content(questionnaire.title)
@@ -437,7 +384,7 @@ describe "Meeting registrations" do
 
           expect(page).to have_no_i18n_content(question.body)
 
-          expect(page).to have_content("You have already answered this form.")
+          expect(page).to have_content("You have already responded this form.")
         end
       end
     end
