@@ -3,10 +3,10 @@
 module Decidim
   module Meetings
     class AgendaItemType < Decidim::Api::Types::BaseObject
-      implements Decidim::Core::TimestampsInterface
-
       graphql_name "MeetingAgendaItem"
       description "A meeting agenda item"
+
+      implements Decidim::Core::TimestampsInterface
 
       field :agenda, Decidim::Meetings::AgendaType, "Belonging agenda", null: true
       field :description, Decidim::Core::TranslatedFieldType, "The description for this agenda item", null: true

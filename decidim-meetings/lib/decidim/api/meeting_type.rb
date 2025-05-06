@@ -22,11 +22,17 @@ module Decidim
       field :attending_organizations, GraphQL::Types::String, "list of attending organizations", null: true
       field :audio_url, GraphQL::Types::String, "URL for the audio of the session, if any", null: true
       field :closed, GraphQL::Types::Boolean, "Whether this meeting is closed or not.", method: :closed?, null: false
+      field :closed_at, Decidim::Core::DateTimeType, "The date and time this meeting was closed", null: true
       field :closing_report, Decidim::Core::TranslatedFieldType, "The closing report of this meeting.", null: true
+      field :comments_enabled, GraphQL::Types::Boolean, "Whether the comments are enabled or not", null: false
+      field :comments_end_time, Decidim::Core::DateTimeType, "The ending time when the comments will be allowed on this meeting", null: true
+      field :comments_start_time, Decidim::Core::DateTimeType, "The starting time when the comments will be allowed on this meeting", null: true
       field :contribution_count, GraphQL::Types::Int, "Amount of contributions to this meeting", method: :contributions_count, null: true
+      field :customize_registration_email, GraphQL::Types::Boolean, "The email to customize for the registration", null: true
       field :description, Decidim::Core::TranslatedFieldType, "The description of this meeting.", null: true
       field :end_time, Decidim::Core::DateTimeType, "The time this meeting ends", null: false
       field :id, GraphQL::Types::ID, "ID of this meeting", null: false
+      field :iframe_access_level, GraphQL::Types::String, "The iframe access level of the meeting ", null: true
       field :iframe_embed_type, GraphQL::Types::String, "The type of displaying of the online meeting URL", null: true
       field :is_withdrawn, GraphQL::Types::Boolean, "Whether this meeting is withdrawn or not.", method: :withdrawn?, null: false
       field :location, Decidim::Core::TranslatedFieldType, "The location of this meeting (free format)", null: true
@@ -38,6 +44,8 @@ module Decidim
       field :registration_form, Decidim::Forms::QuestionnaireType, description: "If registration requires to fill a form, this is the questionnaire", null: true
       field :registration_form_enabled, GraphQL::Types::Boolean, "Whether the registrations have a form or not", null: false
       field :registration_terms, Decidim::Core::TranslatedFieldType, "The registration terms", null: true
+      field :registration_type, GraphQL::Types::String, "The type of registration (disabled, on this platform or different platform)", null: false
+      field :registration_url, GraphQL::Types::String, "URL for the registration form", null: true
       field :registrations_enabled, GraphQL::Types::Boolean, "Whether the registrations are enabled or not", null: false
       field :remaining_slots, GraphQL::Types::Int, "Amount of slots available for this meeting", null: true
       field :start_time, Decidim::Core::DateTimeType, "The time this meeting starts", null: false
