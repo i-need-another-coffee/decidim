@@ -5,7 +5,6 @@ module Decidim
     class ProposalStateType < Decidim::Api::Types::BaseObject
       description "A proposal state"
 
-      implements Decidim::Core::TimestampsInterface
       field :announcement_title, Decidim::Core::TranslatedFieldType, "The announcement for this proposal state", null: true
       field :bg_color, GraphQL::Types::String, description: "The background color of proposal state label", null: true
       field :id, GraphQL::Types::ID, "The id of the Proposal state", null: false

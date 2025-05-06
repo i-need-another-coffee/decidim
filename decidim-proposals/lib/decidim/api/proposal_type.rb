@@ -3,6 +3,8 @@
 module Decidim
   module Proposals
     class ProposalType < Decidim::Api::Types::BaseObject
+      include ActiveSupport::NumberHelper
+
       description "A proposal"
 
       implements Decidim::Comments::CommentableInterface
@@ -22,7 +24,7 @@ module Decidim
       field :answer, Decidim::Core::TranslatedFieldType, "The answer feedback for the status for this proposal", null: true
       field :answered_at, Decidim::Core::DateTimeType, description: "The date and time this proposal was answered", null: true
       field :body, Decidim::Core::TranslatedFieldType, "The description for this body", null: true
-      field :cost, Graphql::Types::Float, "The proposal cost", null: true
+      field :cost, GraphQL::Types::String, "The proposal cost", null: true
       field :cost_report, Decidim::Core::TranslatedFieldType, "The cost report for this proposal", null: true
       field :created_in_meeting, GraphQL::Types::Boolean, "Whether this proposal comes from a meeting or not", method: :official_meeting?, null: true
       field :execution_period, Decidim::Core::TranslatedFieldType, "The execution period for this proposal", null: true
@@ -39,6 +41,18 @@ module Decidim
       field :withdrawn, GraphQL::Types::Boolean, "Whether this proposal has been withdrawn or not", method: :withdrawn?, null: true
       field :withdrawn_at, Decidim::Core::DateTimeType, description: "The date and time this proposal was withdrawn", null: true
 
+      def answered_at
+        return unless object.published_state?
+
+        object.answered_at
+      end
+
+      def answer
+        return unless object.published_state?
+
+        object.answer
+      end
+
       def meeting
         object.authors.first if object.official_meeting?
       end
@@ -46,19 +60,19 @@ module Decidim
       def cost_report
         return unless proposal_has_costs? && current_settings.answers_with_costs?
 
-        model.cost_report
+        object.cost_report
       end
 
       def execution_period
         return unless proposal_has_costs? && current_settings.answers_with_costs?
 
-        model.execution_period
+        object.execution_period
       end
 
       def cost
         return unless proposal_has_costs? && current_settings.answers_with_costs?
 
-        number_to_currency(model.cost, unit: Decidim.currency_unit)
+        number_to_currency(object.cost, unit: Decidim.currency_unit)
       end
 
       def vote_count
@@ -85,7 +99,7 @@ module Decidim
       end
 
       def proposal_has_costs?
-        @proposal.cost.present?
+        object.cost.present?
       end
     end
   end
