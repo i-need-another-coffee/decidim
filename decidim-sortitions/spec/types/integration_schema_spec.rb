@@ -27,7 +27,10 @@ describe "Decidim::Api::QueryType" do
           id
           reference
           requestTimestamp
-          selectedProposals
+          selectedProposals {
+            id
+            title { translation(locale: "#{locale}") }
+          }
           targetItems
           title { translation(locale: "#{locale}") }
           totalCommentsCount
@@ -65,7 +68,7 @@ describe "Decidim::Api::QueryType" do
       "id" => sortition.id.to_s,
       "reference" => sortition.reference,
       "requestTimestamp" => sortition.request_timestamp.to_time.iso8601,
-      "selectedProposals" => sortition.selected_proposals,
+      "selectedProposals" => sortition.proposals.map { |proposal| { "id" => proposal.id.to_s, "title" => { "translation" => translated(proposal.title) } } },
       "targetItems" => sortition.target_items,
       "title" => { "translation" => sortition.title[locale] },
       "totalCommentsCount" => sortition.comments_count,
@@ -135,7 +138,10 @@ describe "Decidim::Api::QueryType" do
                 id
                 reference
                 requestTimestamp
-                selectedProposals
+                selectedProposals {
+                  id
+                  title { translation(locale: "#{locale}") }
+                }
                 targetItems
                 title { translation(locale: "#{locale}") }
                 totalCommentsCount
