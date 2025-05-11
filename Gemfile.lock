@@ -717,7 +717,7 @@ GEM
       rubocop (>= 0.82.0)
     rubocop-graphql (1.5.4)
       rubocop (>= 1.50, < 2)
-    rubocop-obsession (0.1.15)
+    rubocop-obsession (0.1.17)
       activesupport
       rubocop (~> 1.41)
     rubocop-performance (1.21.1)
