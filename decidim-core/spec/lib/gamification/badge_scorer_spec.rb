@@ -8,7 +8,7 @@ module Decidim
       subject { described_class.new(user, badge) }
 
       let(:user) { create(:user) }
-      let(:badge) { Badge.new(name: "test", levels: [1, 3, 5]) }
+      let(:badge) { BadgeManifest.new(name: "test", levels: [1, 3, 5]) }
 
       describe "#increment" do
         context "when there is no previous score" do

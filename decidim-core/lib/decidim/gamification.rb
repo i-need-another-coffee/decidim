@@ -2,7 +2,7 @@
 
 module Decidim
   module Gamification
-    autoload :Badge, "decidim/gamification/badge"
+    autoload :BadgeManifest, "decidim/gamification/badge_manifest"
     autoload :BadgeRegistry, "decidim/gamification/badge_registry"
     autoload :BadgeStatus, "decidim/gamification/badge_status"
     autoload :BadgeScorer, "decidim/gamification/badge_scorer"

@@ -37,7 +37,7 @@ module Decidim
       #
       # Returns an Integer with the score.
       def score
-        @score ||= BadgeScore.find_by(user: @user, badge_name: @badge.name).try(:value) || 0
+        @score ||= BadgeScore.find_by(user: @user, badge_name: @badge.manifest_name).try(:value) || 0
       end
     end
   end

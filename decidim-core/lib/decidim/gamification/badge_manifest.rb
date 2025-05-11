@@ -4,7 +4,7 @@ module Decidim
   module Gamification
     # This class represents an abstract badge. Instances of this class can define
     # different badge types with different rules such as gaining new levels, etc.
-    class Badge
+    class BadgeManifest
       include Decidim::AttributeObject::Model
       include ActiveModel::Validations
 
@@ -32,6 +32,16 @@ module Decidim
         errors.add(:levels, "level thresholds should be ordered") if levels.sort != levels
         errors.add(:levels, "level thresholds should be positive") unless levels.all?(&:positive?)
         errors.add(:levels, "level thresholds should be unique") unless levels.uniq == levels
+      end
+
+      def has_settings?
+        settings.attributes.any?
+      end
+
+      def settings(&block)
+        @settings ||= SettingsManifest.new
+        yield(@settings) if block
+        @settings
       end
 
       # Public: Returns the level for this badge given a score.

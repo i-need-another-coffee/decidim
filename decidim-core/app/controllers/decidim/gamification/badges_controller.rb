@@ -6,7 +6,7 @@ module Decidim
       include HasSpecificBreadcrumb
 
       def index
-        @badges = Decidim::Gamification.badges.sort_by(&:name)
+        @badges = Decidim::Gamification::Badge.where(organization: current_organization).published.collect(&:manifest)
       end
 
       private

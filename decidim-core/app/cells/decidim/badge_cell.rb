@@ -45,7 +45,9 @@ module Decidim
     end
 
     def badge_name
-      badge.translated_name
+      return badge.manifest.translated_name if translated_attribute(badge.name).empty?
+
+      translated_attribute(badge.name)
     end
 
     def opacity
@@ -59,7 +61,7 @@ module Decidim
     end
 
     def status
-      @status ||= options[:status] || Decidim::Gamification.status_for(model, badge.name)
+      @status ||= options[:status] || Decidim::Gamification.status_for(model, badge.manifest_name)
     end
   end
 end

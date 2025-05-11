@@ -210,6 +210,13 @@ module Decidim
                         icon_name: "computer-line",
                         position: 1.7,
                         if: allowed_to?(:update, :organization, organization: current_organization)
+
+          menu.add_item :badges,
+                        I18n.t("menu.badges", scope: "decidim.admin"),
+                        decidim_admin.edit_organization_badge_path,
+                        position: 1.8,
+                        icon_name: "award-line",
+                        if: current_organization.badges_enabled && allowed_to?(:update, :organization, organization: current_organization)
         end
       end
 

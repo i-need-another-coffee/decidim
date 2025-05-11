@@ -41,7 +41,7 @@ module Decidim
       def register(name, &)
         name = name.to_s
 
-        badge = Badge.new(name:).tap do |object|
+        badge = BadgeManifest.new(name:).tap do |object|
           object.instance_eval(&)
         end
 

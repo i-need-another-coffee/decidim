@@ -293,6 +293,13 @@ en:
       autocomplete:
         no_results: No results found
         search_prompt: Type at least three characters to search.
+      badges:
+        create:
+          error: There was a problem creating a new badge.
+          success: Badge created successfully.
+        destroy:
+          error: There was a problem deleting the badge.
+          success: Badge removed successfully.
       block_user:
         bulk_new:
           action: Block accounts and send justification
@@ -582,6 +589,7 @@ en:
         appearance: Appearance
         area_types: Area types
         areas: Areas
+        badges: Manage badges
         components: Components
         configuration: Configuration
         content: Reported content

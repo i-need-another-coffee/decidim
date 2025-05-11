@@ -4,7 +4,7 @@ require "spec_helper"
 
 module Decidim
   module Gamification
-    describe Badge do
+    describe BadgeManifest do
       let(:badge) { described_class.new(name: "followers", levels: [1, 5, 10, 30, 50]) }
 
       context "with all the required fields" do
