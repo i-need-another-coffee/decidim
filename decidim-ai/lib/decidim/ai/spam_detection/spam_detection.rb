@@ -48,6 +48,10 @@ module Decidim
         30.seconds
       end
 
+      config_accessor :spam_auto_hide do
+        false
+      end
+
       # Registered analyzers.
       # You can register your own analyzer by adding a new entry to this array.
       # The entry must be a hash with the following keys:
