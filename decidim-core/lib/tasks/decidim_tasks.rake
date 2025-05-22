@@ -56,8 +56,10 @@ namespace :decidim do
 
   private
 
-  def copy_file_from_core_to_application(origin_path, destination_path = origin_path)
-    FileUtils.cp(decidim_core_path.join(origin_path), rails_app_path.join(destination_path))
+  def copy_file_from_core_to_application(origin_path, destination_path = origin_path, force: false)
+    return if File.exist?(rails_app_path.join(destination_path)) && !force
+
+    FileUtils.cp(decidim_core_path.join(origin_path), rails_app_path.join(destination_path), verbose: true)
   end
 
   def decidim_core_path
