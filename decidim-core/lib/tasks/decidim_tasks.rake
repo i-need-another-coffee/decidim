@@ -4,7 +4,8 @@ namespace :decidim do
   desc "Performs upgrade tasks (migrations, node, docs )."
   task upgrade: [
     :choose_target_plugins,
-    :"decidim:upgrade_app",
+    :framework_defaults,
+    :upgrade_app,
     :"railties:install:migrations",
     :"decidim:upgrade:migrations",
     :"decidim:upgrade:webpacker",
@@ -47,5 +48,23 @@ namespace :decidim do
   desc "Removes the default favicon from the application."
   task :remove_default_favicon do
     FileUtils.rm("public/favicon.ico", force: true)
+  end
+
+  task framework_defaults: :environment do
+    copy_file_from_core_to_application("config/initializers/new_framework_defaults_7_0.rb", "config/initializers/new_framework_defaults_7_0.rb")
+  end
+
+  private
+
+  def copy_file_from_core_to_application(origin_path, destination_path = origin_path)
+    FileUtils.cp(decidim_core_path.join(origin_path), rails_app_path.join(destination_path))
+  end
+
+  def decidim_core_path
+    Pathname.new(Gem.loaded_specs["decidim-core"].full_gem_path)
+  end
+
+  def rails_app_path
+    @rails_app_path ||= Rails.root
   end
 end
