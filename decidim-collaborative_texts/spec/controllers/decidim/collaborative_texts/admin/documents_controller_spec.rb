@@ -28,6 +28,7 @@ module Decidim
           request.env["decidim.current_organization"] = organization
           request.env["decidim.current_participatory_space"] = participatory_space
           request.env["decidim.current_component"] = component
+          request.env["decidim.current_participatory_space"] = participatory_space
           allow(controller).to receive(:current_participatory_space).and_return(participatory_space)
           allow(controller).to receive(:current_component).and_return(component)
         end
