@@ -55,8 +55,8 @@ module Decidim
           blob =
             if type_part == "disk"
               # Disk service URL
-              decoded = ActiveStorage.verifier.verified(key_part, purpose: :blob_key)
-              ActiveStorage::Blob.find_by(key: decoded["key"]) if decoded
+              decoded = ActiveStorage.verifier.verified(key_part, purpose: :blob_key).with_indifferent_access
+              ActiveStorage::Blob.find_by(key: decoded[:key]) if decoded
             else
               # Representation or blob
               if type_part.start_with?("representations")
