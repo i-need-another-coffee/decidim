@@ -9,7 +9,7 @@ module Decidim::Meetings
     let(:participatory_process) { create(:participatory_process, organization:) }
     let(:component) { create(:meeting_component, participatory_space: participatory_process) }
     let(:meeting) { create(:meeting, :published, component:, registrations_enabled: true, available_slots: 10) }
-    let(:my_meeting_path) { "/processes/#{participatory_process.slug}/f/#{component.id}/meetings/#{meeting.id}" }
+    let(:my_meeting_path) { Decidim::EngineRouter.main_proxy(component).meeting_path(meeting) }
 
     before do
       allow(controller).to receive(:meeting_path).and_return(Decidim::EngineRouter.main_proxy(component).meeting_path(meeting))
