@@ -30,7 +30,7 @@ module Decidim
           name_and_surname: ::Faker::Name.name,
           document_type: Decidim::Verifications.document_types.first,
           document_number:,
-          date_of_birth: ::Faker::Date.birthday(min_age: 18, max_age: 40).to_s,
+          date_of_birth: ::Faker::Date.birthday(min_age: 18, max_age: 40),
           postal_code: ::Faker::Address.zip_code,
           scope_id: initiative.scope.id,
           gender: DummySignatureHandler::AVAILABLE_GENDERS.last
