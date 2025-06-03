@@ -47,7 +47,11 @@ describe "Decidim::Api::QueryType" do
   end
   let(:initiative_type_data) do
     {
+      "attachmentsEnabled" => initiative.type.attachments_enabled,
+      "bannerImage" => "ddddddddddddddd",
       "collectUserExtraFields" => initiative.type.collect_user_extra_fields?,
+      "commentsEnabled" => initiative.type.comments_enabled,
+      "customSignatureEndDateEnabled" => initiative.type.custom_signature_end_date_enabled,
       "createdAt" => initiative.type.created_at.to_time.iso8601,
       "description" => { "translation" => initiative.type.description[locale] },
       "extraFieldsLegalInformation" => initiative.type.extra_fields_legal_information,
@@ -89,11 +93,14 @@ describe "Decidim::Api::QueryType" do
         hashtag
         id
         initiativeType {
+          attachmentsEnabled
           bannerImage
           collectUserExtraFields
+          commentsEnabled
           createdAt
+          customSignatureEndDateEnabled
           description {
-          translation(locale: "#{locale}")
+            translation(locale: "#{locale}")
           }
           extraFieldsLegalInformation
           id
@@ -102,8 +109,7 @@ describe "Decidim::Api::QueryType" do
           promotingCommitteeEnabled
           signatureType
           title {
-                  translation(locale: "#{locale}")
-
+            translation(locale: "#{locale}")
           }
           undoOnlineSignaturesEnabled
           updatedAt
