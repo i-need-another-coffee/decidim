@@ -16,7 +16,7 @@ module Decidim
       description "A initiative"
 
       field :answer, Decidim::Core::TranslatedFieldType, "The answer of the initiative", null: true
-      field :answer_url, Decidim::Core::TranslatedFieldType, "The answer url of the initiative", null: true
+      field :answer_url, GraphQL::Types::String, "The answer url of the initiative", null: true
       field :answered_at, Decidim::Core::DateTimeType, "The time this initiative was answered", null: true
       field :author, Decidim::Core::AuthorInterface, "The initiative author", null: false
       field :committee_members, [Decidim::Initiatives::InitiativeCommitteeMemberType, { null: true }], "The committee members list", null: true
@@ -45,6 +45,18 @@ module Decidim
 
       def url
         Decidim::EngineRouter.main_proxy(object).initiative_url(object)
+      end
+
+      def answer
+        return unless object.answered?
+
+        object.answer
+      end
+
+      def answer_url
+        return unless object.answered?
+
+        object.answer_url
       end
     end
   end
