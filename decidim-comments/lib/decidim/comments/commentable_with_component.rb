@@ -17,10 +17,6 @@ module Decidim
           component.settings.comments_enabled?
         end
 
-        def has_comments?
-          comment_threads.not_hidden.size.positive?
-        end
-
         # Public: Overrides the `accepts_new_comments?` Commentable concern method.
         def accepts_new_comments?
           commentable? && !component.current_settings.comments_blocked
