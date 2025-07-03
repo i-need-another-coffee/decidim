@@ -6,7 +6,17 @@ module Decidim
     include Decidim::TranslatableAttributes
     include Decidim::SanitizeHelper
 
-    def title(resource_title, html_escape, all_locales)
+    delegate_missing_to :resource
+
+    def resource
+      __getobj__
+    end
+
+    def title(resource_title = nil, html_escape: false, all_locales: false)
+      return unless resource
+
+      resource_title ||= resource.title
+
       handle_locales(resource_title, all_locales) do |content|
         content = decidim_html_escape(content) if html_escape
 

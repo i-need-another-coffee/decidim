@@ -30,11 +30,6 @@ module Decidim
         link_to title, meeting_path
       end
 
-      def title(html_escape: false, all_locales: false)
-        return unless meeting
-
-        super(meeting.title, html_escape, all_locales)
-      end
 
       def description(links: false, extras: true, strip_tags: false, all_locales: false)
         return unless meeting

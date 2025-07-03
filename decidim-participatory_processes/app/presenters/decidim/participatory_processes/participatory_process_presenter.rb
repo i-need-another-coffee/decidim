@@ -17,12 +17,6 @@ module Decidim
         Decidim::AreaPresenter.new(process.area).translated_name_with_type
       end
 
-      def title(html_escape: false, all_locales: false)
-        return unless process
-
-        super(process.title, html_escape, all_locales)
-      end
-
       def description(links: false, extras: true, strip_tags: false, all_locales: false)
         return unless process
 

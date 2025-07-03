@@ -17,12 +17,6 @@ module Decidim
         Decidim::ResourceLocatorPresenter.new(election).path
       end
 
-      def title(html_escape: false, all_locales: false)
-        return unless election
-
-        super(election.title, html_escape, all_locales)
-      end
-
       def description(links: false, extras: true, strip_tags: false, all_locales: false)
         return unless election
 

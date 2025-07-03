@@ -43,7 +43,7 @@ module Decidim
       component_manifest_name "dummy"
 
       def presenter
-        Decidim::Dev::DummyResourcePresenter.new(self)
+        Decidim::ResourcePresenter.new(self)
       end
 
       def reported_attributes

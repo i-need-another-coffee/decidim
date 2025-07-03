@@ -38,7 +38,7 @@ module Decidim
       end
 
       def presenter
-        Decidim::Sortitions::SortitionPresenter.new(self)
+        Decidim::ResourcePresenter.new(self)
       end
 
       def proposals

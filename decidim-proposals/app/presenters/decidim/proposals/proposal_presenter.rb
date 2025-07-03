@@ -30,15 +30,6 @@ module Decidim
         link_to title, proposal_path
       end
 
-      # Render the proposal title
-      #
-      # Returns a String.
-      def title(html_escape: false, all_locales: false)
-        return unless proposal
-
-        super(proposal.title, html_escape, all_locales)
-      end
-
       def id_and_title(html_escape: false)
         "##{proposal.id} - #{title(html_escape:)}"
       end

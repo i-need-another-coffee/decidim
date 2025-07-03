@@ -74,7 +74,7 @@ module Decidim
       # Returns the presenter for this project, to be used in the views.
       # Required by ResourceRenderer.
       def presenter
-        Decidim::Budgets::ProjectPresenter.new(self)
+        Decidim::ResourcePresenter.new(self)
       end
 
       def resource_locator

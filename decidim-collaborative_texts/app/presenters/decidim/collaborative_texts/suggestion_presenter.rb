@@ -32,7 +32,7 @@ module Decidim
       #
       # Returns a String.
       def title(html_escape: false, all_locales: false)
-        super(suggestion.document.title, html_escape, all_locales)
+        super(suggestion.document.title, html_escape:, all_locales:)
       end
 
       def type

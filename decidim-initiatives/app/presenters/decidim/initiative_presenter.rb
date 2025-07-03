@@ -12,11 +12,5 @@ module Decidim
     def initiative
       __getobj__
     end
-
-    def title(html_escape: false, all_locales: false)
-      return unless initiative
-
-      super(initiative.title, html_escape, all_locales)
-    end
   end
 end

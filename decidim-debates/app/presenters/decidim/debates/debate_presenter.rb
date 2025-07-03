@@ -11,9 +11,7 @@ module Decidim
       include Decidim::SanitizeHelper
       include ActionView::Helpers::DateHelper
 
-      def debate
-        __getobj__
-      end
+      alias debate resource
 
       def author
         @author ||= if official?
@@ -21,12 +19,6 @@ module Decidim
                     else
                       Decidim::UserPresenter.new(super)
                     end
-      end
-
-      def title(html_escape: false, all_locales: false)
-        return unless debate
-
-        super(debate.title, html_escape, all_locales)
       end
 
       def description(strip_tags: false, extras: true, links: false, all_locales: false)
