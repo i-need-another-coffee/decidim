@@ -40,7 +40,7 @@ module Decidim::Budgets
       end
 
       it "schedules a job to send an email with the summary" do
-        expect(SendOrderSummaryJob).to receive(:perform_later).with(order)
+        expect(OrderSummaryMailer).to receive(:order_summary).with(order)
 
         subject.call
       end

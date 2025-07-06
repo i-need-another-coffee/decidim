@@ -31,7 +31,7 @@ module Decidim
         return unless order && order.valid?
 
         @order.with_lock do
-          SendOrderSummaryJob.perform_later(@order)
+          OrderSummaryMailer.order_summary(@order).deliver_later if order&.user&.email.present?
 
           Decidim.traceability.update!(
             @order,
