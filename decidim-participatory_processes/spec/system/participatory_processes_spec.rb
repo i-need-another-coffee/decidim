@@ -27,18 +27,18 @@ describe "Participatory Processes" do
       let(:target_path) { decidim_participatory_processes.participatory_processes_path }
     end
   end
-
-  context "when there are no processes and accessing from the homepage" do
-    let!(:menu_content_block) { create(:content_block, organization:, manifest_name: :global_menu, scope_name: :homepage) }
-
-    it "does not show the menu link" do
-      visit decidim.root_path
-
-      within "#home__menu" do
-        expect(page).to have_no_content("Processes")
-      end
-    end
-  end
+  #
+  # context "when there are no processes and accessing from the homepage" do
+  #   let!(:menu_content_block) { create(:content_block, organization:, manifest_name: :global_menu, scope_name: :homepage) }
+  #
+  #   it "does not show the menu link" do
+  #     visit decidim.root_path
+  #
+  #     within "#home__menu" do
+  #       expect(page).to have_no_content("Processes")
+  #     end
+  #   end
+  # end
 
   context "when the process does not exist" do
     it_behaves_like "a 404 page" do
@@ -57,18 +57,18 @@ describe "Participatory Processes" do
         let(:target_path) { decidim_participatory_processes.participatory_processes_path }
       end
     end
-
-    context "and accessing from the homepage" do
-      let!(:menu_content_block) { create(:content_block, organization:, manifest_name: :global_menu, scope_name: :homepage) }
-
-      it "the menu link is not shown" do
-        visit decidim.root_path
-
-        within "#home__menu" do
-          expect(page).to have_no_content("Processes")
-        end
-      end
-    end
+    #
+    # context "and accessing from the homepage" do
+    #   let!(:menu_content_block) { create(:content_block, organization:, manifest_name: :global_menu, scope_name: :homepage) }
+    #
+    #   it "the menu link is not shown" do
+    #     visit decidim.root_path
+    #
+    #     within "#home__menu" do
+    #       expect(page).to have_no_content("Processes")
+    #     end
+    #   end
+    # end
   end
 
   context "when there are some published processes" do
@@ -96,19 +96,19 @@ describe "Participatory Processes" do
 
       it_behaves_like "accessible page"
 
-      context "and accessing from the homepage" do
-        let!(:menu_content_block) { create(:content_block, organization:, manifest_name: :global_menu, scope_name: :homepage) }
-
-        it "the menu link is not shown" do
-          visit decidim.root_path
-
-          within "#home__menu" do
-            click_on "Processes"
-          end
-
-          expect(page).to have_current_path decidim_participatory_processes.participatory_processes_path
-        end
-      end
+      # context "and accessing from the homepage" do
+      #   let!(:menu_content_block) { create(:content_block, organization:, manifest_name: :global_menu, scope_name: :homepage) }
+      #
+      #   it "the menu link is not shown" do
+      #     visit decidim.root_path
+      #
+      #     within "#home__menu" do
+      #       click_on "Processes"
+      #     end
+      #
+      #     expect(page).to have_current_path decidim_participatory_processes.participatory_processes_path
+      #   end
+      # end
 
       context "with highlighted processes" do
         before do

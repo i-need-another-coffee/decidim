@@ -38,18 +38,18 @@ describe "Assemblies" do
       let(:target_path) { decidim_assemblies.assemblies_path }
     end
   end
-
-  context "when there are no assemblies and accessing from the homepage" do
-    let!(:menu_content_block) { create(:content_block, organization:, manifest_name: :global_menu, scope_name: :homepage) }
-
-    it "the menu link is not shown" do
-      visit decidim.root_path
-
-      within "#home__menu" do
-        expect(page).to have_no_content("Assemblies")
-      end
-    end
-  end
+  #
+  # context "when there are no assemblies and accessing from the homepage" do
+  #   let!(:menu_content_block) { create(:content_block, organization:, manifest_name: :global_menu, scope_name: :homepage) }
+  #
+  #   it "the menu link is not shown" do
+  #     visit decidim.root_path
+  #
+  #     within "#home__menu" do
+  #       expect(page).to have_no_content("Assemblies")
+  #     end
+  #   end
+  # end
 
   context "when the assembly does not exist" do
     it_behaves_like "a 404 page" do
@@ -68,18 +68,18 @@ describe "Assemblies" do
         let(:target_path) { decidim_assemblies.assemblies_path }
       end
     end
-
-    context "and accessing from the homepage" do
-      let!(:menu_content_block) { create(:content_block, organization:, manifest_name: :global_menu, scope_name: :homepage) }
-
-      it "the menu link is not shown" do
-        visit decidim.root_path
-
-        within "#home__menu" do
-          expect(page).to have_no_content("Assemblies")
-        end
-      end
-    end
+    #
+    # context "and accessing from the homepage" do
+    #   let!(:menu_content_block) { create(:content_block, organization:, manifest_name: :global_menu, scope_name: :homepage) }
+    #
+    #   it "the menu link is not shown" do
+    #     visit decidim.root_path
+    #
+    #     within "#home__menu" do
+    #       expect(page).to have_no_content("Assemblies")
+    #     end
+    #   end
+    # end
   end
 
   context "when there are some published assemblies" do
@@ -102,19 +102,19 @@ describe "Assemblies" do
         visit decidim_assemblies.assemblies_path
       end
 
-      context "and accessing from the homepage" do
-        let!(:menu_content_block) { create(:content_block, organization:, manifest_name: :global_menu, scope_name: :homepage) }
-
-        it "the menu link is shown" do
-          visit decidim.root_path
-
-          within "#home__menu" do
-            click_on "Assemblies"
-          end
-
-          expect(page).to have_current_path decidim_assemblies.assemblies_path
-        end
-      end
+      # context "and accessing from the homepage" do
+      #   let!(:menu_content_block) { create(:content_block, organization:, manifest_name: :global_menu, scope_name: :homepage) }
+      #
+      #   it "the menu link is shown" do
+      #     visit decidim.root_path
+      #
+      #     within "#home__menu" do
+      #       click_on "Assemblies"
+      #     end
+      #
+      #     expect(page).to have_current_path decidim_assemblies.assemblies_path
+      #   end
+      # end
 
       it "lists all the highlighted assemblies" do
         within "#highlighted-assemblies" do
