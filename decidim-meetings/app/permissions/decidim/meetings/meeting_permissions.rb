@@ -8,13 +8,6 @@ module Decidim
 
         return permission_action unless subject == :meeting
 
-        if permission_action.action == :read
-          toggle_allow(can_read?)
-          return permission_action
-        end
-
-        return permission_action unless user
-
         permission_method = "can_#{action}?"
         toggle_allow(send(permission_method)) if respond_to?(permission_method, true)
 
@@ -22,6 +15,7 @@ module Decidim
       end
 
       private
+
       def can_read?
         user_has_any_role?(user, meeting.participatory_space, broad_check: true) || (!meeting&.hidden? && meeting&.current_user_can_visit_meeting?(user))
       end
