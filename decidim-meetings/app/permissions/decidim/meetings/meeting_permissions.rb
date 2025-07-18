@@ -30,21 +30,8 @@ module Decidim
       end
 
       def meeting_actions
-        action_permissions = {
-          join: :can_join?,
-          join_waitlist: :can_join_waitlist?,
-          leave: :can_leave?,
-          decline_invitation: :can_decline_invitation?,
-          create: :can_create?,
-          update: :can_update?,
-          withdraw: :can_withdraw?,
-          close: :can_close?,
-          register: :can_register?,
-          reply_poll: :can_reply_poll?
-        }
-
-        permission_method = action_permissions[action]
-        toggle_allow(send(permission_method)) if permission_method
+        permission_method = "can_#{action}?"
+        toggle_allow(send(permission_method)) if respond_to?(permission_method, true)
       end
 
       def can_join?
