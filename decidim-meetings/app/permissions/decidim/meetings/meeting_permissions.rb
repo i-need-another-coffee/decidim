@@ -3,18 +3,11 @@
 module Decidim
   module Meetings
     class MeetingPermissions < Decidim::DefaultPermissions
-      def permissions
-        return permission_action if permission_action.scope != :public
-
-        return permission_action unless subject == :meeting
-
-        permission_method = "can_#{action}?"
-        toggle_allow(send(permission_method)) if respond_to?(permission_method, true)
-
-        permission_action
-      end
-
       private
+
+      def target_scope = :public
+
+      def target_subject = :meeting
 
       def can_read?
         user_has_any_role?(user, meeting.participatory_space, broad_check: true) || (!meeting&.hidden? && meeting&.current_user_can_visit_meeting?(user))
