@@ -35,7 +35,7 @@ module Decidim
           join_waitlist: :can_join_waitlist?,
           leave: :can_leave?,
           decline_invitation: :can_decline_invitation?,
-          create: :can_create_meetings?,
+          create: :can_create?,
           update: :can_update_meeting?,
           withdraw: :can_withdraw_meeting?,
           close: :can_close_meeting?,
@@ -68,7 +68,7 @@ module Decidim
           meeting.invites.exists?(user:)
       end
 
-      def can_create_meetings?
+      def can_create?
         (component_settings&.creation_enabled_for_participants? && can_participate?) || initiative_authorship?
       end
 
