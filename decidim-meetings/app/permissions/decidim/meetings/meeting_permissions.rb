@@ -9,7 +9,7 @@ module Decidim
         return permission_action unless subject == :meeting
 
         if permission_action.action == :read
-          toggle_allow(user_has_any_role?(user, meeting.participatory_space, broad_check: true) || (!meeting&.hidden? && meeting&.current_user_can_visit_meeting?(user)))
+          toggle_allow(can_read?)
           return permission_action
         end
 
@@ -21,6 +21,9 @@ module Decidim
       end
 
       private
+      def can_read?
+        user_has_any_role?(user, meeting.participatory_space, broad_check: true) || (!meeting&.hidden? && meeting&.current_user_can_visit_meeting?(user))
+      end
 
       def meeting
         @meeting ||= context.fetch(:meeting, nil)
