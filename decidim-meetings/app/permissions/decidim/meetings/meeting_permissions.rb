@@ -36,7 +36,7 @@ module Decidim
           leave: :can_leave?,
           decline_invitation: :can_decline_invitation?,
           create: :can_create?,
-          update: :can_update_meeting?,
+          update: :can_update?,
           withdraw: :can_withdraw_meeting?,
           close: :can_close_meeting?,
           register: :can_register_invitation_meeting?,
@@ -72,7 +72,7 @@ module Decidim
         (component_settings&.creation_enabled_for_participants? && can_participate?) || initiative_authorship?
       end
 
-      def can_update_meeting?
+      def can_update?
         meeting.authored_by?(user) &&
           !meeting.closed?
       end
