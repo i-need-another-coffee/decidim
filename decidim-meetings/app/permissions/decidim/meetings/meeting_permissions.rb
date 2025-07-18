@@ -15,7 +15,8 @@ module Decidim
 
         return permission_action unless user
 
-        meeting_actions
+        permission_method = "can_#{action}?"
+        toggle_allow(send(permission_method)) if respond_to?(permission_method, true)
 
         permission_action
       end
@@ -27,11 +28,6 @@ module Decidim
 
       def meeting
         @meeting ||= context.fetch(:meeting, nil)
-      end
-
-      def meeting_actions
-        permission_method = "can_#{action}?"
-        toggle_allow(send(permission_method)) if respond_to?(permission_method, true)
       end
 
       def can_join?
