@@ -38,7 +38,7 @@ module Decidim
           create: :can_create?,
           update: :can_update?,
           withdraw: :can_withdraw?,
-          close: :can_close_meeting?,
+          close: :can_close?,
           register: :can_register_invitation_meeting?,
           reply_poll: :can_reply_poll?
         }
@@ -83,7 +83,7 @@ module Decidim
           !meeting.past?
       end
 
-      def can_close_meeting?
+      def can_close?
         meeting.authored_by?(user) &&
           meeting.past?
       end
