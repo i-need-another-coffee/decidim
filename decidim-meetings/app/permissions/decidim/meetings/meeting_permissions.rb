@@ -31,7 +31,7 @@ module Decidim
 
       def meeting_actions
         action_permissions = {
-          join: :can_join_meeting?,
+          join: :can_join?,
           join_waitlist: :can_join_waitlist?,
           leave: :can_leave_meeting?,
           decline_invitation: :can_decline_invitation?,
@@ -47,7 +47,7 @@ module Decidim
         toggle_allow(send(permission_method)) if permission_method
       end
 
-      def can_join_meeting?
+      def can_join?
         meeting.can_be_joined_by?(user) &&
           authorized?(:join, resource: meeting)
       end
