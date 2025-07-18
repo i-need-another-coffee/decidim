@@ -33,7 +33,7 @@ module Decidim
         action_permissions = {
           join: :can_join?,
           join_waitlist: :can_join_waitlist?,
-          leave: :can_leave_meeting?,
+          leave: :can_leave?,
           decline_invitation: :can_decline_invitation?,
           create: :can_create_meetings?,
           update: :can_update_meeting?,
@@ -59,7 +59,7 @@ module Decidim
           authorized?(:join_waitlist, resource: meeting)
       end
 
-      def can_leave_meeting?
+      def can_leave?
         meeting.registrations_enabled?
       end
 
