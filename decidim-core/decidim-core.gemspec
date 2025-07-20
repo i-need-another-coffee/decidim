@@ -81,6 +81,8 @@ Gem::Specification.new do |s|
   s.add_dependency "rubyXL", "~> 3.4"
   s.add_dependency "rubyzip", "~> 2.0"
   s.add_dependency "shakapacker", "~> 7.1.0"
+  s.add_dependency "stimulus-rails", "~> 1.3.0"
+  s.add_dependency "turbo-rails", "~> 2.0.0"
   s.add_dependency "valid_email2", "~> 7.0"
   s.add_dependency "web-push", "~> 3.0"
   s.add_dependency "wisper", "~> 3.0"
