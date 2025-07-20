@@ -18,6 +18,10 @@ import Rails from "@rails/ujs"
 import svg4everybody from "svg4everybody"
 import morphdom from "morphdom"
 
+import {RailsUjsReplacement} from "src/decidim/rails_ujs_replacement"
+
+window.RailsUjsReplacement = RailsUjsReplacement
+
 /**
  * Local dependencies
  */
@@ -126,6 +130,7 @@ window.initFoundation = (element) => {
 
 // Confirm initialization needs to happen before Rails.start()
 initializeConfirm();
+RailsUjsReplacement.start()
 Rails.start()
 
 /**
