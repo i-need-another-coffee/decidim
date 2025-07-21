@@ -90,7 +90,7 @@
 
                     <% if allowed_to?(:destroy, :space_private_user, private_user: private_user) %>
                       <li class="dropdown__item">
-                        <%= link_to participatory_space_private_user_path(current_participatory_space, private_user), method: :delete, data: { confirm: t("actions.confirm_destroy", scope: "decidim.admin") }, class: "dropdown__button" do %>
+                        <%= link_to participatory_space_private_user_path(current_participatory_space, private_user), data: { turbo_method: :delete, turbo_confirm: t("actions.confirm_destroy", scope: "decidim.admin") }, class: "dropdown__button" do %>
                           <%= icon "delete-bin-line" %>
                           <%= t("actions.destroy", scope: "decidim.admin") %>
                         <% end %>

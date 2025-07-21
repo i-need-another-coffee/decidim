@@ -301,9 +301,9 @@ module Decidim
                                                                                            label: "Mark as co-author",
                                                                                            url: EngineRouter.main_proxy(component).proposal_invite_coauthors_path(proposal_id: proposal.id, id: comment.author.id),
                                                                                            icon: "user-add-line",
-                                                                                           method: :post,
                                                                                            data: {
-                                                                                             confirm: "Are you sure you want to mark this user as a co-author? The receiver will receive a notification to accept or decline the invitation."
+                                                                                             turbo_method: :post,
+                                                                                             turbo_confirm: "Are you sure you want to mark this user as a co-author? The receiver will receive a notification to accept or decline the invitation."
                                                                                            }
                                                                                          }
                                                                                        ])
@@ -332,9 +332,9 @@ module Decidim
                                                                                              label: "Cancel co-author invitation",
                                                                                              url: EngineRouter.main_proxy(component).cancel_proposal_invite_coauthors_path(proposal_id: proposal.id, id: comment.author.id),
                                                                                              icon: "user-forbid-line",
-                                                                                             method: :delete,
                                                                                              data: {
-                                                                                               confirm: "Are you sure you want to cancel the co-author invitation?"
+                                                                                               turbo_method: :delete,
+                                                                                               turbo_confirm: "Are you sure you want to cancel the co-author invitation?"
                                                                                              }
                                                                                            }
                                                                                          ])

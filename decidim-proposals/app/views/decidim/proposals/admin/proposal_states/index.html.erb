@@ -50,7 +50,7 @@
 
                   <% if allowed_to? :destroy, :proposal_state, proposal_state: state %>
                     <li class="dropdown__item">
-                      <%= link_to proposal_state_path(state), method: :delete, data: { confirm: t("actions.delete_proposal_state_confirm", scope: "decidim.proposals") }, class: "dropdown__button" do %>
+                      <%= link_to proposal_state_path(state),data: { turbo_method: :delete,  turbo_confirm: t("actions.delete_proposal_state_confirm", scope: "decidim.proposals") }, class: "dropdown__button" do %>
                         <%= icon "delete-bin-line" %>
                         <%= t("actions.destroy", scope: "decidim.proposals") %>
                       <% end %>

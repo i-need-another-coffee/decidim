@@ -24,6 +24,6 @@
 
   <p>
     <%= t("decidim.verifications.sms.authorizations.edit.resend") %>
-    <%= link_to t("decidim.verifications.sms.authorizations.edit.destroy"), decidim_sms.authorization_path, method: :delete, data: { confirm: t("decidim.verifications.sms.authorizations.edit.confirm_destroy") }, class: "underline text-secondary" %>
+    <%= link_to t("decidim.verifications.sms.authorizations.edit.destroy"), decidim_sms.authorization_path, data: {turbo_method: :delete,  turbo_confirm: t("decidim.verifications.sms.authorizations.edit.confirm_destroy") }, class: "underline text-secondary" %>
   </p>
 <% end %>

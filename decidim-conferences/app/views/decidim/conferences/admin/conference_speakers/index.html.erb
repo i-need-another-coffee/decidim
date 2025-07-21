@@ -88,7 +88,7 @@
 
                   <% if allowed_to? :destroy, :conference_speaker, speaker: speaker %>
                     <li class="dropdown__item">
-                      <%= link_to conference_speaker_path(current_conference, speaker), method: :delete, data: { confirm: t("actions.confirm_destroy", scope: "decidim.admin") }, class: "dropdown__button" do %>
+                      <%= link_to conference_speaker_path(current_conference, speaker),  data: { turbo_method: :delete,turbo_confirm: t("actions.confirm_destroy", scope: "decidim.admin") }, class: "dropdown__button" do %>
                         <%= icon "delete-bin-line" %>
                         <%= t("actions.destroy", scope: "decidim.admin") %>
                       <% end %>

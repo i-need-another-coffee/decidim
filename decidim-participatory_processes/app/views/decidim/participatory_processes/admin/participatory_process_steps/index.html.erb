@@ -70,7 +70,7 @@
 
                     <% if allowed_to? :destroy, :process_step, process_step: step %>
                       <li class="dropdown__item">
-                        <%= link_to participatory_process_step_path(current_participatory_process, step), method: :delete, data: { confirm: t("actions.confirm_destroy", scope: "decidim.admin") }, class: "dropdown__button dropdown__button--danger" do %>
+                        <%= link_to participatory_process_step_path(current_participatory_process, step), data: {turbo_method: :delete,  turbo_confirm: t("actions.confirm_destroy", scope: "decidim.admin") }, class: "dropdown__button dropdown__button--danger" do %>
                           <%= icon "delete-bin-line" %> <%= t("actions.destroy", scope: "decidim.admin") %>
                         <% end %>
                       </li>

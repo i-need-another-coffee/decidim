@@ -98,7 +98,7 @@
           <hr>
 
           <li class="dropdown__item">
-            <%= link_to url_for(action: :soft_delete, id: component, controller: "components"), method: :patch, class: "dropdown__button dropdown__button--danger", data: { confirm: t("actions.confirm_delete_component", scope: "decidim.admin", resources_count:) } do %>
+            <%= link_to url_for(action: :soft_delete, id: component, controller: "components"), class: "dropdown__button dropdown__button--danger", data: {turbo_method: :patch,  turbo_confirm: t("actions.confirm_delete_component", scope: "decidim.admin", resources_count:) } do %>
               <%= icon "delete-bin-line" %>
               <%= t("actions.soft_delete", scope: "decidim.admin", resources_count:) %>
             <% end %>

@@ -48,7 +48,7 @@
 
                   <% if allowed_to? :destroy, :milestone, milestone: milestone %>
                     <li class="dropdown__item">
-                      <%= link_to result_milestone_path(milestone.result, milestone), method: :delete, data: { confirm: t("actions.confirm_destroy", scope: "decidim.accountability") }, class: "dropdown__button dropdown__button--danger" do %>
+                      <%= link_to result_milestone_path(milestone.result, milestone), data: { turbo_method: :delete, turbo_confirm: t("actions.confirm_destroy", scope: "decidim.accountability") }, class: "dropdown__button dropdown__button--danger" do %>
                         <%= icon "delete-bin-line" %>
                         <%= t("actions.destroy", scope: "decidim.accountability") %>
                       <% end %>

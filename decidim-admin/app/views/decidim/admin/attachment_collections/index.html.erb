@@ -45,7 +45,7 @@
 
                       <li class="dropdown__item">
                         <% if attachment_collection.unused? %>
-                          <%= link_to polymorphic_path([collection_for, attachment_collection]), method: :delete, data: { confirm: t("actions.confirm_destroy", scope: "decidim.admin") }, class: "dropdown__button" do %>
+                          <%= link_to polymorphic_path([collection_for, attachment_collection]), data: {turbo_method: :delete,  turbo_confirm: t("actions.confirm_destroy", scope: "decidim.admin") }, class: "dropdown__button" do %>
                             <%= icon "delete-bin-line" %>
                             <%= t("actions.destroy", scope: "decidim.admin") %>
                           <% end %>

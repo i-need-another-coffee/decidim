@@ -58,7 +58,7 @@
                 </button>
               </li>
               <li class="dropdown__item">
-                <%= link_to comment_path, remote: true, method: :delete, class: "dropdown__button", data: { confirm: t("decidim.components.comment.confirm_destroy") } do %>
+                <%= link_to comment_path, remote: true, class: "dropdown__button", data: { turbo_method: :delete, turbo_confirm: t("decidim.components.comment.confirm_destroy") } do %>
                   <%= icon "delete-bin-line" %>
                   <span><%= t("decidim.components.comment.delete") %></span>
                 <% end %>

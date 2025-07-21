@@ -21,7 +21,7 @@ module Decidim
           t("decidim.admin.admin_terms_of_service.actions.accept"),
           admin_terms_accept_path,
           class: "button button__sm button__secondary success",
-          method: :put
+          data: {turbo_method:  :put }
         )
       end
 
@@ -31,7 +31,7 @@ module Decidim
           decidim.root_path,
           class: "button button__sm button__secondary clear",
           data: {
-            confirm: t("actions.are_you_sure", scope: "decidim.admin.admin_terms_of_service")
+            turbo_confirm: t("actions.are_you_sure", scope: "decidim.admin.admin_terms_of_service")
           }
         )
       end

@@ -54,7 +54,7 @@
 
             <%= submit_tag t("select_recipients_to_deliver.deliver", scope: "decidim.admin.newsletters"),
                            id: "deliver-button", class: "button button__sm button__secondary",
-                           data: { confirm: t("select_recipients_to_deliver.confirm_deliver", scope: "decidim.admin.newsletters") } %>
+                           data: { turbo_confirm: t("select_recipients_to_deliver.confirm_deliver", scope: "decidim.admin.newsletters") } %>
           <% end %>
         <% end %>
       </div>

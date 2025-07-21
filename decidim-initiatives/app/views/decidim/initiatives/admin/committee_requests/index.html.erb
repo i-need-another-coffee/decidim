@@ -59,7 +59,7 @@
 
                 <% if allowed_to? :revoke, :initiative_committee_member, request: request %>
                   <li class="dropdown__item">
-                    <%= link_to revoke_initiative_committee_request_path(current_initiative, request), method: :delete, data: { confirm: t(".confirm_revoke") }, class: "dropdown__button" do %>
+                    <%= link_to revoke_initiative_committee_request_path(current_initiative, request), data: { turbo_method: :delete, turbo_confirm: t(".confirm_revoke") }, class: "dropdown__button" do %>
                       <%= icon "delete-bin-line" %>
                       <%= t(".revoke") %>
                     <% end %>

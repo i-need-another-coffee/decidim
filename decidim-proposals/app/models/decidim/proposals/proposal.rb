@@ -511,8 +511,8 @@ module Decidim
               label: I18n.t("decidim.proposals.actions.cancel_coauthor_invitation"),
               url: EngineRouter.main_proxy(component).cancel_proposal_invite_coauthors_path(proposal_id: id, id: comment.author.id),
               icon: "user-forbid-line",
-              method: :delete,
-              data: { confirm: I18n.t("decidim.proposals.actions.cancel_coauthor_invitation_confirm") }
+              data: {
+                turbo_method: :delete, turbo_confirm: I18n.t("decidim.proposals.actions.cancel_coauthor_invitation_confirm") }
             }
           ]
         else
@@ -521,8 +521,8 @@ module Decidim
               label: I18n.t("decidim.proposals.actions.mark_as_coauthor"),
               url: EngineRouter.main_proxy(component).proposal_invite_coauthors_path(proposal_id: id, id: comment.author.id),
               icon: "user-add-line",
-              method: :post,
-              data: { confirm: I18n.t("decidim.proposals.actions.mark_as_coauthor_confirm") }
+              data: {
+                turbo_method: :post, turbo_confirm: I18n.t("decidim.proposals.actions.mark_as_coauthor_confirm") }
             }
           ]
         end

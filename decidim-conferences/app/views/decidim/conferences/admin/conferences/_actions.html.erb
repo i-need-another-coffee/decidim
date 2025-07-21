@@ -77,7 +77,7 @@
           </li>
         <% else %>
           <li class="dropdown__item">
-            <%= link_to soft_delete_conference_path(conference), class: "dropdown__button", method: :patch, data: { confirm: t("decidim.admin.actions.confirm_delete_conference") } do %>
+            <%= link_to soft_delete_conference_path(conference), class: "dropdown__button", data: { turbo_method: :patch, turbo_confirm: t("decidim.admin.actions.confirm_delete_conference") } do %>
               <%= icon "delete-bin-line" %>
               <%= t("decidim.admin.actions.soft_delete") %>
             <% end %>

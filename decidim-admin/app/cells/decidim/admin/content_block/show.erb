@@ -8,7 +8,7 @@
             <%= icon "pencil-line", role: "img", "aria-hidden": true %>
           <% end %>
         <% end %>
-        <%= link_to content_block_path, method: :delete, data: { confirm: content_block_destroy_confirmation_text }, class: "mr-s text-muted" do %>
+        <%= link_to content_block_path, data: { turbo_method: :delete, turbo_confirm: content_block_destroy_confirmation_text }, class: "mr-s text-muted" do %>
           <%= icon "delete-bin-line", role: "img", "aria-hidden": true %>
         <% end %>
       <% end %>

@@ -14,7 +14,7 @@ import "chartkick/chart.js"
 import "foundation-sites";
 
 // external deps that require initialization
-import "@hotwired/turbo-rails"
+import { Turbo } from "@hotwired/turbo-rails"
 import Rails from "@rails/ujs"
 import svg4everybody from "svg4everybody"
 import morphdom from "morphdom"
@@ -127,6 +127,7 @@ window.initFoundation = (element) => {
 
 // Confirm initialization needs to happen before Rails.start()
 initializeConfirm();
+Turbo.setConfirmMethod(ConfirmDialog);
 Rails.start()
 
 /**

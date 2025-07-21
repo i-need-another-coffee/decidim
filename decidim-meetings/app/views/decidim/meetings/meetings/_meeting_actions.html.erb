@@ -22,10 +22,9 @@
     <%= action_authorized_link_to(
           :withdraw,
           withdraw_meeting_path(meeting),
-          method: :put,
           class: "dropdown__button" ,
           title: t("withdraw_btn_hint", scope: "decidim.meetings.meetings.show"),
-          data: { confirm: t("withdraw_confirmation_html", scope: "decidim.meetings.meetings.show") }
+          data: {turbo_method: :put, turbo_confirm: t("withdraw_confirmation_html", scope: "decidim.meetings.meetings.show") }
         ) do %>
       <span><%= t("withdraw_meeting", scope:"decidim.meetings.meetings.show") %></span>
       <%= icon "arrow-go-back-line" %>

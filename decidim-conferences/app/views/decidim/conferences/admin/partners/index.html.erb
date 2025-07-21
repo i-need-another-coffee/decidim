@@ -58,7 +58,7 @@
 
                   <% if allowed_to? :destroy, :partner, partner: partner %>
                     <li class="dropdown__item">
-                      <%= link_to conference_partner_path(current_conference, partner), method: :delete, data: { confirm: t("actions.confirm_destroy", scope: "decidim.admin") }, class: "dropdown__button dropdown__button--danger" do %>
+                      <%= link_to conference_partner_path(current_conference, partner),data: {  turbo_method: :delete, turbo_confirm: t("actions.confirm_destroy", scope: "decidim.admin") }, class: "dropdown__button dropdown__button--danger" do %>
                         <%= icon "delete-bin-line" %>
                         <%= t("actions.destroy", scope: "decidim.admin") %>
                       <% end %>

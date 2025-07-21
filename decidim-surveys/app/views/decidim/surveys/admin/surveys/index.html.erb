@@ -66,7 +66,7 @@
                       </li>
                     <% elsif survey.clean_after_publish? %>
                       <li class="dropdown__item">
-                        <%= link_to publish_survey_path(survey), method: :put, data: { confirm: t("actions.responses_alert", scope: "decidim.surveys", responses_count: survey.questionnaire.responses.size) }, class: "dropdown__button" do %>
+                        <%= link_to publish_survey_path(survey), data: {turbo_method: :put,  turbo_confirm: t("actions.responses_alert", scope: "decidim.surveys", responses_count: survey.questionnaire.responses.size) }, class: "dropdown__button" do %>
                           <%= icon "check-line" %>
                           <%= t("actions.publish", scope: "decidim.admin") %>
                         <% end %>
@@ -101,7 +101,7 @@
                   <hr>
 
                   <li class="dropdown__item">
-                    <%= link_to survey_path(survey), method: :delete, data: { confirm: t("actions.confirm_destroy", scope: "decidim.surveys") }, class: "dropdown__button" do %>
+                    <%= link_to survey_path(survey), data: {turbo_method: :delete,  turbo_confirm: t("actions.confirm_destroy", scope: "decidim.surveys") }, class: "dropdown__button" do %>
                       <%= icon "delete-bin-line" %>
                       <%= t("actions.destroy", scope: "decidim.surveys") %>
                     <% end %>
