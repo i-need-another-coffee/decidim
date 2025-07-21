@@ -20,15 +20,10 @@ describe "Menu" do
     end
 
     context "and clicking on a subpage of that entry" do
-      before do
-        page = create(:static_page, organization:)
-
-        visit current_path
-
-        click_on page.title["en"]
-      end
+      let!(:static_page) { create(:static_page, organization:) }
 
       it "preserves the active option" do
+        click_on translated(static_page.title)
         expect(page).to have_css(".menu-bar__breadcrumb-desktop__dropdown-trigger", text: "Home")
       end
     end
