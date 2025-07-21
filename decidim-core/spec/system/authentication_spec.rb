@@ -129,6 +129,7 @@ describe "Authentication" do
           click_on "Create an account"
 
           find(".login__omniauth-button.login__omniauth-button--facebook").click
+          wait_for_turbo
 
           check :registration_user_tos_agreement
           within "#omniauth-register-form" do
@@ -145,6 +146,8 @@ describe "Authentication" do
         click_on "Create an account"
 
         find(".login__omniauth-button.login__omniauth-button--facebook").click
+
+        wait_for_turbo
 
         check :registration_user_tos_agreement
         check :registration_user_newsletter
@@ -267,6 +270,7 @@ describe "Authentication" do
         it "creates a new User" do
           click_on "Create an account"
           find(".login__omniauth-button.login__omniauth-button--x").click
+          wait_for_turbo
 
           check :registration_user_tos_agreement
           check :registration_user_newsletter
@@ -280,6 +284,8 @@ describe "Authentication" do
         it "sends a welcome notification" do
           click_on "Create an account"
           find(".login__omniauth-button.login__omniauth-button--x").click
+          wait_for_turbo
+
           check :registration_user_tos_agreement
           check :registration_user_newsletter
           within "#omniauth-register-form" do
@@ -330,6 +336,8 @@ describe "Authentication" do
         click_on "Create an account"
 
         click_on "Log in with Google"
+        wait_for_turbo
+
         check :registration_user_tos_agreement
         check :registration_user_newsletter
         within "#omniauth-register-form" do
@@ -343,6 +351,8 @@ describe "Authentication" do
         click_on "Create an account"
 
         click_on "Log in with Google"
+        wait_for_turbo
+
         check :registration_user_tos_agreement
         check :registration_user_newsletter
         within "#omniauth-register-form" do
@@ -447,9 +457,10 @@ describe "Authentication" do
 
       within ".new_user" do
         fill_in :confirmation_user_email, with: user.email
-        perform_enqueued_jobs { find("*[type=submit]").click }
+        find("*[type=submit]").click
       end
 
+      perform_enqueued_jobs
       expect(emails.count).to eq(2)
       expect(page).to have_content("receive an email with instructions")
     end
@@ -662,9 +673,10 @@ describe "Authentication" do
             within ".new_user" do
               fill_in :session_user_email, with: user.email
               fill_in :session_user_password, with: "not-the-password"
-              perform_enqueued_jobs { find("*[type=submit]").click }
+              find("*[type=submit]").click
             end
-
+            
+            perform_enqueued_jobs
             expect(page).to have_content("Invalid")
             expect(emails.count).to eq(1)
           end

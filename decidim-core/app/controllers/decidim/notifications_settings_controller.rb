@@ -24,7 +24,7 @@ module Decidim
         end
       end
 
-      render action: :show
+      render action: :show, status: :see_other
     end
   end
 end
