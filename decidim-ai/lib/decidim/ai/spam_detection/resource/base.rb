@@ -10,14 +10,23 @@ module Decidim
           def fields; end
 
           def batch_train
-            query.find_each(batch_size: 100) do |resource|
-              classification = resource_hidden?(resource) ? :spam : :ham
+            if model.is_a?(Decidim::Reportable)
+              query.hidden.find_each(batch_size: 100) { |resource| train_resource(:spam, resource) }
+              query.not_hidden.find_each(batch_size: 100) { |resource| train_resource(:ham, resource) }
+            else
+              query.find_each(batch_size: 100) do |resource|
+                classification = resource_hidden?(resource) ? :spam : :ham
 
-              fields.each do |field_name|
-                raise "#{resource.class.name} does not implement #{field_name} as defined in `#{self.class.name}`" unless resource.respond_to?(field_name.to_sym)
-
-                train classification, translated_attribute(resource.send(field_name.to_sym))
+                train_resource(classification, resource)
               end
+            end
+          end
+
+          def train_resource(classification, resource)
+            fields.each do |field_name|
+              raise "#{resource.class.name} does not implement #{field_name} as defined in `#{self.class.name}`" unless resource.respond_to?(field_name.to_sym)
+
+              train classification, translated_attribute(resource.send(field_name.to_sym))
             end
           end
 
@@ -34,6 +43,10 @@ module Decidim
           end
 
           protected
+
+          def model = raise(NotImplementedError, "You must define a model class for #{name}")
+
+          def query = model.includes(:moderation)
 
           def error_message(klass, method_name)
             "Invalid Classifier class! The class defined under `#{klass}` does not follow the contract regarding ##{method_name} method"
