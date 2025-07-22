@@ -25,7 +25,7 @@ module Decidim
 
             create_attachments!(attached_to: project)
 
-            Decidim::Comments::Seed.comments_for(project)
+            Decidim::Comments::SeedJob.perform_later(project)
           end
         end
       end

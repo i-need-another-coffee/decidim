@@ -164,7 +164,7 @@ module Decidim
           resource.publish!
         end
 
-        Decidim::Comments::Seed.comments_for(resource)
+        Decidim::Comments::SeedJob.perform_later(resource)
 
         resource
       end

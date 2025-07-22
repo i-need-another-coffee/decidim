@@ -35,7 +35,7 @@ module Decidim
             create_proposal_notes!(proposal:)
           end
 
-          Decidim::Comments::Seed.comments_for(proposal)
+          Decidim::Comments::SeedJob.perform_later(proposal)
 
           create_collaborative_draft!(component:)
         end
@@ -267,7 +267,7 @@ module Decidim
           Decidim::Coauthorship.create(coauthorable: draft, author: author2)
         end
 
-        Decidim::Comments::Seed.comments_for(draft)
+        Decidim::Comments::SeedJob.perform_later(draft)
       end
 
       def update_traceability!(component:)

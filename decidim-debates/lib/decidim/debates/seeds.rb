@@ -62,8 +62,7 @@ module Decidim
             params,
             visibility: "all"
           )
-
-          Decidim::Comments::Seed.comments_for(debate)
+          Decidim::Comments::SeedJob.perform_later(debate)
         end
 
         closed_debate = Decidim::Debates::Debate.last

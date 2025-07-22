@@ -66,7 +66,7 @@ module Decidim
             visibility: "all"
           )
 
-          Decidim::Comments::Seed.comments_for(post)
+          Decidim::Comments::SeedJob.perform_later(post)
         end
       end
     end

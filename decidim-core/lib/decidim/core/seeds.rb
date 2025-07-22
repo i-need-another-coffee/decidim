@@ -92,7 +92,7 @@ module Decidim
           find_or_initialize_user_by(email:)
         end
 
-        regular_user = Decidim::User.find_or_initialize_by(email: "user@example.org")
+        regular_user = find_or_initialize_user_by(email: "user@example.org")
 
         locked_user = find_or_initialize_user_by(email: "locked_user@example.org")
 

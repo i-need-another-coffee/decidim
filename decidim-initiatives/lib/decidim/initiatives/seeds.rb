@@ -24,7 +24,7 @@ module Decidim
 
           create_initiative_votes!(initiative:) if %w(published rejected accepted).include? state
 
-          Decidim::Comments::Seed.comments_for(initiative)
+          Decidim::Comments::SeedJob.perform_later(initiative)
 
           create_attachment(attached_to: initiative, filename: "city.jpeg")
 

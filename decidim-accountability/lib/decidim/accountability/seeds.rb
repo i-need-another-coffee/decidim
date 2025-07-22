@@ -94,7 +94,7 @@ module Decidim
           visibility: "all"
         )
 
-        Decidim::Comments::Seed.comments_for(result)
+        Decidim::Comments::SeedJob.perform_later(result)
 
         number_of_records.times do
           child_result = Decidim.traceability.create!(
@@ -123,7 +123,7 @@ module Decidim
             )
           end
 
-          Decidim::Comments::Seed.comments_for(child_result)
+          Decidim::Comments::SeedJob.perform_later(child_result)
         end
       end
     end
