@@ -9,7 +9,7 @@ module Decidim
 
     included do
       has_one :moderation, class_name: "Decidim::UserModeration", foreign_key: :decidim_user_id, dependent: :destroy
-      has_many :reports, through: :user_moderation, class_name: "Decidim::UserReport"
+      has_many :reports, through: :moderation, class_name: "Decidim::UserReport"
 
       def report_count
         moderation&.report_count.to_i

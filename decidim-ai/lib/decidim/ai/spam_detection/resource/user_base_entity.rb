@@ -35,6 +35,7 @@ module Decidim
           protected
 
           def model = Decidim::User
+          alias query model
 
           def resource_hidden?(resource) = resource.class.included_modules.include?(Decidim::UserReportable) && resource.blocked?
 
