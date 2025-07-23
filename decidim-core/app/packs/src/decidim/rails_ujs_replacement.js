@@ -54,5 +54,5 @@ const AggregatedRailsUjsReplacement = () => {
   };
 };
 
-document.addEventListener("turbo:load", RailsUjsReplacement);
-document.addEventListener("turbo:load", AggregatedRailsUjsReplacement);
+// document.addEventListener("turbo:load", RailsUjsReplacement);
+// document.addEventListener("turbo:load", AggregatedRailsUjsReplacement);
