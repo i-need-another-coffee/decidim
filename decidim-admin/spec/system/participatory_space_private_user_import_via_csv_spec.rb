@@ -29,10 +29,7 @@ describe "Admin manages participatory space private users via csv import" do
   end
 
   context "when there are existing users" do
-    before do
-      create_list(:assembly_private_user, 3, privatable_to: assembly, user: create(:user, organization: assembly.organization))
-      visit current_path
-    end
+    let!(:users) { create_list(:assembly_private_user, 3, privatable_to: assembly, user: create(:user, organization: assembly.organization)) }
 
     it "propose to delete" do
       expect(page).to have_css(".alert")

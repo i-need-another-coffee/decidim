@@ -19,6 +19,7 @@ describe "Admin checks conflicts" do
     visit decidim_admin.root_path
     click_on "Participants"
     click_on "Verification conflicts"
+    wait_for_turbo
   end
 
   include_context "with filterable context"

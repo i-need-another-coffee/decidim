@@ -14,6 +14,7 @@ describe "Admin manages area types" do
     click_on "Settings"
     click_on "Areas"
     click_on "Area types"
+    wait_for_turbo
   end
 
   it "can create new area types" do

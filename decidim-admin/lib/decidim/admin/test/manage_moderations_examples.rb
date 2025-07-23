@@ -25,6 +25,7 @@ shared_examples "sorted moderations" do
     link_text = find("ul[data-pages]").text.split("\n")[-2]
     within "ul[data-pages]" do
       click_on link_text
+      wait_for_turbo
     end
     all("tbody tr").each_with_index do |row, _index|
       expect(row.find("td:nth-child(2)")).to have_content(reportables.first.id)
@@ -58,6 +59,7 @@ shared_examples "manage moderations" do
     else
       within("div.layout-nav") { click_on(moderations_link_text) }
     end
+    wait_for_turbo
   end
 
   context "when listing moderations" do
@@ -175,6 +177,7 @@ shared_examples "manage moderations" do
         within_language_menu(admin: true) do
           click_on "Català"
         end
+        wait_for_turbo
       end
 
       it "renders the reportable types in the selected language" do

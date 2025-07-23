@@ -32,6 +32,7 @@ describe "Admin manages officializations" do
     before do
       within_admin_sidebar_menu do
         click_on "Participants"
+        wait_for_turbo
       end
     end
 
@@ -78,6 +79,7 @@ describe "Admin manages officializations" do
         within "tr[data-user-id=\"#{user.id}\"]" do
           find("button[data-component='dropdown']").click
           click_on "Officialize"
+          wait_for_turbo
         end
       end
 
