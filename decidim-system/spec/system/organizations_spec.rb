@@ -24,6 +24,7 @@ describe "Organizations" do
       before do
         click_on "Organizations"
         click_on "New"
+        wait_for_turbo
       end
 
       it_behaves_like "form hiding advanced settings"
@@ -151,6 +152,7 @@ describe "Organizations" do
         click_on "Organizations"
         within "table tbody" do
           first("tr").click_on "Edit"
+          wait_for_turbo
         end
       end
 

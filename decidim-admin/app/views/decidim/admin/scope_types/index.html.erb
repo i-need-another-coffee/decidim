@@ -54,7 +54,7 @@
 
                   <% if allowed_to? :destroy, :scope_type, scope_type: scope_type %>
                     <li class="dropdown__item">
-                      <%= link_to scope_type,  data: {turbo_method: :delete, turbo_confirm: t("actions.confirm_destroy", scope: "decidim.admin") }, class: "dropdown__button" do %>
+                      <%= link_to scope_type, data: { turbo_method: :delete, turbo_confirm: t("actions.confirm_destroy", scope: "decidim.admin") }, class: "dropdown__button" do %>
                         <%= icon "delete-bin-line" %>
                         <%= t("actions.destroy", scope: "decidim.admin") %>
                       <% end %>

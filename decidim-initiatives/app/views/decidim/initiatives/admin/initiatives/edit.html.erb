@@ -27,7 +27,7 @@
               <%= link_to t("actions.publish", scope: "decidim.admin"),
                           publish_initiative_path(current_initiative),
                           class: "button button__sm button__secondary",
-                          data: {turbo_method: :post, turbo_confirm: t(".confirm") } %>
+                          data: { turbo_method: :post, turbo_confirm: t(".confirm") } %>
             <% end %>
 
             <% if allowed_to? :unpublish, :initiative, initiative: current_initiative %>
@@ -35,7 +35,8 @@
                           unpublish_initiative_path(current_initiative),
                           class: "button button__sm button__secondary",
                           data: {
-                            turbo_method: :delete, turbo_confirm: t(".confirm") } %>
+                            turbo_method: :delete, turbo_confirm: t(".confirm")
+                          } %>
             <% end %>
 
             <% if allowed_to? :accept, :initiative, initiative: current_initiative %>
@@ -43,7 +44,8 @@
                             accept_initiative_path(current_initiative),
                             class: "button button__sm button__secondary",
                             data: {
-                              turbo_method: :post, turbo_confirm: t(".confirm") } %>
+                              turbo_method: :post, turbo_confirm: t(".confirm")
+                            } %>
             <% end %>
 
             <% if allowed_to? :reject, :initiative, initiative: current_initiative %>
@@ -51,7 +53,8 @@
                             reject_initiative_path(current_initiative),
                             class: "button button__sm button__secondary",
                             data: {
-                              turbo_method: :delete, turbo_confirm: t(".confirm") } %>
+                              turbo_method: :delete, turbo_confirm: t(".confirm")
+                            } %>
             <% end %>
 
             <% if allowed_to? :discard, :initiative, initiative: current_initiative %>
@@ -59,7 +62,8 @@
                           discard_initiative_path(current_initiative),
                           class: "button button__sm button__secondary",
                           data: {
-                            turbo_method: :delete, turbo_confirm: t(".confirm") } %>
+                            turbo_method: :delete, turbo_confirm: t(".confirm")
+                          } %>
             <% end %>
 
             <% if allowed_to? :export_votes, :initiative, initiative: current_initiative %>

@@ -19,35 +19,35 @@
         <%= link_to t("actions.publish", scope: "decidim.admin"),
                     publish_initiative_path(current_initiative),
                     class: "button button__sm md:button__lg button__secondary",
-                    data: {turbo_method: :post, turbo_confirm: t("confirm", scope: "decidim.initiatives.edit") } %>
+                    data: { turbo_method: :post, turbo_confirm: t("confirm", scope: "decidim.initiatives.edit") } %>
       <% end %>
 
       <% if allowed_to? :unpublish, :initiative, initiative: current_initiative %>
         <%= link_to t("actions.unpublish", scope: "decidim.admin"),
                     unpublish_initiative_path(current_initiative),
                     class: "button button__sm md:button__lg button__secondary",
-                    data: {turbo_method: :delete, turbo_confirm: t("confirm", scope: "decidim.initiatives.edit") } %>
+                    data: { turbo_method: :delete, turbo_confirm: t("confirm", scope: "decidim.initiatives.edit") } %>
       <% end %>
 
       <% if allowed_to? :accept, :initiative, initiative: current_initiative %>
           <%= link_to t("accept", scope: "decidim.initiatives.edit"),
                       accept_initiative_path(current_initiative),
                       class: "button button__sm md:button__lg button__secondary",
-                      data: {turbo_method: :post, turbo_confirm: t("confirm", scope: "decidim.initiatives.edit") } %>
+                      data: { turbo_method: :post, turbo_confirm: t("confirm", scope: "decidim.initiatives.edit") } %>
       <% end %>
 
       <% if allowed_to? :reject, :initiative, initiative: current_initiative %>
           <%= link_to t("reject", scope: "decidim.initiatives.edit"),
                       reject_initiative_path(current_initiative),
                       class: "button button__sm md:button__lg button__secondary",
-                      data: {turbo_method: :delete, turbo_confirm: t("confirm", scope: "decidim.initiatives.edit") } %>
+                      data: { turbo_method: :delete, turbo_confirm: t("confirm", scope: "decidim.initiatives.edit") } %>
       <% end %>
 
       <% if allowed_to? :discard, :initiative, initiative: current_initiative %>
         <%= link_to t("discard", scope: "decidim.initiatives.edit"),
                     discard_initiative_path(current_initiative),
                     class: "button button__sm md:button__lg button__secondary",
-                    data: {turbo_method: :delete, turbo_confirm: t("confirm", scope: "decidim.initiatives.edit") } %>
+                    data: { turbo_method: :delete, turbo_confirm: t("confirm", scope: "decidim.initiatives.edit") } %>
       <% end %>
 
       <% if allowed_to? :export_votes, :initiative, initiative: current_initiative %>

@@ -209,7 +209,7 @@
                         evaluation_assignment_path(proposal_ids: [proposal.id], evaluator_role_ids: [assignment.evaluator_role.id]),
                         t(".remove_assignment"),
 
-                        data: {turbo_method: :delete, turbo_confirm: t(".remove_assignment_confirmation") },
+                        data: { turbo_method: :delete, turbo_confirm: t(".remove_assignment_confirmation") },
                         class: "red-icon"
                       ) %>
                 <% end %>

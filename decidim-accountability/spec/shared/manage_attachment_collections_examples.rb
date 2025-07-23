@@ -7,6 +7,7 @@ shared_examples "manage accountability attachment collections" do
     within "tr", text: translated(result.title) do
       find("button[data-component='dropdown']").click
       click_on "Folders"
+      wait_for_turbo
     end
   end
 

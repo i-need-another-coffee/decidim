@@ -60,7 +60,7 @@
         <hr>
 
         <li class="dropdown__item">
-          <%= link_to soft_delete_post_path(post),  data: { turbo_method: :patch,turbo_confirm: t("actions.confirm_delete_post", scope: "decidim.blogs") }, class: "dropdown__button" do %>
+          <%= link_to soft_delete_post_path(post), data: { turbo_method: :patch,turbo_confirm: t("actions.confirm_delete_post", scope: "decidim.blogs") }, class: "dropdown__button" do %>
             <%= icon "delete-bin-line" %>
             <%= t("actions.soft_delete", scope: "decidim.admin") %>
           <% end %>

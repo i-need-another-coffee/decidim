@@ -675,7 +675,7 @@ describe "Authentication" do
               fill_in :session_user_password, with: "not-the-password"
               find("*[type=submit]").click
             end
-            
+
             perform_enqueued_jobs
             expect(page).to have_content("Invalid")
             expect(emails.count).to eq(1)

@@ -39,7 +39,7 @@
         <% if allowed_to? :revoke, :initiative_committee_member, initiative: current_initiative, request: request %>
           <%= link_to(
                   revoke_initiative_committee_request_path(current_initiative, request),
-                  data: {turbo_method: :delete, turbo_confirm: t(".confirm_revoke") },
+                  data: { turbo_method: :delete, turbo_confirm: t(".confirm_revoke") },
                   class: "button button__sm button__transparent-secondary"
                 ) do %>
                   <span><%= t(".revoke") %></span>

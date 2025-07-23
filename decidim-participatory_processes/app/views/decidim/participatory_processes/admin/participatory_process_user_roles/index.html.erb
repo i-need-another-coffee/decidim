@@ -73,7 +73,7 @@
 
                   <% if allowed_to? :destroy, :process_user_role, user_role: role %>
                     <li class="dropdown__item">
-                      <%= link_to participatory_process_user_role_path(current_participatory_process, role),data: { turbo_method: :delete,  turbo_confirm: t("actions.confirm_destroy", scope: "decidim.admin") }, class: "dropdown__button dropdown__button--danger" do %>
+                      <%= link_to participatory_process_user_role_path(current_participatory_process, role),data: { turbo_method: :delete, turbo_confirm: t("actions.confirm_destroy", scope: "decidim.admin") }, class: "dropdown__button dropdown__button--danger" do %>
                         <%= icon "delete-bin-line" %> <%= t("actions.destroy", scope: "decidim.admin") %>
                       <% end %>
                     </li>

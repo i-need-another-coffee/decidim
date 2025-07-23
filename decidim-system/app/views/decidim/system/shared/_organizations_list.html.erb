@@ -21,7 +21,7 @@
             <%= link_to t(".resend_invitation"),
                         resend_invitation_organization_path(organization),
                         class: "button button__sm button__transparent-secondary no-underline",
-                        data: {turbo_method: :post, turbo_confirm: t(".confirm_resend_invitation") } %>
+                        data: { turbo_method: :post, turbo_confirm: t(".confirm_resend_invitation") } %>
           <% end %>
           <%= link_to t("actions.edit", scope: "decidim.system"), edit_organization_path(organization) %>
         </td>

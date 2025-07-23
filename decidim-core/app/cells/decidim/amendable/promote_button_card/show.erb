@@ -1,7 +1,7 @@
 <%= action_authorized_link_to :amend,
                               promote_amend_path,
                               resource: emendation,
-                              data: {  turbo_method: :post,turbo_confirm: promote_confirm_text },
+                              data: { turbo_method: :post,turbo_confirm: promote_confirm_text },
                               title: promote_amend_button_label,
                               class: "button button__sm button__transparent-secondary" do %>
     <span><%= promote_amend_button_label %></span>
