@@ -89,7 +89,7 @@ describe "DownloadYourData" do
       end
 
       it "when requesting current user's active file", :slow, download: true do
-        expect(active_export.file).to be_attached
+        expect(active_export.reload.file).to be_attached
         expect(downloads.length).to eq(0)
 
         visit decidim.download_download_your_data_path(active_export)
@@ -103,7 +103,10 @@ describe "DownloadYourData" do
     describe "Export data" do
       it "exports an archive with all user information" do
         expect(Decidim::PrivateExport.count).to eq(4)
-        perform_enqueued_jobs { click_on "Request" }
+        perform_enqueued_jobs do
+          click_on "Request"
+          wait_for_turbo
+        end
 
         within_flash_messages do
           expect(page).to have_content("data is currently in progress")

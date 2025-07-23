@@ -52,9 +52,12 @@ describe "Locales" do
     it "displays devise messages with the right locale when authentication fails" do
       click_on "Log in", match: :first
 
+      wait_for_turbo
       within_language_menu do
         click_on "Català"
       end
+
+      wait_for_turbo
 
       within ".new_user" do
         fill_in "session_user_email", with: "toto@example.org"
