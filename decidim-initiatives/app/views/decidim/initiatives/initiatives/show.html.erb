@@ -33,7 +33,7 @@ edit_link(
             <%= link_to t(".send_to_technical_validation"),
                         send_to_technical_validation_initiative_path(current_initiative),
                         class: "button button__xl w-full button__secondary mt-4",
-                        data: { confirm: t(".confirm") } %>
+                        data: { turbo_confirm: t(".confirm") } %>
           <% end %>
         </section>
       <% end %>

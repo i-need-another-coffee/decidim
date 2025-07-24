@@ -9,9 +9,8 @@
       <p><%= t("decidim.admin.menu.authorization_revocation.info", count: model.count ) %></p>
       <%= link_to t("decidim.admin.menu.authorization_revocation.button"),
                   decidim_verifications.admin_verifications_destroy_all_path,
-                  method: :delete,
                   class: "button button__sm md:button__lg button__secondary",
-                  data: { confirm: t("decidim.admin.menu.authorization_revocation.destroy.confirm_all") } %>
+                  data: { turbo_method: :delete, turbo_confirm: t("decidim.admin.menu.authorization_revocation.destroy.confirm_all") } %>
     </div>
     <br>
     <div class="revoke_before_date_box">
@@ -27,7 +26,7 @@
                 <%= label_tag(:before_date_info, t("decidim.admin.menu.authorization_revocation.before_date_info")) %>
               </div>
               <div class="form__wrapper-block flex-col-reverse md:flex-row justify-between">
-                <%= form.submit t("decidim.admin.menu.authorization_revocation.button_before"), data: { confirm: t("decidim.admin.menu.authorization_revocation.destroy.confirm") }, class: "button button__sm md:button__lg button__secondary" %>
+                <%= form.submit t("decidim.admin.menu.authorization_revocation.button_before"), data: { turbo_confirm: t("decidim.admin.menu.authorization_revocation.destroy.confirm") }, class: "button button__sm md:button__lg button__secondary" %>
               </div>
             </div>
           </div>

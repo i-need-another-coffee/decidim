@@ -52,7 +52,7 @@
                   <hr>
 
                   <li class="dropdown__item">
-                    <%= link_to initiative_type, method: :delete, data: { confirm: t("actions.confirm_destroy", scope: "decidim.admin") }, class: "dropdown__button" do %>
+                    <%= link_to initiative_type, data: { turbo_method: :delete, turbo_confirm: t("actions.confirm_destroy", scope: "decidim.admin") }, class: "dropdown__button" do %>
                       <%= icon "delete-bin-line" %>
                       <%= t("actions.destroy", scope: "decidim.admin") %>
                     <% end %>

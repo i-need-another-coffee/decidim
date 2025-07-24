@@ -11,9 +11,8 @@
 <% if allowed_to?(:destroy, :blogpost, blogpost: post) %>
   <li role="menuitem" class="dropdown__item">
     <%= link_to post_path(post),
-                method: :delete,
                 class: "dropdown__button",
-                data: { confirm: t("button_destroy_confirm", scope: "decidim.blogs.posts.menu_actions") } do %>
+                data: { turbo_method: :delete,turbo_confirm: t("button_destroy_confirm", scope: "decidim.blogs.posts.menu_actions") } do %>
       <span><%= t("button_destroy", scope: "decidim.blogs.posts.menu_actions") %></span>
       <%= icon "delete-bin-line" %>
     <% end %>

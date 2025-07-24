@@ -252,7 +252,7 @@ const createAutocomplete = (searchInput, spaces, inputIndex) => {
   return ac;
 }
 
-document.addEventListener("turbo:load", () => {
+document.addEventListener("turbo:load", () =>  {
   const searchElements = document.querySelectorAll("input.participatory-space-search")
   if (searchElements.length < 1) {
     return;

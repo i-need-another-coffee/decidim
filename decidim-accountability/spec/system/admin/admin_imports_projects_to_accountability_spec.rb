@@ -51,11 +51,11 @@ describe "Admin imports projects to accountability" do
     before do
       click_on "Import"
       click_on "Import results from another component"
+      wait_for_turbo
     end
 
     context "when there are no projects" do
       before do
-        visit current_path
         find_by_id("import_component_origin_component_id").find("option[value='#{budget_component.id}']").select_option
       end
 
@@ -70,7 +70,6 @@ describe "Admin imports projects to accountability" do
       let!(:selected_set) { create_list(:project, 3, budget:, selected_at: Time.current) }
 
       before do
-        visit current_path
         find_by_id("import_component_origin_component_id").find("option[value='#{budget_component.id}']").select_option
       end
 

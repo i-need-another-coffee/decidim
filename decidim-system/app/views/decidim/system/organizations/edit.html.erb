@@ -44,9 +44,8 @@
     <% if @organization&.users&.first&.invitation_pending? %>
       <%= link_to t(".resend_invitation"),
                   resend_invitation_organization_path(@organization),
-                  method: :post,
                   class: "button button__sm md:button__lg button__transparent-secondary",
-                  data: { confirm: t(".confirm_resend_invitation") } %>
+                  data: { turbo_method: :post, turbo_confirm: t(".confirm_resend_invitation") } %>
     <% end %>
     <%= f.submit t("decidim.system.actions.save"), class: "button button__sm md:button__lg button__primary" %>
   </div>

@@ -39,7 +39,7 @@
               <div class="inline-block relative">
                 <ul id="actions-scope-<%= scope.id %>" class="dropdown dropdown__action" aria-hidden="true">
                   <li class="dropdown__item">
-                    <%= link_to scope_scopes_path(scope), method: :get, class: "dropdown__button" do %>
+                    <%= link_to scope_scopes_path(scope), class: "dropdown__button" do %>
                       <%= icon "zoom-in-line" %>
                       <%= t("actions.browse", scope: "decidim.admin") %>
                     <% end %>
@@ -49,7 +49,7 @@
                     <hr>
 
                     <li class="dropdown__item">
-                      <%= link_to [:edit, scope], method: :get, class: "dropdown__button" do %>
+                      <%= link_to [:edit, scope], class: "dropdown__button" do %>
                         <%= icon "pencil-line" %>
                         <%= t("actions.edit", scope: "decidim.admin") %>
                       <% end %>
@@ -60,7 +60,7 @@
                     <hr>
 
                     <li class="dropdown__item">
-                      <%= link_to scope, method: :delete, data: { confirm: t("actions.confirm_destroy", scope: "decidim.admin") }, class: "dropdown__button" do %>
+                      <%= link_to scope, data: { turbo_method: :delete, turbo_confirm: t("actions.confirm_destroy", scope: "decidim.admin") }, class: "dropdown__button" do %>
                         <%= icon "delete-bin-line" %>
                         <%= t("actions.destroy", scope: "decidim.admin") %>
                       <% end %>

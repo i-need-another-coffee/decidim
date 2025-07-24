@@ -2,12 +2,12 @@
   <div>
     <%= link_to(
         decidim.destroy_user_session_path,
-        method: :delete,
         class: "main-bar__links-desktop__item",
         "aria-label": t("layouts.decidim.header.close"),
         data: {
+          turbo_method: :delete,
           close: "main-bar__links-desktop__item",
-          confirm: t("layouts.decidim.header.confirm_close_ephemeral_session"),
+          turbo_confirm: t("layouts.decidim.header.confirm_close_ephemeral_session"),
           confirm_title: t("layouts.decidim.header.confirm_title_close_ephemeral_session"),
           confirm_icon: "logout-box-line"
         }
@@ -21,13 +21,13 @@
   <%= link_to(
       icon("close-line", class: "w-8 h-6 fill-current"),
       decidim.destroy_user_session_path,
-      method: :delete,
       class: "text-secondary",
       type: :button,
       "aria-label": t("layouts.decidim.header.close"),
       data: {
+        turbo_method: :delete,
         close: "",
-        confirm: t("layouts.decidim.header.confirm_close_ephemeral_session"),
+        turbo_confirm: t("layouts.decidim.header.confirm_close_ephemeral_session"),
         confirm_title: t("layouts.decidim.header.confirm_title_close_ephemeral_session"),
         confirm_icon: "logout-box-line"
       }

@@ -67,7 +67,7 @@
 
       <li class="dropdown__item">
         <% if allowed_to?(:soft_delete, :proposal, trashable_deleted_resource: proposal) %>
-          <%= link_to soft_delete_proposal_path(proposal), method: :patch, data: { confirm: t("actions.confirm_delete_proposal", scope: "decidim.proposals.admin") }, class: "dropdown__button" do %>
+          <%= link_to soft_delete_proposal_path(proposal), data: { turbo_method: :patch, turbo_confirm: t("actions.confirm_delete_proposal", scope: "decidim.proposals.admin") }, class: "dropdown__button" do %>
             <%= icon "delete-bin-line" %>
             <%= t("actions.soft_delete", scope: "decidim.admin") %>
           <% end %>

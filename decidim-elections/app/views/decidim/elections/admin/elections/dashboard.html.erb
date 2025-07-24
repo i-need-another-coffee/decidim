@@ -7,9 +7,10 @@
   <% if allowed_to?(:publish, :election, election:) %>
     <%= link_to t("publish", scope: "decidim.elections.admin.elections.form"),
                 publish_election_path(election),
-                method: :put,
                 class: "main-tabs-menu__cta-button",
-                data: { confirm: t("publish_confirm", scope: "decidim.elections.admin.dashboard") } %>
+                data: {
+                  turbo_method: :put, turbo_confirm: t("publish_confirm", scope: "decidim.elections.admin.dashboard")
+                } %>
   <% end %>
 <% end %>
 

@@ -120,7 +120,7 @@
               </li>
             <% else %>
               <li class="dropdown__item">
-                <%= link_to soft_delete_participatory_process_path(process), class: "dropdown__button", method: :patch, data: { confirm: t("actions.confirm_delete_process", scope: "decidim.admin") } do %>
+                <%= link_to soft_delete_participatory_process_path(process), class: "dropdown__button", data: { turbo_method: :patch, turbo_confirm: t("actions.confirm_delete_process", scope: "decidim.admin") } do %>
                   <%= icon "delete-bin-line" %>
                   <%= t("actions.soft_delete", scope: "decidim.admin") %>
                 <% end %>

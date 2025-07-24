@@ -156,8 +156,6 @@ describe "Last activity" do
           component.participatory_space.update(private_space: true)
           comment.participatory_space.update(private_space: true)
           another_comment.participatory_space.update(private_space: true)
-
-          visit current_path
         end
 
         it "does not show the activities" do

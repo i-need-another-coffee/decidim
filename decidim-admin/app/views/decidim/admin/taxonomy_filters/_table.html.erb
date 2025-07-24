@@ -47,7 +47,7 @@
                   <hr>
 
                   <li class="dropdown__item">
-                    <%= link_to taxonomy_filter_path(root_taxonomy, taxonomy_filter), method: :delete, data: { confirm: t(".confirm_destroy", name: strip_tags(translated_attribute(taxonomy_filter.name))) }, class: "dropdown__button" do %>
+                    <%= link_to taxonomy_filter_path(root_taxonomy, taxonomy_filter), data: { turbo_method: :delete, turbo_confirm: t(".confirm_destroy", name: strip_tags(translated_attribute(taxonomy_filter.name))) }, class: "dropdown__button" do %>
                       <%= icon "delete-bin-line" %>
                       <%= t(".destroy") %>
                     <% end %>

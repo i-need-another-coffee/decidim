@@ -36,8 +36,7 @@
 
       <li class="dropdown__item">
         <%= link_to taxonomy,
-                    method: :delete,
-                    data: { confirm: t(".confirm_destroy", name: strip_tags(translated_attribute(taxonomy.name))) },
+                    data: { turbo_method: :delete,turbo_confirm: t(".confirm_destroy", name: strip_tags(translated_attribute(taxonomy.name))) },
                     class: "dropdown__button dropdown__button--danger" do %>
           <%= icon "delete-bin-line" %>
           <%= t("actions.destroy", scope: "decidim.admin.taxonomies") %>

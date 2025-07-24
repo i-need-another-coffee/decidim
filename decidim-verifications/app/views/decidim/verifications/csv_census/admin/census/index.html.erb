@@ -56,7 +56,7 @@
                     <hr>
 
                     <li class="dropdown__item">
-                      <%= link_to census_log_path(data), method: :delete, data: { confirm: t("actions.confirm_destroy", scope: "decidim.verifications.csv_census.admin") }, class: "dropdown__button" do %>
+                      <%= link_to census_log_path(data),data: { turbo_method: :delete, turbo_confirm: t("actions.confirm_destroy", scope: "decidim.verifications.csv_census.admin") }, class: "dropdown__button" do %>
                         <%= icon "delete-bin-line" %>
                         <%= t("actions.destroy", scope: "decidim.verifications.csv_census.admin") %>
                       <% end %>

@@ -33,6 +33,7 @@ shared_context "with filterable context" do
   def remove_applied_filter(filter)
     within("[data-applied-filters-tags] .label", text: /#{filter}/i) do
       click_on("Cancel")
+      wait_for_turbo
     end
   end
 

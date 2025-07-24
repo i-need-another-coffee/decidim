@@ -155,6 +155,7 @@ describe "Content pages" do
       login_as admin, scope: :user
       visit decidim_admin.root_path
       click_on "Pages"
+      wait_for_turbo
     end
 
     context "when displaying the page form" do
@@ -167,6 +168,7 @@ describe "Content pages" do
 
     it "can create new pages" do
       click_on "New page"
+      wait_for_turbo
 
       within ".new_static_page" do
         fill_in :static_page_slug, with: "welcome"

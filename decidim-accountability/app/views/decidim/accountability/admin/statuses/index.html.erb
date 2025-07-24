@@ -52,7 +52,7 @@
 
                   <% if allowed_to? :destroy, :status, status: status %>
                     <li class="dropdown__item">
-                      <%= link_to status_path(status), method: :delete, data: { confirm: t("actions.confirm_destroy", scope: "decidim.accountability", name: t("models.status.name", scope: "decidim.accountability.admin")) }, class: "dropdown__button dropdown__button--danger" do %>
+                      <%= link_to status_path(status),data: { turbo_method: :delete, turbo_confirm: t("actions.confirm_destroy", scope: "decidim.accountability", name: t("models.status.name", scope: "decidim.accountability.admin")) }, class: "dropdown__button dropdown__button--danger" do %>
                         <%= icon "delete-bin-line" %>
                         <%= t("actions.destroy", scope: "decidim.accountability") %>
                       <% end %>

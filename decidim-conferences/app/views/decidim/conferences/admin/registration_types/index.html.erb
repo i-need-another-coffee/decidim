@@ -79,7 +79,7 @@
 
                   <% if allowed_to?(:destroy, :registration_type, registration_type: registration_type) && !registration_type.conference_registrations.any? %>
                     <li class="dropdown__item">
-                      <%= link_to conference_registration_type_path(current_conference, registration_type), method: :delete, data: { confirm: t("actions.confirm_destroy", scope: "decidim.admin") }, class: "dropdown__button" do %>
+                      <%= link_to conference_registration_type_path(current_conference, registration_type), data: { turbo_method: :delete, turbo_confirm: t("actions.confirm_destroy", scope: "decidim.admin") }, class: "dropdown__button" do %>
                         <%= icon "delete-bin-line" %>
                         <%= t("actions.destroy", scope: "decidim.admin") %>
                       <% end %>

@@ -14,6 +14,7 @@ import "chartkick/chart.js"
 import "foundation-sites";
 
 // external deps that require initialization
+import { Turbo } from "@hotwired/turbo-rails"
 import Rails from "@rails/ujs"
 import svg4everybody from "svg4everybody"
 import morphdom from "morphdom"
@@ -81,6 +82,9 @@ import {
 import changeReportFormBehavior from "src/decidim/change_report_form_behavior"
 import setOnboardingAction from "src/decidim/onboarding_pending_action"
 
+
+import "src/decidim/rails_ujs_replacement"
+
 // bad practice: window namespace should avoid be populated as much as possible
 // rails-translations could be referenced through a single Decidim.I18n object
 window.Decidim = window.Decidim || {
@@ -126,6 +130,7 @@ window.initFoundation = (element) => {
 
 // Confirm initialization needs to happen before Rails.start()
 initializeConfirm();
+Turbo.setConfirmMethod(ConfirmDialog);
 Rails.start()
 
 /**
@@ -207,17 +212,9 @@ const initializer = (element = document) => {
   document.dispatchEvent(new CustomEvent("decidim:loaded", { detail: { element } }));
 }
 
-// If no jQuery is used the Tribute feature used in comments to autocomplete
-// mentions stops working
-$(() => initializer());
-
 // Run initializer action over the new DOM elements
 document.addEventListener("remote-modal:loaded", ({ detail }) => initializer(detail));
 document.addEventListener("ajax:loaded", ({ detail }) => initializer(detail));
-
-window.addEventListener("DOMContentLoaded", () => {
-  document.dispatchEvent(new CustomEvent("turbo:load", { detail: { document } }));
-});
 
 // Run initializer action over the new DOM elements (for example after comments polling)
 document.addEventListener("comments:loaded", (event) => {
@@ -231,3 +228,5 @@ document.addEventListener("comments:loaded", (event) => {
     });
   }
 });
+
+document.addEventListener("turbo:load", () => initializer(document));

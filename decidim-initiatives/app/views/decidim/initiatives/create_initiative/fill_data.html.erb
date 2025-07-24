@@ -61,7 +61,7 @@
 
     <div class="form__wrapper-block flex-col-reverse md:flex-row justify-between">
       <% if current_initiative %>
-        <%= link_to discard_initiative_path(current_initiative), class: "button button__sm md:button__lg button__text-secondary", method: :delete, data: { confirm: t(".confirm_discard") } do %>
+        <%= link_to discard_initiative_path(current_initiative), class: "button button__sm md:button__lg button__text-secondary", data: { turbo_method: :delete, turbo_confirm: t(".confirm_discard") } do %>
           <%= icon "delete-bin-line", class: "fill-current" %>
           <%= t(".discard") %>
         <% end %>

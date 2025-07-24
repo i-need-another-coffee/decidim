@@ -83,7 +83,7 @@
                     <hr>
 
                     <li class="dropdown__item">
-                      <%= link_to share_tokens_path(:destroy, id: share_token), method: :delete, data: { confirm: t("actions.confirm_destroy", scope: "decidim.admin.share_tokens") }, class: "dropdown__button" do %>
+                      <%= link_to share_tokens_path(:destroy, id: share_token), data: { turbo_method: :delete, turbo_confirm: t("actions.confirm_destroy", scope: "decidim.admin.share_tokens") }, class: "dropdown__button" do %>
                         <%= icon "delete-bin-line" %>
                         <%= t("actions.destroy", scope: "decidim.admin.share_tokens") %>
                       <% end %>

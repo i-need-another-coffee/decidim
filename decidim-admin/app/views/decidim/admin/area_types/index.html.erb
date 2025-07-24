@@ -39,7 +39,7 @@
                 <ul id="actions-area-type-<%= area_type.id %>" class="dropdown dropdown__action" aria-hidden="true">
                   <% if allowed_to? :update, :area_type, area_type: area_type %>
                     <li class="dropdown__item">
-                      <%= link_to [:edit, area_type], method: :get, class: "dropdown__button" do %>
+                      <%= link_to [:edit, area_type], class: "dropdown__button" do %>
                         <%= icon "pencil-line" %>
                         <%= t("actions.edit", scope: "decidim.admin") %>
                       <% end %>
@@ -50,7 +50,7 @@
                     <hr>
 
                     <li class="dropdown__item">
-                      <%= link_to area_type, method: :delete, data: { confirm: t("actions.confirm_destroy", scope: "decidim.admin") }, class: "dropdown__button" do %>
+                      <%= link_to area_type,data: { turbo_method: :delete, turbo_confirm: t("actions.confirm_destroy", scope: "decidim.admin") }, class: "dropdown__button" do %>
                         <%= icon "delete-bin-line" %>
                         <%= t("actions.destroy", scope: "decidim.admin") %>
                       <% end %>

@@ -14,7 +14,7 @@
 //                       } %>
 // ```
 //
-document.addEventListener("turbo:load", () => {
+document.addEventListener("turbo:load", () =>  {
   document.querySelectorAll("input[data-sync-radio-buttons=true]").forEach((element) => {
     element.addEventListener("change", (event) => {
       const value = event.target.dataset.syncRadioButtonsValue;

@@ -20,6 +20,7 @@ describe "Admin manages conflicts" do
     click_on "Participants"
     click_on "Verification conflicts"
     click_on "Transfer"
+    wait_for_turbo
   end
 
   context "when resolving a conflict" do

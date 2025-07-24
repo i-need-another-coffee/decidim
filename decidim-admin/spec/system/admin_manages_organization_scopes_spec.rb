@@ -13,12 +13,14 @@ describe "Organization scopes" do
 
   describe "Managing scopes" do
     let!(:scope_type) { create(:scope_type, organization: admin.organization) }
+    let!(:scope) { create(:scope, organization:) }
 
     before do
       login_as admin, scope: :user
       visit decidim_admin.root_path
       click_on "Settings"
       click_on "Scopes"
+      wait_for_turbo
     end
 
     it "can create new scopes" do
@@ -43,12 +45,6 @@ describe "Organization scopes" do
     end
 
     context "with existing scopes" do
-      let!(:scope) { create(:scope, organization:) }
-
-      before do
-        visit current_path
-      end
-
       it "can edit them" do
         within "tr", text: translated(scope.name) do
           find("button[data-component='dropdown']").click

@@ -38,7 +38,7 @@ class AbideFormValidatorFixer {
   }
 }
 
-document.addEventListener("turbo:load", () => {
+document.addEventListener("turbo:load", () =>  {
   const validatorFixer = new AbideFormValidatorFixer();
   validatorFixer.initialize();
 });
