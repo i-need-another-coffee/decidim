@@ -12,6 +12,8 @@
   "main": "index.js",
   "dependencies": {
     "@rails/ujs": "^6.1.7",
+    "@hotwired/turbo-rails": "^7.2.5",
+    "@hotwired/stimulus": "^3.2.2",
     "@tailwindcss/typography": "^0.5.2",
     "autoprefixer": "^10.4.14",
     "compression-webpack-plugin": "^10.0.0",

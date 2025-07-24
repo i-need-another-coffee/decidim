@@ -14,6 +14,7 @@ import "chartkick/chart.js"
 import "foundation-sites";
 
 // external deps that require initialization
+import { Turbo } from "@hotwired/turbo-rails"
 import Rails from "@rails/ujs"
 import svg4everybody from "svg4everybody"
 import morphdom from "morphdom"
@@ -126,6 +127,7 @@ window.initFoundation = (element) => {
 
 // Confirm initialization needs to happen before Rails.start()
 initializeConfirm();
+Turbo.setConfirmMethod(ConfirmDialog);
 Rails.start()
 
 /**
@@ -207,17 +209,12 @@ const initializer = (element = document) => {
   document.dispatchEvent(new CustomEvent("decidim:loaded", { detail: { element } }));
 }
 
-// If no jQuery is used the Tribute feature used in comments to autocomplete
-// mentions stops working
-$(() => initializer());
+document.addEventListener("turbo:load", () => initializer(document));
 
 // Run initializer action over the new DOM elements
 document.addEventListener("remote-modal:loaded", ({ detail }) => initializer(detail));
 document.addEventListener("ajax:loaded", ({ detail }) => initializer(detail));
 
-window.addEventListener("DOMContentLoaded", () => {
-  document.dispatchEvent(new CustomEvent("turbo:load", { detail: { document } }));
-});
 
 // Run initializer action over the new DOM elements (for example after comments polling)
 document.addEventListener("comments:loaded", (event) => {

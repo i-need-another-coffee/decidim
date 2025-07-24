@@ -263,6 +263,7 @@ module Decidim
         config.to_prepare do
           ActiveSupport.on_load :action_controller do
             helper Decidim::LayoutHelper if respond_to?(:helper)
+            helper Decidim::RailsUjsHelper if respond_to?(:helper)
           end
         end
       end
