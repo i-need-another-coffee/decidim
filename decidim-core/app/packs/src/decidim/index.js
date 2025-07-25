@@ -215,7 +215,6 @@ document.addEventListener("turbo:load", () => initializer(document));
 document.addEventListener("remote-modal:loaded", ({ detail }) => initializer(detail));
 document.addEventListener("ajax:loaded", ({ detail }) => initializer(detail));
 
-
 // Run initializer action over the new DOM elements (for example after comments polling)
 document.addEventListener("comments:loaded", (event) => {
   const commentsIds = event.detail.commentsIds;
