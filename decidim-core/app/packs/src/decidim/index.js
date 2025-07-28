@@ -82,6 +82,7 @@ import {
 import changeReportFormBehavior from "src/decidim/change_report_form_behavior"
 import setOnboardingAction from "src/decidim/onboarding_pending_action"
 
+
 // bad practice: window namespace should avoid be populated as much as possible
 // rails-translations could be referenced through a single Decidim.I18n object
 window.Decidim = window.Decidim || {
@@ -97,6 +98,32 @@ window.Decidim = window.Decidim || {
 };
 
 window.morphdom = morphdom
+
+
+/* ***********************************************************************
+                              TURBO
+*********************************************************************** */
+
+import "src/decidim/controllers"
+
+import { Application } from "@hotwired/stimulus"
+import DropdownController from "src/decidim/controllers/dropdown_controller";
+import AccordionController from "src/decidim/controllers/accordion_controller";
+
+const application = Application.start()
+
+// Configure Stimulus development experience
+application.debug = true
+
+application.register("dropdown", DropdownController)
+application.register("accordion", AccordionController)
+
+window.Stimulus   = application
+
+/* ***********************************************************************
+                              TURBO
+*********************************************************************** */
+
 
 // REDESIGN_PENDING: deprecated
 window.initFoundation = (element) => {
@@ -115,7 +142,7 @@ window.initFoundation = (element) => {
   $document.off("click.zf.trigger", window.Foundation.Triggers.Listeners.Basic.openListener);
   $document.on("click.zf.trigger", "[data-open]", (ev, ...restArgs) => {
     // Do not apply for the accordion triggers.
-    const accordion = ev.currentTarget?.closest("[data-component='accordion']");
+    const accordion = ev.currentTarget?.closest("[data-controller='accordion']");
     if (accordion) {
       return;
     }
@@ -129,6 +156,14 @@ window.initFoundation = (element) => {
 initializeConfirm();
 Turbo.setConfirmMethod(ConfirmDialog);
 Rails.start()
+
+const checkIfStimulusController = (elem, type) => {
+  // if (elem.hasAttribute("data-controller"))
+  // {
+  //   return
+  // }
+  alert(`${type} element detected`);
+}
 
 /**
  * Initializer event for those script who require to be triggered
@@ -147,8 +182,10 @@ const initializer = (element = document) => {
   svg4everybody();
 
   element.querySelectorAll('input[type="datetime-local"],input[type="date"]').forEach((elem) => formDatePicker(elem))
+  element.querySelectorAll('input[type="datetime-local"],input[type="date"]').forEach((elem) => checkIfStimulusController(elem, "datepicker"))
 
   element.querySelectorAll(".editor-container").forEach((container) => window.createEditor(container));
+  element.querySelectorAll(".editor-container").forEach((container) => checkIfStimulusController(container, "editor"));
 
   // initialize character counter
   $("input[type='text'], textarea, .editor>input[type='hidden']", element).each((_i, elem) => {
@@ -184,9 +221,8 @@ const initializer = (element = document) => {
 
   scrollToLastChild(element)
 
-  element.querySelectorAll('[data-component="accordion"]').forEach((component) => createAccordion(component))
-
-  element.querySelectorAll('[data-component="dropdown"]').forEach((component) => createDropdown(component))
+  element.querySelectorAll('[data-component="accordion"]').forEach((component) => checkIfStimulusController(component, "accordion"));
+  element.querySelectorAll('[data-component="dropdown"]').forEach((component) => checkIfStimulusController(component, "dropdown"));
 
   element.querySelectorAll("[data-dialog]").forEach((component) => createDialog(component))
 
