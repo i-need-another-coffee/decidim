@@ -158,10 +158,10 @@ Turbo.setConfirmMethod(ConfirmDialog);
 Rails.start()
 
 const checkIfStimulusController = (elem, type) => {
-  // if (elem.hasAttribute("data-controller"))
-  // {
-  //   return
-  // }
+  if (elem.hasAttribute("data-controller"))
+  {
+    return
+  }
   alert(`${type} element detected`);
 }
 
