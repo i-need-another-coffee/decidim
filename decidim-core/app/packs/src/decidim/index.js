@@ -109,6 +109,7 @@ import "src/decidim/controllers"
 import { Application } from "@hotwired/stimulus"
 import DropdownController from "src/decidim/controllers/dropdown_controller";
 import AccordionController from "src/decidim/controllers/accordion_controller";
+import EditorController from "src/decidim/controllers/editor_controller";
 
 const application = Application.start()
 
@@ -117,6 +118,8 @@ application.debug = true
 
 application.register("dropdown", DropdownController)
 application.register("accordion", AccordionController)
+application.register("editor", EditorController)
+application.register("editor", EditorController)
 
 window.Stimulus   = application
 
@@ -184,7 +187,7 @@ const initializer = (element = document) => {
   element.querySelectorAll('input[type="datetime-local"],input[type="date"]').forEach((elem) => formDatePicker(elem))
   element.querySelectorAll('input[type="datetime-local"],input[type="date"]').forEach((elem) => checkIfStimulusController(elem, "datepicker"))
 
-  element.querySelectorAll(".editor-container").forEach((container) => window.createEditor(container));
+  // element.querySelectorAll(".editor-container").forEach((container) => window.createEditor(container));
   element.querySelectorAll(".editor-container").forEach((container) => checkIfStimulusController(container, "editor"));
 
   // initialize character counter
