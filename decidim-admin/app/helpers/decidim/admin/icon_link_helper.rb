@@ -21,7 +21,7 @@ module Decidim
                   data: options[:data] || {},
                   title:,
                   target: options[:target]) do
-            content_tag(:span, data: { tooltip: true, disable_hover: false, click_open: false },
+            content_tag(:span, data: { controller: :tooltip, tooltip: true, disable_hover: false, click_open: false },
                                title:) do
               icon(icon_name, aria_label: title, role: "img")
             end

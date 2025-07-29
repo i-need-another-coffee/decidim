@@ -210,7 +210,7 @@ const createDialog = (component) => {
   document.body.appendChild(modal.dialog)
 
   // in order to use the Dialog object somewhere else
-  window.Decidim.currentDialogs = { ...window.Decidim.currentDialogs, [dialog]: modal }
+  // window.Decidim.currentDialogs = { ...window.Decidim.currentDialogs, [dialog]: modal }
 
   // NOTE: when a remote modal is open, the contents are empty
   // once they are in the DOM, we append the ARIA attributes

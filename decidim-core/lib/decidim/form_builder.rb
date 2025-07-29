@@ -200,7 +200,8 @@ module Decidim
           data: {
             toolbar:,
             disabled: options[:disabled],
-            options: editor_options[:editor]
+            options: editor_options[:editor],
+            controller: :editor
           }
         ) { content_tag(:div, nil, class: "editor-input", style: "height: #{lines}rem") }
         template += error_for(name, options) if error?(name)
@@ -687,7 +688,7 @@ module Decidim
         :span,
         visible_title + screenreader_title,
         title: I18n.t("required", scope: "forms"),
-        data: { tooltip: true, disable_hover: false, keep_on_hover: true },
+        data: { tooltip: true, disable_hover: false, keep_on_hover: true, controller: :tooltip },
         class: "label-required"
       ).html_safe
     end

@@ -17,7 +17,7 @@
   </td>
   <% publish_data = publish_data(post.published_at) %>
   <td data-label="<%= t("models.post.fields.published_at", scope: "decidim.blogs") %>">
-    <%= content_tag :span, class: "padding-3", data: { tooltip: true, disable_hover: false, click_open: false }, title: publish_data[:popup] do
+    <%= content_tag :span, class: "padding-3", data: { controller: :tooltip, tooltip: true, disable_hover: false, click_open: false }, title: publish_data[:popup] do
       publish_data[:icon]
     end %>
     <%= l post.published_at, format: :decidim_short %>

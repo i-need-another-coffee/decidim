@@ -70,13 +70,7 @@ import backToListLink from "src/decidim/back_to_list"
 import markAsReadNotifications from "src/decidim/notifications"
 import handleNotificationActions from "src/decidim/notifications_actions"
 import RemoteModal from "src/decidim/remote_modal"
-import {
-  createAccordion,
-  createDialog,
-  createDropdown,
-  announceForScreenReader,
-  Dialogs
-} from "src/decidim/a11y"
+import { announceForScreenReader } from "src/decidim/a11y"
 import changeReportFormBehavior from "src/decidim/change_report_form_behavior"
 import setOnboardingAction from "src/decidim/onboarding_pending_action"
 
@@ -90,7 +84,6 @@ window.Decidim = window.Decidim || {
   FormValidator,
   addInputEmoji,
   EmojiButton,
-  Dialogs,
   ConfirmDialog,
   announceForScreenReader
 };
@@ -123,7 +116,7 @@ application.register("accordion", AccordionController)
 application.register("editor", EditorController)
 application.register("tooltip", TooltipController)
 application.register("toggle", ToggleController)
-application.register("dialog", DialogController)
+// application.register("dialog", DialogController)
 
 window.Stimulus   = application
 
@@ -189,7 +182,7 @@ const initializer = (element = document) => {
   svg4everybody();
 
   element.querySelectorAll('input[type="datetime-local"],input[type="date"]').forEach((elem) => formDatePicker(elem))
-  element.querySelectorAll('input[type="datetime-local"],input[type="date"]').forEach((elem) => checkIfStimulusController(elem, "datepicker"))
+  // element.querySelectorAll('input[type="datetime-local"],input[type="date"]').forEach((elem) => checkIfStimulusController(elem, "datepicker"))
 
   element.querySelectorAll(".editor-container").forEach((container) => checkIfStimulusController(container, "editor"));
 
@@ -227,14 +220,14 @@ const initializer = (element = document) => {
 
   scrollToLastChild(element)
 
+  // Initialize available remote modals (ajax-fetched contents)
+  element.querySelectorAll("[data-dialog-remote-url]").forEach((elem) => new RemoteModal(elem))
+
   element.querySelectorAll('[data-component="accordion"]').forEach((component) => checkIfStimulusController(component, "accordion"));
   element.querySelectorAll('[data-component="dropdown"]').forEach((component) => checkIfStimulusController(component, "dropdown"));
   element.querySelectorAll("[data-tooltip]").forEach((elem) => checkIfStimulusController(elem, "data-tooltip"));
   element.querySelectorAll("[data-toggle]").forEach((elem) => checkIfStimulusController(elem, "data-toggle"));
-  element.querySelectorAll("[data-dialog]").forEach((component) => checkIfStimulusController(component, "data-dialog"));
-
-  // Initialize available remote modals (ajax-fetched contents)
-  element.querySelectorAll("[data-dialog-remote-url]").forEach((elem) => new RemoteModal(elem))
+  // element.querySelectorAll("[data-dialog]").forEach((component) => checkIfStimulusController(component, "data-dialog"));
 
   element.querySelectorAll(".new_report").forEach((elem) => changeReportFormBehavior(elem))
   // element.querySelectorAll(".new_report").forEach((elem) => checkIfStimulusController(elem, "new_report"));
