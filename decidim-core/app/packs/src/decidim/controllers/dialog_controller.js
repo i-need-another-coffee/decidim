@@ -3,7 +3,7 @@ import { createDialog } from "src/decidim/a11y"
 
 
 export default class DialogController extends Controller {
-  connect() {
+  initialize() {
     createDialog(this.element)
   }
 }

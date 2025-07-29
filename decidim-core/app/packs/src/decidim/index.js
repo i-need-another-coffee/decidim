@@ -70,7 +70,10 @@ import backToListLink from "src/decidim/back_to_list"
 import markAsReadNotifications from "src/decidim/notifications"
 import handleNotificationActions from "src/decidim/notifications_actions"
 import RemoteModal from "src/decidim/remote_modal"
-import { announceForScreenReader } from "src/decidim/a11y"
+import {
+  announceForScreenReader,
+  Dialogs
+} from "src/decidim/a11y"
 import changeReportFormBehavior from "src/decidim/change_report_form_behavior"
 import setOnboardingAction from "src/decidim/onboarding_pending_action"
 
@@ -84,6 +87,7 @@ window.Decidim = window.Decidim || {
   FormValidator,
   addInputEmoji,
   EmojiButton,
+  Dialogs,
   ConfirmDialog,
   announceForScreenReader
 };
@@ -116,7 +120,7 @@ application.register("accordion", AccordionController)
 application.register("editor", EditorController)
 application.register("tooltip", TooltipController)
 application.register("toggle", ToggleController)
-// application.register("dialog", DialogController)
+application.register("dialog", DialogController)
 
 window.Stimulus   = application
 
