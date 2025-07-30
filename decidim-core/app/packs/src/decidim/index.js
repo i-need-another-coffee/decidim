@@ -1,5 +1,3 @@
-/* eslint-disable max-lines */
-
 /**
  * External dependencies
  */
@@ -14,6 +12,7 @@ import "chartkick/chart.js"
 import "foundation-sites";
 
 // external deps that require initialization
+import { Turbo } from "@hotwired/turbo-rails"
 import Rails from "@rails/ujs"
 import svg4everybody from "svg4everybody"
 import morphdom from "morphdom"
@@ -69,12 +68,7 @@ import backToListLink from "src/decidim/back_to_list"
 import markAsReadNotifications from "src/decidim/notifications"
 import handleNotificationActions from "src/decidim/notifications_actions"
 import RemoteModal from "src/decidim/remote_modal"
-import createTooltip from "src/decidim/tooltips"
-import createToggle from "src/decidim/toggle"
 import {
-  createAccordion,
-  createDialog,
-  createDropdown,
   announceForScreenReader,
   Dialogs
 } from "src/decidim/a11y"
@@ -97,6 +91,41 @@ window.Decidim = window.Decidim || {
 
 window.morphdom = morphdom
 
+
+/* ***********************************************************************
+                              TURBO
+*********************************************************************** */
+
+import "src/decidim/controllers"
+
+import { Application } from "@hotwired/stimulus"
+import DropdownController from "src/decidim/controllers/dropdown_controller";
+import AccordionController from "src/decidim/controllers/accordion_controller";
+import EditorController from "src/decidim/controllers/editor_controller";
+import TooltipController from "src/decidim/controllers/tooltip_controller";
+import ToggleController from "src/decidim/controllers/toggle_controller";
+import DialogController from "src/decidim/controllers/dialog_controller";
+
+
+const application = Application.start()
+
+// Configure Stimulus development experience
+application.debug = true
+
+application.register("dropdown", DropdownController)
+application.register("accordion", AccordionController)
+application.register("editor", EditorController)
+application.register("tooltip", TooltipController)
+application.register("toggle", ToggleController)
+application.register("dialog", DialogController)
+
+window.Stimulus   = application
+
+/* ***********************************************************************
+                              TURBO
+*********************************************************************** */
+
+
 // REDESIGN_PENDING: deprecated
 window.initFoundation = (element) => {
   $(element).foundation();
@@ -114,7 +143,7 @@ window.initFoundation = (element) => {
   $document.off("click.zf.trigger", window.Foundation.Triggers.Listeners.Basic.openListener);
   $document.on("click.zf.trigger", "[data-open]", (ev, ...restArgs) => {
     // Do not apply for the accordion triggers.
-    const accordion = ev.currentTarget?.closest("[data-component='accordion']");
+    const accordion = ev.currentTarget?.closest("[data-controller='accordion']");
     if (accordion) {
       return;
     }
@@ -126,7 +155,16 @@ window.initFoundation = (element) => {
 
 // Confirm initialization needs to happen before Rails.start()
 initializeConfirm();
+Turbo.setConfirmMethod(ConfirmDialog);
 Rails.start()
+
+const checkIfStimulusController = (elem, type) => {
+  if (elem.hasAttribute("data-controller"))
+  {
+    return
+  }
+  alert(`${window.location.href} --- ${type} element detected`);
+}
 
 /**
  * Initializer event for those script who require to be triggered
@@ -145,8 +183,9 @@ const initializer = (element = document) => {
   svg4everybody();
 
   element.querySelectorAll('input[type="datetime-local"],input[type="date"]').forEach((elem) => formDatePicker(elem))
+  // element.querySelectorAll('input[type="datetime-local"],input[type="date"]').forEach((elem) => checkIfStimulusController(elem, "datepicker"))
 
-  element.querySelectorAll(".editor-container").forEach((container) => window.createEditor(container));
+  element.querySelectorAll(".editor-container").forEach((container) => checkIfStimulusController(container, "editor"));
 
   // initialize character counter
   $("input[type='text'], textarea, .editor>input[type='hidden']", element).each((_i, elem) => {
@@ -182,42 +221,34 @@ const initializer = (element = document) => {
 
   scrollToLastChild(element)
 
-  element.querySelectorAll('[data-component="accordion"]').forEach((component) => createAccordion(component))
-
-  element.querySelectorAll('[data-component="dropdown"]').forEach((component) => createDropdown(component))
-
-  element.querySelectorAll("[data-dialog]").forEach((component) => createDialog(component))
-
   // Initialize available remote modals (ajax-fetched contents)
   element.querySelectorAll("[data-dialog-remote-url]").forEach((elem) => new RemoteModal(elem))
 
-  // Initialize data-tooltips
-  element.querySelectorAll("[data-tooltip]").forEach((elem) => createTooltip(elem))
-
-  // Initialize data-toggles
-  element.querySelectorAll("[data-toggle]").forEach((elem) => createToggle(elem))
+  element.querySelectorAll('[data-component="accordion"]').forEach((component) => checkIfStimulusController(component, "accordion"));
+  element.querySelectorAll('[data-component="dropdown"]').forEach((component) => checkIfStimulusController(component, "dropdown"));
+  element.querySelectorAll("[data-tooltip]").forEach((elem) => checkIfStimulusController(elem, "data-tooltip"));
+  element.querySelectorAll("[data-toggle]").forEach((elem) => checkIfStimulusController(elem, "data-toggle"));
+  // element.querySelectorAll("[data-dialog]").forEach((component) => checkIfStimulusController(component, "data-dialog"));
 
   element.querySelectorAll(".new_report").forEach((elem) => changeReportFormBehavior(elem))
+  // element.querySelectorAll(".new_report").forEach((elem) => checkIfStimulusController(elem, "new_report"));
 
   element.querySelectorAll("[data-onboarding-action]").forEach((elem) => setOnboardingAction(elem))
+  // element.querySelectorAll("[data-onboarding-action]").forEach((elem) => checkIfStimulusController(elem, "data-onboarding-action"));
 
-  initializeUploadFields(element.querySelectorAll("button[data-upload]"));
+  element.querySelectorAll("button[data-upload]").forEach((elem) => initializeUploadFields(elem));
+  // element.querySelectorAll("button[data-upload]").forEach((elem) => checkIfStimulusController(elem, "upload"));
+
   initializeReverseGeocoding()
 
   document.dispatchEvent(new CustomEvent("decidim:loaded", { detail: { element } }));
 }
 
-// If no jQuery is used the Tribute feature used in comments to autocomplete
-// mentions stops working
-$(() => initializer());
+document.addEventListener("turbo:load", () => initializer(document));
 
 // Run initializer action over the new DOM elements
 document.addEventListener("remote-modal:loaded", ({ detail }) => initializer(detail));
 document.addEventListener("ajax:loaded", ({ detail }) => initializer(detail));
-
-window.addEventListener("DOMContentLoaded", () => {
-  document.dispatchEvent(new CustomEvent("turbo:load", { detail: { document } }));
-});
 
 // Run initializer action over the new DOM elements (for example after comments polling)
 document.addEventListener("comments:loaded", (event) => {

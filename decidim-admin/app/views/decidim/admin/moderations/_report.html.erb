@@ -3,6 +3,7 @@
 <% else %>
   <span
     data-tooltip
+    data-controller="tooltip"
     title="<%= report.details&.truncate(250) %>">
       <%= t(".reasons.#{report.reason}") %>
   </span>

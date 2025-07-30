@@ -47,7 +47,8 @@ document.addEventListener("decidim:loaded", () => {
 
       // Handles upload files initialization
       saveForm.querySelectorAll("[data-dialog]").forEach((component) => createDialog(component));
-      initializeUploadFields(saveForm.querySelectorAll("button[data-upload]"));
+
+      saveForm.querySelectorAll("button[data-upload]").forEach((elem) => initializeUploadFields(elem));
 
       // Handles form errors and success
       if (saveForm) {

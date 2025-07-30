@@ -28,7 +28,7 @@
         nil
       ) %>
   <% if !is_blank_root && item.tree_node? && item.node.present? %>
-    <button id="dropdown-trigger-<%= data_checkboxes_tree_id %>" data-controls="panel-dropdown-menu-<%= data_checkboxes_tree_id %>" aria-labelledby="dropdown-title-<%= data_checkboxes_tree_id %>">
+    <button id="dropdown-trigger-<%= data_checkboxes_tree_id %>" data-controller="accordion" data-controls="panel-dropdown-menu-<%= data_checkboxes_tree_id %>" aria-labelledby="dropdown-title-<%= data_checkboxes_tree_id %>">
       <%= icon "arrow-down-s-fill" %>
       <%= icon "arrow-up-s-fill" %>
     </button>

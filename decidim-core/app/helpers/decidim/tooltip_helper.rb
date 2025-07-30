@@ -8,7 +8,7 @@ module Decidim
       content_tag(:p,
                   title:,
                   class: "inline-block",
-                  data: { tooltip: content_tag(:p, title, id: opts[:id], class: opts[:class] || "bottom", role: "tooltip", "aria-hidden": "true") }) do
+                  data: { controller: :tooltip, tooltip: content_tag(:p, title, id: opts[:id], class: opts[:class] || "bottom", role: "tooltip", "aria-hidden": "true") }) do
         capture(&).html_safe
       end
     end

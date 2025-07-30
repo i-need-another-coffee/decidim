@@ -115,29 +115,27 @@ const resetDropzone = (modal) => {
 
 /* NOTE: all this actions are supposed to work using the modal object,
   so, perhaps, it would be more accurate to move all the inner listeners to the UploadModal class */
-export const initializeUploadFields = function(attachmentButtons) {
-  attachmentButtons.forEach((attachmentButton) => {
-    const modal = new UploadModal(attachmentButton);
+export const initializeUploadFields = function(attachmentButton) {
+  const modal = new UploadModal(attachmentButton);
 
-    // append to the modal items array those files already validated (only in first pageload)
-    const files = document.querySelector(`[data-active-uploads=${modal.modal.id}]`);
-    [...files.children].forEach((child) => modal.preloadFiles(child));
+  // append to the modal items array those files already validated (only in first pageload)
+  const files = document.querySelector(`[data-active-uploads=${modal.modal.id}]`);
+  [...files.children].forEach((child) => modal.preloadFiles(child));
 
-    // whenever the input fields changes, process the files
-    modal.input.addEventListener("change", (event) => modal.uploadFiles(event.target.files));
+  // whenever the input fields changes, process the files
+  modal.input.addEventListener("change", (event) => modal.uploadFiles(event.target.files));
 
-    // update the modal title if there are files uploaded and load files (if previously deleted after clicking cancel)
-    modal.button.addEventListener("click", (event) => event.preventDefault() || (modal.items.length === 0 && [...files.children].forEach((child) => child.tagName === "DIV" && modal.preloadFiles(child))) || updateModalTitle(modal));
+  // update the modal title if there are files uploaded and load files (if previously deleted after clicking cancel)
+  modal.button.addEventListener("click", (event) => event.preventDefault() || (modal.items.length === 0 && [...files.children].forEach((child) => child.tagName === "DIV" && modal.preloadFiles(child))) || updateModalTitle(modal));
 
-    // avoid browser to open the file
-    modal.dropZone.addEventListener("dragover", (event) => event.preventDefault() || highlightDropzone(modal));
-    modal.dropZone.addEventListener("dragleave", () => resetDropzone(modal));
-    // avoid browser to open the file and then, process the files
-    modal.dropZone.addEventListener("drop", (event) => event.preventDefault() || resetDropzone(modal) || modal.uploadFiles(event.dataTransfer.files));
+  // avoid browser to open the file
+  modal.dropZone.addEventListener("dragover", (event) => event.preventDefault() || highlightDropzone(modal));
+  modal.dropZone.addEventListener("dragleave", () => resetDropzone(modal));
+  // avoid browser to open the file and then, process the files
+  modal.dropZone.addEventListener("drop", (event) => event.preventDefault() || resetDropzone(modal) || modal.uploadFiles(event.dataTransfer.files));
 
-    // update the DOM with the validated items from the modal
-    modal.saveButton.addEventListener("click", (event) => event.preventDefault() || updateActiveUploads(modal));
-    // remove the uploaded files if cancel button is clicked
-    modal.cancelButton.addEventListener("click", (event) => event.preventDefault() || modal.cleanAllFiles());
-  });
+  // update the DOM with the validated items from the modal
+  modal.saveButton.addEventListener("click", (event) => event.preventDefault() || updateActiveUploads(modal));
+  // remove the uploaded files if cancel button is clicked
+  modal.cancelButton.addEventListener("click", (event) => event.preventDefault() || modal.cleanAllFiles());
 }
