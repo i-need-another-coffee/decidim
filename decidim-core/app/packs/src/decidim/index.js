@@ -195,7 +195,16 @@ const initializer = (element = document) => {
   element.querySelectorAll("[data-tooltip]").forEach((elem) => createTooltip(elem))
 
   // Initialize data-toggles
-  element.querySelectorAll("[data-toggle]").forEach((elem) => createToggle(elem))
+  element.querySelectorAll('[data-controller="toggle"]').forEach((elem) => createToggle(elem))
+  element.querySelectorAll("[data-toggle]").forEach((component) => {
+    if (component.hasAttribute("data-controller"))
+    {
+      return;
+    }
+    alert(`${window.location.href} Using toggle component`);
+    createToggle(component);
+  })
+
 
   element.querySelectorAll(".new_report").forEach((elem) => changeReportFormBehavior(elem))
 
