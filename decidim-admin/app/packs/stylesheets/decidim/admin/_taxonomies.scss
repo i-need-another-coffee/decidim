@@ -57,7 +57,7 @@ ul.taxonomy {
   }
 }
 
-[data-dialog]#item-form {
+[data-controller="dialog"]#item-form {
   @apply bottom-0 sm:top-[5.5rem] top-[8.55rem];
 
   [data-dialog-container] > :last-child {
