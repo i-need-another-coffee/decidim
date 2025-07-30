@@ -10,6 +10,11 @@ const mentionsInitializer = () => {
     return;
   }
 
+  if ($mentionContainer.length < 1) {
+    return;
+  }
+  alert(`${window.location.href} - using input mentions`)
+
   let noMatchTemplate = null
   if (nodatafound) {
     noMatchTemplate = () => `<li>${nodatafound}</li>`;
