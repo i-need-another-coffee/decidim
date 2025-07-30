@@ -23,7 +23,7 @@ import morphdom from "morphdom"
  */
 
 // local deps with no initialization
-import "src/decidim/input_mentions"
+import Mentions from "src/decidim/input_mentions"
 import "src/decidim/input_multiple_mentions"
 import "src/decidim/input_autojump"
 import "src/decidim/history"
@@ -143,6 +143,8 @@ const initializer = (element = document) => {
   window.initFoundation(element);
 
   svg4everybody();
+
+  element.querySelectorAll(".js-mentions").forEach((component) => new Mentions(component))
 
   element.querySelectorAll('input[type="datetime-local"],input[type="date"]').forEach((elem) => formDatePicker(elem))
 

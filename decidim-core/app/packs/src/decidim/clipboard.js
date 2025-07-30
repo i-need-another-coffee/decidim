@@ -35,7 +35,16 @@ import select from "select";
 const CLIPBOARD_COPY_TIMEOUT = 5000;
 
 document.addEventListener("turbo:load", () => {
-  $(document).on("click", "[data-clipboard-copy]", (ev) => {
+
+  const $selector = $("[data-clipboard-copy]");
+
+  if ($selector.length < 1) {
+    return;
+  }
+
+  alert(`${window.location.href} - Using copy to clipboard`)
+
+  $selector.on("click", (ev) => {
     const $el = $(ev.currentTarget);
     if (!$el.data("clipboard-copy") || $el.data("clipboard-copy").length < 1) {
       return;
