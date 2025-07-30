@@ -23,7 +23,6 @@ import morphdom from "morphdom"
  */
 
 // local deps with no initialization
-import "src/decidim/input_tags"
 import "src/decidim/input_mentions"
 import "src/decidim/input_multiple_mentions"
 import "src/decidim/input_autojump"
@@ -80,6 +79,7 @@ import {
 } from "src/decidim/a11y"
 import changeReportFormBehavior from "src/decidim/change_report_form_behavior"
 import setOnboardingAction from "src/decidim/onboarding_pending_action"
+import TomSelect from "tom-select/dist/cjs/tom-select.popular";
 
 // bad practice: window namespace should avoid be populated as much as possible
 // rails-translations could be referenced through a single Decidim.I18n object
@@ -200,6 +200,8 @@ const initializer = (element = document) => {
   element.querySelectorAll(".new_report").forEach((elem) => changeReportFormBehavior(elem))
 
   element.querySelectorAll("[data-onboarding-action]").forEach((elem) => setOnboardingAction(elem))
+
+  element.querySelectorAll(".js-tags-container").forEach((container) => new TomSelect(container, { plugins: ["remove_button"], create: true, render: { no_results: null } }))
 
   initializeUploadFields(element.querySelectorAll("button[data-upload]"));
   initializeReverseGeocoding()
