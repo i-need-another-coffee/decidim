@@ -122,15 +122,4 @@ class Mentions {
   }
 }
 
-// Optional: Allow external libraries to attach elements dynamically
-document.addEventListener("attach-mentions-element", (event) => {
-  if (event.detail?.element) {
-
-    let component = event.detail.element.querySelector(".js-mentions");
-
-    const instance = new Mentions(component);
-    instance.attachElement(event.detail.element);
-  }
-});
-
 export default Mentions;

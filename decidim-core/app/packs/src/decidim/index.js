@@ -26,7 +26,7 @@ import morphdom from "morphdom"
 import Mentions from "src/decidim/input_mentions"
 import "src/decidim/input_multiple_mentions"
 import "src/decidim/input_autojump"
-import "src/decidim/history"
+
 import "src/decidim/callout"
 import "src/decidim/clipboard"
 import "src/decidim/append_elements"
@@ -203,6 +203,7 @@ const initializer = (element = document) => {
 
   element.querySelectorAll("[data-onboarding-action]").forEach((elem) => setOnboardingAction(elem))
 
+  // eslint-disable-next-line camelcase
   element.querySelectorAll(".js-tags-container").forEach((container) => new TomSelect(container, { plugins: ["remove_button"], create: true, render: { no_results: null } }))
 
   initializeUploadFields(element.querySelectorAll("button[data-upload]"));
@@ -221,6 +222,14 @@ document.addEventListener("ajax:loaded", ({ detail }) => initializer(detail));
 
 window.addEventListener("DOMContentLoaded", () => {
   document.dispatchEvent(new CustomEvent("turbo:load", { detail: { document } }));
+});
+
+// Optional: Allow external libraries to attach elements dynamically
+document.addEventListener("attach-mentions-element", (event) => {
+  if (event.detail) {
+    const instance = new Mentions(event.detail);
+    instance.attachElement(event.detail);
+  }
 });
 
 // Run initializer action over the new DOM elements (for example after comments polling)

@@ -34,104 +34,115 @@ import select from "select";
 // copy.
 const CLIPBOARD_COPY_TIMEOUT = 5000;
 
-document.addEventListener("turbo:load", () => {
 
-  const $selector = $("[data-clipboard-copy]");
-
-  if ($selector.length < 1) {
-    return;
+class ClipboardCopy {
+  constructor(button) {
+    this.button = button;
+    this.timeoutId = null;
+    this.initialize();
   }
 
-  alert(`${window.location.href} - Using copy to clipboard`)
+  initialize() {
+    const dataset = this.button.dataset;
+    this.targetSelector = dataset.clipboardCopy;
+    this.content = dataset.clipboardContent || "";
+    this.label = dataset.clipboardCopyLabel;
+    this.message = dataset.clipboardCopyMessage;
+    this.originalLabel = dataset.clipboardCopyLabelOriginal;
+    this.input = this.targetSelector
+      ? document.querySelector(this.targetSelector)
+      : null;
+  }
 
-  $selector.on("click", (ev) => {
-    const $el = $(ev.currentTarget);
-    if (!$el.data("clipboard-copy") || $el.data("clipboard-copy").length < 1) {
+  copyToClipboard() {
+    const selectedText = this.getSelectedText();
+    if (!selectedText) {
       return;
     }
 
-    const $input = $($el.data("clipboard-copy"));
+    this.createTemporaryElement(selectedText);
+    this.showCopiedLabel();
+    this.showScreenReaderMessage();
 
-    let selectedText = $el.data("clipboard-content") || "";
-    if (selectedText === "" && $input.is("input, textarea, select")) {
-      selectedText = select($input[0]);
+  }
+
+
+  getSelectedText() {
+    if (this.content) {
+      return this.content;
     }
 
-    let $msgEl = $el;
-    if ($msgEl.text() === "") {
-      $msgEl = $input;
-    }
-    // Get the available text to clipboard.
-    if (!selectedText || selectedText.length < 1) {
-      return;
+    if (!this.input || !(/(input|textarea|select)/i).test(this.input.tagName)) {
+      return null;
     }
 
-    // Move the selected text to clipboard.
-    const $temp = $(`<textarea>${selectedText}</textarea>`).css({
-      width: 1,
-      height: 1
-    });
-    $el.after($temp);
-    $temp.select();
+    return select(this.input);
+  }
 
-    const copyDone = () => {
-      $temp.remove();
-      $el.focus();
-    };
+  createTemporaryElement(text) {
+    const temp = document.createElement("textarea");
+    temp.value = text;
+    temp.style.width = "1px";
+    temp.style.height = "1px";
+    document.body.appendChild(temp);
+    temp.select();
+
     try {
-      // document.execCommand is deprecated but the Clipboard API is not
-      // supported by IE (which unfortunately is still a thing).
       if (!document.execCommand("copy")) {
         return;
       }
-    } catch (err) {
-      copyDone();
+    } finally {
+      document.body.removeChild(temp);
+      this.button.focus();
+    }
+  }
+
+  showCopiedLabel() {
+    if (!this.label) {
       return;
     }
-    copyDone();
 
-    // Change the label to indicate the copying was successful.
-    const label = $el.data("clipboard-copy-label");
-    if (label) {
-      let to = $el.data("clipboard-copy-label-timeout");
-      if (to) {
-        clearTimeout(to);
-      }
-
-      if (!$el.data("clipboard-copy-label-original")) {
-        $el.data("clipboard-copy-label-original", $msgEl.html());
-      }
-
-      $msgEl.html(label);
-
-      to = setTimeout(() => {
-        $msgEl.html($el.data("clipboard-copy-label-original"));
-        $el.removeData("clipboard-copy-label-original");
-        $el.removeData("clipboard-copy-label-timeout");
-      }, CLIPBOARD_COPY_TIMEOUT);
-
-      $el.data("clipboard-copy-label-timeout", to);
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId);
     }
 
-    // Alert the screen reader what just happened (the link was copied).
-    let message = $el.data("clipboard-copy-message");
-    if (message) {
-      let $msg = $el.data("clipboard-message-element");
-      if ($msg) {
-        if ($msg.html() === message) {
-          // Try to hint the screen reader to re-read the text in the message
-          // element.
-          message += "&nbsp;";
-        }
-      } else {
-        $msg = $('<div aria-role="alert" aria-live="assertive" aria-atomic="true" class="sr-only"></div>');
-        $msgEl.append($msg);
-        $el.data("clipboard-message-element", $msg);
-      }
-
-      // Add the non breaking space always to content to try to force the
-      // screen reader to reannounce the added text.
-      $msg.html(message);
+    if (!this.originalLabel) {
+      this.button.dataset.clipboardCopyLabelOriginal = this.button.innerHTML;
     }
+
+    this.button.innerHTML = this.label;
+
+    this.timeoutId = setTimeout(() => {
+      this.button.innerHTML = this.button.dataset.clipboardCopyLabelOriginal;
+
+      Reflect.deleteProperty(this.button.dataset, "clipboardCopyLabelOriginal");
+      Reflect.deleteProperty(this, "timeoutId");
+    }, CLIPBOARD_COPY_TIMEOUT);
+
+    this.button.dataset.clipboardCopyLabelTimeout = this.timeoutId;
+  }
+
+  showScreenReaderMessage() {
+    if (!this.message) {
+      return;
+    }
+
+    let msg = document.createElement("div");
+    msg.setAttribute("role", "alert");
+    msg.setAttribute("aria-live", "assertive");
+    msg.setAttribute("aria-atomic", "true");
+    msg.className = "sr-only";
+    this.button.appendChild(msg);
+    this.button.dataset.clipboardMessageElement = msg;
+
+    msg.innerHTML = `${this.message}&nbsp;`;
+  }
+}
+
+document.addEventListener("turbo:load", () => {
+  document.querySelectorAll("[data-clipboard-copy]").forEach((button) => {
+    const instance = new ClipboardCopy(button);
+
+    button.addEventListener("click", () => instance.copyToClipboard());
   });
 });
