@@ -21,6 +21,9 @@ document.addEventListener("turbo:load", () => {
     return;
   }
 
+  alert(`${window.location.href} - using input multiple mentions`)
+
+
   const allMessages = window.Decidim.config.get("messages");
   const messages = allMessages.mentionsModal || {};
 

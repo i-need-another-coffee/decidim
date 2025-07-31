@@ -2,6 +2,12 @@ document.addEventListener("turbo:load", () => {
   const $inputs = $("input[data-autojump]");
   const DELETE_KEY_CODE = 8;
 
+  if ($inputs.length === 0) {
+    return;
+  }
+
+  alert(`${window.location.href} - using autojump`)
+
   // Initialize
   $inputs.on("keydown", (event) => {
     // Do not do anything if there is selected text

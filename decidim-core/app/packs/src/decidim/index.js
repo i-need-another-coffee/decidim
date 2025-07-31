@@ -21,11 +21,10 @@ import morphdom from "morphdom"
  */
 
 // local deps with no initialization
-import "src/decidim/input_tags"
-import "src/decidim/input_mentions"
+import Mentions from "src/decidim/input_mentions"
 import "src/decidim/input_multiple_mentions"
 import "src/decidim/input_autojump"
-import "src/decidim/history"
+
 import "src/decidim/callout"
 import "src/decidim/clipboard"
 import "src/decidim/append_elements"
@@ -78,6 +77,7 @@ import {
 } from "src/decidim/a11y"
 import changeReportFormBehavior from "src/decidim/change_report_form_behavior"
 import setOnboardingAction from "src/decidim/onboarding_pending_action"
+import TomSelect from "tom-select/dist/cjs/tom-select.popular";
 
 // bad practice: window namespace should avoid be populated as much as possible
 // rails-translations could be referenced through a single Decidim.I18n object
@@ -141,6 +141,8 @@ const initializer = (element = document) => {
   window.initFoundation(element);
 
   svg4everybody();
+
+  element.querySelectorAll(".js-mentions").forEach((component) => new Mentions(component))
 
   element.querySelectorAll('input[type="datetime-local"],input[type="date"]').forEach((elem) => formDatePicker(elem))
 
@@ -212,6 +214,9 @@ const initializer = (element = document) => {
 
   element.querySelectorAll("[data-onboarding-action]").forEach((elem) => setOnboardingAction(elem))
 
+  // eslint-disable-next-line camelcase
+  element.querySelectorAll(".js-tags-container").forEach((container) => new TomSelect(container, { plugins: ["remove_button"], create: true, render: { no_results: null } }))
+
   initializeUploadFields(element.querySelectorAll("button[data-upload]"));
   initializeReverseGeocoding()
 
@@ -228,6 +233,14 @@ document.addEventListener("ajax:loaded", ({ detail }) => initializer(detail));
 
 window.addEventListener("DOMContentLoaded", () => {
   document.dispatchEvent(new CustomEvent("turbo:load", { detail: { document } }));
+});
+
+// Optional: Allow external libraries to attach elements dynamically
+document.addEventListener("attach-mentions-element", (event) => {
+  if (event.detail) {
+    const instance = new Mentions(event.detail);
+    instance.attachElement(event.detail);
+  }
 });
 
 // Run initializer action over the new DOM elements (for example after comments polling)
