@@ -242,3 +242,10 @@ document.addEventListener("comments:loaded", (event) => {
     });
   }
 });
+
+
+document.addEventListener("turbo:load", () => {
+  document.querySelectorAll(".js-mentions").forEach(() => {
+    alert("Copy to clipboard is being used");
+  })
+})
