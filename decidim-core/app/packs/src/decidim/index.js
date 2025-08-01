@@ -246,6 +246,10 @@ document.addEventListener("comments:loaded", (event) => {
 
 document.addEventListener("turbo:load", () => {
   document.querySelectorAll(".js-multiple-mentions").forEach(() => {
-    alert("Copy to clipboard is being used");
+    alert(`${window.location.href} Using multiple mentions component. Please remove it from the page.`);
+  })
+
+  document.querySelectorAll("input[data-autojump]").forEach(() => {
+    alert(`${window.location.href} Using data autojump component. Please remove it from the page.`);
   })
 })
