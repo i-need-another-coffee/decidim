@@ -245,7 +245,7 @@ document.addEventListener("comments:loaded", (event) => {
 
 
 document.addEventListener("turbo:load", () => {
-  document.querySelectorAll(".js-mentions").forEach(() => {
+  document.querySelectorAll(".js-multiple-mentions").forEach(() => {
     alert("Copy to clipboard is being used");
   })
 })
