@@ -8,6 +8,7 @@ document.addEventListener("turbo:load", () => {
   const $newsletterModal      = $("#sign-up-newsletter-modal");
 
   const checkNewsletter = (check) => {
+    alert(`${window.location.href} - Check newsletter:`)
     $userRegistrationForm.find(newsletterSelector).prop("checked", check);
     $userOmniauthRegistrationForm.find(newsletterSelector).prop("checked", check);
     $newsletterModal.data("continue", true);
@@ -17,6 +18,7 @@ document.addEventListener("turbo:load", () => {
   }
 
   $userRegistrationForm.on("submit", (event) => {
+    alert(`${window.location.href} - userregistration form submit`)
     const newsletterChecked = $userRegistrationForm.find(newsletterSelector);
     if (!$newsletterModal.data("continue")) {
       if (!newsletterChecked.prop("checked")) {
@@ -27,6 +29,7 @@ document.addEventListener("turbo:load", () => {
   });
 
   $userOmniauthRegistrationForm.on("submit", (event) => {
+    alert(`${window.location.href} - user omniauth registration form submit`)
     const newsletterChecked = $userOmniauthRegistrationForm.find(newsletterSelector);
     if (!$newsletterModal.data("continue")) {
       if (!newsletterChecked.prop("checked")) {
@@ -37,6 +40,7 @@ document.addEventListener("turbo:load", () => {
   });
 
   $newsletterModal.find("[data-check]").on("click", (event) => {
+    alert(`${window.location.href} - data check`)
     checkNewsletter($(event.target).data("check"));
   });
 
