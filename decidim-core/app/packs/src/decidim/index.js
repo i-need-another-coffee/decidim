@@ -252,4 +252,8 @@ document.addEventListener("turbo:load", () => {
   document.querySelectorAll("input[data-autojump]").forEach(() => {
     alert(`${window.location.href} Using data autojump component. Please remove it from the page.`);
   })
+
+  if ($('.callout[role="alert"]:first').length > 0) {
+    alert(`${window.location.href} Using callout component. Please remove it from the page.`);
+  }
 })
