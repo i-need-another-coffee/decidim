@@ -245,15 +245,7 @@ document.addEventListener("comments:loaded", (event) => {
 
 
 document.addEventListener("turbo:load", () => {
-  document.querySelectorAll(".js-multiple-mentions").forEach(() => {
-    alert(`${window.location.href} Using multiple mentions component. Please remove it from the page.`);
+  document.querySelectorAll("[data-onboarding-action]").forEach(() => {
+    alert(`${window.location.href} Using data-onboarding-action. Please remove it from the page.`);
   })
-
-  document.querySelectorAll("input[data-autojump]").forEach(() => {
-    alert(`${window.location.href} Using data autojump component. Please remove it from the page.`);
-  })
-
-  if ($('.callout[role="alert"]:first').length > 0) {
-    alert(`${window.location.href} Using callout component. Please remove it from the page.`);
-  }
 })
