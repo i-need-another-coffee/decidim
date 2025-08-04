@@ -78,6 +78,7 @@ import {
 } from "src/decidim/a11y"
 import changeReportFormBehavior from "src/decidim/change_report_form_behavior"
 import setOnboardingAction from "src/decidim/onboarding_pending_action"
+import elem from "../../../../../development_app/public/decidim-packs/js/decidim_dev";
 
 // bad practice: window namespace should avoid be populated as much as possible
 // rails-translations could be referenced through a single Decidim.I18n object
@@ -243,9 +244,8 @@ document.addEventListener("comments:loaded", (event) => {
   }
 });
 
-
 document.addEventListener("turbo:load", () => {
-  document.querySelectorAll("[data-onboarding-action]").forEach(() => {
-    alert(`${window.location.href} Using data-onboarding-action. Please remove it from the page.`);
-  })
-})
+  document.querySelectorAll(".js-mentions").forEach(() => {
+    alert(`${window.location.href} Using mentions feature.`);
+  });
+});
