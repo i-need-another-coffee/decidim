@@ -23,7 +23,7 @@ const content = document.getElementById("content");
 const footer = document.querySelector("footer");
 
 
-menuButton.addEventListener("click", function (e) {
+menuButton.addEventListener("click", function () {
   const isHidden = menuContainer.getAttribute("aria-hidden") === "true";
 
   if (isHidden) {
@@ -37,9 +37,9 @@ menuButton.addEventListener("click", function (e) {
   }
 });
 
-document.addEventListener("click", function (e) {
+document.addEventListener("click", function (event) {
   const isOpen = menuContainer.getAttribute("aria-hidden") === "false";
-  const clickedInsideMenu = menuContainer.contains(e.target) || menuButton.contains(e.target);
+  const clickedInsideMenu = menuContainer.contains(event.target) || menuButton.contains(event.target);
 
   if (isOpen && !clickedInsideMenu) {
     menuContainer.setAttribute("aria-hidden", "true");
