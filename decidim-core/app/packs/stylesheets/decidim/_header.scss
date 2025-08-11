@@ -39,7 +39,7 @@ header {
   }
 
   .main-bar {
-    @apply container grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-4 items-center py-5 h-24;
+    @apply container grid grid-cols-4 md:flex md:justify-between gap-4 items-center py-5 h-24;
 
     &--focus-mode-back-button {
       @apply h-16 lg:h-24;
@@ -98,7 +98,11 @@ header {
       @apply hidden lg:flex items-center justify-between text-center divide-x-2 divide-gray-3 ml-auto [&>*]:px-4 xl:[&>*]:px-6 first:[&>*]:pl-0 last:[&>*]:pr-0;
 
       &__item {
-        @apply flex flex-col items-center text-secondary px-2 py-1 rounded hover:underline hover:bg-background;
+        @apply flex items-center gap-x-2 text-secondary px-2 py-1 rounded;
+
+        &:hover {
+          @apply bg-secondary rounded-[4px] text-white;
+        }
 
         &-wrapper {
           @apply flex gap-x-4 xl:gap-x-6;
@@ -109,17 +113,62 @@ header {
         }
       }
 
+      &__dropdown {
+        @apply flex items-end absolute top-full right-0 z-30;
+
+        .menu-bar {
+          &__main-dropdown {
+            @apply hidden lg:flex flex-col;
+
+            &__left {
+              @apply w-full;
+            }
+          }
+
+          &__dropdown-menu {
+            @apply w-full;
+
+            li {
+              @apply border-none;
+            }
+          }
+        }
+      }
+
+      &__trigger {
+        @apply text-secondary cursor-pointer py-1 px-2 text-md leading-[22px] w-fit flex items-center gap-x-2;
+
+        span {
+          @apply text-secondary;
+        }
+
+        &:hover {
+          @apply bg-secondary rounded-[4px] text-white;
+
+          svg,
+          span {
+            @apply text-white;
+          }
+        }
+
+        &[aria-expended="true"] {
+          #content {
+            @apply bg-[rgb(0_0_0_/_0.5)];
+          }
+        }
+      }
+
       /* overwrite default dropdown styles */
       [data-target*="dropdown"] > span:only-of-type {
         @apply gap-0;
       }
 
       svg {
-        @apply w-5 h-5 fill-current;
+        @apply w-4 h-5 fill-current;
       }
 
       svg + span {
-        @apply text-sm first-letter:uppercase;
+        @apply text-md leading-[22px] first-letter:uppercase;
       }
     }
 
@@ -127,7 +176,7 @@ header {
       @apply fixed bottom-0 left-0 z-40 bg-white w-full px-4 py-3 flex justify-between text-secondary shadow-[0_-4px_6px_rgba(198,198,198,0.25)];
 
       &__trigger {
-        @apply flex flex-col items-center text-secondary cursor-pointer md:pl-4 md:border-l border-gray-3;
+        @apply flex flex-col items-center text-secondary cursor-pointer;
 
         svg {
           @apply w-6 h-6 fill-current;
@@ -239,7 +288,7 @@ header {
 
     /* overwrite default dropdown styles */
     [id*="dropdown-menu"] {
-      @apply py-0 mx-0 w-full;
+      @apply py-0 mx-0 w-full lg:w-fit;
 
       &[aria-hidden="true"] {
         @apply md:hidden;
@@ -382,14 +431,14 @@ header {
     }
 
     &__dropdown-menu {
-      @apply w-full md:w-1/4 bg-primary px-4 md:px-8 pt-0 pb-3 md:py-3 divide-y divide-gray-3 text-white;
+      @apply w-full md:w-1/4 px-4 md:px-8 pt-0 pb-3 md:py-3 divide-y divide-gray-3 text-[var(--secondary)];
 
       > * {
-        @apply py-3 md:py-3.5;
+        @apply py-3 md:py-3.5 md:px-2;
       }
 
       a {
-        @apply flex items-center justify-start gap-1 font-semibold text-lg text-white;
+        @apply flex items-center justify-start gap-1 font-semibold text-xl text-[var(--secondary)] underline;
 
         span {
           @apply min-w-0 truncate;
@@ -399,10 +448,18 @@ header {
           @apply flex-none fill-current;
         }
       }
+
+      li:hover {
+        @apply bg-[var(--secondary)] rounded-[4px];
+
+        a {
+          @apply text-white;
+        }
+      }
     }
 
     &__main-dropdown {
-      @apply bg-white flex flex-row rounded-b shadow-lg text-black w-full lg:w-[1280px] h-screen md:h-auto;
+      @apply bg-white flex flex-row rounded-b shadow-lg text-black w-full lg:w-[530px] h-screen md:h-auto;
 
       &__left {
         @apply flex flex-col justify-between p-4 md:p-8 space-y-5 hidden md:block md:w-3/4;
@@ -459,6 +516,24 @@ header {
 
       &__subtitle {
         @apply hidden text-md md:flex md:text-lg text-gray-2 mt-5;
+      }
+    }
+
+    &__dropdown-desktop {
+      .card__highlight {
+        @apply flex-col ring-transparent rounded-lg shadow-[1px_4px_8px_3px_rgba(0,0,0,0.15)];
+
+        &-img {
+          @apply w-full aspect-[3/1] rounded-tl-lg rounded-tr-lg;
+        }
+
+        &-text {
+          @apply w-full items-start text-start bg-background-2 rounded-bl-lg rounded-br-lg;
+
+          h3 {
+            @apply font-bold;
+          }
+        }
       }
     }
 
