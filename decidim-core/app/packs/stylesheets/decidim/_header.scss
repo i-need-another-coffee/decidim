@@ -184,7 +184,7 @@ header {
       @apply fixed bottom-0 left-0 z-40 bg-white w-full px-4 py-3 flex justify-between text-secondary shadow-[0_-4px_6px_rgba(198,198,198,0.25)];
 
       &__trigger {
-        @apply text-secondary cursor-pointer py-1 px-2 text-md leading-[22px] w-fit flex items-center gap-x-2;
+        @apply flex flex-col items-center text-secondary cursor-pointer;
 
         svg {
           @apply w-6 h-6 fill-current;
