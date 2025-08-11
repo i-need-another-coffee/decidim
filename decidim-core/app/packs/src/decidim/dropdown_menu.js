@@ -16,3 +16,34 @@ document.addEventListener("turbo:load", () => {
     })
   }
 });
+
+const menuContainer = document.getElementById("dropdown-menu-main-desktop");
+const menuButton = document.getElementById("main-dropdown-summary-desktop");
+const content = document.getElementById("content");
+const footer = document.querySelector("footer");
+
+
+menuButton.addEventListener("click", function (e) {
+  const isHidden = menuContainer.getAttribute("aria-hidden") === "true";
+
+  if (isHidden) {
+    menuContainer.setAttribute("aria-hidden", "false");
+    content.style.opacity = "0.3";
+    footer.style.opacity = "0.3";
+  } else {
+    menuContainer.setAttribute("aria-hidden", "true");
+    content.style.opacity = "1";
+    footer.style.opacity = "1";
+  }
+});
+
+document.addEventListener("click", function (e) {
+  const isOpen = menuContainer.getAttribute("aria-hidden") === "false";
+  const clickedInsideMenu = menuContainer.contains(e.target) || menuButton.contains(e.target);
+
+  if (isOpen && !clickedInsideMenu) {
+    menuContainer.setAttribute("aria-hidden", "true");
+    content.style.opacity = "1";
+    footer.style.opacity = "1";
+  }
+});
