@@ -1,9 +1,20 @@
 document.addEventListener("turbo:load", () => {
-  const $wrapper = $(".slug");
-  const $input = $wrapper.find("input");
-  const $target = $wrapper.find("span.slug-url-value");
+  const wrapper = document.querySelector(".slug");
 
-  $input.on("keyup", (event) => {
-    $target.html(event.target.value);
+  if (wrapper) {
+    alert("slug");
+  } else {
+    return;
+  }
+
+  const input = wrapper.querySelector("input");
+  const target = wrapper.querySelector("span.slug-url-value");
+
+  if (!input || !target) {
+    return;
+  }
+
+  input.addEventListener("keyup", (event) => {
+    target.innerHTML = event.target.value;
   });
 });
