@@ -37,7 +37,8 @@
   }
 }
 
-[data-target="dropdown-menu-main-desktop"] {
+[data-target="dropdown-menu-main-desktop"],
+[data-target="dropdown-menu-main-mobile"] {
   > span:first-of-type {
     @apply block;
   }

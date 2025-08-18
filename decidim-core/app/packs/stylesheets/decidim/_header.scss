@@ -1,6 +1,6 @@
 header {
   .admin-bar {
-    @apply container flex flex-wrap items-center justify-start gap-y-2 gap-x-4;
+    @apply container flex flex-wrap items-center justify-start gap-y-2 gap-x-4 md:px-0;
 
     &__container {
       @apply bg-tertiary py-2;
@@ -39,7 +39,7 @@ header {
   }
 
   .main-bar {
-    @apply container grid grid-cols-4 md:flex md:justify-between gap-4 items-center py-5 h-24 px-0;
+    @apply container flex justify-between gap-4 items-center py-5 h-24 px-4 md:px-0;
 
     &--focus-mode-back-button {
       @apply h-16 lg:h-24;
@@ -65,15 +65,23 @@ header {
       @apply hidden md:block col-span-2 col-start-5 xl:col-start-4;
 
       form {
-        @apply block relative rounded text-md bg-background;
+        @apply block relative rounded text-md bg-background-6 border border-gray-7 h-full;
       }
 
       input[type="text"] {
-        @apply block bg-transparent w-full px-4 py-1.5;
+        @apply block bg-transparent w-full px-4 py-1.5 h-full;
+
+        &::placeholder {
+          @apply text-gray-8 ltr:pl-6 rtl:pr-6;
+        }
       }
 
       button[type="submit"] {
-        @apply absolute ltr:right-2 rtl:left-2 inset-y-2 text-secondary;
+        @apply absolute ltr:left-4 rtl:right-4 inset-y-2;
+
+        svg {
+          @apply fill-gray-8;
+        }
       }
     }
 
@@ -176,14 +184,23 @@ header {
       @apply fixed bottom-0 left-0 z-40 bg-white w-full px-4 py-3 flex justify-between text-secondary shadow-[0_-4px_6px_rgba(198,198,198,0.25)];
 
       &__trigger {
-        @apply flex flex-col items-center text-secondary cursor-pointer;
+        @apply text-secondary cursor-pointer py-1 px-2 text-md leading-[22px] w-fit flex items-center gap-x-2;
 
         svg {
           @apply w-6 h-6 fill-current;
         }
 
         span {
-          @apply text-sm first-letter:uppercase;
+          @apply text-secondary;
+        }
+
+        &:hover {
+          @apply bg-secondary rounded-[4px] text-white;
+
+          svg,
+          span {
+            @apply text-white;
+          }
         }
       }
 
@@ -430,7 +447,7 @@ header {
       @apply absolute top-full left-0 rounded w-full bg-gray-5;
 
       &-desktop {
-        @apply border-r border-gray-6 pr-6;
+        @apply border-r border-gray-6 pr-10;
 
         & button {
           @apply border border-gray-7 rounded px-4 py-2 gap-x-2;
@@ -505,7 +522,7 @@ header {
       @apply bg-white flex flex-row rounded-b shadow-lg text-black w-full lg:w-[530px] h-screen md:h-auto;
 
       &__left {
-        @apply flex flex-col justify-between p-4 md:p-8 space-y-5 hidden md:block md:w-3/4;
+        @apply p-4 md:p-8 space-y-5 hidden md:block md:w-3/4;
 
         &-top {
           @apply border-b-4 border-gray-3 pb-3;

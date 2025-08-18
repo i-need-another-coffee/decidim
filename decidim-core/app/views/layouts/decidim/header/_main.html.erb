@@ -18,7 +18,7 @@
       <% elsif current_user&.ephemeral? %>
         <%= render partial: "layouts/decidim/header/close_ephemeral_session" %>
       <% else %>
-        <div class="flex justify-between gap-x-8">
+        <div class="flex md:justify-between md:gap-x-10">
           <div class="main-bar__search">
             <%= render partial: "layouts/decidim/header/main_search" %>
           </div>
