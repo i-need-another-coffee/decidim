@@ -12,7 +12,7 @@ describe "Menu" do
 
   context "when clicking on a menu entry" do
     before do
-      click_on("Help", match: :first)
+      visit decidim.pages_path
     end
 
     it "switches the active option" do
