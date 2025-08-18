@@ -39,7 +39,7 @@ header {
   }
 
   .main-bar {
-    @apply container grid grid-cols-4 md:flex md:justify-between gap-4 items-center py-5 h-24;
+    @apply container grid grid-cols-4 md:flex md:justify-between gap-4 items-center py-5 h-24 px-0;
 
     &--focus-mode-back-button {
       @apply h-16 lg:h-24;
@@ -427,7 +427,50 @@ header {
     }
 
     &__language-chooser {
-      @apply absolute top-full left-0 bg-white rounded w-full bg-gray-5;
+      @apply absolute top-full left-0 rounded w-full bg-gray-5;
+
+      &-desktop {
+        @apply border-r border-gray-6 pr-6;
+
+        & button {
+          @apply border border-gray-7 rounded px-4 py-2 gap-x-2;
+
+          & > span,
+          & > svg:first-of-type {
+            @apply text-gray-8;
+            @apply block #{!important};
+          }
+
+          & > span {
+            @apply text-sm font-normal;
+          }
+
+          & > svg:last-of-type {
+            @apply text-gray-2  ml-1;
+            @apply block #{!important};
+          }
+        }
+
+        #dropdown-menu-language-chooser {
+          @apply absolute top-full bg-white shadow-[1px_4px_8px_3px_rgba(0,0,0,0.15)] p-2;
+
+          ul {
+            @apply grid grid-cols-3;
+
+            li:hover {
+              @apply rounded;
+            }
+
+            .is-active {
+              @apply bg-[#fc9292] rounded;
+
+              &:hover {
+                @apply bg-[var(--secondary)];
+              }
+            }
+          }
+        }
+      }
     }
 
     &__dropdown-menu {
