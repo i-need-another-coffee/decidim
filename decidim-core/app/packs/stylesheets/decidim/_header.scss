@@ -94,7 +94,7 @@ header {
     }
 
     &__menu-mobile {
-      @apply lg:hidden flex flex-row-reverse items-center;
+      @apply lg:hidden flex flex-row-reverse items-center gap-x-3;
     }
 
     &__links-desktop,
@@ -176,7 +176,7 @@ header {
       }
 
       svg + span {
-        @apply text-md leading-[22px] first-letter:uppercase;
+        @apply text-md leading-[22px] first-letter:uppercase font-semibold;
       }
     }
 
@@ -184,7 +184,7 @@ header {
       @apply fixed bottom-0 left-0 z-40 bg-white w-full px-4 py-3 flex justify-between text-secondary shadow-[0_-4px_6px_rgba(198,198,198,0.25)];
 
       &__trigger {
-        @apply flex flex-col items-center text-secondary cursor-pointer;
+        @apply flex items-center text-secondary cursor-pointer justify-evenly gap-x-1 px-2 py-1;
 
         svg {
           @apply w-6 h-6 fill-current;
@@ -206,10 +206,6 @@ header {
 
       &__dropdown {
         @apply absolute top-full left-0 z-30 bg-white;
-      }
-
-      &__dropdown-before {
-        @apply before:block before:absolute before:-top-10 before:right-12 before:content-[""] before:bg-white before:w-24 before:h-12 before:-mt-8;
       }
 
       &__account {
@@ -260,7 +256,7 @@ header {
         }
 
         svg + span {
-          @apply text-sm first-letter:uppercase w-auto;
+          @apply w-auto text-md leading-[22px] first-letter:uppercase font-semibold;
 
           flex-shrink: 0;
         }
