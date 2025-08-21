@@ -35,7 +35,7 @@ header {
   }
 
   #sticky-header-container {
-    @apply fixed w-full top-0 shadow-lg z-40 bg-white md:relative transition-top duration-300;
+    @apply fixed w-full top-0 z-40 bg-white md:relative transition-top duration-300;
   }
 
   .main-bar {
@@ -314,17 +314,21 @@ header {
   }
 
   .menu-bar {
-    @apply container h-full flex justify-between items-center lg:relative last-of-type:[&>svg]:hidden;
+    @apply container h-full flex justify-between items-center lg:relative last-of-type:[&>svg]:hidden md:px-0;
 
     &__container {
-      @apply bg-primary relative h-14;
+      @apply bg-white relative h-14;
     }
 
     &__breadcrumb-desktop {
-      @apply hidden lg:flex justify-between items-center gap-2.5 [&>*]:text-lg [&>*]:text-white;
+      @apply hidden lg:flex justify-between items-center [&>*]:text-md [&>*]:text-black;
+
+      .no-interactive {
+        @apply font-normal;
+      }
 
       &__dropdown-trigger {
-        @apply flex rounded px-2 py-1 z-20;
+        @apply flex rounded px-2 py-1 z-20 font-semibold;
 
         &:hover {
           @apply z-10 relative before:content-[''] before:absolute before:w-[calc(100%+3rem+1px)] before:min-w-[10rem] before:h-40 before:left-1/2 before:top-1/2 before:-translate-x-1/2 before:-translate-y-1/4 before:-z-10;
@@ -336,7 +340,7 @@ header {
       }
 
       &__dropdown-wrapper {
-        @apply flex items-center cursor-pointer rounded hover:backdrop-brightness-75 focus:backdrop-brightness-75 focus:outline-none;
+        @apply flex items-center cursor-pointer underline focus:backdrop-brightness-75 focus:outline-none;
       }
 
       &__dropdown-content {
@@ -410,11 +414,15 @@ header {
       @apply block lg:hidden w-full z-20;
 
       &__dropdown-trigger {
-        @apply flex items-center justify-between text-white;
+        @apply flex items-center justify-between text-black;
 
         svg {
           @apply w-6 h-6 fill-current;
         }
+      }
+
+      .menu-bar__breadcrumb-item {
+        @apply font-semibold underline;
       }
 
       /* overwrite default dropdown styles */
