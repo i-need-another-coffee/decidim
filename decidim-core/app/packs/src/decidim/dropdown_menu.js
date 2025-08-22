@@ -21,6 +21,7 @@ const menuContainer = document.getElementById("dropdown-menu-main-desktop");
 const menuButton = document.getElementById("main-dropdown-summary-desktop");
 const content = document.getElementById("content");
 const footer = document.querySelector("footer");
+const menuBar = document.querySelector("#menu-bar-container");
 
 
 menuButton.addEventListener("click", function () {
@@ -30,10 +31,12 @@ menuButton.addEventListener("click", function () {
     menuContainer.setAttribute("aria-hidden", "false");
     content.style.opacity = "0.3";
     footer.style.opacity = "0.3";
+    menuBar.style.opacity = "0.3";
   } else {
     menuContainer.setAttribute("aria-hidden", "true");
     content.style.opacity = "1";
     footer.style.opacity = "1";
+    menuBar.style.opacity = "1";
   }
 });
 

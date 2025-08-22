@@ -1,6 +1,6 @@
 header {
   .admin-bar {
-    @apply container flex flex-wrap items-center justify-start gap-y-2 gap-x-4 md:px-0;
+    @apply container flex flex-wrap items-center justify-start gap-y-2 gap-x-4;
 
     &__container {
       @apply bg-tertiary py-2;
@@ -39,14 +39,14 @@ header {
   }
 
   .main-bar {
-    @apply container flex justify-between gap-4 items-center py-5 h-24 px-4 md:px-0;
+    @apply container flex justify-between gap-4 items-center py-5 h-20;
 
     &--focus-mode-back-button {
       @apply h-16 lg:h-24;
     }
 
     &__container {
-      @apply relative w-full;
+      @apply relative w-full flex justify-between;
     }
 
     &__logo {
@@ -69,10 +69,10 @@ header {
       }
 
       input[type="text"] {
-        @apply block bg-transparent w-full px-4 py-1.5 h-full;
+        @apply block bg-transparent w-full px-4 py-2 h-full;
 
         &::placeholder {
-          @apply text-gray-8 ltr:pl-6 rtl:pr-6;
+          @apply text-gray-8 text-sm ltr:pl-6 rtl:pr-6;
         }
       }
 
@@ -310,21 +310,21 @@ header {
   }
 
   .menu-bar {
-    @apply container h-full flex justify-between items-center lg:relative last-of-type:[&>svg]:hidden md:px-0;
+    @apply container h-full flex justify-between items-center lg:relative last-of-type:[&>svg]:hidden;
 
     &__container {
-      @apply bg-white relative h-14;
+      @apply bg-white relative h-14 flex justify-between;
     }
 
     &__breadcrumb-desktop {
       @apply hidden lg:flex justify-between items-center [&>*]:text-md [&>*]:text-black;
 
       .no-interactive {
-        @apply font-normal;
+        @apply font-normal px-2;
       }
 
       &__dropdown-trigger {
-        @apply flex rounded px-2 py-1 z-20 font-semibold;
+        @apply flex rounded py-1 z-20 pr-2 font-semibold;
 
         &:hover {
           @apply z-10 relative before:content-[''] before:absolute before:w-[calc(100%+3rem+1px)] before:min-w-[10rem] before:h-40 before:left-1/2 before:top-1/2 before:-translate-x-1/2 before:-translate-y-1/4 before:-z-10;
