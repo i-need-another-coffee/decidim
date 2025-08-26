@@ -59,13 +59,6 @@ es:
         header_snippets: Snippets de encabezado
         highlight_alternative_color: Destacado, alternativo
         highlight_color: Destacado
-        highlighted_content_banner_action_subtitle: Subtítulo del botón de acción
-        highlighted_content_banner_action_title: Título del botón de acción
-        highlighted_content_banner_action_url: URL del botón de acción
-        highlighted_content_banner_enabled: Mostrar el banner de contenido resaltado
-        highlighted_content_banner_image: Imagen
-        highlighted_content_banner_short_description: Descripción breve
-        highlighted_content_banner_title: Título
         host: Host
         instagram_handler: Nombre de Instagram
         logo: Logo
@@ -173,12 +166,17 @@ es:
   decidim:
     admin:
       actions:
+        actions: Acciones
+        actions_label: Acciones para %{resource}
         add: Añadir
         attachment:
           new: Nuevo archivo adjunto
         attachment_collection:
           new: Nueva carpeta de archivos adjuntos
+        attachment_collections: Añadir una carpeta
+        attachments: Añadir un adjunto
         browse: Explorar
+        configure: Configurar
         confirm_delete_component: |
           ¿Seguro que quieres eliminar este componente?<br>
           Este componente contiene:<br>
@@ -186,21 +184,22 @@ es:
             <li class="font-bold">%{resources_count} recursos</li>
           </ul>
           Si cambias de opinión, puedes restaurarlo más tarde.
-        export: Exportar todo
+        export: Exportar
         export-selection: Exportar selección
         import: Importar
-        manage: Gestionar
+        menu_hidden: Ocultar del menú
+        moderate: Gestionar las moderaciones
         newsletter:
           new: Nuevo boletín
         participatory_space_private_user:
           new: Nuevo usuario privado del espacio participativo
         per_page: Por página
-        permissions: Permisos
+        permissions: Gestionar los permisos
         restore: Restaurar
         send_me_a_test_email: Envíame un correo electrónico de prueba
         share: Compartir
-        share_tokens: Enlaces de acceso
-        soft_delete: Enviar a la papelera
+        share_tokens: Compartir el enlace
+        soft_delete: Mover a la papelera
         user:
           new: Nueva administradora
         view_deleted_components: Ver los componentes eliminados
@@ -584,7 +583,7 @@ es:
         content: Contenido reportado
         external_domain_allowlist: Dominios externos permitidos
         help_sections: Secciones de ayuda
-        homepage: Página principal
+        homepage: Disposición de la página de inicio
         impersonations: Impersonaciones
         insights: Estadísticas
         manage: Gestionar
@@ -689,7 +688,7 @@ es:
               update_moderated_user_button: Deshacer la denuncia a las usuarias
             title: Acciones
             unblock: Desbloquear usuaria
-            unreport: Deshacer denuncia
+            unreport: Deshacer la denuncia
           cancel: Cancelar
           name: Nombre
           nickname: Alias
@@ -844,7 +843,7 @@ es:
         index:
           actions: Acciones
           badge: Insignias
-          block: Bloquear usuaria
+          block: Bloquear
           created_at: Creado el
           name: Nombre
           nickname: Alias
@@ -853,9 +852,10 @@ es:
           officialized: Oficializada
           reofficialize: Vuelve a oficializar
           reports: Informes
-          show_email: Mostrar la dirección de correo electrónico
+          send_message: Enviar un mensaje
+          show_email: Mostrar la dirección electrónica
           status: Estado
-          unblock: Desbloquear usuaria
+          unblock: Desbloquear
           unofficialize: Des-oficializar
         new:
           badge: Insignia de oficialización
@@ -903,14 +903,6 @@ es:
         update:
           error: Se ha producido un error al actualizar esta organización.
           success: Organización actualizada correctamente.
-      organization_appearance:
-        edit:
-          update: Actualizar
-        form:
-          header_snippets:
-            header_snippets_help_html: Utiliza este campo para añadir cosas a la cabecera HTML. El uso más común es integrar servicios de terceros que requieren JavaScript o CSS adicionales. También, puedes usarlo para añadir meta-etiquetas extra al HTML. Ten en cuenta que esto sólo será renderizado en páginas públicas, no en la sección de administración. Si el código interactúa con APIs externas o no cumple con las pautas de seguridad de la aplicación, será necesario cambiar la Política de Seguridad del Contenido. Lee más sobre esto <a href="https://docs.decidim.org/develop/en/customize/content_security_policy">en el sitio de documentación</a>.
-            title: Fragmentos de código HTML de cabecera
-          homepage_highlighted_content_banner_title: Banner de contenido resaltado
       organization_external_domain_allowlist:
         edit:
           update: Actualizar
@@ -1090,7 +1082,7 @@ es:
           success: Tema actualizado correctamente
       static_pages:
         actions:
-          view: Ver la página pública
+          view: Ver
         create:
           error: Se ha producido un error al crear una nueva página.
           success: La página se ha creado correctamente. Sigue ahora con la configuración de las fases.
@@ -1118,9 +1110,9 @@ es:
       taxonomies:
         actions:
           actions: Acciones
-          destroy: Eliminar taxonomía y elementos
-          edit: Editar taxonomía y elementos
-          filters: Administrar filtros
+          destroy: Borrar
+          edit: Editar
+          filters: Aplicar filtros
         breadcrumb:
           edit: Editar taxonomía
           new: Nueva taxonomía
@@ -1232,8 +1224,6 @@ es:
         authorization_workflows: Métodos de verificación
         dashboard: Panel de control
         edit_external_domains: Lista de dominios externos permitidos
-        edit_landing_page: Contenidos de la página
-        edit_organization_appearance: Editar apariencia de página de inicio
         impersonatable_users: Participantes que se pueden gestionar
         impersonations: Gestión de participantes
         menu: Menú
@@ -1248,6 +1238,9 @@ es:
         taxonomy_filters: Filtros de taxonomía para "%{taxonomy}"
         users: Administradoras
       tooltips:
+        cannot_destroy_taxonomy_filter: No se puede eliminar este filtro de taxonomía
+        cannot_edit_taxonomy_filter: No se puede editar este filtro de taxonomía
+        deleted_attachment_collections_info: No se puede eliminar esta carpeta porque tiene archivos adjuntos.
         deleted_component_info: Este componente solo se puede eliminar si el estado es 'Despublicado'.
       trash_management:
         restore:
@@ -1290,8 +1283,8 @@ es:
         not_hidden: No ocultas
         parent_hidden: No se puede mostrar este recurso porque está incluido dentro de otro recurso ("padre") que sigue oculto.
         title: Acciones
-        unhide: Vuelve a mostrar
-        unreport: Deshacer denuncia
+        unhide: Volver a mostrar
+        unreport: Deshacer la denuncia
       admin:
         reportable:
           bulk_action:

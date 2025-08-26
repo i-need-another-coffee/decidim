@@ -45,12 +45,6 @@ ko:
         from: 보낸사람의 이메일 주소
         github_handler: Github handler
         highlight_color: 하이라이트
-        highlighted_content_banner_action_title: 실행버튼 URL
-        highlighted_content_banner_action_url: 실행버튼 URL
-        highlighted_content_banner_enabled: 하이라이트된 컨텐츠 배너 보기
-        highlighted_content_banner_image: 이미지
-        highlighted_content_banner_short_description: 요약
-        highlighted_content_banner_title: 제목
         host: 호스트
         instagram_handler: Instagram handler
         logo: 로고
@@ -148,7 +142,6 @@ ko:
         attachment_collection:
           new: 새 첨부 폴더
         browse: 찾아보기
-        export: 모두 내보내기
         export-selection: 선택한 항목 내보내기
         import: 가져오기
         newsletter:
@@ -156,7 +149,6 @@ ko:
         participatory_space_private_user:
           new: 새 참여 공간 비공개 사용자
         per_page: 페이지 당
-        permissions: 권한
         send_me_a_test_email: 나에게 테스트 메일 보내기
         share: 공유
         user:
@@ -530,23 +522,15 @@ ko:
           success: 참가자가 성공적으로 차단되었습니다.
         index:
           badge: 뱃지
-          block: 사용자 차단
           name: 이름
           nickname: 닉네임
-          show_email: 이메일 주소 보기
           status: 상태
-          unblock: 사용자 차단 해제
         show_email_modal:
           email_address: 이메일 주소
           full_name: 전체 이름
           hidden: 숨겨짐
           show: 표시
           title: 참가자의 이메일 주소 보기
-      organization_appearance:
-        form:
-          header_snippets:
-            header_snippets_help_html: 이 필드를 사용하여 HTML 헤드에 항목을 추가할 수 있습니다. 가장 일반적인 용도는 자바스크립트나 CSS가 필요한 타사 서비스를 통합하는 것입니다. 또한 이를 사용하여 HTML에 추가 메타 태그를 추가할 수 있습니다. 이는 관리자 섹션이 아닌 공용 페이지에서만 렌더링됩니다. 코드가 외부 API와 상호 작용하거나 애플리케이션 보안 지침을 준수하지 않는 경우 콘텐츠 보안 정책을 변경해야 합니다. 지침 사이트 </a>에서 <a href="https://docs.decidim.org/develop/en/customize/content_security_policy ">에 대해 자세히 알아보십시오.
-          homepage_highlighted_content_banner_title: 강조 표시된 내용 배너
       participatory_space_private_users:
         new:
           create: 생성
@@ -598,8 +582,6 @@ ko:
         update:
           success: 주제가 성공적으로 업데이트되었습니다
       static_pages:
-        actions:
-          view: 공개 페이지 보기
         create:
           error: 새 페이지를 생성하는 도중 문제가 생겼습니다.
           success: 페이지가 성공적으로 생성되었습니다.
@@ -627,8 +609,6 @@ ko:
         areas: 영역
         authorization_workflows: 인증 방식
         dashboard: 대시보드
-        edit_landing_page: 페이지 콘텐츠
-        edit_organization_appearance: 홈페이지 외관 편집
         impersonatable_users: 관리 가능한 참가자
         impersonations: 참가자 관리
         menu: 메뉴

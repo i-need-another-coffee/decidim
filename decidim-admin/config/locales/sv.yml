@@ -59,13 +59,6 @@ sv:
         header_snippets: HTML header snippets
         highlight_alternative_color: Alternativ accentfärg
         highlight_color: Accentfärg
-        highlighted_content_banner_action_subtitle: Undertitel på knapp
-        highlighted_content_banner_action_title: Titel på knapp
-        highlighted_content_banner_action_url: URL för knapp
-        highlighted_content_banner_enabled: Visa bannern för utvalt innehåll
-        highlighted_content_banner_image: Bild
-        highlighted_content_banner_short_description: Kort beskrivning
-        highlighted_content_banner_title: Titel
         host: Host
         instagram_handler: Instagram-namn
         logo: Logo
@@ -173,12 +166,16 @@ sv:
   decidim:
     admin:
       actions:
+        actions_label: Åtgärder för %{resource}
         add: Lägg till
         attachment:
           new: Ny bifogad fil
         attachment_collection:
           new: Ny mapp för bilagor
+        attachment_collections: Lägg till mapp
+        attachments: Lägg till bilaga
         browse: Bläddra
+        configure: Konfigurera
         confirm_delete_component: |
           Är du säker på att du vill ta bort komponenten?<br>
           Komponenten innehåller:<br>
@@ -186,21 +183,22 @@ sv:
             <li class="font-bold">%{resources_count} resurser</li>
           </ul>
           Om du ändrar dig, du kan återställa det senare.
-        export: Exportera allt
+        export: Exportera
         export-selection: Exportera markerade
         import: Importera
-        manage: Hantera
+        menu_hidden: Dölj från menyn
+        moderate: Hantera modereringar
         newsletter:
           new: Nytt nyhetsbrev
         participatory_space_private_user:
           new: Ny privat deltagare i deltagarutrymme
         per_page: Per sida
-        permissions: Behörigheter
+        permissions: Hantera behörigheter
         restore: Återställ
         send_me_a_test_email: Skicka ett testmeddelande till mig
         share: Dela
-        share_tokens: Åtkomstlänkar
-        soft_delete: Mjuk radering
+        share_tokens: Dela länk
+        soft_delete: Flytta till papperskorgen
         user:
           new: Ny administratör
         view_deleted_components: Visa borttagna komponenter
@@ -351,6 +349,8 @@ sv:
       conflicts:
         attempts: Försök
         'false': 'Nej'
+        index:
+          text: Sök efter e-post, namn eller användarnamn
         managed_user_name: Hanterad användare
         solved: Löst
         title: Verifieringskonflikter
@@ -452,7 +452,11 @@ sv:
         remove_all: Ta bort allt
         search_label: Sök
         search_placeholder:
+          name_or_nickname_or_email_cont: Sök i %{collection} efter e-post, namn eller användarnamn
           report_count_eq: Antal rapporteringar
+          reported_id_string_or_reported_content_cont: Sök %{collection} efter anmälnings-id eller innehåll
+          title_cont: Sök i %{collection} efter titel
+          user_name_or_user_nickname_or_user_email_cont: Sök i %{collection} efter e-post, namn eller användarnamn
         state_eq:
           label: Status
           values:
@@ -551,6 +555,7 @@ sv:
       logs:
         filters:
           participatory_space: Hitta deltagarutrymme
+          text: Sök efter e-post, namn eller användarnamn
           user: Användare
         logs_list:
           no_logs_yet: Det finns inga loggar än.
@@ -577,7 +582,6 @@ sv:
         content: Rapporterat innehåll
         external_domain_allowlist: Tillåtna externa domäner
         help_sections: Hjälpavsnitt
-        homepage: Startsida
         impersonations: Uppträd som
         insights: Insikter
         manage: Hantera
@@ -682,7 +686,7 @@ sv:
               update_moderated_user_button: Avrapportera användare
             title: Åtgärder
             unblock: Avblockera användare
-            unreport: Ta bort rapport
+            unreport: Ångra rapporten
           cancel: Avbryt
           name: Namn
           nickname: Användarnamn
@@ -706,10 +710,10 @@ sv:
               title: Dölj
               update_moderation_button: Dölj valda resurser
             unhide:
-              title: Sluta dölja
+              title: Ångra döljande
               update_moderation_button: Sluta dölja valda resurser
             unreport:
-              title: Avrapportera
+              title: Ångra rapporten
               update_moderation_button: Avrapportera valda resurser
           cancel: Avbryt
           selected: valda
@@ -837,7 +841,7 @@ sv:
         index:
           actions: Åtgärder
           badge: Märke
-          block: Blockera användare
+          block: Blockera
           created_at: Skapad
           name: Namn
           nickname: Användarnamn
@@ -846,9 +850,10 @@ sv:
           officialized: Har officiell status
           reofficialize: Ge officiell status igen
           reports: Rapporter
-          show_email: Visa e-postadress
+          send_message: Skicka meddelande
+          show_email: Visa e-post
           status: Status
-          unblock: Avblockera användare
+          unblock: Avblockera
           unofficialize: Återkalla officiell status
         new:
           badge: Officiellt märke
@@ -896,14 +901,6 @@ sv:
         update:
           error: Det gick inte att uppdatera organisationen.
           success: Organisationen har uppdaterats.
-      organization_appearance:
-        edit:
-          update: Uppdatera
-        form:
-          header_snippets:
-            header_snippets_help_html: Använd det här fältet för att göra tillägg till HTML-huvudet. Den vanligaste användningen är för att integrera tredjepartstjänster som kräver extra JavaScript eller CSS. Du kan också använda den för att lägga till extra metataggar till HTML. Observera att detta endast kommer att visas på offentliga sidor, inte i admin-sektionen. Om koden interagerar med externa API:er eller inte följer webbplatsens säkerhetsriktlinjer behöver du ändra säkerhetspolicyn. Läs mer <a href="https://docs.decidim.org/develop/en/customize/content_security_policy">på dokumentationssidan</a>.
-            title: HTML header snippets
-          homepage_highlighted_content_banner_title: Banner med utvalt innehåll
       organization_external_domain_allowlist:
         edit:
           update: Uppdatera
@@ -1083,7 +1080,7 @@ sv:
           success: Ämnet har uppdaterats
       static_pages:
         actions:
-          view: Visa offentlig sida
+          view: Visa
         create:
           error: Det gick inte att skapa en ny sida.
           success: Sidan har skapats.
@@ -1111,9 +1108,9 @@ sv:
       taxonomies:
         actions:
           actions: Åtgärder
-          destroy: Ta bort kategorisering & kategorier
-          edit: Redigera kategorisering & kategorier
-          filters: Hantera filter
+          destroy: Radera
+          edit: Redigera
+          filters: Tillämpa filter
         breadcrumb:
           edit: Redigera kategorisering
           new: Ny kategorisering
@@ -1225,8 +1222,6 @@ sv:
         authorization_workflows: Verifieringsmetoder
         dashboard: Adminpanel
         edit_external_domains: Tillåtna externa domäner
-        edit_landing_page: Sidans innehåll
-        edit_organization_appearance: Redigera startsidans utseende
         impersonatable_users: Hanterbara deltagare
         impersonations: Deltagarhantering
         menu: Meny
@@ -1241,6 +1236,7 @@ sv:
         taxonomy_filters: Kategorifilter för "%{taxonomy}"
         users: Administratörer
       tooltips:
+        deleted_attachment_collections_info: Kan inte ta bort denna mapp eftersom den har bilagor.
         deleted_component_info: Komponenten kan endast tas bort om statusen är 'avpublicerad'.
       trash_management:
         restore:
@@ -1283,8 +1279,8 @@ sv:
         not_hidden: Inte dold
         parent_hidden: Du kan inte visa innehållet eftersom dess överordnade innehåll fortfarande är dolt.
         title: Åtgärder
-        unhide: Sluta dölja
-        unreport: Ta bort rapport
+        unhide: Ångra döljande
+        unreport: Ångra rapporten
       admin:
         reportable:
           bulk_action:

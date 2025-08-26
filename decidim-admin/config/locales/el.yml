@@ -56,13 +56,6 @@ el:
         header_snippets: Τμήματα κεφαλίδας
         highlight_alternative_color: Επισήμαση, εναλλακτική
         highlight_color: Επισήμανση
-        highlighted_content_banner_action_subtitle: Υπότιτλος κουμπιού ενέργειας
-        highlighted_content_banner_action_title: Τίτλος κουμπιού ενέργειας
-        highlighted_content_banner_action_url: Διεύθυνση URL κουμπιού ενέργειας
-        highlighted_content_banner_enabled: Εμφάνιση του επισημασμένου πλαισίου περιεχομένου
-        highlighted_content_banner_image: Εικόνα
-        highlighted_content_banner_short_description: Σύντομη περιγραφή
-        highlighted_content_banner_title: Τίτλος
         host: Διοργανωτής
         instagram_handler: Πρόγραμμα χειρισμού Instagram
         logo: Λογότυπο
@@ -172,16 +165,15 @@ el:
         attachment_collection:
           new: Νέος φάκελος συνημμένων
         browse: Αναζήτηση
-        export: Εξαγωγή όλων
+        configure: Διαμόρφωση
+        export: Εξαγωγή
         export-selection: Εξαγωγή επιλογής
         import: Εισαγωγή
-        manage: Διαχείριση
         newsletter:
           new: Νέο ενημερωτικό δελτίο
         participatory_space_private_user:
           new: Νέος ιδιωτικός χρήστης συμμετοχικού χώρου
         per_page: Ανά σελίδα
-        permissions: Δικαιώματα
         share: Κοινοποίηση
         user:
           new: Νέος διαχειριστής
@@ -502,7 +494,6 @@ el:
         configuration: Διαμόρφωση
         content: Περιεχόμενο που αναφέρθηκε
         help_sections: Ενότητες βοήθειας
-        homepage: Αρχική σελίδα
         impersonations: Αναπαραστάσεις
         manage: Διαχείριση
         moderation: Καθολικές εποπτεύσεις
@@ -582,9 +573,11 @@ el:
         index:
           actions:
             block: Αποκλεισμός χρήστη
+            bulk_actions:
+              unreport:
+                title: Κατάργηση αναφοράς
             title: Ενέργειες
             unblock: Ξεμπλοκάρισμα χρήστη
-            unreport: Κατάργηση αναφοράς
           name: Όνομα
           nickname: Ψευδώνυμο
           reason: Αιτία
@@ -689,7 +682,6 @@ el:
         index:
           actions: Ενέργειες
           badge: Έμβλημα
-          block: Αποκλεισμός χρήστη
           created_at: Δημιουργήθηκε στις
           name: Όνομα
           nickname: Ψευδώνυμο
@@ -698,9 +690,7 @@ el:
           officialized: Επισημοποιήθηκε
           reofficialize: Εκ νέου επισημοποίηση
           reports: Αναφορές
-          show_email: Εμφάνιση διεύθυνσης email
           status: Κατάσταση
-          unblock: Ξεμπλοκάρισμα χρήστη
           unofficialize: Κατάργηση επισημοποίησης
         new:
           badge: Έμβλημα επισημοποίησης
@@ -730,11 +720,6 @@ el:
         update:
           error: Υπήρξε ένα πρόβλημα κατά την ενημέρωση αυτού του οργανισμού.
           success: Ο οργανισμός ενημερώθηκε με επιτυχία.
-      organization_appearance:
-        edit:
-          update: Ενημέρωση
-        form:
-          homepage_highlighted_content_banner_title: Επισημασμένο πλαίσιο περιεχομένου
       participatory_space_private_users:
         create:
           error: Υπήρξε ένα πρόβλημα κατά την προσθήκη ενός ιδιωτικού συμμετέχοντα για αυτόν τον χώρο συμμετοχής.
@@ -819,8 +804,6 @@ el:
           error: Υπήρξε ένα πρόβλημα κατά την ενημέρωση αυτού του θέματος.
           success: Το θέμα ενημερώθηκε με επιτυχία
       static_pages:
-        actions:
-          view: Προβολή δημόσιας σελίδας
         create:
           error: Υπήρξε ένα πρόβλημα κατά τη δημιουργία μιας νέας σελίδας.
           success: Η σελίδα δημιουργήθηκε με επιτυχία.
@@ -888,8 +871,6 @@ el:
         hide: Απόκρυψη
         not_hidden: Δεν είναι κρυφό
         title: Ενέργειες
-        unhide: Επανεμφάνιση
-        unreport: Κατάργηση αναφοράς
       admin:
         reportable:
           hide:

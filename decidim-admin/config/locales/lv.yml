@@ -37,13 +37,6 @@ lv:
         favicon: Ikona
         github_handler: GitHub apdarinātājs
         header_snippets: Galvenes koda fragmenti
-        highlighted_content_banner_action_subtitle: Darbības pogas apakšnosaukums
-        highlighted_content_banner_action_title: Darbības pogas nosaukums
-        highlighted_content_banner_action_url: Darbības pogas URL
-        highlighted_content_banner_enabled: Rādīt izcelto satura reklāmkarogu
-        highlighted_content_banner_image: Attēls
-        highlighted_content_banner_short_description: Īss apraksts
-        highlighted_content_banner_title: Nosaukums
         instagram_handler: Instagram apdarinātājs
         logo: Logotips
         name: Nosaukums
@@ -112,9 +105,9 @@ lv:
       actions:
         add: Pievienot
         browse: Pārlūkot
-        manage: Pārvaldīt
+        configure: Konfigurēt
+        export: Eksportēt
         per_page: Lapā
-        permissions: Atļaujas
       area_types:
         create:
           error: Jauna jomas veida radīšanas laikā radās problēma.
@@ -289,7 +282,6 @@ lv:
         areas: Jomas
         configuration: Konfigurācija
         help_sections: Palīdzības sadaļas
-        homepage: Sākumlapa
         impersonations: Uzdošanās par citu personu
         manage: Pārvaldīt
         newsletters: Informatīvie biļeteni
@@ -429,7 +421,6 @@ lv:
           officialize: Piešķirt oficiālo statusu
           officialized: Piešķirts oficiāls statuss
           reofficialize: Atkal piešķirt oficiālo statusu
-          show_email: Rādīt e-pasta adresi
           status: Statuss
           unofficialize: Noņemt oficiālo statusu
         new:
@@ -451,11 +442,6 @@ lv:
         update:
           error: Šīs organizācijas atjaunināšanas laikā radās problēma.
           success: Organizācija ir veiksmīgi atjaunināta.
-      organization_appearance:
-        edit:
-          update: Atjaunināt
-        form:
-          homepage_highlighted_content_banner_title: Izceltais satura reklāmkarogs
       participatory_space_private_users:
         create:
           error: Pievienojot privāto dalībnieku šai līdzdalības telpai, radās problēma.
@@ -525,8 +511,6 @@ lv:
           error: Šīs tēmas atjaunināšanas laikā radās problēma.
           success: Tēma ir veiksmīgi atjaunināta
       static_pages:
-        actions:
-          view: Skatīt publisko lapu
         create:
           error: Jaunas lapas izveides laikā radās problēma.
           success: Lapa ir veiksmīgi izveidota.
@@ -582,8 +566,6 @@ lv:
         hide: Slēpt
         not_hidden: Nav paslēpts
         title: Darbības
-        unhide: Atcelt slēpšanu
-        unreport: Atcelt ziņošanu
       admin:
         reportable:
           hide:

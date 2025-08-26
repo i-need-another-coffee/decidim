@@ -38,13 +38,6 @@ ru:
         favicon: Значок
         github_handler: Обработчик GitHub
         header_snippets: Сниппеты для гипертекстовых заголовков страниц сайта
-        highlighted_content_banner_action_subtitle: Подзаголовок кнопки действия
-        highlighted_content_banner_action_title: Заголовок кнопки действия
-        highlighted_content_banner_action_url: Веб-адрес кнопки действия
-        highlighted_content_banner_enabled: Показывать баннер рекомендуемого содержимого
-        highlighted_content_banner_image: Изображение
-        highlighted_content_banner_short_description: Краткое описание
-        highlighted_content_banner_title: Заголовок
         instagram_handler: Обработчик Instagram
         logo: Логотип
         name: Имя
@@ -112,8 +105,8 @@ ru:
       actions:
         add: Добавить
         browse: Просмотреть
-        manage: Управлять
-        permissions: Права
+        configure: Настроить
+        export: Сохранить в виде файла
       area_types:
         create:
           error: При попытке создать новый вид участка произошла ошибка.
@@ -273,7 +266,6 @@ ru:
         areas: Участки
         configuration: Конфигурация
         help_sections: Разделы справки
-        homepage: Домашняя страница
         impersonations: Выступления в роли участника
         manage: Управлять
         newsletters: Рассылки новостей
@@ -418,11 +410,6 @@ ru:
         update:
           error: При попытке обновить эту организацию произошла ошибка.
           success: Организация успешно обновлена.
-      organization_appearance:
-        edit:
-          update: Обновить
-        form:
-          homepage_highlighted_content_banner_title: Баннер рекомендуемого содержимого
       participatory_space_private_users:
         create:
           error: При попытке добавить частного участника в это пространство соучастия произошла ошибка.
@@ -471,8 +458,6 @@ ru:
           error: При попытке обновить этот охват произошла ошибка.
           success: Охват успешно обновлен
       static_pages:
-        actions:
-          view: Просмотреть общедоступную страницу
         create:
           error: При попытке создать новую страницу произошла ошибка.
           success: Страница успешно создана.
@@ -518,8 +503,6 @@ ru:
         hide: Скрыть
         not_hidden: Не скрыт
         title: Действия
-        unhide: Отобразить
-        unreport: Отменить жалобу
       admin:
         reportable:
           hide:

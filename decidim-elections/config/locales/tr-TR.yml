@@ -1,7 +1,13 @@
 tr:
   decidim:
+    admin:
+      menu:
+        elections_menu:
+          election_questions: Sorular
     components:
       elections:
+        actions:
+          destroy: Yok et
         name: Seçimler
         settings:
           global:
@@ -12,16 +18,34 @@ tr:
       actions:
         title: Eylemler
       admin:
+        dashboard:
+          main:
+            labels:
+              description: Açıklama
+          questions:
+            labels:
+              answers: Cevaplar
+            title: Sorular
+          questions_table:
+            answer: Cevaplar
         elections:
           edit:
             title: Seçimi düzenle
-            update: Seçimi güncelle
+          form:
+            publish: Yayınla
           index:
             title: Seçimler
           new:
-            create: Seçim oluştur
             title: Yeni seçim
+        questions:
+          edit_questions:
+            new_question: Yeni soru
+            title: Sorular
       models:
         election:
           fields:
+            status: Statü
             title: Başlık
+      status:
+        active: Aktif
+        finished: Bitti
