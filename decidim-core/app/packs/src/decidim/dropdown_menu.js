@@ -24,29 +24,37 @@ const footer = document.querySelector("footer");
 const menuBar = document.querySelector("#menu-bar-container");
 
 
-menuButton.addEventListener("click", function () {
-  const isHidden = menuContainer.getAttribute("aria-hidden") === "true";
+if (menuButton !== null) {
+  menuButton.addEventListener("click", function () {
+    if (menuContainer === null) {
+      return;
+    }
 
-  if (isHidden) {
-    menuContainer.setAttribute("aria-hidden", "false");
-    content.style.opacity = "0.3";
-    footer.style.opacity = "0.3";
-    menuBar.style.opacity = "0.3";
-  } else {
-    menuContainer.setAttribute("aria-hidden", "true");
-    content.style.opacity = "1";
-    footer.style.opacity = "1";
-    menuBar.style.opacity = "1";
-  }
-});
+    const isHidden = menuContainer.getAttribute("aria-hidden") === "true";
 
-document.addEventListener("click", function (event) {
-  const isOpen = menuContainer.getAttribute("aria-hidden") === "false";
-  const clickedInsideMenu = menuContainer.contains(event.target) || menuButton.contains(event.target);
+    if (isHidden) {
+      menuContainer.setAttribute("aria-hidden", "false");
+      content.style.opacity = "0.3";
+      footer.style.opacity = "0.3";
+      menuBar.style.opacity = "0.3";
+    } else {
+      menuContainer.setAttribute("aria-hidden", "true");
+      content.style.opacity = "1";
+      footer.style.opacity = "1";
+      menuBar.style.opacity = "1";
+    }
+  });
+}
 
-  if (isOpen && !clickedInsideMenu) {
-    menuContainer.setAttribute("aria-hidden", "true");
-    content.style.opacity = "1";
-    footer.style.opacity = "1";
-  }
-});
+if (menuContainer !== null) {
+  document.addEventListener("click", function (event) {
+    const isOpen = menuContainer.getAttribute("aria-hidden") === "false";
+    const clickedInsideMenu = menuContainer.contains(event.target) || menuButton.contains(event.target);
+
+    if (isOpen && !clickedInsideMenu) {
+      menuContainer.setAttribute("aria-hidden", "true");
+      content.style.opacity = "1";
+      footer.style.opacity = "1";
+    }
+  });
+}
