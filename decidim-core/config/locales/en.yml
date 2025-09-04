@@ -2119,7 +2119,6 @@ en:
         confirm_title_close_ephemeral_session: Before leaving this page…
         log_in: Log in
         main_menu: Main menu
-        user_menu: User menu
       impersonation_warning:
         close_session: Close session
         description_html: You are managing the participant <b>%{user_name}</b>.
