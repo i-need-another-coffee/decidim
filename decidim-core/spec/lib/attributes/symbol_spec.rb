@@ -22,10 +22,10 @@ module Decidim
       end
 
       context "with a constant value" do
-        let(:value) { OpenStruct }
+        let(:value) { BetterStruct }
 
         it "returns the value cast to string and then to symbol" do
-          expect(subject).to be(:OpenStruct)
+          expect(subject).to be(:"Decidim::BetterStruct")
         end
       end
 

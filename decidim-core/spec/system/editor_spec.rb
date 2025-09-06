@@ -15,7 +15,7 @@ describe "Editor" do
 
   let(:editor_content) { "" }
   let(:editor_options) { {} }
-  let(:record) { OpenStruct.new(body: editor_content) }
+  let(:record) { Decidim::BetterStruct.new(body: editor_content) }
   let(:form) { Decidim::FormBuilder.new(:record, record, template, {}) }
   let(:template_class) do
     Class.new(ActionView::Base) do

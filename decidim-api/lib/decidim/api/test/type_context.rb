@@ -11,7 +11,7 @@ shared_context "with a graphql class type" do
       Doorkeeper::OAuth::Scopes.from_string("api:read")
     end
   end
-  let(:model) { OpenStruct.new({}) }
+  let(:model) { BetterStruct.new({}) }
   let(:type_class) { described_class }
   let(:variables) { {} }
   let(:root_value) { model }
@@ -51,7 +51,7 @@ shared_context "with a graphql scalar class type" do
   include_context "with a graphql class type"
 
   let(:root_value) do
-    OpenStruct.new(value: model)
+    BetterStruct.new(value: model)
   end
 
   let(:type_class) do

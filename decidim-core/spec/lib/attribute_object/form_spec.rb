@@ -171,7 +171,7 @@ module Decidim
       subject { form.from_model(model) }
 
       let(:model) do
-        OpenStruct.new(
+        BetterStruct.new(
           id: 1,
           name: "John",
           email: "john@example.org",
@@ -213,7 +213,7 @@ module Decidim
         let(:drink) { drink_class.new }
 
         let(:model) do
-          OpenStruct.new(id: 1, drinks: [drink])
+          BetterStruct.new(id: 1, drinks: [drink])
         end
 
         it "calls the map_model method on the created nested form object" do
@@ -407,7 +407,7 @@ module Decidim
 
       it "sets the correct context values" do
         subject.with_context(context)
-        expect(subject.context).to be_a(OpenStruct)
+        expect(subject.context).to be_a(BetterStruct)
         expect(subject.context.foo).to eq("bar")
         expect(subject.context.baz).to eq("biz")
       end

@@ -30,12 +30,12 @@ module Decidim
 
     let(:collection) do
       [
-        OpenStruct.new(id: 1, name: { ca: "foocat", es: "fooes" }, ids: [1, 2, 3], float: 1.66, date: Time.zone.local(2017, 10, 1, 5, 0)),
-        OpenStruct.new(id: 2, name: { ca: "barcat", es: "bares" }, ids: [2, 3, 4], float: 0.55, date: Time.zone.local(2017, 9, 20)),
-        OpenStruct.new(id: 3, name: { ca: "@atcat", es: "@ates" }, ids: [1, 2, 3], float: 0.35, date: Time.zone.local(2020, 7, 20)),
-        OpenStruct.new(id: 4, name: { ca: "=equalcat", es: "=equales" }, ids: [1, 2, 3], float: 0.45, date: Time.zone.local(2020, 6, 24)),
-        OpenStruct.new(id: 5, name: { ca: "+pluscat", es: "+pluses" }, ids: [1, 2, 3], float: 0.65, date: Time.zone.local(2020, 7, 15)),
-        OpenStruct.new(id: 6, name: { ca: "-minuscat", es: "-minuses" }, ids: [1, 2, 3], float: 0.75, date: Time.zone.local(2020, 6, 27))
+        Decidim::BetterStruct.new(id: 1, name: { ca: "foocat", es: "fooes" }, ids: [1, 2, 3], float: 1.66, date: Time.zone.local(2017, 10, 1, 5, 0)),
+        Decidim::BetterStruct.new(id: 2, name: { ca: "barcat", es: "bares" }, ids: [2, 3, 4], float: 0.55, date: Time.zone.local(2017, 9, 20)),
+        Decidim::BetterStruct.new(id: 3, name: { ca: "@atcat", es: "@ates" }, ids: [1, 2, 3], float: 0.35, date: Time.zone.local(2020, 7, 20)),
+        Decidim::BetterStruct.new(id: 4, name: { ca: "=equalcat", es: "=equales" }, ids: [1, 2, 3], float: 0.45, date: Time.zone.local(2020, 6, 24)),
+        Decidim::BetterStruct.new(id: 5, name: { ca: "+pluscat", es: "+pluses" }, ids: [1, 2, 3], float: 0.65, date: Time.zone.local(2020, 7, 15)),
+        Decidim::BetterStruct.new(id: 6, name: { ca: "-minuscat", es: "-minuses" }, ids: [1, 2, 3], float: 0.75, date: Time.zone.local(2020, 6, 27))
       ]
     end
 
@@ -92,8 +92,8 @@ module Decidim
 
       let(:collection) do
         [
-          OpenStruct.new(id: 1, title: { ca: "such", es: "wow" }, start_date: Date.strptime("08-07-2020", "%d-%m-%Y")),
-          OpenStruct.new(id: 2, title: { ca: "many", es: "much" }, start_date: Date.strptime("13-01-2021", "%d-%m-%Y"))
+          Decidim::BetterStruct.new(id: 1, title: { ca: "such", es: "wow" }, start_date: Date.strptime("08-07-2020", "%d-%m-%Y")),
+          Decidim::BetterStruct.new(id: 2, title: { ca: "many", es: "much" }, start_date: Date.strptime("13-01-2021", "%d-%m-%Y"))
         ]
       end
 

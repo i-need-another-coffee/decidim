@@ -26,7 +26,7 @@ module Decidim
     end
 
     let(:collection) do
-      [OpenStruct.new(id: 1, name: "foo"), OpenStruct.new(id: 2, name: "bar")]
+      [Decidim::BetterStruct.new(id: 1, name: "foo"), Decidim::BetterStruct.new(id: 2, name: "bar")]
     end
 
     describe "export" do

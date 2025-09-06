@@ -20,7 +20,7 @@ module Decidim
       end
 
       let(:resource) do
-        OpenStruct.new(author: user)
+        Decidim::BetterStruct.new(author: user)
       end
 
       let(:user) { create(:user) }
@@ -97,7 +97,7 @@ module Decidim
       end
 
       context "when the resource does not have an author" do
-        let(:resource) { OpenStruct.new }
+        let(:resource) { Decidim::BetterStruct.new }
 
         it "ignores it" do
           expect(subject.author).to be_nil

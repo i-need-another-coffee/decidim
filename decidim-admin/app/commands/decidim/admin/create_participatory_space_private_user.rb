@@ -82,12 +82,12 @@ module Decidim
       end
 
       def user_form
-        OpenStruct.new(name: form.name,
-                       email: form.email.downcase,
-                       organization: private_user_to.organization,
-                       admin: false,
-                       invited_by: current_user,
-                       invitation_instructions:)
+        BetterStruct.new(name: form.name,
+                         email: form.email.downcase,
+                         organization: private_user_to.organization,
+                         admin: false,
+                         invited_by: current_user,
+                         invitation_instructions:)
       end
 
       def invitation_instructions

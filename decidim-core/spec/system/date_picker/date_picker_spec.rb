@@ -5,7 +5,7 @@ require "spec_helper"
 describe "Datepicker" do
   let(:organization) { create(:organization) }
   let(:datepicker_content) { "" }
-  let(:record) { OpenStruct.new(body: datepicker_content) }
+  let(:record) { Decidim::BetterStruct.new(body: datepicker_content) }
   let(:form) { Decidim::FormBuilder.new(:example, record, template, {}) }
   let(:datetime_field) { form.datetime_field(:input) }
 

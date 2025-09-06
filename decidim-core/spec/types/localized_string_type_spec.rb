@@ -9,7 +9,7 @@ module Decidim
       include_context "with a graphql class type"
 
       let(:model) do
-        OpenStruct.new(locale: "en", text: "A test locale.")
+        Decidim::BetterStruct.new(locale: "en", text: "A test locale.")
       end
 
       describe "locale" do
@@ -36,14 +36,14 @@ module Decidim
         end
 
         context "when the model responds to machine_translated" do
-          let(:model) { OpenStruct.new(machine_translated: true) }
+          let(:model) { Decidim::BetterStruct.new(machine_translated: true) }
 
           it "returns the correct value" do
             expect(response).to include("machineTranslated" => true)
           end
 
           context "and the model returns false" do
-            let(:model) { OpenStruct.new(machine_translated: false) }
+            let(:model) { Decidim::BetterStruct.new(machine_translated: false) }
 
             it "returns the correct value" do
               expect(response).to include("machineTranslated" => false)
@@ -51,7 +51,7 @@ module Decidim
           end
 
           context "and the model returns a nil" do
-            let(:model) { OpenStruct.new(machine_translated: nil) }
+            let(:model) { Decidim::BetterStruct.new(machine_translated: nil) }
 
             it "returns false" do
               expect(response).to include("machineTranslated" => false)
@@ -59,7 +59,7 @@ module Decidim
           end
 
           context "and the model returns a non-boolean evaluating as present" do
-            let(:model) { OpenStruct.new(machine_translated: "true") }
+            let(:model) { Decidim::BetterStruct.new(machine_translated: "true") }
 
             it "returns true" do
               expect(response).to include("machineTranslated" => true)
@@ -67,7 +67,7 @@ module Decidim
           end
 
           context "and the model returns a non-boolean evaluating as blank" do
-            let(:model) { OpenStruct.new(machine_translated: "") }
+            let(:model) { Decidim::BetterStruct.new(machine_translated: "") }
 
             it "returns false" do
               expect(response).to include("machineTranslated" => false)

@@ -82,7 +82,7 @@ module Decidim
         end
 
         context "with a custom class without defined ActiveModel::Type" do
-          let(:type) { OpenStruct }
+          let(:type) { Decidim::BetterStruct }
 
           it "returns an :object type with the correct primitive option" do
             expect(subject).to eq(type: :object, options: { primitive: type, foo: "bar" })
@@ -91,33 +91,33 @@ module Decidim
       end
 
       context "with a Hash type" do
-        let(:type) { { String => OpenStruct } }
+        let(:type) { { String => Decidim::BetterStruct } }
 
         it "returns a :hash type with correct key_type and value_type options" do
-          expect(subject).to eq(type: :hash, options: { key_type: String, value_type: OpenStruct, default: {}, foo: "bar" })
+          expect(subject).to eq(type: :hash, options: { key_type: String, value_type: Decidim::BetterStruct, default: {}, foo: "bar" })
         end
 
         context "with custom default option" do
-          let(:options) { { default: { "a" => OpenStruct.new } } }
+          let(:options) { { default: { "a" => Decidim::BetterStruct.new } } }
 
           it "returns a :hash type with correct value_type and default options" do
-            expect(subject).to eq(type: :hash, options: { key_type: String, value_type: OpenStruct, default: options[:default] })
+            expect(subject).to eq(type: :hash, options: { key_type: String, value_type: Decidim::BetterStruct, default: options[:default] })
           end
         end
       end
 
       context "with an Array type" do
-        let(:type) { Array[OpenStruct] }
+        let(:type) { Array[Decidim::BetterStruct] }
 
         it "returns a :hash type with correct value_type option" do
-          expect(subject).to eq(type: :array, options: { value_type: OpenStruct, default: [], foo: "bar" })
+          expect(subject).to eq(type: :array, options: { value_type: Decidim::BetterStruct, default: [], foo: "bar" })
         end
 
         context "with custom default option" do
-          let(:options) { { default: [OpenStruct.new] } }
+          let(:options) { { default: [Decidim::BetterStruct.new] } }
 
           it "returns a :hash type with correct value_type and default options" do
-            expect(subject).to eq(type: :array, options: { value_type: OpenStruct, default: options[:default] })
+            expect(subject).to eq(type: :array, options: { value_type: Decidim::BetterStruct, default: options[:default] })
           end
         end
       end

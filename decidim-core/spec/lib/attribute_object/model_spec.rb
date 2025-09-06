@@ -15,8 +15,8 @@ module Decidim
         attribute :int, Integer
         attribute :flt, Float
         attribute :eng, Rails::Engine, **{}
-        attribute :arr, Array[OpenStruct]
-        attribute(:hsh, { String => OpenStruct })
+        attribute :arr, Array[BetterStruct]
+        attribute(:hsh, { String => BetterStruct })
       end
 
       c.attribute :sub, submodel
@@ -40,8 +40,8 @@ module Decidim
         int: 1,
         flt: 1.1,
         eng: Decidim::Core::Engine.instance,
-        arr: [OpenStruct.new(foo: "bar"), OpenStruct.new(foo: "baz")],
-        hsh: { foo: OpenStruct.new(foo: "bar"), bar: OpenStruct.new(foo: "baz") },
+        arr: [BetterStruct.new(foo: "bar"), BetterStruct.new(foo: "baz")],
+        hsh: { foo: BetterStruct.new(foo: "bar"), bar: BetterStruct.new(foo: "baz") },
         sub: { id: 1, name: "John", role: "Dough" },
         sar: [{ id: 1, name: "John", role: "Dough" }, { id: 2, name: "Joanna", role: "Donut" }],
         shs: { foo: { id: 1, name: "John", role: "Dough" }, bar: { id: 2, name: "Joanna", role: "Donut" } }
@@ -54,7 +54,7 @@ module Decidim
       expect(subject.int).to eq(1)
       expect(subject.flt).to eq(1.1)
       expect(subject.eng).to be(Decidim::Core::Engine.instance)
-      expect(subject.arr.all? { |i| i.is_a?(OpenStruct) }).to be(true)
+      expect(subject.arr.all? { |i| i.is_a?(BetterStruct) }).to be(true)
       expect(subject.arr[0].foo).to eq("bar")
       expect(subject.arr[1].foo).to eq("baz")
 
