@@ -22,7 +22,7 @@ module Decidim
     def initialize(menu_item, view, options = {})
       @menu_item = menu_item
       @view = view
-      @options = OpenStruct.new(options)
+      @options = Decidim::BetterStruct.new(options)
     end
 
     delegate :label, :url, :active, :icon_name, to: :@menu_item
