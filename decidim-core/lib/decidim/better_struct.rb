@@ -8,20 +8,20 @@ module Decidim
       @data = if args.is_a?(Hash)
                 Struct.new(*(args.keys)).new(*(args.values))
               else
-                Struct.new
+                Struct.new(args)
               end
     end
 
     attr_reader :data
 
+    delegate :to_h, to: :data
+
     def respond_to_missing?(name, include_private)
       data.respond_to?(name) || super
     end
 
-    def method_missing(method_name, *args, &block)
-      data.respond_to?(method_name) ? data.send(method_name, args, block) : nil
+    def method_missing(method_name, *_args)
+      data.respond_to?(method_name) ? data.send(method_name) : nil
     end
-
-    delegate :to_h, to: :data
   end
 end
