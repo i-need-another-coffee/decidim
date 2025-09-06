@@ -24,7 +24,7 @@ describe "Admin manages officializations" do
     let!(:not_officialized) { create(:user, organization:) }
     let!(:deleted) do
       user = create(:user, organization:)
-      result = Decidim::DestroyAccount.call(BetterStruct.new(valid?: true, delete_reason: "Testing", current_user: user))
+      result = Decidim::DestroyAccount.call(Decidim::BetterStruct.new(valid?: true, delete_reason: "Testing", current_user: user))
       result["ok"]
     end
     let!(:external_not_officialized) { create(:user) }

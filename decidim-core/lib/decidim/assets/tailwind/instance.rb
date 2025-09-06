@@ -2,6 +2,7 @@
 
 require "ostruct"
 require "erb"
+require "decidim/better_struct"
 
 module Decidim
   module Assets
@@ -26,7 +27,7 @@ module Decidim
           # when processed by Tailwind
           content_directories_as_array_of_strings = content_directories.map { |content_directory| "'#{content_directory}'" }.join(",")
 
-          OpenStruct.new(tailwind_content_directories: content_directories_as_array_of_strings)
+          Decidim::BetterStruct.new(tailwind_content_directories: content_directories_as_array_of_strings)
         end
 
         def tailwind_configuration_template

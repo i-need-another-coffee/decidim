@@ -21,7 +21,7 @@ module Decidim
         end
 
         def self.attached_config
-          attached_config = OpenStruct.new
+          attached_config = Decidim::BetterStruct.new
           attached_config.uploader = Decidim::ImageUploader
           {
             image: attached_config

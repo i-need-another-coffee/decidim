@@ -12,7 +12,7 @@
     <h2 class="title-decorator inline-block text-left"><%= translated_attribute(current_initiative.title) %></h2>
   </div>
 
-  <%= cell "decidim/coauthorships", OpenStruct.new(identities: current_initiative.committee_members.excluding_author.approved.map(&:user).reject(&:deleted?).prepend(current_initiative.author) ) %>
+  <%= cell "decidim/coauthorships", Decidim::BetterStruct.new(identities: current_initiative.committee_members.excluding_author.approved.map(&:user).reject(&:deleted?).prepend(current_initiative.author) ) %>
 
   <div class="form__wrapper">
 

@@ -160,7 +160,7 @@ module Decidim
         options = options.present? ? options.stringify_keys : {}
 
         attributes_required_for_authorization.inject(options) do |options_for_authorizer_class, (key, _)|
-          options_for_authorizer_class.update(key => OpenStruct.new(required_for_authorization?: true, value: options[key]))
+          options_for_authorizer_class.update(key => Decidim::BetterStruct.new(required_for_authorization?: true, value: options[key]))
         end
       end
 

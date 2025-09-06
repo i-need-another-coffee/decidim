@@ -18,7 +18,7 @@ module Decidim
 
       def show
         @form = form(HelpSectionsForm).from_model(
-          BetterStruct.new(sections:)
+          Decidim::BetterStruct.new(sections:)
         )
       end
 
@@ -43,7 +43,7 @@ module Decidim
 
       def sections
         @sections ||= Decidim.participatory_space_manifests.map do |manifest|
-          BetterStruct.new(
+          Decidim::BetterStruct.new(
             id: manifest.name.to_s,
             content: ContextualHelpSection.find_content(current_organization, manifest.name)
           )

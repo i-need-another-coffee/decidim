@@ -22,7 +22,7 @@ module Decidim
       end
 
       context "with a constant value" do
-        let(:value) { BetterStruct }
+        let(:value) { Decidim::BetterStruct }
 
         it "returns the value cast to string and then to symbol" do
           expect(subject).to be(:"Decidim::BetterStruct")

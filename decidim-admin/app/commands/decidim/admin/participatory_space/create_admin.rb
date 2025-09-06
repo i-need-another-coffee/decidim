@@ -96,12 +96,12 @@ module Decidim
         end
 
         def user_form
-          BetterStruct.new(name: form.name,
-                           email: form.email.downcase,
-                           organization: participatory_space.organization,
-                           admin: false,
-                           invited_by: current_user,
-                           invitation_instructions:)
+          Decidim::BetterStruct.new(name: form.name,
+                                    email: form.email.downcase,
+                                    organization: participatory_space.organization,
+                                    admin: false,
+                                    invited_by: current_user,
+                                    invitation_instructions:)
         end
 
         def add_admin_as_follower

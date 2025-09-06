@@ -20,7 +20,7 @@ module Decidim
       uploader_content_type: true,
       uploader_image_dimensions: true
     )
-    attached_config[:organization_logo] = OpenStruct.new(uploader: OAuthApplicationLogoUploader)
+    attached_config[:organization_logo] = Decidim::BetterStruct.new(uploader: OAuthApplicationLogoUploader)
 
     def owner
       organization

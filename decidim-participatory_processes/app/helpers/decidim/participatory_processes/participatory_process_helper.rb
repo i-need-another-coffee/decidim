@@ -50,7 +50,7 @@ module Decidim
 
         return if cta_settings.blank? || cta_settings.button_url.blank?
 
-        OpenStruct.new(
+        Decidim::BetterStruct.new(
           text: translated_attribute(cta_settings.button_text),
           path: cta_settings.button_url,
           image_url: block.images_container.attached_uploader(:background_image).variant_url(:big)

@@ -135,7 +135,7 @@ module Decidim
         end
 
         context "with a custom class" do
-          let(:type) { "OpenStruct" }
+          let(:type) { "Decidim::BetterStruct" }
 
           it "returns an :object type with the correct primitive option" do
             expect(subject).to eq(type: :object, options: { primitive: type, foo: "bar" })

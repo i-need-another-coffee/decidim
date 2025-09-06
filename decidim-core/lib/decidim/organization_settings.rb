@@ -5,7 +5,7 @@ module Decidim
   # Takes care of holding and accessing organization settings for each
   # organization or the default organization.
   #
-  class OrganizationSettings < OpenStruct
+  class OrganizationSettings < Decidim::BetterStruct
     class << self
       # Fetches or creates a settings object for the given organization.
       #
@@ -87,7 +87,7 @@ module Decidim
       #
       # @return [Decidim::OrganizationSettings] The default settings object.
       def defaults
-        @defaults ||= new(OpenStruct.new)
+        @defaults ||= new(Decidim::BetterStruct.new)
       end
 
       private
@@ -190,9 +190,9 @@ module Decidim
     #
     # @param hash [Hash] The configurations hash.
     # @param default [Hash] The default configurations.
-    # @return [OpenStruct] The configuration struct.
+    # @return [Decidim::BetterStruct] The configuration struct.
     def generate_config(hash, default = {})
-      OpenStruct.new(
+      Decidim::BetterStruct.new(
         default.deep_merge(hash).to_h do |key, value|
           value = generate_config(value) if value.is_a?(Hash)
           [key, value]
@@ -244,13 +244,13 @@ module Decidim
     # Note that when the deepest configuration hash has the key "default", it
     # will not be appended to the method name.
     #
-    # @param obj [Decidim::OrganizationSettings, OpenStruct] The settings object
+    # @param obj [Decidim::OrganizationSettings, Decidim::BetterStruct] The settings object
     #   for which to define the accessors.
     # @param chain [Array<Symbol>] The current lookup chain for the settings
     #   object. Needed when called recursively.
     def define_config_accessors(obj, chain)
       obj.each_pair do |key, val|
-        if val.is_a?(OpenStruct)
+        if val.is_a?(Decidim::BetterStruct)
           define_config_accessors(val, [*chain, key])
         else
           prefix = chain.join("_")

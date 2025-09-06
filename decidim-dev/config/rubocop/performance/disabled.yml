@@ -81,9 +81,6 @@ Performance/MapMethodChain:
 Performance/MethodObjectAsBlock:
   Enabled: false
 
-Performance/OpenStruct:
-  Enabled: false
-
 Performance/RangeInclude:
   Enabled: false
 

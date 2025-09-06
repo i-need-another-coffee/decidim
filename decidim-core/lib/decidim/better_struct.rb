@@ -6,7 +6,9 @@ module Decidim
   class BetterStruct
     def initialize(args = nil)
       @data = if args.is_a?(Hash)
-                Struct.new(*(args.keys)).new(*(args.values))
+                # Convert string keys to symbols to ensure valid identifiers
+                symbol_keys = args.keys.map(&:to_sym)
+                Struct.new(*symbol_keys).new(*args.values)
               else
                 Struct.new(args)
               end
@@ -14,14 +16,20 @@ module Decidim
 
     attr_reader :data
 
-    delegate :to_h, to: :data
+    delegate :to_h, :dig, :each_pair, to: :data
 
     def respond_to_missing?(name, include_private)
-      data.respond_to?(name) || super
+      data.respond_to?(name.to_sym) || super
     end
 
     def method_missing(method_name, *_args)
-      data.respond_to?(method_name) ? data.send(method_name) : nil
+      symbol_method = method_name.to_sym
+      data.respond_to?(symbol_method) ? data.send(symbol_method) : nil
+    end
+
+    def [](key)
+      symbol_key = key.to_sym
+      data.respond_to?(symbol_key) ? data.send(symbol_key) : nil
     end
   end
 end

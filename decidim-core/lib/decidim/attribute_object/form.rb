@@ -115,7 +115,7 @@ module Decidim
 
       def with_context(new_context)
         @context = if new_context.is_a?(Hash)
-                     BetterStruct.new(new_context)
+                     Decidim::BetterStruct.new(new_context)
                    else
                      new_context
                    end

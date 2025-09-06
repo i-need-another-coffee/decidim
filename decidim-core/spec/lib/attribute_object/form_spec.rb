@@ -171,7 +171,7 @@ module Decidim
       subject { form.from_model(model) }
 
       let(:model) do
-        BetterStruct.new(
+        Decidim::BetterStruct.new(
           id: 1,
           name: "John",
           email: "john@example.org",
@@ -213,7 +213,7 @@ module Decidim
         let(:drink) { drink_class.new }
 
         let(:model) do
-          BetterStruct.new(id: 1, drinks: [drink])
+          Decidim::BetterStruct.new(id: 1, drinks: [drink])
         end
 
         it "calls the map_model method on the created nested form object" do

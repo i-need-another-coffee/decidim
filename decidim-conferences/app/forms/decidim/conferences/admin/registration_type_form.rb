@@ -26,7 +26,7 @@ module Decidim
           @meetings ||= Decidim::ConferenceMeeting.where(component: meeting_components)
                                                    &.order(title: :asc)
                                                    &.map do |meeting|
-                                                     BetterStruct.new(
+                                                     Decidim::BetterStruct.new(
                                                        title: present(meeting).title,
                                                        value: meeting.id
                                                      )

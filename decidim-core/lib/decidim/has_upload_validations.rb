@@ -18,7 +18,7 @@ module Decidim
           uploader_image_dimensions: true
         )
 
-        attached_config[attribute] = OpenStruct.new(options)
+        attached_config[attribute] = Decidim::BetterStruct.new(options)
         validate_config(attached_config[attribute], attribute)
       end
 
@@ -34,7 +34,7 @@ module Decidim
       end
 
       def attached_options(attached, options = {})
-        attached_config[attached] = OpenStruct.new(options)
+        attached_config[attached] = Decidim::BetterStruct.new(options)
 
         yield(attached_config[attached]) if block_given?
       end

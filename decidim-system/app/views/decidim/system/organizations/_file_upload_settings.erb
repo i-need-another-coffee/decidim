@@ -2,7 +2,7 @@
 <p class="help-text"><%= t(".intro") %></p>
 
 <%= f.fields_for :file_upload_settings, f.object.file_upload_settings do |settings_form| %>
-  <%= settings_form.fields_for :allowed_file_extensions, OpenStruct.new(settings_form.object.allowed_file_extensions) do |extensions_form| %>
+  <%= settings_form.fields_for :allowed_file_extensions, Decidim::BetterStruct.new(settings_form.object.allowed_file_extensions) do |extensions_form| %>
     <% i18n_scope = "#{f.object.class.i18n_scope}.attributes.#{settings_form.object.model_name.i18n_key}.allowed_file_extensions" %>
 
     <%= field_set_tag f.label(t(".file_extensions.title"), nil, for: nil), class: "border-2 border-background p-4 form__wrapper" do %>
@@ -12,7 +12,7 @@
     <% end %>
   <% end %>
 
-  <%= settings_form.fields_for :allowed_content_types, OpenStruct.new(settings_form.object.allowed_content_types) do |extensions_form| %>
+  <%= settings_form.fields_for :allowed_content_types, Decidim::BetterStruct.new(settings_form.object.allowed_content_types) do |extensions_form| %>
     <% i18n_scope = "#{f.object.class.i18n_scope}.attributes.#{settings_form.object.model_name.i18n_key}.allowed_content_types" %>
 
     <%= field_set_tag f.label(t(".content_types.title"), nil, for: nil), class: "border-2 border-background p-4 form__wrapper" do %>
@@ -22,7 +22,7 @@
     <% end %>
   <% end %>
 
-  <%= settings_form.fields_for :maximum_file_size, OpenStruct.new(settings_form.object.maximum_file_size) do |extensions_form| %>
+  <%= settings_form.fields_for :maximum_file_size, Decidim::BetterStruct.new(settings_form.object.maximum_file_size) do |extensions_form| %>
     <% i18n_scope = "#{f.object.class.i18n_scope}.attributes.#{settings_form.object.model_name.i18n_key}.maximum_file_size" %>
 
     <%= field_set_tag f.label(t(".file_sizes.title"), nil, for: nil), class: "border-2 border-background p-4 form__wrapper last:pb-4" do %>

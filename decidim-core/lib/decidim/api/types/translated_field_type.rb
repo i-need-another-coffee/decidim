@@ -26,7 +26,7 @@ module Decidim
         translations = display_translations
         translations = translations.slice(*locales) unless locales.empty?
 
-        translations.map { |locale, text| OpenStruct.new(locale:, text:, machine_translated: defined_translations[locale].blank?) }
+        translations.map { |locale, text| Decidim::BetterStruct.new(locale:, text:, machine_translated: defined_translations[locale].blank?) }
       end
 
       private

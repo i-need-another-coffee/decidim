@@ -763,7 +763,7 @@ module Decidim
 
   def self.open_data_manifests
     [
-      BetterStruct.new(
+      Decidim::BetterStruct.new(
         name: :moderated_users,
         collection: lambda { |organization|
           Decidim::UserModeration.joins(:user).where(decidim_users: { decidim_organization_id: organization.id }).where.not(decidim_users: { blocked_at: nil })
@@ -771,19 +771,19 @@ module Decidim
         serializer: Decidim::Exporters::OpenDataBlockedUserSerializer,
         include_in_open_data: true
       ),
-      BetterStruct.new(
+      Decidim::BetterStruct.new(
         name: :moderations,
         collection: ->(organization) { Decidim::Moderation.where(participatory_space: organization.participatory_spaces).includes(:reports).hidden },
         serializer: Decidim::Exporters::OpenDataModerationSerializer,
         include_in_open_data: true
       ),
-      BetterStruct.new(
+      Decidim::BetterStruct.new(
         name: :users,
         collection: ->(organization) { Decidim::User.where(organization:).confirmed.not_blocked.includes(avatar_attachment: :blob) },
         serializer: Decidim::Exporters::OpenDataUserSerializer,
         include_in_open_data: true
       ),
-      BetterStruct.new(
+      Decidim::BetterStruct.new(
         name: :taxonomies,
         collection: ->(organization) { Decidim::Taxonomy.where(organization:) },
         serializer: Decidim::Exporters::OpenDataTaxonomySerializer,
