@@ -122,6 +122,22 @@ module Decidim
                   "# config.action_controller.raise_on_missing_callback_actions = false"
         gsub_file "config/environments/development.rb", /config\.action_controller\.raise_on_missing_callback_actions = true$/,
                   "# config.action_controller.raise_on_missing_callback_actions = false"
+
+        gsub_file "config/environments/test.rb", /Rails\.application\.configure do$/,
+                  "Rails.application.configure do
+  if ENV[\"DISABLE_LOGS\"].present? && ENV[\"CI\"].present?
+    config.active_record.verbose_query_logs = false
+    config.active_record.query_log_tags_enabled = false
+
+    config.action_view.logger = nil
+
+    # We also raised the log level to further reduce I/O
+    config.log_level = :fatal
+
+    config.action_dispatch.log_rescued_responses=false
+    config.action_dispatch.logger = nil
+  end
+"
       end
 
       def disable_annotate_rendered_view_on_development
