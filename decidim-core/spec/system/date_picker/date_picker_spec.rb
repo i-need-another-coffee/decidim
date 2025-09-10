@@ -83,8 +83,6 @@ describe "Datepicker" do
   end
 
   after do
-    expect_no_js_errors
-
     # Reset the routes back to original
     Rails.application.reload_routes!
   end

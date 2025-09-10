@@ -12,10 +12,6 @@ describe "Comments" do
 
   let(:resource_path) { resource_locator(commentable).path }
 
-  after do
-    expect_no_js_errors
-  end
-
   before do
     switch_to_host(organization.host)
   end

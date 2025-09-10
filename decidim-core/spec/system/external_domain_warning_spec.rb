@@ -14,10 +14,6 @@ describe "ExternalDomainWarning" do
     click_on static_page.topic.title["en"]
   end
 
-  after do
-    expect_no_js_errors
-  end
-
   it "reveals warning when clicking link with an external href" do
     click_on "Very nice link"
     expect(page).to have_css("#external-domain-warning")

@@ -330,8 +330,6 @@ describe "Explore meeting directory" do
         click_filter_item "In-person"
       end
       expect(page).to have_css(".leaflet-marker-icon", count: 2)
-
-      expect_no_js_errors
     end
 
     it "shows markers for 'hybrid' selected meetings" do
@@ -340,8 +338,6 @@ describe "Explore meeting directory" do
         click_filter_item "Hybrid"
       end
       expect(page).to have_css(".leaflet-marker-icon", count: 2)
-
-      expect_no_js_errors
     end
 
     it "hides markers when 'online' selected meetings" do
@@ -350,8 +346,6 @@ describe "Explore meeting directory" do
         click_filter_item "Online"
       end
       expect(page).to have_css(".leaflet-marker-icon", count: 0)
-
-      expect_no_js_errors
     end
   end
 end

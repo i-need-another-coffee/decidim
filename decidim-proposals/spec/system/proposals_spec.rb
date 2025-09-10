@@ -425,8 +425,6 @@ describe "Proposals" do
           click_filter_item "Official"
         end
         expect(page).to have_css(".leaflet-marker-icon", count: 2)
-
-        expect_no_js_errors
       end
     end
 

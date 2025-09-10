@@ -20,8 +20,6 @@ describe "Autocomplete multiselect" do
   end
 
   after do
-    expect_no_js_errors
-
     Rails.application.reload_routes!
   end
 

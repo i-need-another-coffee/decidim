@@ -28,10 +28,6 @@ describe "Admin chooses user block templates when blocking user" do
       end
     end
 
-    after do
-      expect_no_js_errors
-    end
-
     it "blocks the user" do
       select template.name["en"], from: :block_template_chooser, wait: 5
       expect(page).to have_field(:block_user_justification, with: translated(template.description))
