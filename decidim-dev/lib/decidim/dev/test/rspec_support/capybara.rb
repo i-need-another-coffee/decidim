@@ -48,6 +48,51 @@ Capybara.server_port = 1.step do |num|
   end
 end
 
+Capybara.register_driver :cuprite do |app|
+  Capybara::Cuprite::Driver.new(
+    app,
+    screen_size: [1920, 1080],
+    options: {
+      js_errors: true,
+      headless: true,
+      slowmo: 0.5,
+      process_timeout: 15,
+      timeout: 10,
+      window_size: [1920, 1080],
+      browser_options: {
+        :"ignore-certificate-errors" => ENV.fetch("TEST_SSL", nil),
+        :"no-sandbox" => nil
+      }
+    }
+  )
+end
+
+Capybara.register_driver :iphone do |app|
+  Capybara::Cuprite::Driver.new(
+    app,
+    screen_size: [896, 414],
+    options: {
+      js_errors: true,
+      headless: true,
+      slowmo: 0.5,
+      process_timeout: 15,
+      timeout: 10,
+      window_size: [896, 414],
+      browser_options: {
+        :"ignore-certificate-errors" => ENV.fetch("TEST_SSL", nil),
+        :"no-sandbox" => nil,
+        :options => {
+          "goog:chromeOptions" => {
+            mobileEmulation: {
+              deviceName: "iPhone XR" # Or another device
+            }
+          }
+        }
+      }
+    }
+  )
+end
+
 # In order to work with PWA apps, Chrome cannot be run in headless mode, and requires
 # setting up special prefs and flags
 Capybara.register_driver :pwa_chrome do |app|
@@ -80,21 +125,6 @@ Capybara.register_driver :pwa_chrome do |app|
   )
 end
 
-Capybara.register_driver :iphone do |app|
-  options = Selenium::WebDriver::Chrome::Options.new
-  options.args << "--headless=new"
-  options.args << "--no-sandbox"
-  # Do not limit browser resources
-  options.args << "--disable-dev-shm-usage"
-  options.add_emulation(device_name: "iPhone XR")
-
-  Capybara::Selenium::Driver.new(
-    app,
-    browser: :chrome,
-    options:
-  )
-end
-
 server_options = { Silent: true, queue_requests: false }
 if ENV["TEST_SSL"]
   dev_gem = Bundler.load.specs.find { |spec| spec.name == "decidim-dev" }
@@ -115,18 +145,7 @@ Capybara.default_max_wait_time = 10
 
 RSpec.configure do |config|
   config.before :each, type: :system do
-    driven_by(:cuprite, screen_size: [1920, 1080], options: {
-                js_errors: true,
-                headless: true,
-                slowmo: 0.5,
-                process_timeout: 15,
-                timeout: 10,
-                window_size: [1920, 1080],
-                browser_options: {
-                  :"ignore-certificate-errors" => ENV.fetch("TEST_SSL", nil),
-                  :"no-sandbox" => nil
-                }
-              })
+    driven_by(:cuprite)
 
     switch_to_default_host
     domain = (try(:organization) || try(:current_organization))&.host
