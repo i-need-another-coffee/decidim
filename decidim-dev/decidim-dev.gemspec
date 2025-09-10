@@ -33,6 +33,7 @@ Gem::Specification.new do |s|
   end
 
   s.add_dependency "capybara", "~> 3.39"
+  s.add_dependency "cuprite", "~> 0.17"
   s.add_dependency "decidim-admin", Decidim::Dev.version
   s.add_dependency "decidim-api", Decidim::Dev.version
   s.add_dependency "decidim-comments", Decidim::Dev.version

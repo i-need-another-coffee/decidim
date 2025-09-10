@@ -2,6 +2,7 @@
 
 require "parallel_tests"
 require "selenium-webdriver"
+require "capybara/cuprite"
 
 module Decidim
   # Helpers meant to be used only during capybara test runs.
@@ -45,34 +46,6 @@ Capybara.server_port = 1.step do |num|
   rescue Errno::ECONNREFUSED
     break port
   end
-end
-
-Capybara.register_driver :headless_chrome do |app|
-  options = Selenium::WebDriver::Chrome::Options.new
-  options.args << "--explicitly-allowed-ports=#{Capybara.server_port}"
-  options.args << "--headless=new"
-  options.args << "--disable-search-engine-choice-screen" # Prevents closing the window normally
-  # Do not limit browser resources
-  options.args << "--disable-dev-shm-usage"
-  options.args << "--no-sandbox"
-  options.args << if ENV["BIG_SCREEN_SIZE"].present?
-                    "--window-size=1920,3000"
-                  else
-                    "--window-size=1920,1080"
-                  end
-  options.args << "--ignore-certificate-errors" if ENV["TEST_SSL"]
-
-  options.add_preference(:download,
-                         directory_upgrade: true,
-                         prompt_for_download: false,
-                         default_directory: DownloadHelper::PATH.to_s)
-  options.add_preference(:browser, set_download_behavior: { behavior: "allow" })
-
-  Capybara::Selenium::Driver.new(
-    app,
-    browser: :chrome,
-    options:
-  )
 end
 
 # In order to work with PWA apps, Chrome cannot be run in headless mode, and requires
@@ -142,25 +115,32 @@ Capybara.default_max_wait_time = 10
 
 RSpec.configure do |config|
   config.before :each, type: :system do
-    driven_by(:headless_chrome)
+    driven_by(:cuprite, screen_size: [1920, 1080], options: {
+                js_errors: true,
+                headless: true,
+                slowmo: 0.5,
+                process_timeout: 15,
+                timeout: 10,
+                window_size: [1920, 1080],
+                browser_options: {
+                  :"ignore-certificate-errors" => ENV.fetch("TEST_SSL", nil),
+                  :"no-sandbox" => nil
+                }
+              })
 
     switch_to_default_host
     domain = (try(:organization) || try(:current_organization))&.host
+
     if domain
-      # JavaScript sets the cookie also for all subdomains but localhost is a
+      # Javascript sets the cookie also for all subdomains but localhost is a
       # special case.
       domain = ".#{domain}" unless domain == "localhost"
-      page.driver.browser.execute_cdp(
-        "Network.setCookie",
-        domain:,
-        name: Decidim.consent_cookie_name,
-        value: { essential: true }.to_json,
-        path: "/",
-        expires: 1.day.from_now.to_i,
-        same_site: "Lax"
-      )
+      cookie_options = { domain:, path: "/", expires: 1.day.from_now.to_i, same_site: "Lax" }
+      page.driver.set_cookie(Decidim.consent_cookie_name, { essential: true }.to_json, **cookie_options)
     end
   end
+
+  config.filter_gems_from_backtrace("capybara", "cuprite", "ferrum")
 
   config.before :each, driver: :rack_test do
     driven_by(:rack_test)
