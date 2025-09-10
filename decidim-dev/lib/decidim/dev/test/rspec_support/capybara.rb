@@ -68,6 +68,7 @@ Capybara.register_driver :cuprite do |app|
 end
 
 Capybara.register_driver :iphone do |app|
+  Capybara::Cuprite::Browser
   Capybara::Cuprite::Driver.new(
     app,
     screen_size: [896, 414],

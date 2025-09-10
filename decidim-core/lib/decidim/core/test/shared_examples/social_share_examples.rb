@@ -89,7 +89,7 @@ shared_examples "a social share via QR code" do
     wait_for_download
 
     expect(downloads.length).to eq(1)
-    expect(download_path).to match(/.*\.png/)
+    expect(download_path).to match(/.png/)
   end
 
   it "displays the QR code page" do
