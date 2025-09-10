@@ -132,7 +132,7 @@ RSpec.configure do |config|
     domain = (try(:organization) || try(:current_organization))&.host
 
     if domain
-      # Javascript sets the cookie also for all subdomains but localhost is a
+      # JavaScript sets the cookie also for all subdomains but localhost is a
       # special case.
       domain = ".#{domain}" unless domain == "localhost"
       cookie_options = { domain:, path: "/", expires: 1.day.from_now.to_i, same_site: "Lax" }
@@ -152,10 +152,6 @@ RSpec.configure do |config|
     using_wait_time(max_wait_time_for_slow_specs) do
       example.run
     end
-  end
-
-  config.after(type: :system) do |example|
-    warn page.driver.browser.logs.get(:browser) unless example.metadata[:driver].eql?(:rack_test)
   end
 
   config.include Decidim::CapybaraTestHelpers, type: :system

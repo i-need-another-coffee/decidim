@@ -201,7 +201,15 @@ import { Application } from "@hotwired/stimulus"
 import { definitionsFromContext } from "src/decidim/refactor/support/stimulus"
 
 const application = Application.start()
-application.debug = true
+
+application.debug = (process.env.RAILS_ENV !== "production")
+
+if (process.env.RAILS_ENV === "test") {
+  // propagate errors that happen inside Stimulus controllers
+  application.handleError = (error, message, detail) => {
+    throw error
+  }
+}
 
 const context = require.context("./controllers", true, /controller\.js$/)
 application.load(definitionsFromContext(context))
