@@ -87,6 +87,7 @@ module Decidim
       # given_organization - An optional Organization to get the default locale from.
       #
       # Returns a String with the translation.
+      # rubocop:disable Metrics/CyclomaticComplexity
       def translated_attribute(attribute, given_organization = nil, override_machine_translation_settings = nil)
         return "" if attribute.nil?
         return attribute unless attribute.is_a?(Hash)
@@ -96,12 +97,15 @@ module Decidim
         given_organization ||= try(:organization)
         organization_locale = given_organization.try(:default_locale)
 
+        raise "Missing organization" if given_organization.nil?
+
         attribute[I18n.locale.to_s].presence ||
           machine_translation_value(attribute, given_organization, override_machine_translation_settings) ||
           attribute[organization_locale].presence ||
           attribute[attribute.keys.first].presence ||
           ""
       end
+      # rubocop:enable Metrics/CyclomaticComplexity
 
       # Detects whether we need to show the machine translated version of the
       # field, or not.
