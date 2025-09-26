@@ -4,8 +4,10 @@
 # user has a previous sms authorization with the same phone number provided in
 # the initiative signature workflow. In this way only the sms code received in
 # the phone is verified and no previous authorization is necessary.
-class DummySmsMobilePhoneValidator < Decidim::Initiatives::ValidateMobilePhone
-  def authorized? = true
+if Decidim.module_installed?(:initiatives)
+  class DummySmsMobilePhoneValidator < Decidim::Initiatives::ValidateMobilePhone
+    def authorized? = true
 
-  def phone_match? = true
+    def phone_match? = true
+  end
 end
