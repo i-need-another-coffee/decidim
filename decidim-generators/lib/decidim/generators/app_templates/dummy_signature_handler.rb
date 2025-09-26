@@ -123,4 +123,10 @@ if Decidim.module_installed?(:initiatives)
       AVAILABLE_GENDERS
     end
   end
+else
+  class DummySignatureHandler
+    def initialize(**)
+      raise ArgumentError, "decidim-initiatives is not installed"
+    end
+  end
 end
