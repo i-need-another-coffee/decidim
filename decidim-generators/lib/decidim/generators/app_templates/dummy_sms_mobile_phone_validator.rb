@@ -4,7 +4,7 @@
 # user has a previous sms authorization with the same phone number provided in
 # the initiative signature workflow. In this way only the sms code received in
 # the phone is verified and no previous authorization is necessary.
-class DummySmsMobilePhoneValidator < Decidim::Initiatives::ValidateMobilePhone
+class DummySmsMobilePhoneValidator < Decidim::Command
   # Public: Initializes the command.
   #
   # form - A MobilePhoneForm.
