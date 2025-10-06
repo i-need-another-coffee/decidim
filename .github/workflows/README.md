@@ -2,11 +2,25 @@
 
 We use GitHub Actions as CI.
 
+## Core CI Workflows
+
 - `lint_code.yml`: runs the linters for Ruby, JS and ERB files.
 - `ci_main.yml`: runs the tests for the main folder
 - `ci_core.yml`: runs the tests for the `decidim-core` module. The remaining workflows (except noted) are based on this one.
 
-Individual workflows with changes:
+## Async Remote Dispatch Workflows
+
+- `async_remote_dispatch.yml`: Automatically dispatches events to a remote repository when PRs modify Decidim modules. See [ASYNC_REMOTE_DISPATCH.md](ASYNC_REMOTE_DISPATCH.md) for full documentation.
+- `dispatch_module_changes.yml`: Reusable workflow for dispatching module changes to remote repositories. Can be called from individual module workflows.
+
+These workflows enable triggering non-blocking remote GitHub Actions with context about:
+- PR information (number, URL, branch)
+- Version information (Node, Ruby, Decidim)
+- Modified module name
+
+For setup and usage instructions, see [ASYNC_REMOTE_DISPATCH.md](ASYNC_REMOTE_DISPATCH.md) and [EXAMPLE_TARGET_WORKFLOW.md](EXAMPLE_TARGET_WORKFLOW.md).
+
+## Individual Module Workflows
 
 - `ci_generators.yml`: `decidim-generators` does not need to create the test_app, so this command is removed. Screenshots uploads and chromedriver setup steps are also not needed for this module and thus removed. We also customize the gems path after running `bundle install`:
 
