@@ -1,0 +1,85 @@
+name: "[Async] Dispatch Module Changes"
+
+on:
+  workflow_call:
+    inputs:
+      working-directory:
+        description: 'The module directory to check for changes'
+        required: true
+        type: string
+      remote-repository:
+        description: 'The remote repository to dispatch to (format: owner/repo)'
+        required: false
+        type: string
+        default: ''
+    secrets:
+      REMOTE_DISPATCH_TOKEN:
+        description: 'GitHub token with repo permissions for the remote repository'
+        required: false
+
+jobs:
+  dispatch:
+    name: Dispatch Module Changes
+    runs-on: ubuntu-22.04
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check if module was modified
+        id: check_changes
+        run: |
+          # Get the list of changed files in the PR
+          git fetch origin ${{ github.base_ref }}
+          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
+          
+          # Check if any files in the current module directory were changed
+          if echo "$CHANGED_FILES" | grep -q "^${{ inputs.working-directory }}/"; then
+            echo "Module ${{ inputs.working-directory }} was modified"
+            echo "modified=true" >> $GITHUB_OUTPUT
+          else
+            echo "Module ${{ inputs.working-directory }} was not modified"
+            echo "modified=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Read version files
+        if: steps.check_changes.outputs.modified == 'true'
+        id: versions
+        run: |
+          NODE_VERSION=$(cat .node-version)
+          RUBY_VERSION=$(cat .ruby-version)
+          DECIDIM_VERSION=$(cat .decidim-version)
+          
+          echo "node_version=$NODE_VERSION" >> $GITHUB_OUTPUT
+          echo "ruby_version=$RUBY_VERSION" >> $GITHUB_OUTPUT
+          echo "decidim_version=$DECIDIM_VERSION" >> $GITHUB_OUTPUT
+          
+          echo "Node version: $NODE_VERSION"
+          echo "Ruby version: $RUBY_VERSION"
+          echo "Decidim version: $DECIDIM_VERSION"
+
+      - name: Dispatch to remote repository
+        if: steps.check_changes.outputs.modified == 'true' && inputs.remote-repository != ''
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.REMOTE_DISPATCH_TOKEN }}
+          repository: ${{ inputs.remote-repository }}
+          event-type: decidim-module-changed
+          client-payload: |
+            {
+              "pr_number": ${{ github.event.pull_request.number }},
+              "pr_id": ${{ github.event.pull_request.id }},
+              "pr_url": "${{ github.event.pull_request.html_url }}",
+              "pr_title": "${{ github.event.pull_request.title }}",
+              "pr_head_ref": "${{ github.event.pull_request.head.ref }}",
+              "pr_head_sha": "${{ github.event.pull_request.head.sha }}",
+              "pr_base_ref": "${{ github.event.pull_request.base.ref }}",
+              "repository": "${{ github.repository }}",
+              "node_version": "${{ steps.versions.outputs.node_version }}",
+              "ruby_version": "${{ steps.versions.outputs.ruby_version }}",
+              "decidim_version": "${{ steps.versions.outputs.decidim_version }}",
+              "module_name": "${{ inputs.working-directory }}",
+              "triggered_by": "${{ github.actor }}"
+            }

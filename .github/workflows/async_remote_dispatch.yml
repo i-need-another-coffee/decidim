@@ -1,0 +1,134 @@
+name: "[Async] Remote Repository Dispatch"
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches-ignore:
+      - "chore/l10n*"
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'PR number to process'
+        required: false
+        type: number
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  check_config:
+    name: Check Configuration
+    runs-on: ubuntu-22.04
+    outputs:
+      enabled: ${{ steps.check.outputs.enabled }}
+    steps:
+      - name: Check if dispatch is configured
+        id: check
+        run: |
+          if [ -n "${{ secrets.REMOTE_DISPATCH_TOKEN }}" ] && [ -n "${{ secrets.REMOTE_REPOSITORY }}" ]; then
+            echo "enabled=true" >> $GITHUB_OUTPUT
+            echo "Remote dispatch is properly configured"
+          else
+            echo "enabled=false" >> $GITHUB_OUTPUT
+            echo "Remote dispatch is not configured. Set REMOTE_DISPATCH_TOKEN and REMOTE_REPOSITORY secrets to enable."
+          fi
+
+  dispatch:
+    name: Dispatch to Remote Repository
+    runs-on: ubuntu-22.04
+    needs: check_config
+    if: needs.check_config.outputs.enabled == 'true'
+    strategy:
+      matrix:
+        working-directory:
+          - decidim-accountability
+          - decidim-admin
+          - decidim-ai
+          - decidim-api
+          - decidim-assemblies
+          - decidim-blogs
+          - decidim-budgets
+          - decidim-collaborative_texts
+          - decidim-comments
+          - decidim-conferences
+          - decidim-core
+          - decidim-debates
+          - decidim-demographics
+          - decidim-design
+          - decidim-dev
+          - decidim-elections
+          - decidim-forms
+          - decidim-generators
+          - decidim-initiatives
+          - decidim-meetings
+          - decidim-pages
+          - decidim-participatory_processes
+          - decidim-proposals
+          - decidim-sortitions
+          - decidim-surveys
+          - decidim-system
+          - decidim-templates
+          - decidim-verifications
+      fail-fast: false
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check if module was modified
+        id: check_changes
+        run: |
+          # Get the list of changed files in the PR
+          git fetch origin ${{ github.base_ref }}
+          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
+          
+          # Check if any files in the current module directory were changed
+          if echo "$CHANGED_FILES" | grep -q "^${{ matrix.working-directory }}/"; then
+            echo "Module ${{ matrix.working-directory }} was modified"
+            echo "modified=true" >> $GITHUB_OUTPUT
+          else
+            echo "Module ${{ matrix.working-directory }} was not modified"
+            echo "modified=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Read version files
+        if: steps.check_changes.outputs.modified == 'true'
+        id: versions
+        run: |
+          NODE_VERSION=$(cat .node-version)
+          RUBY_VERSION=$(cat .ruby-version)
+          DECIDIM_VERSION=$(cat .decidim-version)
+          
+          echo "node_version=$NODE_VERSION" >> $GITHUB_OUTPUT
+          echo "ruby_version=$RUBY_VERSION" >> $GITHUB_OUTPUT
+          echo "decidim_version=$DECIDIM_VERSION" >> $GITHUB_OUTPUT
+          
+          echo "Node version: $NODE_VERSION"
+          echo "Ruby version: $RUBY_VERSION"
+          echo "Decidim version: $DECIDIM_VERSION"
+
+      - name: Dispatch to remote repository
+        if: steps.check_changes.outputs.modified == 'true'
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.REMOTE_DISPATCH_TOKEN }}
+          repository: ${{ secrets.REMOTE_REPOSITORY }}
+          event-type: decidim-module-changed
+          client-payload: |
+            {
+              "pr_number": ${{ github.event.pull_request.number }},
+              "pr_id": ${{ github.event.pull_request.id }},
+              "pr_url": "${{ github.event.pull_request.html_url }}",
+              "pr_title": "${{ github.event.pull_request.title }}",
+              "pr_head_ref": "${{ github.event.pull_request.head.ref }}",
+              "pr_head_sha": "${{ github.event.pull_request.head.sha }}",
+              "pr_base_ref": "${{ github.event.pull_request.base.ref }}",
+              "repository": "${{ github.repository }}",
+              "node_version": "${{ steps.versions.outputs.node_version }}",
+              "ruby_version": "${{ steps.versions.outputs.ruby_version }}",
+              "decidim_version": "${{ steps.versions.outputs.decidim_version }}",
+              "module_name": "${{ matrix.working-directory }}",
+              "triggered_by": "${{ github.actor }}"
+            }
