@@ -27,10 +27,10 @@ jobs:
         id: check
         run: |
           if [ -n "${{ secrets.REMOTE_DISPATCH_TOKEN }}" ] && [ -n "${{ secrets.REMOTE_REPOSITORY }}" ]; then
-            echo "enabled=true" >> $GITHUB_OUTPUT
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
             echo "Remote dispatch is properly configured"
           else
-            echo "enabled=false" >> $GITHUB_OUTPUT
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
             echo "Remote dispatch is not configured. Set REMOTE_DISPATCH_TOKEN and REMOTE_REPOSITORY secrets to enable."
           fi
 
@@ -81,16 +81,16 @@ jobs:
         id: check_changes
         run: |
           # Get the list of changed files in the PR
-          git fetch origin ${{ github.base_ref }}
-          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
+          git fetch origin "${{ github.base_ref }}"
+          CHANGED_FILES=$(git diff --name-only "origin/${{ github.base_ref }}...HEAD")
           
           # Check if any files in the current module directory were changed
           if echo "$CHANGED_FILES" | grep -q "^${{ matrix.working-directory }}/"; then
             echo "Module ${{ matrix.working-directory }} was modified"
-            echo "modified=true" >> $GITHUB_OUTPUT
+            echo "modified=true" >> "$GITHUB_OUTPUT"
           else
             echo "Module ${{ matrix.working-directory }} was not modified"
-            echo "modified=false" >> $GITHUB_OUTPUT
+            echo "modified=false" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Read version files
@@ -101,9 +101,11 @@ jobs:
           RUBY_VERSION=$(cat .ruby-version)
           DECIDIM_VERSION=$(cat .decidim-version)
           
-          echo "node_version=$NODE_VERSION" >> $GITHUB_OUTPUT
-          echo "ruby_version=$RUBY_VERSION" >> $GITHUB_OUTPUT
-          echo "decidim_version=$DECIDIM_VERSION" >> $GITHUB_OUTPUT
+          {
+            echo "node_version=$NODE_VERSION"
+            echo "ruby_version=$RUBY_VERSION"
+            echo "decidim_version=$DECIDIM_VERSION"
+          } >> "$GITHUB_OUTPUT"
           
           echo "Node version: $NODE_VERSION"
           echo "Ruby version: $RUBY_VERSION"
