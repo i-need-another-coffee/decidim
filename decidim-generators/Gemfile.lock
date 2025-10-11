@@ -132,6 +132,7 @@ PATH
       faker (~> 3.2)
       i18n-tasks (~> 1.0)
       nokogiri (~> 1.16, >= 1.16.2)
+      parallel_split_test
       parallel_tests (~> 4.2)
       puma (~> 6.5)
       rails-controller-testing (~> 1.0)
@@ -609,6 +610,9 @@ GEM
       activerecord (>= 6.1)
       request_store (~> 1.4)
     parallel (1.27.0)
+    parallel_split_test (0.10.0)
+      parallel (>= 0.5.13)
+      rspec-core (>= 3.9.0)
     parallel_tests (4.9.0)
       parallel
     paranoia (3.0.1)
