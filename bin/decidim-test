@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+require "test_queue"
+require "test_queue/runner/rspec"
+
+class DecidimTestRunner < TestQueue::Runner::RSpec
+  def after_fork(num)
+    ENV["TEST_ENV_NUMBER"] = num.to_s if num > 1
+  end
+end
+
+DecidimTestRunner.new.execute

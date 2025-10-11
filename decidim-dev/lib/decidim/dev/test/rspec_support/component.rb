@@ -5,7 +5,7 @@ require "decidim/comments"
 require "decidim/dev"
 
 RSpec.configure do |config|
-  config.before(:suite) do
+  config.before(:all) do
     ActiveRecord::Migration.suppress_messages do
       unless ActiveRecord::Base.connection.data_source_exists?("decidim_dev_dummy_resources")
         ActiveRecord::Migration.create_table :decidim_dev_dummy_resources do |t|

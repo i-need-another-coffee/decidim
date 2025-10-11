@@ -851,6 +851,7 @@ GEM
     temple (0.10.4)
     terminal-table (4.0.0)
       unicode-display_width (>= 1.1.1, < 4)
+    test-queue (0.11.1)
     thor (1.4.0)
     tilt (2.5.0)
     timeout (0.4.3)
@@ -927,8 +928,8 @@ DEPENDENCIES
   decidim-templates!
   letter_opener_web (~> 2.0)
   listen (~> 3.1)
-  parallel_tests (~> 4.2)
   puma (>= 6.3.1)
+  test-queue
   web-console (~> 4.2)
 
 RUBY VERSION
