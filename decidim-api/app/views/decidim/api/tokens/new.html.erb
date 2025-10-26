@@ -1,0 +1,16 @@
+<% add_decidim_page_title(t(".page_title")) %>
+
+<% content_for :profile_title do %>
+  <%= t(".page_title") %>
+<% end %>
+
+<%= render layout: "layouts/decidim/shared/layout_user_profile" do %>
+  <%= decidim_form_for(@token, url: tokens_path, html: { autocomplete: "on", class: "form-defaults edit_user" }) do |f| %>
+
+    <%= render partial: "form" %>
+
+    <div class="py-10 flex flex-col gap-4">
+      <%= f.submit t("decidim.api.tokens.new.create"), class: "button button__sm md:button__lg button__secondary mr-auto !ml-0" %>
+    </div>
+  <% end %>
+<% end %>

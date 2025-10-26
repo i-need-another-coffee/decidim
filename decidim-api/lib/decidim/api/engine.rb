@@ -44,6 +44,20 @@ module Decidim
       initializer "decidim_api.shakapacker.assets_path" do
         Decidim.register_assets_path File.expand_path("app/packs", root)
       end
+
+
+      initializer "decidim_api.user_menu" do
+        Decidim.menu :user_menu do |menu|
+          menu.add_item :api,
+                        t("tokens", scope: "decidim.api.menu.user_menu"),
+                        decidim_api.tokens_path,
+                        position: 1.0,
+                        active: is_active_link?(decidim_api.tokens_path)
+
+          menu.move :api, after: :download_your_data
+        end
+      end
+
     end
   end
 end

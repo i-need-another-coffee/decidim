@@ -14,4 +14,6 @@ Decidim::Api::Engine.routes.draw do
              router_name: :decidim_api,
              controllers: { sessions: "decidim/api/sessions" },
              only: :sessions
+
+  resources :tokens
 end

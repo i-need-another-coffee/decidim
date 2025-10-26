@@ -1,0 +1,14 @@
+en:
+
+  decidim:
+    api:
+      tokens:
+        new:
+          page_title: New API token
+          create: Create
+        index:
+          new_token: New API token
+          page_title: My Api Tokens
+      menu:
+        user_menu:
+          tokens: My API tokens
