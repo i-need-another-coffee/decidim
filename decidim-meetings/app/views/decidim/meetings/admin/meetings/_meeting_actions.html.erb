@@ -1,4 +1,4 @@
-<button type="button" data-component="dropdown" data-target="actions-meeting-<%= meeting.id %>" aria-label="<%= t("actions.actions_label", scope: "decidim.admin") %>">
+<button type="button" data-controller="dropdown" data-target="actions-meeting-<%= meeting.id %>" aria-label="<%= t("actions.actions_label", scope: "decidim.admin") %>">
   <%= icon "more-fill", class: "text-secondary" %>
 </button>
 
@@ -151,7 +151,7 @@
       <li class="dropdown__item">
         <% if allowed_to?(:update, :meeting, meeting: meeting) %>
           <% if meeting.published? %>
-            <%= link_to unpublish_meeting_path(meeting), method: :put, data: { confirm: t("actions.unpublish", scope: "decidim.admin") }, class: "dropdown__button" do %>
+            <%= link_to unpublish_meeting_path(meeting), method: :put, data: { confirm: t("actions.confirm_unpublish_meeting", scope: "decidim.meetings") }, class: "dropdown__button" do %>
               <%= icon "close-circle-line" %>
               <%= t("actions.unpublish", scope: "decidim.admin") %>
             <% end %>
