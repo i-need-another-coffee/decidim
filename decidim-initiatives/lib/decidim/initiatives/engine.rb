@@ -22,6 +22,7 @@ module Decidim
 
         resources :create_initiative do
           collection do
+            get :load_initiative_draft
             get :select_initiative_type
             put :select_initiative_type, to: "create_initiative#store_initiative_type"
             get :fill_data
@@ -60,6 +61,7 @@ module Decidim
             get :authorization_create_modal, to: "authorization_create_modals#show"
             get :print, to: "initiatives#print", as: "print"
             get :send_to_technical_validation, to: "initiatives#send_to_technical_validation"
+            delete :discard, to: "initiatives#discard"
           end
 
           resource :initiative_vote, only: [:create, :destroy]
@@ -86,11 +88,32 @@ module Decidim
         end
       end
 
+      initializer "decidim_initiatives.mount_routes" do
+        Decidim::Core::Engine.routes do
+          mount Decidim::Initiatives::Engine, at: "/", as: "decidim_initiatives"
+        end
+      end
+
       initializer "decidim_initiatives.register_icons" do
         Decidim.icons.register(name: "Decidim::Initiative", icon: "lightbulb-flash-line", description: "Initiative", category: "activity", engine: :initiatives)
         Decidim.icons.register(name: "apps-line", icon: "apps-line", category: "system", description: "", engine: :initiatives)
         Decidim.icons.register(name: "printer-line", icon: "printer-line", category: "system", description: "", engine: :initiatives)
         Decidim.icons.register(name: "forbid-line", icon: "forbid-line", category: "system", description: "", engine: :initiatives)
+      end
+
+      initializer "decidim_initiatives.data_migrate", after: "decidim_core.data_migrate" do
+        DataMigrate.configure do |config|
+          config.data_migrations_path << root.join("db/data").to_s
+        end
+      end
+
+      initializer "decidim_initiatives.stats" do
+        Decidim.stats.register :initiatives_count,
+                               priority: StatsRegistry::HIGH_PRIORITY,
+                               icon_name: "lightbulb-flash-line",
+                               tooltip_key: "initiatives_count_tooltip" do |organization, _start_at, _end_at|
+          Decidim::Initiative.where(organization:).public_spaces.count
+        end
       end
 
       initializer "decidim_initiatives.content_blocks" do
@@ -112,20 +135,12 @@ module Decidim
         Decidim::Gamification.register_badge(:initiatives) do |badge|
           badge.levels = [1, 5, 15, 30, 50]
 
-          badge.valid_for = [:user, :user_group]
+          badge.valid_for = [:user]
 
           badge.reset = lambda { |model|
-            case model
-            when User
-              Decidim::Initiative.where(
-                author: model,
-                user_group: nil
-              ).published.count
-            when UserGroup
-              Decidim::Initiative.where(
-                user_group: model
-              ).published.count
-            end
+            Decidim::Initiative.where(
+              author: model
+            ).published.count
           }
         end
       end
@@ -134,7 +149,7 @@ module Decidim
         Decidim::Api::QueryType.include QueryExtensions
       end
 
-      initializer "decidim_initiatives.webpacker.assets_path" do
+      initializer "decidim_initiatives.shakapacker.assets_path" do
         Decidim.register_assets_path File.expand_path("app/packs", root)
       end
 
@@ -143,7 +158,7 @@ module Decidim
         # We need to make sure we call `Preview.all` before requiring our
         # previews, otherwise any previews the app attempts to add need to be
         # manually required.
-        if Rails.env.development? || Rails.env.test?
+        if Rails.env.local?
           ActionMailer::Preview.all
 
           Dir[root.join("spec/mailers/previews/**/*_preview.rb")].each do |file|

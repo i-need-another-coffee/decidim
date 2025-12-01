@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.version = Decidim::Dev.version
   s.authors = ["Josep Jaume Rey Peroy", "Marc Riera Casals", "Oriol Gual Oliva"]
   s.email = ["josepjaume@gmail.com", "mrc2407@gmail.com", "oriolgual@gmail.com"]
-  s.license = "AGPL-3.0"
+  s.license = "AGPL-3.0-or-later"
   s.homepage = "https://decidim.org"
   s.metadata = {
     "bug_tracker_uri" => "https://github.com/decidim/decidim/issues",
@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
     "homepage_uri" => "https://decidim.org",
     "source_code_uri" => "https://github.com/decidim/decidim"
   }
-  s.required_ruby_version = "~> 3.3.0"
+  s.required_ruby_version = "~> 3.4.0"
 
   s.name = "decidim-dev"
   s.summary = "Decidim dev tools"
@@ -42,13 +42,13 @@ Gem::Specification.new do |s|
   s.add_dependency "factory_bot_rails", "~> 6.2"
   s.add_dependency "faker", "~> 3.2"
 
-  s.add_dependency "bullet", "~> 7.1.6"
+  s.add_dependency "bullet", "~> 8.0.0"
   s.add_dependency "byebug", "~> 11.0"
-  s.add_dependency "erb_lint", "~> 0.6.0"
+  s.add_dependency "erb_lint", "~> 0.8.0"
   s.add_dependency "i18n-tasks", "~> 1.0"
   s.add_dependency "nokogiri", "~> 1.16", ">= 1.16.2"
   s.add_dependency "parallel_tests", "~> 4.2"
-  s.add_dependency "puma", "~> 6.2", ">= 6.3.1"
+  s.add_dependency "puma", "~> 6.5"
   s.add_dependency "rails-controller-testing", "~> 1.0"
   s.add_dependency "rspec", "~> 3.12"
   s.add_dependency "rspec-cells", "~> 0.3.7"
@@ -56,15 +56,17 @@ Gem::Specification.new do |s|
   s.add_dependency "rspec_junit_formatter", "~> 0.6.0"
   s.add_dependency "rspec-rails", "~> 6.0"
   s.add_dependency "rspec-retry", "~> 0.6.2"
-  s.add_dependency "rubocop", "~> 1.65.0"
-  s.add_dependency "rubocop-capybara", "~> 2.21"
-  s.add_dependency "rubocop-factory_bot", "~> 2.26"
-  s.add_dependency "rubocop-faker", "~> 1.1"
-  s.add_dependency "rubocop-performance", "~> 1.21"
-  s.add_dependency "rubocop-rails", "~> 2.25"
-  s.add_dependency "rubocop-rspec", "~> 3.0"
-  s.add_dependency "rubocop-rspec_rails", "~> 2.30"
-  s.add_dependency "rubocop-rubycw", "~> 0.1"
+  s.add_dependency "rubocop", "~> 1.78.0"
+  s.add_dependency "rubocop-capybara", "~> 2.22.0", ">= 2.22.1"
+  s.add_dependency "rubocop-factory_bot", "~> 2.27.0"
+  s.add_dependency "rubocop-faker", "~> 1.3", ">= 1.3.0"
+  s.add_dependency "rubocop-graphql", "~> 1.5", ">= 1.5.6"
+  s.add_dependency "rubocop-performance", "~> 1.25", ">= 1.25.0"
+  s.add_dependency "rubocop-rails", "~> 2.32.0", ">= 2.32.0"
+  s.add_dependency "rubocop-rspec", "~> 3.0", ">= 3.6.0"
+  s.add_dependency "rubocop-rspec_rails", "~> 2.31.0"
+  s.add_dependency "rubocop-rubycw", "~> 0.2.0"
+  s.add_dependency "rubocop-yard", "~> 1.0.0"
   s.add_dependency "selenium-webdriver", "~> 4.9"
   s.add_dependency "simplecov", "~> 0.22.0"
   s.add_dependency "simplecov-cobertura", "~> 2.1.0"

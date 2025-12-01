@@ -2,39 +2,116 @@
 
 require "spec_helper"
 
-describe "DownloadYourData" do
+describe "DownloadYourData", download: true do
+  let(:component) { create(:component, :published, organization:) }
+  let!(:resource) { create(:dummy_resource, component:, author: user, published_at: Time.current) }
+  let!(:other_resource) { create(:dummy_resource, component:, author: other_user, published_at: Time.current) }
+
   let(:user) { create(:user, :confirmed, name: "Hodor User") }
   let(:organization) { user.organization }
+
+  let!(:expired_export) { create(:private_export, :expired, attached_to: user, organization:) }
+  let!(:active_export) { create(:private_export, attached_to: user, organization:) }
+
+  let(:other_user) { create(:user, :confirmed, organization:) }
+  let!(:other_user_expired_export) { create(:private_export, :expired, attached_to: other_resource.author, organization:) }
+  let!(:other_user_active_export) { create(:private_export, attached_to: other_resource.author, organization:) }
+
+  around do |example|
+    previous = Capybara.raise_server_errors
+
+    Capybara.raise_server_errors = false
+    clear_enqueued_jobs
+    example.run
+    Capybara.raise_server_errors = previous
+  end
 
   before do
     switch_to_host(organization.host)
     login_as user, scope: :user
+    visit decidim.download_your_data_path
   end
 
-  context "when on the download your data page" do
-    before do
-      visit decidim.download_your_data_path
-    end
-
+  shared_examples_for "downloading data" do
     describe "show button export data" do
       it "export the user's data" do
         within ".download-your-data" do
-          expect(page).to have_content(/Download the data/i)
-          expect(page).to have_content(user.email)
+          expect(page).to have_content("Here you can find all the downloads available for you")
+          expect(page).to have_content("You can request a .zip file with your submissions and personal data.")
         end
+      end
+
+      it "displays only links from current_user" do
+        [expired_export, active_export, other_user_expired_export, other_user_active_export].each(&:reload)
+
+        expect(page).to have_css("form[action=\"#{decidim.download_download_your_data_path(uuid: expired_export.uuid)}\"]")
+        within "form[action=\"#{decidim.download_download_your_data_path(uuid: expired_export.uuid)}\"]" do
+          expect(page).to have_button("Download", disabled: true)
+        end
+        expect(page).to have_css("form[action=\"#{decidim.download_download_your_data_path(uuid: active_export.uuid)}\"]")
+        within "form[action=\"#{decidim.download_download_your_data_path(uuid: active_export.uuid)}\"]" do
+          expect(page).to have_button("Download", disabled: false)
+        end
+        expect(page).to have_no_css("form[action=\"#{decidim.download_download_your_data_path(uuid: other_user_expired_export.uuid)}\"]")
+        expect(page).to have_no_css("form[action=\"#{decidim.download_download_your_data_path(uuid: other_user_active_export.uuid)}\"]")
+      end
+    end
+
+    describe "downloading attachments" do
+      it "when requesting the file of other user's data" do
+        visit decidim.download_download_your_data_path(uuid: other_user_active_export.uuid)
+
+        expect(page).to have_content("The export you have accessed does not exist, or you do not have access to download it")
+      end
+
+      it "when requesting the expired file of other user's data" do
+        visit decidim.download_download_your_data_path(uuid: other_user_expired_export.uuid)
+
+        expect(page).to have_content("The export you have accessed does not exist, or you do not have access to download it")
+      end
+
+      it "when requesting current user's expired file" do
+        visit decidim.download_download_your_data_path(uuid: expired_export.uuid)
+
+        expect(page).to have_content("The export has expired. Try to generate a new export.")
+      end
+
+      it "when requesting current user's active file", :slow do
+        expect(downloads("*.zip").length).to eq(0)
+
+        visit decidim.download_download_your_data_path(uuid: active_export.uuid)
+        wait_for_download
+
+        expect(downloads("*.zip").length).to eq(1)
       end
     end
 
     describe "Export data" do
-      it "exports a 7z with all user information" do
-        perform_enqueued_jobs { click_on "Request data" }
+      it "exports an archive with all user information" do
+        expect(Decidim::PrivateExport.count).to eq(4)
+        perform_enqueued_jobs do
+          click_on "Request"
+          sleep 1
+        end
 
         within_flash_messages do
           expect(page).to have_content("data is currently in progress")
         end
 
+        expect(Decidim::PrivateExport.count).to eq(5)
+
         expect(last_email.subject).to include("Hodor User")
       end
     end
+  end
+
+  context "when user has not yet accepted tos" do
+    let(:user) { create(:user, :confirmed, name: "Hodor User", accepted_tos_version: nil) }
+
+    include_examples "downloading data"
+  end
+
+  context "when on the download your data page" do
+    include_examples "downloading data"
   end
 end

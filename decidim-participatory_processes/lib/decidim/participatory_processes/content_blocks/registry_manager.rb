@@ -125,11 +125,6 @@ module Decidim
             content_block.public_name_key = "decidim.content_blocks.participatory_space_stats.name"
           end
 
-          Decidim.content_blocks.register(:participatory_process_homepage, :metrics) do |content_block|
-            content_block.cell = "decidim/participatory_processes/content_blocks/metrics"
-            content_block.public_name_key = "decidim.content_blocks.participatory_space_metrics.name"
-          end
-
           Decidim.content_blocks.register(:participatory_process_homepage, :related_processes) do |content_block|
             content_block.cell = "decidim/participatory_processes/content_blocks/related_processes"
             content_block.settings_form_cell = "decidim/participatory_processes/content_blocks/highlighted_processes_settings_form"
@@ -166,11 +161,47 @@ module Decidim
             end
           end
 
+          register_highlighted_debates
           register_highlighted_meetings
           register_highlighted_posts
           register_highlighted_proposals
           register_highlighted_results
           register_related_assemblies
+          register_democratic_quality_stats
+        end
+
+        def self.register_democratic_quality_stats
+          return unless Decidim.module_installed?(:meetings)
+          return unless Decidim.module_installed?(:proposals)
+          return unless Decidim.module_installed?(:accountability)
+          return unless Decidim.module_installed?(:budgets)
+
+          Decidim.content_blocks.register(:participatory_process_homepage, :democratic_quality_stats) do |content_block|
+            content_block.cell = "decidim/participatory_processes/content_blocks/democratic_quality_stats"
+            content_block.public_name_key = "decidim.participatory_processes.content_blocks.democratic_quality_stats.name"
+            content_block.settings_form_cell = "decidim/participatory_processes/content_blocks/democratic_quality_stats_settings_form"
+            content_block.settings do |settings|
+              settings.attribute :functional_diversity_invited, type: :integer, default: -1
+              settings.attribute :languages_communicated, type: :integer, default: -1
+              settings.attribute :mobility_meeting_access, type: :integer, default: -1
+              settings.attribute :participation_scheduling_times, type: :integer, default: -1
+              settings.attribute :digital_support_offered, type: :integer, default: -1
+              settings.attribute :citizen_influence_level, type: :integer, default: -1
+              settings.attribute :citizen_decisional_intervention, type: :integer, default: -1
+              settings.attribute :published_information_clarity, type: :integer, default: -1
+              settings.attribute :information_provided, type: :integer, default: -1
+            end
+          end
+        end
+
+        def self.register_highlighted_debates
+          return unless Decidim.module_installed?(:debates)
+
+          Decidim.content_blocks.register(:participatory_process_homepage, :highlighted_debates) do |content_block|
+            content_block.cell = "decidim/debates/content_blocks/highlighted_debates"
+            content_block.public_name_key = "decidim.debates.content_blocks.highlighted_debates.name"
+            content_block.component_manifest_name = "debates"
+          end
         end
 
         def self.register_highlighted_meetings

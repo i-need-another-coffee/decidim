@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.version = Decidim::Templates.version
   s.authors = ["Vera Rojman"]
   s.email = ["vrojman@protonmail.com"]
-  s.license = "AGPL-3.0"
+  s.license = "AGPL-3.0-or-later"
   s.homepage = "https://decidim.org"
   s.metadata = {
     "bug_tracker_uri" => "https://github.com/decidim/decidim/issues",
@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
     "homepage_uri" => "https://decidim.org",
     "source_code_uri" => "https://github.com/decidim/decidim"
   }
-  s.required_ruby_version = "~> 3.3.0"
+  s.required_ruby_version = "~> 3.4.0"
 
   s.name = "decidim-templates"
   s.summary = "A decidim templates module"

@@ -3,14 +3,10 @@ uk:
     attributes:
       participatory_process:
         announcement: Оголошення
-        copy_categories: Скопіювати категорії
-        copy_components: Копіювати складові
-        copy_steps: Скопіювати кроки
         description: Опис
         developer_group: Робочий гурт з просування
         domain: Домен
         end_date: Дата закінчення
-        hashtag: Хештег
         hero_image: Зображення головної сторінки
         local_area: Дільниця організації
         meta_scope: Метавідомості обсягу
@@ -20,8 +16,6 @@ uk:
         promoted: Висвітлено
         published_at: 'Оприлюднено:'
         related_process_ids: Супутні рухи
-        scope_id: Обсяг
-        scopes_enabled: Обсяги увімкнено
         short_description: Стислий опис
         slug: Скорочена веб-адреса
         start_date: Дата початку
@@ -66,7 +60,6 @@ uk:
     admin:
       actions:
         activate: Започаткувати
-        configure: Налаштувати
         confirm_destroy: Підтвердьте видалення
         destroy: Видалити
         duplicate: Створити копію
@@ -86,10 +79,8 @@ uk:
           attachment_collections: Теки
           attachment_files: Вкладені файли
           attachments: Вкладені файли
-          categories: Категорії
           components: Складові
           moderations: Дії з модерації
-          private_users: Приватні учасники
           process_admins: Учасники руху
           steps: Кроки
       models:
@@ -122,11 +113,6 @@ uk:
           fields:
             invitation_accepted_at: 'Запрошення прийняте:'
             invitation_sent_at: 'Запрошення надіслане:'
-      participatory_process_copies:
-        new:
-          copy: Скопіювати
-          select: Оберіть відомості, копію яких ви хотіли б створити
-          title: Створити копію руху співучасті
       participatory_process_groups:
         destroy:
           success: Сукупність рухів співучасті успішно видалено.
@@ -201,10 +187,6 @@ uk:
         update:
           error: При спробі оновити цей рух співучасті сталася помилка.
           success: Рух співучасті успішно оновлено.
-      participatory_processes_copies:
-        create:
-          error: При спробі створити копію цього руху співучасті сталася помилка.
-          success: Успішно створено копію руху співучасті.
       participatory_processes_group:
         create:
           error: При спробі створити нову сукупність рухів співучасті сталася помилка.

@@ -16,15 +16,6 @@ module Decidim
       cell("decidim/amendable/announcement", emendation)
     end
 
-    # Returns Html action button card to AMEND an amendable resource
-    def amend_button_for(amendable)
-      return unless amendments_enabled? && amendable.amendable?
-      return unless current_component.current_settings.amendment_creation_enabled
-      return unless can_participate_in_private_space?
-
-      cell("decidim/amendable/amend_button_card", amendable)
-    end
-
     # Checks if the user can participate in a participatory space
     # based on its settings related with Decidim::HasPrivateUsers.
     def can_participate_in_private_space?
@@ -70,8 +61,9 @@ module Decidim
     # Checks if the user can accept and reject the emendation
     def allowed_to_accept_and_reject?(emendation)
       return unless emendation.amendment.evaluating?
+      return current_user.admin? if emendation.amendable.respond_to?(:official?) && emendation.amendable.official?
 
-      emendation.amendable.created_by?(current_user) || current_user.admin?
+      emendation.amendable.created_by?(current_user)
     end
 
     # Checks if the user can promote the emendation
@@ -91,7 +83,6 @@ module Decidim
 
     def amendments_form_field_for(attribute, form, original_resource)
       options = {
-        class: "js-hashtags",
         label: amendments_form_fields_label(attribute),
         value: amendments_form_fields_value(original_resource, attribute)
       }
@@ -100,7 +91,7 @@ module Decidim
       when :title
         form.text_field(:title, options)
       when :body
-        text_editor_for(form, :body, options.merge(hashtaggable: true))
+        text_editor_for(form, :body, options)
       end
     end
 

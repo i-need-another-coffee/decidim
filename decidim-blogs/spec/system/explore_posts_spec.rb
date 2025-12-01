@@ -32,12 +32,15 @@ describe "Explore posts" do
 
       before do
         create(:comment, commentable: old_post)
-        create(:endorsement, resource: old_post, author: build(:user, organization: old_post.participatory_space.organization))
+        create(:like, resource: old_post, author: build(:user, organization: old_post.participatory_space.organization))
 
         visit_component
       end
 
       it "shows the component name in the sidebar" do
+        within(".menu-bar") do
+          expect(page).to have_content(translated(component.name))
+        end
         within("aside") do
           expect(page).to have_content(translated(component.name))
         end
@@ -86,15 +89,9 @@ describe "Explore posts" do
           within ".author__name" do
             expect(page).to have_content("Official")
           end
-        end
-      end
-
-      context "when author is a user_group" do
-        let(:author) { create(:user_group, :verified, organization:) }
-
-        it "shows user group as the author" do
-          within ".author__name" do
-            expect(page).to have_content(author.name)
+          within(".menu-bar") do
+            expect(page).to have_content(translated(component.name))
+            expect(page).to have_content(translated(post.title))
           end
         end
       end
@@ -105,6 +102,14 @@ describe "Explore posts" do
         it "shows user as the author" do
           within ".author__name" do
             expect(page).to have_content(user.name)
+          end
+        end
+
+        context "when participant is deleted" do
+          let(:author) { create(:user, :deleted, organization: component.organization) }
+
+          it "successfully shows the page" do
+            expect(page).to have_content("Deleted participant")
           end
         end
       end

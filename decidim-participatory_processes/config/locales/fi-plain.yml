@@ -4,16 +4,16 @@ fi-pl:
       participatory_process:
         announcement: Ilmoitus
         area_id: Alue
-        copy_categories: Kopioi aihepiirit
-        copy_components: Kopioi komponentit
-        copy_steps: Kopioi vaiheet
         decidim_area_id: Alue
         description: Kuvaus
         developer_group: Kehittäjäryhmä
         document: Asiakirja
         domain: Toimintaympäristö
+        duplicate_categories: Kopioi aihepiirit
+        duplicate_components: Kopioi komponentit
+        duplicate_landing_page_blocks: Kopioi laskeutumissivun sisältölohkot
+        duplicate_steps: Kopioi vaiheet
         end_date: Päättymispäivä
-        hashtag: Aihetunniste (hashtag)
         hero_image: Etusivun kuva
         import_attachments: Tuo liitteitä
         import_categories: Kopioi aihepiirejä
@@ -22,16 +22,12 @@ fi-pl:
         local_area: Järjestöalue
         meta_scope: Teeman metadata
         participatory_process_group_id: Prosessiryhmä
-        participatory_process_type_id: Prosessin tyyppi
         participatory_scope: Mitä päätetään
         participatory_structure: Miten päätetään
         private_space: Yksityinen prosessi
         promoted: Korostettu
         published_at: Julkaisuaika
         related_process_ids: Liittyvät prosessit
-        scope_id: Teema
-        scope_type_max_depth_id: Teema-suodattimen syvyys
-        scopes_enabled: Teemat käytössä
         short_description: Lyhyt kuvaus
         slug: URL-tunniste
         start_date: Alkamispäivä
@@ -43,7 +39,6 @@ fi-pl:
         description: Kuvaus
         developer_group: Edistäjäryhmä
         group_url: Verkkosivusto
-        hashtag: Aihetunniste (hashtag)
         hero_image: Kuva
         local_area: Organisaation alue
         meta_scope: Teeman metatiedot
@@ -59,8 +54,6 @@ fi-pl:
         end_date: Päättymispäivä
         short_description: Lyhyt kuvaus
         start_date: Alkamispäivä
-        title: Otsikko
-      participatory_process_type:
         title: Otsikko
       participatory_process_user_role:
         email: Sähköposti
@@ -90,23 +83,22 @@ fi-pl:
     admin:
       actions:
         activate: Aktivoi
-        configure: Asetukset
+        confirm_delete_process: Haluatko varmasti poistaa tämän prosessin? Mikäli muutat mieltäsi, voit palauttaa prosessin myöhemmin.
         confirm_destroy: Vahvista poistaminen
         destroy: Poista
         duplicate: Kopioi
         edit: Muokkaa
         import_process: Tuo
-        moderate: Moderoi
         new_process: Uusi prosessi
         new_process_group: Uusi prosessiryhmä
         new_process_step: Uusi vaihe
-        new_process_type: Uusi prosessityyppi
         new_process_user_role: Uusi prosessikäyttäjä
         preview: Esikatsele
         publish: Julkaise
         resend_invitation: Lähetä kutsu uudelleen
         see_process: Näytä prosessi
         unpublish: Lopeta julkaisu
+        view_deleted_processes: Näytä poistetut prosessit
       filters:
         decidim_participatory_process_group_id_eq:
           label: Prosessiryhmä
@@ -114,19 +106,17 @@ fi-pl:
         participatory_process_groups: Prosessiryhmät
         participatory_process_groups_submenu:
           info: Tiedot
-          landing_page: Laskeutumissivu
-        participatory_process_types: Prosessityypit
+          landing_page: Laskeutumissivun asettelu
         participatory_processes: Prosessit
         participatory_processes_submenu:
           attachment_collections: Kansiot
           attachment_files: Tiedostot
           attachments: Liitteet
-          categories: Aihepiirit
           components: Komponentit
           info: Tietoa tästä prosessista
-          landing_page: Laskeutumissivu
+          landing_page: Laskeutumissivun asettelu
           moderations: Moderoinnit
-          private_users: Yksityiset käyttäjät
+          private_users: Jäsenet
           process_admins: Prosessin käyttäjät
           steps: Vaiheet
       models:
@@ -140,21 +130,19 @@ fi-pl:
           name: Osallisuusprosessi
         participatory_process_group:
           fields:
+            actions: Toiminnot
             title: Otsikko
           name: Prosessiryhmä
         participatory_process_step:
           fields:
+            actions: Toiminnot
             end_date: Päättymispäivä
             start_date: Alkamispäivä
             title: Otsikko
           name: Osallisuusprosessin vaihe
-        participatory_process_type:
-          fields:
-            created_at: Luontiaika
-            title: Otsikko
-          name: Prosessityyppi
         participatory_process_user_role:
           fields:
+            actions: Toiminnot
             email: Sähköposti
             name: Nimi
             role: Rooli
@@ -162,17 +150,18 @@ fi-pl:
           roles:
             admin: Järjestelmänvalvoja
             collaborator: Osallisuuskäyttäjä
+            evaluator: Arvioija
             moderator: Moderoija
-            valuator: Arvon arvioija
         user:
           fields:
             invitation_accepted_at: Kutsu hyväksytty
             invitation_sent_at: Kutsu on
-      participatory_process_copies:
+            published: Julkaistu
+      participatory_process_duplicates:
         new:
-          copy: Kopio
+          duplicate: Kopioi
           select: Valitse, mitkä tiedot haluat kopioida
-          title: Kopioi osallisuusprosessi
+          title: Kopioi osallistumisprosessi
       participatory_process_groups:
         destroy:
           error: Osallistumistilojen ryhmän poisto epäonnistui.
@@ -216,12 +205,6 @@ fi-pl:
             last_step: Prosessin viimeistä vaihetta ei voi poistaa.
           success: Osallisuusprosessin vaihe poistettiin onnistuneesti.
         edit:
-          cta_deprecated:
-            body_html: |-
-              Osallistumisprosessin toimintopainike (call to action) on poistettu käytöstä uuden ulkoasun myötä.
-              Voit muuttaa tätä asetusta <b>Laskeutumssivun asetusten kautta</b> käyttämällä sisältölohkoa nimeltä <b>Pääkuva</b>.
-              Asetus on jätetty tähän paikkaan muuttaaksesi toimintopainikkeet (call to action) sellaiseksi kuin haluat. Kentät <i>toimintopainikkeen (call to action) polulle</i> ja <i>toimintopainikkeen (call to action) tekstille</i> poistetaan seuraavassa versiossa.
-            title: Käytöstä poistettu CTA (call to action)
           title: Muokkaa osallisuusprosessin vaihetta
           update: Päivitä
         index:
@@ -234,21 +217,6 @@ fi-pl:
         update:
           error: Tämän osallisuusprosessin vaiheen päivityksessä tapahtui virhe.
           success: Osallisuusprosessin vaihe päivitetty onnistuneesti.
-      participatory_process_types:
-        create:
-          error: Prosessityypin luonti epäonnistui.
-          success: Prosessityypin luonti onnistui.
-        destroy:
-          success: Prosessityypin poisto onnistui.
-        edit:
-          title: Muokkaa prosessityyppiä
-          update: Päivitä
-        new:
-          create: Luo
-          title: Uusi prosessityyppi
-        update:
-          error: Prosessityypin päivitys epäonnistui.
-          success: Prosessityypin päivittäminen onnistui.
       participatory_process_user_roles:
         create:
           error: Tapahtui virhe lisätessä käyttäjää osallisuusprosessiin.
@@ -277,24 +245,32 @@ fi-pl:
           public: Julkinen
           published: Julkaistu
           unpublished: Julkaisematon
+        manage_trash:
+          title: Poistetut osallistumisprosessit
         new:
           create: Luo
           title: Uusi osallisuusprosessi
         update:
           error: Tämän osallisuusprosessin päivityksessä tapahtui virhe.
           success: Osallisuusprosessi päivitetty onnistuneesti.
-      participatory_processes_copies:
+      participatory_processes_duplicates:
         create:
-          error: Tämän osallisuusprosessin kopioinnissa tapahtui virhe.
-          success: Osallisuusprosessi kopioitu onnistuneesti.
+          error: Osallistumisprosessin kopiointi epäonnistui.
+          success: Osallistumisprosessin kopiointi onnistui.
       participatory_processes_group:
         create:
           error: Uuden osallisuusprosessiryhmän luonnissa tapahtui virhe.
           success: Osallisuusprosessiryhmä luotu onnistuneesti.
+      taxonomy_filters:
+        space_filter_for:
+          participatory_processes: Kaikki osallistumisprosessit
       titles:
         participatory_process_groups: Osallisuusprosessiryhmät
         participatory_process_types: Osallistumisprosessien tyypit
         participatory_processes: Osallisuusprosessit
+        participatory_processes_deleted: Poistetut osallistumisprosessit
+      tooltips:
+        deleted_processes_info: Prosessi voidaan poistaa ainoastaan, mikäli sitä ei ole julkaistu.
       users:
         resend_invitation:
           error: Virhe lähettää kutsun.
@@ -306,10 +282,13 @@ fi-pl:
         export: "%{user_name} vei osallistumisprosessin %{resource_name}"
         import: "%{user_name} toi osallistumisprosessin %{resource_name}"
         publish: "%{user_name} julkaisi osallisuusprosessin %{resource_name}"
+        restore: "%{user_name} palautti osallistumisprosessin %{resource_name}"
+        soft_delete: "%{user_name} siirsi osallistumisprosessin %{resource_name} roskakoriin"
         unpublish: "%{user_name} muutti osallisuusprosessin %{resource_name} julkaisemattomaksi"
         update: "%{user_name} päivitti osallisuusprosessin %{resource_name}"
       participatory_process_group:
         create: "%{user_name} loi osallisuusprosessien ryhmän %{resource_name}"
+        unpublish: "%{user_name} perui osallistumisprosessin %{resource_name} julkaisun"
         update: "%{user_name} päivitti osallisuusprosessien ryhmää %{resource_name}"
       participatory_process_step:
         activate: "%{user_name} aktivoi vaiheen %{resource_name} osallisuusprosessissa %{space_name}"
@@ -324,6 +303,9 @@ fi-pl:
         create: "%{user_name} kutsui käyttäjän %{resource_name} osallisuusprosessiin %{space_name}"
         delete: "%{user_name} poisti käyttäjän %{resource_name} osallisuusprosessista %{space_name}"
         update: "%{user_name} muutti käyttäjän %{resource_name} roolia osallisuusprosessissa %{space_name}"
+    download_your_data:
+      show:
+        participatory_processes: Osallistumisprosessien vienti
     events:
       participatory_process:
         role_assigned:
@@ -353,11 +335,37 @@ fi-pl:
           not_found: 'Prosessityyppiä ei löytynyt tietokannasta (ID: %{id}).'
     menu:
       processes: Prosessit
-    metrics:
-      participatory_processes:
-        description: Osallisuusprosessien määrä tässä organisaatiossa
-        object: osallisuusprosessit
-        title: Osallisuusprosessit
+    open_data:
+      help:
+        participatory_processes:
+          announcement: Ilmoituksen sisältö
+          area: Alue, jota prosessi koskee
+          created_at: Tilan luontiaika
+          description: Prosessin pitkä kuvaus
+          developer_group: Prosessin kehittäjäryhmä, joka edistää tämän prosessin toteutumista.
+          end_date: Prosessin päättymispäivä
+          follows_count: Tilaa seuraavien käyttäjien määrä
+          id: Prosessin yksilöivä tunniste
+          local_area: Prosessin paikallisalue, eli millä alueella prosessi tapahtuu.
+          meta_scope: Prosessin teeman metatiedot
+          participatory_process_group: Prosessin ryhmä, mikäli sellainen on määritetty
+          participatory_process_type: Prosessin tyyppi
+          participatory_scope: Prosessin osallistumisen laajuus
+          participatory_structure: Prosessin osallistumisrakenne. Määrittää, miten prosessin lopputulokset määrätään.
+          promoted: Onko prosessi korostettu vai ei
+          published_at: Tilan julkaisuaika
+          reference: Tilan yksilöivä viite
+          remote_hero_image_url: Prosessin hero-kuvan URL-osoite
+          scope: Prosessin teema
+          scopes_enabled: Ovatko teemat otettu käyttöön vai eivät
+          short_description: Prosessin lyhyt kuvaus
+          slug: Prosessin URL-tunniste (URL-osoitteen osa, joka erottaa prosessin muista prosesseista)
+          start_date: Prosessin alkamispäivä
+          subtitle: Prosessin alaotsikko
+          target: Prosessin tavoite. Määrittää esimerkiksi, keitä prosessiin osallistuu.
+          title: Prosessin otsikko
+          updated_at: Osallistumistilan viimeisimmän päivityksen ajankohta
+          url: Tilan URL-osoite
     participatory_process_groups:
       content_blocks:
         extra_data:
@@ -386,6 +394,8 @@ fi-pl:
           participatory_processes:
             one: 1 prosessi
             other: "%{count} prosessia"
+      related_processes:
+        help: Valitut prosessit liitetään tähän ryhmään, myös sellaiset, jotka on aikaisemmin liitetty johonkin toiseen ryhmään.
       show:
         title: Osallisuusprosessiryhmät
     participatory_process_steps:
@@ -394,6 +404,82 @@ fi-pl:
     participatory_processes:
       admin:
         content_blocks:
+          democratic_quality_stats_settings_form:
+            announcement:
+              body_html: |-
+                <ul>
+                <li>Nämä lasketaan automaattisesti Decidim-alustalla olevista tiedoista. Kyseiset tiedot tulevat näkyviin, kun julkaiset tämän sisältölohkon.</li>
+                <li>Nämä tiedot perustuvat alla olevaan lomakkeen antamiisi vastauksiin. Kyseiset tiedot tulevat näkyviin, kun julkaiset tämän sisältölohkon.</li>
+                </ul>
+              title: 'Tämä sisältölohko esittää kahta erityyppistä tilastomittaria:'
+            citizen_influence:
+              citizen_decisional_intervention:
+                legend: Kuinka monessa prosessin vaiheista (päätettävien asioiden valinnasta toteutuksen valvontaan) kansalaisilla on mahdollisuus tehdä päätöksiä tai toimeenpanovaltaa?
+                options:
+                  five: 80 - 100%
+                  four: 60 - 80%
+                  one: 0 - 20%
+                  three: 40 - 60%
+                  two: 20 - 40%
+              citizen_influence_level:
+                legend: Missä määrin kansalaisilla on tässä prosessissa päätösvaltaa? Tämä voi esimerkiksi ulottua ainoastaan pelkkään tiedon saamiseen tai todelliseen päätöksentekovaltaan ja resurssien hallinnointiin kansalaisten toimesta.
+                options:
+                  five: Osallistujat hallitsevat päätöksentekoprosessia, resursseja sekä päätösten toimeenpanoa
+                  four: Osallistujia huomioitiin päätöksenteossa
+                  one: Osallistujat saivat tietoa organisaatiolta
+                  three: Osallistujat käyttivät päätöksentekovaltaa yhdessä viranhaltijoiden tai päättäjien kanssa
+                  two: Osallistujia kuultiin asioiden käsittelyssä tai he antoivat palautetta organisaatiolle
+              name: Kansalaisvaikuttaminen
+            inclusiveness:
+              description: Inklusiivisuus kulttuurillisen alkuperän tai toiminnallisen monimuotoisuuden perusteella.
+              digital_support_offered:
+                legend: Onko osallistujille tarjottu digitaalista tukea?
+                options:
+                  five: 'Kyllä'
+                  two_five: Osittain
+                  zero: 'Ei'
+              functional_diversity_invited:
+                legend: Onko toimihenkilöiden ja osallistujien monimuotoisuus ollut verrannollinen prosessia koskettavan väestön monimuotoisuuteen?
+                options:
+                  five: Hyvä
+                  one: Matala
+                  two_five: Riittävä
+                  zero: Ei ollenkaan
+              languages_communicated:
+                legend: Kuinka montaa eri kieltä tässä prosessissa on käytetty?
+                options:
+                  five: Yli puolia yhteisön puhumista kielistä
+                  one: Yhtä kieltä
+                  two_five: Alle puolia yhteisön puhumista kielistä
+              mobility_meeting_access:
+                legend: Olivatko tapahtumapaikat kasvokkain järjestetyissä tapaamisissa liikuntarajoitteistan henkilöiden saavutettavissa?
+                options:
+                  five: 'Kyllä'
+                  two_five: Osittain
+                  zero: 'Ei'
+              name: Inklusiivisuus
+              participation_scheduling_times:
+                legend: Osallistumistilaisuuksia on järjestetty eri aikoina (aamulla, keskipäivällä, iltapäivällä, iltaisin ja viikonloppuisin).
+                options:
+                  five: 'Kyllä'
+                  two_five: Osittain
+                  zero: 'Ei'
+            informativeness:
+              information_provided:
+                legend: Onko osallistujille annettu tarpeeksi tietoa, millaiset heidän vaikutsmahdollisuutensa ovat keskustelun kohteena olevaan aiheeseen? (prosessista kommunikoitaessa, kutsuissa tilaisuuksiin, sekä jokaisen tilaisuuden alussa ja lopussa)
+                options:
+                  five: Aina
+                  one: En juuri koskaan
+                  two_five: Yleensä
+                  zero: Ei koskaan
+              name: Tiedottaminen
+              published_information_clarity:
+                legend: Selventääkö julkaistu tieto käytettyjä päätöksentekotapoja? (esim. äänestykset, yksimielisyys, suorat neuvottelut)
+                options:
+                  five: Täysi selkeys
+                  one: Vähäinen selkeys
+                  two_five: Riittävä selkeys
+                  zero: Ei ollenkaan
           highlighted_processes:
             active: Aktiiviset
             all: Kaikki
@@ -402,7 +488,7 @@ fi-pl:
         new_import:
           accepted_types:
             json: JSON
-        participatory_process_copies:
+        participatory_process_duplicates:
           form:
             slug_help_html: 'URL-tunnisteita käytetään tuottamaan URL-osoitteet, jotka viittaavat tähän prosessiin. Hyväksyy vain kirjaimet, numerot ja viivat. Arvon on alettava kirjaimella. Esimerkki: %{url}'
         participatory_process_groups:
@@ -414,27 +500,51 @@ fi-pl:
           form:
             document_legend: Lisää asiakirja
             slug_help_html: 'URL-tunnisteita käytetään tuottamaan URL-osoitteet, jotka viittaavat tähän prosessiin. Hyväksyy vain kirjaimet, numerot ja viivat. Arvon on alettava kirjaimella. Esimerkki: %{url}'
-        participatory_process_steps:
-          form:
-            cta_path_help_html: 'Käytä osittaisia ​​polkuja, ei kokonaisia URL-osoitteita. Hyväksyy kirjaimet, numerot, väliviivat ja kauttaviivat. Arvon täytyy alkaa kirjaimella. Jos asetusta ei ole asetettu, painiketta ei näytetä. Esimerkki: %{url}'
-            cta_text_help: Jos asetusta ei ole asetettu, painiketta ei näytetä.
         participatory_processes:
           form:
             announcement_help: Tähän kirjoitettu teksti näkyy käyttäjälle heti prosessitietojen alapuolella.
+            define_taxonomy_filters: Määritä osallistumistilalle suodattimia ennen kuin käytät tätä asetusta.
             duration: Kesto
-            filters: Suodattimet
             images: kuvat
             metadata: metadata
-            other: muut
+            no_taxonomy_filters_found: Luokittelusuodattimia ei löytynyt.
+            private_notice: Voit hallinnoida osallistumistilan yksityisiä käyttäjiä asettamalla osallistumistilan yksityiseksi
             related_processes: Liittyvät prosessit
-            scope_type_max_depth_help: Rajaa teemasuodattimen syvyyttä; suodatin näyttää yleisestä teemasta valittuun teematyyppiin saakka.
-            select_an_area: Valitse alue
-            select_participatory_process_type: Valitse prosessityyppi
             select_process_group: Valitse prosessiryhmä
             slug_help_html: 'URL-tunnisteita käytetään tuottamaan URL-osoitteet, jotka viittaavat tähän prosessiin. Hyväksyy vain kirjaimet, numerot ja viivat. Arvon on alettava kirjaimella. Esimerkki: %{url}'
+            taxonomies: Luokittelut
             title: Yleistä tietoa
             visibility: Näkyvyys
       content_blocks:
+        democratic_quality_stats:
+          automatic_metrics:
+            description: Nämä tilastot tuotetaan automaattisesti alustalla olevan tiedon perusteella.
+            indicators:
+              hybridization: Hybridisointi
+              hybridization_tooltip: Tämä tilasto mittaa verkossa ja verkon ulkopuolella olevien tilojen yhdistämisen tasoa prosessin aikana
+              influence: Kansalaisvaikuttaminen
+              influence_tooltip: Tämä tilasto mittaa kansalaisvaikuttamisen tasoa hyväksyttyjen ehdotusten ja prosessien lopputulosten osalta.
+              traceability: Seurattavuus
+              traceability_tooltip: Tämä tilasto mittaa osallistumisprosessin läpinäkyvyyttä ja seurattavuutta. Tilasto kertoo, miten helposti osallistujat voivat seurata ehdotusten kehittymistä ja etenemistä sekä tarkastaa viranhaltijoiden suorittamia toimenpiteitä julkaistujen tietojen pohjalta.
+              transparency: Reaktiivisuus
+              transparency_tooltip: Tämä tilasto mittaa organisaation reaktiivisuuden tasoa osallistujien aktiivisuuteen nähden. Tilasto kertoo, kuinka hyvin viranhaltijat ovat sitoutuneet antamaan virallisia vastauksia ja toteuttamaan tehtyjä päätöksiä.
+            name: Automaattiset tilastomittarit
+          global_score:
+            description_html: Tältä sivulta löydät erilaisia tilastoja, joiden avulla voit arvioida osallistumisprosessien demokraattista laatua. Löydät lisää tietoa näiden tilastojen laskennasta <a href="%{info_url}">demokraattisten laatumittareiden tietosivulta</a>.
+            name: Yleinen arvosana
+            note: "*Suuntaa-antavat arvot mitataan asteikolla 1-5, jossa 1 edustaa alhaisinta ja 5 korkeinta laatua."
+            tooltip: Lasketaan kaikkien mittareiden keskiarvona
+          name: Laatuindikaattori
+          qualitative_metrics:
+            description: Nämä tilastot saadaan alustan hallintakäyttäjien antamista vastauksista itsearviointikyselyyn.
+            indicators:
+              citizen_influence: Kansalaisvaikuttaminen
+              citizen_influence_tooltip: Mittaa kuinka hyvin osallistujien mielipiteitä on otettu huomioon päätöksenteossa.
+              inclusiveness: Inklusiivisuus
+              inclusiveness_tooltip: Arvioi, kuinka monipuolisesti eri ryhmiä edustavat asiasta kiinnostuneet tahot ovat olleet edustettuina.
+              informativeness: Tiedottaminen
+              informativeness_tooltip: Mittaa prosessin aikana jaetun tiedon selkeyden tasoa.
+            name: Itsearvioinnin tilastot
         extra_data:
           name: Vaihe ja kesto
         hero:
@@ -446,15 +556,12 @@ fi-pl:
       index:
         title: Osallisuusprosessit
       last_activity:
-        new_participatory_process: Uusi osallisuusprosessi
+        new_participatory_process: 'Uusi osallistumisprosessi:'
       pages:
         home:
           highlighted_processes:
             active_spaces: Aktiiviset prosessit
             see_all_spaces: Näytä kaikki prosessit
-      participatory_process_steps:
-        index:
-          back_to_process: Takaisin prosessin sivulle
       participatory_processes:
         description:
           area_name: Alue
@@ -496,12 +603,200 @@ fi-pl:
           type: Tyyppi
         show:
           title: Tietoa tästä prosessista
+      participatory_space_private_users:
+        index:
+          title: Jäsenet
       show:
         belongs_to_group: Tämä prosessi kuuluu ryhmään
         private_space: Tämä on yksityinen prosessi
         related_processes: Liittyvät prosessit
+      static_pages:
+        democratic_quality_indicators:
+          content: |-
+            <h2>Tilastojärjestelmä osallistumisen laadun mittaamiseen Decidim-alustalla</h2>
+
+            <h3>Johdanto</h3>
+            <p>Demokraattinen laatu on Decidim-alustan ydinperiaate. Ylläpitääksemme tätä, olemme kehittäneet tilastojärjestelmän, jonka avulla alustalla olevien osallistumisprosessien laatua voidaan arvioida. Tämä sivu selventää, kuinka nämä tilastot lasketaan.</p>
+
+            <h3>Kuinka tilastot lasketaan?</h3>
+            <p>Määrittelimme kaksi menetelmää laatuindikaattorien keräämiseksi:</p>
+
+            <ol>
+             <li><strong>Automaattiset tilastot:</strong> nämä lasketaan suoraan Decidim-alustalla olevista tiedoista.</li>
+             <li><strong>Itsearvioinnin kysymykset:</strong> nämä perustuvat hallintakäyttäjien antamiin kyselylomakkeen vastauksiin.</li>
+            </ol>
+
+            <p>Jokainen tilasto esitetään prosentuaalisena arvona (n/kokonaismäärä). Tämä prosentuaalinen osuus pisteytetään asteikolla 1-5 seuraavasti:</p>
+
+            <ul>
+             <li>1 = 0–20%</li>
+             <li>2 = 20–40%</li>
+             <li>3 = 40–60%</li>
+             <li>4 = 60–80%</li>
+             <li>5 = 80–100%</li>
+            </ul>
+
+            <br><br>
+            <h3>Automaattiset tilastot</h3>
+            <p>Nämä tilastot lasketaan automaattisesti Decidim-alustalla olevien tietojen avulla. Tilastot lasketaan erikseen jokaiselle osallistumisprosessille ja hallintakäyttäjät voivat julkaista nämä tiedot osallistujien nähtäväksi.</p>
+
+            <p>Määritimme neljä tilastoa: kansalaisvaikuttaminen, hybridisointi, reaktiivisuus ja seurattavuus.</p>
+
+            <h3>Kansalaisvaikuttaminen</h3>
+
+            <p>Tämä tilasto mittaa kansalaisvaikuttamisen tasoa hyväksyttyjen ehdotusten ja prosessien lopputulosten osalta.</p>
+
+            <ul>
+             <li>
+             Kansalaisvaikuttaminen ehdotusten kautta
+             <ul>
+             <li>Hyväksyttyjen ehdotusten määrä (n/kokonaismäärä)</li>
+             <li>Hyväksyttyjen <em>kansalaisten</em> jättämien ehdotusten prosentuaalinen osuus kaikista kansalaisten jättämien ehdotusten määrästä (kansalaisvaikuttamisen kokonaistaso hyväksyttyihin ehdotuksiin)</li>
+             <li>Hyväksyttyjen kansalaisten jättämien ehdotusten prosentuaalinen osuus kaikkien hyväksyttyjen ehdotusten määrästä (suhteellinen kansalaisten vaikutusvalta hyväksyttyihin ehdotuksiin)</li>
+             </ul>
+             </li>
+             <li>
+             Kansalaisvaikuttaminen johtopäätöksiin tai lopputuloksiin
+             <ul>
+             <li>Ehdotuksiin liitettyjen tulosten prosentuaalinen määrä kaikkien tulosten määrästä (kansalaisvaikuttamisen kokonaistaso lopputuloksiin)</li>
+             </ul>
+             </li>
+            </ul>
+
+            <h3>Hybridisointi</h3>
+
+            <p>Tämä tilasto mittaa verkossa ja verkon ulkopuolella olevien tilojen yhdistämisen tasoa prosessin aikana</p>
+
+            <ul>
+             <li>Onko prosessissa järjestetty tapaamisia? (Kyllä=5, Ei=0)</li>
+             <li>Onko prosessin aikana ollut naamatusten järjestettyjä fyysisiä tapaamisia? (Kyllä=5, Ei=0)</li>
+             <li>Onko prosessin aikana ollut verkkotapaamisia? (Kyllä=5, Ei=0)</li>
+             <li>Onko prosessin aikana ollut hybriditapaamisia? (Kyllä=5, Ei=0)</li>
+             <li>Onko tapaamisten perusteella luotu ehdotuksia? (Kyllä=5, Ei=0)</li>
+            </ul>
+
+            <h3>Reaktiivisuus</h3>
+
+            <p>Tämä tilasto mittaa organisaation reaktiivisuuden tasoa osallistujien aktiivisuuteen nähden. Tilasto kertoo, kuinka hyvin viranhaltijat ovat sitoutuneet antamaan virallisia vastauksia ja toteuttamaan tehtyjä päätöksiä.</p>
+
+            <ul>
+             <li>Vastattujen ehdotusten prosentiaalinen osuus (n/kokonaismäärä) – Viranhaltijoiden reaktiivisuus ehdotuksiin</li>
+             <li>100% valmistuneiden tulosten prosentuaalinen osuus (n/kokonaismäärä)</li>
+            </ul>
+
+            <h3>Seurattavuus</h3>
+
+            <p>Tämä tilasto mittaa osallistumisprosessin läpinäkyvyyttä ja seurattavuutta. Tilasto kertoo, miten helposti osallistujat voivat seurata ehdotusten kehittymistä ja etenemistä sekä tarkastaa viranhaltijoiden suorittamia toimenpiteitä julkaistujen tietojen pohjalta.</p>
+
+            <ul>
+             <li>Muutettujen ehdotusten prosentuaalinen osuus (n/kokonaismäärä)</li>
+             <li>Ehdotuksiin linkattujen tulosten prosentuaalinen osuus (n/kokonaismäärä)</li>
+             <li>Julkaistun tapaamismuistion kanssa suljettujen tapaamisten prosentuaalinen osuus (n/kokonaismäärä)</li>
+             <li>Avoimen datan moduulin aktivoiminen (kahtiajako: 0 tai 5)</li>
+             <li>Budjetteihin liitettyjen ehdotusten prosentuaalinen osuus (n/kokonaismäärä)</li>
+            </ul>
+
+            <br><br>
+            <h3>Itsearvioinnin tilastot</h3>
+
+            <p>Automaattisten tilastojen lisäksi ehdotamme <strong>itsearviointikyselyn</strong> käyttämistä jokaisen osallistumisprosessin laadun arvioinnissa. Hallintakäyttäjät täyttävät tämän lomakkeen jokaisen prosessin lopuksi ja sen vastaukset näytetään julkisesti tilastomittareille tarkoitetun sisältölohkon kautta.</p>
+
+            <p>Näiden kysymysten avulla pyritään keräämään demokraattisen laadun näkokulmia, joita ei voi arvioida ainoastaan määrällisen tilastoanalyysin perusteella. On tärkeää huomioida, että tämän kyselyn vastaukset ovat puolueellisia ja perustuvat hallintakäyttäjien mielipiteisiin.</p>
+
+            <br><br>
+            <h3>Itsearvioinnin kysymykset</h3>
+
+            <p>Hallintakäyttäjien itsearviointiin sisältyvät kysymykset sekä kuhunkin vastaukseen liittyvät arvot on selitetty alla.</p>
+
+            <h4>Informatiivisuus</h4>
+
+            <ol>
+             <li>Selventääkö julkaistu tieto päätöksenteon tapoja (esim. äänestys, yhteisymmärrys, suorat neuvottelut)?
+             <ul>
+             <li>Ei selkeyttä = 0</li>
+             <li>Matalan tason selkeys = 1</li>
+             <li>Riittävä selkeys = 2,5</li>
+             <li>Täysi selkeys = 5</li>
+             </ul>
+             </li>
+             <li>Onko osallistujille tarjottu tietoa heidän vaikutusmahdollisuuksistaan käsiteltävään asiaan (prosessin viestinnässä, kutsuissa ja jokaisen keskustelutilaisuuden alussa)?
+             <ul>
+             <li>Ei koskaan = 0</li>
+             <li>Ei miltei koskaan = 1</li>
+             <li>Yleensä = 2,5</li>
+             <li>Aina = 5</li>
+             </ul>
+             </li>
+            </ol>
+
+            <h4>Kansalaisvaikuttaminen</h4>
+
+            <ol>
+             <li>Prosessin osallistumismahdollisuuksien arviointi
+             <ul>
+             <li>Osallistujille on annettu tietoa organisaation puolesta = 1</li>
+             <li>Osallistujat ovat osallistuneet kuulemisiin aktiivisesti tai antaneet palautetta organisaatiolle = 2</li>
+             <li>Osallistujille on annettu päätöksentekovaltaa = 3</li>
+             <li>Osallistujat on otettu määrätietoisesti mukaan päätöksentekoon = 4</li>
+             <li>Osallistujat ovat olleet osana päätöksentekoa ja hallinnoineet toteutusten resursseja = 5</li>
+             </ul>
+             </li>
+             <li>Prosessin vaiheiden arviointi asteikolla 0-5 kansalaisten päätöksenteon mahdollisuuksista.
+             <p>Kaikista prosessn vaiheista (asioiden valinnasta toimeenpanon valvontaan), monessa vaiheessa osallistujilla on ollut päätöksenteko- tai toimeenpanovaltaa?</p>
+             <ul>
+             <li>0-20% = 1</li>
+             <li>20-40% = 2</li>
+             <li>40-60% = 3</li>
+             <li>60-80% = 4</li>
+             <li>80-100% = 5</li>
+             </ul>
+             </li>
+            </ol>
+
+            <h4>Inklusiivisuus</h4>
+
+            <ol>
+             <li>Miten toimijoiden ja osallistujien monimuotoisuutta on arvioitu päätöksenteon kohteena olevien asukkaiden kohderyhmään suhteutettuna?
+             <ul>
+             <li>Ei mitenkään = 0</li>
+             <li>Hieman = 1</li>
+             <li>Riittävästi = 2,5</li>
+             <li>Hyvällä tasolla = 5</li>
+             </ul>
+             </li>
+             <li>Kuinka monella kielellä prosessista on viestitty?
+             <ul>
+             <li>Yhdellä kielellä = 1</li>
+             <li>Alle puolilla yhteisön puhumista kielistä = 2,5</li>
+             <li>Yli puolilla yhteisön puhumista kielistä = 5</li>
+             </ul>
+             </li>
+             <li>Olivatko tapahtumapaikat kasvokkain järjestetyissä tapaamisissa liikuntarajoitteistan henkilöiden saavutettavissa?
+             <ul>
+             <li>Eivät = 0</li>
+             <li>Osittain = 2,5</li>
+             <li>Kyllä = 5</li>
+             </ul>
+             </li>
+             <li>Onko osallistumistilaisuuksia on järjestetty eri aikoina (aamulla, keskipäivällä, iltapäivällä, iltaisin ja viikonloppuisin)?
+             <ul>
+             <li>Ei = 0</li>
+             <li>Osittain = 2,5</li>
+             <li>Kyllä = 5</li>
+             </ul>
+             </li>
+             <li>Onko osallistujille tarjottu digitaalista tukea?
+             <ul>
+             <li>Ei = 0</li>
+             <li>Osittain = 2,5</li>
+             <li>Kyllä = 5</li>
+             </ul>
+             </li>
+            </ol>
+          title: Demokraattiset laatumittarit
     statistics:
       processes_count: Prosessia
+      processes_count_tooltip: Julkisesti näkyvien osallistumisprosessien lukumäärä.
   layouts:
     decidim:
       participatory_process_groups:
@@ -509,6 +804,8 @@ fi-pl:
           browse: Selaa
           browse_resource: Selaa prosessiryhmää %{resource_name}
           processes_count: 'Prosessit:'
+      participatory_process_navigation:
+        member_menu_item: Jäsenet
       participatory_processes:
         index:
           promoted_processes: Tärkeät prosessit

@@ -48,7 +48,7 @@ module Decidim
       # Note: this cannot fetch the default settings from the class instance
       # variable "defaults" because that would cause an infinite loop.
       #
-      # @param *chain [Symbol, String] The configuration key(s) to dig into
+      # @param chain [Array<Symbol, String>] The configuration key(s) to dig into
       #   inside the default configurations hash.
       # @return The value found from the default configurations hash.
       def default(*chain)
@@ -105,7 +105,7 @@ module Decidim
           "upload" => {
             "allowed_file_extensions" => {
               "default" => %w(jpg jpeg png webp pdf rtf txt),
-              "admin" => %w(jpg jpeg png webp pdf doc docx xls xlsx ppt pptx ppx rtf txt odt ott odf otg ods ots),
+              "admin" => %w(jpg jpeg png webp pdf doc docx xls xlsx ppt pptx ppx rtf txt odt ott odf otg ods ots csv json md),
               "image" => %w(jpg jpeg png webp)
             },
             "allowed_content_types" => {
@@ -125,23 +125,18 @@ module Decidim
                 application/vnd.oasis.opendocument
                 application/pdf
                 application/rtf
+                application/json
+                text/markdown
                 text/plain
+                text/csv
               )
             },
             "maximum_file_size" => {
-              "default" => default_maximum_attachment_size,
-              "avatar" => default_maximum_avatar_size
+              "default" => Decidim.maximum_attachment_size.to_f,
+              "avatar" => Decidim.maximum_avatar_size.to_f
             }
           }
         }
-      end
-
-      def default_maximum_attachment_size
-        (Rails.application.secrets.decidim[:maximum_attachment_size].presence || 10).to_f
-      end
-
-      def default_maximum_avatar_size
-        (Rails.application.secrets.decidim[:maximum_avatar_size].presence || 5).to_f
       end
     end
 
@@ -208,7 +203,7 @@ module Decidim
     # Turns the stars into wildcard regular expression matches in the matching
     # strings.
     #
-    # @param [Array<String>] An array of glob strings to match against.
+    # @param types [Array<String>] An array of glob strings to match against.
     # @return [Array<Regexp>] An array of regular expressions to match against.
     def content_type_array(types)
       types.map do |match_string|

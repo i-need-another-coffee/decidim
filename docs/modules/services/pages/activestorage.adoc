@@ -4,6 +4,11 @@ Decidim uses https://edgeguides.rubyonrails.org/active_storage_overview.html[Act
 
 In order to plug Decidim into a storage provider of your choice, you need to generate the Decidim application using the `--storage` modifier as explained at the xref:configure:index.adoc[configuration guide]. You will also need to provide the correct configuration options for the selected storage provider as explained at the xref:configure:environment_variables.adoc[environment variables guide].
 
+[NOTE]
+====
+If you use any other provider than the default (`local`) you will need to also configure the xref:customize:content_security_policy.adoc[Content security policy]. For the directives "default-src", "img-src", "media-src", and "connect-src"`.
+====
+
 == Dynamic file uploads
 
 Decidim allows participants to upload files dynamically from their browsers to the website using the upload modals where participants can drag and drop the files to or select them from their computer. With the default configuration using a local file storage, this feature does not require any additional configuration. With external storage providers, you have to configure those storages properly to support the client-side file uploads to Decidim.
@@ -23,6 +28,7 @@ Locate the bucket, go into the "Permissions" tab and find the section titled "CO
       "*"
     ],
     "AllowedMethods": [
+      "GET"
       "PUT"
     ],
     "AllowedOrigins": [
@@ -57,7 +63,7 @@ Before running that command you need to have a `cors.json` file in the same dire
 [
   {
     "origin": ["https://www.example.com"],
-    "method": ["PUT"],
+    "method": ["GET", "PUT"],
     "responseHeader": ["Origin", "Content-Type", "Content-MD5", "Content-Disposition"],
     "maxAgeSeconds": 3600
   }
@@ -71,7 +77,7 @@ Read more at https://cloud.google.com/storage/docs/configuring-cors[Google Cloud
 Locate the storage account from the Azure Portal and go to the "Resource sharing (CORS)" section under "Settings. Fill in the following configuration options in the "Blob service" tab of that section (replace `https://www.example.com` with the actual domain of your service):
 
 - **Allowed origins**: https://www.example.com
-- **Allowed methods**: PUT
+- **Allowed methods**: GET,PUT
 - **Allowed headers**: *
 - **Exposed headers**: Origin, Content-Type, Content-MD5, x-ms-blob-content-disposition, x-ms-blob-type
 - **Max age**: 3600
@@ -83,7 +89,7 @@ When using the Azure REST API, you can use the `Set Blob Service Properties` ope
 <Cors>
   <CorsRule>
     <AllowedOrigins>https://www.example.com</AllowedOrigins>
-    <AllowedMethods>PUT</AllowedMethods>
+    <AllowedMethods>GET,PUT</AllowedMethods>
     <AllowedHeaders>*</AllowedHeaders>
     <ExposedHeaders>Origin, Content-Type, Content-MD5, x-ms-blob-content-disposition, x-ms-blob-type</ExposedHeaders>
     <MaxAgeInSeconds>3600</MaxAgeInSeconds>

@@ -6,7 +6,6 @@ module Decidim
     class ProposalsController < Decidim::Proposals::ApplicationController
       helper ProposalWizardHelper
       helper ParticipatoryTextsHelper
-      helper UserGroupHelper
       helper Decidim::Admin::IconLinkHelper
       include Decidim::ApplicationHelper
       include Flaggable
@@ -21,7 +20,7 @@ module Decidim
 
       before_action :authenticate_user!, only: [:new, :create]
       before_action :ensure_is_draft, only: [:preview, :publish, :edit_draft, :update_draft, :destroy_draft]
-      before_action :set_proposal, only: [:show, :edit, :update, :withdraw]
+      before_action :proposal, only: [:show, :edit, :update, :withdraw]
       before_action :edit_form, only: [:edit_draft, :edit]
       before_action :set_view_mode, only: [:index]
 
@@ -39,28 +38,15 @@ module Decidim
                        .published
                        .not_hidden
                        .only_amendables
-                       .includes(:category, :scope, :attachments, :coauthorships)
+                       .includes(:taxonomies, :attachments, :coauthorships)
                        .order(position: :asc)
           render "decidim/proposals/proposals/participatory_texts/participatory_text"
         else
-          @base_query = search
-                        .result
-                        .published
-                        .not_hidden
+          @proposals = search.result
 
-          @proposals = @base_query.includes(:component, :coauthorships, :attachments)
-          @all_geocoded_proposals = @base_query.geocoded
-
-          @voted_proposals = if current_user
-                               ProposalVote.where(
-                                 author: current_user,
-                                 proposal: @proposals.pluck(:id)
-                               ).pluck(:decidim_proposal_id)
-                             else
-                               []
-                             end
           @proposals = reorder(@proposals)
           @proposals = paginate(@proposals)
+          @proposals = @proposals.includes(:component, :coauthorships, :attachments)
         end
       end
 
@@ -93,7 +79,7 @@ module Decidim
 
           on(:invalid) do
             flash.now[:alert] = I18n.t("proposals.create.error", scope: "decidim")
-            render :new
+            render :new, status: :unprocessable_entity
           end
         end
       end
@@ -115,7 +101,7 @@ module Decidim
 
           on(:invalid) do
             flash.now[:alert] = I18n.t("proposals.publish.error", scope: "decidim")
-            render :edit_draft
+            render :edit_draft, status: :unprocessable_entity
           end
         end
       end
@@ -138,7 +124,7 @@ module Decidim
 
           on(:invalid) do
             flash.now[:alert] = I18n.t("proposals.update_draft.error", scope: "decidim")
-            render :edit_draft
+            render :edit_draft, status: :unprocessable_entity
           end
         end
       end
@@ -154,7 +140,7 @@ module Decidim
 
           on(:invalid) do
             flash.now[:alert] = I18n.t("proposals.destroy_draft.error", scope: "decidim")
-            render :edit_draft
+            render :edit_draft, status: :unprocessable_entity
           end
         end
       end
@@ -175,7 +161,7 @@ module Decidim
 
           on(:invalid) do
             flash.now[:alert] = I18n.t("proposals.update.error", scope: "decidim")
-            render :edit
+            render :edit, status: :unprocessable_entity
           end
         end
       end
@@ -206,9 +192,8 @@ module Decidim
           search_text_cont: "",
           with_any_origin: nil,
           activity: "all",
-          with_any_category: nil,
+          with_any_taxonomies: nil,
           with_any_state: default_states,
-          with_any_scope: nil,
           related_to: "",
           type: "all"
         }
@@ -231,8 +216,8 @@ module Decidim
         redirect_to Decidim::ResourceLocatorPresenter.new(@proposal).path unless @proposal.draft?
       end
 
-      def set_proposal
-        @proposal = Proposal.published.not_hidden.where(component: current_component).find_by(id: params[:id])
+      def proposal
+        @proposal ||= Proposal.published.not_hidden.where(component: current_component).find_by(id: params[:id])
       end
 
       # Returns true if the proposal is NOT an emendation or the user IS an admin.
@@ -286,36 +271,12 @@ module Decidim
       def tab_panel_items
         @tab_panel_items ||= [
           {
-            enabled: @proposal.linked_resources(:projects, "included_proposals").present?,
-            id: "included_projects",
-            text: t("decidim/budgets/project", scope: "activerecord.models", count: 2),
-            icon: resource_type_icon_key("Decidim::Budgets::Project"),
+            enabled: ProposalHistoryCell.new(@proposal).render?,
+            id: "included_history",
+            text: t("decidim.history", scope: "activerecord.models", count: 2),
+            icon: resource_type_icon_key("history"),
             method: :cell,
-            args: ["decidim/linked_resources_for", @proposal, { type: :projects, link_name: "included_proposals" }]
-          },
-          {
-            enabled: @proposal.linked_resources(:results, "included_proposals").present?,
-            id: "included_results",
-            text: t("decidim/accountability/result", scope: "activerecord.models", count: 2),
-            icon: resource_type_icon_key("Decidim::Accountability::Result"),
-            method: :cell,
-            args: ["decidim/linked_resources_for", @proposal, { type: :results, link_name: "included_proposals" }]
-          },
-          {
-            enabled: @proposal.linked_resources(:meetings, "proposals_from_meeting").present?,
-            id: "included_meetings",
-            text: t("decidim/meetings/meeting", scope: "activerecord.models", count: 2),
-            icon: resource_type_icon_key("Decidim::Meetings::Meeting"),
-            method: :cell,
-            args: ["decidim/linked_resources_for", @proposal, { type: :meetings, link_name: "proposals_from_meeting" }]
-          },
-          {
-            enabled: @proposal.linked_resources(:proposals, "copied_from_component").present?,
-            id: "included_proposals",
-            text: t("decidim/proposals/proposal", scope: "activerecord.models", count: 2),
-            icon: resource_type_icon_key("Decidim::Proposals::Proposal"),
-            method: :cell,
-            args: ["decidim/linked_resources_for", @proposal, { type: :proposals, link_name: "copied_from_component" }]
+            args: ["decidim/proposals/proposal_history", @proposal]
           }
         ] + attachments_tab_panel_items(@proposal)
       end
@@ -327,6 +288,24 @@ module Decidim
 
       def default_view_mode
         @default_view_mode ||= current_component.settings.attachments_allowed? ? "grid" : "list"
+      end
+
+      def add_breadcrumb_item
+        return {} if proposal.blank?
+
+        if proposal.emendation?
+          {
+            label: translated_attribute(proposal.amendable.title),
+            url: Decidim::EngineRouter.main_proxy(current_component).proposal_path(proposal.amendable),
+            active: false
+          }
+        else
+          {
+            label: translated_attribute(proposal.title),
+            url: Decidim::EngineRouter.main_proxy(current_component).proposal_path(proposal),
+            active: false
+          }
+        end
       end
     end
   end

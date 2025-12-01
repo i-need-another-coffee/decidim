@@ -4,34 +4,30 @@ sv:
       participatory_process:
         announcement: Meddelande
         area_id: Område
-        copy_categories: Kopiera kategorier
-        copy_components: Kopiera komponenter
-        copy_steps: Kopiera steg
         decidim_area_id: Område
         description: Beskrivning
-        developer_group: Kampanjgrupp
+        developer_group: Arrangör
         document: Dokument
         domain: Domän
+        duplicate_categories: Duplicera kategorier
+        duplicate_components: Duplicera komponenter
+        duplicate_landing_page_blocks: Kopiera elementen från landningssidan
+        duplicate_steps: Duplicera steg
         end_date: Slutdatum
-        hashtag: Hashtag
-        hero_image: Hembild
+        hero_image: Startbild
         import_attachments: Importera bilagor
         import_categories: Importera kategorier
         import_components: Importera komponenter
         import_steps: Importera steg
         local_area: Område
-        meta_scope: Metadata för indelning
+        meta_scope: Omfattning
         participatory_process_group_id: Grupp av processer
-        participatory_process_type_id: Typ av processer
-        participatory_scope: Vad som bestäms
-        participatory_structure: Hur det bestäms
+        participatory_scope: Vad beslutas
+        participatory_structure: Hur fattas beslut
         private_space: Privat process
-        promoted: Annonserad
+        promoted: Utvald
         published_at: Publicerad
         related_process_ids: Relaterade processer
-        scope_id: Indelning
-        scope_type_max_depth_id: Djup på filter
-        scopes_enabled: Aktivera indelningar
         short_description: Kort beskrivning
         slug: URL-slug
         start_date: Startdatum
@@ -41,26 +37,23 @@ sv:
         weight: Position i listan
       participatory_process_group:
         description: Beskrivning
-        developer_group: Kampanjgrupp
+        developer_group: Arrangör
         group_url: Webbplats
-        hashtag: Hashtag
         hero_image: Bild
         local_area: Område
-        meta_scope: Metadata för indelning
+        meta_scope: Omfattning
         participatory_process_ids: Relaterade processer
-        participatory_scope: Vad som beslutas
+        participatory_scope: Vad beslutas
         participatory_structure: Hur fattas beslut
         target: Vem deltar
         title: Titel
       participatory_process_step:
-        cta_path: Call to Action-sökväg
-        cta_text: Call to Action-text
+        cta_path: Knappens länk
+        cta_text: Text till knapp
         description: Beskrivning
         end_date: Slutdatum
         short_description: Kort beskrivning
         start_date: Startdatum
-        title: Titel
-      participatory_process_type:
         title: Titel
       participatory_process_user_role:
         email: E-post
@@ -90,23 +83,22 @@ sv:
     admin:
       actions:
         activate: Aktivera
-        configure: Konfigurera
+        confirm_delete_process: Är du säker på att du vill ta bort den här processen? Om du ändrar dig kan du återställa den senare.
         confirm_destroy: Bekräfta radering
         destroy: Radera
         duplicate: Duplicera
         edit: Redigera
         import_process: Importera
-        moderate: Moderera
         new_process: Ny process
         new_process_group: Ny grupp av processer
         new_process_step: Nytt steg
-        new_process_type: Ny typ av process
         new_process_user_role: Ny administratör för process
         preview: Förhandsvisa
         publish: Publicera
         resend_invitation: Skicka inbjudan igen
         see_process: Visa process
         unpublish: Avpublicera
+        view_deleted_processes: Visa raderade processer
       filters:
         decidim_participatory_process_group_id_eq:
           label: Efter processgrupp
@@ -114,19 +106,15 @@ sv:
         participatory_process_groups: Grupper för processer
         participatory_process_groups_submenu:
           info: Info
-          landing_page: Landningssida
-        participatory_process_types: Typ av processer
         participatory_processes: Processer
         participatory_processes_submenu:
           attachment_collections: Mappar
           attachment_files: Filer
           attachments: Bilagor
-          categories: Kategorier
           components: Komponenter
           info: Om processen
-          landing_page: Landningssida
           moderations: Moderering
-          private_users: Privata deltagare
+          private_users: Medlemmar
           process_admins: Administratörer för process
           steps: Steg
       models:
@@ -140,21 +128,19 @@ sv:
           name: Deltagandeprocess
         participatory_process_group:
           fields:
+            actions: Åtgärder
             title: Titel
           name: Grupp av processer
         participatory_process_step:
           fields:
+            actions: Handlingar
             end_date: Slutdatum
             start_date: Startdatum
             title: Titel
           name: Steg i process
-        participatory_process_type:
-          fields:
-            created_at: Skapad
-            title: Titel
-          name: Typ av process
         participatory_process_user_role:
           fields:
+            actions: Handlingar
             email: E-post
             name: Namn
             role: Roll
@@ -162,17 +148,18 @@ sv:
           roles:
             admin: Administratör
             collaborator: Medarbetare
+            evaluator: Utvärderare
             moderator: Moderator
-            valuator: Värderare
         user:
           fields:
             invitation_accepted_at: Inbjudan godkänd
             invitation_sent_at: Inbjudan skickad
-      participatory_process_copies:
+            published: Publicerad
+      participatory_process_duplicates:
         new:
-          copy: Kopiera
-          select: Välj vilka data som du vill duplicera
-          title: Duplicera process
+          duplicate: Duplicera
+          select: Välj vilken data du vill duplicera
+          title: Duplicera deltagarprocess
       participatory_process_groups:
         destroy:
           error: Det gick inte att radera gruppen.
@@ -228,21 +215,6 @@ sv:
         update:
           error: Det gick inte att uppdatera steget i processen.
           success: Steget i processen har uppdaterats.
-      participatory_process_types:
-        create:
-          error: Det gick inte att skapa en ny typ av process.
-          success: Typen av process har skapats.
-        destroy:
-          success: Typen av process har raderats.
-        edit:
-          title: Redigera typ av process
-          update: Uppdatera
-        new:
-          create: Skapa
-          title: Ny typ av process
-        update:
-          error: Det gick inte att uppdatera typen av process.
-          success: Typen av process har uppdaterats.
       participatory_process_user_roles:
         create:
           error: Det gick inte att lägga till en deltagare till processen.
@@ -271,24 +243,32 @@ sv:
           public: Offentlig
           published: Publicerad
           unpublished: Ej publicerad
+        manage_trash:
+          title: Raderade deltagandeprocesser
         new:
           create: Skapa
           title: Ny deltagandeprocess
         update:
           error: Det gick inte att uppdatera processen.
           success: Processen har uppdaterats.
-      participatory_processes_copies:
+      participatory_processes_duplicates:
         create:
-          error: Det gick inte att duplicera processen.
-          success: Processen har duplicerats.
+          error: Det gick inte att duplicera deltagarprocessen.
+          success: Deltagandeprocessen har duplicerats.
       participatory_processes_group:
         create:
           error: Det gick inte att skapa en ny grupp för processer.
           success: Gruppen har skapats.
+      taxonomy_filters:
+        space_filter_for:
+          participatory_processes: Alla deltagandeprocesser
       titles:
         participatory_process_groups: Grupper av deltagandeprocesser
         participatory_process_types: Typer av deltagandeprocesser
         participatory_processes: Deltagandeprocesser
+        participatory_processes_deleted: Raderade deltagandeprocesser
+      tooltips:
+        deleted_processes_info: En process kan endast raderas om status är "avpublicerad".
       users:
         resend_invitation:
           error: Det gick inte att skicka inbjudan igen.
@@ -300,10 +280,13 @@ sv:
         export: "%{user_name} exporterade processen %{resource_name}"
         import: "%{user_name} importerade processen %{resource_name}"
         publish: "%{user_name} publicerade deltagandeprocessen %{resource_name}"
+        restore: "%{user_name} återställde deltagandeprocessen %{resource_name}"
+        soft_delete: "%{user_name} raderade deltagandeprocessen %{resource_name}"
         unpublish: "%{user_name} avpublicerade deltagandeprocessen %{resource_name}"
         update: "%{user_name} uppdaterade deltagandeprocessen %{resource_name}"
       participatory_process_group:
         create: "%{user_name} skapade gruppen %{resource_name}"
+        unpublish: "%{user_name} avpublicerade gruppen av deltagandeprocesser %{resource_name}"
         update: "%{user_name} uppdaterade gruppen %{resource_name}"
       participatory_process_step:
         activate: "%{user_name} aktiverade steget %{resource_name} i processen %{space_name}"
@@ -318,6 +301,9 @@ sv:
         create: "%{user_name} bjöd in deltagaren %{resource_name} till processen %{space_name}"
         delete: "%{user_name} tog bort deltagaren %{resource_name} från processen %{space_name}"
         update: "%{user_name} ändrade rollen för deltagaren %{resource_name} i processen %{space_name}"
+    download_your_data:
+      show:
+        participatory_processes: Export av deltagandeprocesser
     events:
       participatory_process:
         role_assigned:
@@ -347,17 +333,36 @@ sv:
           not_found: 'Typen av process hittades inte i databasen (ID: %{id}).'
     menu:
       processes: Processer
-    metrics:
-      participatory_processes:
-        description: Antal deltagandeprocesser i organisationen
-        object: deltagandeprocesser
-        title: Deltagandeprocesser
+    open_data:
+      help:
+        participatory_processes:
+          announcement: Meddelande
+          area: Geografiskt område för processen
+          component_settings: Inställningar för processen
+          created_at: Datum när processen skapades
+          description: Längre beskrivning av processen
+          developer_group: Ansvariga för processen. Organisation eller grupp som står bakom processen.
+          end_date: Slutdatum för processen
+          follows_count: Antal följare
+          id: Unikt id för processen
+          local_area: Geografiskt område för processen. Det område där processen genomförs.
+          participatory_process_group: Grupp av processer, om tillämpbart
+          participatory_process_type: Typ av process
+          published_at: Datum när processen publicerades
+          reference: Unikt id för processen
+          remote_hero_image_url: URL till processens huvudbild
+          scopes_enabled: Om indelningar är aktiverat eller inte
+          short_description: Kort beskrivning av processen
+          start_date: Startdatum för processen
+          subtitle: Undertitel för processen
+          title: Processens titel
+          url: Processens URL
     participatory_process_groups:
       content_blocks:
         extra_data:
           developer_group: Stödd av
           name: Metadata
-          participatory_scope: Vad som beslutas
+          participatory_scope: Vad beslutas
           participatory_structure: Hur fattas beslut
           target: Vem deltar
         html:
@@ -371,7 +376,7 @@ sv:
         main_data:
           name: Titel och beskrivning
         participatory_processes:
-          active: Aktiva deltagandeprocesser
+          active: Pågående deltagandeprocesser
           name: Deltagandeprocesser
         stats:
           name: Statistik
@@ -388,15 +393,80 @@ sv:
     participatory_processes:
       admin:
         content_blocks:
+          democratic_quality_stats_settings_form:
+            citizen_influence:
+              citizen_decisional_intervention:
+                legend: Av alla faser i processen (från att välja frågor till att övervaka genomförande), hur många har allmänheten möjlighet att besluta eller utföra handlingar i?
+                options:
+                  five: 80 - 100%
+                  four: 60 - 80%
+                  one: 0 - 20%
+                  three: 40 - 60%
+                  two: 20 - 40%
+              citizen_influence_level:
+                options:
+                  five: Deltagarna deltog i beslutsfattandet samt i hanteringen av resurserna eller i genomförandet
+                  four: Deltagarna hade en beslutsfattande roll
+                  one: Deltagare fick information från organisationen
+                  three: Deltagarna deltog genom att fördela beslutsfattande makt
+                  two: Deltagarna tillfrågades på ett rådgivande sätt eller gav feedback till organisationen
+            inclusiveness:
+              digital_support_offered:
+                legend: Har deltagarna erbjudits digitalt stöd?
+                options:
+                  five: 'Ja'
+                  two_five: Delvis
+                  zero: 'Nej'
+              functional_diversity_invited:
+                legend: Hur är graden av mångfald hos processens agenter och deltagare i relation till mångfalden hos de som påverkas av beslutet?
+                options:
+                  five: Bra
+                  one: Låg
+                  two_five: Tillräcklig
+                  zero: Ingen
+              languages_communicated:
+                legend: Hur många språk har använts inom processen?
+                options:
+                  five: Mer än hälften av de språk som talas i samhället
+                  one: Ett språk
+                  two_five: Mindre än hälften av de språk som talas i samhället
+              mobility_meeting_access:
+                legend: Var mötesplatserna för möten ansikte mot ansikte tillgängliga för personer med nedsatt rörlighet?
+                options:
+                  five: 'Ja'
+                  two_five: Delvis
+                  zero: 'Nej'
+              participation_scheduling_times:
+                legend: Deltagarsessionerna har schemalagts vid olika tidpunkter (morgon, middag, eftermiddag, kväll och helger).
+                options:
+                  five: 'Ja'
+                  two_five: Delvis
+                  zero: 'Nej'
+            informativeness:
+              information_provided:
+                legend: Har information lämnats om deltagarnas möjligheter att påverka ämnet som diskuteras? (både i kommunikationen av processen och inbjudningarna, liksom i början av varje debattsession)
+                options:
+                  five: Alltid
+                  one: Nästan aldrig
+                  two_five: Vanligtvis
+                  zero: Aldrig
+              name: Informationsförmåga
+              published_information_clarity:
+                legend: Är den publicerade informationen tydlig med beslutsmekanismerna? (t.ex. omröstning, konsensus, direkta förhandlingar)
+                options:
+                  five: Full klarhet
+                  one: Låg tydlighet
+                  two_five: Tillfällig tydlighet
+                  zero: Ingen klarhet
           highlighted_processes:
-            active: Aktiv
+            active: Pågående
             all: Alla
             max_results: Högsta antal element att visa
             selection_criteria: Urvalskriterier
         new_import:
           accepted_types:
             json: JSON
-        participatory_process_copies:
+        participatory_process_duplicates:
           form:
             slug_help_html: 'URL-slugs används till att generera URL:er till processen. Använd bara bokstäver, siffror och bindestreck, och de måste börja med en bokstav. Exempel: %{url}'
         participatory_process_groups:
@@ -408,27 +478,31 @@ sv:
           form:
             document_legend: Lägg till ett dokument
             slug_help_html: 'URL-slugs används till att generera URL:er till processen. Använd bara bokstäver, siffror och bindestreck, och de måste börja med en bokstav. Exempel: %{url}'
-        participatory_process_steps:
-          form:
-            cta_path_help_html: 'Använd relativa sökvägar, inte fullständiga URL:er. Accepterar bokstäver, siffror, bindestreck och snedstreck, och måste börja med en bokstav. Om fältet inte fylls i visas inte knappen. Exempel: %{url}'
-            cta_text_help: Om den inte är på kommer knappen inte att visas.
         participatory_processes:
           form:
             announcement_help: Den här texten visas direkt under informationen om processen.
+            define_taxonomy_filters: Vänligen definiera några filter för deltagarutrymmet innan du använder den här inställningen.
             duration: Varaktighet
-            filters: Filter
             images: Bilder
             metadata: Metadata
-            other: Andra
+            no_taxonomy_filters_found: Inga filter för kategorier hittades.
+            private_notice: Du kommer att kunna hantera medlemmar om processen gjorts privat
             related_processes: Relaterade processer
-            scope_type_max_depth_help: Begränsa djupet på filtret för indelningen.
-            select_an_area: Välj ett område
-            select_participatory_process_type: Välj typ av process
             select_process_group: Välj en grupp av processer
             slug_help_html: 'URL-slugs används till att generera URL:er till processen. Använd bara bokstäver, siffror och bindestreck, och de måste börja med en bokstav. Exempel: %{url}'
+            taxonomies: Kategorisering
             title: Allmän information
             visibility: Synlighet
       content_blocks:
+        democratic_quality_stats:
+          global_score:
+            note: "*De indikativa värdena mäts på en skala från 1 till 5, där 1 representerar den lägsta och 5 den högsta kvalitetsmätaren."
+          name: Kvalitetsindikator
+          qualitative_metrics:
+            indicators:
+              inclusiveness_tooltip: Bedömer om olika berörda parter är rättvist representerade.
+              informativeness: Informationsförmåga
+              informativeness_tooltip: Mäter graden av tydlighet och information som tillhandahålls i processen.
         extra_data:
           name: Steg & varaktighet
         hero:
@@ -440,23 +514,20 @@ sv:
       index:
         title: Deltagandeprocesser
       last_activity:
-        new_participatory_process: Ny process
+        new_participatory_process: 'Ny process:'
       pages:
         home:
           highlighted_processes:
             active_spaces: Pågående processer
             see_all_spaces: Visa alla processer
-      participatory_process_steps:
-        index:
-          back_to_process: Tillbaka till processen
       participatory_processes:
         description:
           area_name: Område
           data: Data från processen
-          developer_group: Kampanjgrupp
+          developer_group: Arrangör
           local_area: Område
           meta_scope: Indelning
-          participatory_scope: Vad som beslutas
+          participatory_scope: Vad beslutas
           participatory_structure: Hur fattas beslut
           target: Vem deltar
           title: Om processen
@@ -490,12 +561,16 @@ sv:
           type: Typ
         show:
           title: Om processen
+      participatory_space_private_users:
+        index:
+          title: Medlemmar
       show:
         belongs_to_group: Den här processen tillhör
         private_space: Det här är en privat process
         related_processes: Relaterade processer
     statistics:
       processes_count: Processer
+      processes_count_tooltip: Antalet deltagande processer som är allmänt tillgängliga.
   layouts:
     decidim:
       participatory_process_groups:
@@ -503,6 +578,8 @@ sv:
           browse: Bläddra
           browse_resource: Bläddra i processgruppen %{resource_name}
           processes_count: 'Processer:'
+      participatory_process_navigation:
+        member_menu_item: Medlemmar
       participatory_processes:
         index:
           promoted_processes: Viktiga processer just nu

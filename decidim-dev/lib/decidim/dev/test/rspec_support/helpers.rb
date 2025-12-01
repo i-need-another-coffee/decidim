@@ -33,7 +33,7 @@ module Decidim
     end
 
     def within_language_menu(options = {})
-      within(options[:admin] ? ".language-choose" : "footer") do
+      within(options[:admin] ? ".language-choose" : "header") do
         find(options[:admin] ? "#admin-menu-trigger" : "#trigger-dropdown-language-chooser").click
         yield
       end
@@ -131,6 +131,22 @@ module Decidim
           #{move};
 
           #{events}
+        JS
+      )
+    end
+
+    def select_text(selector)
+      page.execute_script(
+        <<~JS
+          var selection = document.getSelection();
+          var range = document.createRange();
+          var element = document.querySelector("#{selector}");
+
+          range.selectNodeContents(element);
+          selection.removeAllRanges();
+          selection.addRange(range);
+          document.dispatchEvent(new MouseEvent("selectstart"));
+          document.dispatchEvent(new MouseEvent("mouseup"));
         JS
       )
     end

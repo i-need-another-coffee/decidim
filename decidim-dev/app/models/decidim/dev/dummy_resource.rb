@@ -10,6 +10,7 @@ module Decidim
       include Authorable
       include HasCategory
       include ScopableResource
+      include Taxonomizable
       include Decidim::Comments::Commentable
       include Followable
       include Traceable
@@ -19,10 +20,11 @@ module Decidim
       include Paddable
       include Amendable
       include Decidim::NewsletterParticipant
-      include ::Decidim::Endorsable
+      include ::Decidim::Likeable
       include Decidim::HasAttachments
       include Decidim::ShareableWithToken
       include Decidim::TranslatableResource
+      include Decidim::SoftDeletable
 
       translatable_fields :title
       searchable_fields(
@@ -40,8 +42,14 @@ module Decidim
 
       component_manifest_name "dummy"
 
-      def reported_content_url
-        ResourceLocatorPresenter.new(self).url
+      alias creator_author author
+
+      def authors
+        [author]
+      end
+
+      def presenter
+        Decidim::Dev::DummyResourcePresenter.new(self)
       end
 
       def reported_attributes
@@ -49,7 +57,7 @@ module Decidim
       end
 
       def reported_searchable_content_extras
-        [normalized_author.name]
+        [author.name]
       end
 
       def allow_resource_permissions?
@@ -70,7 +78,10 @@ module Decidim
 
       # Public: Whether the object can have new comment votes or not.
       def user_allowed_to_vote_comment?(user)
-        component.can_participate_in_space?(user)
+        return false unless accepts_new_comments?
+        return unless component.can_participate_in_space?(user)
+
+        ActionAuthorizer.new(user, "vote_comment", component, self).authorize.ok?
       end
 
       def self.user_collection(user)

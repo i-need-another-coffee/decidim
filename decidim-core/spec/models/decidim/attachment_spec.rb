@@ -28,6 +28,7 @@ module Decidim
         it { is_expected.not_to be_valid }
       end
 
+      # See UploaderImageDimensionsValidator#validate_image_size
       context "when the file is a malicious image" do
         subject do
           build(
@@ -55,10 +56,20 @@ module Decidim
       it "returns the file extension" do
         expect(subject.file_type).to eq("jpeg")
       end
+
+      context "when the url is in S3" do
+        before do
+          allow(subject).to receive(:url).and_return("https://s3.example.com/1234?response-content-disposition=inline&filename=image.jpeg&response-content-type=image%2Fjpeg")
+        end
+
+        it "returns the file extension" do
+          expect(subject.file_type).to eq("jpeg")
+        end
+      end
     end
 
     context "when it has an image" do
-      subject { build(:attachment, :with_image) }
+      subject { create(:attachment, :with_image) }
 
       it "has a thumbnail" do
         expect(subject.thumbnail_url).not_to be_nil

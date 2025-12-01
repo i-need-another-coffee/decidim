@@ -7,6 +7,7 @@ module Decidim
     include ActionView::Context
     include Decidim::TranslatableAttributes
     include Decidim::Map::Autocomplete::FormBuilder
+    include Decidim::TooltipHelper
 
     # Public: generates a check boxes input from a collection and adds help
     # text and errors.
@@ -73,23 +74,30 @@ module Decidim
         safe_join [field_label, language_selector]
       end
 
-      hashtaggable = options.delete(:hashtaggable)
       tabs_content = content_tag(:div, class: "tabs-content", data: { tabs_content: tabs_id }) do
         locales.each_with_index.inject("".html_safe) do |string, (locale, index)|
           tab_content_id = "#{tabs_id}-#{name}-panel-#{index}"
           string + content_tag(:div, class: tab_element_class_for("panel", index), id: tab_content_id, "aria-hidden": tab_attr_aria_hidden_for(index)) do
-            if hashtaggable
-              hashtaggable_text_field(type, name, locale, options.merge(label: false))
-            elsif type.to_sym == :editor
-              send(type, name_with_locale(name, locale), options.merge(label: false, hashtaggable:))
-            else
-              send(type, name_with_locale(name, locale), options.merge(label: false))
-            end
+            send(type, name_with_locale(name, locale), options.merge(label: false))
           end
         end
       end
 
       safe_join [label_tabs, tabs_content]
+    end
+
+    def datetime_field(attribute, opts = {})
+      label = label_for(attribute)
+      opts.reverse_merge!(
+        data: {
+          "date-label": I18n.t("datetime.widget.label.date", label:),
+          "time-label": I18n.t("datetime.widget.label.time", label:),
+          "button-date-label": I18n.t("datetime.widget.picker.date_button", label:),
+          "button-time-label": I18n.t("datetime.widget.picker.time_button", label:)
+        }
+      )
+
+      super
     end
 
     def password_field(attribute, options = {})
@@ -101,32 +109,11 @@ module Decidim
     end
 
     def translated_one_locale(type, name, locale, options = {})
-      return hashtaggable_text_field(type, name, locale, options) if options.delete(:hashtaggable)
-
       send(
         type,
         "#{name}_#{locale.to_s.gsub("-", "__")}",
         options.merge(label: options[:label] || label_for(name))
       )
-    end
-
-    # Public: Generates a field for hashtaggable type.
-    # type - The form field's type, like `text_area` or `text_field`
-    # name - The name of the field
-    # locale - The locale to be created
-    # options - The set of options to send to the field
-    #
-    # Renders form fields for each locale.
-    def hashtaggable_text_field(type, name, locale, options = {})
-      options[:hashtaggable] = true if type.to_sym == :editor
-
-      content_tag(:div) do
-        if options[:value]
-          send(type, name_with_locale(name, locale), options.merge(label: options[:label], value: options[:value][locale]))
-        else
-          send(type, name_with_locale(name, locale), options.merge(label: options[:label]))
-        end
-      end
     end
 
     # Public: Generates a form field for each social.
@@ -193,7 +180,7 @@ module Decidim
       help_text = options.delete(:help_text)
       editor_image = Decidim::EditorImage.new
       editor_options = editor_options(editor_image, options)
-      hidden_options = extract_validations(name, options).merge(options)
+      hidden_options = editor_hidden_options(name, options)
 
       @template.append_stylesheet_pack_tag "decidim_editor"
       @template.append_javascript_pack_tag "decidim_editor", defer: false
@@ -212,44 +199,16 @@ module Decidim
           nil,
           class: editor_options[:editor].delete("class").join(" "),
           data: {
+            controller: :editor,
             toolbar:,
             disabled: options[:disabled],
             options: editor_options[:editor]
           }
-        ) { content_tag(:div, nil, class: "editor-input", style: "height: #{lines}rem") }
+        ) { content_tag(:div, nil, class: "editor-input", style: "min-height: #{lines}rem") }
         template += error_for(name, options) if error?(name)
         template += editor_upload(editor_image, editor_options[:upload])
         template.html_safe
       end
-    end
-
-    # Public: Generates a select field with the categories. Only leaf categories can be set as selected.
-    #
-    # name       - The name of the field (usually category_id)
-    # collection - A collection of categories.
-    # options    - An optional Hash with options:
-    # - prompt   - An optional String with the text to display as prompt.
-    # - disable_parents - A Boolean to disable parent categories. Defaults to `true`.
-    # html_options - HTML options for the select
-    #
-    # Returns a String.
-    def categories_select(name, collection, options = {}, html_options = {})
-      options = {
-        disable_parents: true
-      }.merge(options)
-
-      disable_parents = options[:disable_parents]
-
-      selected = object.send(name)
-      selected = selected.first if selected.is_a?(Array) && selected.length > 1
-      categories = categories_for_select(collection)
-      disabled = if disable_parents
-                   disabled_categories_for(collection)
-                 else
-                   []
-                 end
-
-      select(name, @template.options_for_select(categories, selected:, disabled:), options, html_options)
     end
 
     # Public: Generates a select field for areas.
@@ -297,46 +256,6 @@ module Decidim
         .sort
 
       select(name, @template.options_for_select(resources, selected: options[:selected]), options)
-    end
-
-    # Public: Generates a picker field for scope selection.
-    #
-    # attribute     - The name of the field (usually scope_id)
-    # options       - An optional Hash with options:
-    # - multiple    - Multiple mode, to allow multiple scopes selection.
-    # - label       - Show label?
-    # - checkboxes_on_top - Show checked picker values on top (default) or below the picker prompt (only for multiple pickers)
-    # - namespace   - prepend a custom name to the html element's DOM id.
-    #
-    # Also it should receive a block that returns a Hash with :url and :text for each selected scope (and for null scope for prompt)
-    #
-    # Returns a String.
-    def scopes_picker(attribute, options = {})
-      id = if self.options.has_key?(:namespace)
-             "#{self.options[:namespace]}_#{sanitize_for_dom_selector(@object_name)}"
-           else
-             "#{sanitize_for_dom_selector(@object_name)}_#{attribute}"
-           end
-
-      picker_options = {
-        id:,
-        class: "picker-#{options[:multiple] ? "multiple" : "single"}",
-        name: "#{@object_name}[#{attribute}]"
-      }
-
-      picker_options[:class] += " is-invalid-input" if error?(attribute)
-
-      prompt_params = yield(nil)
-      scopes = selected_scopes(attribute).map { |scope| [scope, yield(scope)] }
-      template = ""
-      template += "<label>#{label_for(attribute) + required_for_attribute(attribute)}</label>" unless options[:label] == false
-      template += @template.render("decidim/scopes/scopes_picker_input",
-                                   picker_options:,
-                                   prompt_params:,
-                                   scopes:,
-                                   values_on_top: !options[:multiple] || options[:checkboxes_on_top])
-      template += error_and_help_text(attribute, options)
-      template.html_safe
     end
 
     # Public: Generates a picker field for selection (either simple or multiselect).
@@ -388,7 +307,7 @@ module Decidim
     # options      - A Hash with options to build the field. See upload method for
     # more detailed information.
     def attachment(attribute, options = {})
-      object_attachment = object.attachment.present?
+      object_attachment = object.respond_to?(:attachment) && object.attachment.present?
       record = object_attachment ? object.attachment : object
       options = {
         titled: options[:multiple],
@@ -527,6 +446,16 @@ module Decidim
 
     private
 
+    def editor_hidden_options(name, options)
+      hidden_options = extract_validations(name, options).merge(options)
+      if hidden_options[:minlength] || hidden_options[:maxlength]
+        hidden_options[:data] ||= {}
+        hidden_options[:data][:controller] ||= ""
+        hidden_options[:data][:controller] += " character-counter"
+      end
+      hidden_options
+    end
+
     # Private: Override from FoundationRailsHelper in order to render
     # inputs inside the label and to automatically inject validations
     # from the object.
@@ -561,8 +490,6 @@ module Decidim
       end
 
       help_text = options.delete(:help_text)
-      prefix = options.delete(:prefix)
-      postfix = options.delete(:postfix)
 
       class_options = extract_validations(attribute, options).merge(class_options)
 
@@ -571,7 +498,7 @@ module Decidim
       content = content.html_safe
 
       html = error_and_help_text(attribute, options.merge(help_text:))
-      html + wrap_prefix_and_postfix(content, prefix, postfix)
+      html + content
     end
 
     # rubocop: disable Metrics/CyclomaticComplexity
@@ -714,30 +641,6 @@ module Decidim
       content_tag(:span, text, class: "form-error")
     end
 
-    def categories_for_select(scope)
-      sorted_main_categories = scope.first_class.includes(:subcategories).sort_by do |category|
-        [category.weight, translated_attribute(category.name, category.participatory_space.organization)]
-      end
-
-      sorted_main_categories.flat_map do |category|
-        parent = [[translated_attribute(category.name, category.participatory_space.organization), category.id]]
-
-        sorted_subcategories = category.subcategories.sort_by do |subcategory|
-          [subcategory.weight, translated_attribute(subcategory.name, subcategory.participatory_space.organization)]
-        end
-
-        sorted_subcategories.each do |subcategory|
-          parent << ["- #{translated_attribute(subcategory.name, subcategory.participatory_space.organization)}", subcategory.id]
-        end
-
-        parent
-      end
-    end
-
-    def disabled_categories_for(scope)
-      scope.first_class.joins(:subcategories).pluck(:id)
-    end
-
     def tab_element_class_for(type, index)
       element_class = "tabs-#{type}"
       element_class += " is-active" if index.zero?
@@ -792,22 +695,13 @@ module Decidim
         I18n.t("required", scope: "forms"),
         class: "sr-only"
       )
-      content_tag(
-        :span,
-        visible_title + screenreader_title,
-        title: I18n.t("required", scope: "forms"),
-        data: { tooltip: true, disable_hover: false, keep_on_hover: true },
-        class: "label-required"
-      ).html_safe
-    end
-
-    # Private: Returns an array of scopes related to object attribute
-    def selected_scopes(attribute)
-      selected = object.send(attribute) || []
-      selected = selected.values if selected.is_a?(Hash)
-      selected = [selected] unless selected.is_a?(Array)
-      selected = Decidim::Scope.where(id: selected.map(&:to_i)) unless selected.first.is_a?(Decidim::Scope)
-      selected
+      with_tooltip(I18n.t("required", scope: "forms"), options.merge(class: "top")) do
+        content_tag(
+          :span,
+          visible_title + screenreader_title,
+          class: "label-required"
+        )
+      end.html_safe
     end
 
     # Private: Returns the help text and error tags at the end of the field.
@@ -868,24 +762,7 @@ module Decidim
 
       content_tag(:span,
                   content_tag(:span, options[:value], class: name),
-                  class: column_classes(options).to_s)
-    end
-
-    # Private: Wraps the prefix and postfix for the field. Overridden from
-    # FoundationRailsHelper to make the generated HTML valid since these
-    # elements are printed within <label> elements and <div>'s are not allowed
-    # there.
-    def wrap_prefix_and_postfix(block, prefix_options, postfix_options)
-      prefix = tag_from_options("prefix", prefix_options)
-      postfix = tag_from_options("postfix", postfix_options)
-
-      input_size = calculate_input_size(prefix_options, postfix_options)
-      klass = column_classes(input_size.marshal_dump).to_s
-      input = content_tag(:span, block, class: klass)
-
-      return block unless input_size.changed?
-
-      content_tag(:span, prefix + input + postfix, class: "row collapse")
+                  class: "columns")
     end
 
     def language_selector_select(locales, tabs_id, name)
@@ -937,14 +814,10 @@ module Decidim
       upload_options = options.delete(:image_upload) || {}
       upload_options[:modal_id] ||= "upload_#{SecureRandom.uuid}"
 
-      hashtaggable = options.delete(:hashtaggable)
-      mentionable = options.delete(:mentionable)
-      emojiable = options.delete(:emojiable)
+      resource_mentionable = options.delete(:resource_mentionable)
 
       editor_classes = ["editor-container"]
-      editor_classes << "js-hashtags" if hashtaggable
-      editor_classes << "js-mentions" if mentionable
-      editor_classes << "js-emojis" if emojiable
+      editor_classes << "js-resource-mentions" if resource_mentionable
 
       editor_options = {
         class: editor_classes,
@@ -956,6 +829,9 @@ module Decidim
         drag_and_drop_help_text: I18n.t("drag_and_drop_help", scope: "decidim.editor_images"),
         upload_dialog_selector: "##{upload_options[:modal_id]}"
       }.transform_keys { |key| key.to_s.camelize(:lower) }
+
+      editor_options[:mention] = options.delete(:mentionable)
+      editor_options[:emoji] = options.delete(:emojiable)
 
       { editor: editor_options, upload: upload_options }
     end

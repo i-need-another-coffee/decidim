@@ -22,6 +22,13 @@ module Decidim
       # Allow ransacker to search for a key in a hstore column (`name`.`en`)
       ransacker_i18n :name
 
+      def self.ransackable_attributes(auth_object = nil)
+        base = %w(id name)
+        return base unless auth_object&.admin?
+
+        base + %w(key progress)
+      end
+
       def self.log_presenter_class_for(_log)
         Decidim::Accountability::AdminLog::StatusPresenter
       end

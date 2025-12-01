@@ -18,7 +18,6 @@ module Decidim::ParticipatoryProcesses
         expect(serialized).to include(title: resource.title)
         expect(serialized).to include(subtitle: resource.subtitle)
         expect(serialized).to include(slug: resource.slug)
-        expect(serialized).to include(hashtag: resource.hashtag)
         expect(serialized).to include(short_description: resource.short_description)
         expect(serialized).to include(description: resource.description)
         expect(serialized).to include(announcement: resource.announcement)
@@ -51,6 +50,21 @@ module Decidim::ParticipatoryProcesses
 
           expect(serialized_area).to include(id: resource.area.id)
           expect(serialized_area).to include(name: resource.area.name)
+        end
+      end
+
+      context "when assembly has taxonomies" do
+        let(:taxonomies) { create_list(:taxonomy, 2, :with_parent, organization: resource.organization) }
+        let(:serialized_taxonomies) do
+          { ids: taxonomies.pluck(:id) }.merge(taxonomies.to_h { |t| [t.id, t.name] })
+        end
+
+        before do
+          resource.update!(taxonomies:)
+        end
+
+        it "serializes the taxonomies" do
+          expect(subject.serialize[:taxonomies]).to eq(serialized_taxonomies)
         end
       end
 
@@ -128,8 +142,6 @@ module Decidim::ParticipatoryProcesses
           expect(serialized_participatory_process_steps).to include(description: step.description)
           expect(serialized_participatory_process_steps).to include(start_date: step.start_date)
           expect(serialized_participatory_process_steps).to include(end_date: step.end_date)
-          expect(serialized_participatory_process_steps).to include(cta_path: step.cta_path)
-          expect(serialized_participatory_process_steps).to include(cta_text: step.cta_text)
           expect(serialized_participatory_process_steps).to include(active: step.active)
           expect(serialized_participatory_process_steps).to include(position: step.position)
         end
@@ -139,7 +151,7 @@ module Decidim::ParticipatoryProcesses
         let!(:category) { create(:category, participatory_space: resource) }
 
         it "includes the categories" do
-          serialized_participatory_process_categories = subject.serialize[:participatory_process_categories].first
+          serialized_participatory_process_categories = subject.serialize[:categories].first
           expect(serialized_participatory_process_categories).to be_a(Hash)
 
           expect(serialized_participatory_process_categories).to include(id: category.id)
@@ -152,7 +164,7 @@ module Decidim::ParticipatoryProcesses
           let!(:subcategory) { create(:subcategory, parent: category, participatory_space: resource) }
 
           it "includes the categories" do
-            serialized_participatory_process_categories = subject.serialize[:participatory_process_categories].first
+            serialized_participatory_process_categories = subject.serialize[:categories].first
 
             expect(serialized_participatory_process_categories).to be_a(Hash)
 

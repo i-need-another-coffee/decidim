@@ -26,6 +26,7 @@ describe "Explore versions", versioning: true do
   end
 
   before do
+    stub_geocoding_coordinates([meeting.latitude, meeting.longitude])
     Decidim.traceability.update!(
       meeting,
       "test suite",
@@ -34,12 +35,23 @@ describe "Explore versions", versioning: true do
     visit meeting_path
   end
 
+  context "when showing a version of a meeting that is hidden" do
+    include_examples "a version of a hidden object" do
+      let(:resource_path) { meeting_path }
+      let(:hidden_object) { meeting }
+    end
+  end
+
   context "when visiting versions index" do
     before do
       click_on "see other versions"
     end
 
     it "lists all versions" do
+      within(".menu-bar") do
+        expect(page).to have_content(translated(component.name))
+        expect(page).to have_content(translated(meeting.reload.title))
+      end
       expect(page).to have_link("Version 1 of 2")
       expect(page).to have_link("Version 2 of 2")
     end

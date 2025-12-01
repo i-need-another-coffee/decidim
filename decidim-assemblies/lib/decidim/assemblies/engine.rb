@@ -26,7 +26,7 @@ module Decidim
         }, constraints: { assembly_id: /[0-9]+/ }
 
         resources :assemblies, only: [:index, :show], param: :slug, path: "assemblies" do
-          resources :assembly_members, only: :index, path: "members"
+          resources :participatory_space_private_users, only: :index, path: "members"
         end
 
         scope "/assemblies/:assembly_slug/f/:component_id" do
@@ -37,6 +37,18 @@ module Decidim
               mount manifest.engine, at: "/", as: "decidim_assembly_#{manifest.name}"
             end
           end
+        end
+      end
+
+      initializer "decidim_assemblies.mount_routes" do
+        Decidim::Core::Engine.routes do
+          mount Decidim::Assemblies::Engine, at: "/", as: "decidim_assemblies"
+        end
+      end
+
+      initializer "decidim_assemblies.data_migrate", after: "decidim_core.data_migrate" do
+        DataMigrate.configure do |config|
+          config.data_migrations_path << root.join("db/data").to_s
         end
       end
 
@@ -53,7 +65,10 @@ module Decidim
       end
 
       initializer "decidim_assemblies.stats" do
-        Decidim.stats.register :assemblies_count, priority: StatsRegistry::HIGH_PRIORITY do |organization, _start_at, _end_at|
+        Decidim.stats.register :assemblies_count,
+                               priority: StatsRegistry::HIGH_PRIORITY,
+                               icon_name: "government-line",
+                               tooltip_key: "assemblies_count_tooltip" do |organization, _start_at, _end_at|
           Decidim::Assembly.where(organization:).public_spaces.count
         end
       end
@@ -68,8 +83,8 @@ module Decidim
         Decidim.view_hooks.register(:user_profile_bottom, priority: Decidim::ViewHooks::MEDIUM_PRIORITY) do |view_context|
           assemblies = OrganizationPublishedAssemblies.new(view_context.current_organization, view_context.current_user)
                                                       .query.distinct
-                                                      .joins(:members)
-                                                      .merge(Decidim::AssemblyMember.where(user: view_context.profile_holder))
+                                                      .joins(:participatory_space_private_users)
+                                                      .merge(Decidim::ParticipatorySpacePrivateUser.where(user: view_context.profile_holder))
                                                       .reorder(title: :asc)
 
           next unless assemblies.any?
@@ -90,24 +105,19 @@ module Decidim
         Decidim::Assemblies::ContentBlocks::RegistryManager.register!
       end
 
-      initializer "decidim_assemblies.register_metrics" do
-        Decidim.metrics_registry.register(:assemblies) do |metric_registry|
-          metric_registry.manager_class = "Decidim::Assemblies::Metrics::AssembliesMetricManage"
-
-          metric_registry.settings do |settings|
-            settings.attribute :highlighted, type: :boolean, default: false
-            settings.attribute :scopes, type: :array, default: %w(home)
-            settings.attribute :weight, type: :integer, default: 1
-          end
-        end
-      end
-
       initializer "decidim_assemblies.query_extensions" do
         Decidim::Api::QueryType.include Decidim::Assemblies::QueryExtensions
       end
 
-      initializer "decidim_assemblies.webpacker.assets_path" do
+      initializer "decidim_assemblies.shakapacker.assets_path" do
         Decidim.register_assets_path File.expand_path("app/packs", root)
+      end
+
+      initializer "decidim_assemblies.extend_component_controllers" do
+        config.to_prepare do
+          # Extend component controllers with assembly breadcrumb when mounted under assemblies
+          Decidim::Components::BaseController.include(Decidim::Assemblies::AssemblyBreadcrumb)
+        end
       end
     end
   end

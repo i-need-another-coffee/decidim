@@ -14,11 +14,22 @@ describe "Explore versions", versioning: true do
     end
 
     it "has only one version" do
+      within(".menu-bar") do
+        expect(page).to have_content(translated(component.name))
+        expect(page).to have_content(translated(debate.title))
+      end
       expect(page).to have_content("Version number 1 (of 1)")
     end
 
     it "shows the versions index" do
       expect(page).to have_link "see other versions"
+    end
+
+    context "when showing a version of a debate that is hidden" do
+      include_examples "a version of a hidden object" do
+        let(:resource_path) { debate_path }
+        let(:hidden_object) { debate }
+      end
     end
   end
 
