@@ -35,7 +35,6 @@ hu:
       id: ID
       newsletter:
         body: Szöveg
-        send_to_all_users: Küldés az összes felhasználónak
         send_to_followers: Küldés a követőknek
         send_to_participants: Küldés a résztvevőknek
         subject: Tárgy
@@ -170,16 +169,15 @@ hu:
         attachment_collection:
           new: Új csatolmány mappa
         browse: Böngészés
-        export: Összes exportálása
+        configure: Beállítások
+        export: Exportálás
         export-selection: Kiválasztottak exportálása
         import: Import
-        manage: Kezelés
         newsletter:
           new: Új hírlevél
         participatory_space_private_user:
           new: Új privát felhasználó a részvételi térben
         per_page: Oldalanként
-        permissions: Engedélyek
         send_me_a_test_email: Teszt e-mail küldése
         share: Megosztás
         user:
@@ -271,7 +269,6 @@ hu:
       block_user:
         new:
           action: Fiók blokkolása és igazolás küldése
-          already_reported_html: Ezt a műveletet folytatva elrejti a résztvevők összes tartalmát is.
           description: Egy felhasználó letiltása használhatatlanná teszi a fiókját. Az indoklásban megadhat bármilyen iránymutatást arra vonatkozóan, hogy miként lehetne feloldani a felhasználó blokkolását.
           justification: Indoklás
           title: '%{name} felhasználó blokkolása'
@@ -349,7 +346,6 @@ hu:
         form:
           domain_too_short: Túl rövid domain név
         update:
-          error: Nem sikerült frissíteni az engedélyezett külső tartományok listáját
           success: Az engedélyezett külső tartományok listája sikeresen frissült.
       exports:
         export_as: "%{name} mint %{export_format}"
@@ -606,9 +602,11 @@ hu:
         index:
           actions:
             block: Felhasználó tiltása
+            bulk_actions:
+              unreport:
+                title: Jelentés visszavonása
             title: Műveletek
             unblock: Felhasználó feloldása
-            unreport: Jelentés visszavonása
           name: Név
           nickname: Felhasználónév
           reason: Indok
@@ -716,7 +714,6 @@ hu:
         index:
           actions: Műveletek
           badge: Jelvény
-          block: Felhasználó tiltása
           created_at: Létrehozva
           name: Név
           nickname: Becenév
@@ -725,9 +722,7 @@ hu:
           officialized: Hivatalos
           reofficialize: Újbóli hivatalossá tétel
           reports: Jelentések
-          show_email: E-mail cím megjelenítése
           status: Állapot
-          unblock: Felhasználó tiltásának törlése
           unofficialize: Hivatalossá tétel visszavonása
         new:
           badge: A hivatalosság jelvénye
@@ -869,8 +864,6 @@ hu:
           error: Hiba történt a téma frissítésekor.
           success: Téma frissítve sikeresen
       static_pages:
-        actions:
-          view: Nyilvános oldal megtekintése
         create:
           error: Hiba történt az új oldal létrehozásakor.
           success: Oldal létrehozása sikeres.
@@ -929,7 +922,6 @@ hu:
           last_day: Utolsó nap
           last_month: Előző hónap
           last_week: Előző hét
-          no_users_count_statistics_yet: Még nincsenek felhasználói statisztikák.
           participants: Résztvevők
     forms:
       errors:
@@ -942,8 +934,6 @@ hu:
         hide: Elrejt
         not_hidden: Nem rejtett
         title: Műveletek
-        unhide: Felfedés
-        unreport: Ne jelentse
       admin:
         reportable:
           hide:

@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
     "homepage_uri" => "https://decidim.org",
     "source_code_uri" => "https://github.com/decidim/decidim"
   }
-  s.required_ruby_version = "~> 3.3.0"
+  s.required_ruby_version = "~> 3.4.0"
 
   s.name = "decidim-dev"
   s.summary = "Decidim dev tools"
@@ -60,13 +60,14 @@ Gem::Specification.new do |s|
   s.add_dependency "rubocop-capybara", "~> 2.22.0", ">= 2.22.1"
   s.add_dependency "rubocop-factory_bot", "~> 2.27.0"
   s.add_dependency "rubocop-faker", "~> 1.3", ">= 1.3.0"
-  s.add_dependency "rubocop-graphql", "~> 1.5"
+  s.add_dependency "rubocop-graphql", "~> 1.5", ">= 1.5.6"
   s.add_dependency "rubocop-obsession", "~> 0.2.0"
   s.add_dependency "rubocop-performance", "~> 1.25", ">= 1.25.0"
   s.add_dependency "rubocop-rails", "~> 2.32.0", ">= 2.32.0"
   s.add_dependency "rubocop-rspec", "~> 3.0", ">= 3.6.0"
   s.add_dependency "rubocop-rspec_rails", "~> 2.31.0"
   s.add_dependency "rubocop-rubycw", "~> 0.2.0"
+  s.add_dependency "rubocop-yard", "~> 1.0.0"
   s.add_dependency "selenium-webdriver", "~> 4.9"
   s.add_dependency "simplecov", "~> 0.22.0"
   s.add_dependency "simplecov-cobertura", "~> 2.1.0"

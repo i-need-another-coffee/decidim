@@ -35,7 +35,6 @@ ar:
       id: المعرف ID
       newsletter:
         body: النص
-        send_to_all_users: إرسال إلى كافة المستخدمين
         send_to_followers: إرسال إلى المتابِعين
         send_to_participants: إرسال إلى المشتركين
         subject: الموضوع
@@ -179,14 +178,11 @@ ar:
             <li class="font-bold">%{resources_count} مصادر</li>
           </ul>
           يمكنك استعادة العنصر إذا غيرت رأيك لاحقاً.
-        export: تصدير الكل
         export-selection: تصدير الإختيار
         import: استيراد
-        manage: تدبير
         newsletter:
           new: رسالة إخبارية جديدة
         per_page: في كل صفحة
-        permissions: تصريحات
         share: مشاركة
         user:
           new: مدير جديد
@@ -536,9 +532,10 @@ ar:
             block: حظر مستخدم
             bulk_actions:
               actions_dropdown: الإجراءات
+              unreport:
+                title: إلغاء التبليغ
             title: الإجراءات
             unblock: إلغاء حظر المستخدم
-            unreport: إلغاء التبليغ
           name: الإسم
           nickname: الاسم المستعار
           reason: السبب
@@ -624,7 +621,6 @@ ar:
         index:
           actions: أفعال
           badge: شارة
-          block: حظر مستخدم
           created_at: أنشئت في
           name: اسم
           nickname: كنية
@@ -633,9 +629,7 @@ ar:
           officialized: Officialized
           reofficialize: Reofficialize
           reports: التقارير
-          show_email: إظهار عنوان البريد الإلكتروني
           status: الحالة
-          unblock: إلغاء حظر المستخدم
           unofficialize: Unofficialize
         new:
           badge: شارة رسمية
@@ -750,8 +744,6 @@ ar:
           error: حدثت مشكلة أثناء تحديث هذا الموضوع.
           success: تم تحديث الموضوع بنجاح
       static_pages:
-        actions:
-          view: عرض الصفحة العامة
         create:
           error: كانت هناك مشكلة في إنشاء صفحة جديدة.
           success: تم إنشاء الصفحة بنجاح.
@@ -825,8 +817,6 @@ ar:
         hide: إخفاء
         not_hidden: غير مخفي
         title: أفعال
-        unhide: إظهار
-        unreport: Unreport
       admin:
         reportable:
           hide:

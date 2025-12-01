@@ -35,7 +35,6 @@ sq:
       id: ID
       newsletter:
         body: Trupi i mesazhit
-        send_to_all_users: Dërgo të gjithë përdoruesve
         send_to_followers: Dërgo ndjekësve
         send_to_participants: Dërgo pjesëmarrësve
         subject: Tema
@@ -137,12 +136,10 @@ sq:
         attachment:
           new: Shtojcë e re
         browse: Shfleto
-        export: Eksporto të gjitha
         import: Importo
         newsletter:
           new: Newsletter i ri
         per_page: Për faqe
-        permissions: Lejet
         send_me_a_test_email: Më dërgo një email prove
         share: Shpërndaj
         user:
@@ -421,13 +418,13 @@ sq:
           all_users_help: Dërgo buletinin te të gjithë përdoruesit e konfirmuar.
           confirm_deliver: A je i sigurt që do ta dërgosh këtë buletin? Veprimi nuk mund të anulohet.
           deliver: Dërgo buletinin
+          send_to_all_users: Dërgo të gjithë përdoruesve
         show:
           preview: Parapamje
           subject: Tema
       officializations:
         index:
           actions: Veprimet
-          block: Blloko përdoruesin
           created_at: Krijuar më
           name: Emri
           nickname: Nofka

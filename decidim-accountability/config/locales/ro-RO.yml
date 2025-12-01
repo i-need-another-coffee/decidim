@@ -33,8 +33,6 @@ ro:
   decidim:
     accountability:
       actions:
-        attachment_collections: Dosare
-        attachments: Atașamente
         confirm_destroy: Sunteți sigur că doriți să ștergeți %{name}?
         destroy: Ștergeți
         edit: Actualizare
@@ -131,7 +129,6 @@ ro:
           fields:
             created_at: Creat
             end_date: Data de sfârșit
-            id: ID
             progress: Progres
             start_date: Data de început
             status: Stare

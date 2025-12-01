@@ -28,7 +28,6 @@ pt:
       id: ID
       newsletter:
         body: Corpo
-        send_to_all_users: Enviar para todas as pessoas utilizadoras
         subject: Assunto
       organization:
         alert_color: Alerta
@@ -134,18 +133,16 @@ pt:
         attachment:
           new: Novo anexo
         browse: Explorar
-        export: Exportar tudo
+        configure: Configurar
+        export: Exportar
         export-selection: Exportar selecção
         import: Importar
-        manage: Gerir
         newsletter:
           new: Novo boletim informativo
         participatory_space_private_user:
           new: Novo utilizador privado do espaço participativo
         per_page: Por página
-        permissions: Permissões
         share: Partilhar
-        soft_delete: Mover para a lixeira
       area_types:
         create:
           error: Ocorreu um problema ao criar um novo tipo de área.
@@ -212,7 +209,6 @@ pt:
       block_user:
         bulk_new:
           action: Bloquear conta e enviar justificação
-          already_reported_html: Com essa ação todos os conteúdos dos participantes bloqueados serão ocultados.
           description: Bloquear um participante torna a sua conta inutilizável. Pode dar na sua justificação orientações sobre o que poderia levar a considerar desbloquear o participante.
           justification: Justificação
           title: Bloquear participantes
@@ -496,7 +492,6 @@ pt:
               update_moderated_user_button: Remover denúncias
             title: Acções
             unblock: Desbloquear utilizador
-            unreport: Remover denúncia
           cancel: Cancelar
           name: Nome
           nickname: Alcunha
@@ -591,7 +586,6 @@ pt:
         index:
           actions: Ações
           badge: Distintivo
-          block: Bloquear utilizador
           created_at: Criado em
           name: Nome
           nickname: Alcunha
@@ -600,9 +594,7 @@ pt:
           officialized: Oficializado
           reofficialize: Reoficializar
           reports: Relatórios
-          show_email: Mostrar endereço de e-mail
           status: Estado
-          unblock: Desbloquear utilizador
           unofficialize: Desoficializar
         new:
           badge: Distintivo de oficialização
@@ -703,8 +695,6 @@ pt:
           error: Ocorreu um problema ao atualizar este tópico.
           success: Tópico atualizado com sucesso
       static_pages:
-        actions:
-          view: Ver página pública
         create:
           error: Ocorreu um problema ao criar uma nova página.
           success: Página criada corretamente.
@@ -762,8 +752,6 @@ pt:
         hide: Ocultar
         not_hidden: Não oculto
         title: Ações
-        unhide: Mostrar
-        unreport: Unreport
       admin:
         reportable:
           hide:
