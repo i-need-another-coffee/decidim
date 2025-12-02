@@ -32,8 +32,10 @@ class UploaderImageDimensionsValidator < ActiveModel::Validations::FileContentTy
     # avoid reckless users that upload images with too many pixels.
     #
     # See https://hackerone.com/reports/390
-    record.errors.add attribute, I18n.t("decidim.errors.files.file_resolution_too_large") if [image.width, image.height].any? { |dimension| dimension > uploader.max_image_height_or_width }
-  rescue Vips::Error => e
+    resolution_too_large = [image.width, image.height].any? { |dimension| dimension > uploader.max_image_height_or_width }
+
+    record.errors.add attribute, I18n.t("decidim.errors.files.file_resolution_too_large") if resolution_too_large
+  rescue Vips::Error
     # The error may happen because of many reasons but most commonly the image
     # exceeds the default maximum dimensions set for ImageMagick when the
     # `identify` command fails to identify the image.
