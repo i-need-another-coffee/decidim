@@ -85,8 +85,8 @@ FactoryBot.define do
     "#{Faker::Lorem.sentence(word_count: 1, supplemental: true, random_words_to_add: 3)} #{n}"
   end
 
-  factory :participatory_space, parent: ENV.fetch("SPACE_FACTORY") do
-    
+  factory :participatory_space, parent: ENV.fetch("SPACE_FACTORY", nil) do
+    # empty by default
   end
 
   factory :category, class: "Decidim::Category" do
@@ -98,7 +98,7 @@ FactoryBot.define do
     description { generate_localized_description(:category_description, skip_injection:) }
     weight { 0 }
 
-    association :participatory_space, factory: :participatory_process
+    association :participatory_space
   end
 
   factory :subcategory, parent: :category do
