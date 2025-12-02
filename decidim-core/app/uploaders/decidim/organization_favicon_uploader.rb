@@ -17,9 +17,10 @@ module Decidim
           format: :png
         }
       end.merge(
+        # Libvips does not support the ImageMagick-specific define option, nor does it natively support
+        # generating multi-resolution (multi-layer) .ico files from a single command like auto-resize.
         favicon: {
           resize_and_pad: [256, 256],
-          define: "icon:auto-resize=16,24,32,48,64,72,96,128,256",
           format: :ico
         }
       )
