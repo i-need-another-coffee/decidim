@@ -36,7 +36,7 @@ module Decidim
       end
 
       context "when the organization has a favicon" do
-        let(:favicon_path) { Decidim::Dev.asset("icon.ico") }
+        let(:favicon_path) { Decidim::Dev.asset("icon.png") }
 
         before do
           organization.favicon.attach(io: File.open(favicon_path), filename: File.basename(favicon_path))
@@ -73,8 +73,6 @@ module Decidim
         end
 
         context "and the variant has not been processed" do
-          let(:favicon_path) { Decidim::Dev.asset("icon.png") }
-
           it "renders the processed favicon" do
             get :show
 
@@ -84,8 +82,6 @@ module Decidim
         end
 
         context "and the variant has been processed" do
-          let(:favicon_path) { Decidim::Dev.asset("icon.png") }
-
           before { organization.attached_uploader(:favicon).variant(:favicon).processed }
 
           it "renders the favicon" do
