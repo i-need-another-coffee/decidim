@@ -21,13 +21,13 @@ module Decidim
         # generating multi-resolution (multi-layer) .ico files from a single command like auto-resize.
         favicon: {
           resize_and_pad: [256, 256],
-          format: :ico
+          format: :png
         }
       )
     end
 
     def extension_allowlist
-      %w(png jpg jpeg webp ico)
+      %w(png jpg jpeg webp)
     end
   end
 end
