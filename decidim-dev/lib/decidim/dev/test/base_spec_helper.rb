@@ -13,6 +13,7 @@ ENV["DECIDIM_SMS_GATEWAY_SERVICE"] ||= "Decidim::Verifications::Sms::ExampleGate
 ENV["DECIDIM_TIMESTAMP_SERVICE"] ||= "Decidim::Initiatives::DummyTimestamp"
 ENV["DECIDIM_PDF_SIGNATURE_SERVICE"] ||= "Decidim::PdfSignatureExample"
 ENV["DECIDIM_MACHINE_TRANSLATION_SERVICE"] ||= "Decidim::Dev::DummyTranslator"
+ENV["SPACE_FACTORY"] = %w(participatory_process assembly initiative conference).sample
 
 engine_spec_dir = File.join(Dir.pwd, "spec")
 

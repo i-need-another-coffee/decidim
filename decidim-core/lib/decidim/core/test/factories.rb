@@ -85,6 +85,10 @@ FactoryBot.define do
     "#{Faker::Lorem.sentence(word_count: 1, supplemental: true, random_words_to_add: 3)} #{n}"
   end
 
+  factory :participatory_space, parent: ENV.fetch("SPACE_FACTORY") do
+    
+  end
+
   factory :category, class: "Decidim::Category" do
     transient do
       skip_injection { false }
