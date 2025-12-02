@@ -43,11 +43,11 @@ describe UploaderImageDimensionsValidator do
 
       # Ensure MiniMagic is called so that the validations are actually run for
       # the same reason as above.
-      it "calls MiniMagick" do
+      it "calls Vips" do
         if type == :blob
           expect(Vips::Image).to receive(:new_from_buffer).and_call_original
         else
-          expect(Vips::Image).to receive(:new_from_file).and_call_original
+          expect(Vips::Operation).to receive(:call).and_call_original
         end
 
         subject.valid?
