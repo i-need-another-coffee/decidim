@@ -9,7 +9,7 @@ describe "Admin manages newsletters" do
   let(:organization) { create(:organization) }
   let!(:attributes) { attributes_for(:newsletter, organization:) }
   let(:user) { create(:user, :admin, :confirmed, name: "Sarah Kerrigan", organization:) }
-  let!(:deliverable_users) { create_list(:user, 5, :confirmed, newsletter_notifications_at: Time.current, organization:) }
+  let!(:deliverable_users) { create_list(:user, 5, :confirmed, newsletter_notifications_at: Time.current, organization:, avatar: nil) }
 
   before do
     switch_to_host(organization.host)
