@@ -193,7 +193,7 @@ FactoryBot.define do
     organization
     locale { organization.default_locale }
     tos_agreement { "1" }
-    avatar { Decidim::Dev.test_file("avatar.jpg", "image/jpeg") }
+    avatar { nil }
     personal_url { Faker::Internet.url }
     about { generate_title(:user_about, skip_injection:) }
     confirmation_sent_at { Time.current }
