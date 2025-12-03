@@ -204,7 +204,7 @@ describe "Amend Proposal", versioning: true do
         end
 
         context "when the user is logged in and clicks" do
-          let!(:user) { create(:user, :confirmed, organization: component.organization) }
+          let!(:user) { create(:user, :confirmed, organization: component.organization, avatar: nil) }
 
           before do
             expect(page).to have_content("Log in")
