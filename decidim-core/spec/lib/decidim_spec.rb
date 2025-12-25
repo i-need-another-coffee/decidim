@@ -31,7 +31,7 @@ describe Decidim do
 
       expect(manifests).to all(receive(:seed!).once)
 
-      application = double(railties: (decidim_railties + other_railties))
+      application = double(railties: (decidim_railties + other_railties), config: double(active_storage: double(service: :local)))
       allow(Rails).to receive(:application).and_return application
 
       described_class.seed!

@@ -19,6 +19,31 @@ module Decidim
 
         snippets.add(:head, helpers.stylesheet_pack_tag("decidim_dev"))
         snippets.add(:foot, helpers.javascript_pack_tag("decidim_dev", defer: false))
+
+        return unless defined?(::Debugbar)
+
+        return unless ::Debugbar.config.enabled?
+
+        snippets.add(:head, helpers.javascript_include_tag("/_debugbar/assets/script", defer: :defer))
+        snippets.add(:foot, debug_bar)
+      end
+
+      def debug_bar
+        div = helpers.content_tag(:div, nil, id: "__debugbar", data: { "turbo-permanent" => true })
+
+        js = <<~JS
+          window._debugbarConfigOptions = {
+            mode: "poll",
+            poll: {
+              url: "//" + document.location.host,
+              interval: 1000
+            }
+          }
+        JS
+
+        js = helpers.javascript_tag(js.html_safe, data: { "turbo-permanent" => true })
+
+        div.concat(js)
       end
     end
   end

@@ -125,6 +125,7 @@ jobs:
           CI: "true"
           SIMPLECOV: "true"
           SHAKAPACKER_RUNTIME_COMPILE: "false"
+          DEBUGBAR_ENABLED: "false"
           NODE_ENV: "test"
       - uses: qltysh/qlty-action/coverage@v1
         with:

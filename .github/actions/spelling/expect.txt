@@ -189,6 +189,7 @@ ddmm
 deauthorizes
 debante
 debian
+debugbar
 decidiamo
 decidim
 decidimcommandscreateresource

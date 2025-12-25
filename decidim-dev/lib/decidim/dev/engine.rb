@@ -57,6 +57,23 @@ module Decidim
 
         Decidim::Api.add_orphan_type Decidim::Dev::DummyResourceType
       end
+
+      initializer "decidim_dev.debugbar" do |_app|
+        if defined? Debugbar
+          Debugbar.configure do |config|
+            config.enabled = Decidim::Env.new("DEBUGBAR_ENABLED", "true").present?
+            config.ignore_request = lambda { |env|
+              [
+                [Debugbar.config.prefix, "/editor_images", "/favicon.ico", "/open-data", "/qr-code", "/static_map", "/rails/active_storage"].any? do |prefix|
+                  env["PATH_INFO"].start_with? prefix
+                end,
+                env["PATH_INFO"] =~ %r{/[a-z]{2}/initiatives/[^/]+/print},
+                env["PATH_INFO"].ends_with?("export_pdf_signatures.pdf")
+              ].any?
+            }
+          end
+        end
+      end
     end
   end
 end
