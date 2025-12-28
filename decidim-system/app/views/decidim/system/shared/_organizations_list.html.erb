@@ -25,6 +25,7 @@
                         data: { confirm: t(".confirm_resend_invitation") } %>
           <% end %>
           <%= link_to t("actions.edit", scope: "decidim.system"), edit_organization_path(organization) %>
+          <%= link_to t("actions.destroy", scope: "decidim.system"), organization_destroy_organization_index_path(organization), data: { confirm: t(".confirm_delete") } %>
         </td>
       </tr>
     <% end %>

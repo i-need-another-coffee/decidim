@@ -15,6 +15,12 @@ Decidim::System::Engine.routes.draw do
       member do
         post :resend_invitation
       end
+
+      resources :destroy_organization, only: [:index] do
+        collection do
+          delete :destroy
+        end
+      end
     end
     resources :admins, except: [:show]
     resources :oauth_applications

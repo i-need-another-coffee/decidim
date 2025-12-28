@@ -1,0 +1,20 @@
+<% add_decidim_page_title(t(".title")) %>
+
+<% provide :title do %>
+  <h1 class="h1"><%= t ".title" %></h1>
+<% end %>
+
+<div class="text-content space-y-4">
+  <%= cell("decidim/announcement", t(".explanation_html"), callout_class: "alert") %>
+</div>
+
+<%= decidim_form_for(@form, url: organization_destroy_organization_index_path(current_organization), method: :delete, class: "api-user", html: { id: "new_api_user" }) do |f| %>
+  <div class="form__wrapper">
+    <%= f.text_field :confirmation, help_text: t(".confirm_text", host: current_organization.host)  %>
+
+    <div class="form__wrapper-block">
+      <%=  link_to t(".cancel"), edit_organization_path(current_organization), class: "button button__sm md:button__lg button__secondary" %>
+      <%= f.submit t(".destroy"), class: "button button__sm md:button__lg button__primary" %>
+    </div>
+  </div>
+<% end %>
