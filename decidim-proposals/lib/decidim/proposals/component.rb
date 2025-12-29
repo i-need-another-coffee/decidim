@@ -14,11 +14,7 @@ Decidim.register_component(:proposals) do |component|
   component.on(:purge) do |instance|
     Decidim::Proposals::Proposal.with_deleted.where(component: instance).find_each do |proposal|
       Decidim::Proposals::ProposalVote.where(proposal:).delete_all
-      proposal.amendments.find_each do |amendment|
-        amendment.destroy!
-        amendment.versions.destroy_all
-      end
-
+      proposal.amendments.find_each(&:destroy!)
       proposal.really_destroy!
       proposal.versions.destroy_all
     end
