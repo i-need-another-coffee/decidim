@@ -14,6 +14,16 @@ Decidim.register_component(:meetings) do |component|
     "Decidim::Meetings::Meeting"
   ]
 
+  component.on(:purge) do |instance|
+    Decidim::Meetings::Meeting.with_deleted.where(component: instance).find_each do |meeting|
+      meeting.really_destroy!
+      meeting.versions.destroy_all
+    end
+
+    instance.really_destroy!
+    instance.versions.destroy_all
+  end
+
   component.on(:before_destroy) do |instance|
     raise StandardError, "Cannot remove this component" if Decidim::Meetings::Meeting.where(component: instance).any?
   end

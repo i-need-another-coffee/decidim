@@ -4,6 +4,20 @@ Decidim.register_participatory_space(:initiatives) do |participatory_space|
   participatory_space.icon = "media/images/decidim_initiatives.svg"
   participatory_space.stylesheet = "decidim/initiatives/initiatives"
 
+  participatory_space.on(:purge) do |space|
+    space.components.with_deleted.find_each do |component|
+      component.manifest.run_hooks(:purge, component)
+    end
+
+    Decidim::InitiativesSettings.where(organization: space.organization).destroy_all
+    Decidim::InitiativesType.where(organization: space.organization).destroy_all
+
+    Decidim::InitiativesVote.where(initiative: space).delete_all
+
+    space.destroy!
+    space.versions.destroy_all
+  end
+
   participatory_space.context(:public) do |context|
     context.engine = Decidim::Initiatives::Engine
     context.layout = "layouts/decidim/initiative"

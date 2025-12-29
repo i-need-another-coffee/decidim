@@ -7,6 +7,16 @@ Decidim.register_component(:collaborative_texts) do |component|
   component.icon_key = "draft-line"
   component.permissions_class_name = "Decidim::CollaborativeTexts::Permissions"
 
+  component.on(:purge) do |instance|
+    Decidim::CollaborativeTexts::Document.with_deleted.where(component: instance).find_each do |text|
+      text.really_destroy!
+      text.versions.destroy_all
+    end
+
+    instance.really_destroy!
+    instance.versions.destroy_all
+  end
+
   component.query_type = "Decidim::CollaborativeTexts::DocumentsType"
 
   component.register_stat :collaborative_texts_count,

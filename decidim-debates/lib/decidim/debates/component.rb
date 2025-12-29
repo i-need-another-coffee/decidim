@@ -12,6 +12,16 @@ Decidim.register_component(:debates) do |component|
 
   component.newsletter_participant_entities = ["Decidim::Debates::Debate"]
 
+  component.on(:purge) do |instance|
+    Decidim::Debates::Debate.with_deleted.where(component: instance).find_each do |debate|
+      debate.really_destroy!
+      debate.versions.destroy_all
+    end
+
+    instance.really_destroy!
+    instance.versions.destroy_all
+  end
+
   component.on(:before_destroy) do |instance|
     raise StandardError, "Cannot remove this component" if Decidim::Debates::Debate.where(component: instance).any?
   end

@@ -9,6 +9,13 @@ Decidim.register_component(:blogs) do |component|
 
   component.query_type = "Decidim::Blogs::BlogsType"
 
+  component.on(:purge) do |instance|
+    Decidim::Blogs::Post.with_deleted.where(component: instance).find_each(&:really_destroy!)
+
+    instance.really_destroy!
+    instance.versions.destroy_all
+  end
+
   component.on(:before_destroy) do |instance|
     raise StandardError, "Cannot remove this component" if Decidim::Blogs::Post.where(component: instance).any?
   end

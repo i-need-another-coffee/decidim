@@ -11,6 +11,21 @@ Decidim.register_component(:accountability) do |component|
   component.permissions_class_name = "Decidim::Accountability::Permissions"
   component.query_type = "Decidim::Accountability::AccountabilityType"
 
+  component.on(:purge) do |instance|
+    Decidim::Accountability::Status.where(component: instance).find_each do |status|
+      status.destroy!
+      status.versions.destroy_all
+    end
+
+    Decidim::Accountability::Result.with_deleted.where(component: instance).find_each do |result|
+      result.really_destroy!
+      result.versions.destroy_all
+    end
+
+    instance.really_destroy!
+    instance.versions.destroy_all
+  end
+
   component.on(:before_destroy) do |instance|
     raise StandardError, "Cannot remove this component" if Decidim::Accountability::Result.where(component: instance).any?
   end

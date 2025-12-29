@@ -12,6 +12,16 @@ Decidim.register_component(:pages) do |component|
 
   component.query_type = "Decidim::Pages::PagesType"
 
+  component.on(:purge) do |instance|
+    Decidim::Pages::Page.where(component: instance).find_each do |page|
+      page.destroy!
+      page.versions.destroy_all
+    end
+
+    instance.really_destroy!
+    instance.versions.destroy_all
+  end
+
   component.on(:create) do |instance|
     Decidim::Pages::CreatePage.call(instance) do
       on(:invalid) { raise "Cannot create page" }

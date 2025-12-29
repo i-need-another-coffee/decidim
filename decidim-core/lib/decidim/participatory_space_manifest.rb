@@ -13,6 +13,7 @@ module Decidim
   class ParticipatorySpaceManifest
     include ActiveModel::Model
     include Decidim::AttributeObject::Model
+    include Decidim::HasHooks
 
     attribute :name, Symbol
 
