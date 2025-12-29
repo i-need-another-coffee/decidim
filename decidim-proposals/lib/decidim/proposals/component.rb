@@ -11,6 +11,29 @@ Decidim.register_component(:proposals) do |component|
     raise "Cannot destroy this component when there are proposals" if Decidim::Proposals::Proposal.where(component: instance).any?
   end
 
+  component.on(:purge) do |instance|
+    Decidim::Proposals::Proposal.with_deleted.where(component: instance).find_each do |proposal|
+      Decidim::Proposals::ProposalVote.where(proposal:).delete_all
+      proposal.amendments.find_each(&:destroy!)
+      proposal.really_destroy!
+      proposal.versions.destroy_all
+    end
+
+    Decidim::Proposals::ProposalState.where(component: instance).find_each(&:destroy!)
+    Decidim::Proposals::ParticipatoryText.where(component: instance).find_each do |text|
+      text.really_destroy!
+      text.versions.destroy_all
+    end
+
+    Decidim::Proposals::CollaborativeDraft.where(component: instance).find_each do |draft|
+      draft.destroy!
+      draft.versions.destroy_all
+    end
+
+    instance.really_destroy!
+    instance.versions.destroy_all
+  end
+
   component.on(:create) do |instance|
     admin_user = GlobalID::Locator.locate(instance.versions.first.whodunnit)
     Decidim::Proposals.create_default_states!(instance, admin_user)

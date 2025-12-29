@@ -66,5 +66,43 @@ module Decidim
         expect(user.name).to eq(expected_name)
       end
     end
+
+    describe "hooks" do
+      describe "run_hooks" do
+        it "runs all registered hooks" do
+          subject.on(:foo) do |context|
+            context[:foo1] ||= 0
+            context[:foo1] += 1
+          end
+
+          subject.on(:foo) do |context|
+            context[:foo2] ||= 0
+            context[:foo2] += 1
+          end
+
+          subject.on(:bar) do
+            context[:bar] ||= 0
+            context[:bar] += 1
+          end
+
+          context = {}
+          subject.run_hooks(:foo, context)
+          expect(context[:foo1]).to eq(1)
+          expect(context[:foo2]).to eq(1)
+          expect(context[:bar]).to be_nil
+        end
+      end
+
+      describe "reset_hooks!" do
+        it "resets hooks" do
+          subject.on(:foo) do
+            raise "Yo, I run!"
+          end
+
+          subject.reset_hooks!
+          expect { subject.run_hooks(:foo) }.not_to raise_error
+        end
+      end
+    end
   end
 end

@@ -17,6 +17,21 @@ Decidim.register_component(:budgets) do |component|
 
   component.actions = %w(vote comment vote_comment)
 
+  component.on(:purge) do |instance|
+    Decidim::Budgets::Budget.with_deleted.where(component: instance).find_each do |budget|
+      budget.projects.find_each do |project|
+        project.really_destroy!
+        project.versions.destroy_all
+      end
+
+      budget.really_destroy!
+      budget.versions.destroy_all
+    end
+
+    instance.really_destroy!
+    instance.versions.destroy_all
+  end
+
   component.on(:before_destroy) do |instance|
     raise StandardError, "Cannot remove this component" if Decidim::Budgets::Budget.where(component: instance).any?
   end

@@ -17,6 +17,18 @@ Decidim.register_participatory_space(:participatory_processes) do |participatory
 
   participatory_space.breadcrumb_cell = "decidim/participatory_processes/process_dropdown_metadata"
 
+  participatory_space.on(:purge) do |space|
+    space.components.with_deleted.find_each do |component|
+      component.manifest.run_hooks(:purge, component)
+    end
+
+    Decidim::ParticipatoryProcessGroup.where(organization: space.organization).destroy_all
+    Decidim::ParticipatoryProcessType.where(organization: space.organization).destroy_all
+    Decidim::ParticipatoryProcessUserRole.where(participatory_process: space).destroy_all
+    space.really_destroy!
+    space.versions.destroy_all
+  end
+
   participatory_space.register_resource(:participatory_process) do |resource|
     resource.model_class_name = "Decidim::ParticipatoryProcess"
     resource.card = "decidim/participatory_processes/process"

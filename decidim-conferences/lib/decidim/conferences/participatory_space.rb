@@ -5,6 +5,16 @@ Decidim.register_participatory_space(:conferences) do |participatory_space|
   participatory_space.model_class_name = "Decidim::Conference"
   participatory_space.stylesheet = "decidim/conferences/conferences"
 
+  participatory_space.on(:purge) do |space|
+    space.components.with_deleted.find_each do |component|
+      component.manifest.run_hooks(:purge, component)
+    end
+
+    Decidim::ConferenceUserRole.where(conference: space).destroy_all
+    space.really_destroy!
+    space.versions.destroy_all
+  end
+
   participatory_space.participatory_spaces do |organization|
     Decidim::Conferences::OrganizationConferences.new(organization).query
   end

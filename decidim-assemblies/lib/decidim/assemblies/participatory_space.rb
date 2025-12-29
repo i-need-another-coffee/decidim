@@ -9,6 +9,21 @@ Decidim.register_participatory_space(:assemblies) do |participatory_space|
     Decidim::Assemblies::OrganizationAssemblies.new(organization).query
   end
 
+  participatory_space.on(:purge) do |space|
+    space.children.with_deleted.find_each do |child|
+      child.manifest.run_hooks(:purge, child)
+    end
+
+    space.components.with_deleted.find_each do |component|
+      component.manifest.run_hooks(:purge, component)
+    end
+
+    Decidim::AssembliesType.where(organization: space.organization).destroy_all
+    Decidim::AssemblyUserRole.where(assembly: space).destroy_all
+    space.really_destroy!
+    space.versions.destroy_all
+  end
+
   participatory_space.permissions_class_name = "Decidim::Assemblies::Permissions"
 
   participatory_space.query_type = "Decidim::Assemblies::AssemblyType"

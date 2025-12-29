@@ -20,7 +20,7 @@ module Decidim
       after_save :save_version
 
       has_many :document_versions, class_name: "Decidim::CollaborativeTexts::Version", inverse_of: :document, dependent: :destroy
-      has_many :suggestions, through: :document_versions
+      has_many :suggestions, through: :document_versions, dependent: :destroy
 
       validates :title, presence: true
 

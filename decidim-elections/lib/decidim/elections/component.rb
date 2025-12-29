@@ -10,6 +10,17 @@ Decidim.register_component(:elections) do |component|
 
   component.actions = %w()
 
+  component.on(:purge) do |instance|
+    Decidim::Elections::Election.with_deleted.where(component: instance).find_each do |election|
+      election.questions.find_each { |question| question.votes.delete_all }
+      election.questions.destroy_all
+      election.really_destroy!
+    end
+
+    instance.really_destroy!
+    instance.versions.destroy_all
+  end
+
   component.on(:before_destroy) do |instance|
     raise StandardError, "Cannot remove this component" if Decidim::Elections::Election.where(component: instance).any?
   end
