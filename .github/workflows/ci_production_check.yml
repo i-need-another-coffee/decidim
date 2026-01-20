@@ -35,7 +35,7 @@ jobs:
     timeout-minutes: 60
     services:
       postgres:
-        image: postgres:14
+        image: postgres:14@sha256:d508bf6220b5c7b7cd9c735d6abd5ea2e6e4e45882a29ed704f625aba32bd935
         ports: ["5432:5432"]
         options: >-
           --health-cmd pg_isready
@@ -51,7 +51,7 @@ jobs:
       DECIDIM_SPAM_DETECTION_BACKEND_RESOURCE: "memory"
       DECIDIM_SPAM_DETECTION_BACKEND_USER: "memory"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           fetch-depth: 1
       - run: |
@@ -62,13 +62,13 @@ jobs:
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: ${{ env.NODE_VERSION }}
       - name: Get npm cache directory path
         id: npm-cache-dir-path
         run: echo "dir=$(npm get cache)-${{ env.DECIDIM_MODULE }}" >> $GITHUB_OUTPUT
-      - uses: actions/cache@v4
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         id: npm-cache
         with:
           path: ${{ steps.npm-cache-dir-path.outputs.dir }}

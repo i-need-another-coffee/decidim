@@ -40,8 +40,8 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/labeler@v5
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/labeler@8558fd74291d67161a8a78ce36a881fa63b766a9 # v5
         with:
           dot: 'true'
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
@@ -50,7 +50,7 @@ jobs:
     name: Check PR labels
     runs-on: ubuntu-22.04
     steps:
-      - uses: jesusvasquez333/verify-pr-label-action@v1.4.0
+      - uses: jesusvasquez333/verify-pr-label-action@657d111bbbe13e22bbd55870f1813c699bde1401 # v1.4.0
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
           valid-labels: "type: feature, type: change, type: fix, type: removal, target: developer-experience, type: internal"
