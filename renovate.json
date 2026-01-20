@@ -33,14 +33,15 @@
       "matchManagers": [
         "custom.regex"
       ],
-      "rangeStrategy": "replace"
+      "rangeStrategy": "bump"
     },
     // Security updates - high priority
     {
       "matchUpdateTypes": ["patch"],
       "matchPackagePatterns": ["devise", "doorkeeper", "omniauth"],
-      "automerge": true,
-      "labels": ["security", "automerge"]
+      "automerge": false,
+      "labels": ["security", "automerge"],
+      "rangeStrategy": "bump"
     }
   ], 
   
