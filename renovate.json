@@ -3,17 +3,30 @@
   "extends": [
     "config:recommended"
   ],
-  "customManagers": [
-    {
-      "customType": "regex",
-      "fileMatch": [
-        "^.*\\/.*\\.gemspec"
-      ],
-      "matchStrings": [
-        ".*\\.add_(:?(?<depType>.*?)_)?dependency\\s*(['\"])(?<depName>[^'\"]+)(['\"])(\\s*,\\s*(?<currentValue>(['\"])[^'\"]+['\"](\\s*,\\s*['\"][^'\"]+['\"])?))?"
-      ],
-      "datasourceTemplate": "rubygems",
-      "versioningTemplate": "ruby"
-    }
-  ]
+  "bundler": {
+    "enabled": true,
+    "rangeStrategy": "bump",
+    "fileMatch": [
+      "Gemfile", 
+      "decidim-accountability/decidim-accountability.gemspec",
+      "decidim-admin/decidim-admin.gemspec",
+      "decidim-ai/decidim-ai.gemspec"
+    ], 
+    "matchFileNames": [
+      "decidim-conferences/decidim-conferences.gemspec",
+      "decidim-core/decidim-core.gemspec"
+    ]
+ },
+ "npm": {
+   "enabled": true,
+   "rangeStrategy":  "bump"
+ },
+  "github-actions": {
+    "enabled":  true,
+    "pinDigests": true
+  },
+  "prConcurrentLimit": 2,
+  "prCreation": "immediate",
+  "automerge": false,
+  "prHourlyLimit": 5
 }
