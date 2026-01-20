@@ -6,7 +6,7 @@
   "bundler": {
     "enabled": true,
     "rangeStrategy": "bump",
-    "filePatterns": [
+    "managerFilePatterns": [
       "/^Gemfile$/", 
       "/^decidim-generators\\/Gemfile$/",
       "/^decidim-generators\\/lib\\/decidim\\/generators\\/component_templates\\/Gemfile\\.erb$/",
