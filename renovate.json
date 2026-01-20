@@ -2,55 +2,67 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
-  ], 
-  "customManagers": [
-    {
-      "customType": "regex",
-      "fileMatch": [
-        ".*\\/*\\.gemspec"
-      ],
-      "matchStrings": [
-        ".*\\.add_(:?(?<depType>.*?)_)?dependency\\s*(['\"])(?<depName>[^'\"]+)(['\"])(\\s*,\\s*(?<currentValue>(['\"])[^'\"]+['\"](\\s*,\\s*['\"][^'\"]+['\"])?))?"
-      ],
-      "datasourceTemplate": "rubygems",
-      "versioningTemplate": "ruby"
-    }
   ],
   "packageRules": [
-     // Rails ecosystem
+    // ==========================================
+    // 🚫 IGNORE INTERNAL DECIDIM-* GEMS
+    // ==========================================
     {
-      "groupName": "Rails",
-      "matchPackagePatterns": ["^rails", "^action", "^active"],
-      "rangeStrategy": "bump"
+      "description": "Do not update internal decidim-* gems - they use version constants",
+      "matchDatasources": ["rubygems"],
+      "matchPackagePatterns": ["^decidim-"],
+      "enabled": false
     },
-    // Update gemspec constraints
+    // ==========================================
+    // 📦 ALL RUBY GEMS - UPDATE GEMSPECS
+    // ==========================================
     {
+      "description": "Update all external Ruby gems in gemspec files with bump strategy",
+      "matchDatasources": ["rubygems"],
       "matchFileNames": ["**/*.gemspec"],
-      "enabled": true,
-      "matchDatasources": [
-        "rubygems"
-      ],
-      "matchManagers": [
-        "custom.regex"
-      ],
-      "rangeStrategy": "bump"
+      "rangeStrategy": "bump",
+      "enabled": true
     },
-    // Security updates - high priority
+    // ==========================================
+    // 🚂 RAILS FRAMEWORK
+    // ==========================================
     {
-      "matchUpdateTypes": ["patch"],
-      "matchPackagePatterns": ["devise", "doorkeeper", "omniauth"],
-      "automerge": false,
-      "labels": ["security", "automerge"]
+      "description": "Group all Rails-related gems together",
+      "matchDatasources": ["rubygems"],
+      "matchPackagePatterns": [
+        "^rails$",
+        "^railties$",
+        "^actionpack$",
+        "^actioncable$",
+        "^actionmailbox$",
+        "^actionmailer$",
+        "^actiontext$",
+        "^actionview$",
+        "^activejob$",
+        "^activemodel$",
+        "^activerecord$",
+        "^activestorage$",
+        "^activesupport$"
+      ],
+      "groupName": "Rails framework",
+      "rangeStrategy": "bump",
+      "labels": ["dependencies", "rails"]
     }
   ], 
   
   "bundler": {
     "enabled":  true,
     "rangeStrategy": "bump"  // Key setting:  updates ~> 4.7 to ~> 4.9
-  }, 
-  
+  },
   "npm": {
     "enabled": true,
     "rangeStrategy": "bump"
+  },
+  // ============================================
+  // GITHUB ACTIONS CONFIGURATION
+  // ============================================
+  "github-actions": {
+    "enabled": true,
+    "pinDigests": true
   }
 }
