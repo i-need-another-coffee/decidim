@@ -11,10 +11,6 @@
       "decidim-accountability/decidim-accountability.gemspec",
       "decidim-admin/decidim-admin.gemspec",
       "decidim-ai/decidim-ai.gemspec"
-    ], 
-    "matchFileNames": [
-      "decidim-conferences/decidim-conferences.gemspec",
-      "decidim-core/decidim-core.gemspec"
     ]
  },
  "npm": {
