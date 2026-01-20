@@ -40,8 +40,7 @@
       "matchUpdateTypes": ["patch"],
       "matchPackagePatterns": ["devise", "doorkeeper", "omniauth"],
       "automerge": false,
-      "labels": ["security", "automerge"],
-      "rangeStrategy": "bump"
+      "labels": ["security", "automerge"]
     }
   ], 
   
