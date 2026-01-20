@@ -48,7 +48,7 @@
     "classnames": "^2.2.5",
     "d3": "^7.8.5",
     "dayjs": "^1.11.0",
-    "diff": "^5.0.0",
+    "diff": "^5.2.0",
     "drag-on-drop": "^3.6.1",
     "emoji-mart": "^5.5.2",
     "emojibase": "^6.1.0",
