@@ -3,11 +3,11 @@
   "extends": [
     "config:recommended"
   ], 
-  ,
-  "regexManagers": [
+  "customManagers": [
     {
+      "customType": "regex",
       "fileMatch": [
-        "**/*.gemspec"
+        "^.*\\.gemspec"
       ],
       "matchStrings": [
         ".*\\.add_(:?(?<depType>.*?)_)?dependency\\s*(['\"])(?<depName>[^'\"]+)(['\"])(\\s*,\\s*(?<currentValue>(['\"])[^'\"]+['\"](\\s*,\\s*['\"][^'\"]+['\"])?))?"
@@ -15,7 +15,7 @@
       "datasourceTemplate": "rubygems",
       "versioningTemplate": "ruby"
     }
-  ],
+  ],,
   "packageRules": [
      // Rails ecosystem
     {
@@ -26,8 +26,14 @@
     // Update gemspec constraints
     {
       "matchFileNames": ["**/*.gemspec"],
-      "rangeStrategy": "bump",
-      "enabled": true
+      "enabled": true,
+      "matchDatasources": [
+        "rubygems"
+      ],
+      "matchManagers": [
+        "custom.regex"
+      ],
+      "rangeStrategy": "replace"
     },
     // Security updates - high priority
     {
