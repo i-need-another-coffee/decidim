@@ -47,7 +47,7 @@
         "decidim-system/decidim-system.gemspec",
         "decidim-templates/decidim-templates.gemspec",
         "decidim-verifications/decidim-verifications. gemspec",
-        "**/decidim-*.gemspec"
+        "decidim.gemspec"
       ],
       "rangeStrategy": "bump",
       "enabled": true,
