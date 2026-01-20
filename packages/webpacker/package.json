@@ -14,7 +14,7 @@
     "@hotwired/stimulus": "^3.2.2",
     "@rails/ujs": "^6.1.7",
     "@tailwindcss/typography": "^0.5.2",
-    "autoprefixer": "^10.4.14",
+    "autoprefixer": "^10.4.23",
     "compression-webpack-plugin": "^10.0.0",
     "core-js": "~3.33.1",
     "css-loader": "^6.8.1",
