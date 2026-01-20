@@ -6,11 +6,12 @@
   "bundler": {
     "enabled": true,
     "rangeStrategy": "bump",
-    "fileMatch": [
-      "Gemfile", 
-      "decidim-accountability/decidim-accountability.gemspec",
-      "decidim-admin/decidim-admin.gemspec",
-      "decidim-ai/decidim-ai.gemspec"
+    "filePatterns": [
+      "/^Gemfile$/", 
+      "/^decidim-generators\\/Gemfile$/",
+      "/^decidim-generators\\/lib\\/decidim\\/generators\\/component_templates\\/Gemfile\\.erb$/",
+      "/^decidim-core\\/decidim-core\\.gemspec$/",
+      "/\\.gemspec$/"
     ]
  },
  "npm": {
