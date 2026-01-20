@@ -102,7 +102,7 @@
     "fileMatch": [
       "(^|/)Gemfile$",
       "\\.gemspec$",
-      "**/decidim-.*\\.gemspec$"
+      ".*\\/decidim-.*\\.gemspec$"
     ]
   },
   "npm": {
