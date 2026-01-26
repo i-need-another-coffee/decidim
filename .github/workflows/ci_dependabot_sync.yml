@@ -42,7 +42,7 @@ jobs:
           changed_gems=$(echo "$diff_output" | grep '^+' | tail -n +3 | awk '{print $2}')
           # Update only the changed gems
           echo "Updating gems: $changed_gems"
-          echo $changed_gems | xargs -n1 -I {} sh -c 'bundle update "{}" || true'
+          printf '%s\n' $changed_gems | xargs -n1 -I {} sh -c 'bundle update "{}" || true'
 
       - name: Commit changes
         run: |
