@@ -4,7 +4,6 @@ on:
     branches:
       - develop
       - release/*
-      - dependabot/**
       - "*-stable"
   pull_request:
     branches-ignore:
