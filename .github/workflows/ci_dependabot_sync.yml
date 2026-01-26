@@ -46,7 +46,7 @@ jobs:
           changed_gems=$(echo "$diff_output" | grep '^+' | tail -n +3 | awk '{print $2}')
           # Update only the changed gems
           echo "$changed_gems" | while IFS= read -r gem; do
-            if bundle update "$gem"; then
+            if bundle update --quiet "$gem"; then
               echo "✅ $gem updated successfully"
             else
               echo "⚠️  Failed to update $gem, but continuing..."
