@@ -43,7 +43,7 @@ jobs:
           cd decidim-generators
           # Extract gem names from additions (lines starting with +)
           # Skip first 2 lines, get second column
-          changed_gems=$(echo "$diff_output" | grep '^+' | tail -n +3 | awk '{print $2}')
+          changed_gems=$(echo "$diff_output" | grep '^+' | tail -n +3 | awk '{print $2}' | sort -u)
           # Update only the changed gems
           echo "$changed_gems" | while IFS= read -r gem; do
             if bundle update --quiet "$gem"; then
