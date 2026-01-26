@@ -436,7 +436,7 @@ GEM
       fog-core (>= 1.27, < 3.0)
     formatador (1.1.1)
     gemoji (3.0.1)
-    geocoder (1.8.5)
+    geocoder (1.8.6)
       base64 (>= 0.1.0)
       csv (>= 3.0.0)
     geom2d (0.4.1)
