@@ -2,9 +2,10 @@ name: Sync Gemfile.lock files
 
 permissions:
   contents: write
+  pull-requests: write
 
 on:
-  pull_request:
+  pull_request_target:
     types: [opened, synchronize]
     paths:
       - 'Gemfile.lock'
@@ -17,8 +18,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.head_ref }}
-          token: ${{ secrets.ACTION_BACKPORTER_PAT }}
+          ref: ${{ github.event.pull_request.head.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          token: ${{ secrets.PAT_TOKEN }}
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
