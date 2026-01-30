@@ -192,7 +192,16 @@ This works for Ubuntu Linux, other operating systems would need to do other comm
 
 You can read more about this change on PR [#15670](https://github.com/decidim/decidim/pull/15670).
 
-### 3.6. [[TITLE OF THE ACTION]]
+### 3.6. Removal of Rack Mini Profiler
+
+Since we are moving to DebugBar gem, and we need to remove Rack Mini Profiler. To remove it from your application, you will need to remove the `rack-mini-profiler` gem from your application, and also the associated initializer from your application.
+
+```bash
+bundle remove rack-mini-profiler
+rm config/initializers/rack_profiler.rb
+```
+
+### 3.7. [[TITLE OF THE ACTION]]
 
 You can read more about this change on PR [#XXXX](https://github.com/decidim/decidim/pull/XXXX).
 

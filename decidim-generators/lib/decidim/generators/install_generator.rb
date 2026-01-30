@@ -145,7 +145,6 @@ module Decidim
         RUBY
 
         copy_file "bullet_initializer.rb", "config/initializers/bullet.rb"
-        copy_file "rack_profiler_initializer.rb", "config/initializers/rack_profiler.rb"
       end
 
       def tweak_spring
