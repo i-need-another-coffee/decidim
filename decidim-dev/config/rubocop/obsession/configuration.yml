@@ -1,0 +1,62 @@
+plugins: rubocop-obsession
+
+Obsession/Graphql/MutationName:
+  Include:
+    - "**/app/graphql/mutations/**/*"
+
+Obsession/Rspec/DescribePublicMethod:
+  Include:
+    - "**/spec/**/*_spec.rb"
+
+Obsession/Rails/CallbackOneMethod:
+  Include:
+    - "**/app/models/**/*"
+    - "**/app/controllers/**/*"
+
+Obsession/Rails/FullyDefinedJsonField:
+  Include:
+    - "**/db/migrate/*"
+
+Obsession/Rails/MigrationBelongsTo:
+  Include:
+    - "**/db/migrate/*"
+
+Obsession/Rails/NoCallbackConditions:
+  Include:
+    - "**/app/models/**/*"
+
+Obsession/Rails/PrivateCallback:
+  Include:
+    - "**/app/models/**/*"
+    - "**/app/controllers/**/*"
+
+Obsession/Rails/SafetyAssuredComment:
+  Include:
+    - "**/db/migrate/*"
+
+Obsession/Rails/ServiceName:
+  Include:
+    - "**/app/services/**/*"
+    - "**/app/jobs/**/*"
+  Exclude:
+    - "**/app/jobs/application_job.rb"
+
+Obsession/Rails/ServicePerformMethod:
+  Include:
+    - "**/app/services/**/*"
+
+Obsession/Rails/ShortAfterCommit:
+  Include:
+    - "**/app/models/**/*"
+
+Obsession/Rails/ShortValidate:
+  Include:
+    - "**/app/models/**/*"
+
+Obsession/Rails/ValidateOneField:
+  Include:
+    - "**/app/models/**/*"
+
+Obsession/Rails/ValidationMethodName:
+  Include:
+    - "**/app/models/**/*"

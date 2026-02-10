@@ -1,0 +1,49 @@
+# Disabled obsession configurations
+
+Layout/ClassStructure:
+  Enabled: false
+
+Obsession/MethodOrder:
+  Enabled: false
+
+Gemspec/OrderedDependencies:
+  Enabled: false
+
+Obsession/Rspec/DescribePublicMethod:
+  Enabled: false
+
+Obsession/Rails/CallbackOneMethod:
+  Enabled: false
+
+Obsession/Rails/FullyDefinedJsonField:
+  Enabled: false
+
+Obsession/Rails/MigrationBelongsTo:
+  Enabled: false
+
+Obsession/Rails/NoCallbackConditions:
+  Enabled: false
+
+Obsession/Rails/PrivateCallback:
+  Enabled: false
+
+Obsession/Rails/SafetyAssuredComment:
+  Enabled: false
+
+Obsession/Rails/ServiceName:
+  Enabled: false
+
+Obsession/Rails/ServicePerformMethod:
+  Enabled: false
+
+Obsession/Rails/ShortAfterCommit:
+  Enabled: false
+
+Obsession/Rails/ValidateOneField:
+  Enabled: false
+
+Obsession/Rails/ValidationMethodName:
+  Enabled: false
+
+Obsession/Rspec/EmptyLineAfterFinalLet:
+  Enabled: false

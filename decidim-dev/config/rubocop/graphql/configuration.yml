@@ -24,6 +24,3 @@ GraphQL/ObjectDescription:
     - "decidim-api/spec/lib/decidim/api/recursion_analyzer_spec.rb"
     - "spec/**/*"
     - "test/**/*"
-
-GraphQL/ExtractType:
-  Enabled: false
