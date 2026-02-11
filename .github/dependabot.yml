@@ -56,6 +56,7 @@ updates:
       timezone: "Europe/Madrid"
     labels:
       - "dependencies"
+      - "type: internal"
       - "configuration"
     commit-message:
       prefix: "Bump to dependencies"
@@ -87,7 +88,7 @@ updates:
       - "dependencies"
       - "type: internal"
       - "javascript"
-      - "decidim-core"
+      - "module: core"
       - "configuration"
     commit-message:
       prefix: "Bump to dependencies"
@@ -152,6 +153,7 @@ updates:
     labels:
       - "dependencies"
       - "type: internal"
+      - "module: dev"
       - "javascript"
     commit-message:
       prefix: "Bump to dependencies"
@@ -185,6 +187,7 @@ updates:
       - "dependencies"
       - "type: internal"
       - "javascript"
+      - "module: core"
       - "configuration"
     commit-message:
       prefix: "Bump to dependencies"
