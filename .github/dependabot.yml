@@ -46,7 +46,9 @@ updates:
 
   # GitHub Actions
   - package-ecosystem: "github-actions"
-    directory: "/"
+    directories:
+      - "/"
+      - "/decidim-generators/lib/decidim/generators/component_templates/github"
     schedule:
       interval: "weekly"
       day: "tuesday"
