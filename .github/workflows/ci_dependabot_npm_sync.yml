@@ -38,9 +38,6 @@ jobs:
           cache: 'npm'
           cache-dependency-path: ./package-lock.json
 
-      - name: Install root dependencies
-        run: bundle install
-
       - name: Update update package.lock files
         run: npm install
 
