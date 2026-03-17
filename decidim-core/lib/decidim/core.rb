@@ -282,11 +282,6 @@ module Decidim
     Decidim::Env.new("VAPID_PRIVATE_KEY", nil).to_s
   end
 
-  # Having this on true will change the way the svg assets are being served.
-  config_accessor :cors_enabled do
-    Decidim::Env.new("DECIDIM_CORS_ENABLED", "false").present?
-  end
-
   # Exposes a configuration option: The application available locales.
   config_accessor :available_locales do
     Decidim::Env.new("DECIDIM_AVAILABLE_LOCALES", %w(en bg ar ca cs da de el eo es es-MX es-PY et eu fa fi-pl fi fr fr-CA ga gl hr
