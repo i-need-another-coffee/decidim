@@ -9,7 +9,7 @@ module Decidim
 
           protected
 
-          def query = Decidim::Debates::Debate.includes(:moderation)
+          def model = Decidim::Debates::Debate
         end
       end
     end

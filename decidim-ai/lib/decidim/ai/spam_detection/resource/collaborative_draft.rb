@@ -9,7 +9,7 @@ module Decidim
 
           protected
 
-          def query = Decidim::Proposals::CollaborativeDraft.includes(:moderation)
+          def model = Decidim::Proposals::CollaborativeDraft
         end
       end
     end

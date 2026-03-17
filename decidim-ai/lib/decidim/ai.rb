@@ -9,5 +9,9 @@ module Decidim
     autoload :Language, "decidim/ai/language/language"
 
     include ActiveSupport::Configurable
+
+    def self.logger(message)
+      Rails.logger.info("[decidim-ai] #{message}")
+    end
   end
 end

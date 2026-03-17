@@ -9,7 +9,7 @@ module Decidim
 
           protected
 
-          def query = Decidim::Comments::Comment.includes(:moderation)
+          def model = Decidim::Comments::Comment
         end
       end
     end
