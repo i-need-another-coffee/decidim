@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class AddFileUploadSettingsToDecidimOrganizations < ActiveRecord::Migration[5.2]
+  class Organization < ApplicationRecord
+    self.table_name = :decidim_organizations
+  end
+
   def change
     add_column :decidim_organizations, :file_upload_settings, :jsonb
 
@@ -13,7 +17,7 @@ class AddFileUploadSettingsToDecidimOrganizations < ActiveRecord::Migration[5.2]
           avatar_size = config.fetch(:maximum_avatar_size, 5.megabytes)
 
           # Update all organizations with the default file upload settings.
-          Decidim::Organization.all.each do |organization|
+          Organization.all.each do |organization|
             organization.update(
               file_upload_settings: default_settings.merge(
                 "maximum_file_size" => {

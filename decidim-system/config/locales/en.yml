@@ -1,5 +1,6 @@
 ---
 en:
+
   activemodel:
     attributes:
       oauth_application:
@@ -41,6 +42,13 @@ en:
               secret_key: You need to define the SECRET_KEY_BASE environment variable to be able to save this field
   decidim:
     system:
+      destroy_organization:
+        index:
+          confirm_text: 'Type in "%{host}" to confirm the organization deletion.'
+          title: Destroy Organization
+          cancel: Cancel
+          destroy: Delete this organization
+          explanation_html: The  following action is irreversible. You will lose all the data associated with this organization, including all the proposals, meetings, debates, votes, users etc.
       actions:
         api_user:
           hidden_secret: Secret is hidden
@@ -211,6 +219,9 @@ en:
           error: There was a problem updating this application.
           success: Application updated successfully.
       organizations:
+        destroy:
+          error: There was a problem deleting this organization.
+          success: Organization successfully deleted.
         advanced_settings:
           hide: Hide advanced settings
           show: Show advanced settings
@@ -343,6 +354,7 @@ en:
           no_organization_warning_html: You must create an organization to get started. Make sure you read %{guide} before proceeding.
           our_getting_started_guide: our getting started guide
         organizations_list:
+          confirm_delete: You are about to delete this organization. There is no way of revert this operation. Are you sure?
           confirm_resend_invitation: Are you sure you want to resend the invitation?
           resend_invitation: Resend invitation
       system_checks:
