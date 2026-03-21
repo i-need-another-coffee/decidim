@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+require_relative "../development_app/config/boot"
+require "active_support/continuous_integration"
+
+CI = ActiveSupport::ContinuousIntegration
+require_relative "../config/linters.rb"
