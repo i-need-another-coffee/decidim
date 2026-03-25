@@ -94,9 +94,9 @@ module Decidim
         conversation = conversation_between(current_user, user)
 
         if conversation
-          decidim_routes.conversation_path(conversation)
+          decidim_routes.conversation_path(conversation, locale:)
         elsif user.accepts_conversation?(current_user)
-          decidim_routes.new_conversation_path(recipient_id: user.id)
+          decidim_routes.new_conversation_path(recipient_id: user.id, locale:)
         end
       end
 
@@ -156,7 +156,7 @@ module Decidim
       def current_or_new_user_conversation_path(users, conversation = nil)
         return decidim_routes.conversation_path(conversation) if conversation.present?
 
-        decidim_routes.new_conversation_path(recipient_id: users.pluck(:id))
+        decidim_routes.new_conversation_path(recipient_id: users.pluck(:id), locale:)
       end
 
       private

@@ -59,30 +59,57 @@ Decidim::Core::Engine.routes.draw do
       put "apply_password" => "devise/passwords"
     end
 
-    resource :account, only: [:show, :update, :destroy], controller: "account" do
-      member do
-        get :delete
-        post :resend_confirmation_instructions
-        post :cancel_email_change
+    scope "/:locale" do
+      resource :notifications_settings, only: [:show, :update], controller: "notifications_settings"
+
+      resource :account, only: [:show, :update, :destroy], controller: "account" do
+        member do
+          get :delete
+          post :resend_confirmation_instructions
+          post :cancel_email_change
+        end
       end
-    end
-    resources :conversations, only: [:new, :create, :index, :show, :update], controller: "messaging/conversations"
-    post "/conversations/check_multiple", to: "messaging/conversations#check_multiple"
-    resources :notifications, only: [:index, :destroy] do
-      collection do
-        delete :read_all
+
+      resource :download_your_data, only: [:show], controller: "download_your_data" do
+        member do
+          post :export
+          get "/:uuid", to: "download_your_data#download_file", as: :download
+        end
       end
+
+      resources :notifications, only: [:index, :destroy] do
+        collection do
+          delete :read_all
+        end
+      end
+
+      resources :conversations, only: [:new, :create, :index, :show, :update], controller: "messaging/conversations"
+      post "/conversations/check_multiple", to: "messaging/conversations#check_multiple"
     end
-    resource :notifications_settings, only: [:show, :update], controller: "notifications_settings"
+
+    get "/notifications_settings", to: redirect { |params, request|
+      locale = Decidim::LocaleRouterDetector.new(request, params).locale
+      "/#{locale}/notifications_settings"
+    }
+
+    get "/notifications", to: redirect { |params, request|
+      locale = Decidim::LocaleRouterDetector.new(request, params).locale
+      "/#{locale}/notifications"
+    }
+    get "/account/*rest", to: redirect { |params, request|
+      locale = Decidim::LocaleRouterDetector.new(request, params).locale
+      "/#{locale}/account/#{params[:rest]}"
+    }
+    get "/conversations/*rest", to: redirect { |params, request|
+      locale = Decidim::LocaleRouterDetector.new(request, params).locale
+      "/#{locale}/conversations/#{params[:rest]}"
+    }
+    get "/download_your_data/*rest", to: redirect { |params, request|
+      locale = Decidim::LocaleRouterDetector.new(request, params).locale
+      "/#{locale}/download_your_data/#{params[:rest]}"
+    }
 
     get "/newsletters_opt_in/:token", to: "newsletters_opt_in#update", as: :newsletters_opt_in
-
-    resource :download_your_data, only: [:show], controller: "download_your_data" do
-      member do
-        post :export
-        get "/:uuid", to: "download_your_data#download_file", as: :download
-      end
-    end
 
     resources :notifications_subscriptions, param: :auth, only: [:create, :destroy]
 
@@ -94,34 +121,57 @@ Decidim::Core::Engine.routes.draw do
     )
   end
 
-  resources :profiles, only: [:show], param: :nickname, constraints: { nickname: %r{[^/]+} }, format: false
-  scope "/profiles/:nickname", format: false, constraints: { nickname: %r{[^/]+} } do
-    get "following", to: "profiles#following", as: "profile_following"
-    get "followers", to: "profiles#followers", as: "profile_followers"
-    get "badges", to: "profiles#badges", as: "profile_badges"
-    get "activity", to: "user_activities#index", as: "profile_activity"
-  end
-
   scope :timeouts do
     post "heartbeat", to: "timeouts#heartbeat"
     get "seconds_until_timeout", to: "timeouts#seconds_until_timeout"
   end
 
   scope "/:locale" do
-    resources :pages, only: [:index, :show], format: false
-  end
+    resources :profiles, only: [:show], param: :nickname, constraints: { nickname: %r{[^/]+} }, format: false
+    scope "/profiles/:nickname", format: false, constraints: { nickname: %r{[^/]+} } do
+      get "following", to: "profiles#following", as: "profile_following"
+      get "followers", to: "profiles#followers", as: "profile_followers"
+      get "badges", to: "profiles#badges", as: "profile_badges"
+      get "activity", to: "user_activities#index", as: "profile_activity"
+    end
 
-  get "/pages", to: redirect { |params, request|
-    locale = Decidim::LocaleRouterDetector.new(request, params).locale
-    "/#{locale}/pages"
-  }
+    resources :pages, only: [:index, :show], format: false
+    resources :last_activities, only: [:index]
+    get "/search", to: "searches#index", as: :search
+    get "/open-data", to: "open_data#index", as: :open_data
+    get "/open-data/download", to: "open_data#download", as: :open_data_download
+    get "/open-data/download/:resource", to: "open_data#download", as: :open_data_download_resource
+
+    namespace :gamification do
+      resources :badges, only: [:index]
+    end
+  end
 
   get "/pages/*rest", to: redirect { |params, request|
     locale = Decidim::LocaleRouterDetector.new(request, params).locale
     "/#{locale}/pages/#{params[:rest]}"
   }
 
-  get "/search", to: "searches#index", as: :search
+  get "/open-data/*rest", to: redirect { |params, request|
+    locale = Decidim::LocaleRouterDetector.new(request, params).locale
+    "/#{locale}/open-data/#{params[:rest]}"
+  }
+  get "/gamification/*rest", to: redirect { |params, request|
+    locale = Decidim::LocaleRouterDetector.new(request, params).locale
+    "/#{locale}/gamification/#{params[:rest]}"
+  }
+  get "/profiles/*rest", to: redirect { |params, request|
+    locale = Decidim::LocaleRouterDetector.new(request, params).locale
+    "/#{locale}/profiles/#{params[:rest]}"
+  }
+
+  %w(last_activities search pages open-data).each do |resource|
+    get "/#{resource}", to: redirect { |params, request|
+      locale = Decidim::LocaleRouterDetector.new(request, params).locale
+      "/#{locale}/#{resource}"
+    }
+  end
+
   get "/resource_autocomplete", to: "resource_autocomplete#index", as: :resource_autocomplete
 
   get "/link", to: "links#new", as: :link
@@ -132,10 +182,6 @@ Decidim::Core::Engine.routes.draw do
 
   match "/404", to: "errors#not_found", via: :all
   match "/500", to: "errors#internal_server_error", via: :all
-
-  get "/open-data", to: "open_data#index", as: :open_data
-  get "/open-data/download", to: "open_data#download", as: :open_data_download
-  get "/open-data/download/:resource", to: "open_data#download", as: :open_data_download_resource
 
   resource :follow, only: [:create, :destroy]
   resource :report, only: [:create]
@@ -161,17 +207,11 @@ Decidim::Core::Engine.routes.draw do
 
   resources :editor_images, only: [:create]
 
-  namespace :gamification do
-    resources :badges, only: [:index]
-  end
-
   resources :newsletters, only: [:show] do
     get :unsubscribe, on: :collection
   end
 
   resources :upload_validations, only: [:create]
-
-  resources :last_activities, only: [:index]
 
   resources :short_links, only: [:index, :show], path: "s"
 
@@ -183,5 +223,10 @@ Decidim::Core::Engine.routes.draw do
     get "/me" => "doorkeeper/credentials#me"
   end
 
-  root to: "homepage#show"
+  get "/:locale" => "homepage#show"
+
+  root to: redirect { |params, request|
+    locale = Decidim::LocaleRouterDetector.new(request, params).locale
+    "/#{locale}"
+  }
 end

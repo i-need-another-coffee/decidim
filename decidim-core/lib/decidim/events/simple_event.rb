@@ -103,6 +103,10 @@ module Decidim
         nil
       end
 
+      def locale
+        I18n.locale
+      end
+
       private
 
       def event_interpolations

@@ -16,7 +16,7 @@ module Decidim
     describe "#badges" do
       context "with an user with uppercase" do
         it "returns the lowercased user" do
-          get :badges, params: { nickname: "NICK" }
+          get :badges, params: { nickname: "NICK", locale: I18n.locale }
           expect(response).to render_template(:show)
         end
       end
@@ -25,8 +25,8 @@ module Decidim
     describe "#show" do
       context "with a normal user" do
         it "redirects to the correct page" do
-          get :show, params: { nickname: "Nick" }
-          expect(response).to redirect_to("/profiles/nick/activity")
+          get :show, params: { nickname: "Nick", locale: I18n.locale }
+          expect(response).to redirect_to("/en/profiles/nick/activity")
         end
       end
 
@@ -34,7 +34,7 @@ module Decidim
         let!(:user) { create(:user, :confirmed, :blocked, nickname: "nick", organization:) }
 
         it "does not return the page" do
-          expect { get :show, params: { nickname: "Nick" } }.to raise_error(ActionController::RoutingError)
+          expect { get :show, params: { nickname: "Nick", locale: I18n.locale } }.to raise_error(ActionController::RoutingError)
         end
       end
     end

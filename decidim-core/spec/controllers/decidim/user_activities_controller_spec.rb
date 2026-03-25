@@ -17,14 +17,14 @@ module Decidim
       context "with an unknown user" do
         it "raises an ActionController::RoutingError" do
           expect do
-            get :index, params: { nickname: "foobar" }
+            get :index, params: { nickname: "foobar", locale: I18n.locale }
           end.to raise_error(ActionController::RoutingError, "Missing user: foobar")
         end
       end
 
       context "with an user with uppercase" do
         it "returns the lowercased user" do
-          get :index, params: { nickname: "NICK" }
+          get :index, params: { nickname: "NICK", locale: I18n.locale }
           expect(response).to render_template(:index)
         end
       end

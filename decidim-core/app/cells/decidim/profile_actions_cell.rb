@@ -22,7 +22,7 @@ module Decidim
       values[:options] = values.delete(:options) || {}
       return values if values.has_key?(:cell)
 
-      values[:path] = send(values[:path]) if values[:path].present?
+      values[:path] = send(values[:path], locale:) if values[:path].present?
       values[:text] = t(key, scope: translations_scope)
       values
     end

@@ -30,9 +30,9 @@ module Decidim
           conversation = conversation_between(current_user, @form.recipient)
         end
 
-        return redirect_back_or_to(profile_path(current_user.nickname)) if @form.recipient.empty?
+        return redirect_back_or_to(profile_path(current_user.nickname, locale:)) if @form.recipient.empty?
 
-        return redirect_to conversation_path(conversation) if conversation
+        return redirect_to conversation_path(conversation, locale:) if conversation
 
         enforce_permission_to :create, :conversation, conversation: new_conversation(@form.recipient)
       end
