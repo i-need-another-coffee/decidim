@@ -183,5 +183,10 @@ Decidim::Core::Engine.routes.draw do
     get "/me" => "doorkeeper/credentials#me"
   end
 
-  root to: "homepage#show"
+  get "/:locale" => "homepage#show"
+
+  root to: redirect { |params, request|
+    locale = Decidim::LocaleRouterDetector.new(request, params).locale
+    "/#{locale}"
+  }
 end

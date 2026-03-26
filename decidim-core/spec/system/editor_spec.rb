@@ -131,14 +131,14 @@ describe "Editor" do
       end
 
       # The actual editor testing route for these specs
-      get "test_editor", to: ->(_) { [200, {}, [final_html]] }
+      get "/:locale/test_editor", to: ->(_) { [200, {}, [final_html]] }
     end
 
     # Login needed for uploading the images
     switch_to_host(organization.host)
     login_as user, scope: :user
 
-    visit "/test_editor"
+    visit "/en/test_editor"
 
     # Wait for the editor to be initialized
     expect(page).to have_css(prosemirror_selector)
@@ -1215,7 +1215,7 @@ describe "Editor" do
           page.find("[data-image-resizer-control='bottom-right']").click
           page.find("[data-image-resizer-control='bottom-left']").click
 
-          expect(page).to have_current_path("/test_editor")
+          expect(page).to have_current_path("/en/test_editor")
         end
       end
     end
