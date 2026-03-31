@@ -2,9 +2,9 @@
 
   <%
   path = if content_for(:redirect_after_login)
-           session_path(:user, redirect_url: content_for(:redirect_after_login))
+           session_path(:user, locale: current_locale, redirect_url: content_for(:redirect_after_login))
          else
-           session_path(:user)
+           session_path(:user, locale: current_locale)
          end
   %>
 
@@ -28,12 +28,12 @@
           </div>
           <div class="login__modal-remember">
               <%= f.check_box :remember_me, label_options: { class: "form__wrapper-checkbox-label" } %>
-              <%= link_to t("devise.shared.links.forgot_your_password"), new_password_path(:user) %>
+              <%= link_to t("devise.shared.links.forgot_your_password"), new_password_path(:user, locale: current_locale) %>
           </div>
           <div class="login__info flex justify-center font-semibold">
             <p>
               <%= t("decidim.devise.sessions.new.are_you_new?") %>
-              <%= link_to t(".sign_up"), decidim.new_user_registration_path, class: "sign-up-link" if current_organization.sign_up_enabled? %>
+              <%= link_to t(".sign_up"), decidim.new_user_registration_path(locale: current_locale), class: "sign-up-link" if current_organization.sign_up_enabled? %>
             </p>
           </div>
 

@@ -17,6 +17,7 @@ module Decidim
     describe "POST create" do
       let(:params) do
         {
+          locale: I18n.locale,
           user: {
             sign_up_as: "user",
             name: "User",
@@ -60,6 +61,7 @@ module Decidim
         context "when all params are invalid" do
           let(:params) do
             {
+              locale: I18n.locale,
               user: {
                 sign_up_as: "",
                 name: "",

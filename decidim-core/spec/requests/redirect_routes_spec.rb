@@ -122,4 +122,44 @@ describe "Redirect routes" do
       it_behaves_like "redirects to the new url", "open-data/download"
     end
   end
+
+  context "when navigating the authentication flow" do
+    context "when browsing sign_in" do
+      it_behaves_like "redirects to the new url", "users/sign_in"
+    end
+
+    context "when browsing sign_up" do
+      it_behaves_like "redirects to the new url", "users/sign_up"
+    end
+
+    context "when browsing reset password" do
+      it_behaves_like "redirects to the new url", "users/password/new"
+    end
+
+    context "when browsing change password" do
+      it_behaves_like "redirects to the new url", "users/password/edit"
+    end
+
+    context "when accepting invitation" do
+      it_behaves_like "redirects to the new url", "users/invitation/accept"
+    end
+
+    context "when declining invitation" do
+      it_behaves_like "redirects to the new url", "users/invitation/remove"
+    end
+
+    context "when creating invitation" do
+      it_behaves_like "redirects to the new url", "users/invitation/new"
+    end
+
+    context "when confirming account" do
+      it_behaves_like "redirects to the new url", "users/confirmation/new"
+      it_behaves_like "redirects to the new url", "users/confirmation"
+    end
+
+    context "when unlocking account" do
+      it_behaves_like "redirects to the new url", "users/unlock/new"
+      it_behaves_like "redirects to the new url", "users/unlock"
+    end
+  end
 end

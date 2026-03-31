@@ -137,7 +137,7 @@ module Decidim
       def user_has_no_permission_path
         return meeting_path(meeting) if user_signed_in?
 
-        decidim.new_user_session_path
+        decidim.new_user_session_path(locale: current_locale)
       end
     end
   end

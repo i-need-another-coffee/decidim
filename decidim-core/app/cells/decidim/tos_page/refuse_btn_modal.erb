@@ -13,7 +13,7 @@
     </p>
   </div>
   <div data-dialog-actions>
-    <%= button_to decidim.destroy_user_session_path, method: :delete, class: "button button__sm md:button__lg button__transparent-secondary" do %>
+    <%= button_to decidim.destroy_user_session_path(locale: current_locale), method: :delete, class: "button button__sm md:button__lg button__transparent-secondary" do %>
       <%= t("refuse.modal_btn_exit", scope: "decidim.pages.terms_of_service") %>
     <% end %>
 

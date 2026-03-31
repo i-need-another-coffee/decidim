@@ -33,38 +33,38 @@ module Decidim::Devise
       end
 
       it "responds to the edit path" do
-        get :edit, params: { invitation_token: user.raw_invitation_token }
+        get :edit, params: { locale: I18n.locale, invitation_token: user.raw_invitation_token }
         expect(response).to have_http_status(:ok)
       end
 
       it "redirects to the provided path" do
-        post :update, params: { user: registration_params }
+        post :update, params: { locale: I18n.locale, user: registration_params }
         expect(response).to redirect_to("/")
       end
 
       context "when an invite redirect is provided" do
         it "redirects to the redirect path" do
-          post :update, params: { invite_redirect: "/admin/", user: registration_params }
+          post :update, params: { locale: I18n.locale, invite_redirect: "/admin/", user: registration_params }
           expect(response).to redirect_to("/admin/")
         end
 
         context "with a full HTTP URL" do
           it "redirects to the default path" do
-            post :update, params: { invite_redirect: "http://example.org", user: registration_params }
+            post :update, params: { locale: I18n.locale, invite_redirect: "http://example.org", user: registration_params }
             expect(response).to redirect_to("/")
           end
         end
 
         context "with a full HTTPS URL" do
           it "redirects to the default path" do
-            post :update, params: { invite_redirect: "https://example.org", user: registration_params }
+            post :update, params: { locale: I18n.locale, invite_redirect: "https://example.org", user: registration_params }
             expect(response).to redirect_to("/")
           end
         end
 
         context "with a URL without protocol" do
           it "redirects to the default path" do
-            post :update, params: { invite_redirect: "//example.org", user: registration_params }
+            post :update, params: { locale: I18n.locale, invite_redirect: "//example.org", user: registration_params }
             expect(response).to redirect_to("/")
           end
         end

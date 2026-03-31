@@ -397,7 +397,7 @@ describe "Authentication" do
       let(:organization) { create(:organization, users_registration_mode: :existing) }
 
       it "redirects to the sign in when accessing the sign up page" do
-        visit decidim.new_user_registration_path
+        visit decidim.new_user_registration_path(locale: I18n.locale)
         expect(page).to have_no_content("Create an account")
       end
 
@@ -455,7 +455,7 @@ describe "Authentication" do
     end
 
     it "sends an email with the instructions" do
-      visit decidim.new_user_confirmation_path
+      visit decidim.new_user_confirmation_path(locale: I18n.locale)
 
       within ".new_user" do
         fill_in :confirmation_user_email, with: user.email
@@ -561,7 +561,7 @@ describe "Authentication" do
 
     describe "Forgot password" do
       it "sends a password recovery email" do
-        visit decidim.new_user_password_path
+        visit decidim.new_user_password_path(locale: I18n.locale)
 
         within ".new_user" do
           fill_in :password_user_email, with: user.email
@@ -573,7 +573,7 @@ describe "Authentication" do
       end
 
       it "says it sends a password recovery email when is a non-existing email" do
-        visit decidim.new_user_password_path
+        visit decidim.new_user_password_path(locale: I18n.locale)
 
         within ".new_user" do
           fill_in :password_user_email, with: "nonexistent@example.org"
@@ -613,7 +613,7 @@ describe "Authentication" do
         expect(page).to have_content("must contain at least 5 different characters")
         expect(page).to have_content("must not be too common")
         expect(page).to have_content("must be different from your name, nickname, email and the organization's host")
-        expect(page).to have_current_path "/users/password"
+        expect(page).to have_current_path "/en/users/password"
       end
 
       it "enforces the minimum length for the password in the front-end" do
@@ -722,7 +722,7 @@ describe "Authentication" do
         before do
           user.lock_access!
 
-          visit decidim.new_user_unlock_path
+          visit decidim.new_user_unlock_path(locale: I18n.locale)
         end
 
         it "resends the unlock instructions" do

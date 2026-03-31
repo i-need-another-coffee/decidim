@@ -13,7 +13,7 @@ module Decidim
         if user.present? && user.blocked?
           check_user_block_status(user)
         elsif user.needs_password_update?
-          decidim.change_password_path
+          decidim.change_password_path(locale: current_locale)
         elsif pending_onboarding_action?(user)
           decidim_verifications.onboarding_pending_authorizations_path
         else

@@ -20,7 +20,7 @@
 
   </button>
 <% else %>
-  <%= link_to decidim.new_user_session_path, class: "main-bar__links-mobile__login" do %>
+  <%= link_to decidim.new_user_session_path(locale: current_locale), class: "main-bar__links-mobile__login" do %>
     <%= icon "user-line" %><span><%= t("layouts.decidim.header.log_in") %></span>
   <% end %>
 <% end %>

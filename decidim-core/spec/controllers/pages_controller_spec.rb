@@ -65,7 +65,7 @@ module Decidim
           it "redirects to sign in path" do
             get :show, params: { id: page.slug, locale: I18n.locale }
 
-            expect(response).to redirect_to("/users/sign_in")
+            expect(response).to redirect_to("/en/users/sign_in")
             expect(flash[:warning]).to include("Please, log in with your account before access")
           end
         end

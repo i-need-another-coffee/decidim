@@ -31,7 +31,7 @@ js_configs = {
   },
   external_domain_allowlist: [current_organization.host] + current_organization.external_domain_allowlist,
   consent_cookie_name: Decidim.consent_cookie_name,
-  sign_out_path: decidim.destroy_user_session_path
+  sign_out_path: decidim.destroy_user_session_path(locale: current_locale)
 }
 external_link_messages = {
   "externalLink": t("decidim.accessibility.external_link"),

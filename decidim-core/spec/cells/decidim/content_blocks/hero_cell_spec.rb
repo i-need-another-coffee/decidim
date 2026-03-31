@@ -21,7 +21,7 @@ describe Decidim::ContentBlocks::HeroCell, type: :cell do
     end
 
     it "shows the default cta path" do
-      expect(subject).to have_link(href: "/users/sign_up")
+      expect(subject).to have_link(href: "/en/users/sign_up")
     end
   end
 

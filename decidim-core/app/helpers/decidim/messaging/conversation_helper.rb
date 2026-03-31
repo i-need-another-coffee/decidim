@@ -89,7 +89,7 @@ module Decidim
       # @return [String] The resulting route
       #
       def current_or_new_conversation_path_with(user)
-        return decidim_routes.new_user_session_path unless user_signed_in?
+        return decidim_routes.new_user_session_path(locale: I18n.locale) unless user_signed_in?
 
         conversation = conversation_between(current_user, user)
 
@@ -119,7 +119,7 @@ module Decidim
       # Links to the conversation between the current user and another users
       #
       def current_or_new_conversation_path_with_multiple(users, opts = {})
-        return decidim_routes.new_user_session_path unless user_signed_in?
+        return decidim_routes.new_user_session_path(locale: I18n.locale) unless user_signed_in?
 
         active_participant = opts[:nickname].present? ? Decidim::UserBaseEntity.find_by(nickname: opts[:nickname]) : current_user
         participants = users.to_a.prepend(active_participant)

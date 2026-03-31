@@ -122,7 +122,7 @@ module Decidim
           it "redirects to sign in path" do
             get :show, params: { slug: unpublished_process.slug, locale: I18n.locale }
 
-            expect(response).to redirect_to("/users/sign_in")
+            expect(response).to redirect_to("/en/users/sign_in")
           end
 
           context "with signed in user" do

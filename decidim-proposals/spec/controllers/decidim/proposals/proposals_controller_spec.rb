@@ -107,9 +107,9 @@ module Decidim
         let(:component) { create(:proposal_component, :with_creation_enabled) }
 
         it "redirects to the login page" do
-          get(:new)
+          get(:new, params: { locale: I18n.locale })
           expect(response).to have_http_status(:found)
-          expect(response).to redirect_to("/users/sign_in")
+          expect(response).to redirect_to("/en/users/sign_in")
         end
       end
 

@@ -28,7 +28,7 @@ module Decidim
                          decidim.accept_tos_path,
                          decidim.download_your_data_path(locale: current_locale),
                          decidim.export_download_your_data_path(locale: current_locale),
-                         decidim.change_password_path].compact
+                         decidim.change_password_path(locale: current_locale)].compact
       # ensure that path with or without query string pass
       permitted_paths.find { |el| el.split("?").first == target_path }
     end
@@ -36,7 +36,7 @@ module Decidim
     def redirect_to_change_password
       flash[:notice] = flash[:notice] if flash[:notice]
       flash[:secondary] = t("decidim.admin.password_change.alert")
-      redirect_to decidim.change_password_path
+      redirect_to decidim.change_password_path(locale: current_locale)
     end
   end
 end

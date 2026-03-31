@@ -212,7 +212,7 @@ describe "Conference registrations" do
 
     it "requires the user to sign in" do
       visit_conference_registration_type
-      expect(page).to have_current_path("/users/sign_in")
+      expect(page).to have_current_path("/en/users/sign_in")
     end
 
     context "when the user is signed in" do

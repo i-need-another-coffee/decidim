@@ -35,7 +35,7 @@ module Decidim
           format.html do
             flash[:warning] = t("actions.login_before_access", scope: "decidim.core")
             store_location_for(:user, request.path)
-            redirect_to decidim.new_user_session_path
+            redirect_to decidim.new_user_session_path(locale: current_locale)
           end
           format.json do
             render json: { error: "Access denied" }, status: :unauthorized

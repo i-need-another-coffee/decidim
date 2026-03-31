@@ -20,7 +20,7 @@ describe "Registration" do
   before do
     allow(Decidim).to receive(:omniauth_providers).and_return(omniauth_secrets)
     switch_to_host(organization.host)
-    visit decidim.new_user_registration_path
+    visit decidim.new_user_registration_path(locale: I18n.locale)
   end
 
   context "when signing up" do
@@ -62,7 +62,7 @@ describe "Registration" do
         find("*[type=submit]").click
       end
       expect(page).to have_css("#sign-up-newsletter-modal", visible: :visible)
-      expect(page).to have_current_path decidim.new_user_registration_path
+      expect(page).to have_current_path decidim.new_user_registration_path(locale: I18n.locale)
     end
 
     it "checks when clicking the checking button" do
@@ -70,7 +70,7 @@ describe "Registration" do
         find("*[type=submit]").click
       end
       click_on "Check and continue"
-      expect(page).to have_current_path decidim.new_user_registration_path
+      expect(page).to have_current_path decidim.new_user_registration_path(locale: I18n.locale)
       expect(page).to have_css("#sign-up-newsletter-modal", visible: :all)
       expect(page).to have_field("registration_user_newsletter", checked: true)
     end
@@ -85,7 +85,7 @@ describe "Registration" do
       within "form.new_user" do
         find("*[type=submit]").click
       end
-      expect(page).to have_current_path decidim.user_registration_path
+      expect(page).to have_current_path decidim.user_registration_path(locale: I18n.locale)
       expect(page).to have_field("registration_user_newsletter", checked: false)
     end
   end
@@ -100,7 +100,7 @@ describe "Registration" do
       within "form.new_user" do
         find("*[type=submit]").click
       end
-      expect(page).to have_current_path decidim.user_registration_path
+      expect(page).to have_current_path decidim.user_registration_path(locale: I18n.locale)
       expect(page).to have_field("registration_user_newsletter", checked: true)
     end
   end

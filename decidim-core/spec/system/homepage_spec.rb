@@ -9,7 +9,7 @@ describe "Homepage" do
     end
 
     it "redirects to system UI and shows a warning" do
-      expect(page).to have_current_path(decidim_system.new_admin_session_path)
+      expect(page).to have_current_path(decidim_system.new_admin_session_path(locale: I18n.locale))
       expect(page).to have_content("You must create an organization to get started")
     end
   end

@@ -10,6 +10,33 @@ class RandomStalling < Devise::FailureApp
     super
   end
 
+  def scope_url
+    opts = {}
+
+    # Initialize script_name with nil to prevent infinite loops in
+    # authenticated mounted engines
+    opts[:script_name] = nil
+
+    route = route(scope)
+
+    opts[:format] = request_format unless skip_format?
+
+    router_name = Devise.mappings[scope].router_name || Devise.available_router_name
+    context = send(router_name)
+
+    opts[:script_name] = relative_url_root if relative_url_root?
+
+    opts[:locale] = session[:user_locale].presence || I18n.locale
+
+    if context.respond_to?(route)
+      context.send(route, opts)
+    elsif respond_to?(:root_url)
+      root_url(opts)
+    else
+      "/"
+    end
+  end
+
   protected
 
   def i18n_options(options)

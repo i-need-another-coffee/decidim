@@ -476,7 +476,7 @@ module Decidim
 
           # This block will be called to check whether the resource owner is authenticated or not.
           resource_owner_authenticator do
-            current_user || redirect_to(new_user_session_path)
+            current_user || redirect_to(new_user_session_path(locale: I18n.locale))
           end
 
           # The controller Doorkeeper::ApplicationController inherits from.

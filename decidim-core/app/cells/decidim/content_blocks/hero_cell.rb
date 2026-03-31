@@ -46,9 +46,9 @@ module Decidim
         elsif current_user
           decidim.account_path(locale: current_locale)
         elsif current_organization.sign_up_enabled?
-          decidim.new_user_registration_path
+          decidim.new_user_registration_path(locale: current_locale)
         else
-          decidim.new_user_session_path
+          decidim.new_user_session_path(locale: current_locale)
         end
       end
     end

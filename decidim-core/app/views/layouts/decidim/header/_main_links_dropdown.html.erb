@@ -40,7 +40,7 @@
   </li>
 <% end %>
 <li class="dropdown__item">
-  <%= link_to decidim.destroy_user_session_path, method: :delete, class: "dropdown__button" do %>
+  <%= link_to decidim.destroy_user_session_path(locale: current_locale), method: :delete, class: "dropdown__button" do %>
     <%= icon "logout-box-r-line" %>
     <span><%= t("layouts.decidim.user_menu.log_out") %></span>
   <% end %>

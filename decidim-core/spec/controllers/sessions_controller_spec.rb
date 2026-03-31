@@ -108,7 +108,7 @@ module Decidim
       end
 
       describe "POST create" do
-        let(:params) { { user: { email: user.email, password: } } }
+        let(:params) { { locale: I18n.locale, user: { email: user.email, password: } } }
         let(:user) { create(:user, :confirmed, password:) }
         let(:password) { "decidim123456789" }
 
@@ -170,7 +170,7 @@ module Decidim
         end
 
         it "clears the current user" do
-          delete :destroy
+          delete :destroy, params: { locale: I18n.locale }
 
           expect(controller.current_user).to be_nil
         end

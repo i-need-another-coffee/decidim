@@ -5,7 +5,7 @@ require "spec_helper"
 RSpec.describe "Session" do
   subject { response.body }
 
-  let(:request_path) { Decidim::Core::Engine.routes.url_helpers.user_session_path }
+  let(:request_path) { Decidim::Core::Engine.routes.url_helpers.user_session_path(locale: I18n.locale) }
 
   let(:organization) { create(:organization) }
   let(:user) { create(:user, :confirmed, email: "user@example.org", password: "decidim123456789", organization:) }

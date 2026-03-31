@@ -95,7 +95,7 @@ describe "Admin manages static page content blocks" do
       expect(page).to have_content("Custom privacy policy summary text!")
 
       logout
-      visit decidim.new_user_registration_path
+      visit decidim.new_user_registration_path(locale: I18n.locale)
       expect(page).to have_content("Custom privacy policy summary text!")
     end
   end

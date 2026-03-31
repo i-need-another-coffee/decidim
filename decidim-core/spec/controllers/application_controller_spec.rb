@@ -202,7 +202,7 @@ module Decidim
         context "when not authenticated" do
           it "redirects to sign in path" do
             get :show
-            expect(response).to redirect_to("/users/sign_in")
+            expect(response).to redirect_to("/en/users/sign_in")
             expect(flash[:warning]).to include("Please, log in with your account before access")
           end
         end
@@ -213,7 +213,7 @@ module Decidim
       it "redirects the user to the sign in page" do
         get :unauthorized
 
-        expect(response).to redirect_to("/users/sign_in")
+        expect(response).to redirect_to("/en/users/sign_in")
       end
 
       context "when authenticated" do

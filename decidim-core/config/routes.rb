@@ -8,6 +8,7 @@ Decidim::Core::Engine.routes.draw do
   get "/favicon.ico", to: "favicon#show"
 
   devise_for :users,
+             path_prefix: "/:locale",
              class_name: "Decidim::User",
              module: :devise,
              router_name: :decidim,
@@ -16,10 +17,24 @@ Decidim::Core::Engine.routes.draw do
                sessions: "decidim/devise/sessions",
                confirmations: "decidim/devise/confirmations",
                passwords: "decidim/devise/passwords",
-               unlocks: "decidim/devise/unlocks",
-               omniauth_callbacks: "decidim/devise/omniauth_registrations"
+               unlocks: "decidim/devise/unlocks"
              },
-             skip: [:registrations]
+             skip: [:registrations, :omniauth_callbacks]
+
+  # When having the locale in the path, Devise will raise error for the Omniauth
+  # Devise does not support scoping OmniAuth callbacks under a dynamic segment (RuntimeError)
+  devise_for :users,
+             only: :omniauth_callbacks,
+             class_name: "Decidim::User",
+             module: :devise,
+             router_name: :decidim,
+             controllers: {
+               omniauth_callbacks: "decidim/devise/omniauth_registrations"
+             }
+
+  devise_scope :user do
+    post "omniauth_registrations" => "devise/omniauth_registrations#create"
+  end
 
   # Manually define the registration routes because otherwise the default "edit"
   # route would be exposed through Devise while we already have the edit and
@@ -28,7 +43,7 @@ Decidim::Core::Engine.routes.draw do
     :registration,
     only: [:new, :create],
     as: :user_registration,
-    path: "/users",
+    path: "/:locale/users",
     path_names: { new: "sign_up" },
     controller: "devise/registrations"
   ) do
@@ -37,10 +52,6 @@ Decidim::Core::Engine.routes.draw do
     # OAuth signing in/up in the middle of the process, removing all OAuth
     # session data. @see [Devise::RegistrationsController#cancel]
     get :cancel
-  end
-
-  devise_scope :user do
-    post "omniauth_registrations" => "devise/omniauth_registrations#create"
   end
 
   resource :manifest, only: [:show]
@@ -54,12 +65,12 @@ Decidim::Core::Engine.routes.draw do
   end
 
   authenticate(:user) do
-    devise_scope :user do
-      get "change_password" => "devise/passwords"
-      put "apply_password" => "devise/passwords"
-    end
-
     scope "/:locale" do
+      devise_scope :user do
+        get "change_password" => "devise/passwords"
+        put "apply_password" => "devise/passwords"
+      end
+
       resource :account, only: [:show, :update, :destroy], controller: "account" do
         member do
           get :delete
@@ -202,6 +213,30 @@ Decidim::Core::Engine.routes.draw do
   get "/open-data", to: redirect { |params, request|
     locale = Decidim::LocaleRouterDetector.new(request, params).locale
     "/#{locale}/open-data"
+  }
+
+  get "/users/", to: redirect { |params, request|
+    locale = Decidim::LocaleRouterDetector.new(request, params).locale
+
+    query_string = Rack::Utils.parse_nested_query(request.query_string.to_s)
+    query_string.delete("locale")
+    query_string = CGI.unescape(query_string.to_query)
+
+    path = "/#{locale}/users"
+    path += "?#{query_string}" unless query_string.empty?
+    path
+  }
+
+  get "/users/*rest", to: redirect { |params, request|
+    locale = Decidim::LocaleRouterDetector.new(request, params).locale
+
+    query_string = Rack::Utils.parse_nested_query(request.query_string.to_s)
+    query_string.delete("locale")
+    query_string = CGI.unescape(query_string.to_query)
+
+    path = "/#{locale}/users/#{params[:rest]}"
+    path += "?#{query_string}" unless query_string.empty?
+    path
   }
 
   get "/resource_autocomplete", to: "resource_autocomplete#index", as: :resource_autocomplete

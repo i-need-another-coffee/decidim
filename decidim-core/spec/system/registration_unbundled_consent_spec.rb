@@ -8,7 +8,7 @@ describe "TOS" do
 
   before do
     switch_to_host(organization.host)
-    visit decidim.new_user_registration_path
+    visit decidim.new_user_registration_path(locale: I18n.locale)
   end
 
   context "when in registration form" do

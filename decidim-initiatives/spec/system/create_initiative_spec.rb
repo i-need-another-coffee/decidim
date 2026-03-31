@@ -60,7 +60,7 @@ describe "Initiative" do
         it "redirects to the login page when landing on #{step}" do
           expect(Decidim::InitiativesType.count).to eq(1)
           visit decidim_initiatives.create_initiative_path(step, locale: I18n.locale)
-          expect(page).to have_current_path("/users/sign_in")
+          expect(page).to have_current_path("/en/users/sign_in")
         end
       end
     end
@@ -75,7 +75,7 @@ describe "Initiative" do
         it "redirects to the login page when landing on #{step}" do
           expect(Decidim::InitiativesType.count).to eq(2)
           visit decidim_initiatives.create_initiative_path(step, locale: I18n.locale)
-          expect(page).to have_current_path("/users/sign_in")
+          expect(page).to have_current_path("/en/users/sign_in")
         end
       end
     end

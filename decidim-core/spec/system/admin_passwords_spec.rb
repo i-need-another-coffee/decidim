@@ -34,7 +34,7 @@ describe "Admin passwords" do
       click_on "Home", match: :first
       expect(page).to have_content("You need to change your password in order to proceed further")
       expect(page).to have_content("Password change")
-      expect(page).to have_current_path(decidim.change_password_path)
+      expect(page).to have_current_path(decidim.change_password_path(locale: I18n.locale))
     end
 
     context "when user has strong password" do

@@ -201,7 +201,7 @@ module Decidim
             delete :destroy, xhr: true, params: { id: comment.id }
           end.not_to(change { Decidim::Comments::Comment.not_deleted.count })
 
-          expect(response).to redirect_to("/users/sign_in")
+          expect(response).to redirect_to("/en/users/sign_in")
         end
 
         context "when a user different of the author is signed in" do
@@ -240,7 +240,7 @@ module Decidim
 
         it "redirects to sign in path if not signed in" do
           put :update, xhr: true, params: { id: comment.id }
-          expect(response).to redirect_to("/users/sign_in")
+          expect(response).to redirect_to("/en/users/sign_in")
         end
 
         context "when the body length is more than 1000" do

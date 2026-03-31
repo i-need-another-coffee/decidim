@@ -50,7 +50,7 @@ module Decidim::Meetings
       context "when user not authenticated" do
         it "redirects to login" do
           post(:create, params:)
-          expect(response).to redirect_to("/users/sign_in")
+          expect(response).to redirect_to("/en/users/sign_in")
         end
       end
     end

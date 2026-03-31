@@ -7,7 +7,7 @@ module Decidim
 
       helper Decidim::MetaTagsHelper
 
-      helper_method :path_items
+      helper_method :path_items, :current_locale
 
       def path_items(path)
         files = Dir.glob("#{gem_path}/app/views/decidim/design/#{path}/*.html.erb")
@@ -19,6 +19,13 @@ module Decidim
       end
 
       private
+
+      # The current locale for the user. Available as a helper for the views.
+      #
+      # Returns a String.
+      def current_locale
+        @current_locale ||= I18n.locale.to_s
+      end
 
       def gem_path
         @gem_path ||= Bundler.load.specs.find { |spec| spec.name == "decidim-design" }.full_gem_path

@@ -103,7 +103,7 @@ module Decidim
     end
 
     def user_has_no_permission_path
-      return decidim.new_user_session_path unless user_signed_in?
+      return decidim.new_user_session_path(locale: current_locale) unless user_signed_in?
 
       decidim.root_path
     end
