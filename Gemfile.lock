@@ -873,11 +873,13 @@ GEM
     spring-watcher-listen (2.1.0)
       listen (>= 2.7, < 4.0)
       spring (>= 4)
+    stackprof (0.2.28)
     stringio (3.2.0)
     strscan (3.1.8)
     temple (0.10.4)
     terminal-table (4.0.0)
       unicode-display_width (>= 1.1.1, < 4)
+    test-prof (1.6.1)
     thor (1.5.0)
     tilt (2.5.0)
     timeout (0.6.1)
@@ -957,6 +959,8 @@ DEPENDENCIES
   listen (~> 3.10)
   parallel_tests (~> 5.7)
   puma (>= 6.3.1)
+  stackprof
+  test-prof (~> 1.0)
   web-console (~> 4.3)
 
 RUBY VERSION
