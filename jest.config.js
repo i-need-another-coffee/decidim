@@ -11,6 +11,11 @@ fs.readdirSync(root, { withFileTypes: true }).
   filter((d) => d.isDirectory() && (/^decidim-(.*)$/).test(d.name)).
   forEach((d) => moduleDirs.push(path.join("<rootDir>", d.name, "app/packs")));
 
+// Add any decidim-*/app/javascript directories found in the root
+fs.readdirSync(root, { withFileTypes: true }).
+  filter((d) => d.isDirectory() && (/^decidim-(.*)$/).test(d.name)).
+  forEach((d) => moduleDirs.push(path.join("<rootDir>", d.name, "app/javascript")));
+
 module.exports = {
   testEnvironment: "jsdom",
   testEnvironmentOptions: {
