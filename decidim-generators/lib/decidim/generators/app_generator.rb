@@ -372,6 +372,10 @@ module Decidim
         CONFIG
       end
 
+      def patch_controller
+        gsub_file "app/controllers/application_controller.rb", /\n  stale_when_importmap_changes/, ""
+      end
+
       def authorization_handler
         return unless options[:demo]
 
