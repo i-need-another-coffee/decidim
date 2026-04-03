@@ -22,6 +22,15 @@ module Decidim
         end
       end
 
+      initializer "decidim_forms.assets" do |app|
+        app.config.assets.paths << root.join("app/javascript")
+      end
+
+      initializer "decidim_forms.importmaps", before: "importmap" do |app|
+        app.config.importmap.paths << root.join("config/importmap.rb")
+        app.config.importmap.cache_sweepers << root.join("app/javascript")
+      end
+
       initializer "decidim_forms.authorization_transfer" do
         config.to_prepare do
           Decidim::AuthorizationTransfer.register(:forms) do |transfer|

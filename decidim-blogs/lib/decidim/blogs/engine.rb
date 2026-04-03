@@ -31,6 +31,15 @@ module Decidim
         end
       end
 
+      initializer "decidim_blogs.assets" do |app|
+        app.config.assets.paths << root.join("app/javascript")
+      end
+
+      initializer "decidim_blogs.importmaps", before: "importmap" do |app|
+        app.config.importmap.paths << root.join("config/importmap.rb")
+        app.config.importmap.cache_sweepers << root.join("app/javascript")
+      end
+
       initializer "decidim_blogs.add_cells_view_paths" do
         Cell::ViewModel.view_paths << File.expand_path("#{Decidim::Blogs::Engine.root}/app/cells")
         Cell::ViewModel.view_paths << File.expand_path("#{Decidim::Blogs::Engine.root}/app/views") # for partials

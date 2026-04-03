@@ -81,6 +81,15 @@ module Decidim
         end
       end
 
+      initializer "decidim_meetings.assets" do |app|
+        app.config.assets.paths << root.join("app/javascript")
+      end
+
+      initializer "decidim_meetings.importmaps", before: "importmap" do |app|
+        app.config.importmap.paths << root.join("config/importmap.rb")
+        app.config.importmap.cache_sweepers << root.join("app/javascript")
+      end
+
       initializer "decidim_meetings.register_mutations", before: "decidim_api.graphiql" do
         Decidim::MutationRegistry.instance.register(
           Decidim::Meetings::MeetingsMutationType
