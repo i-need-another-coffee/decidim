@@ -707,6 +707,7 @@ progname
 progressbox
 promotal
 promotors
+propshaft
 proposta
 Propostes
 Propuesta

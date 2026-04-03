@@ -49,6 +49,10 @@ require "decidim/middleware/current_organization"
 require "decidim/shakapacker"
 require "decidim/webpacker"
 
+require "importmap-rails"
+require "stimulus-rails"
+require "propshaft"
+
 module Decidim
   module Core
     # Decidim's core Rails Engine.
@@ -235,6 +239,15 @@ module Decidim
           config.data_migrations_path = [app.root.join("db/data").to_s]
           config.data_migrations_path << root.join("db/data").to_s
         end
+      end
+
+      initializer "decidim_core.assets" do |app|
+        app.config.assets.paths << root.join("app/javascript")
+      end
+
+      initializer "decidim_core.importmaps", before: "importmap" do |app|
+        app.config.importmap.paths << root.join("config/importmap.rb")
+        app.config.importmap.cache_sweepers << root.join("app/javascript")
       end
 
       initializer "decidim_core.patch_shakapacker", before: "shakapacker.version_checker" do
