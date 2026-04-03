@@ -96,6 +96,8 @@ module Decidim
 
         rails "shakapacker:binstubs"
 
+        # install importmap
+        rails "importmap:install"
         # Run Decidim custom shakapacker installation
         rails "decidim:shakapacker:install"
 

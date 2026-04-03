@@ -113,10 +113,6 @@ module Decidim
           require "action_cable/engine"
           require "rails/test_unit/railtie"
         RUBY
-
-        gsub_file "config/environments/development.rb", /config\.assets.*$/, ""
-        gsub_file "config/environments/test.rb", /config\.assets.*$/, ""
-        gsub_file "config/environments/production.rb", /config\.assets.*$/, ""
       end
 
       def patch_production_file
@@ -370,10 +366,6 @@ module Decidim
             end
           end
         CONFIG
-      end
-
-      def patch_controller
-        gsub_file "app/controllers/application_controller.rb", /\n  stale_when_importmap_changes/, ""
       end
 
       def authorization_handler
