@@ -56,6 +56,15 @@ module Decidim
         Decidim.icons.register(name: "filter-line", icon: "filter-line", category: "system", description: "", engine: :admin)
       end
 
+      initializer "decidim_admin.assets" do |app|
+        app.config.assets.paths << root.join("app/javascript")
+      end
+
+      initializer "decidim_admin.importmaps", before: "importmap" do |app|
+        app.config.importmap.paths << root.join("config/importmap.rb")
+        app.config.importmap.cache_sweepers << root.join("app/javascript")
+      end
+
       initializer "decidim_admin.data_migrate", after: "decidim_core.data_migrate" do
         DataMigrate.configure do |config|
           config.data_migrations_path << root.join("db/data").to_s

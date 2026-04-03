@@ -39,6 +39,15 @@ module Decidim
         end
       end
 
+      initializer "decidim_surveys.assets" do |app|
+        app.config.assets.paths << root.join("app/javascript")
+      end
+
+      initializer "decidim_surveys.importmaps", before: "importmap" do |app|
+        app.config.importmap.paths << root.join("config/importmap.rb")
+        app.config.importmap.cache_sweepers << root.join("app/javascript")
+      end
+
       initializer "decidim_surveys.responses_email" do
         config.to_prepare do
           ActiveSupport::Notifications.subscribe("decidim.forms.response_questionnaire:after") do |_event_name, data|
