@@ -7,21 +7,40 @@ Decidim::Core::Engine.routes.draw do
 
   get "/favicon.ico", to: "favicon#show"
 
-  devise_for :users,
-             path_prefix: "/:locale",
-             class_name: "Decidim::User",
-             module: :devise,
-             router_name: :decidim,
-             controllers: {
-               invitations: "decidim/devise/invitations",
-               sessions: "decidim/devise/sessions",
-               confirmations: "decidim/devise/confirmations",
-               passwords: "decidim/devise/passwords",
-               unlocks: "decidim/devise/unlocks"
-             },
-             skip: [:registrations, :omniauth_callbacks]
+  scope "/:locale", constraints: { locale: /#{I18n.available_locales.join("|")}/ } do
+    devise_for :users,
+               class_name: "Decidim::User",
+               module: :devise,
+               router_name: :decidim,
+               controllers: {
+                 invitations: "decidim/devise/invitations",
+                 sessions: "decidim/devise/sessions",
+                 confirmations: "decidim/devise/confirmations",
+                 passwords: "decidim/devise/passwords",
+                 unlocks: "decidim/devise/unlocks"
+               },
+               skip: [:registrations, :omniauth_callbacks]
 
-  # When having the locale in the path, Devise will raise error for the Omniauth
+    # Manually define the registration routes because otherwise the default "edit"
+    # route would be exposed through Devise while we already have the edit and
+    # destroy routes available through the account pages.
+    resource(
+      :registration,
+      only: [:new, :create],
+      as: :user_registration,
+      path: "/users",
+      path_names: { new: "sign_up" },
+      controller: "devise/registrations"
+    ) do
+      # The "cancel" route forces the session data which is usually expired after
+      # sign in to be expired now. This is useful if the user wants to cancel
+      # OAuth signing in/up in the middle of the process, removing all OAuth
+      # session data. @see [Devise::RegistrationsController#cancel]
+      get :cancel
+    end
+  end
+
+  # When having the locale in the path, Devise will raise an error for OmniAuth
   # Devise does not support scoping OmniAuth callbacks under a dynamic segment (RuntimeError)
   devise_for :users,
              only: :omniauth_callbacks,
@@ -36,24 +55,6 @@ Decidim::Core::Engine.routes.draw do
     post "omniauth_registrations" => "devise/omniauth_registrations#create"
   end
 
-  # Manually define the registration routes because otherwise the default "edit"
-  # route would be exposed through Devise while we already have the edit and
-  # destroy routes available through the account pages.
-  resource(
-    :registration,
-    only: [:new, :create],
-    as: :user_registration,
-    path: "/:locale/users",
-    path_names: { new: "sign_up" },
-    controller: "devise/registrations"
-  ) do
-    # The "cancel" route forces the session data which is usually expired after
-    # sign in to be expired now. This is useful if the user wants to cancel
-    # OAuth signing in/up in the middle of the process, removing all OAuth
-    # session data. @see [Devise::RegistrationsController#cancel]
-    get :cancel
-  end
-
   resource :manifest, only: [:show]
 
   resource :locale, only: [:create]
@@ -65,7 +66,7 @@ Decidim::Core::Engine.routes.draw do
   end
 
   authenticate(:user) do
-    scope "/:locale" do
+    scope "/:locale", constraints: { locale: /#{I18n.available_locales.join("|")}/ } do
       devise_scope :user do
         get "change_password" => "devise/passwords"
         put "apply_password" => "devise/passwords"
@@ -155,7 +156,7 @@ Decidim::Core::Engine.routes.draw do
     get "seconds_until_timeout", to: "timeouts#seconds_until_timeout"
   end
 
-  scope "/:locale" do
+  scope "/:locale", constraints: { locale: /#{I18n.available_locales.join("|")}/ } do
     resources :pages, only: [:index, :show], format: false
     resources :last_activities, only: [:index]
     get "/open-data", to: "open_data#index", as: :open_data
