@@ -110,30 +110,9 @@ Decidim::Core::Engine.routes.draw do
     end
   end
 
-  get "/pages", to: redirect { |params, request|
-    locale = Decidim::LocaleRouterDetector.new(request, params).locale
-    "/#{locale}/pages"
-  }
-
-  get "/pages/*rest", to: redirect { |params, request|
-    locale = Decidim::LocaleRouterDetector.new(request, params).locale
-    "/#{locale}/pages/#{params[:rest]}"
-  }
-
-  get "/profiles/*rest", to: redirect { |params, request|
-    locale = Decidim::LocaleRouterDetector.new(request, params).locale
-
-    # Handle explicitly the query strings, as we have some filters and pagination on the activity tab.
-    # We need to handle URLs like
-    # https://nightly.decidim.org/profiles/visitant_bqqppvus/activity?filter[resource_type]=Decidim::Initiative
-    query_string = Rack::Utils.parse_nested_query(request.query_string.to_s)
-    query_string.delete("locale")
-    query_string = CGI.unescape(query_string.to_query)
-
-    path = "/#{locale}/profiles/#{params[:rest]}"
-    path += "?#{query_string}" unless query_string.empty?
-    path
-  }
+  get "/pages", to: redirect { |params, request| Decidim::Router.call(request, params, "pages") }
+  get "/pages/*rest", to: redirect { |params, request| Decidim::Router.call(request, params, "pages", wildcard: :rest) }
+  get "/profiles/*rest", to: redirect { |params, request| Decidim::Router.call(request, params, "profiles", wildcard: :rest, query_string: true) }
 
   get "/search", to: "searches#index", as: :search
   get "/resource_autocomplete", to: "resource_autocomplete#index", as: :resource_autocomplete

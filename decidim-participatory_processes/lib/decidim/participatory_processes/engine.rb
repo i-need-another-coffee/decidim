@@ -41,21 +41,10 @@ module Decidim
             end
           end
         end
+        get "/participatory_process_groups/*rest", to: redirect { |params, request| Decidim::Router.new(request, params, "participatory_process_groups", wildcard: :rest) }
 
-        get "/participatory_process_groups/*rest", to: redirect { |params, request|
-          locale = Decidim::LocaleRouterDetector.new(request, params).locale
-          "/#{locale}/processes_groups/#{params[:rest]}"
-        }
-
-        get "/processes", to: redirect { |params, request|
-          locale = Decidim::LocaleRouterDetector.new(request, params).locale
-          "/#{locale}/processes"
-        }
-
-        get "/processes/*rest", to: redirect { |params, request|
-          locale = Decidim::LocaleRouterDetector.new(request, params).locale
-          "/#{locale}/processes/#{params[:rest]}"
-        }
+        get "/processes", to: redirect { |params, request| Decidim::Router.call(request, params, "processes") }
+        get "/processes/*rest", to: redirect { |params, request| Decidim::Router.new(request, params, "processes", wildcard: :rest) }
       end
 
       initializer "decidim_participatory_processes.mount_routes" do

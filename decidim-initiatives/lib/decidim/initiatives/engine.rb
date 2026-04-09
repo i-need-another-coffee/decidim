@@ -89,30 +89,12 @@ module Decidim
           end
         end
 
-        get "/initiatives", to: redirect { |params, request|
-          locale = Decidim::LocaleRouterDetector.new(request, params).locale
-          "/#{locale}/initiatives"
-        }
+        get "/initiatives", to: redirect { |params, request| Decidim::Router.call(request, params, "initiatives") }
+        get "/initiatives/*rest", to: redirect { |params, request| Decidim::Router.new(request, params, "initiatives", wildcard: :rest) }
 
-        get "/initiatives/*rest", to: redirect { |params, request|
-          locale = Decidim::LocaleRouterDetector.new(request, params).locale
-          "/#{locale}/initiatives/#{params[:rest]}"
-        }
-
-        get "/initiative_types/*rest", to: redirect { |params, request|
-          locale = Decidim::LocaleRouterDetector.new(request, params).locale
-          "/#{locale}/initiative_types/#{params[:rest]}"
-        }
-
-        get "/initiative_type_scopes/*rest", to: redirect { |params, request|
-          locale = Decidim::LocaleRouterDetector.new(request, params).locale
-          "/#{locale}/initiative_type_scopes/#{params[:rest]}"
-        }
-
-        get "/initiative_type_signature_types/*rest", to: redirect { |params, request|
-          locale = Decidim::LocaleRouterDetector.new(request, params).locale
-          "/#{locale}/initiative_type_signature_types/#{params[:rest]}"
-        }
+        get "/initiative_types/*rest", to: redirect { |params, request| Decidim::Router.new(request, params, "initiative_types", wildcard: :rest) }
+        get "/initiative_type_scopes/*rest", to: redirect { |params, request| Decidim::Router.new(request, params, "initiative_type_scopes", wildcard: :rest) }
+        get "/initiative_type_signature_types/*rest", to: redirect { |params, request| Decidim::Router.new(request, params, "initiative_type_signature_types", wildcard: :rest) }
       end
 
       initializer "decidim_initiatives.mount_routes" do

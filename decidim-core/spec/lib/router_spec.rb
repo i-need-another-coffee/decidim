@@ -3,7 +3,7 @@
 require "spec_helper"
 
 module Decidim
-  describe LocaleRouterDetector do
+  describe Router do
     subject { described_class.new(request, params) }
     let(:organization) { create(:organization, default_locale:, available_locales:) }
 

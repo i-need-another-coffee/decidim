@@ -41,15 +41,8 @@ module Decidim
           end
         end
 
-        get "/assemblies", to: redirect { |params, request|
-          locale = Decidim::LocaleRouterDetector.new(request, params).locale
-          "/#{locale}/assemblies"
-        }
-
-        get "/assemblies/*rest", to: redirect { |params, request|
-          locale = Decidim::LocaleRouterDetector.new(request, params).locale
-          "/#{locale}/assemblies/#{params[:rest]}"
-        }
+        get "/assemblies", to: redirect { |params, request| Decidim::Router.call(request, params, "assemblies") }
+        get "/assemblies/*rest", to: redirect { |params, request| Decidim::Router.new(request, params, "assemblies", wildcard: :rest) }
       end
 
       initializer "decidim_assemblies.mount_routes" do
