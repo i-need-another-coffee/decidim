@@ -35,7 +35,7 @@ module Decidim
         #
         # @return Boolean
         # @param [Symbol] scope
-        def allowed_to?(action, subject, object, context, scope: :public)
+        def allowed_to?(action, subject, object, context)
           unless subject.is_a?(::Symbol)
             subject = determine_subject_name(object)
             context[subject] = object
@@ -118,11 +118,18 @@ module Decidim
 
           permissions
         end
+
+        def scope
+          return :admin if determine_required_scopes.present? && determine_required_scopes.map {|scope| scope.split(":").first }.include?("admin")
+
+          :public
+        end
+
       end
 
       private
 
-      delegate :allowed_to?, to: :class
+      delegate :allowed_to?, :scope, to: :class
 
       attr_reader :action
     end
