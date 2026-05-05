@@ -16,7 +16,7 @@ module Decidim
         let(:proposal1) { create(:proposal, cost: nil, component:, proposal_state: nil) }
         let(:proposal2) { create(:proposal, cost: nil, component:, proposal_state: nil) }
         let(:proposal_state) { create(:proposal_state, component:) }
-        let(:template) { create(:template, skip_injection: true, target: :proposal_answer, templatable: component, field_values: { "proposal_state_id" => proposal_state.id }) }
+        let(:template) { create(:template, target: :proposal_answer, templatable: component, field_values: { "proposal_state_id" => proposal_state.id }) }
         let(:proposal_ids) { [proposal1.id, proposal2.id] }
         let(:params) do
           {

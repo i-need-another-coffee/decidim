@@ -11,11 +11,11 @@ describe "Explore projects", :slow do
     create_list(:project, projects_count, budget:)
   end
   let!(:project) { projects.first }
-  let(:taxonomy) { create(:taxonomy, :with_parent, skip_injection: true, organization:) }
+  let(:taxonomy) { create(:taxonomy, :with_parent, organization:) }
   let(:taxonomy_filter) { create(:taxonomy_filter, root_taxonomy: taxonomy.parent) }
   let!(:taxonomy_filter_item) { create(:taxonomy_filter_item, taxonomy_filter:, taxonomy_item: taxonomy) }
 
-  let(:second_taxonomy) { create(:taxonomy, :with_parent, skip_injection: true, organization:) }
+  let(:second_taxonomy) { create(:taxonomy, :with_parent, organization:) }
   let(:second_taxonomy_filter) { create(:taxonomy_filter, root_taxonomy: second_taxonomy.parent) }
   let!(:second_taxonomy_filter_item) { create(:taxonomy_filter_item, taxonomy_filter: second_taxonomy_filter, taxonomy_item: second_taxonomy) }
   let(:taxonomy_filter_ids) { [taxonomy_filter.id, second_taxonomy_filter.id] }

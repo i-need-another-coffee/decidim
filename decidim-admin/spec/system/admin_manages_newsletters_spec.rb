@@ -181,10 +181,10 @@ describe "Admin manages newsletters" do
   end
 
   describe "select newsletter recipients" do
-    let!(:participatory_process) { create(:participatory_process, organization:, skip_injection: true) }
-    let!(:assembly) { create(:assembly, organization:, skip_injection: true) }
-    let!(:conference) { create(:conference, organization:, skip_injection: true) }
-    let!(:initiative) { create(:initiative, organization:, skip_injection: true) }
+    let!(:participatory_process) { create(:participatory_process, organization:) }
+    let!(:assembly) { create(:assembly, organization:) }
+    let!(:conference) { create(:conference, organization:) }
+    let!(:initiative) { create(:initiative, organization:) }
 
     let!(:newsletter) { create(:newsletter, organization:) }
     let(:spaces) { [participatory_process, assembly, conference, initiative] }
@@ -471,7 +471,7 @@ describe "Admin manages newsletters" do
 
     context "when members are selected" do
       context "with members" do
-        let!(:participatory_process) { create(:participatory_process, organization:, has_members: true, skip_injection: true) }
+        let!(:participatory_process) { create(:participatory_process, organization:, has_members: true) }
         let!(:members) do
           create_list(:member, 30) do |member|
             member.user = create(:user, :confirmed, newsletter_notifications_at: Time.current, organization:)

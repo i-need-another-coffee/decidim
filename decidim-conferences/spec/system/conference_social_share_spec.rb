@@ -31,7 +31,7 @@ describe "Social shares" do
   end
   let(:block_attachment_file) { Decidim::Dev.test_file("icon.png", "image/png") }
   let(:component) { create(:component, manifest_name: :meetings, participatory_space: conference) }
-  let!(:conference_speakers) { create_list(:conference_speaker, 3, :with_meeting, :published, skip_injection: true, conference:, meetings_component: component) }
+  let!(:conference_speakers) { create_list(:conference_speaker, 3, :with_meeting, :published, conference:, meetings_component: component) }
   let!(:registration_types) { create_list(:registration_type, 2, conference:) }
 
   let(:resource) { conference }
