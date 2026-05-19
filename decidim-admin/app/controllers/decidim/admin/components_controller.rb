@@ -175,7 +175,7 @@ module Decidim
       def component_params
         new_settings = proc { |name, data| Component.build_settings(manifest, name, data, current_organization) }
 
-        params[:component].permit!.tap do |hsh|
+        params.fetch(:component, {}).to_unsafe_h.tap do |hsh|
           hsh[:id] = params[:id]
           hsh[:manifest] = manifest
           hsh[:participatory_space] = current_participatory_space
