@@ -18,13 +18,11 @@ document.addEventListener("stimulus:load", () => {
 
 
 // REDESIGN_PENDING: deprecated
-window.initFoundation = (element) => {
-  $(element).foundation();
+window.initFoundation = (_element) => {
+  alert("Admin initFoundation");
 };
 
 document.addEventListener("turbo:load", () => {
-  window.initFoundation(document);
-
   toggleNav();
 
   createSortList("#steps tbody", {

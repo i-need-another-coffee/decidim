@@ -161,7 +161,7 @@ document.addEventListener("turbo:load", () => {
 
 // REDESIGN_PENDING: deprecated
 window.initFoundation = (element) => {
-  $(element).foundation();
+  alert("Core initFoundation");
 };
 
 // Confirm initialization needs to happen before Rails.start()
@@ -178,9 +178,6 @@ Rails.start()
 const initializer = (element = document) => {
   // focus guard must be initialized only once
   window.focusGuard = window.focusGuard || new FocusGuard(document.body);
-
-  // REDESIGN_PENDING: deprecated
-  window.initFoundation(element);
 
   svg4everybody();
 
