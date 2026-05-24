@@ -74,6 +74,7 @@ document.addEventListener("decidim:loaded", () => {
       fetch(urlToFetch).then((response) => response.text()).then((html) => {
         container.innerHTML = html;
         container.classList.remove("spinner-container");
+
         activateDrawerForm();
       });
     };
