@@ -16,12 +16,6 @@ document.addEventListener("stimulus:load", () => {
   window.Stimulus.load(window.definitionsFromContext(context))
 }, { once: true });
 
-
-// REDESIGN_PENDING: deprecated
-window.initFoundation = (_element) => {
-  alert("Admin initFoundation");
-};
-
 document.addEventListener("turbo:load", () => {
   toggleNav();
 

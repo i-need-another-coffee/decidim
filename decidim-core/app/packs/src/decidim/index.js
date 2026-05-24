@@ -7,9 +7,6 @@ import "core-js/stable";
 import "regenerator-runtime/runtime";
 import "jquery"
 
-// REDESIGN_PENDING: deprecated
-import "foundation-sites";
-
 // external deps that require initialization
 import Rails from "@rails/ujs"
 import svg4everybody from "svg4everybody"
@@ -87,6 +84,21 @@ const deprecationMessage = (element, oldSyntax, newSyntax) => {
 window.deprecate = deprecate;
 window.deprecationMessage = deprecationMessage;
 
+// eslint-disable-next-line no-unused-vars
+window.initFoundation = (element) => {
+  console.warn("[Decidim] initFoundation method has been removed as it was deprecated since Decidim 0.28")
+
+  if (typeof window.Decidim.dev !== "undefined" && window.Decidim.dev === true) {
+    // eslint-disable-next-line no-alert
+    alert("[Decidim] initFoundation method has been removed as it was deprecated since Decidim 0.28")
+  }
+};
+
+// Create a dummy foundation jQuery method for the comments component to call
+$.fn.foundation = () => {
+  window.initFoundation();
+}
+
 document.addEventListener("turbo:load", () => {
   document.querySelectorAll("[data-tabs]").forEach((elem) =>
     deprecate(elem, "tabs", "[data-tabs]"))
@@ -158,11 +170,6 @@ document.addEventListener("turbo:load", () => {
   document.querySelectorAll("[data-toggler]").forEach((container) =>
     deprecationMessage(container, "[data-toggler]", "Use the Stimulus toggle controller with hidden targets"));
 })
-
-// REDESIGN_PENDING: deprecated
-window.initFoundation = (element) => {
-  alert("Core initFoundation");
-};
 
 // Confirm initialization needs to happen before Rails.start()
 initializeConfirm();
