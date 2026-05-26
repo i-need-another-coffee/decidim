@@ -20,8 +20,8 @@ module Decidim
       end
 
       context "with title as translatable string" do
-        let(:title) { generate_localized_title(:proposal_title, skip_injection: true) }
-        let(:other_title) { generate_localized_title(:proposal_title, skip_injection: true) }
+        let(:title) { generate_localized_title(:proposal_title) }
+        let(:other_title) { generate_localized_title(:proposal_title) }
 
         it "renders the diff successfully" do
           expect(subject.dig(:title_en, :old_value)).to eq(title[:en])

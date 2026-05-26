@@ -7,7 +7,7 @@ describe "Filter Proposals", :slow do
   let(:manifest_name) { "proposals" }
 
   let(:root_taxonomy) { create(:taxonomy, organization:) }
-  let!(:taxonomy) { create(:taxonomy, skip_injection: true, parent: root_taxonomy, organization:) }
+  let!(:taxonomy) { create(:taxonomy, parent: root_taxonomy, organization:) }
   let(:taxonomy_filter) { create(:taxonomy_filter, root_taxonomy:, participatory_space_manifests: [component.participatory_space.manifest.name]) }
   let!(:taxonomy_filter_item) { create(:taxonomy_filter_item, taxonomy_item: taxonomy, taxonomy_filter:) }
   let!(:user) { create(:user, :confirmed, organization:) }
@@ -138,7 +138,7 @@ describe "Filter Proposals", :slow do
   end
 
   context "when filtering proposals by TAXONOMY" do
-    let!(:taxonomy2) { create(:taxonomy, skip_injection: true, name: { en: "Taxonomy name" }, parent: root_taxonomy, organization:) }
+    let!(:taxonomy2) { create(:taxonomy, name: { en: "Taxonomy name" }, parent: root_taxonomy, organization:) }
     let!(:taxonomy_filter_item2) { create(:taxonomy_filter_item, taxonomy_item: taxonomy2, taxonomy_filter:) }
     let!(:proposals) { create_list(:proposal, 2, component:, taxonomies: [taxonomy]) }
     let(:first_proposal) { proposals.first }

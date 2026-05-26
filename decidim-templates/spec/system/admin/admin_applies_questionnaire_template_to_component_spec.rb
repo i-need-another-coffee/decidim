@@ -7,7 +7,7 @@ describe "Admin applies questionnaire templates" do
   let!(:user) { create(:user, :admin, :confirmed, organization:) }
   let!(:participatory_space) { create(:participatory_process, organization:) }
   let!(:component) { create(:component, participatory_space:) }
-  let!(:questionnaire_template) { create(:questionnaire_template, :with_all_questions, organization:, skip_injection: true) }
+  let!(:questionnaire_template) { create(:questionnaire_template, :with_all_questions, organization:) }
 
   around do |example|
     ActionController::Base.allow_forgery_protection = true

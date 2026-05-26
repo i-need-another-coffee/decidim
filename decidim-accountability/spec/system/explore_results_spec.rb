@@ -7,7 +7,7 @@ describe "Explore results", :versioning do
 
   let(:manifest_name) { "accountability" }
   let(:path) { decidim_participatory_process_accountability.root_path(participatory_process_slug: participatory_process.slug, component_id: component.id, locale: I18n.locale) }
-  let(:taxonomy) { create(:taxonomy, :with_parent, skip_injection: true, organization:) }
+  let(:taxonomy) { create(:taxonomy, :with_parent, organization:) }
   let(:sub_taxonomy) { create(:taxonomy, parent: taxonomy, organization:) }
   let!(:other_taxonomy) { create(:taxonomy, parent: taxonomy.parent, organization:) }
   let(:other_sub_taxonomy) { create(:taxonomy, parent: other_taxonomy, organization:) }
@@ -209,7 +209,7 @@ describe "Explore results", :versioning do
         it "shows tags for taxonomy" do
           expect(page).to have_css("[data-tags]")
           within "[data-tags]" do
-            expect(page).to have_content(translated(taxonomy.name))
+            expect(page).to have_content(decidim_sanitize_translated(taxonomy.name))
           end
         end
       end

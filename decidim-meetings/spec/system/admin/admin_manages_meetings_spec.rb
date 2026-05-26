@@ -15,7 +15,7 @@ describe "Admin manages meetings" do
   let(:meeting_start_time) { base_date.utc.strftime("%H:%M") }
   let(:meeting_end_date) { ((base_date + 2.days) + 1.month).strftime("%d/%m/%Y") }
   let(:meeting_end_time) { (base_date + 4.hours).strftime("%H:%M") }
-  let(:attributes) { attributes_for(:meeting, component: current_component, skip_injection: true) }
+  let(:attributes) { attributes_for(:meeting, component: current_component) }
   let(:root_taxonomy) { create(:taxonomy, organization:) }
   let!(:taxonomy) { create(:taxonomy, parent: root_taxonomy, organization:) }
   let(:taxonomy_filter) { create(:taxonomy_filter, root_taxonomy:) }

@@ -65,9 +65,9 @@ describe "Admin checks logs" do
     context "with participatory space" do
       let(:space_title) { translated(action_logs.first.participatory_space.title) }
       let(:search_term) { space_title[0..2].downcase }
-      let(:autocomplete_result) { "Participatory processes - #{space_title}" }
+      let(:autocomplete_result) { "Participatory processes -#{strip_tags(space_title)}" }
       # we are intentionally skipping injection here because we want to test the search.
-      let!(:action_logs) { create_list(:action_log, 3, organization:, skip_injection: true) }
+      let!(:action_logs) { create_list(:action_log, 3, organization:) }
 
       it "lists only logs from that participatory space" do
         within ".filters__section" do

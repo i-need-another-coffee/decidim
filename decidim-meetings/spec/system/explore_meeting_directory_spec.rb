@@ -12,7 +12,7 @@ describe "Explore meeting directory" do
       create_list(:meeting, 2, :published, :not_official, component:)
     end
   end
-  let(:taxonomy) { create(:taxonomy, :with_parent, skip_injection: true, organization:) }
+  let(:taxonomy) { create(:taxonomy, :with_parent, organization:) }
   let(:taxonomy_filter) { create(:taxonomy_filter, root_taxonomy: taxonomy.parent) }
   let!(:taxonomy_filter_item) { create(:taxonomy_filter_item, taxonomy_filter:, taxonomy_item: taxonomy) }
   let(:taxonomy_filter_ids) { [taxonomy_filter.id] }
