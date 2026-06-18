@@ -13,6 +13,8 @@ ENV["DECIDIM_SMS_GATEWAY_SERVICE"] ||= "Decidim::Verifications::Sms::ExampleGate
 ENV["DECIDIM_TIMESTAMP_SERVICE"] ||= "Decidim::Initiatives::DummyTimestamp"
 ENV["DECIDIM_PDF_SIGNATURE_SERVICE"] ||= "Decidim::PdfSignatureExample"
 ENV["DECIDIM_MACHINE_TRANSLATION_SERVICE"] ||= "Decidim::Dev::DummyTranslator"
+ENV["SPACE_FACTORY"] = %w(participatory_process assembly initiative conference).sample
+ENV["SPACE_FACTORY"] = %w(participatory_process assembly).sample
 
 engine_spec_dir = File.join(Dir.pwd, "spec")
 
@@ -42,6 +44,10 @@ if ENV["CI"]
   require "rspec/retry"
 
   RSpec.configure do |config|
+    config.before(:suite) do
+      warn("Using #{ENV.fetch("SPACE_FACTORY")} space")
+    end
+
     # show retry status in spec process
     config.verbose_retry = true
     # show exception that triggers a retry if verbose_retry is set to true
