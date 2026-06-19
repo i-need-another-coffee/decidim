@@ -13,8 +13,7 @@ module Decidim
                class_name: "Decidim::Attachment",
                dependent: :destroy,
                inverse_of: :attached_to,
-               as: :attached_to,
-               counter_cache: :attachments_count
+               as: :attached_to
 
       # The first attachment that is a photo for this model.
       #
