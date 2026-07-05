@@ -64,6 +64,7 @@ module Decidim
                counter_cache: "proposal_votes_count"
 
       has_many :notes, foreign_key: "decidim_proposal_id", class_name: "ProposalNote", dependent: :destroy, counter_cache: "proposal_notes_count"
+      has_many :evaluation_assignments, class_name: "Decidim::Proposals::EvaluationAssignment", foreign_key: "decidim_proposal_id", dependent: :destroy
 
       validates :title, :body, presence: true
 
