@@ -12,8 +12,7 @@ module Decidim
 
     belongs_to :organization,
                foreign_key: "decidim_organization_id",
-               class_name: "Decidim::Organization",
-               inverse_of: :initiatives_types
+               class_name: "Decidim::Organization"
 
     has_many :scopes,
              foreign_key: "decidim_initiatives_types_id",

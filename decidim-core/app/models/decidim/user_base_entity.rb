@@ -16,11 +16,11 @@ module Decidim
     belongs_to :organization, foreign_key: "decidim_organization_id", class_name: "Decidim::Organization", inverse_of: :user_entities
     has_many :notifications, foreign_key: "decidim_user_id", class_name: "Decidim::Notification", dependent: :destroy
     has_many :following_follows, foreign_key: "decidim_user_id", class_name: "Decidim::Follow", dependent: :destroy
-    has_many :follows, foreign_key: "decidim_user_id", class_name: "Decidim::Follow", dependent: :destroy
     has_many :badge_scores, class_name: "Decidim::Gamification::BadgeScore", foreign_key: "decidim_user_id", dependent: :destroy
     has_many :user_moderations, class_name: "Decidim::UserModeration", foreign_key: "decidim_user_id", dependent: :destroy
     has_many :blocks_created, class_name: "Decidim::UserBlock", foreign_key: "decidim_blocking_user_id", dependent: :destroy
     has_many :blocks_received, class_name: "Decidim::UserBlock", foreign_key: "decidim_user_id", dependent: :destroy
+    has_many :action_logs, foreign_key: "decidim_organization_id", class_name: "Decidim::ActionLog"
 
     has_one :blocking, class_name: "Decidim::UserBlock", foreign_key: :id, primary_key: :block_id, dependent: :destroy
 

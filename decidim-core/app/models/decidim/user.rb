@@ -42,6 +42,8 @@ module Decidim
     has_many :admin_impersonations, class_name: "Decidim::ImpersonationLog", foreign_key: "decidim_admin_id", dependent: :destroy
     has_many :editor_images, class_name: "Decidim::EditorImage", foreign_key: "decidim_author_id", dependent: :destroy
     has_many :newsletters, class_name: "Decidim::Newsletter", foreign_key: "decidim_author_id", dependent: :destroy
+    has_many :share_tokens, class_name: "Decidim::ShareToken", foreign_key: "decidim_user_id", dependent: :destroy
+    has_many :received_receipts, class_name: "Decidim::Messaging::Receipt", foreign_key: "decidim_recipient_id", dependent: :destroy
 
     validates :name, presence: true, unless: -> { deleted? }
     validates :nickname,
