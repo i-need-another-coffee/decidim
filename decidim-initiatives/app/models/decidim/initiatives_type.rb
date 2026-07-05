@@ -12,7 +12,8 @@ module Decidim
 
     belongs_to :organization,
                foreign_key: "decidim_organization_id",
-               class_name: "Decidim::Organization"
+               class_name: "Decidim::Organization",
+               inverse_of: :initiatives_types
 
     has_many :scopes,
              foreign_key: "decidim_initiatives_types_id",
@@ -23,6 +24,8 @@ module Decidim
     has_many :initiatives,
              through: :scopes,
              class_name: "Decidim::Initiative"
+
+    has_many :type_scopes, class_name: "Decidim::InitiativesTypeScope", foreign_key: "decidim_initiatives_types_id", dependent: :destroy
 
     enum :signature_type, [:online, :offline, :any], suffix: true
 
