@@ -7,7 +7,8 @@ module Decidim
         def highlighted_spaces
           @highlighted_spaces ||= OrganizationPrioritizedAssemblies
                                   .new(current_organization, current_user)
-                                  .query
+                                    .query
+                                    .includes([:hero_image_attachment, :organization])
         end
 
         def i18n_scope

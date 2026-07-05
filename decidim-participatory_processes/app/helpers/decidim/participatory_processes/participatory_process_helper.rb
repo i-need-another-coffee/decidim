@@ -87,7 +87,7 @@ module Decidim
       end
 
       def available_taxonomy_filters
-        Decidim::TaxonomyFilter.for(current_organization).for_manifest(:participatory_processes)
+        Decidim::TaxonomyFilter.for(current_organization).for_manifest(:participatory_processes).includes(:root_taxonomy, :filter_items)
       end
 
       def filter_dates_values

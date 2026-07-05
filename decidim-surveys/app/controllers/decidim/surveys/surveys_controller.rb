@@ -81,7 +81,7 @@ module Decidim
       end
 
       def search_collection
-        @search_collection ||= Decidim::Surveys::Survey.where(component: current_component)
+        @search_collection ||= Decidim::Surveys::Survey.where(component: current_component).includes(:component, questionnaire: [questions: :display_conditions])
       end
 
       def default_filter_params

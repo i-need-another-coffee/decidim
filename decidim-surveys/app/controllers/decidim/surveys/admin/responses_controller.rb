@@ -62,7 +62,7 @@ module Decidim
         end
 
         def collection
-          @collection ||= participants_query.participants
+          @collection ||= participants_query.participants.includes(:questionnaire)
         end
 
         def participant(response)

@@ -30,6 +30,7 @@ module Decidim
     def base_query
       ActionLog
         .where(organization:, visibility:)
+        .includes(:user)
         .order(created_at: :desc)
     end
 

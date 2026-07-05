@@ -8,7 +8,7 @@
 %>
 
 <main class="home" role="main">
-  <% Decidim::ContentBlock.published.for_scope(:homepage, organization: current_organization).each do |content_block| %>
+  <% Decidim::ContentBlock.published.includes(:organization).for_scope(:homepage, organization: current_organization).each do |content_block| %>
     <% next unless content_block.manifest %>
 
     <%= cell content_block.manifest.cell, content_block %>
