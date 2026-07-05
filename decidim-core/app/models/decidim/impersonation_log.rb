@@ -5,8 +5,8 @@ module Decidim
   class ImpersonationLog < ApplicationRecord
     SESSION_TIME_IN_MINUTES = 30
 
-    belongs_to :admin, foreign_key: "decidim_admin_id", class_name: "Decidim::User"
-    belongs_to :user, foreign_key: "decidim_user_id", class_name: "Decidim::User"
+    belongs_to :admin, foreign_key: "decidim_admin_id", class_name: "Decidim::User", inverse_of: :admin_impersonations
+    belongs_to :user, foreign_key: "decidim_user_id", class_name: "Decidim::User", inverse_of: :impersonated_as_logs
 
     validate :same_organization
 

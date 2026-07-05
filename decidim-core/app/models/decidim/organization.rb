@@ -20,7 +20,8 @@ module Decidim
                         :admin_terms_of_service_body
 
     has_many :static_pages, foreign_key: "decidim_organization_id", class_name: "Decidim::StaticPage", inverse_of: :organization, dependent: :destroy
-    has_many :static_page_topics, class_name: "Decidim::StaticPageTopic", inverse_of: :organization, dependent: :destroy
+    has_many :static_page_topics, class_name: "Decidim::StaticPageTop
+ic", inverse_of: :organization, dependent: :destroy
     has_many :scopes, -> { order(name: :asc) }, foreign_key: "decidim_organization_id", class_name: "Decidim::Scope", inverse_of: :organization, dependent: :destroy
     has_many :scope_types, -> { order(name: :asc) }, foreign_key: "decidim_organization_id", class_name: "Decidim::ScopeType", inverse_of: :organization, dependent: :destroy
     has_many :areas, -> { order(name: :asc) }, foreign_key: "decidim_organization_id", class_name: "Decidim::Area", inverse_of: :organization, dependent: :destroy
@@ -34,6 +35,16 @@ module Decidim
     has_many :templates, foreign_key: "decidim_organization_id", class_name: "Decidim::Templates::Template", dependent: :destroy if defined? Decidim::Templates
 
     has_many :taxonomies, foreign_key: "decidim_organization_id", class_name: "Decidim::Taxonomy", inverse_of: :organization, dependent: :destroy
+
+    has_many :content_blocks, foreign_key: "decidim_organization_id", class_name: "Decidim::ContentBlock", dependent: :destroy
+    has_many :contextual_help_sections, class_name: "Decidim::ContextualHelpSection", dependent: :destroy
+    has_many :editor_images, foreign_key: "decidim_organization_id", class_name: "Decidim::EditorImage", dependent: :destroy
+    has_many :identities, foreign_key: "decidim_organization_id", class_name: "Decidim::Identity", dependent: :destroy
+    has_many :newsletters, class_name: "Decidim::Newsletter", dependent: :destroy
+    has_many :share_tokens, foreign_key: "decidim_organization_id", class_name: "Decidim::ShareToken", dependent: :destroy
+    has_many :short_links, foreign_key: "decidim_organization_id", class_name: "Decidim::ShortLink", dependent: :destroy
+    has_many :action_logs, foreign_key: "decidim_organization_id", class_name: "Decidim::ActionLog", dependent: :destroy
+    has_many :searchable_resources, foreign_key: "decidim_organization_id", class_name: "Decidim::SearchableResource", dependent: :destroy
 
     # Users registration mode. Whether users can register or access the system. Does not affect users that access through Omniauth integrations.
     #  enabled: Users registration and sign in are enabled (default value).

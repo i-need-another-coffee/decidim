@@ -5,8 +5,8 @@ module Decidim
   class Identity < ApplicationRecord
     include Decidim::DownloadYourData
 
-    belongs_to :user, foreign_key: :decidim_user_id, class_name: "Decidim::User"
-    belongs_to :organization, foreign_key: :decidim_organization_id, class_name: "Decidim::Organization"
+    belongs_to :user, foreign_key: :decidim_user_id, class_name: "Decidim::User", inverse_of: :identities
+    belongs_to :organization, foreign_key: :decidim_organization_id, class_name: "Decidim::Organization", inverse_of: :identities
 
     validates :provider, presence: true
     validates :uid, presence: true, uniqueness: { scope: [:provider, :organization] }
