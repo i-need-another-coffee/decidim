@@ -32,3 +32,8 @@ group :development do
   gem "listen", "~> 3.10"
   gem "web-console", "~> 4.3"
 end
+
+group :test do
+  gem "stackprof"
+  gem "test-prof", "~> 1.0"
+end

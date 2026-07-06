@@ -38,6 +38,24 @@ require "paper_trail/frameworks/rspec"
 
 require_relative "spec_helper"
 
+if ENV["TEST_PROF_ENABLED"]
+  require "test_prof"
+
+  TestProf.configure do |config|
+    # the directory to put artifacts (reports) in ('tmp/test_prof' by default)
+    config.output_dir = Rails.root.join("tmp/test-prof")
+
+    # use unique filenames for reports (by simply appending current timestamp)
+    config.timestamps = true
+
+    # color output
+    config.color = true
+
+    # where to write logs (defaults)
+    config.output = $stdout
+  end
+end
+
 if ENV["CI"]
   require "rspec/retry"
 
