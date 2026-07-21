@@ -1,0 +1,6 @@
+= API file upload handling
+
+== Attachments
+
+* xref:develop:api/reference/uploads/attachments/create.adoc[Create Attachments]
+* xref:develop:api/reference/uploads/attachments/update.adoc[Create Attachments]

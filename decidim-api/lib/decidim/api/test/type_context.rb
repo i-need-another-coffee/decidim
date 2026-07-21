@@ -26,6 +26,7 @@ shared_context "with a graphql class type" do
   end
 
   let(:response) do
+    # pp variables.stringify_keys.to_json
     execute_query query, variables.stringify_keys
   end
 
