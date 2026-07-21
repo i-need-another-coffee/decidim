@@ -93,6 +93,18 @@ From now on, we will skip the "query" keyword for the purpose of readability. Yo
 ***** xref:develop:api/reference/components/proposals/withdraw.adoc[Withdraw Proposal]
 ***** xref:develop:api/reference/components/proposals/vote.adoc[Vote Proposal]
 ***** xref:develop:api/reference/components/proposals/answer.adoc[Answer Proposal]
+** API file upload handling
+*** xref:develop:api/reference/attachment_collection.adoc[Attachment Collections]
+**** xref:develop:api/reference/attachment_collection/create.adoc[Create Attachment Collection]
+**** xref:develop:api/reference/attachment_collection/update.adoc[Update Attachment Collection]
+**** xref:develop:api/reference/attachment_collection/delete.adoc[Delete Attachment Collection]
+*** xref:develop:api/reference/attachments.adoc[Attachments]
+**** xref:develop:api/reference/attachments/create.adoc[Create Attachments]
+**** xref:develop:api/reference/attachments/update.adoc[Update Attachments]
+**** xref:develop:api/reference/attachments/delete.adoc[Delete Attachments]
+*** xref:develop:api/reference/file_upload.adoc[File Upload]
+**** xref:develop:api/reference/upload/file.adoc[Upload File]
+**** xref:develop:api/reference/upload/blob.adoc[Delete Blob]
 
 == Usage limits
 

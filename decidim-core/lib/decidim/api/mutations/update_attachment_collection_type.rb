@@ -10,21 +10,18 @@ module Decidim
       argument :id, GraphQL::Types::ID, "The ID of the attachment collection", required: true
 
       def resolve(attributes:, id:)
-        return GraphQL::ExecutionError.new(I18n.t("decidim.admin.attachments.update.error")) unless attachment_collection(id)
+        raise GraphQL::ExecutionError.new(I18n.t("decidim.admin.attachments.update.error")) unless attachment_collection(id)
 
         form_attrs = params_from_attributes(attributes)
-
-        form = Admin::AttachmentCollectionForm.from_params(form_attrs)
-                                              .with_context(
-                                                current_component: context[:current_component],
-                                                current_organization: context[:current_organization],
-                                                current_user: context[:current_user],
-                                                collection_for: object
-                                              )
+        form = form(Admin::AttachmentCollectionForm).from_params(form_attrs, collection_for: object)
 
         Decidim::Admin::UpdateAttachmentCollection.call(attachment_collection, form) do
           on(:ok) do
             return @attachment_collection.reload
+          end
+
+          on(:invalid) do
+            raise Decidim::Api::Errors::AttributeValidationError, form.errors
           end
         end
 
@@ -53,15 +50,18 @@ module Decidim
       end
 
       def params_from_attributes(attributes)
+        validate_multiple_locales(attributes, :name)
+        validate_multiple_locales(attributes, :description)
+
         key = attributes[:key].presence || attributes[:slug] || attachment_collection.key
 
-        {
-          key:,
-          description: attachment_collection.description,
-          name: attachment_collection.name,
-          weight: attachment_collection.weight,
-          current_user: context[:current_user]
-        }.merge(attributes.to_h.slice(:name, :description, :weight))
+        attributes = attributes.to_h.slice(:name, :description, :weight)
+
+        attributes[:description] = attributes.to_h.fetch(:description, attachment_collection.description)
+        attributes[:name] = attributes.to_h.fetch(:name, attachment_collection.name)
+        attributes[:key] = key
+
+        attributes
       end
     end
   end

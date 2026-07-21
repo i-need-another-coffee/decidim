@@ -9,7 +9,6 @@ module Decidim
       description "Attributes for attaching files to objects"
 
       argument :blob_id, GraphQL::Types::Int, description: "The file blob ID to attach to the object", required: true
-      # TODO: Should be completed
     end
   end
 end

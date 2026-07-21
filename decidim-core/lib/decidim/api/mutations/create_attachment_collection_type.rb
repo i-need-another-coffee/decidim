@@ -9,18 +9,15 @@ module Decidim
       argument :attributes, AttachmentCollectionAttributes, description: "input attributes to create an attachment collection", required: true
 
       def resolve(attributes:)
-        key = attributes.key || attributes.slug
-        form = Admin::AttachmentCollectionForm.from_params(attributes.to_h.merge(key:))
-                                              .with_context(
-                                                current_component: context[:current_component],
-                                                current_organization: context[:current_organization],
-                                                current_user: context[:current_user],
-                                                collection_for: object
-                                              )
+        params = extract_from(attributes)
+
+        key = params.fetch(:key) || params.fetch(:slug)
+        form = form(Admin::AttachmentCollectionForm).from_params(params.merge(key:), collection_for: object)
+
         attachment_collection = nil
         Decidim::Admin::CreateAttachmentCollection.call(form, object) do
           on(:ok) do
-            attachment_collection = @attachment_collection
+            return @attachment_collection
           end
         end
         return attachment_collection if attachment_collection.present?
@@ -38,6 +35,18 @@ module Decidim
         end
 
         true
+      end
+
+      def extract_from(attributes)
+        validate_multiple_locales(attributes, :name)
+        validate_multiple_locales(attributes, :description)
+
+        attributes = attributes.to_h
+
+        attributes[:name] = attributes.to_h.fetch(:name, {})
+        attributes[:description] = attributes.to_h.fetch(:description, {})
+
+        attributes
       end
     end
   end

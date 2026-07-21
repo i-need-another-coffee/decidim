@@ -9,22 +9,23 @@ module Decidim
       argument :attributes, AttachmentAttributes, description: "input attributes to create an attachment", required: true
 
       def resolve(attributes:)
-        form_attrs = attributes.to_h.merge(
+        params = extract_from(attributes)
+
+
+        form_attrs = params.merge(
           file: attributes.file.blob.signed_id,
           attachment_collection_id: attributes.collection&.id_value
         )
-        form = Admin::AttachmentForm.from_params(form_attrs)
-                                    .with_context(
-                                      current_component: context[:current_component],
-                                      current_organization: context[:current_organization],
-                                      current_user: context[:current_user],
-                                      attached_to: object
-                                    )
+        form = form(Admin::AttachmentForm).from_params(form_attrs, attached_to: object)
 
         attachment = nil
         Admin::CreateAttachment.call(form, object) do
           on(:ok) do
-            attachment = @attachment
+            return @attachment
+          end
+
+          on(:invalid) do
+            raise Decidim::Api::Errors::AttributeValidationError, form.errors
           end
         end
         return attachment if attachment.present?
@@ -40,9 +41,24 @@ module Decidim
         context[:scope] = :admin
 
         context[:attached_to] = object
-        raise Decidim::Api::Errors::MutationNotAuthorizedError, I18n.t("decidim.api.errors.unauthorized_mutation") unless super && allowed_to?(:create, :attachment, nil, context)
+        unless super && allowed_to?(:create, :attachment, nil, context)
+          raise Decidim::Api::Errors::MutationNotAuthorizedError, I18n.t("decidim.api.errors.unauthorized_mutation")
+        end
+
 
         true
+      end
+
+      def extract_from(attributes)
+        validate_multiple_locales(attributes, :title)
+        validate_multiple_locales(attributes, :description)
+
+        attributes = attributes.to_h
+
+        attributes[:title] = attributes.to_h.fetch(:title, {})
+        attributes[:description] = attributes.to_h.fetch(:description, {})
+
+        attributes
       end
     end
   end
