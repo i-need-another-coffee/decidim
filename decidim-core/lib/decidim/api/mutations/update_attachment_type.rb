@@ -13,20 +13,17 @@ module Decidim
         return GraphQL::ExecutionError.new(I18n.t("decidim.admin.attachments.update.error")) unless attachment(id)
 
         form_params = params_from_attributes(attributes)
-        form = Admin::AttachmentForm.from_params(form_params).with_context(
-          current_component: context[:current_component],
-          current_organization: context[:current_organization],
-          current_user: context[:current_user],
-          attached_to: object
-        )
+        form = form(Admin::AttachmentForm).from_params(form_params, attached_to: object)
 
-        status = nil
         Decidim::Admin::UpdateAttachment.call(attachment, form) do
           on(:ok) do
-            status = :ok
+            return attachment.reload
+          end
+
+          on(:invalid) do
+            raise Decidim::Api::Errors::AttributeValidationError, form.errors
           end
         end
-        return attachment.reload if status == :ok
 
         raise Decidim::Api::Errors::AttributeValidationError, form.errors if form.errors.any?
 
@@ -56,15 +53,16 @@ module Decidim
         file_attribute = attributes.file&.blob&.signed_id ||
                          attachment.file&.blob&.signed_id
         attachment_attribute = attributes.collection&.id_value || attachment.attachment_collection&.id
-        {
-          title: attachment.title,
-          description: attachment.description,
-          weight: attachment.weight,
-          file: file_attribute,
-          attachment_collection_id: attachment_attribute
-        }.merge(
-          attributes.to_h.slice(:title, :description, :weight)
-        )
+
+
+        attributes = attributes.to_h.slice(:title, :description, :weight)
+
+        attributes[:description] = attributes.to_h.fetch(:description, attachment.description)
+        attributes[:title] = attributes.to_h.fetch(:title, attachment.title)
+        attributes[:file] = file_attribute
+        attributes[:attachment_collection_id] = attachment_attribute
+
+        attributes
       end
     end
   end
