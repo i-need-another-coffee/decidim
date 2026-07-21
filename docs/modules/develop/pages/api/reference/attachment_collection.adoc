@@ -1,0 +1,2 @@
+= Attachments Collections
+Several modules do support attachment collections. This is the documentation
