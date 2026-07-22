@@ -2,7 +2,7 @@
 
 == Sample request
 
-The `deleteAttachment` mutation allows authenticated administrators to delete any attachment collections.
+The `deleteAttachmentCollection` mutation allows authenticated administrators to delete any attachment collections.
 
 [source,graphql]
 ----
