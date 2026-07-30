@@ -2,7 +2,7 @@
 
 module Decidim
   # Attribute that can be handled to enable or disable search behavior for speed up of the specs
-  mattr_accessor :skip_indexing, default: false
+  mattr_accessor :skip_indexing, default: true
 end
 
 RSpec.configure do |config|
