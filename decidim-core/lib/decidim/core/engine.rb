@@ -40,6 +40,7 @@ require "chartkick"
 require "shakapacker"
 require "data_migrate"
 
+require "active_record/session_store"
 require "decidim/api"
 require "decidim/core/content_blocks/registry_manager"
 require "decidim/core/menu"
@@ -322,6 +323,19 @@ module Decidim
         app.config.middleware.insert_before Warden::Manager, Decidim::Middleware::CurrentOrganization
         app.config.middleware.insert_before Warden::Manager, Decidim::Middleware::StripXForwardedHost
         app.config.middleware.use BatchLoader::Middleware
+      end
+
+      initializer "decidim_core.session_store" do |app|
+        app.config.session_store :active_record_store,
+                                 key: "_session_id",
+                                 secure: Rails.env.production?,
+                                 httponly: true,
+                                 same_site: :lax
+
+        Warden::Manager.before_logout do |_user, auth, _opts|
+          auth.request.session.options[:drop] = true
+          auth.request.reset_session
+        end
       end
 
       initializer "decidim_core.param_filtering" do |app|
