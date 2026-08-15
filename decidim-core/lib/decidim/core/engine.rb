@@ -325,19 +325,6 @@ module Decidim
         app.config.middleware.use BatchLoader::Middleware
       end
 
-      initializer "decidim_core.session_store" do |app|
-        app.config.session_store :active_record_store,
-                                 key: "_session_id",
-                                 secure: Rails.env.production?,
-                                 httponly: true,
-                                 same_site: :lax
-
-        Warden::Manager.before_logout do |_user, auth, _opts|
-          auth.request.session.options[:drop] = true
-          auth.request.reset_session
-        end
-      end
-
       initializer "decidim_core.param_filtering" do |app|
         app.config.filter_parameters += [:document_number, :postal_code, :mobile_phone_number]
       end
@@ -563,7 +550,17 @@ module Decidim
       initializer "decidim_core.session_store" do |app|
         next if app.config.session_store?
 
-        app.config.session_store :cookie_store, secure: Decidim.config.force_ssl, expire_after: Decidim.config.expire_session_after
+        app.config.session_store :active_record_store,
+                                 key: "_session_id",
+                                 secure: Decidim.config.force_ssl,
+                                 expire_after: Decidim.config.expire_session_after,
+                                 httponly: true,
+                                 same_site: :lax
+
+        Warden::Manager.before_logout do |_user, auth, _opts|
+          auth.request.session.options[:drop] = true
+          auth.request.reset_session
+        end
       end
 
       initializer "decidim_core.register_resources" do

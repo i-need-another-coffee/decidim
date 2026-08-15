@@ -11,6 +11,7 @@ module Decidim
     let(:organization) { create(:organization) }
 
     before do
+      patch_request(request)
       request.env["decidim.current_organization"] = organization
       request.env["devise.mapping"] = ::Devise.mappings[:user]
     end

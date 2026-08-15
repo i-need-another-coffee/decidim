@@ -12,7 +12,13 @@ module Decidim
       logout scope
       sleep 0.5
 
-      login_as user, scope:
+      login_as(user, scope:)
+    end
+
+    def clear_session!
+      page.driver.browser.manage.delete_all_cookies if page.driver.respond_to?(:browser) && page.driver.browser.respond_to?(:manage)
+      ActiveRecord::SessionStore::Session.delete_all
+      ActiveRecord::Base.connection.clear_query_cache
     end
   end
 end
@@ -26,6 +32,12 @@ RSpec.configure do |config|
     if controller
       allow(controller).to receive(:current_organization).and_return(try(:organization) || try(:current_organization) || nil)
       allow(controller).to receive(:current_user).and_return(try(:user) || try(:current_user) || nil)
+    end
+  end
+
+  config.before :each, type: :system do
+    Warden::Manager.after_set_user do |_user, auth, _opts|
+      auth.env["rack.session.options"][:renew] = false
     end
   end
 
