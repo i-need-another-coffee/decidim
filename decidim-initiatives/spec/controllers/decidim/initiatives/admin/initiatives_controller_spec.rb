@@ -288,6 +288,7 @@ describe Decidim::Initiatives::Admin::InitiativesController do
         let(:other_user) { create(:user, organization:) }
 
         before do
+          patch_request(request)
           sign_in other_user, scope: :user
         end
 

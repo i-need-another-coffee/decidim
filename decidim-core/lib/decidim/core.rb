@@ -487,6 +487,8 @@ module Decidim
   # this is also maximum time that user can idle before getting automatically signed out.
   mattr_accessor :expire_session_after, default: Decidim::Env.new("DECIDIM_EXPIRE_SESSION_AFTER", "30").to_i.minutes
 
+  mattr_accessor :remove_sessions_after, default: Decidim::Env.new("DECIDIM_REMOVE_SESSIONS_AFTER", "120").to_i.minutes
+
   # Defines how long the OAuth access tokens and API access tokens are valid.
   # Defaults to the default value as defined in Doorkeeper.
   mattr_accessor :oauth_access_token_expires_in, default: Decidim::Env.new("DECIDIM_OAUTH_ACCESS_TOKEN_EXPIRES_IN", "120").to_i.minutes

@@ -7,19 +7,21 @@ shared_context "when inviting participatory space users" do
   let(:role) { "Moderator" }
 
   def invite_user
-    login_as user, scope: :user
+    with_new_session do
+      login_as user, scope: :user
+      visit participatory_space_user_roles_path
 
-    visit participatory_space_user_roles_path
-    within "[data-content]" do
-      click_on new_button_label
+      within "[data-content]" do
+        click_on new_button_label
+      end
+
+      fill_in "Name", with: "Alice Liddel"
+      fill_in "Email", with: email
+      select role, from: "Role"
+      click_on "Create"
+      expect(page).to have_callout(added_callout_message)
+      logout :user
     end
-
-    fill_in "Name", with: "Alice Liddel"
-    fill_in "Email", with: email
-    select role, from: "Role"
-    click_on "Create"
-    expect(page).to have_callout(added_callout_message)
-    logout :user
   end
 
   def edit_user(username)

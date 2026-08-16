@@ -59,8 +59,7 @@ describe "Identity document online review" do
     context "and the user logs back in" do
       before do
         expect(page).to have_text("Verification rejected. Participant will be prompted to amend their documents")
-        relogin_as user, scope: :user
-        visit decidim_verifications.authorizations_path
+        relogin_as user, scope: :user, url: decidim_verifications.authorizations_path
         click_on "Identity documents"
       end
 
@@ -76,8 +75,8 @@ describe "Identity document online review" do
         )
         expect(page).to have_text("Document successfully reuploaded")
 
-        relogin_as admin, scope: :user
-        visit decidim_admin_id_documents.root_path
+        relogin_as admin, scope: :user, url: decidim_admin_id_documents.root_path
+
         click_on "Verification #1"
         expect(page).to have_css("img[src*='/private_downloads/']")
         submit_verification_form(doc_type: "Identification number", doc_number: "XXXXXXXY")

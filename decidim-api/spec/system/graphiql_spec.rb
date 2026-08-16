@@ -11,7 +11,6 @@ describe "GraphiQL" do
 
   before do
     switch_to_host(organization.host)
-    visit decidim_api.graphiql_path
   end
 
   context "when the organization has private access" do
@@ -23,12 +22,14 @@ describe "GraphiQL" do
     end
 
     it "forces the user to log in" do
+      visit decidim_api.graphiql_path
       expect(page).to have_current_path decidim.new_user_session_path
       expect(page).to have_text("Please, log in with your account before access")
     end
   end
 
   it "is able to execute the default query" do
+    visit decidim_api.graphiql_path
     # Wait for the page to finish loading and the GraphiQL interface to start
     # before clicking the button for it to actually work.
     expect(page).to have_text("participatoryProcesses {")
@@ -41,10 +42,10 @@ describe "GraphiQL" do
   context "with force_api_authentication enabled" do
     before do
       allow(Decidim::Api).to receive(:force_api_authentication).and_return(true)
-      visit decidim_api.graphiql_path
     end
 
     it "forces the user to log in" do
+      visit decidim_api.graphiql_path
       expect(page).to have_current_path decidim.new_user_session_path
       expect(page).to have_text("Please, log in with your account before access")
     end

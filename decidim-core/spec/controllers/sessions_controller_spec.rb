@@ -9,6 +9,10 @@ module Decidim
 
       let(:organization) { create(:organization) }
 
+      before do
+        patch_request(request)
+      end
+
       describe "after_sign_in_path_for" do
         subject { controller.after_sign_in_path_for(user) }
 

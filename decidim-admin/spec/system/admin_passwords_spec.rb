@@ -80,6 +80,44 @@ describe "Admin passwords" do
     end
   end
 
+  context "when using logout" do
+    let(:session_cookie_name) { "_session_id" }
+    let(:password_updated_at) { 7.days.ago }
+
+    it "removes the session from the session list" do
+      visit current_path
+      manual_login(user.email, password)
+
+      visit decidim_admin.root_path
+
+      expect(page).to have_current_path("/en/admin/")
+
+      browser_cookies = page.driver.browser.manage.all_cookies
+      session_cookie = browser_cookies.find { |c| c[:name] == session_cookie_name }
+
+      expect(session_cookie).not_to be_nil
+      captured_cookie_value = session_cookie[:value]
+
+      click_on user.email
+      click_link "Log out"
+      expect(page).to have_current_path("/en/users/sign_in")
+
+      Capybara.using_session("Duplicate session") do
+        driven_by :headless_chrome
+
+        visit decidim_admin.root_path
+
+        page.driver.browser.manage.add_cookie(name: session_cookie_name, value: captured_cookie_value, path: "/", secure: false, http_only: true)
+
+        visit decidim_admin.root_path
+
+        expect(page).to have_current_path("/en/users/sign_in")
+        expect(page).to have_no_text("Dashboard")
+        expect(page).to have_text("You need to log in or create an account before continuing.")
+      end
+    end
+  end
+
   def manual_login(email, password)
     click_on "Log in", match: :first
     within ".new_user" do
