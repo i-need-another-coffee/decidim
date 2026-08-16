@@ -8,17 +8,21 @@ module Decidim
     # Utility method to login in the middle of a test as a different user from
     # the current one.
     #
-    def relogin_as(user, scope: :user)
+    def relogin_as(user, scope: :user, url: nil)
       logout scope
+      clear_session!
       sleep 0.5
 
+      visit url.nil? ? current_url : url
+
       login_as(user, scope:)
+      visit url.nil? ? current_url : url
     end
 
     def clear_session!
-      page.driver.browser.manage.delete_all_cookies if page.driver.respond_to?(:browser) && page.driver.browser.respond_to?(:manage)
       ActiveRecord::SessionStore::Session.delete_all
       ActiveRecord::Base.connection.clear_query_cache
+      page.driver.browser.manage.delete_all_cookies if page.driver.respond_to?(:browser) && page.driver.browser.respond_to?(:manage)
     end
   end
 end

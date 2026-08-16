@@ -27,6 +27,17 @@ module Decidim
 
       "http"
     end
+
+    def with_new_session(&block)
+      Capybara.using_session("Duplicate session") do
+        clear_session!
+        driven_by :headless_chrome
+
+        visit current_url
+
+        yield
+      end
+    end
   end
 end
 
