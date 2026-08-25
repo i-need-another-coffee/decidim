@@ -27,11 +27,23 @@ module Decidim
                           confirmation_keys: [:decidim_organization_id, :email]
     devise :rememberable if Decidim.enable_remember_me
 
-    has_many :identities, foreign_key: "decidim_user_id", class_name: "Decidim::Identity", dependent: :destroy
+    has_many :identities, foreign_key: "decidim_user_id", class_name: "Decidim::Identity", dependent: :destroy, inverse_of: :user
     has_many :access_grants, class_name: "Doorkeeper::AccessGrant", foreign_key: :resource_owner_id, dependent: :destroy
     has_many :access_tokens, class_name: "Doorkeeper::AccessToken", foreign_key: :resource_owner_id, dependent: :destroy
     has_many :reminders, foreign_key: "decidim_user_id", class_name: "Decidim::Reminder", dependent: :destroy
     has_many :private_exports, class_name: "Decidim::PrivateExport", dependent: :destroy, inverse_of: :attached_to, as: :attached_to
+    has_many :authorizations, foreign_key: "decidim_user_id", class_name: "Decidim::Authorization", dependent: :destroy
+    has_many :authorized_transfers, class_name: "Decidim::AuthorizationTransfer", foreign_key: "decidim_user_id", dependent: :destroy
+    has_many :source_user_transfers, class_name: "Decidim::AuthorizationTransfer", foreign_key: "decidim_source_user_id", dependent: :destroy
+    has_many :amendments_made, class_name: "Decidim::Amendment", foreign_key: "decidim_user_id", dependent: :destroy
+    has_many :reports_made, class_name: "Decidim::Report", foreign_key: "decidim_user_id", dependent: :destroy
+    has_many :user_reports, class_name: "Decidim::UserReport", foreign_key: "decidim_user_id", dependent: :destroy
+    has_many :impersonated_as_logs, class_name: "Decidim::ImpersonationLog", foreign_key: "decidim_user_id", dependent: :destroy
+    has_many :admin_impersonations, class_name: "Decidim::ImpersonationLog", foreign_key: "decidim_admin_id", dependent: :destroy
+    has_many :editor_images, class_name: "Decidim::EditorImage", foreign_key: "decidim_author_id", dependent: :destroy
+    has_many :newsletters, class_name: "Decidim::Newsletter", foreign_key: "decidim_author_id", dependent: :destroy
+    has_many :share_tokens, class_name: "Decidim::ShareToken", foreign_key: "decidim_user_id", dependent: :destroy
+    has_many :received_receipts, class_name: "Decidim::Messaging::Receipt", foreign_key: "decidim_recipient_id", dependent: :destroy
 
     validates :name, presence: true, unless: -> { deleted? }
     validates :nickname,

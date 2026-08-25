@@ -24,6 +24,7 @@ module Decidim
     belongs_to :scope,
                foreign_key: "decidim_scope_id",
                class_name: "Decidim::Scope",
+               inverse_of: :searchable_resources,
                optional: true
     belongs_to :resource, polymorphic: true
     belongs_to :decidim_participatory_space, polymorphic: true, optional: true

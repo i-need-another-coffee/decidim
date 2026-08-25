@@ -10,7 +10,7 @@ module Decidim
     class Receipt < ApplicationRecord
       self.table_name = "decidim_messaging_receipts"
 
-      belongs_to :recipient, foreign_key: "decidim_recipient_id", class_name: "Decidim::User"
+      belongs_to :recipient, foreign_key: "decidim_recipient_id", class_name: "Decidim::User", inverse_of: :received_receipts
       belongs_to :message, foreign_key: "decidim_message_id", class_name: "Decidim::Messaging::Message"
 
       scope :recipient, ->(recipient) { where(recipient:) }

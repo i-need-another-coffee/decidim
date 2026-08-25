@@ -7,7 +7,7 @@ module Decidim
 
     translatable_fields :content
 
-    belongs_to :organization, class_name: "Decidim::Organization"
+    belongs_to :organization, class_name: "Decidim::Organization", inverse_of: :contextual_help_sections
     validates :content, presence: true
 
     def self.log_presenter_class_for(_log)

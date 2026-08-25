@@ -35,6 +35,16 @@ module Decidim
 
     has_many :taxonomies, foreign_key: "decidim_organization_id", class_name: "Decidim::Taxonomy", inverse_of: :organization, dependent: :destroy
 
+    has_many :content_blocks, foreign_key: "decidim_organization_id", class_name: "Decidim::ContentBlock", dependent: :destroy
+    has_many :contextual_help_sections, class_name: "Decidim::ContextualHelpSection", dependent: :destroy
+    has_many :editor_images, foreign_key: "decidim_organization_id", class_name: "Decidim::EditorImage", dependent: :destroy
+    has_many :identities, foreign_key: "decidim_organization_id", class_name: "Decidim::Identity", dependent: :destroy
+    has_many :newsletters, class_name: "Decidim::Newsletter", dependent: :destroy
+    has_many :share_tokens, foreign_key: "decidim_organization_id", class_name: "Decidim::ShareToken", dependent: :destroy
+    has_many :short_links, foreign_key: "decidim_organization_id", class_name: "Decidim::ShortLink", dependent: :destroy
+    has_many :action_logs, foreign_key: "decidim_organization_id", class_name: "Decidim::ActionLog"
+    has_many :searchable_resources, foreign_key: "decidim_organization_id", class_name: "Decidim::SearchableResource", dependent: :destroy
+
     # Users registration mode. Whether users can register or access the system. Does not affect users that access through Omniauth integrations.
     #  enabled: Users registration and sign in are enabled (default value).
     #  existing: Users cannot be registered in the system. Only existing users can sign in.

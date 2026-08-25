@@ -33,6 +33,8 @@ module Decidim
              inverse_of: :parent,
              dependent: :destroy
 
+    has_many :searchable_resources, class_name: "Decidim::SearchableResource", foreign_key: "decidim_scope_id", dependent: :destroy
+
     before_validation :update_part_of, on: :update
 
     validates :name, :code, presence: true

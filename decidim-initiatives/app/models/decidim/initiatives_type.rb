@@ -24,6 +24,8 @@ module Decidim
              through: :scopes,
              class_name: "Decidim::Initiative"
 
+    has_many :type_scopes, class_name: "Decidim::InitiativesTypeScope", foreign_key: "decidim_initiatives_types_id", dependent: :destroy
+
     enum :signature_type, [:online, :offline, :any], suffix: true
 
     validates :title, :description, :signature_type, presence: true

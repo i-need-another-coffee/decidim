@@ -61,6 +61,7 @@ module Decidim
                optional: true
 
     has_many :components, as: :participatory_space, dependent: :destroy
+    has_many :participatory_process_user_roles, class_name: "Decidim::ParticipatoryProcessUserRole", foreign_key: "decidim_participatory_process_id", dependent: :destroy
 
     attr_readonly :active_step
 
