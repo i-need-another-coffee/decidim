@@ -40,6 +40,7 @@ require "chartkick"
 require "shakapacker"
 require "data_migrate"
 
+require "active_record/session_store"
 require "decidim/api"
 require "decidim/core/content_blocks/registry_manager"
 require "decidim/core/menu"
@@ -546,10 +547,29 @@ module Decidim
         end
       end
 
+      initializer "decidim_core.session_store_override" do
+        ActiveRecord::SessionStore::Session.class_eval do
+          def data=(data)
+            attribute_will_change!("data") if data != self.class.deserialize(read_attribute("data"))
+            @data = data
+          end
+        end
+      end
+
       initializer "decidim_core.session_store" do |app|
         next if app.config.session_store?
 
-        app.config.session_store :cookie_store, secure: Decidim.config.force_ssl, expire_after: Decidim.config.expire_session_after
+        app.config.session_store :active_record_store,
+                                 key: "_session_id",
+                                 secure: Decidim.config.force_ssl,
+                                 expire_after: Decidim.config.expire_session_after,
+                                 httponly: true,
+                                 same_site: :lax
+
+        # Warden::Manager.before_logout do |_user, auth, _opts|
+        #   auth.request.session.options[:drop] = true
+        #   auth.request.reset_session
+        # end
       end
 
       initializer "decidim_core.register_resources" do

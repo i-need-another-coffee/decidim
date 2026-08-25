@@ -230,9 +230,9 @@ shared_examples "comments" do
 
     context "when user visit a computer browser" do
       before do
-        switch_to_host(organization.host)
-        visit decidim.root_path
-        login_as user, scope: :user
+        # switch_to_host(organization.host)
+        # visit decidim.root_path
+        # login_as user, scope: :user
         visit resource_path
       end
 
@@ -257,7 +257,6 @@ shared_examples "comments" do
         switch_to_host(organization.host)
         visit decidim.root_path
         click_on "Accept all"
-        login_as user, scope: :user
         visit resource_path
         if page.has_content?("Log in")
           login_as user, scope: :user
