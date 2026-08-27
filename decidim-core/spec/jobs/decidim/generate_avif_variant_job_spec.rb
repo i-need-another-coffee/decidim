@@ -8,7 +8,8 @@ module Decidim
 
     describe "queue" do
       it "is queued to default" do
-        expect(subject.queue_name).to eq("default")
+        ::ActiveStorage.queues[:transform] = :default
+        expect(subject.queue_name.call).to eq(:default)
       end
     end
 
