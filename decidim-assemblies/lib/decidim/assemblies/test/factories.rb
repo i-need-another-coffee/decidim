@@ -111,10 +111,9 @@ FactoryBot.define do
   factory :assembly_admin, parent: :user, class: "Decidim::User" do
     transient do
       skip_injection { false }
-      assembly { create(:assembly) }
+      assembly { create(:assembly, organization:, skip_injection:) }
     end
 
-    organization { assembly.organization }
     admin_terms_accepted_at { Time.current }
 
     after(:create) do |user, evaluator|
@@ -129,10 +128,9 @@ FactoryBot.define do
   factory :assembly_moderator, parent: :user, class: "Decidim::User" do
     transient do
       skip_injection { false }
-      assembly { create(:assembly) }
+      assembly { create(:assembly, organization:, skip_injection:) }
     end
 
-    organization { assembly.organization }
     admin_terms_accepted_at { Time.current }
 
     after(:create) do |user, evaluator|
@@ -147,10 +145,9 @@ FactoryBot.define do
   factory :assembly_collaborator, parent: :user, class: "Decidim::User" do
     transient do
       skip_injection { false }
-      assembly { create(:assembly) }
+      assembly { create(:assembly, organization:, skip_injection:) }
     end
 
-    organization { assembly.organization }
     admin_terms_accepted_at { Time.current }
 
     after(:create) do |user, evaluator|
@@ -165,10 +162,9 @@ FactoryBot.define do
   factory :assembly_evaluator, parent: :user, class: "Decidim::User" do
     transient do
       skip_injection { false }
-      assembly { create(:assembly) }
+      assembly { create(:assembly, organization:, skip_injection:) }
     end
 
-    organization { assembly.organization }
     admin_terms_accepted_at { Time.current }
 
     after(:create) do |user, evaluator|

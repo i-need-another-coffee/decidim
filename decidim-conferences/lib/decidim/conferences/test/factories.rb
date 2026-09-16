@@ -68,10 +68,9 @@ FactoryBot.define do
   factory :conference_admin, parent: :user, class: "Decidim::User" do
     transient do
       skip_injection { false }
-      conference { create(:conference, skip_injection:) }
+      conference { create(:conference, organization:, skip_injection:) }
     end
 
-    organization { conference.organization }
     admin_terms_accepted_at { Time.current }
 
     after(:create) do |user, evaluator|
@@ -86,10 +85,9 @@ FactoryBot.define do
   factory :conference_moderator, parent: :user, class: "Decidim::User" do
     transient do
       skip_injection { false }
-      conference { create(:conference, skip_injection:) }
+      conference { create(:conference, organization:, skip_injection:) }
     end
 
-    organization { conference.organization }
     admin_terms_accepted_at { Time.current }
 
     after(:create) do |user, evaluator|
@@ -104,10 +102,9 @@ FactoryBot.define do
   factory :conference_collaborator, parent: :user, class: "Decidim::User" do
     transient do
       skip_injection { false }
-      conference { create(:conference, skip_injection:) }
+      conference { create(:conference, organization:, skip_injection:) }
     end
 
-    organization { conference.organization }
     admin_terms_accepted_at { Time.current }
 
     after(:create) do |user, evaluator|
@@ -122,10 +119,9 @@ FactoryBot.define do
   factory :conference_evaluator, parent: :user, class: "Decidim::User" do
     transient do
       skip_injection { false }
-      conference { create(:conference, skip_injection:) }
+      conference { create(:conference, organization:, skip_injection:) }
     end
 
-    organization { conference.organization }
     admin_terms_accepted_at { Time.current }
 
     after(:create) do |user, evaluator|

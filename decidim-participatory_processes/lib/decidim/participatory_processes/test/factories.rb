@@ -165,10 +165,9 @@ FactoryBot.define do
   factory :process_admin, parent: :user, class: "Decidim::User" do
     transient do
       skip_injection { false }
-      participatory_process { create(:participatory_process, skip_injection:) }
+      participatory_process { create(:participatory_process, organization:, skip_injection:) }
     end
 
-    organization { participatory_process.organization }
     admin_terms_accepted_at { Time.current }
 
     after(:create) do |user, evaluator|
@@ -182,10 +181,9 @@ FactoryBot.define do
   factory :process_collaborator, parent: :user, class: "Decidim::User" do
     transient do
       skip_injection { false }
-      participatory_process { create(:participatory_process, skip_injection:) }
+      participatory_process { create(:participatory_process, organization:, skip_injection:) }
     end
 
-    organization { participatory_process.organization }
     admin_terms_accepted_at { Time.current }
 
     after(:create) do |user, evaluator|
@@ -199,10 +197,9 @@ FactoryBot.define do
   factory :process_moderator, parent: :user, class: "Decidim::User" do
     transient do
       skip_injection { false }
-      participatory_process { create(:participatory_process, skip_injection:) }
+      participatory_process { create(:participatory_process, organization:, skip_injection:) }
     end
 
-    organization { participatory_process.organization }
     admin_terms_accepted_at { Time.current }
 
     after(:create) do |user, evaluator|
@@ -216,10 +213,9 @@ FactoryBot.define do
   factory :process_evaluator, parent: :user, class: "Decidim::User" do
     transient do
       skip_injection { false }
-      participatory_process { create(:participatory_process, skip_injection:) }
+      participatory_process { create(:participatory_process, organization:, skip_injection:) }
     end
 
-    organization { participatory_process.organization }
     admin_terms_accepted_at { Time.current }
 
     after(:create) do |user, evaluator|
