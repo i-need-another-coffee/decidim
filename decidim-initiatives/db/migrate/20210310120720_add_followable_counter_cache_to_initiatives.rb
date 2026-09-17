@@ -7,8 +7,11 @@ class AddFollowableCounterCacheToInitiatives < ActiveRecord::Migration[5.2]
     reversible do |dir|
       dir.up do
         Decidim::Initiative.reset_column_information
-        Decidim::Initiative.find_each do |record|
-          record.class.reset_counters(record.id, :follows)
+
+        Decidim::Initiative.with_enforcement_disabled do
+          Decidim::Initiative.find_each do |record|
+            record.class.reset_counters(record.id, :follows)
+          end
         end
       end
     end

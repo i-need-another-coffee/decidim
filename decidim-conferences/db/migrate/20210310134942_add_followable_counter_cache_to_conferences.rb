@@ -7,8 +7,11 @@ class AddFollowableCounterCacheToConferences < ActiveRecord::Migration[5.2]
     reversible do |dir|
       dir.up do
         Decidim::Conference.reset_column_information
-        Decidim::Conference.unscoped.find_each do |record|
-          record.class.reset_counters(record.id, :follows)
+
+        Decidim::Conference.with_enforcement_disabled do
+          Decidim::Conference.unscoped.find_each do |record|
+            record.class.reset_counters(record.id, :follows)
+          end
         end
       end
     end
