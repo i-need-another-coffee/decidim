@@ -7,6 +7,7 @@ module Decidim
 
       included do
         class_attribute :enforced_attribute
+        class_attribute :enforcement_disabled
       end
 
       class_methods do
@@ -15,14 +16,30 @@ module Decidim
         end
 
         def enforced?
-          enforced_attribute.present?
+          [enforced_attribute.present?, enforcement_disabled.nil?].all?
+        end
+
+        def with_enforcement_disabled
+          previous_state = enforcement_disabled
+          begin
+            self.enforcement_disabled = true
+            yield
+          ensure
+            self.enforcement_disabled = previous_state
+          end
         end
       end
     end
 
     module Relation
       def exec_queries(*args)
-        if Rails.env.local? && klass.respond_to?(:enforced?) && klass.enforced?
+        conditions = [
+          Rails.env.local?,
+          klass.respond_to?(:enforced?) && klass.enforced?,
+          klass.respond_to?(:disable_enforcement?) && klass.disable_enforcement?
+        ]
+
+        if conditions.all?
           where_sql = arel.constraints.map(&:to_sql).join(" ")
 
           association_reflection = klass.reflect_on_association(klass.enforced_attribute)
