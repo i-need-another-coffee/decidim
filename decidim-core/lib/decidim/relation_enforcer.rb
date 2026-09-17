@@ -15,6 +15,10 @@ module Decidim
           self.enforced_attribute = attribute
         end
 
+        def self.enforcement_disabled?
+          self.enforcement_disabled.present?
+        end
+
         def enforced?
           [enforced_attribute.present?, enforcement_disabled.nil?].all?
         end
@@ -35,8 +39,7 @@ module Decidim
       def exec_queries(*args)
         conditions = [
           Rails.env.local?,
-          klass.respond_to?(:enforced?) && klass.enforced?,
-          klass.respond_to?(:disable_enforcement?) && klass.disable_enforcement?
+          klass.respond_to?(:enforced?) && klass.enforced?
         ]
 
         if conditions.all?
