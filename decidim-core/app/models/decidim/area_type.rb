@@ -9,6 +9,8 @@ module Decidim
 
     translatable_fields :name, :plural
 
+    enforces :organization
+
     belongs_to :organization,
                foreign_key: "decidim_organization_id",
                class_name: "Decidim::Organization",

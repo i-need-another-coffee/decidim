@@ -351,6 +351,14 @@ module Decidim
         end
       end
 
+      initializer "decidim_core.add_active_record" do
+        ActiveSupport.on_load(:active_record) do
+          include(Decidim::RelationEnforcer::Model)
+        end
+
+        ActiveRecord::Relation.prepend(Decidim::RelationEnforcer::Relation)
+      end
+
       initializer "decidim_core.graphql_api" do
         Decidim::Api.add_orphan_type Decidim::Core::UserType
       end

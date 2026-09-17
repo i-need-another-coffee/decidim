@@ -135,6 +135,7 @@ module Decidim
   autoload :FormFactory, "decidim/form_factory"
   autoload :LocaleRouterDetector, "decidim/locale_router_detector"
   autoload :Routes, "decidim/routes"
+  autoload :RelationEnforcer, "decidim/relation_enforcer"
 
   module ParticipatorySpace
     autoload :HasMembers, "decidim/participatory_space/has_members"

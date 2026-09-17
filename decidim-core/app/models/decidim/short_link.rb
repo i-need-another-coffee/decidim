@@ -11,6 +11,8 @@ module Decidim
   # This feature can be used to link to any URLs or resources in Decidim with a
   # short reference.
   class ShortLink < ApplicationRecord
+    enforces :organization
+
     belongs_to :organization, foreign_key: "decidim_organization_id", class_name: "Decidim::Organization"
     belongs_to :target, polymorphic: true
 

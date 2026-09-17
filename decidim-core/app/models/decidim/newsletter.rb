@@ -9,6 +9,8 @@ module Decidim
 
     translatable_fields :subject
 
+    enforces :organization
+
     belongs_to :author, class_name: "User"
     belongs_to :organization
 

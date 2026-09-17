@@ -11,6 +11,8 @@ module Decidim
     translatable_fields :title, :description, :developer_group, :local_area, :meta_scope, :participatory_scope,
                         :participatory_structure, :target
 
+    enforces :organization
+
     has_many :participatory_processes,
              foreign_key: "decidim_participatory_process_group_id",
              class_name: "Decidim::ParticipatoryProcess",

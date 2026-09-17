@@ -5,6 +5,8 @@ module Decidim
   class EditorImage < ApplicationRecord
     include Decidim::HasUploadValidations
 
+    enforces :organization
+
     belongs_to :author, foreign_key: :decidim_author_id, class_name: "Decidim::User"
     belongs_to :organization, foreign_key: :decidim_organization_id, class_name: "Decidim::Organization"
 

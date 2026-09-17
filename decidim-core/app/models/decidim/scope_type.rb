@@ -7,6 +7,8 @@ module Decidim
     include Decidim::TranslatableResource
     include Traceable
 
+    enforces :organization
+
     translatable_fields :name, :plural
     belongs_to :organization,
                foreign_key: "decidim_organization_id",

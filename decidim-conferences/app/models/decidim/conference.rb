@@ -26,6 +26,8 @@ module Decidim
 
     translatable_fields :title, :slogan, :short_description, :description, :objectives, :registration_terms
 
+    enforces :organization
+
     belongs_to :organization,
                foreign_key: "decidim_organization_id",
                class_name: "Decidim::Organization"

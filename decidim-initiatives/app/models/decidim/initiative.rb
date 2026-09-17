@@ -36,6 +36,8 @@ module Decidim
     delegate :name, to: :area, prefix: true, allow_nil: true
     delegate :name, to: :author, prefix: true
 
+    enforces :organization
+
     belongs_to :organization,
                foreign_key: "decidim_organization_id",
                class_name: "Decidim::Organization"

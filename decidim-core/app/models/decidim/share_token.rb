@@ -4,6 +4,8 @@ module Decidim
   class ShareToken < ApplicationRecord
     include Decidim::Traceable
 
+    enforces :organization
+
     belongs_to :organization, foreign_key: "decidim_organization_id", class_name: "Decidim::Organization"
     belongs_to :user, foreign_key: "decidim_user_id", class_name: "Decidim::User"
     belongs_to :token_for, foreign_type: "token_for_type", polymorphic: true

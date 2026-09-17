@@ -10,6 +10,8 @@ module Decidim
 
     translatable_fields :title, :description, :extra_fields_legal_information
 
+    enforces :organization
+
     belongs_to :organization,
                foreign_key: "decidim_organization_id",
                class_name: "Decidim::Organization"

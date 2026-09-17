@@ -7,6 +7,8 @@ module Decidim
 
     translatable_fields :content
 
+    enforces :organization
+
     belongs_to :organization, class_name: "Decidim::Organization"
     validates :content, presence: true
 

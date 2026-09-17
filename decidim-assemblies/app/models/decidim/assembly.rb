@@ -40,6 +40,8 @@ module Decidim
     include Decidim::SoftDeletable
     include Decidim::ShareableWithToken
 
+    enforces :organization
+
     CREATED_BY = %w(city_council public others).freeze
 
     translatable_fields :title, :subtitle, :short_description, :description, :developer_group, :meta_scope, :local_area,

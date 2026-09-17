@@ -14,6 +14,8 @@ module Decidim
 
     translatable_fields :title, :content
 
+    enforces :organization
+
     belongs_to :organization, foreign_key: "decidim_organization_id", class_name: "Decidim::Organization", inverse_of: :static_pages
     belongs_to :topic, class_name: "Decidim::StaticPageTopic", optional: true
 

@@ -8,6 +8,8 @@ module Decidim
 
     attr_accessor :in_preview
 
+    enforces :organization
+
     belongs_to :organization, foreign_key: :decidim_organization_id, class_name: "Decidim::Organization"
     has_many :attachments, foreign_key: "decidim_content_block_id", class_name: "Decidim::ContentBlockAttachment", inverse_of: :content_block, dependent: :destroy
 

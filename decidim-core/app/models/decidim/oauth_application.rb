@@ -6,6 +6,8 @@ module Decidim
     include Decidim::Loggable
     include Decidim::HasUploadValidations
 
+    enforces :organization
+
     belongs_to :organization, foreign_key: "decidim_organization_id", class_name: "Decidim::Organization", inverse_of: :oauth_applications
 
     has_one_attached :organization_logo
