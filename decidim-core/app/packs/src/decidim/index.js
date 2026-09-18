@@ -6,14 +6,9 @@
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 import "jquery"
-import "chartkick/chart.js"
-
-// REDESIGN_PENDING: deprecated
-import "foundation-sites";
 
 // external deps that require initialization
 import Rails from "@rails/ujs"
-import svg4everybody from "svg4everybody"
 import morphdom from "morphdom"
 
 /**
@@ -27,16 +22,13 @@ import setOnboardingAction from "src/decidim/refactor/integration/onboarding_pen
 // local deps with no initialization
 import "src/decidim/refactor/moved/history"
 import "src/decidim/append_redirect_url_to_modals"
-import "src/decidim/form_attachments"
 import "src/decidim/form_remote"
 import "src/decidim/refactor/moved/delayed"
 import "src/decidim/security/selfxss_warning"
 import "src/decidim/session_timeouter"
 import "src/decidim/results_listing"
 import "src/decidim/data_consent"
-import "src/decidim/sw"
 import "src/decidim/attachments"
-import "src/decidim/dropdown_menu"
 import "src/decidim/callout"
 
 // local deps that require initialization
@@ -52,6 +44,9 @@ import {
   Dialogs
 } from "src/decidim/a11y"
 
+
+window.Rails = window.Rails || Rails;
+
 // bad practice: window namespace should avoid be populated as much as possible
 // rails-translations could be referenced through a single Decidim.I18n object
 window.Decidim = window.Decidim || {
@@ -62,9 +57,9 @@ window.Decidim = window.Decidim || {
   announceForScreenReader
 };
 
+window.createDialog = createDialog;
 window.morphdom = morphdom
 
-// eslint-disable-next-line max-params
 const deprecate = (element, targetController, oldSyntax) => {
   if (element.hasAttribute("data-controller") && element.getAttribute("data-controller").includes(targetController)) {
     return;
@@ -90,7 +85,21 @@ const deprecationMessage = (element, oldSyntax, newSyntax) => {
 window.deprecate = deprecate;
 window.deprecationMessage = deprecationMessage;
 
+// eslint-disable-next-line no-unused-vars
+window.initFoundation = (element) => {
+  let message = "[Decidim] initFoundation method has previously used to initialize foundation-sites based tools. The Foundation CSS based interface has been removed in 0.28. Since then we worked to remove related JavaScript, which has been completed. Calling this method, will have no effect on your application."
+
+  console.warn(message)
+
+  if (typeof window.Decidim.dev !== "undefined" && window.Decidim.dev === true) {
+    // eslint-disable-next-line no-alert
+    alert(message)
+  }
+};
+
 document.addEventListener("turbo:load", () => {
+  document.querySelectorAll("[data-tabs]").forEach((elem) =>
+    deprecate(elem, "tabs", "[data-tabs]"))
   document.querySelectorAll("[data-sticky-buttons]").forEach((container) =>
     deprecate(container, "sticky-buttons", "[data-sticky-buttons]"));
   document.querySelectorAll("[data-clipboard-copy]").forEach((container) =>
@@ -156,34 +165,9 @@ document.addEventListener("turbo:load", () => {
     deprecationMessage(container, '.callout[role="alert"]', '.flash[role="alert"]'));
   document.querySelectorAll(".js-back-to-list").forEach((container) =>
     deprecationMessage(container, ".js-back-to-list", "NEEDS TO BE REMOVED"));
+  document.querySelectorAll("[data-toggler]").forEach((container) =>
+    deprecationMessage(container, "[data-toggler]", "Use the Stimulus toggle controller with hidden targets"));
 })
-
-// REDESIGN_PENDING: deprecated
-window.initFoundation = (element) => {
-  $(element).foundation();
-
-  // Fix compatibility issue with the `a11y-accordion-component` package that
-  // uses the `data-open` attribute to indicate the open state for the accordion
-  // trigger.
-  //
-  // In Foundation, these listeners are initiated on the document node always,
-  // regardless of the element for which foundation is initiated. Therefore, we
-  // need the document node here instead of the `element` passed to this
-  // function.
-  const $document = $(document);
-
-  $document.off("click.zf.trigger", window.Foundation.Triggers.Listeners.Basic.openListener);
-  $document.on("click.zf.trigger", "[data-open]", (ev, ...restArgs) => {
-    // Do not apply for the accordion triggers.
-    const accordion = ev.currentTarget?.closest("[data-controller='accordion']");
-    if (accordion) {
-      return;
-    }
-
-    // Otherwise call the original implementation
-    Reflect.apply(window.Foundation.Triggers.Listeners.Basic.openListener, ev.currentTarget, [ev, ...restArgs]);
-  });
-};
 
 // Confirm initialization needs to happen before Rails.start()
 initializeConfirm();
@@ -199,11 +183,6 @@ Rails.start()
 const initializer = (element = document) => {
   // focus guard must be initialized only once
   window.focusGuard = window.focusGuard || new FocusGuard(document.body);
-
-  // REDESIGN_PENDING: deprecated
-  window.initFoundation(element);
-
-  svg4everybody();
 
   element.querySelectorAll("a[target=\"_blank\"]:not([data-external-link=\"false\"])").forEach((elem) => {
     // both functions (updateExternalDomainLinks and ExternalLink) are related, so if we disable one, the other also
@@ -236,8 +215,7 @@ const initializer = (element = document) => {
   document.dispatchEvent(new CustomEvent("decidim:loaded", { detail: { element } }));
 }
 
-// If no jQuery is used the Tribute feature used in comments to autocomplete
-// mentions stops working
+// Keep this under jQuery ready to support components initialized on legacy templates
 $(() => initializer());
 
 // Run initializer action over the new DOM elements
@@ -260,15 +238,3 @@ document.addEventListener("comments:loaded", (event) => {
     });
   }
 });
-
-import { Application } from "@hotwired/stimulus"
-import { definitionsFromContext } from "src/decidim/refactor/support/stimulus"
-
-const application = Application.start()
-application.debug = true
-
-const context = require.context("./controllers", true, /controller\.js$/)
-application.load(definitionsFromContext(context))
-
-window.definitionsFromContext = definitionsFromContext
-window.Stimulus = application

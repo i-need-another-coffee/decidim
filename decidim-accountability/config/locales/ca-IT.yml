@@ -301,7 +301,7 @@ ca-IT:
           global:
             clear_all: Netejar-ho tot
             comments_enabled: Comentaris habilitats
-            comments_max_length: Longitud màxima dels comentaris (deixa 0 si vols mantenir la configuració per defecte)
+            comments_max_length: Caràcters màxims per comentari (deixar a 0 el valor predeterminat)
             default_taxonomy: Taxonomia predeterminada
             default_taxonomy_help: Selecciona quina taxonomia vols mostrar per defecte. Si no se selecciona cap taxonomia, els resultats es mostraran en un format de llista.
             define_taxonomy_filters: Si us plau, defineix algunes filtres per aquest espai de participació abans de fer servir aquesta configuració.
@@ -322,7 +322,7 @@ ca-IT:
       accountability:
         proposal_linked:
           email_intro: 'La proposta "%{proposal_title}" s''ha inclòs en un resultat. Pots veure-ho des d''aquesta pàgina:'
-          email_outro: Has rebut aquesta notificació perquè estàs seguint "%{proposal_title}". Pots deixar de rebre notificacions seguint l'enllaç anterior.
+          email_outro: Has rebut aquesta notificació perquè estàs seguint la proposta "%{proposal_title}". Pots deixar de rebre notificacions seguint l'enllaç anterior.
           email_subject: Una actualització a %{proposal_title}
           notification_title: La proposta <a href="%{proposal_path}">%{proposal_title}</a> s'ha inclòs al resultat <a href="%{resource_path}">%{resource_title}</a>.
         result_progress_updated:

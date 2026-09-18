@@ -6,6 +6,11 @@ es-MX:
       token_csv:
         file: Archivo
         remove_all: Eliminar todos los datos del censo actual
+  activerecord:
+    models:
+      decidim/elections/election:
+        one: Elección
+        other: Elecciones
   decidim:
     admin:
       menu:
@@ -46,6 +51,7 @@ es-MX:
             choose_census: Elige el tipo de censo que quieres vincular esta elección
             created_at: Creado el
             identifier: Identificador de usuaria
+            title: Editar la elección
           preview:
             title:
               one: La vista previa de la lista está limitada a %{count} registro.
@@ -115,7 +121,6 @@ es-MX:
             title: Editar la votación
           form:
             add_images: Añadir imágenes
-            attachment_legend: Añadir galería de imágenes (opcional)
             basic_title: Información básica
             calendar: Calendario
             calendar_description: Compruebe que la zona horaria es correcta en la configuración de la organización. La configuración actual es %{timezone}.

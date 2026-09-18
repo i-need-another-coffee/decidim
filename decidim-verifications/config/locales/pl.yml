@@ -43,7 +43,6 @@ pl:
           destroy:
             confirm: Unieważnienie przed autoryzacjami dat nie może zostać cofnięte. Czy na pewno chcesz kontynuować?
             confirm_all: Unieważnienie wszystkich autoryzacji nie może zostać cofnięte. Czy na pewno chcesz kontynuować?
-          destroy_ok: Pomyślnie wycofano wszystkie autoryzacje spełniające kryteria.
           info: 'Całkowita liczba zweryfikowanych użytkowników: %{count}.'
           no_data: Brak zweryfikowanych uczestników.
           title: Wycofanie autoryzacji
@@ -106,10 +105,8 @@ pl:
     events:
       verifications:
         verify_with_managed_user:
-          email_intro: Uczestnik <a href="%{resource_url}">%{resource_title}</a> próbował zweryfikować się z danymi innego uczestnika (<a href="%{managed_user_url}">%{managed_user_name}</a>).
           email_outro: Sprawdź <a href="%{conflicts_url}">listę konfliktów weryfikacji</a> i skontaktuj się z uczestnikiem, aby zweryfikować jego dane i rozwiązać problem.
           email_subject: Nieudana próba weryfikacji względem innego uczestnika
-          notification_title: Uczestnik <a href="%{resource_path}">%{resource_title}</a> próbował zweryfikować się z danymi innego uczestnika (<a href="%{managed_user_path}">%{managed_user_name}</a>).
     verifications:
       authorizations:
         authorization_metadata:
@@ -142,12 +139,6 @@ pl:
         skip_verification: Możesz to teraz pominąć i %{link}
         start_exploring: zacznij odkrywać
       csv_census:
-        admin:
-          index:
-            title: Aktualne dane spisu
-          instructions:
-            body: Aby to zrobić, musisz wejść do administracji systemem i dodać uprawnienia csv_census do organizacji
-            title: Musisz aktywować spis CSV dla tej organizacji
         authorizations:
           new:
             error: Nie mogliśmy zweryfikować Twojego konta lub nie znajdujesz się w spisie organizacji.
@@ -178,7 +169,6 @@ pl:
               error: Dane weryfikacyjne się nie pokrywają. Spróbuj ponownie lub odrzuć weryfikację, aby użytkownik mógł ją poprawić.
               success: Użytkownik pomyślnie zweryfikowany.
             new:
-              introduce_user_data: Wprowadź dane z obrazu
               reject: Odrzuć
               verify: Zweryfikuj
           offline_confirmations:
@@ -187,7 +177,6 @@ pl:
               success: Uczestnik pomyślnie zweryfikowany.
             new:
               cancel: Anuluj
-              introduce_user_data: Przedstaw adres e-mail użytkownika i dane dokumentu
               verify: Zweryfikuj
           pending_authorizations:
             index:

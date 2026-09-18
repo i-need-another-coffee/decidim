@@ -1,9 +1,9 @@
 <div class="relative">
   <button class="button button__sm button__transparent-secondary" data-controller="dropdown" data-target="<%= dropdown_id(filters) %>">
     <% if filters.present? %>
-      <%= t("actions.export-selection", scope: "decidim.admin") %>
+      <%= t("actions.export_selection", scope: "decidim.admin") %>
     <% else %>
-      <%= t("actions.export", scope: "decidim.admin") %>
+      <%= t("actions.export_all", scope: "decidim.admin") %>
     <% end %>
     <%= icon "arrow-down-s-line" %>
     <%= icon "arrow-down-s-line" %>
@@ -15,6 +15,15 @@
         <li class="dropdown__item">
           <%= link_to exports_path(component, id: manifest.name, format:, resource_id:, filters:), class: "dropdown__button", method: :post do %>
             <%= t("decidim.admin.exports.export_as", name: t("decidim.#{component.manifest.name}.admin.exports.#{manifest.name}"), export_format: t("decidim.admin.exports.formats.#{format}")) %>
+          <% end %>
+        </li>
+      <% end %>
+    <% end %>
+    <% if defined?(extra_export_links) && extra_export_links.is_a?(Array) %>
+      <% extra_export_links.each do |link| %>
+        <li class="dropdown__item">
+          <%= link_to link[:href], method: link[:method], class: "dropdown__button" do %>
+            <%= t("decidim.admin.exports.export_as", name: t("decidim.#{component.manifest.name}.admin.exports.#{link[:type]}"), export_format: link[:format_name]) %>
           <% end %>
         </li>
       <% end %>

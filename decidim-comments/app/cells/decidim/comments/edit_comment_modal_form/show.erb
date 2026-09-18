@@ -1,3 +1,5 @@
+<%= append_javascript_pack_tag "decidim_emoji" %>
+
 <%= decidim_modal id: "editCommentModal#{model.id}" do %>
   <%= decidim_form_for(form_object, url: decidim_comments.comment_path(comment), method: :put, remote: true, html: { id: nil }) do |form| %>
     <div data-dialog-container>
@@ -19,7 +21,11 @@
           placeholder: t("decidim.components.edit_comment_modal_form.form.body.placeholder"),
           label: false,
           class: "w-full rounded border min-h-[160px] border-text-gray-2",
-          data: { remaining_characters: "##{form_id}-remaining-characters", controller: "emoji mention character-counter" }
+          data: {
+            remaining_characters: "##{form_id}-remaining-characters",
+            controller: "emoji mention character-counter",
+            search_prompt: t("decidim.shared.mentions.search_prompt")
+          }
         ) %>
       </div>
     </div>

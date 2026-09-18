@@ -6,7 +6,7 @@ import Dropdowns from "a11y-dropdown-component";
  * Create dropdown from a component
  *
  * @param {HTMLElement} component - The component to be created
- * @return {void}
+ * @returns {void}
  */
 export default class extends Controller {
   connect() {
@@ -47,6 +47,12 @@ export default class extends Controller {
       this.element.id = `dropdown-${Math.random().toString(36).substring(7)}`
     }
 
+    if (!this.element.hasAttribute("aria-expanded")) {
+      this.element.setAttribute("aria-expanded", dropdownOptions.isOpen
+        ? "true"
+        : "false");
+    }
+
     const autofocus = this.element.dataset.autofocus;
     if (autofocus) {
       // set the focus to some inner element, use setTimeout hack due to waiting for element to display
@@ -76,6 +82,32 @@ export default class extends Controller {
     }
 
     Dropdowns.render(this.element.id, dropdownOptions);
+
+    const addAriaRoles = this.element.dataset.addAriaRoles !== "false";
+    if (!addAriaRoles) {
+      this.removeAriaRoles();
+    }
+  }
+
+  removeAriaRoles() {
+    const target = this.element.dataset.target;
+    const dropdownMenu = document.getElementById(target);
+    if (!dropdownMenu) {
+      return;
+    }
+
+    dropdownMenu.removeAttribute("role");
+    dropdownMenu.removeAttribute("aria-labelledby");
+    dropdownMenu.removeAttribute("tabindex");
+
+    dropdownMenu.querySelectorAll("li").forEach((li) => {
+      li.removeAttribute("role");
+    });
+
+    dropdownMenu.querySelectorAll("a").forEach((anchor) => {
+      anchor.removeAttribute("role");
+      anchor.removeAttribute("tabindex");
+    });
   }
 
   /**

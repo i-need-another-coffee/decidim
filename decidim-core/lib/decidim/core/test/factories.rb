@@ -85,6 +85,8 @@ FactoryBot.define do
     "#{Faker::Lorem.sentence(word_count: 1, supplemental: true, random_words_to_add: 3)} #{n}"
   end
 
+  sequence(:component_position)
+
   factory :category, class: "Decidim::Category" do
     transient do
       skip_injection { false }
@@ -155,7 +157,6 @@ FactoryBot.define do
       }
     end
     file_upload_settings { Decidim::OrganizationSettings.default(:upload) }
-    enable_participatory_space_filters { true }
     content_security_policy do
       {
         "default-src" => "localhost:* #{host}:*",
@@ -210,6 +211,13 @@ FactoryBot.define do
     previous_passwords { [] }
     extended_data { {} }
 
+    trait :malicious do
+      after :create do |user|
+        # rubocop:disable-next Rails/SkipsModelValidations
+        user.update_column(:name, "user_#{user.id}\n<script>alert('name')</script>")
+      end
+    end
+
     trait :confirmed do
       confirmed_at { Time.current }
     end
@@ -260,6 +268,7 @@ FactoryBot.define do
 
     trait :ephemeral do
       managed
+      confirmed
       extended_data { { ephemeral: true } }
     end
 
@@ -303,9 +312,10 @@ FactoryBot.define do
   factory :assembly_member, class: "Decidim::ParticipatorySpace::Member" do
     transient do
       skip_injection { false }
+      organization { create(:organization, skip_injection:) }
     end
-    user
-    participatory_space { create(:assembly, organization: user.organization, skip_injection:) }
+    user { create(:user, :confirmed, organization:, skip_injection:) }
+    participatory_space { create(:assembly, organization:, skip_injection:) }
   end
 
   factory :identity, class: "Decidim::Identity" do
@@ -461,6 +471,7 @@ FactoryBot.define do
     manifest_name { "dummy" }
     published_at { Time.current }
     deleted_at { nil }
+    weight { generate(:component_position) }
     settings do
       {
         dummy_global_translatable_text: generate_localized_title(:dummy_global_translatable_text, skip_injection:),
@@ -823,8 +834,8 @@ FactoryBot.define do
 
     user { create(:user) }
     organization { user.organization }
-    user_id { user.id }
-    user_type { user.class.name }
+    user_id { user.try(:id) }
+    user_type { user.try(:class).try(:name) }
     participatory_space { build(:participatory_process, organization:, skip_injection:) }
     component { build(:component, participatory_space:, skip_injection:) }
     resource { build(:dummy_resource, component:, skip_injection:) }
@@ -992,7 +1003,7 @@ FactoryBot.define do
       skip_injection { false }
     end
     resource { build(:dummy_resource, skip_injection:) }
-    author { resource.try(:creator_author) || resource.try(:author) || build(:user, organization: resource.organization, skip_injection:) }
+    author { resource.try(:creator_author) || resource.try(:author) || build(:user, :confirmed, organization: resource.organization, skip_injection:) }
   end
 
   factory :share_token, class: "Decidim::ShareToken" do

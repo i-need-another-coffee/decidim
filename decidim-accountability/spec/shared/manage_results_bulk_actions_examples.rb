@@ -37,6 +37,21 @@ shared_examples "when managing results bulk actions as an admin" do
           expect(page).to have_selector(:link_or_button, "Change status")
           expect(page).to have_selector(:link_or_button, "Change dates")
         end
+
+        context "when there are no statuses" do
+          before do
+            Decidim::Accountability::Status.where(component: current_component).destroy_all
+            visit current_path
+            page.find_by_id("results_bulk").set(true)
+            click_on "Actions"
+          end
+
+          it "does not show the change status option" do
+            expect(page).to have_selector(:link_or_button, "Change taxonomies")
+            expect(page).to have_no_selector(:link_or_button, "Change status")
+            expect(page).to have_selector(:link_or_button, "Change dates")
+          end
+        end
       end
 
       context "when change taxonomies is selected from actions dropdown" do
@@ -56,7 +71,7 @@ shared_examples "when managing results bulk actions as an admin" do
           expect(page).to have_selector(:link_or_button, "Change taxonomies")
           select decidim_sanitize_translated(taxonomy.name), from: "taxonomies_for_filter_#{taxonomy_filter.id}"
           click_on "Change taxonomies"
-          expect(page).to have_admin_callout "Successfully updated taxonomies #{translated(taxonomy.name)} for results"
+          expect(page).to have_callout "Successfully updated taxonomies #{translated(taxonomy.name)} for results"
           expect(result.reload.taxonomies.first).to eq(taxonomy)
         end
       end
@@ -70,7 +85,7 @@ shared_examples "when managing results bulk actions as an admin" do
         it "changes the status" do
           select translated(status.name), from: "result_bulk_actions[decidim_accountability_status_id]"
           click_on "Change status"
-          expect(page).to have_admin_callout "Results status successfully updated"
+          expect(page).to have_callout "Results status successfully updated"
           expect(result.reload.status).to eq(status)
           expect(other_result.reload.status).to eq(status)
         end
@@ -86,7 +101,7 @@ shared_examples "when managing results bulk actions as an admin" do
           fill_in "result_bulk_actions_start_date_date", with: "01/01/2025"
           fill_in "result_bulk_actions_end_date_date", with: "02/01/2025"
           click_on "Change date"
-          expect(page).to have_admin_callout "Results dates successfully updated"
+          expect(page).to have_callout "Results dates successfully updated"
           expect(result.reload.start_date).to eq(Date.parse("2025-01-01"))
           expect(result.reload.end_date).to eq(Date.parse("2025-01-02"))
         end

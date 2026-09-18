@@ -13,7 +13,7 @@ describe Decidim::ProfileCell, type: :cell do
 
   context "when show is rendered" do
     it "does not show the inaccessible profile alert" do
-      expect(subject).to have_text(user.name)
+      expect(subject).to have_no_text("This profile is inaccessible due to terms of service violation!")
     end
   end
 
@@ -43,7 +43,7 @@ describe Decidim::ProfileCell, type: :cell do
     end
 
     it "shows the officialization name" do
-      expect(subject).to have_content(decidim_sanitize_translated(user.officialized_as))
+      expect(subject).to have_text(decidim_sanitize_translated(user.officialized_as))
     end
   end
 end

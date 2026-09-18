@@ -44,6 +44,10 @@ FactoryBot.define do
       published_at { Time.current }
     end
 
+    trait :trashed do
+      deleted_at { Time.current }
+    end
+
     trait :diploma do
       main_logo { Decidim::Dev.test_file("avatar.jpg", "image/jpeg") }
       signature { Decidim::Dev.test_file("avatar.jpg", "image/jpeg") }
@@ -151,7 +155,7 @@ FactoryBot.define do
     end
 
     trait :with_user do
-      user { create(:user, organization: conference.organization, skip_injection:) }
+      user { create(:user, :confirmed, organization: conference.organization, skip_injection:) }
     end
 
     trait :with_meeting do

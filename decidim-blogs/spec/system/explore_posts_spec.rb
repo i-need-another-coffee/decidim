@@ -14,7 +14,7 @@ describe "Explore posts" do
 
       it "shows an empty page with a message" do
         within "main" do
-          expect(page).to have_content "There are no posts yet"
+          expect(page).to have_text "There are no posts yet"
         end
       end
     end
@@ -32,20 +32,20 @@ describe "Explore posts" do
 
       before do
         create(:comment, commentable: old_post)
-        create(:like, resource: old_post, author: build(:user, organization: old_post.participatory_space.organization))
+        create(:like, resource: old_post, author: build(:user, :confirmed, organization: old_post.participatory_space.organization))
 
         visit_component
       end
 
       it "shows the correct information in breadcrumb" do
         within(".menu-bar") do
-          expect(page).to have_content(translated(component.name))
+          expect(page).to have_text(translated(component.name))
         end
       end
 
       it "shows the component name in the sidebar" do
         within("aside") do
-          expect(page).to have_content(translated(component.name))
+          expect(page).to have_text(translated(component.name))
         end
       end
 
@@ -90,7 +90,7 @@ describe "Explore posts" do
       context "when author is an organization" do
         it "shows 'Official' as the author" do
           within ".author__name" do
-            expect(page).to have_content("Official")
+            expect(page).to have_text("Official")
           end
         end
       end
@@ -100,7 +100,7 @@ describe "Explore posts" do
 
         it "shows user as the author" do
           within ".author__name" do
-            expect(page).to have_content(user.name)
+            expect(page).to have_text(user.name)
           end
         end
 
@@ -108,7 +108,7 @@ describe "Explore posts" do
           let(:author) { create(:user, :deleted, organization: component.organization) }
 
           it "successfully shows the page" do
-            expect(page).to have_content("Deleted participant")
+            expect(page).to have_text("Deleted participant")
           end
         end
       end
@@ -116,11 +116,66 @@ describe "Explore posts" do
       it "show post info" do
         expect(page).to have_i18n_content(post.title)
         expect(page).to have_i18n_content(post.body)
-        expect(page).to have_content(translated(post.author.name))
-        expect(page).to have_content(post.created_at.strftime("%d/%m/%Y %H:%M"))
+        expect(page).to have_text(translated(post.author.name))
+        expect(page).to have_text(post.created_at.strftime("%d/%m/%Y %H:%M"))
+      end
+
+      it "shows the post reference" do
+        within ".layout-container__reference" do
+          expect(page).to have_text(post.reference)
+        end
       end
 
       it_behaves_like "has embedded video in description", :body
+    end
+  end
+
+  context "when filtering posts by TAXONOMY" do
+    let(:root_taxonomy) { create(:taxonomy, organization:) }
+    let!(:taxonomy) { create(:taxonomy, skip_injection: true, name: { en: "Category A" }, parent: root_taxonomy, organization:) }
+    let!(:taxonomy2) { create(:taxonomy, skip_injection: true, name: { en: "Category B" }, parent: root_taxonomy, organization:) }
+    let(:taxonomy_filter) { create(:taxonomy_filter, root_taxonomy:, participatory_space_manifests: [component.participatory_space.manifest.name]) }
+    let!(:taxonomy_filter_item) { create(:taxonomy_filter_item, taxonomy_item: taxonomy, taxonomy_filter:) }
+    let!(:taxonomy_filter_item2) { create(:taxonomy_filter_item, taxonomy_item: taxonomy2, taxonomy_filter:) }
+
+    let!(:posts_with_taxonomy) { create_list(:post, 2, component:, taxonomies: [taxonomy]) }
+    let!(:post_with_taxonomy2) { create(:post, component:, taxonomies: [taxonomy2]) }
+    let!(:post_no_taxonomy) { create(:post, component:, taxonomies: []) }
+
+    before do
+      component.update!(settings: { taxonomy_filters: [taxonomy_filter.id] })
+      visit_component
+    end
+
+    it "shows the taxonomy filter in the sidebar" do
+      within "form.new_filter" do
+        expect(page).to have_text("Category A")
+        expect(page).to have_text("Category B")
+      end
+    end
+
+    context "when selecting one taxonomy" do
+      it "lists only posts with that taxonomy" do
+        within "#dropdown-menu-filters div.filter-container", text: "Category B" do
+          uncheck "All"
+          check decidim_sanitize_translated(taxonomy.name)
+        end
+
+        expect(page).to have_css("#blogs > a", count: 2)
+      end
+    end
+
+    context "when no taxonomy filter is configured" do
+      before do
+        component.update!(settings: { taxonomy_filters: [] })
+        visit_component
+      end
+
+      it "does not show taxonomy filter" do
+        within "form.new_filter" do
+          expect(page).to have_no_text("Category A")
+        end
+      end
     end
   end
 end

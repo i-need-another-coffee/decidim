@@ -6,6 +6,10 @@ ja:
       token_csv:
         file: ファイル
         remove_all: 現在のセンサスデータをすべて削除する
+  activerecord:
+    models:
+      decidim/elections/election:
+        other: 選挙
   decidim:
     admin:
       menu:
@@ -46,6 +50,7 @@ ja:
             choose_census: この選挙に使用したいセンサスの種類を選択してください
             created_at: 作成日時
             identifier: ユーザーID
+            title: 選挙を編集
           preview:
             title:
               other: プレビューリストは %{count} レコードに制限されています。
@@ -113,7 +118,6 @@ ja:
             title: 選挙を編集
           form:
             add_images: 画像を追加
-            attachment_legend: 画像ギャラリーを追加 (オプション)
             basic_title: 基本情報
             calendar: カレンダー
             calendar_description: 組織のタイムゾーンが正しいことを確認してください。現在の設定は %{timezone} です。

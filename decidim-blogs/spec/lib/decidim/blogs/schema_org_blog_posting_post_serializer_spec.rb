@@ -60,21 +60,21 @@ module Decidim::Blogs
           it "serializes the author" do
             expect(serialized[:author][:@type]).to eq("Organization")
             expect(serialized[:author][:name]).to eq(translated_attribute(post.author.name))
-            expect(serialized[:author][:url]).to eq("http://#{organization.host}:#{Capybara.server_port}/")
+            expect(serialized[:author][:url]).to eq(root_url)
           end
         end
 
         context "with participant author" do
-          let(:author) { create(:user, organization:) }
+          let(:author) { create(:user, :confirmed, organization:) }
 
           it "serializes the author" do
             expect(serialized[:author][:@type]).to eq("Person")
             expect(serialized[:author][:name]).to eq(post.author.name)
-            expect(serialized[:author][:url]).to eq("http://#{organization.host}:#{Capybara.server_port}/profiles/#{post.author.nickname}")
+            expect(serialized[:author][:url]).to eq("http://#{organization.host}:#{Capybara.server_port}/en/profiles/#{post.author.nickname}")
           end
 
           context "when author is deleted" do
-            let(:author) { create(:user, :deleted, organization:) }
+            let(:author) { create(:user, :confirmed, :deleted, organization:) }
 
             it "serializes the author" do
               expect(serialized[:author][:@type]).to eq("Person")
@@ -112,6 +112,10 @@ module Decidim::Blogs
             expect(serialized[:image]).to include(attachment2.thumbnail_url)
           end
         end
+      end
+
+      def root_url
+        Decidim::Core::Engine.routes.url_helpers.root_url(host: post.organization.host, port: Capybara.server_port)
       end
     end
   end

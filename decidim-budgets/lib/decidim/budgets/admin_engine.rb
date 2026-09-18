@@ -28,6 +28,7 @@ module Decidim
               post :update_selected
               post :update_budget
               resource :proposals_import, only: [:new, :create]
+              resource :pabulib_export, only: [:show, :create]
               get :manage_trash
             end
 
@@ -43,6 +44,10 @@ module Decidim
 
           resources :attachment_collections, except: [:show]
           resources :attachments, except: [:show]
+        end
+
+        resource :proposals_import, only: [:new, :create] do
+          get :component_states
         end
 
         root to: "budgets#index"

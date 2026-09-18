@@ -15,12 +15,12 @@ module Decidim
 
           included do
             include Decidim::Admin::ParticipatorySpace::Concerns::MembersFilterable
+
             helper PaginateHelper
             helper_method :members
 
-            # rubocop:disable Rails/LexicallyScopedActionFilter
+            # rubocop:disable-next Rails/LexicallyScopedActionFilter
             before_action :set_member, only: [:edit, :update, :destroy, :resend_invitation]
-            # rubocop:enable Rails/LexicallyScopedActionFilter
 
             def index
               enforce_permission_to :read, :space_member
@@ -52,7 +52,7 @@ module Decidim
 
                 on(:invalid) do
                   flash.now[:alert] = I18n.t("members.update.error", scope: "decidim.admin")
-                  render template: "decidim/admin/members/edit", status: :unprocessable_entity
+                  render template: "decidim/admin/members/edit", status: :unprocessable_content
                 end
               end
             end
@@ -69,7 +69,7 @@ module Decidim
 
                 on(:invalid) do
                   flash.now[:alert] = I18n.t("members.create.error", scope: "decidim.admin")
-                  render template: "decidim/admin/members/new", status: :unprocessable_entity
+                  render template: "decidim/admin/members/new", status: :unprocessable_content
                 end
               end
             end
@@ -85,7 +85,7 @@ module Decidim
 
                 on(:invalid) do
                   flash.now[:alert] = I18n.t("members.destroy.error", scope: "decidim.admin")
-                  render template: "decidim/admin/members/index", status: :unprocessable_entity
+                  render template: "decidim/admin/members/index", status: :unprocessable_content
                 end
               end
             end
@@ -155,7 +155,7 @@ module Decidim
             end
 
             def set_member
-              @member = collection.find(params[:id])
+              @member = collection.find(params.expect(:id))
             end
           end
         end

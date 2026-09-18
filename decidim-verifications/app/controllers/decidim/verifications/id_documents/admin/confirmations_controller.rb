@@ -13,6 +13,7 @@ module Decidim
           before_action :load_pending_authorization
 
           include Decidim::Admin::WorkflowsBreadcrumb
+          include Decidim::Verifications::Admin::PendingAuthorizationLoader
 
           add_breadcrumb_item_from_menu :workflows_menu
 
@@ -27,7 +28,7 @@ module Decidim
 
             @form = InformationForm.from_params(params)
 
-            ConfirmUserAuthorization.call(@pending_authorization, @form, session) do
+            ConfirmUserAuthorization.call(@pending_authorization, @form) do
               on(:ok) do
                 flash[:notice] = t("confirmations.create.success", scope: "decidim.verifications.id_documents.admin")
                 redirect_to pending_authorizations_path
@@ -35,7 +36,12 @@ module Decidim
 
               on(:invalid) do
                 flash.now[:alert] = t("confirmations.create.error", scope: "decidim.verifications.id_documents.admin")
-                render action: :new, status: :unprocessable_entity
+                render action: :new, status: :unprocessable_content
+              end
+
+              on(:locked) do
+                flash.now[:alert] = t("confirmations.create.locked", scope: "decidim.verifications.id_documents.admin")
+                render action: :new, status: :too_many_requests
               end
             end
           end
@@ -43,7 +49,7 @@ module Decidim
           private
 
           def load_pending_authorization
-            @pending_authorization = Authorization.find(params[:pending_authorization_id])
+            @pending_authorization = load_pending_authorization!("id_documents", params[:pending_authorization_id])
           end
         end
       end

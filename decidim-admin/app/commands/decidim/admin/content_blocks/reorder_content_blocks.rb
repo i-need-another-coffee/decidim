@@ -47,9 +47,8 @@ module Decidim
         end
 
         def reset_weights
-          # rubocop:disable Rails/SkipsModelValidations
+          # rubocop:disable-next Rails/SkipsModelValidations
           collection.where.not(weight: nil).update_all(weight: nil)
-          # rubocop:enable Rails/SkipsModelValidations
         end
 
         def set_new_weights
@@ -59,7 +58,7 @@ module Decidim
 
           data.each do |id, weight|
             content_block = collection.find_by(id:)
-            content_block.update!(weight:) if content_block.present?
+            (content_block.presence&.update!(weight:))
           end
         end
 

@@ -55,7 +55,6 @@ tr:
           success: Toplantı başarıyla kopyalandı.
         new:
           copy: Kopyala
-          title: Yinelenen toplantı
     components:
       meetings:
         actions:
@@ -65,7 +64,6 @@ tr:
           global:
             announcement: Duyuru
             comments_enabled: Yorumlar etkin
-            comments_max_length: Maksimum yorum uzunluğu (Varsayılan değer için 0 bırakın)
             creation_enabled_for_participants: Katılımcılar toplantı oluşturabilir
             default_registration_terms: Varsayılan kayıt şartları
             enable_pads_creation: Altlık oluşturmayı etkinleştirin
@@ -176,13 +174,10 @@ tr:
             success: Katılımcı başarıyla toplantıya katılmaya davet edildi.
           form:
             attendee_type: Katılımcı Tipi
-            existing_user: Mevcut katılımcı
             invite: Davet et
             invite_explanation: Katılımcı toplantıya ve organizasyona katılmaya davet edilecektir.
-            non_user: Mevcut olmayan katılımcı
             select_user: Katılımcı seç
           index:
-            invite_attendee: Katılımcı davet et
             invites: Davetler
         meeting_closes:
           edit:
@@ -227,7 +222,6 @@ tr:
               one: '%{count} kayıt oldu.'
               other: '%{count} kayıt oldu.'
             reserved_slots_less_than: Daha az ya da buna eşit olmalıdır %{count}
-            title: Kayıtlar
           update:
             invalid: Kayıt ayarları kaydedilirken bir sorun oluştu.
             success: Toplantı kayıtları ayarları başarıyla kaydedildi.

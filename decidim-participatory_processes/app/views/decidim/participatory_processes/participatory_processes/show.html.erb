@@ -2,7 +2,7 @@
   title: translated_attribute(current_participatory_space.title),
   image_url: resolve_meta_image_url(current_participatory_space),
   description: translated_attribute(current_participatory_space.short_description),
-  url: participatory_process_url(current_participatory_space, locale: current_locale),
+  url: participatory_process_url(current_participatory_space),
   resource: current_participatory_space) %>
 
 <%
@@ -16,12 +16,17 @@
 
 <%= render partial: "layouts/decidim/header/follow_space_menu_bar_button", locals: { participatory_space: current_participatory_space } %>
 
-<main>
-  <%# NOTE: this elements goes outside of the .participatory-space__container block %>
-  <% if current_participatory_space.private_space? %>
-    <section class="participatory-space__block-reference alert">
-      <%= t("private_space", scope: "decidim.participatory_processes.show") %>
-    </section>
+<main role="main">
+  <% if current_participatory_space.restricted? %>
+    <aside class="layout-container__reference text-sm alert" aria-label="<%= t("restricted", scope: "decidim.participatory_space.labels") %>">
+      <%= t("restricted_space", scope: "decidim.participatory_spaces.show") %>
+    </aside>
+  <% end %>
+
+  <% if current_participatory_space.transparent? %>
+    <aside class="layout-container__reference text-sm alert" aria-label="<%= t("transparent", scope: "decidim.participatory_space.labels") %>">
+      <%= t("transparent_space", scope: "decidim.participatory_spaces.show") %>
+    </aside>
   <% end %>
 
   <div class="participatory-space__container">
@@ -37,7 +42,7 @@
 
   </div>
 
-  <section class="participatory-space__block-reference">
-    <%= resource_reference(current_participatory_space) %>
-  </section>
+  <aside class="layout-container__reference" aria-label="<%= t("reference", scope: "decidim.participatory_space.labels") %>">
+    <p><%= resource_reference(current_participatory_space) %></p>
+  </aside>
 </main>

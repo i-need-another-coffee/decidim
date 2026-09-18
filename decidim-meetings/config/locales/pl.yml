@@ -140,7 +140,6 @@ pl:
           success: Zduplikowano spotkanie.
         new:
           copy: Kopiuj
-          title: Duplikat spotkania
     components:
       meetings:
         actions:
@@ -152,7 +151,6 @@ pl:
           global:
             announcement: Ogłoszenie
             comments_enabled: Komentarze włączone
-            comments_max_length: Maksymalna długość komentarzy (Pozostaw 0 dla wartości domyślnej)
             creation_enabled_for_participants: Uczestnicy mogą tworzyć spotkania
             default_registration_terms: Domyślne warunki rejestracji
             enable_pads_creation: Włącz tworzenie padów
@@ -279,13 +277,10 @@ pl:
             success: Zaproszono użytkownika do udziału w spotkaniu.
           form:
             attendee_type: Typ uczestnika
-            existing_user: Istniejący użytkownik
             invite: Zaproś
             invite_explanation: Użytkownik zostanie zaproszony do udziału w spotkaniu i do organizacji.
-            non_user: Nieistniejący użytkownik
             select_user: Wybierz użytkownika
           index:
-            invite_attendee: Zaproś uczestnika
             invites: Zaproszeni
             registrations_disabled: Nie można zaprosić uczestnika, ponieważ rejestracja jest wyłączona.
         meeting_closes:
@@ -367,7 +362,6 @@ pl:
               other: Było %{count} rejestracji.
             reserved_slots_help: Pozostaw 0, jeśli nie masz zarezerwowanych miejsc.
             reserved_slots_less_than: Musi być mniejszy lub równy %{count}
-            title: Rejestracje
           update:
             invalid: Wystąpił błąd przy zapisywaniu ustawień rejestracji.
             success: Zapisano ustawienia rejestracji.

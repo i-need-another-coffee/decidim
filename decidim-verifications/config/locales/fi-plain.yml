@@ -48,7 +48,7 @@ fi-pl:
             confirm: Ennen valittua päivämäärää tehtyjen vahvistustietojen tuhoamista ei voi peruuttaa. Haluatko varmasti jatkaa?
             confirm_all: Vahvistusten tuhoamista ei voi peruuttaa. Haluatko varmasti jatkaa?
           destroy_nok: Vahvistusten kumoaminen epäonnistui.
-          destroy_ok: Kaikki hakua vastanneiden tunnistautumiset on peruutettu onnistuneesti.
+          destroy_ok: Tunnistautumisten kumoaminen on käynnissä. Tämän valmistuminen voi kestää useamman minuutin ajan.
           info: Yhteensä %{count} varmennettua osallistujaa.
           no_data: Ei vahvistettuja osallistujia.
           title: Tunnistautumisten peruuttaminen
@@ -117,10 +117,8 @@ fi-pl:
     events:
       verifications:
         verify_with_managed_user:
-          email_intro: Osallistuja <a href="%{resource_url}">%{resource_title}</a> yritti tunnistautua toisen osallistujan (<a href="%{managed_user_url}">%{managed_user_name}</a>) tiedoilla.
           email_outro: Tarkasta <a href="%{conflicts_url}">tunnistautumisten konfliktilista</a> ja ota yhteyttä osallistujaan tarkastaaksesi hänen tietonsa ja ratkaistaksesi ongelman.
           email_subject: Tunnistautumisyritys epäonnistui toisen osallistujan tietojen käytön takia
-          notification_title: Osallistuja <a href="%{resource_path}">%{resource_title}</a> yritti tunnistautua toisen osallistujan (<a href="%{managed_user_path}">%{managed_user_name}</a>) tiedoilla.
     verifications:
       admin_log:
         csv_datum:
@@ -183,6 +181,10 @@ fi-pl:
               empty: Henkilötietorekisterissä ei ole tietoja. Käytä %{import_csv} -toimintoa tuodaksesi tiedot järjestelmään CSV-tiedostosta.
               no_sign_in: Ei ole koskaan kirjautunut sisään
               no_user: Käyttäjää ei löytynyt
+              title: Henkilötietorekisterin tiedot
+            instructions:
+              body: Käyttääksesi tätä toimintoa sinun on kirjauduttava järjestelmänvalvojan hallinnointinäkymään ja lisättävä csv_census-vahvistustapa organisaatiolle
+              title: Sinun on otettava käyttöön CSV-henkilötietorekisteri tälle organisaatiolle
             last_login:
               no_sign_in: Ei ole koskaan kirjautunut sisään
               no_user: Ei käyttäjää
@@ -220,10 +222,6 @@ fi-pl:
               user_authorized: Onko käyttäjän henkilöllisyys on vahvistettu?
             import_csv: Tuo CSV
             no_authorized: Käyttäjän henkilöllisyyttä ei ole vahvistettu
-            title: Nykyiset rekisteritiedot
-          instructions:
-            body: Käyttääksesi tätä toimintoa sinun on kirjauduttava järjestelmähallintaosioon ja lisättävä csv_census-vahvistustapa organisaatiolle
-            title: Sinun on aktivoitava CSV-rekisteritiedot tälle organisaatiolle
         authorizations:
           new:
             error: Emme voineet vahvistaa tiliäsi, koska tietojasi ei löytynyt organisaation rekisteristä.
@@ -254,8 +252,8 @@ fi-pl:
               error: Vahvistustiedot eivät täsmää. Yritä uudestaan tai hylkää vahvistus, jolloin käyttäjä voi muuttaa sitä.
               success: Osallistujan vahvistaminen onnistui.
             new:
-              introduce_user_data: Syötä kuvassa näkyvät tiedot
               reject: Hylkää
+              title: Syötä kuvassa näkyvät tiedot
               verify: Vahvista
           offline_confirmations:
             create:
@@ -263,7 +261,7 @@ fi-pl:
               success: Osallistujan vahvistaminen onnistui.
             new:
               cancel: Peruuta
-              introduce_user_data: Lisää käyttäjän sähköposti ja asiakirjan tiedot
+              title: Syötä osallistujan sähköpostiosoite ja henkilöllisyystodistuksen tiedot
               verify: Vahvista
           pending_authorizations:
             index:

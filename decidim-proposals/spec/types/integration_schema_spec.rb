@@ -183,7 +183,7 @@ describe "Decidim::Api::QueryType" do
           "name" => e.author.name,
           "nickname" => "@#{e.author.nickname}",
           "organizationName" => { "translation" => translated(e.author.organization.name) },
-          "profilePath" => "/profiles/#{e.author.nickname}" }
+          "profilePath" => "/en/profiles/#{e.author.nickname}" }
       end,
       "likesCount" => proposal.likes.size,
       "executionPeriod" => execution_period,
@@ -224,7 +224,7 @@ describe "Decidim::Api::QueryType" do
         ]
       },
       "url" => Decidim::EngineRouter.main_proxy(current_component).root_url,
-      "weight" => 0
+      "weight" => current_component.weight
     }
   end
 

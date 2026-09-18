@@ -27,11 +27,11 @@
   </h2>
 
   <% if collection.any? %>
-    <%= render "filters" %>
+    <%= render "decidim/admin/taxonomies/filters" %>
 
     <% if @taxonomies.any? %>
       <p class="help-text mt-4"><%= t(".description") %></p>
-      <%= render "table", collection: @taxonomies %>
+      <%= render "decidim/admin/taxonomies/table", collection: @taxonomies %>
     <% else %>
       <p class="mt-8"><%= t("no_items_found", scope: "decidim.admin.taxonomies.index") %></p>
     <% end %>
@@ -57,7 +57,6 @@
       if(!form) {
         return location.reload();
       }
-      window.initFoundation(container);
 
       form.addEventListener("ajax:beforeSend", function(evt) {
         form.classList.add("spinner-container");

@@ -49,6 +49,10 @@ module Decidim
         !officialized_at.nil?
       end
 
+      def profile_published?
+        true
+      end
+
       def confirmed?
         true
       end
@@ -76,6 +80,10 @@ module Decidim
 
       def needs_password_update?
         false
+      end
+
+      def ephemeral?
+        extended_data["ephemeral"]
       end
     end
   end

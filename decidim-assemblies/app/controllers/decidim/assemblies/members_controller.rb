@@ -4,13 +4,15 @@ module Decidim
   module Assemblies
     class MembersController < Decidim::Assemblies::ApplicationController
       include ParticipatorySpaceContext
+      include Paginable
       include Decidim::ParticipatorySpace::HasMembersPage
 
       def index
         raise ActionController::RoutingError, "No members for this assembly" if members.none?
 
+        @members = paginate(members)
         enforce_permission_to :list, :members
-        redirect_to decidim_assemblies.assembly_path(current_participatory_space, locale: I18n.locale) unless can_visit_index?
+        redirect_to decidim_assemblies.assembly_path(current_participatory_space) unless can_visit_index?
       end
 
       private
@@ -21,6 +23,13 @@ module Decidim
         @current_participatory_space ||= OrganizationAssemblies.new(current_organization).query.where(slug: params[:assembly_slug]).or(
           OrganizationAssemblies.new(current_organization).query.where(id: params[:assembly_slug])
         ).first!
+      end
+
+      def page_params
+        {
+          per_page:,
+          page: params[:page]
+        }
       end
     end
   end

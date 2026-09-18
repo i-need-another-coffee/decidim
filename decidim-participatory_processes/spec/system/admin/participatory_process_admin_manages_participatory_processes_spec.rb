@@ -14,6 +14,7 @@ describe "Participatory process admin manages participatory processes" do
     switch_to_host(organization.host)
     login_as user, scope: :user
     visit decidim_admin_participatory_processes.participatory_processes_path
+    expect(page).to have_text(translated(participatory_process.title))
   end
 
   it_behaves_like "manage processes examples"
@@ -32,7 +33,7 @@ describe "Participatory process admin manages participatory processes" do
 
     it "cannot delete a participatory_process" do
       within "tr", text: translated(participatory_process2.title) do
-        expect(page).to have_no_content("Delete")
+        expect(page).to have_no_text("Delete")
       end
     end
   end

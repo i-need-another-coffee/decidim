@@ -1,4 +1,4 @@
-<%= render layout: "layouts/decidim/shared/layout_item" do %>
+<%= render layout: "layouts/decidim/shared/layout_item", locals: { reference: resource_reference(meeting) } do %>
 
   <%= render partial: "schema_org_event_meeting" %>
 
@@ -55,17 +55,17 @@
     <% end %>
   </section>
 
-  <%= cell "decidim/tab_panels", tab_panel_items %>
-
   <% if meeting.agenda.present? && meeting.agenda.visible? %>
     <section class="layout-main__section">
-      <%= render "meeting_agenda" %>
+      <%= render "decidim/meetings/meetings/meeting_agenda" %>
     </section>
   <% end %>
 
+  <%= cell "decidim/tab_panels", tab_panel_items %>
+
   <% if meeting.closed? && meeting.closing_visible? %>
     <section class="layout-main__section">
-      <%= render "meeting_minutes" %>
+      <%= render "decidim/meetings/meetings/meeting_minutes" %>
     </section>
   <% end %>
 
@@ -89,8 +89,8 @@
 
   <% content_for :item_footer do %>
     <%= comments_for meeting %>
+
     <ul class="metadata__container layout-main__section" data-metadata-footer>
-      <%= content_tag :li, resource_reference(meeting), class: "metadata__item" %>
       <%= content_tag :li, resource_version(meeting, versions_path: meeting_version_path(meeting, meeting.versions.count)), class: "metadata__item" %>
       <%= content_tag :li, link_to(t("add_to_calendar", scope: "decidim.meetings.meetings.calendar_modal"), nil, remote: true, data: { dialog_open: "calendarShare_#{meeting.id}" }), class: "metadata__item" %>
     </ul>

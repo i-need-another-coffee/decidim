@@ -5,14 +5,12 @@ const focusableDisableableNodes = ["BUTTON", "INPUT", "TEXTAREA", "SELECT"];
 export default class FocusGuard {
   constructor(container) {
     this.container = container;
-    this.guardedElement = null;
-    this.triggerElement = null;
+    this.stack = [];
   }
 
   trap(element, trigger) {
     this.enable();
-    this.guardedElement = element;
-    this.triggerElement = trigger;
+    this.stack.push({ element, trigger });
   }
 
   enable() {
@@ -45,14 +43,15 @@ export default class FocusGuard {
   }
 
   disable() {
-    const guards = this.container.querySelectorAll(`:scope > .${focusGuardClass}`);
-    guards.forEach((guard) => guard.remove());
+    const current = this.stack.pop();
 
-    this.guardedElement = null;
+    if (this.stack.length === 0) {
+      const guards = this.container.querySelectorAll(`:scope > .${focusGuardClass}`);
+      guards.forEach((guard) => guard.remove());
+    }
 
-    if (this.triggerElement) {
-      this.triggerElement.focus();
-      this.triggerElement = null;
+    if (current && current.trigger) {
+      current.trigger.focus();
     }
   }
 
@@ -67,27 +66,28 @@ export default class FocusGuard {
   };
 
   handleContainerFocus(guard) {
-    if (!this.guardedElement) {
+    const current = this.stack[this.stack.length - 1];
+    if (!current || !current.element) {
       guard.blur();
       return;
     }
 
-    const visibleNodes = Array.from(this.guardedElement.querySelectorAll("*")).filter((item) => {
+    const visibleNodes = Array.from(current.element.querySelectorAll("*")).filter((item) => {
       return this.isVisible(item);
     });
 
     let target = null;
     if (guard.dataset.position === "start") {
-      // Focus at the start guard, so focus the first focusable element after that
-      for (let ind = 0; ind < visibleNodes.length; ind += 1) {
+      // Focus at the start guard, so focus the last focusable element (cycle forward to end)
+      for (let ind = visibleNodes.length - 1; ind >= 0; ind -= 1) {
         if (!this.isFocusGuard(visibleNodes[ind]) && this.isFocusable(visibleNodes[ind])) {
           target = visibleNodes[ind];
           break;
         }
       }
     } else {
-      // Focus at the end guard, so focus the first focusable element after that
-      for (let ind = visibleNodes.length - 1; ind >= 0; ind -= 1) {
+      // Focus at the end guard, so focus the first focusable element (cycle back to start)
+      for (let ind = 0; ind < visibleNodes.length; ind += 1) {
         if (!this.isFocusGuard(visibleNodes[ind]) && this.isFocusable(visibleNodes[ind])) {
           target = visibleNodes[ind];
           break;

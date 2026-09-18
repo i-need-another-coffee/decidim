@@ -21,8 +21,8 @@ describe "Participatory Processes Breadcrumb" do
       visit decidim_participatory_processes.participatory_process_group_path(participatory_process_group, locale: I18n.locale)
 
       within ".menu-bar" do
-        expect(page).to have_content("Processes")
-        expect(page).to have_content(translated(participatory_process_group.title))
+        expect(page).to have_text("Processes")
+        expect(page).to have_text(translated(participatory_process_group.title))
       end
     end
 
@@ -30,9 +30,9 @@ describe "Participatory Processes Breadcrumb" do
       visit decidim_participatory_processes.participatory_process_path(participatory_space, locale: I18n.locale)
 
       within ".menu-bar" do
-        expect(page).to have_content("Processes")
-        expect(page).to have_content(translated(participatory_process_group.title))
-        expect(page).to have_content(translated(participatory_space.title))
+        expect(page).to have_text("Processes")
+        expect(page).to have_text(translated(participatory_process_group.title))
+        expect(page).to have_text(translated(participatory_space.title))
       end
     end
 
@@ -40,10 +40,10 @@ describe "Participatory Processes Breadcrumb" do
       visit router.root_path
 
       within ".menu-bar" do
-        expect(page).to have_content("Processes")
-        expect(page).to have_content(translated(participatory_process_group.title))
-        expect(page).to have_content(translated(participatory_space.title))
-        expect(page).to have_content(translated(component.name))
+        expect(page).to have_text("Processes")
+        expect(page).to have_text(translated(participatory_process_group.title))
+        expect(page).to have_text(translated(participatory_space.title))
+        expect(page).to have_text(translated(component.name))
       end
     end
   end
@@ -53,8 +53,8 @@ describe "Participatory Processes Breadcrumb" do
       visit decidim_participatory_processes.participatory_process_path(participatory_space, locale: I18n.locale)
 
       within ".menu-bar" do
-        expect(page).to have_content("Processes")
-        expect(page).to have_content(translated(participatory_space.title))
+        expect(page).to have_text("Processes")
+        expect(page).to have_text(translated(participatory_space.title))
       end
     end
 
@@ -62,10 +62,33 @@ describe "Participatory Processes Breadcrumb" do
       visit router.root_path
 
       within ".menu-bar" do
-        expect(page).to have_content("Processes")
-        expect(page).to have_content(translated(participatory_space.title))
-        expect(page).to have_content(translated(component.name))
+        expect(page).to have_text("Processes")
+        expect(page).to have_text(translated(participatory_space.title))
+        expect(page).to have_text(translated(component.name))
       end
+    end
+  end
+
+  context "when checking the current page marker" do
+    scenario "marks only the breadcrumb item as the current page on the processes index page" do
+      visit decidim_participatory_processes.participatory_processes_path(locale: I18n.locale)
+
+      expect(page).to have_css("[aria-current='page']", count: 1, visible: :all)
+      expect(find("[aria-current='page']")).to have_text("Processes")
+    end
+
+    scenario "marks only the deepest active breadcrumb item as the current page on a participatory process page" do
+      visit decidim_participatory_processes.participatory_process_path(participatory_space, locale: I18n.locale)
+
+      expect(page).to have_css("[aria-current='page']", count: 1, visible: :all)
+      expect(find("[aria-current='page']")).to have_text(translated(participatory_space.title))
+    end
+
+    scenario "marks only the deepest active breadcrumb item as the current page on a component page" do
+      visit router.root_path
+
+      expect(page).to have_css("[aria-current='page']", count: 1, visible: :all)
+      expect(find("[aria-current='page']")).to have_text(translated(participatory_space.title))
     end
   end
 end

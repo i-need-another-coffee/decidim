@@ -46,7 +46,6 @@ id:
           success: Pertemuan duplikat berhasil.
         new:
           copy: Salinan
-          title: Pertemuan duplikat
     components:
       meetings:
         actions:
@@ -157,13 +156,10 @@ id:
             success: Pengguna berhasil diundang untuk bergabung dengan rapat.
           form:
             attendee_type: Tipe penerima tamu
-            existing_user: Pengguna yang sudah ada
             invite: Undang
             invite_explanation: Pengguna akan diundang untuk bergabung dengan rapat dan ke organisasi juga.
-            non_user: Pengguna tidak ada
             select_user: Pilih pengguna
           index:
-            invite_attendee: Undang hadirin
             invites: Undangan
         meeting_closes:
           edit:

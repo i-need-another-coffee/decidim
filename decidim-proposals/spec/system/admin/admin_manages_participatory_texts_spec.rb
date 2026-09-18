@@ -21,7 +21,7 @@ describe "Admin manages participatory texts" do
   def visit_participatory_texts
     visit_component_admin
     find("#js-other-actions-wrapper a#participatory_texts").click
-    expect(page).to have_content "Preview participatory text"
+    expect(page).to have_text "Preview participatory text"
   end
 
   describe "importing participatory texts from a document" do
@@ -29,15 +29,15 @@ describe "Admin manages participatory texts" do
       visit_participatory_texts
 
       find("a#import-doc").click
-      expect(page).to have_content "Add document"
+      expect(page).to have_text "Add document"
 
       fill_in_i18n(:import_participatory_text_title, "#import-title", ca: "Algun text participatiu", en: "Some participatory text", es: "Un texto participativo")
       fill_in_i18n(:import_participatory_text_description, "#import-desc", ca: "La descripció d'algun text participatiu", en: "The description of some participatory text", es: "La descripción de algún texto participativo")
       dynamically_attach_file(:import_participatory_text_document, Decidim::Dev.asset("participatory_text.md"))
       click_on "Upload document"
 
-      expect(page).to have_content "The following sections have been converted to proposals. Now you can review and adjust them before publishing."
-      expect(page).to have_content "Preview participatory text"
+      expect(page).to have_text "The following sections have been converted to proposals. Now you can review and adjust them before publishing."
+      expect(page).to have_text "Preview participatory text"
 
       proposals = Decidim::Proposals::Proposal.where(component: current_component)
       proposals.each do |proposal|
@@ -45,12 +45,12 @@ describe "Admin manages participatory texts" do
         expect(proposal.body).to be_a(Hash)
       end
 
-      expect(page).to have_content "Section:", count: 2
-      expect(page).to have_content "Subsection:", count: 5
-      expect(page).to have_content "Article", count: 15
+      expect(page).to have_text "Section:", count: 2
+      expect(page).to have_text "Subsection:", count: 5
+      expect(page).to have_text "Article", count: 15
 
       click_on("Publish document")
-      expect(page).to have_content "All proposals have been published"
+      expect(page).to have_text "All proposals have been published"
 
       proposals = Decidim::Proposals::Proposal.where(component: current_component)
       titles = [
@@ -81,7 +81,7 @@ describe "Admin manages participatory texts" do
     it "renders only draft proposals" do
       visit_participatory_texts
 
-      expect(page).to have_content "Section:", count: 1
+      expect(page).to have_text "Section:", count: 1
     end
   end
 
@@ -90,17 +90,64 @@ describe "Admin manages participatory texts" do
 
     it "removes all proposals in draft mode" do
       visit_participatory_texts
-      expect(page).to have_content "Article", count: 5
+      expect(page).to have_text "Article", count: 5
 
       accept_confirm "Are you sure to discard the whole participatory text draft?" do
         click_on "Discard all"
       end
-      expect(page).to have_content "All participatory text drafts have been discarded."
-      expect(page).to have_content "Preview participatory text"
+      expect(page).to have_text "All participatory text drafts have been discarded."
+      expect(page).to have_text "Preview participatory text"
 
-      expect(page).to have_no_content "Section:"
-      expect(page).to have_no_content "Subsection:"
-      expect(page).to have_no_content "Article"
+      expect(page).to have_no_text "Section:"
+      expect(page).to have_no_text "Subsection:"
+      expect(page).to have_no_text "Article"
+    end
+  end
+
+  describe "collapsing participatory texts in draft mode" do
+    let!(:proposal) { create(:proposal, :draft, component: current_component, participatory_text_level: "article") }
+
+    it "toggles the article panel when clicking its title" do
+      visit_participatory_texts
+
+      expect(page).to have_css("#panel-article-#{proposal.id}")
+
+      find("a[data-controls='panel-article-#{proposal.id}']").click
+      expect(page).to have_css("#panel-article-#{proposal.id}", visible: :hidden)
+
+      find("a[data-controls='panel-article-#{proposal.id}']").click
+      expect(page).to have_css("#panel-article-#{proposal.id}")
+    end
+  end
+
+  describe "reordering participatory texts in draft mode" do
+    let!(:first_section) { create(:proposal, :draft, component: current_component, participatory_text_level: "section", position: 1, title: { en: "First section" }) }
+    let!(:second_section) { create(:proposal, :draft, component: current_component, participatory_text_level: "section", position: 2, title: { en: "Second section" }) }
+    let!(:third_section) { create(:proposal, :draft, component: current_component, participatory_text_level: "section", position: 3, title: { en: "Third section" }) }
+
+    it "persists the new positions after dragging and saving the draft" do
+      visit_participatory_texts
+      expect(page).to have_css("#participatory-text li", count: 3)
+
+      drag_last_section_to_top
+
+      expect(all("#participatory-text li a").map(&:text).first).to include("Third section")
+
+      click_on "Save draft"
+      expect(page).to have_text "Participatory text successfully updated."
+
+      expect(all("#participatory-text li a").map(&:text).first).to include("Third section")
+      titles = Decidim::Proposals::Proposal.where(component: current_component).order(:position).pluck(:title)
+      expect(titles.map { |title| title["en"] }).to eq(["Third section", "First section", "Second section"])
+    end
+
+    def drag_last_section_to_top
+      page.execute_script(<<~JS)
+        const list = document.querySelector("#participatory-text");
+        const items = list.querySelectorAll("li");
+        list.insertBefore(items[items.length - 1], items[0]);
+        list.dispatchEvent(new CustomEvent("sortupdate", { bubbles: true }));
+      JS
     end
   end
 
@@ -110,15 +157,15 @@ describe "Admin manages participatory texts" do
 
     it "persists changes and all proposals remain as drafts" do
       visit_participatory_texts
-      expect(page).to have_content "Article", count: 1
+      expect(page).to have_text "Article", count: 1
 
       fill_in("preview_participatory_text_proposals_attributes_0_body", with: new_body)
 
       click_on "Save draft"
-      expect(page).to have_content "Participatory text successfully updated."
-      expect(page).to have_content "Preview participatory text"
+      expect(page).to have_text "Participatory text successfully updated."
+      expect(page).to have_text "Preview participatory text"
 
-      expect(page).to have_content "Article", count: 1
+      expect(page).to have_text "Article", count: 1
       proposal.reload
       expect(translated(proposal.body).delete("\r")).to eq(new_body)
     end

@@ -6,12 +6,15 @@ module Decidim
     class PostsController < Decidim::Blogs::ApplicationController
       include Flaggable
       include Paginable
+      include FilterResource
       include Decidim::IconHelper
+      include Decidim::Blogs::Orderable
 
       helper Decidim::Blogs::PostsSelectHelper
       include Decidim::FormFactory
 
       helper_method :posts, :post, :post_presenter, :paginate_posts, :posts_most_commented, :tabs, :panels
+      before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
       def index; end
 
@@ -36,7 +39,7 @@ module Decidim
 
           on(:invalid) do
             flash.now[:alert] = I18n.t("posts.create.invalid", scope: "decidim.blogs.admin")
-            render action: "new", status: :unprocessable_entity
+            render action: "new", status: :unprocessable_content
           end
         end
       end
@@ -58,7 +61,7 @@ module Decidim
 
           on(:invalid) do
             flash.now[:alert] = I18n.t("posts.update.invalid", scope: "decidim.blogs.admin")
-            render action: "edit", status: :unprocessable_entity
+            render action: "edit", status: :unprocessable_content
           end
         end
       end
@@ -77,10 +80,6 @@ module Decidim
 
       private
 
-      def paginate_posts
-        @paginate_posts ||= paginate(posts.created_at_desc)
-      end
-
       def post
         @post ||= posts.find_by(id: params[:id])
       end
@@ -90,18 +89,11 @@ module Decidim
       end
 
       def posts
-        @posts ||= if current_user&.admin?
-                     Post.where(component: current_component).published_at_desc
-                   else
-                     Post.published.where(component: current_component).published_at_desc
-                   end
+        @posts ||= search.result
       end
 
-      # PROVISIONAL if we implement counter cache
       def posts_most_commented
-        @posts_most_commented ||= posts.joins(:comments).group(:id)
-                                       .select("count(decidim_comments_comments.id) as counter")
-                                       .select("decidim_blogs_posts.*").order("counter DESC").published_at_desc.limit(7)
+        @posts_most_commented ||= posts.order(comments_count: :desc).published_at_desc.limit(7)
       end
 
       def add_breadcrumb_item
@@ -112,6 +104,18 @@ module Decidim
           url: Decidim::EngineRouter.main_proxy(current_component).post_path(post),
           active: false
         }
+      end
+
+      def search_collection
+        if current_user&.admin?
+          Post.where(component: current_component)
+        else
+          Post.published.where(component: current_component)
+        end
+      end
+
+      def default_filter_params
+        { search_text_cont: "", with_any_taxonomies: nil }
       end
     end
   end

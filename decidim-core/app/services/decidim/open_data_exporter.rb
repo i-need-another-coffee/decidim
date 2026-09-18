@@ -83,7 +83,7 @@ module Decidim
       headers = []
       collection = []
       ActiveRecord::Base.uncached do
-        components.where(manifest_name: export_manifest.manifest.name).unscope(:order).find_each do |component|
+        components.where(manifest_name: export_manifest.manifest.name).includes(:participatory_space).unscope(:order).find_each do |component|
           export_manifest.collection.call(component).find_in_batches(batch_size: 100) do |batch|
             serializer = export_manifest.open_data_serializer.nil? ? export_manifest.serializer : export_manifest.open_data_serializer
             exporter = Decidim::Exporters::CSV.new(batch, serializer)
@@ -118,7 +118,7 @@ module Decidim
 
     def data_for_participatory_space(export_manifest)
       collection = participatory_spaces.filter { |space| space.manifest.name == export_manifest.manifest.name }.flat_map do |participatory_space|
-        export_manifest.collection.call(participatory_space)
+        export_manifest.collection.call(participatory_space, nil)
       end
 
       serializer = export_manifest.open_data_serializer.nil? ? export_manifest.serializer : export_manifest.open_data_serializer

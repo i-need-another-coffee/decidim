@@ -2,6 +2,7 @@
 
 shared_context "with a graphql decidim component" do
   include_context "with a graphql class type"
+  include_examples "when the introspection is disabled"
 
   let(:schema) { Decidim::Api::Schema }
 
@@ -190,7 +191,7 @@ shared_examples "with resource visibility" do
     end
   end
 
-  context "when space is published, private and transparent" do
+  context "when space is published and transparent" do
     let(:process_space_factory) { :assembly }
     let(:space_type) { "assembly" }
 
@@ -210,7 +211,7 @@ shared_examples "with resource visibility" do
       }
     )
     end
-    let!(:participatory_process) { create(process_space_factory, :published, :private, :transparent, organization: current_organization) }
+    let!(:participatory_process) { create(process_space_factory, :published, :transparent, organization: current_organization) }
 
     context "when component is published" do
       let!(:current_component) { create(component_factory, :published, participatory_space: participatory_process) }
@@ -305,8 +306,8 @@ shared_examples "with resource visibility" do
     end
   end
 
-  context "when space is published but private" do
-    let!(:participatory_process) { create(process_space_factory, :published, :private, :with_steps, organization: current_organization) }
+  context "when space is published but restricted" do
+    let!(:participatory_process) { create(process_space_factory, :published, :restricted, :with_steps, organization: current_organization) }
 
     context "when component is published" do
       let!(:current_component) { create(component_factory, :published, participatory_space: participatory_process) }

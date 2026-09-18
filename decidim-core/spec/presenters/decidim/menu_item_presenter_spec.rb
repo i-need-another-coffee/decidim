@@ -9,11 +9,16 @@ module Decidim
     let(:menu_item) { MenuItem.new("Foo", "/boo", :foo) }
 
     it "renders the label" do
-      expect(subject.render).to have_content("Foo")
+      expect(subject.render).to have_text("Foo")
     end
 
     it "renders the url" do
       expect(subject.render).to have_link("Foo", href: "/boo")
+    end
+
+    it "adds the menuitem role to the interactive element by default" do
+      expect(subject.render).to have_css("li[role='presentation']")
+      expect(subject.render).to have_css("a[role='menuitem']")
     end
 
     it "does not add the aria-current attribute for non-active page" do
@@ -21,6 +26,8 @@ module Decidim
     end
 
     context "when the link URL is active" do
+      subject { MenuItemPresenter.new(menu_item, view, active_class: "is-active") }
+
       let(:request) { double }
       let(:current_path) { "/boo" }
 
@@ -29,15 +36,23 @@ module Decidim
         allow(request).to receive(:original_fullpath).and_return(current_path)
       end
 
-      it "adds the aria-current attribute to the link" do
-        expect(subject.render).to include('aria-current="page"')
+      it "does not add the aria-current attribute to the link" do
+        expect(subject.render).not_to include("aria-current")
+      end
+
+      it "adds the active class to the item" do
+        expect(subject.render).to have_css("li.is-active")
       end
 
       context "and the page is a sub-page of the menu link" do
         let(:current_path) { "/boo/bar" }
 
-        it "adds the aria-current attribute to the link" do
-          expect(subject.render).to include('aria-current="page"')
+        it "does not add the aria-current attribute to the link" do
+          expect(subject.render).not_to include("aria-current")
+        end
+
+        it "keeps the active class on the item" do
+          expect(subject.render).to have_css("li.is-active")
         end
       end
     end
@@ -47,7 +62,7 @@ module Decidim
 
       it "adds a span instead of a link" do
         expect(subject.render).to have_no_link("Foo", href: "#")
-        expect(subject.render).to have_css("span.sidebar-menu__item-disabled")
+        expect(subject.render).to have_css("li[role='presentation'] span.sidebar-menu__item-disabled[role='menuitem']")
       end
     end
   end

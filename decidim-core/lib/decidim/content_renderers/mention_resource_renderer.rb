@@ -20,34 +20,52 @@ module Decidim
       # a link to the resource.
       #
       # @return [String] the content ready to display (contains HTML)
-      def render(editor: false, **_)
-        replace_pattern(content, GLOBAL_ID_REGEX, editor:)
+      def render(editor: false, plain: false, **_)
+        if plain
+          replace_plain_text(content)
+        else
+          replace_pattern(content, GLOBAL_ID_REGEX, editor:)
+        end
       end
 
       protected
 
       def replace_pattern(text, pattern, editor:)
-        return text unless text.respond_to?(:gsub)
-
-        text.gsub(pattern) do |resource_gid|
+        replace_pattern_by_context(text, pattern) do |resource_gid, context|
           resource = GlobalID::Locator.locate(resource_gid)
-          if editor
+          if context.attribute?
+            render_resource_url(resource, editor:)
+          elsif editor
             render_editor(resource_gid, resource)
           else
             render_resource_link(resource)
           end
-        rescue ActiveRecord::RecordNotFound => _e
-          ""
+        end
+      end
+
+      def replace_plain_text(text)
+        text.gsub(GLOBAL_ID_REGEX) do
+          resource = GlobalID::Locator.locate(Regexp.last_match[0])
+          resource ? presenter_for(resource).title : ""
         end
       end
 
       def render_editor(resource_gid, resource)
-        title = presenter_for(resource).title
-        %(<span data-type="mentionResource" data-id="#{resource_gid}" data-label="#{title}">#{title}</span>)
+        title = presenter_for(resource).title.to_s
+        escaped_gid = CGI.escapeHTML(resource_gid.to_s)
+        escaped_title = CGI.escapeHTML(title)
+
+        %(<span data-type="mentionResource" data-id="#{escaped_gid}" data-label="#{escaped_title}">#{escaped_title}</span>)
       end
 
       def render_resource_link(resource)
         link_to mention_title(resource), resource_path(resource)
+      end
+
+      def render_resource_url(resource, editor:)
+        return resource_path(resource) if editor
+
+        Decidim::ResourceLocatorPresenter.new(resource).url
       end
 
       def mention_title(resource)

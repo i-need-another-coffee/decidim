@@ -11,6 +11,7 @@ module Decidim
     #
     class UserEntityList
       include NeedsApiFilterAndOrder
+      include NeedsApiDefaultOrder
 
       def initialize
         @model_class = Decidim::UserBaseEntity
@@ -19,10 +20,10 @@ module Decidim
       def call(_obj, args, ctx)
         @query = Decidim::UserBaseEntity
                  .where(organization: ctx[:current_organization])
-                 .confirmed
-                 .not_blocked
+                 .visible
         add_filter_keys(args[:filter])
         add_order_keys(args[:order].to_h)
+        add_default_order
         @query
       end
     end

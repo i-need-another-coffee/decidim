@@ -164,7 +164,6 @@ fr:
       front_page_link: Aller à la première page
       logo: "Logo officiel de %{organization}"
       opens_in_new_tab: S'ouvre dans un nouvel onglet
-      secondary_menu: Menu secondaire
       skip_button: Passer au contenu principal
     account:
       blocked: Ce compte a été bloqué en raison d'une violation des conditions d'utilisation
@@ -385,7 +384,7 @@ fr:
       withdraw:
         error: Une erreur s'est produite lors du retrait de cet amendement.
         success: L'amendement a été retiré avec succès.
-      wizard_step_form:
+      wizard:
         steps:
           '1': Créez votre amendement
           '2': Publier votre amendement
@@ -430,6 +429,7 @@ fr:
         explanation: Procédure d'autorisation factice
         name: Procédure d'autorisation factice
       ephemeral_dummy_authorization_handler:
+        explanation: Obtenir une vérification en saisissant un numéro de document se terminant par « X ».
         fields:
           allowed_postal_codes: Codes postaux autorisés (séparés par des virgules)
           document_number: Numéro du document
@@ -517,7 +517,7 @@ fr:
           global:
             amendments_enabled: Modifications activées
             comments_enabled: Activer le module de commentaire
-            comments_max_length: Longueur maximale des commentaires
+            comments_max_length: Nombre maximum de caractères par commentaire
             dummy_global_attribute1: Attribut factice 1
             dummy_global_attribute2: Attribut factice 2
             dummy_global_translatable_text: Texte traduisible factice
@@ -538,6 +538,7 @@ fr:
     contact: Contact
     content_blocks:
       announcement:
+        body: Texte de l’annonce
         name: Annonce
       cta:
         name: Image, texte et bouton d'appel à l'action
@@ -618,6 +619,13 @@ fr:
           all: Tout
         filter_scope_values:
           all: Tout
+    delete_user_mailer:
+      delete:
+        body_1: Votre compte a été désactivé et n'est plus accessible. La suppression permanente de vos données personnelles a été programmée, conformément à nos politiques de conservation.
+        body_2: Pour des raisons de sécurité, certaines données relatives à l’autorisation seront conservées ; si vous créez un nouveau compte et que vous l'autorisez à nouveau, elles peuvent être reliées à votre nouveau compte.
+        greetings_html: Cordialement,<br/><a href="%{organization_url}">%{organization_name}</a>
+        hello: Cher(ère) %{username},
+      subject: Votre compte a été supprimé
     devise:
       omniauth_registrations:
         create:
@@ -780,13 +788,9 @@ fr:
           affected_user:
             email_intro: 'Une modification a été acceptée pour %{amendable_title}. Vous pouvez le voir sur cette page:'
             email_outro: Vous avez reçu cette notification parce que vous êtes l'auteur de %{amendable_title}. Si vous souhaitez vous désabonner des notifications, connectez-vous à la plateforme, puis rendez-vous dans l'onglet “Mon compte” > “Paramètres des notifications”.
-            email_subject: Un amendement accepté pour %{amendable_title} du %{emendation_author_nickname}
-            notification_title: Le <a href="%{emendation_path}">amendement</a> créé par <a href="%{emendation_author_path}">%{emendation_author_nickname}</a> a été accepté pour <a href="%{amendable_path}">%{amendable_title}</a>.
           follower:
             email_intro: 'Une modification a été acceptée pour %{amendable_title}. Vous pouvez le voir sur cette page:'
             email_outro: Vous avez reçu cette notification parce que vous suivez %{amendable_title}. Si vous souhaitez vous désabonner des notifications, connectez-vous à la plateforme, puis rendez-vous dans l'onglet “Mon compte” > “Paramètres des notifications”.
-            email_subject: Un amendement accepté pour %{amendable_title} du %{emendation_author_nickname}
-            notification_title: Le <a href="%{emendation_path}">amendement</a> créé par <a href="%{emendation_author_path}">%{emendation_author_nickname}</a> a été accepté pour <a href="%{amendable_path}">%{amendable_title}</a>.
         amendment_created:
           affected_user:
             email_intro: 'Une nouvelle modification a été créée pour %{amendable_title}. Vous pouvez le voir sur cette page:'
@@ -802,29 +806,20 @@ fr:
           affected_user:
             email_intro: 'Une modification rejetée pour %{amendable_title} a été promue en %{amendable_type}indépendante. Vous pouvez le voir sur cette page:'
             email_outro: Vous avez reçu cette notification parce que vous êtes l'auteur de %{amendable_title}. Si vous souhaitez vous désabonner des notifications, connectez-vous à la plateforme, puis rendez-vous dans l'onglet “Mon compte” > “Paramètres des notifications”.
-            email_subject: Un amendement de %{emendation_author_nickname} a été publié en tant que nouveau %{amendable_type}
-            notification_title: A <a href="%{emendation_path}">a rejeté l' amendement</a> pour <a href="%{amendable_path}">%{amendable_title}</a> a été publiée en tant que nouveau %{amendable_type} par <a href="%{emendation_author_path}">%{emendation_author_nickname}</a>.
           follower:
             email_intro: 'Une modification rejetée pour %{amendable_title} a été promue en %{amendable_type}indépendante. Vous pouvez le voir sur cette page:'
             email_outro: Vous avez reçu cette notification parce que vous suivez %{amendable_title}. Si vous souhaitez vous désabonner des notifications, connectez-vous à la plateforme, puis rendez-vous dans l'onglet “Mon compte” > “Paramètres des notifications”.
-            email_subject: Un amendement de %{emendation_author_nickname} a été publié en tant que nouveau %{amendable_type}
-            notification_title: A <a href="%{emendation_path}">a rejeté l' amendement</a> pour <a href="%{amendable_path}">%{amendable_title}</a> a été publiée en tant que nouveau %{amendable_type} par <a href="%{emendation_author_path}">%{emendation_author_nickname}</a>.
         amendment_rejected:
           affected_user:
             email_intro: 'Une modification a été rejetée pour %{amendable_title}. Vous pouvez le voir sur cette page:'
             email_outro: Vous avez reçu cette notification parce que vous êtes l'auteur de %{amendable_title}. Si vous souhaitez vous désabonner des notifications, connectez-vous à la plateforme, puis rendez-vous dans l'onglet “Mon compte” > “Paramètres des notifications”.
-            email_subject: Un amendement rejeté pour %{amendable_title} à %{emendation_author_nickname}
-            notification_title: Le <a href="%{emendation_path}">amendement</a> créé par <a href="%{emendation_author_path}">%{emendation_author_nickname}</a> a été rejetée pour <a href="%{amendable_path}">%{amendable_title}</a>.
           follower:
             email_intro: 'Une modification a été rejetée pour %{amendable_title}. Vous pouvez le voir sur cette page:'
             email_outro: Vous avez reçu cette notification parce que vous suivez %{amendable_title}. Si vous souhaitez vous désabonner des notifications, connectez-vous à la plateforme, puis rendez-vous dans l'onglet “Mon compte” > “Paramètres des notifications”.
-            email_subject: Un amendement rejeté pour %{amendable_title} à %{emendation_author_nickname}
-            notification_title: Le <a href="%{emendation_path}">amendement</a> créé par <a href="%{emendation_author_path}">%{emendation_author_nickname}</a> a été rejetée pour <a href="%{amendable_path}">%{amendable_title}</a>.
         emendation_promoted:
           follower:
             email_intro: 'Une correction a été publiée pour %{amendable_title}. Vous pouvez la voir sur cette page :'
             email_outro: Vous avez reçu cette notification parce que vous êtes un(e) auteur/trice de %{amendable_title}.
-            email_subject: Une correction réalisée par %{emendation_author_nickname} a été publiée en tant que nouvelle %{amendable_type}
       attachments:
         attachment_created:
           email_intro: 'Un nouveau document a été ajouté à %{resource_title}. Vous pouvez le voir sur cette page :'
@@ -857,6 +852,18 @@ fr:
         notification_body: Nous avons corrigé la façon dont les pseudonymes sont utilisés pour qu'il n'y ait pas de doublons, et c'est pourquoi nous avons supprimé la distinction entre les majuscules et les minuscules. <br/> Votre pseudonyme a été créé après un autre qui était identique, nous l'avons donc automatiquement modifié. Vous pouvez le modifier depuis <a href="%{link_to_account_settings}">les paramètres de votre compte</a>.
       notification_event:
         notification_title: Un événement a eu lieu sur <a href="%{resource_path}">%{resource_title}</a>.
+      participatory_space:
+        member_added:
+          published:
+            email_intro: Vous avez été ajouté(e) en tant que membre à un espace participatif.
+            email_outro: Vous avez reçu cette notification car un administrateur vous a ajouté à <a href="%{resource_url}">%{resource_title}</a>. Si l'accès à cet espace est restreint, vous pourrez y accéder avec votre compte.<br> Votre profil apparaîtra dans la <a href="%{members_page}">liste des membres</a> de cet espace.
+            email_subject: Vous avez maintenant accès à %{resource_title}.
+            notification_title: Vous avez maintenant accès à <a href="%{resource_url}">%{resource_title}</a>.
+          unpublished:
+            email_intro: Vous avez été ajouté(e) en tant que membre à un espace participatif.
+            email_outro: Vous avez reçu cette notification car un administrateur vous a ajouté à <a href="%{resource_url}">%{resource_title}</a>. Si l'accès à cet espace est restreint, vous pourrez y accéder avec votre compte.
+            email_subject: Vous avez maintenant accès à %{resource_title}.
+            notification_title: Vous avez maintenant accès à <a href="%{resource_url}">%{resource_title}</a>.
       reports:
         resource_hidden:
           email_intro: Un administrateur a modéré votre %{resource_type} car il a été signalé comme %{report_reasons}.
@@ -867,15 +874,10 @@ fr:
             <i>%{resource_content}</i>
       users:
         profile_updated:
-          email_intro: Le <a href="%{resource_url}">profil public</a> de %{name} (%{nickname}), que vous suivez, a été mis à jour.
-          email_outro: Vous recevez cette notification car vous suivez « %{nickname} ». Si vous souhaitez vous désabonner des notifications, connectez-vous à la plateforme, puis rendez-vous dans l'onglet “Mon compte” > “Paramètres des notifications”.
-          email_subject: "%{nickname} a mis à jour son profil public"
-          notification_title: Le <a href="%{resource_path}">profil public</a> de %{name} (%{nickname}), que vous suivez, a été mis à jour.
+          email_subject: "%{name} a mis à jour son profil"
         user_officialized:
-          email_intro: Le participant %{name} (%{nickname}) a été officialisé.
           email_outro: Vous avez reçu cette notification parce que vous êtes un administrateur de l'organisation. Si vous souhaitez vous désabonner des notifications, connectez-vous à la plateforme, puis rendez-vous dans l'onglet “Mon compte” > “Paramètres des notifications”.
           email_subject: "%{name} a été officialisé"
-          notification_title: Le participant %{name} (%{nickname}) a été officialisé.
     export_mailer:
       download_your_data_export:
         click_button_html: Cliquez sur le lien suivant pour télécharger vos données.<br/>Le fichier sera disponible au téléchargement jusqu'à %{date}.
@@ -944,6 +946,9 @@ fr:
           explanation: 'Orientation pour l''image:'
           message_1: De préférence une image au format paysage ne contenant pas de texte.
           message_2: Le service recadre l'image.
+        import_file:
+          explanation: 'Instructions pour le fichier d''importation :'
+          message_1: Doit être un document JSON téléchargé via la fonction d'exportation.
       file_validation:
         allowed_file_extensions: 'Extensions de fichier autorisées : %{extensions}'
         max_file_dimension: 'Dimensions de fichier maximales : %{resolution} pixels'
@@ -1038,6 +1043,12 @@ fr:
         update_permissions_with_space: "%{user_name} a mis à jour les permissions de %{resource_name} dans %{space_name}"
         update_with_space: "%{user_name} a mis à jour %{resource_name} dans %{space_name}"
       value_types:
+        access_mode_presenter:
+          access_modes:
+            open: Ouvert
+            restricted: Restreint
+            transparent: Transparent
+          not_found: Le mode d'accès %{id} est introuvable
         area_presenter:
           not_found: 'Le périmètre d''assemblée n''a pas été trouvée dans la base de données (ID: %{id})'
         area_type_presenter:
@@ -1054,6 +1065,8 @@ fr:
       dynamic:
         screen_reader_explanation: L'élément suivant est une carte qui présente les éléments de cette page comme des points de carte. L'élément peut être utilisé avec un lecteur d'écran, mais il peut être difficile à comprendre.
         skip_button: Passer la carte
+        zoom_in: Zoomer
+        zoom_out: Dézoomer
       static:
         latlng_text: 'latitude : %{latitude}, longitude : %{longitude}'
         map_service_brand: OpenStreetMap
@@ -1083,7 +1096,6 @@ fr:
         create:
           error: La conversation n'a pas commencé. Réessayez plus tard.
         error_modal:
-          close: Fermer la fenêtre de dialogue
           correct_errors: Veuillez corriger les erreurs et réessayer.
           intro: 'Il y a eu les erreurs suivantes avec votre message :'
           ok: Ok
@@ -1209,6 +1221,7 @@ fr:
         own_activity: Ma propre activité, comme quand quelqu'un commente dans ma proposition ou me mentionne
         push_notifications: Notifications push
         push_notifications_reminder: Pour recevoir des notifications de la plateforme, vous devez d'abord les autoriser dans les paramètres de votre navigateur.
+        push_notifications_unsupported_browser: Votre navigateur n'est pas pris en charge.
         receive_notifications_about: Je veux recevoir des notifications sur
         update_notifications_settings: Enregistrer les modifications
       update:
@@ -1261,6 +1274,7 @@ fr:
           badge: Le badge de l'utilisateur
           groups: L'identifiant et le nom du groupe d'utilisateurs
           id: L'identifiant unique de l'utilisateur
+          name: Le nom d'affichage de l'utilisateur
           nickname: Le pseudonyme de l'utilisateur
           profile_url: L'url du profil
       index:
@@ -1369,13 +1383,22 @@ fr:
         log_in: se connecter
         never_logged_in: jamais connecté
         subject: Avertissement de compte inactif
-      removal_notification:
-        body: Votre compte %{organization_name} a été supprimé en raison de son inactivité.
-        greetings_html: |
-          Cordialement,<br>
-          %{organization_name}
-        hello: Cher(ère) %{username},
-        subject: Compte inactif supprimé
+    participatory_space:
+      labels:
+        reference: Référence de l'espace
+        restricted: Espace restreint
+        transparent: Espace transparent
+      pages:
+        user_profile:
+          member_of:
+            member_of: Membre de
+    participatory_space_members:
+      index:
+        members: Membres
+    participatory_spaces:
+      show:
+        restricted_space: Il s'agit d'un espace restreint. Seuls les membres et les administrateurs peuvent le voir et y participer.
+        transparent_space: Ceci est un espace transparent. N'importe qui peut voir le contenu, mais seuls les membres et les administrateurs peuvent participer.
     passwords:
       update:
         error: Il y a eu un problème lors de la mise à jour de votre mot de passe.
@@ -1518,6 +1541,8 @@ fr:
       login_modal:
         please_log_in: Veuillez vous connecter
         sign_up: Créer un compte
+      mentions:
+        search_prompt: Tapez pour rechercher des participants
       mentions_modal:
         remove_recipient: Supprimer le destinataire %{name}
       progress: Avancement
@@ -1642,6 +1667,7 @@ fr:
       send_paranoid_instructions: Si votre adresse e-mail existe dans notre base de données, vous recevrez un e-mail avec les instructions pour confirmer votre adresse e-mail dans quelques minutes.
     failure:
       already_authenticated: Vous êtes déjà connecté.
+      csrf_token: Impossible de vérifier votre demande. Veuillez réessayer.
       inactive: Votre compte n'est pas encore activé.
       invalid: '%{authentication_keys} ou mot de passe invalide.'
       invited: Vous avez une invitation en attente, acceptez-la pour terminer la création de votre compte.
@@ -1656,6 +1682,7 @@ fr:
         nickname_help: Cet identifiant est public et unique sur %{organization} ; il permet aux autres utilisateurs de vous suivre, de vous contacter ou de vous mentionner dans leurs commentaires. Il s’affichera précédé d’un « @ » ; il ne peut contenir que des lettres, des chiffres ainsi que les caractères "-" et "_".
         submit_button: Sauvegarder
         subtitle: Si vous acceptez l'invitation, veuillez indiquer votre pseudonyme et votre mot de passe.
+        subtitle_no_password: Si vous acceptez l'invitation, veuillez définir votre pseudonyme.
       invitation_removed: Votre invitation a été supprimée.
       invitation_token_invalid: Le jeton d'invitation fourni n'est pas valide!
       new:
@@ -1663,8 +1690,8 @@ fr:
         submit_button: Envoyer une invitation
       no_invitations_remaining: Aucune invitation restante
       send_instructions: Un email d'invitation a été envoyé à %{email}.
-      updated: Votre mot de passe a été défini avec succès. Vous êtes maintenant inscrit.
-      updated_not_active: Votre mot de passe a été défini avec succès.
+      updated: Invitation acceptée avec succès. Vous êtes maintenant connecté(e).
+      updated_not_active: Invitation acceptée avec succès.
     mailer:
       confirmation_instructions:
         action: Confirmer mon compte
@@ -1723,8 +1750,8 @@ fr:
         confirm_new_password: Confirmer le nouveau mot de passe
         new_password: Nouveau mot de passe
         old_password_help: Afin de confirmer les modifications apportées à votre compte, veuillez saisir votre mot de passe actuel.
-        password_help: "%{minimum_characters} caractères minimum, ne doit pas être trop commun (par exemple 123456) et doit être différent de votre pseudo et de votre email."
-        password_help_admin: "%{minimum_characters} caractères minimum, ne doit pas être trop commun (par exemple 123456) et doit être différent de votre pseudo et de votre email, ainsi que de vos précédents mots de passe."
+        password_help: "%{minimum_characters} caractères minimum, doit contenir au moins 5 caractères différents, ne doit pas être trop commun (ex. 123456) et doit être différent de votre nom, de votre pseudo, de votre courriel et du nom de l'organisation."
+        password_help_admin: "%{minimum_characters} caractères minimum, doit contenir au moins 5 caractères différents, ne doit pas être trop commun (ex. 123456) et doit être différent de votre nom, de votre pseudo, de votre courriel, du nom de l'organisation et de vos anciens mots de passe."
         title: Changement de mot de passe
       new:
         forgot_your_password: Mot de passe oublié?
@@ -1895,7 +1922,6 @@ fr:
   layouts:
     decidim:
       announcements:
-        view_less: Afficher moins
         view_more: Plus d'informations
       data_consent:
         details:
@@ -1968,6 +1994,7 @@ fr:
         confirm_title_close_ephemeral_session: Avant de quitter cette page…
         log_in: Se connecter
         main_menu: Menu principal
+        mobile_account_greeting: Bonjour %{user_name},
         user_menu: Menu utilisateur
       impersonation_warning:
         close_session: Fermer la session

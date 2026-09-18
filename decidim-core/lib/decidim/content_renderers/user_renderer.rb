@@ -17,31 +17,40 @@ module Decidim
       # invalid Decidim::User are replaced with an empty string.
       #
       # @return [String] the content ready to display (contains HTML)
-      def render(editor: false, **_)
-        replace_pattern(content, GLOBAL_ID_REGEX, editor:)
+      def render(editor: false, plain: false, **_)
+        if plain
+          replace_plain_text(content)
+        else
+          replace_pattern(content, GLOBAL_ID_REGEX, editor:)
+        end
       end
 
       protected
 
       def replace_pattern(text, pattern, editor:)
-        return text unless text.respond_to?(:gsub)
-
-        text.gsub(pattern) do |mentionable_gid|
-          mentionable = GlobalID::Locator.locate(mentionable_gid)
-          if editor
-            render_editor(mentionable)
+        replace_pattern_by_context(text, pattern) do |user_gid, context|
+          user = GlobalID::Locator.locate(user_gid)
+          if context.attribute?
+            render_profile_path(user)
+          elsif editor
+            render_editor(user)
           else
-            render_text(mentionable)
+            render_text(user)
           end
-        rescue ActiveRecord::RecordNotFound => _e
-          ""
+        end
+      end
+
+      def replace_plain_text(text)
+        text.gsub(GLOBAL_ID_REGEX) do
+          user = GlobalID::Locator.locate(Regexp.last_match[0])
+          user ? presenter_for(user).nickname : ""
         end
       end
 
       def render_editor(mentionable)
         mention = render_text(mentionable, editor: true)
-        label = CGI.escapeHTML("#{mention} (#{mentionable.name})")
-        %(<span data-type="mention" data-id="#{mention}" data-label="#{label}">#{label}</span>)
+        label = CGI.escapeHTML(mention)
+        %(<span data-type="mention" data-id="#{label}" data-label="#{label}">#{label}</span>)
       end
 
       def presenter_for(mentionable)
@@ -54,6 +63,10 @@ module Decidim
         else
           presenter_for(user).display_mention
         end
+      end
+
+      def render_profile_path(user)
+        presenter_for(user).profile_path
       end
     end
   end

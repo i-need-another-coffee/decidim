@@ -20,7 +20,7 @@ shared_examples "searchable results" do
       find(search_input_selector).native.send_keys :enter
 
       expect(page).to have_current_path decidim.search_path, ignore_query: true
-      expect(page).to have_content(%(results for the search: "#{term}"))
+      expect(page).to have_text(%(results for the search: "#{term}"))
       expect(page).to have_css(".filter-search.filter-container")
       expect(page.find("#search-count h2").text.to_i).to be_positive
     end
@@ -34,7 +34,7 @@ shared_examples "searchable results" do
         find(search_input_selector).native.send_keys :enter
 
         expect(page).to have_current_path decidim.search_path, ignore_query: true
-        expect(page).to have_content(%(results for the search: "#{term}"))
+        expect(page).to have_text(%(results for the search: "#{term}"))
         expect(page).to have_css(".filter-search.filter-container")
         expect(page.find("#search-count h2").text.to_i).to be_positive
 
@@ -42,9 +42,8 @@ shared_examples "searchable results" do
           next unless searchable.is_a?(Decidim::Reportable)
 
           create(:moderation, reportable: searchable, hidden_at: Time.current)
-          # rubocop:disable Rails/SkipsModelValidations
+          # rubocop:disable-next Rails/SkipsModelValidations
           searchable.reload.touch
-          # rubocop:enable Rails/SkipsModelValidations
         end
 
         visit decidim.root_path
@@ -53,7 +52,7 @@ shared_examples "searchable results" do
         find(search_input_selector).native.send_keys :enter
 
         expect(page).to have_current_path decidim.search_path, ignore_query: true
-        expect(page).to have_content(%(results for the search: "#{term}"))
+        expect(page).to have_text(%(results for the search: "#{term}"))
         expect(page).to have_css(".filter-search.filter-container")
         expect(page.find("#search-count h2").text.to_i).not_to be_positive
       end
@@ -69,7 +68,7 @@ shared_examples "searchable results" do
           find(search_input_selector).native.send_keys :enter
 
           expect(page).to have_current_path decidim.search_path, ignore_query: true
-          expect(page).to have_content(%(results for the search: "#{term}"))
+          expect(page).to have_text(%(results for the search: "#{term}"))
           expect(page).to have_css(".filter-search.filter-container")
           expect(page.find("#search-count h2").text.to_i).not_to be_positive
         end
@@ -83,9 +82,9 @@ shared_examples "searchable results" do
         it_behaves_like "no searches found"
       end
 
-      context "when participatory space is private" do
+      context "when participatory space is restricted" do
         before do
-          perform_enqueued_jobs { participatory_space.update!(private_space: true) }
+          perform_enqueued_jobs { participatory_space.update!(access_mode: :restricted) }
         end
 
         it_behaves_like "no searches found"

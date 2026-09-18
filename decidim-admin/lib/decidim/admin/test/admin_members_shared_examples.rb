@@ -2,6 +2,7 @@
 
 shared_examples "manage admin members examples" do
   let(:other_user) { create(:user, organization:, email: "my_email@example.org") }
+  let!(:name_user) { create(:user, :confirmed, organization:, name: "Sarah Connor", nickname: "sarahconnor") }
 
   let!(:member) { create(:member, user:, participatory_space:) }
 
@@ -16,7 +17,7 @@ shared_examples "manage admin members examples" do
 
   it "shows the member list" do
     within "#members table" do
-      expect(page).to have_content(member.user.email)
+      expect(page).to have_text(member.user.email)
     end
   end
 
@@ -24,20 +25,57 @@ shared_examples "manage admin members examples" do
     click_on "New member"
 
     within ".new_member" do
-      fill_in :member_name, with: "John Doe"
+      choose "Email", name: "member[member_type]"
       fill_in :member_email, with: other_user.email
 
       find("*[type=submit]").click
     end
 
-    expect(page).to have_admin_callout("successfully")
+    expect(page).to have_callout("Member access successfully created.")
 
     within "#members table" do
-      expect(page).to have_content(other_user.email)
+      expect(page).to have_text(other_user.email)
     end
 
     visit decidim_admin.root_path
-    expect(page).to have_content("invited #{other_user.name} to be a member")
+    expect(page).to have_text("invited #{other_user.name} to be a member")
+  end
+
+  it "creates a new member by name or nickname" do
+    click_on "New member"
+
+    within ".new_member" do
+      choose "Name or nickname", name: "member[member_type]"
+      autocomplete_select name_user.name, from: :user_id
+
+      find("*[type=submit]").click
+    end
+
+    expect(page).to have_callout("Member access successfully created.")
+
+    within "#members table" do
+      expect(page).to have_text(name_user.email)
+    end
+
+    visit decidim_admin.root_path
+    expect(page).to have_text("invited #{name_user.name} to be a member")
+  end
+
+  it "switches between member type modes" do
+    click_on "New member"
+
+    within ".new_member" do
+      expect(page).to have_css(".user-picker-fields--name", visible: :visible)
+      expect(page).to have_css(".user-picker-fields--email", visible: :hidden)
+
+      choose "Email", name: "member[member_type]"
+      expect(page).to have_css(".user-picker-fields--name", visible: :hidden)
+      expect(page).to have_css(".user-picker-fields--email", visible: :visible)
+
+      choose "Name or nickname", name: "member[member_type]"
+      expect(page).to have_css(".user-picker-fields--name", visible: :visible)
+      expect(page).to have_css(".user-picker-fields--email", visible: :hidden)
+    end
   end
 
   describe "when import a batch of members from csv" do
@@ -50,7 +88,7 @@ shared_examples "manage admin members examples" do
       dynamically_attach_file(:member_csv_import_file, Decidim::Dev.asset("import_members.csv"))
       perform_enqueued_jobs { click_on "Upload" }
 
-      expect(page).to have_content("CSV file uploaded successfully")
+      expect(page).to have_text("CSV file uploaded successfully")
     end
   end
 
@@ -68,7 +106,7 @@ shared_examples "manage admin members examples" do
       click_on "Publish all"
       sleep(1)
       visit decidim_admin.root_path
-      expect(page).to have_content("published all members of the #{translated(participatory_space.title)}")
+      expect(page).to have_text("published all members of the #{translated(participatory_space.title)}")
     end
   end
 
@@ -84,10 +122,10 @@ shared_examples "manage admin members examples" do
         accept_confirm { click_on "Delete" }
       end
 
-      expect(page).to have_admin_callout("successfully")
+      expect(page).to have_callout("Member access successfully destroyed.")
 
       within "#members table" do
-        expect(page).to have_no_content(other_user.email)
+        expect(page).to have_no_text(other_user.email)
       end
     end
 
@@ -95,7 +133,8 @@ shared_examples "manage admin members examples" do
       before do
         form = Decidim::Admin::ParticipatorySpace::MemberForm.from_params(
           name: "test",
-          email: "test@example.org"
+          email: "test@example.org",
+          member_type: "email"
         )
 
         Decidim::Admin::ParticipatorySpace::CreateMember.call(
@@ -112,7 +151,7 @@ shared_examples "manage admin members examples" do
           click_on "Resend invitation"
         end
 
-        expect(page).to have_admin_callout("successfully")
+        expect(page).to have_callout("Invitation successfully resent.")
       end
     end
   end

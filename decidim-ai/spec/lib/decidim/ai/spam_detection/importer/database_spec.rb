@@ -20,6 +20,7 @@ describe Decidim::Ai::SpamDetection::Importer::Database do
     let(:reporting_user) { author }
     let(:spam_count) { 2 }
     let!(:parent) { create(:report, reason: "parent_hidden", user: reporting_user, moderation: create(:moderation, :hidden, reportable: resources.last)) }
+
     Decidim::Report::REASONS.excluding("parent_hidden").each do |reason|
       let!(:report) { create(:report, reason:, user: reporting_user, moderation: create(:moderation, :hidden, reportable:)) }
 
@@ -37,7 +38,7 @@ describe Decidim::Ai::SpamDetection::Importer::Database do
 
   shared_examples "resource is being indexed" do
     let(:organization) { create(:organization) }
-    let!(:author) { create(:user, organization:) }
+    let!(:author) { create(:user, :confirmed, organization:) }
     let(:component) { create(:component, participatory_space:, manifest_name:) }
     let(:participatory_space) { create(:participatory_process, organization:) }
     let(:instance) { Decidim::Ai::SpamDetection::Service.new(registry: Decidim::Ai::SpamDetection.resource_registry) }
@@ -56,7 +57,7 @@ describe Decidim::Ai::SpamDetection::Importer::Database do
 
   context "when trained model is Decidim::Initiative" do
     let(:organization) { create(:organization) }
-    let!(:author) { create(:user, organization:) }
+    let!(:author) { create(:user, :confirmed, organization:) }
     let(:training) { 8 }
     let!(:resource_models) { { "Decidim::Initiative" => "Decidim::Ai::SpamDetection::Resource::Initiative" } }
 
@@ -103,18 +104,6 @@ describe Decidim::Ai::SpamDetection::Importer::Database do
     include_examples "some resources are being spam"
   end
 
-  context "when trained model is Decidim::Proposals::CollaborativeDraft" do
-    let(:manifest_name) { "proposals" }
-    let(:training) { 8 }
-
-    let!(:reportable) { create(:collaborative_draft, component:, users: [author], title: "Hidden resource") }
-    let!(:resources) { create_list(:collaborative_draft, 3, component:, users: [author]) }
-    let(:resource_models) { { "Decidim::Proposals::CollaborativeDraft" => "Decidim::Ai::SpamDetection::Resource::CollaborativeDraft" } }
-
-    include_examples "resource is being indexed"
-    include_examples "some resources are being spam"
-  end
-
   context "when trained model is Decidim::Debates::Debate" do
     let(:manifest_name) { "debates" }
     let(:training) { 8 }
@@ -139,7 +128,7 @@ describe Decidim::Ai::SpamDetection::Importer::Database do
     let(:tested) { 3 }
     let(:training) { 4 } # tested + author in shared example
 
-    let!(:user) { create_list(:user, tested, organization:, about: "Something about me") }
+    let!(:user) { create_list(:user, tested, :confirmed, organization:, about: "Something about me") }
     let(:resource_models) { { "Decidim::User" => "Decidim::Ai::SpamDetection::Resource::UserBaseEntity" } }
 
     include_examples "resource is being indexed" do

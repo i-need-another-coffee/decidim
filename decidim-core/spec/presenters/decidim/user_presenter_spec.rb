@@ -5,7 +5,40 @@ require "spec_helper"
 module Decidim
   describe UserPresenter, type: :helper do
     let(:presenter) { described_class.new(user) }
-    let(:user) { build(:user) }
+    let(:organization) { create(:organization) }
+    let(:user) { build(:user, :confirmed, organization:) }
+
+    describe "name" do
+      subject { presenter.name }
+
+      context "when is valid" do
+        it { is_expected.to eq(user.name) }
+      end
+
+      context "when is not valid" do
+        let(:user) { build(:user, :confirmed, organization:, name: "John\r<script>alert('name')</script>") }
+
+        it { is_expected.to eq("John\ralert('name')") }
+      end
+
+      context "when user is not confirmed" do
+        let(:user) { build(:user, organization:) }
+
+        it { is_expected.to eq("") }
+      end
+
+      context "when user is deleted" do
+        let(:user) { build(:user, :confirmed, :deleted, organization:) }
+
+        it { is_expected.to eq("") }
+      end
+
+      context "when user is managed" do
+        let(:user) { build(:user, :confirmed, :managed, organization:) }
+
+        it { is_expected.to eq("") }
+      end
+    end
 
     describe "#nickname" do
       subject { presenter.nickname }
@@ -18,6 +51,24 @@ module Decidim
         before do
           user.blocked = true
         end
+
+        it { is_expected.to eq("") }
+      end
+
+      context "when not confirmed" do
+        let(:user) { build(:user, organization:) }
+
+        it { is_expected.to eq("") }
+      end
+
+      context "when deleted" do
+        let(:user) { build(:user, :confirmed, :deleted, organization:) }
+
+        it { is_expected.to eq("") }
+      end
+
+      context "when managed" do
+        let(:user) { build(:user, :confirmed, :managed, organization:) }
 
         it { is_expected.to eq("") }
       end
@@ -44,7 +95,25 @@ module Decidim
     describe "#profile_url" do
       subject { described_class.new(user).profile_url }
 
-      it { is_expected.to eq("http://#{user.organization.host}:#{Capybara.server_port}/profiles/#{user.nickname}") }
+      it { is_expected.to eq("http://#{user.organization.host}:#{Capybara.server_port}/en/profiles/#{user.nickname}") }
+
+      context "when user is not confirmed" do
+        let(:user) { build(:user, organization:) }
+
+        it { is_expected.to eq("http://#{user.organization.host}:#{Capybara.server_port}/en") }
+      end
+
+      context "when user is deleted" do
+        let(:user) { build(:user, :confirmed, :deleted, organization:) }
+
+        it { is_expected.to eq("http://#{user.organization.host}:#{Capybara.server_port}/en") }
+      end
+
+      context "when user is managed" do
+        let(:user) { build(:user, :confirmed, :managed, organization:) }
+
+        it { is_expected.to eq("http://#{user.organization.host}:#{Capybara.server_port}/en") }
+      end
     end
 
     describe "#avatar_url" do
@@ -69,7 +138,7 @@ module Decidim
     end
 
     context "when user is officialized" do
-      let(:user) { build(:user, :officialized) }
+      let(:user) { build(:user, :confirmed, :officialized) }
 
       describe "#badge" do
         subject { presenter.badge }
@@ -81,16 +150,30 @@ module Decidim
     describe "#profile_path" do
       subject { presenter.profile_path }
 
-      it { is_expected.to eq("/profiles/#{user.nickname}") }
-    end
+      it { is_expected.to eq("/en/profiles/#{user.nickname}") }
 
-    context "when user is deleted" do
-      let(:user) { build(:user, :deleted) }
+      context "when user is not published" do
+        let(:user) { build(:user, organization:) }
 
-      describe "#profile_path" do
-        subject { presenter.profile_path }
+        it { is_expected.to eq("/en") }
+      end
 
-        it { is_expected.to eq("") }
+      context "when user is deleted" do
+        let(:user) { build(:user, :confirmed, :deleted, organization:) }
+
+        it { is_expected.to eq("/en") }
+      end
+
+      context "when user is managed" do
+        let(:user) { build(:user, :confirmed, :managed, organization:) }
+
+        it { is_expected.to eq("/en") }
+      end
+
+      context "when user is blocked" do
+        let(:user) { build(:user, :confirmed, :blocked, organization:) }
+
+        it { is_expected.to eq("/en") }
       end
     end
 
@@ -98,7 +181,7 @@ module Decidim
       subject { presenter.display_mention }
 
       it do
-        expect(subject).to have_link(user.nickname, href: "http://#{user.organization.host}:#{Capybara.server_port}/profiles/#{user.nickname}")
+        expect(subject).to have_link(user.nickname, href: "http://#{user.organization.host}:#{Capybara.server_port}/en/profiles/#{user.nickname}")
       end
     end
 

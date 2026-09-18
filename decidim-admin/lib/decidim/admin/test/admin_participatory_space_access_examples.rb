@@ -4,14 +4,14 @@ shared_examples "accessing the participatory space" do
   it "shows the page" do
     # Since the button now contains dynamic text, we have to check the href
     expect(page).to have_css("[href='#{resource_locator(try(:participatory_space) || try(:participatory_process)).path.split("?").first}']", text: "See")
-    expect(page).to have_content("My space")
+    expect(page).to have_text("My space")
   end
 end
 
 shared_examples "showing the unauthorized error message" do
   it "redirects to the relevant unauthorized page" do
-    expect(page).to have_content("You are not authorized to perform this action")
-    expect(page).to have_current_path("/admin/")
+    expect(page).to have_text("You are not authorized to perform this action")
+    expect(page).to have_current_path(decidim_admin.root_path)
   end
 end
 
@@ -32,6 +32,36 @@ shared_examples "admin participatory space edit button" do
   end
 end
 
+shared_examples "admin participatory space access public interface of restricted space" do
+  let(:user) { role }
+
+  before do
+    switch_to_host(organization.host)
+    login_as user, scope: :user
+    visit participatory_space_path
+  end
+
+  it "displays the page" do
+    expect(page).to have_text("This is a restricted space. Only members and administrators can view it and participate.")
+    expect(page).to have_current_path(participatory_space_path)
+  end
+end
+
+shared_examples "admin participatory space access public interface of transparent space" do
+  let(:user) { role }
+
+  before do
+    switch_to_host(organization.host)
+    login_as user, scope: :user
+    visit participatory_space_path
+  end
+
+  it "displays the page" do
+    expect(page).to have_text("This is a transparent space. Anyone can view the content, but only members and administrators can participate.")
+    expect(page).to have_current_path(participatory_space_path)
+  end
+end
+
 shared_examples "admin participatory space access" do
   before do
     switch_to_host(organization.host)
@@ -40,7 +70,7 @@ shared_examples "admin participatory space access" do
 
   context "when the user is a normal user" do
     let(:user) { create(:user, :confirmed, organization:) }
-    let(:unauthorized_path) { "/" }
+    let(:unauthorized_path) { decidim.root_path }
 
     it_behaves_like "a 404 page"
   end
@@ -53,7 +83,7 @@ shared_examples "admin participatory space access" do
         visit decidim.root_path
 
         within "#admin-bar" do
-          expect(page).to have_link("Admin dashboard", href: "/admin/")
+          expect(page).to have_link("Admin dashboard", href: decidim_admin.root_path)
         end
       end
     end
@@ -85,10 +115,10 @@ shared_examples "admin menu shows only assigned space" do |space_name:, other_sp
 
   context "and does not show unassigned spaces" do
     it "shows only the assigned space" do
-      expect(page).to have_content(space_name)
+      expect(page).to have_text(space_name)
 
       other_spaces.each do |other_space|
-        expect(page).to have_no_content(other_space)
+        expect(page).to have_no_text(other_space)
       end
     end
   end

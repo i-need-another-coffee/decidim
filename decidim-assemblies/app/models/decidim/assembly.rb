@@ -53,10 +53,6 @@ module Decidim
                foreign_key: "decidim_area_id",
                class_name: "Decidim::Area",
                optional: true
-    belongs_to :assembly_type,
-               foreign_key: "decidim_assemblies_type_id",
-               class_name: "Decidim::AssembliesType",
-               optional: true
     has_many :categories,
              foreign_key: "decidim_participatory_space_id",
              foreign_type: "decidim_participatory_space_type",
@@ -70,9 +66,6 @@ module Decidim
 
     has_one_attached :hero_image
     validates_upload :hero_image, uploader: Decidim::HeroImageUploader
-
-    has_one_attached :banner_image
-    validates_upload :banner_image, uploader: Decidim::BannerImageUploader
 
     validates :slug, uniqueness: { scope: :organization }
     validates :slug, presence: true, format: { with: Decidim::Assembly.slug_format }
@@ -92,10 +85,14 @@ module Decidim
                       index_on_create: ->(_assembly) { false },
                       index_on_update: ->(assembly) { assembly.visible? })
 
-    # Overwriting existing method Decidim::ParticipatorySpace::HasMembers.public_spaces
-    def self.public_spaces
-      where(private_space: false).or(where(private_space: true).where(is_transparent: true)).published
-    end
+    # Access modes are consistent across participatory spaces (assemblies and processes)
+    # open: visible and accessible for all
+    # transparent: visible for all but the actions require to be a member of the space
+    # restricted: visible and accessible only for members fo the space
+    ACCESS_MODES = { open: 0, transparent: 1, restricted: 2 }.freeze
+    enum :access_mode, ACCESS_MODES
+
+    scope_search_multi :with_any_access_mode, ACCESS_MODES.keys
 
     # Scope to return only the promoted assemblies.
     #
@@ -120,7 +117,7 @@ module Decidim
 
     # This is a overwrite for Decidim::ParticipatorySpaceResourceable.visible?
     def visible?
-      published? && (!private_space? || (private_space? && is_transparent?))
+      published? && (open? || transparent?)
     end
 
     def to_param
@@ -157,7 +154,7 @@ module Decidim
     end
 
     def self.ransackable_scopes(_auth_object = nil)
-      [:with_any_taxonomies]
+      [:with_any_taxonomies, :with_any_access_mode]
     end
 
     def shareable_url(share_token)
@@ -169,7 +166,7 @@ module Decidim
 
       return base unless auth_object&.admin?
 
-      base + %w(published_at created_at private_space parent_id)
+      base + %w(published_at created_at parent_id access_mode)
     end
 
     def self.ransackable_associations(_auth_object = nil)
@@ -192,11 +189,10 @@ module Decidim
     #
     # Note: updating parents_path in their descendants is done in the `update_children_paths` function.
     #
-    # rubocop:disable Rails/SkipsModelValidations
+    # rubocop:disable-next Rails/SkipsModelValidations
     def set_parents_path
       update_column(:parents_path, [parent&.parents_path, id].compact_blank.join("."))
     end
-    # rubocop:enable Rails/SkipsModelValidations
 
     # When an assembly changes their parent, we need to update the parents_path attribute on their descendants
     # E.g. If we have the following tree:
@@ -217,7 +213,7 @@ module Decidim
     #
     # Note: updating parents_path of C (the assembly in which we have changed the parent) is done in the `set_parents_path` function.
     #
-    # rubocop:disable Rails/SkipsModelValidations
+    # rubocop:disable-next Rails/SkipsModelValidations
     def update_children_paths
       self.class.where(
         ["#{self.class.table_name}.parents_path <@ :old_path AND #{self.class.table_name}.id != :id", { old_path: parents_path_before_last_save, id: }]
@@ -225,7 +221,6 @@ module Decidim
         ["parents_path = :new_path || subpath(parents_path, nlevel(:old_path))", { new_path: parents_path, old_path: parents_path_before_last_save }]
       )
     end
-    # rubocop:enable Rails/SkipsModelValidations
 
     # Allow ransacker to search for a key in a hstore column (`title`.`en`)
     ransacker_i18n :title

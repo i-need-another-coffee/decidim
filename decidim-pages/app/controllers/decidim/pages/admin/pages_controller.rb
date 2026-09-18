@@ -11,6 +11,7 @@ module Decidim
           enforce_permission_to :update, :page
 
           @form = form(Admin::PageForm).from_model(page)
+          @form.attachment = form(AttachmentForm).from_params({})
         end
 
         def update
@@ -26,7 +27,7 @@ module Decidim
 
             on(:invalid) do
               flash.now[:alert] = I18n.t("pages.update.invalid", scope: "decidim.pages.admin")
-              render action: "edit", status: :unprocessable_entity
+              render action: "edit", status: :unprocessable_content
             end
           end
         end

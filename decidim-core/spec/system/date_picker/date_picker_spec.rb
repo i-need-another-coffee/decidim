@@ -58,7 +58,7 @@ describe "Datepicker" do
           <title>Datepicker Test</title>
           #{stylesheet_pack_tag "decidim_core"}
           #{stylesheet_pack_tag "decidim_dev"}
-          #{javascript_pack_tag "decidim_core", "decidim_dev", defer: false}
+          #{javascript_pack_tag "decidim_core", "decidim_controllers", "decidim_date_picker", "decidim_dev", defer: false}
         </head>
         <body>
           #{content_wrapper}
@@ -93,14 +93,14 @@ describe "Datepicker" do
     context "when filling form datetime input with datepicker" do
       it "fills the field correctly" do
         find(".datepicker__calendar-button").click
-        find('span > input[name="year"]').set("1994")
-        find('select[name="month"]').find(:option, "January").select_option
+        find("span > input.wc-datepicker__year-select").set("1994")
+        find("select.wc-datepicker__month-select").find(:option, "January").select_option
+        find("select.wc-datepicker__month-select").execute_script("this.dispatchEvent(new Event('change'))")
         find(".wc-datepicker__next-month-button").click
-        month = find('select[name="month"]').value
+        month = find("select.wc-datepicker__month-select").value
         formatted_month = format("%02d", month)
 
-        find("td > span", text: "20", match: :first).click
-        find(".datepicker__pick-calendar").click
+        find("td > span[aria-hidden=true]", text: "20", match: :first).click
 
         find(".datepicker__clock-button").click
         find(".datepicker__hour-up").click
@@ -133,7 +133,7 @@ describe "Datepicker" do
       let(:datetime_field) { form.datetime_field(:input, hide_help: true) }
 
       it "hides the help texts" do
-        expect(page).to have_no_content("Format: dd/mm/yy")
+        expect(page).to have_no_text("Format: dd/mm/yy")
       end
     end
 
@@ -145,17 +145,13 @@ describe "Datepicker" do
             expect(page).to have_css("#example_input_date_datepicker")
           end
 
-          it "has disabled select button" do
-            find(".datepicker__calendar-button").click
-            expect(page).to have_button("Select", disabled: true)
-          end
-
           context "when choosing a date" do
-            it "enables the select button" do
+            it "hides the datepicker calendar" do
               find(".datepicker__calendar-button").click
               yesterday = Date.yesterday.strftime("%-d")
-              find("td > span", text: yesterday, match: :first).click
-              expect(page).to have_button("Select", disabled: false)
+              find("td > span[aria-hidden=true]", text: yesterday, match: :first).click
+              expect(find_by_id("example_input_date").value).not_to eq("")
+              expect(page).to have_css("#example_input_date_datepicker", visible: :hidden)
             end
           end
         end
@@ -172,14 +168,12 @@ describe "Datepicker" do
         context "when opening datepicker with an existing date" do
           it "has the previously picked date selected" do
             find(".datepicker__calendar-button").click
-            find('span > input[name="year"]').set("1994")
+            find("span > input.wc-datepicker__year-select").set("1994")
             find(".wc-datepicker__next-month-button").click
-            find("td > span", text: "20", match: :first).click
-            find(".datepicker__pick-calendar").click
+            find("td > span[aria-hidden=true]", text: "20", match: :first).click
             find(".datepicker__calendar-button").click
             element = find("td.wc-datepicker__date--selected")
-            expect(element).to have_content("20")
-            expect(page).to have_button("Select", disabled: false)
+            expect(element).to have_text("20")
           end
         end
       end
@@ -189,12 +183,12 @@ describe "Datepicker" do
           it "sets the date on the datepicker calendar" do
             fill_in_datepicker :example_input_date, with: "24/11/2012"
             find(".datepicker__calendar-button").click
-            year = find('span > input[name="year"]')
-            month = find('select[name="month"]')
+            year = find("span > input.wc-datepicker__year-select")
+            month = find("select.wc-datepicker__month-select")
             date = find("td.wc-datepicker__date--selected")
             expect(year.value).to eq("2012")
-            expect(month).to have_content("November")
-            expect(date).to have_content("24")
+            expect(month).to have_text("November")
+            expect(date).to have_text("24")
           end
 
           it "only allows typing numbers and separators" do
@@ -485,7 +479,7 @@ describe "Datepicker" do
             <title>Datepicker Test</title>
             #{stylesheet_pack_tag "decidim_core"}
             #{stylesheet_pack_tag "decidim_dev"}
-            #{javascript_pack_tag "decidim_core", "decidim_dev", defer: false}
+            #{javascript_pack_tag "decidim_core", "decidim_controllers", "decidim_dev", defer: false}
           </head>
           <body>
             #{content_wrapper}
@@ -501,14 +495,14 @@ describe "Datepicker" do
     context "when filling form datetime input with datepicker" do
       it "fills the field correctly" do
         find(".datepicker__calendar-button").click(x: 5, y: 10)
-        find('span > input[name="year"]').set("1994")
-        find('select[name="month"]').find(:option, "January").select_option
+        find("span > input.wc-datepicker__year-select").set("1994")
+        find("select.wc-datepicker__month-select").find(:option, "January").select_option
+        find("select.wc-datepicker__month-select").execute_script("this.dispatchEvent(new Event('change'))")
         find(".wc-datepicker__next-month-button").click
-        month = find('select[name="month"]').value
+        month = find("select.wc-datepicker__month-select").value
         formatted_month = format("%02d", month)
 
-        find("td > span", text: "20", match: :first).click
-        find(".datepicker__pick-calendar").click
+        find("td > span[aria-hidden=true]", text: "20", match: :first).click
 
         find(".datepicker__clock-button").click
         find(".datepicker__hour-up").click
@@ -553,12 +547,12 @@ describe "Datepicker" do
           it "sets the date on the datepicker calendar" do
             fill_in_datepicker :example_input_date, with: "01/20/1994"
             find(".datepicker__calendar-button").click(x: 5, y: 10)
-            year = find('span > input[name="year"]')
-            month = find('select[name="month"]')
+            year = find("span > input.wc-datepicker__year-select")
+            month = find("select.wc-datepicker__month-select")
             date = find("td.wc-datepicker__date--selected")
             expect(year.value).to eq("1994")
-            expect(month).to have_content("January")
-            expect(date).to have_content("20")
+            expect(month).to have_text("January")
+            expect(date).to have_text("20")
           end
         end
 
@@ -741,7 +735,7 @@ describe "Datepicker" do
             <title>Datepicker Test</title>
             #{stylesheet_pack_tag "decidim_core"}
             #{stylesheet_pack_tag "decidim_dev"}
-            #{javascript_pack_tag "decidim_core", "decidim_dev", defer: false}
+            #{javascript_pack_tag "decidim_core", "decidim_controllers", "decidim_dev", defer: false}
           </head>
           <body>
             #{content_wrapper}
@@ -757,14 +751,14 @@ describe "Datepicker" do
     context "when filling form datetime input with datepicker" do
       it "fills the field correctly" do
         find(".datepicker__calendar-button").click(x: 5, y: 10)
-        find('span > input[name="year"]').set("1994")
-        find('select[name="month"]').find(:option, "January").select_option
+        find("span > input.wc-datepicker__year-select").set("1994")
+        find("select.wc-datepicker__month-select").find(:option, "January").select_option
+        find("select.wc-datepicker__month-select").execute_script("this.dispatchEvent(new Event('change'))")
         find(".wc-datepicker__next-month-button").click
-        month = find('select[name="month"]').value
+        month = find("select.wc-datepicker__month-select").value
         formatted_month = format("%02d", month)
 
-        find("td > span", text: "20", match: :first).click
-        find(".datepicker__pick-calendar").click
+        find("td > span[aria-hidden=true]", text: "20", match: :first).click
 
         find(".datepicker__clock-button").click
         find(".datepicker__hour-up").click
@@ -783,12 +777,12 @@ describe "Datepicker" do
           it "sets the date on the datepicker calendar" do
             fill_in_datepicker :example_input_date, with: "1994/01/20"
             find(".datepicker__calendar-button").click(x: 5, y: 10)
-            year = find('span > input[name="year"]')
-            month = find('select[name="month"]')
+            year = find("span > input.wc-datepicker__year-select")
+            month = find("select.wc-datepicker__month-select")
             date = find("td.wc-datepicker__date--selected")
             expect(year.value).to eq("1994")
-            expect(month).to have_content("January")
-            expect(date).to have_content("20")
+            expect(month).to have_text("January")
+            expect(date).to have_text("20")
           end
         end
 
