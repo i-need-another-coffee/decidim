@@ -21,6 +21,7 @@ module Decidim
 
       def respond_to_missing?(method, _include_private = false)
         return false if method == :__getobj__
+        return false if method == :avatar
 
         true
       end
