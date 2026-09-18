@@ -26,9 +26,8 @@ describe Decidim::NotificationCell, type: :cell do
 
   context "when resource is missing" do
     before do
-      # rubocop:disable Rails/SkipsModelValidations:
+      # rubocop:disable-next Rails/SkipsModelValidations:
       notification.update_attribute(:decidim_resource_type, "Decidim::ParticipatoryProcessStep")
-      # rubocop:enable Rails/SkipsModelValidations:
     end
 
     it "Resource title is present" do
@@ -40,7 +39,19 @@ describe Decidim::NotificationCell, type: :cell do
     let!(:resource) { create(:dummy_resource, :moderated, component:) }
 
     it "does not render the resource" do
-      expect(subject.to_s).to include("Content moderated")
+      expect(subject.to_s).to include("Content has been hidden through moderation.")
+    end
+  end
+
+  context "when resource is deleted" do
+    let!(:resource) { create(:dummy_resource, component:) }
+
+    before do
+      resource.destroy
+    end
+
+    it "does not render the resource" do
+      expect(subject.to_s).to include("Content has been deleted by the author.")
     end
   end
 

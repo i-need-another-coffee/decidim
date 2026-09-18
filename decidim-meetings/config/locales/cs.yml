@@ -49,8 +49,6 @@ cs:
       meeting_registration_invite:
         email: E-mail
         name: Jméno
-      response:
-        add_documents: Přidat dokumenty
       validate_registration_code:
         code: Kód
     errors:
@@ -151,10 +149,16 @@ cs:
           success: Duplicitní schůzka úspěšně.
         new:
           copy: Kopírovat
-          title: Duplicitní schůzka
       tooltips:
+        cannot_close_meetings: Tuto schůzku nelze zavřít, protože ji vytvořil účastník
+        cannot_duplicate_meetings: Tuto schůzku nelze duplikovat, protože byla vytvořena účastníkem
+        cannot_edit_meetings: Nelze upravit tuto schůzku tak, jak je vytvořena účastníkem
+        cannot_manage_agenda_meetings: Nelze spravovat program na této schůzce tak, jak je vytvořen účastníkem
         cannot_manage_attachments_meetings: Nelze spravovat přílohy v této schůzce, protože jsou vytvořeny uživatelem
         cannot_manage_poll_meetings: Nelze spravovat anketu na této schůzce, protože je vytvořena účastníkem
+        cannot_manage_registrations_meetings: Nelze spravovat registrace na této schůzce, protože jsou vytvořeny účastníkem, registrace jsou zakázány nebo tyto registrace jsou externími
+        cannot_mark_attendee: Nelze označit jako atteendee, protože již byl označen
+        deleted_meetings_info: Tuto schůzku nelze odstranit, protože ji vytvořil účastník.
     components:
       meetings:
         actions:
@@ -167,7 +171,7 @@ cs:
             announcement: Oznámení
             clear_all: Vymazat vše
             comments_enabled: Komentáře povoleny
-            comments_max_length: Maximální délka komentáře (ponechte 0 pro výchozí hodnotu)
+            comments_max_length: Maximální počet znaků na komentář (ponechte 0 pro výchozí hodnotu)
             creation_enabled_for_participants: Účastníci mohou vytvářet schůzky
             default_registration_terms: Výchozí podmínky registrace
             define_taxonomy_filters: Před použitím tohoto nastavení prosím definujte některé filtry pro tento participační prostor.
@@ -256,6 +260,8 @@ cs:
           email_outro: Toto upozornění jste obdrželi, protože postupujete po schůzce "%{resource_title}". Můžete jej odhlásit od předchozího odkazu.
           email_subject: Schůzka "%{resource_title}" povolila registrace.
           notification_title: Schůzka <a href="%{resource_path}">%{resource_title}</a> povolila registrace.
+        upcoming_meeting:
+          default_body: Schůzka "{{meeting_title}}" začne za méně než {{before_hours}}h.
     forms:
       meetings:
         attendees_count_help_text: Nezapomeňte uvést celkový počet účastníků na vaší schůzce, ať už osobní, online nebo smíšené.
@@ -340,19 +346,22 @@ cs:
             success: Uživatel úspěšně byl pozván k účasti na schůzce.
           form:
             attendee_type: Typ účastníka
-            existing_user: Existující uživatel
+            email: E-mail
             invite: Pozvat
             invite_explanation: Uživatel bude pozván, aby se připojil ke schůzce i organizaci.
-            non_user: Neexistující uživatel
+            name_or_nickname: Jméno nebo přezdívka
             select_user: Vyberte uživatele
           index:
-            invite_attendee: Pozvat účastníka
             invites: Pozvánky
             registrations_disabled: Nemůžete pozvat účastníka, protože registrace jsou blokovány.
+            title: Pozvat účastníka
         meeting_closes:
           edit:
             close: Zavřít
             title: Zavřete schůzku
+        meeting_copies:
+          new:
+            title: Duplikovat schůzku
         meetings:
           close:
             invalid: Při uzavření této schůzky došlo k chybě.
@@ -385,7 +394,7 @@ cs:
             assign: Přiřadit
             link_a_space: Propojit prostor
             private_meeting_warning: Propojené prostory nebudou použity, pokud je schůzka soukromá a netransparentní.
-            private_space_warning: Propojené prostory nebudou použity, pokud schůzka patří do soukromého netransparentního prostoru.
+            restricted_space_warning: Propojené prostory nebudou použity, pokud schůzka patří do soukromého netransparentního prostoru.
             select: Vyberte prostor
             table:
               actions: Akce
@@ -429,15 +438,21 @@ cs:
             invalid: Při aktualizaci této schůze došlo k chybě.
             success: Anketa ke schůzi byla úspěšně aktualizována.
         poll:
+          edit:
+            title: Upravit anketu
           form:
             announcement_html:
               - Pokud otázka obdrží odpovědi nebo je zveřejněna/uzavřena, již ji nelze upravovat.
               - Otázku můžete kdykoliv přidat.
               - Průzkum bude ukončen po zveřejnění výsledků všech vytvořených otázek.
               - Navštivte <a href='%{admin_link}'>stránku administrace anket</a> pro odeslání dotazů a publikování výsledků.
+        registration_form:
+          edit_questions:
+            title: Upravit otázky
         registrations:
           edit:
             save: Uložit
+            title: Registrace
           form:
             available_slots_help: Nechte to na 0, pokud máte k dispozici neomezené sloty.
             invites: Pozvánky
@@ -453,7 +468,6 @@ cs:
               other: Bylo zde %{count} registrací.
             reserved_slots_help: Ponechte 0, pokud nemáte vyhrazené sloty.
             reserved_slots_less_than: Musí být menší nebo rovno %{count}
-            title: Registrace
           update:
             invalid: Došlo k potížím při ukládání nastavení registrace.
             success: Nastavení úspěšných registrací bylo úspěšně uloženo.
@@ -676,7 +690,6 @@ cs:
           fields:
             closed: Zavřeno
             end_time: Datum ukončení
-            id: ID
             map: Mapa
             official_meeting: Oficiální schůzka
             published: Zveřejněno
@@ -732,11 +745,14 @@ cs:
           few: a %{count} další osoby
           many: a %{count} dalších osob
           other: a %{count} další osoby
+        show_less: Zobrazit méně
+        show_more: Zobrazit více
       read_more: "(Přečtěte si více)"
       registration_mailer:
         confirmation:
           confirmed_html: Vaše registrace pro schůzku <a href="%{url}">%{title}</a> byla potvrzena.
           details: Podrobnosti schůzky naleznete v příloze.
+          registration_code: Váš registrační kód je %{code}. Pro ověření vaší účasti prosím ukažte níže uvedený QR kód správci.
       registration_type:
         on_different_platform: Na jiné platformě
         on_this_platform: Na této platformě
@@ -844,6 +860,7 @@ cs:
     statistics:
       attendees_count: Účastníci schůzky
       meetings_count: Setkání
+      meetings_count_tooltip: Počet schůzek, které se konaly jak on-line, tak osobně.
       participatory_space_meetings_count: Schůzky
   devise:
     mailer:

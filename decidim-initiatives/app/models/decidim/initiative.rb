@@ -173,7 +173,7 @@ module Decidim
 
       return base unless auth_object&.admin?
 
-      base + %w(published_at state decidim_area_id type_id)
+      base + %w(published_at created_at state decidim_area_id type_id)
     end
 
     def self.ransackable_associations(_auth_object = nil)
@@ -182,14 +182,6 @@ module Decidim
 
     def self.ransackable_scopes(_auth_object = nil)
       [:with_any_state, :with_any_type, :with_any_scope, :with_any_area]
-    end
-
-    # Public: Overrides participatory space's banner image with the banner image defined
-    # for the initiative type.
-    #
-    # Returns Decidim::BannerImageUploader
-    def banner_image
-      type.attached_uploader(:banner_image)
     end
 
     # Public: Whether the object's comments are visible or not.
@@ -338,9 +330,8 @@ module Decidim
         counters["total"] += count
       end
 
-      # rubocop:disable Rails/SkipsModelValidations
+      # rubocop:disable-next Rails/SkipsModelValidations
       update_column("online_votes", online_votes)
-      # rubocop:enable Rails/SkipsModelValidations
     end
 
     def set_offline_votes_total
@@ -388,13 +379,14 @@ module Decidim
     #
     # Returns a Boolean.
     def has_authorship?(user)
+      return false unless user
       return true if author.id == user.id
 
       committee_members.approved.where(decidim_users_id: user.id).any?
     end
 
     def author_users
-      [author].concat(committee_members.excluding_author.map(&:user))
+      [author].concat(committee_members.includes(:user).excluding_author.map(&:user))
     end
 
     def accepts_offline_votes?
@@ -439,6 +431,12 @@ module Decidim
     # implement this interface.
     def user_role_config_for(_user, _role_name)
       Decidim::ParticipatorySpaceRoleConfig::Base.new(:empty_role_name)
+    end
+
+    # Public: Initiatives do not have user roles like other participatory spaces.
+    # Returns an empty relation.
+    def user_roles(_role_name = nil)
+      self.class.none
     end
 
     # Public: Overrides the `allow_resource_permissions?` Resourceable concern method.

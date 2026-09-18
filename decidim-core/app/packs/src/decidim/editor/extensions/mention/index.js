@@ -29,34 +29,58 @@ const searchUsers = async (queryText) => {
 export default Mention.extend({
   addOptions() {
     const parentOptions = this.parent?.();
+    const searchPromptMessage = parentOptions?.searchPromptMessage || "Type to search participants";
 
     return {
       ...parentOptions,
-      renderLabel({ node }) {
-        // The labels are formed based on the nicknames returned by the API
-        // which already contain the suggestion character, so there is no need
-        // to display it twice.
-        return `${node.attrs.label ?? node.attrs.id}`
+      searchPromptMessage,
+      renderText({ node }) {
+        // renderText is used to create the DOM representation
+        const label = node.attrs.label ?? node.attrs.id;
+        return label;
       },
       suggestion: {
         ...parentOptions?.suggestion,
         allowSpaces: true,
         items: async ({ query }) => {
           if (query.length < 2) {
-            return [];
+            return [{ label: searchPromptMessage, help: true }];
           }
 
           const data = await searchUsers(query);
-          const sorted = data.sort((user) => user.nickname.slice(1));
+          const sorted = data.sort((first, second) => first.nickname.localeCompare(second.nickname));
           return sorted.slice(0, 5);
         },
         render: createSuggestionRenderer(this, {
           itemConverter: (user) => {
-            return { id: user.nickname, label: `${user.nickname} (${user.name})` }
+            if (user.help) {
+              return { label: user.label, help: true }
+            }
+
+            return {
+              id: user.nickname,
+              label: user.nickname,
+              displayLabel: `${user.nickname} (${user.name})`,
+              avatarUrl: user.avatarUrl
+            }
           }
         })
       }
     };
+  },
+
+  renderHTML({ node }) {
+    // renderHTML is used for visual rendering getHTML()
+    const label = node.attrs.label ?? node.attrs.id;
+    return [
+      "span",
+      {
+        "data-type": "mention",
+        "data-id": node.attrs.id,
+        "data-label": node.attrs.label
+      },
+      label
+    ];
   },
 
   addNodeView() {

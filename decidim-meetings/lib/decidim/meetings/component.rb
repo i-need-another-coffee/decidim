@@ -14,8 +14,16 @@ Decidim.register_component(:meetings) do |component|
     "Decidim::Meetings::Meeting"
   ]
 
-  component.on(:before_destroy) do |instance|
-    raise StandardError, "Cannot remove this component" if Decidim::Meetings::Meeting.where(component: instance).any?
+  component.on(:publish) do |instance|
+    Decidim::Meetings::Meeting.where(component: instance).find_in_batches(batch_size: 100) do |batch|
+      Decidim::UpdateSearchIndexesJob.perform_later(batch)
+    end
+  end
+
+  component.on(:unpublish) do |instance|
+    Decidim::Meetings::Meeting.where(component: instance).find_in_batches(batch_size: 100) do |batch|
+      Decidim::RemoveSearchIndexesJob.perform_later(batch)
+    end
   end
 
   component.register_resource(:meeting) do |resource|
@@ -82,7 +90,7 @@ Decidim.register_component(:meetings) do |component|
         .not_hidden
         .visible
         .where(component: component_instance)
-        .includes(:taxonomies, :attachments, component: { participatory_space: :organization })
+        .includes(:author, :taxonomies, :attachments, component: { participatory_space: :organization })
     end
 
     exports.include_in_open_data = true

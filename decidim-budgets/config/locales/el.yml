@@ -33,6 +33,7 @@ el:
       actions:
         edit: Επεξεργασία
         import: Εισαγωγή προτάσεων σε έργα
+        new_project: Νέο έργο
         preview: Προεπισκόπηση
         send_voting_reminders: Αποστολή υπενθυμίσεων ψήφου
         title: Ενέργειες
@@ -66,7 +67,6 @@ el:
             invalid: Υπήρξε ένα πρόβλημα κατά τη δημιουργία αυτού του έργου.
             success: Το έργο δημιουργήθηκε επιτυχώς.
           edit:
-            title: Επεξεργασία έργου
             update: Ενημέρωση
           index:
             actions: Ενέργειες
@@ -81,7 +81,6 @@ el:
             update: Ενημέρωση
           new:
             create: Δημιουργία
-            title: Νέο έργο
           update:
             invalid: Υπήρξε ένα πρόβλημα κατά την ενημέρωση αυτού του έργου.
             success: Το έργο ενημερώθηκε με επιτυχία.
@@ -95,7 +94,6 @@ el:
           new:
             create: Εισαγωγή προτάσεων σε έργα
             default_budget: Προεπιλεγμένος προϋπολογισμός
-            import_all_accepted_proposals: Εισαγωγή όλων των αποδεχθείσων προτάσεων
             no_components: Δεν υπάρχουν άλλα στοιχεία προτάσεων σε αυτόν τον χώρο συμμετοχής για εισαγωγή των προτάσεων σε έργα.
             origin_component_id: Στοιχείο καταγωγής
             select_component: Επιλέξτε ένα στοιχείο
@@ -142,7 +140,6 @@ el:
             total_budget: Συνολικός προϋπολογισμός
         project:
           fields:
-            id: ID
             title: Τίτλος
       order:
         status:
@@ -230,7 +227,6 @@ el:
           global:
             announcement: Ανακοίνωση
             comments_enabled: Τα σχόλια ενεργοποιήθηκαν
-            comments_max_length: Μέγιστο μέγεθος σχολίων (Αφήστε το 0 για το προκαθορισμένο μέγεθος)
             form:
               errors:
                 budget_voting_rule_only_one: Μόνο ένας κανόνας ψηφοφορίας πρέπει να είναι ενεργοποιημένος.

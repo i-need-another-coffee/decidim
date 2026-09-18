@@ -2,7 +2,7 @@ eu:
   activerecord:
     models:
       decidim/pages/page:
-        one: Orrialde
+        one: Orrialdea
         other: Orrialdeak
   decidim:
     admin_log:
@@ -31,9 +31,11 @@ eu:
       admin:
         models:
           components:
-            body: Testua
+            body: Gorputza
         pages:
           edit:
+            add_attachments: Gehitu eranskinak
+            edit_attachments: Editatu eranskinak
             save: Eguneratu
             title: Editatu orria
           update:

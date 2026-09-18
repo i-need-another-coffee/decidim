@@ -6,7 +6,7 @@ shared_examples_for "resource liked event" do
   include_context "when a simple event"
 
   let(:event_name) { "decidim.events.resource_liked" }
-  let(:author) { create(:user, organization: resource.organization) }
+  let(:author) { create(:user, :confirmed, organization: resource.organization) }
 
   let(:extra) { { liker_id: author.id } }
   let(:like) { create(:like, resource:, author:) }
@@ -30,7 +30,7 @@ shared_examples_for "resource liked event" do
 
   describe "email_subject" do
     it "is generated correctly" do
-      expect(subject.email_subject).to eq("#{author_presenter.nickname} has performed a new like")
+      expect(subject.email_subject).to eq("#{author_presenter.name} has performed a new like")
     end
   end
 
@@ -38,7 +38,7 @@ shared_examples_for "resource liked event" do
     let(:resource_title) { decidim_sanitize_translated(resource.title) }
     it "is generated correctly" do
       expect(subject.email_intro)
-        .to eq("#{author.name} #{author_presenter.nickname}, who you are following, " \
+        .to eq("#{author.name}, who you are following, " \
                "has just liked \"#{resource_title}\" and we think it may be interesting to you. Check it out and contribute:")
     end
   end
@@ -51,7 +51,7 @@ shared_examples_for "resource liked event" do
         .to include("The <a href=\"#{resource_path}\">#{resource_title}</a> #{resource_type} has been liked by ")
 
       expect(subject.notification_title)
-        .to include("<a href=\"/profiles/#{author.nickname}\">#{author.name} #{author_presenter.nickname}</a>.")
+        .to include("<a href=\"/en/profiles/#{author.nickname}\">#{author.name}</a>.")
     end
   end
 

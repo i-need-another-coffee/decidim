@@ -23,7 +23,7 @@ module Decidim
         OpenStruct.new(author: user)
       end
 
-      let(:user) { create(:user) }
+      let(:user) { create(:user, :confirmed) }
 
       it "adds author i18n attributes" do
         expect(subject.i18n_options.keys).to include(:author_name)
@@ -48,7 +48,7 @@ module Decidim
 
       it "has an author path" do
         expect(subject.author_path).to be_present
-        expect(subject.author_path).to start_with("/profile")
+        expect(subject.author_path).to start_with("/en/profile")
       end
 
       it "has an author url" do

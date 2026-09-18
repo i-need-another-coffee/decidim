@@ -13,31 +13,38 @@ module Decidim
       include_examples "timestamps interface"
       include_examples "followable interface"
 
+      shared_examples "unauthorized User object" do
+        it "throws Decidim::Api::Errors::UnauthorizedObjectError" do
+          expect { response }.to raise_error(Decidim::Api::Errors::UnauthorizedObjectError, "You cannot view or edit this User because you do not have permissions")
+        end
+      end
+
       describe "unconfirmed user" do
         let(:model) { create(:user) }
         let(:query) { "{ id }" }
 
-        it "returns nothing" do
-          expect(response).to be_nil
-        end
+        it_behaves_like "unauthorized User object"
       end
 
       describe "deleted user" do
-        let(:model) { create(:user, :deleted) }
+        let(:model) { create(:user, :confirmed, :deleted) }
         let(:query) { "{ id }" }
 
-        it "returns nothing" do
-          expect(response).to be_nil
-        end
+        it_behaves_like "unauthorized User object"
       end
 
       describe "moderated user" do
-        let(:model) { create(:user, :blocked) }
+        let(:model) { create(:user, :confirmed, :blocked) }
         let(:query) { "{ id }" }
 
-        it "returns nothing" do
-          expect(response).to be_nil
-        end
+        it_behaves_like "unauthorized User object"
+      end
+
+      describe "managed user" do
+        let(:model) { create(:user, :confirmed, :managed) }
+        let(:query) { "{ id }" }
+
+        it_behaves_like "unauthorized User object"
       end
 
       describe "name" do
@@ -118,15 +125,13 @@ module Decidim
         let(:query) { "{ profilePath }" }
 
         it "returns the user profile path" do
-          expect(response).to include("profilePath" => "/profiles/#{model.nickname}")
+          expect(response).to include("profilePath" => "/en/profiles/#{model.nickname}")
         end
 
         context "when user is deleted" do
-          let(:model) { create(:user, :deleted) }
+          let(:model) { create(:user, :confirmed, :deleted) }
 
-          it "returns empty" do
-            expect(response).to be_nil
-          end
+          it_behaves_like "unauthorized User object"
         end
       end
 

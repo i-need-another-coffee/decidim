@@ -11,6 +11,7 @@ module Decidim
       implements Decidim::Core::TraceableInterface
       implements Decidim::Core::LikeableInterface
       implements Decidim::Core::TimestampsInterface
+      implements Decidim::Core::ReferableInterface
 
       description "A post"
 
@@ -33,8 +34,6 @@ module Decidim
         ].all?
 
         super && chain
-      rescue Decidim::PermissionAction::PermissionNotSetError
-        false
       end
     end
   end

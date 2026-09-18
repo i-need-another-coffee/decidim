@@ -123,7 +123,6 @@ lt:
           fields:
             created_at: Sukurta
             end_date: Pabaigos data
-            id: ID
             progress: Progresas
             start_date: Pradžios data
             status: Statusas
@@ -162,7 +161,6 @@ lt:
         settings:
           global:
             comments_enabled: Įjungti komentarai
-            comments_max_length: Maksimalus komentaro ilgis (įrašyti 0 įprastam ilgiui)
             display_progress_enabled: Rodyti progresą
             intro: Įžanga
           step:

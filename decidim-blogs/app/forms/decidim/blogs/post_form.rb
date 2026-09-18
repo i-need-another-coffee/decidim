@@ -14,7 +14,7 @@ module Decidim
 
       attribute :decidim_author_id, Integer
 
-      attachments_attribute :documents
+      attachments_attribute :attachments
 
       validates :body, translatable_presence: true
       validates :title, translatable_presence: true
@@ -28,7 +28,7 @@ module Decidim
 
         self.title = presenter.title
         self.body = presenter.body
-        self.documents = model.attachments
+        self.attachments = model.attachments
       end
 
       def author
@@ -48,7 +48,7 @@ module Decidim
       end
 
       def post
-        @post ||= Post.find_by(id: id)
+        @post ||= Post.find_by(id:)
       end
 
       def participatory_space_manifest

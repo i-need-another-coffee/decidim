@@ -6,7 +6,7 @@ describe "Explore results", :versioning do
   include_context "with a component"
 
   let(:manifest_name) { "accountability" }
-  let(:path) { decidim_participatory_process_accountability.root_path(participatory_process_slug: participatory_process.slug, component_id: component.id) }
+  let(:path) { decidim_participatory_process_accountability.root_path(participatory_process_slug: participatory_process.slug, component_id: component.id, locale: I18n.locale) }
   let(:taxonomy) { create(:taxonomy, :with_parent, skip_injection: true, organization:) }
   let(:sub_taxonomy) { create(:taxonomy, parent: taxonomy, organization:) }
   let!(:other_taxonomy) { create(:taxonomy, parent: taxonomy.parent, organization:) }
@@ -29,14 +29,14 @@ describe "Explore results", :versioning do
       let(:taxonomy_filter_ids) { [] }
 
       it "shows an empty page with a message" do
-        expect(page).to have_content "There are no projects"
+        expect(page).to have_text "There are no projects"
       end
     end
 
     context "with a taxonomy" do
       it "shows an empty page with a message" do
         within "main" do
-          expect(page).to have_content "There are no projects"
+          expect(page).to have_text "There are no projects"
         end
       end
     end
@@ -76,7 +76,7 @@ describe "Explore results", :versioning do
 
       it "shows the component name in the sidebar" do
         within("aside") do
-          expect(page).to have_content(translated(component.name))
+          expect(page).to have_text(translated(component.name))
         end
       end
 
@@ -86,12 +86,12 @@ describe "Explore results", :versioning do
 
       it "shows root taxonomies filters" do
         within("aside") do
-          expect(page).to have_content(translated(taxonomy.parent.name))
+          expect(page).to have_text(translated(taxonomy.parent.name))
         end
       end
 
       it "shows progress" do
-        expect(page).to have_content("Global execution status")
+        expect(page).to have_text("Global execution status")
         within("aside") do
           expect(page).to have_css(".accountability__status-value")
         end
@@ -105,7 +105,7 @@ describe "Explore results", :versioning do
         it "does not show progress" do
           visit path
 
-          expect(page).to have_no_content("Global execution status")
+          expect(page).to have_no_text("Global execution status")
           within("aside") do
             expect(page).to have_no_css(".accountability__status-value")
           end
@@ -136,11 +136,11 @@ describe "Explore results", :versioning do
           end
 
           within("#results") do
-            expect(page).to have_content(translated(matching_result1.title))
-            expect(page).to have_content(translated(matching_result2.title))
+            expect(page).to have_text(translated(matching_result1.title))
+            expect(page).to have_text(translated(matching_result2.title))
 
             results.each do |result|
-              expect(page).to have_no_content(translated(result.title))
+              expect(page).to have_no_text(translated(result.title))
             end
           end
         end
@@ -148,29 +148,25 @@ describe "Explore results", :versioning do
     end
 
     describe "index" do
-      let(:path) { decidim_participatory_process_accountability.results_path(participatory_process_slug: participatory_process.slug, component_id: component.id) }
+      let(:path) { decidim_participatory_process_accountability.results_path(participatory_process_slug: participatory_process.slug, component_id: component.id, locale: I18n.locale) }
 
       before do
         visit path
       end
 
       it "shows all results for the given process and taxonomy" do
-        within(".menu-bar") do
-          expect(page).to have_content(translated(component.name))
-        end
-
         within("#results") do
           expect(page).to have_css(".card__list", count: results_count)
 
           results.each do |result|
-            expect(page).to have_content(translated(result.title))
+            expect(page).to have_text(translated(result.title))
           end
         end
       end
     end
 
     describe "show" do
-      let(:path) { decidim_participatory_process_accountability.result_path(id: result.id, participatory_process_slug: participatory_process.slug, component_id: component.id) }
+      let(:path) { decidim_participatory_process_accountability.result_path(id: result.id, participatory_process_slug: participatory_process.slug, component_id: component.id, locale: I18n.locale) }
       let(:results_count) { 1 }
       let(:result) { results.first }
 
@@ -179,14 +175,16 @@ describe "Explore results", :versioning do
       end
 
       it "shows all result info" do
-        within(".menu-bar") do
-          expect(page).to have_content(translated(component.name))
-          expect(page).to have_content(translated(result.title))
-        end
         expect(page).to have_i18n_content(result.title)
         expect(page).to have_i18n_content(result.description, strip_tags: true)
-        expect(page).to have_content(result.reference)
-        expect(page).to have_content("#{result.progress.to_i}%")
+        expect(page).to have_text(result.reference)
+        expect(page).to have_text("#{result.progress.to_i}%")
+      end
+
+      it "shows the result reference" do
+        within ".layout-container__reference" do
+          expect(page).to have_text(result.reference)
+        end
       end
 
       context "when it has no versions" do
@@ -196,13 +194,13 @@ describe "Explore results", :versioning do
         end
 
         it "does not show version data" do
-          expect(page).to have_no_content("Version number")
+          expect(page).to have_no_text("Version number")
         end
       end
 
       context "when it has some versions" do
         it "does shows version data" do
-          expect(page).to have_content("Version number 1")
+          expect(page).to have_text("Version number 1")
         end
       end
 
@@ -217,7 +215,7 @@ describe "Explore results", :versioning do
         it "shows tags for taxonomy" do
           expect(page).to have_css("[data-tags]")
           within "[data-tags]" do
-            expect(page).to have_content(translated(taxonomy.name))
+            expect(page).to have_text(translated(taxonomy.name))
           end
         end
       end
@@ -233,7 +231,7 @@ describe "Explore results", :versioning do
 
         it "shows the comments" do
           comments.each do |comment|
-            expect(page).to have_content(comment.body.values.first)
+            expect(page).to have_text(comment.body.values.first)
           end
         end
       end
@@ -247,13 +245,35 @@ describe "Explore results", :versioning do
         end
 
         it "shows the tab" do
-          expect(page).to have_content("Milestone")
+          expect(page).to have_text("Milestone")
         end
 
         it "shows the milestone" do
-          expect(page).to have_content(decidim_sanitize_translated(milestone.title))
-          expect(page).to have_content(I18n.l(milestone.entry_date, format: :decidim_short))
-          expect(page).to have_content(decidim_sanitize_translated(milestone.description))
+          expect(page).to have_text(decidim_sanitize_translated(milestone.title))
+          expect(page).to have_text(I18n.l(milestone.entry_date, format: :decidim_short))
+          expect(page).to have_text(decidim_sanitize_translated(milestone.description))
+        end
+
+        context "and milestone's description contains an image" do
+          let!(:image_blob) do
+            ActiveStorage::Blob.create_and_upload!(
+              io: File.open(Decidim::Dev.asset("city.jpeg")),
+              filename: "city.jpeg",
+              content_type: "image/jpeg"
+            )
+          end
+
+          before do
+            image_url = Rails.application.routes.url_helpers.rails_blob_path(image_blob, only_path: true)
+            milestone.update!(description: { "en" => "<p>Milestone description</p><img src=\"#{image_url}\" alt=\"city_image\">" })
+          end
+
+          it "displays the image" do
+            visit current_path
+            expect(page).to have_text(decidim_sanitize_translated(milestone.title))
+            expect(page).to have_text(I18n.l(milestone.entry_date, format: :decidim_short))
+            expect(page).to have_css(".editor-content img[alt=city_image]")
+          end
         end
       end
 
@@ -266,29 +286,23 @@ describe "Explore results", :versioning do
         end
 
         it "shows the tab" do
-          expect(page).to have_content("Subresults")
+          expect(page).to have_text("Subresults")
         end
 
         it "shows subresults" do
           subresults.each do |subresult|
-            expect(page).to have_content(translated(subresult.title))
+            expect(page).to have_text(translated(subresult.title))
           end
         end
 
         it "the result is mentioned in the subresult page" do
           click_on translated(first_subresult.title)
           expect(page).to have_i18n_content(result.title)
-
-          within(".menu-bar") do
-            expect(page).to have_content(translated(component.name))
-            expect(page).to have_content(translated(result.title))
-            expect(page).to have_content(translated(first_subresult.title))
-          end
         end
 
         it "a banner links back to the result" do
           click_on translated(first_subresult.title)
-          expect(page).to have_content(translated(result.title))
+          expect(page).to have_text(translated(result.title))
         end
       end
 
@@ -305,14 +319,14 @@ describe "Explore results", :versioning do
         end
 
         it "shows the tab" do
-          expect(page).to have_content("History")
+          expect(page).to have_text("History")
         end
 
         it "shows related proposals" do
           proposals.each do |proposal|
-            expect(page).to have_content(decidim_sanitize_translated(proposal.title))
-            expect(page).to have_no_content(proposal.creator_author.name)
-            expect(page).to have_content(proposal.votes.size)
+            expect(page).to have_text(decidim_sanitize_translated(proposal.title))
+            expect(page).to have_no_text(proposal.creator_author.name)
+            expect(page).to have_text(proposal.votes.size)
           end
         end
 
@@ -325,7 +339,7 @@ describe "Explore results", :versioning do
         it "a banner links back to the result" do
           click_on decidim_sanitize_translated(proposal.title)
 
-          expect(page).to have_content(decidim_sanitize_translated(result.title))
+          expect(page).to have_text(decidim_sanitize_translated(result.title))
         end
       end
 
@@ -343,12 +357,12 @@ describe "Explore results", :versioning do
         end
 
         it "shows the tab" do
-          expect(page).to have_content("History")
+          expect(page).to have_text("History")
         end
 
         it "shows related projects" do
           projects.each do |project|
-            expect(page).to have_content(decidim_sanitize_translated(project.title))
+            expect(page).to have_text(decidim_sanitize_translated(project.title))
           end
         end
 
@@ -372,7 +386,7 @@ describe "Explore results", :versioning do
         end
 
         it "shows the tab" do
-          expect(page).to have_content("History")
+          expect(page).to have_text("History")
         end
 
         it "shows related meetings" do
@@ -388,7 +402,7 @@ describe "Explore results", :versioning do
 
         it "a banner links back to the result" do
           click_on decidim_sanitize_translated(meeting.title)
-          expect(page).to have_content(translated(result.title))
+          expect(page).to have_text(translated(result.title))
         end
       end
 

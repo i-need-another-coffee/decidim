@@ -3,6 +3,7 @@
 module Decidim
   module Surveys
     class SurveyType < Decidim::Api::Types::BaseObject
+      implements Decidim::Core::ReferableInterface
       implements Decidim::Core::TimestampsInterface
 
       description "A survey"
@@ -27,8 +28,6 @@ module Decidim
         context[:current_settings] = object.component.current_settings
 
         super
-      rescue Decidim::PermissionAction::PermissionNotSetError
-        false
       end
     end
   end

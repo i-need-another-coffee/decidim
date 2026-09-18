@@ -59,7 +59,7 @@ module Decidim
 
       private
 
-      # rubocop:disable Metrics/ParameterLists
+      # rubocop:disable-next Metrics/ParameterLists
       def render_field_form_method(form_method, form, attribute, name, i18n_scope, options)
         case form_method
         when :collection_radio_buttons
@@ -82,7 +82,6 @@ module Decidim
           form.send(form_method, name, options)
         end
       end
-      # rubocop:enable Metrics/ParameterLists
 
       # Renders a select field collection input for the given attribute
       #
@@ -108,7 +107,8 @@ module Decidim
         html = form.select(
           name,
           choices,
-          { include_blank: attribute.include_blank, label: options[:label] }
+          { include_blank: attribute.include_blank, label: options[:label] },
+          { disabled: options[:readonly] || false }
         )
         html << content_tag(:p, options[:help_text], class: "help-text") if options[:help_text]
         html
@@ -142,7 +142,7 @@ module Decidim
       end
 
       # Get the translation for a given attribute
-      # Returns a translation or nil. If nil, FoundationRailsHelper will not add the help_text.
+      # Returns a translation or nil. If nil, LegacyFormBuilder will not add the help_text.
       #
       # @param name (see #settings_attribute_input)
       # @param suffix [String] What suffix the i18n key has
@@ -227,6 +227,8 @@ module Decidim
       # @param i18n_scope (see #settings_attribute_input)
       # @param [Object] form
       def taxonomy_filters(form, name, i18n_scope)
+        return disabled_taxonomy_filters(name, i18n_scope) if @component&.new_record?
+
         current_filters = content_tag(:div, class: "js-current-filters") do
           render partial: "decidim/admin/taxonomy_filters_selector/component_table",
                  locals: { field_name: "#{form.object_name}[#{name}][]", component: @component }
@@ -249,6 +251,15 @@ module Decidim
         end
 
         label_tag(name, t(name, scope: i18n_scope)) + container + drawer
+      end
+
+      def disabled_taxonomy_filters(name, i18n_scope)
+        container = content_tag(:div) do
+          message = t("taxonomy_filters_unavailable", scope: "decidim.components.settings.global")
+          content_tag(:p, message, class: "help-text")
+        end
+
+        label_tag(name, t(name, scope: i18n_scope)) + container
       end
     end
   end

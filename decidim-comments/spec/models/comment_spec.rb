@@ -7,7 +7,7 @@ module Decidim
     describe Comment do
       let(:component) { create(:component, manifest_name: "dummy") }
       let!(:commentable) { create(:dummy_resource, component:) }
-      let!(:author) { create(:user, organization: commentable.organization) }
+      let!(:author) { create(:user, :confirmed, organization: commentable.organization) }
       let!(:comment) { create(:comment, commentable:, author:) }
       let!(:replies) { create_list(:comment, 3, commentable: comment, root_commentable: commentable) }
       let!(:up_vote) { create(:comment_vote, :up_vote, comment:) }
@@ -109,7 +109,7 @@ module Decidim
       end
 
       describe "#up_voted_by?" do
-        let(:user) { create(:user, organization: comment.organization) }
+        let(:user) { create(:user, :confirmed, organization: comment.organization) }
 
         it "returns true if the given user has upvoted the comment" do
           create(:comment_vote, comment:, author: user, weight: 1)
@@ -122,7 +122,7 @@ module Decidim
       end
 
       describe "#down_voted_by?" do
-        let(:user) { create(:user, organization: comment.organization) }
+        let(:user) { create(:user, :confirmed, organization: comment.organization) }
 
         it "returns true if the given user has downvoted the comment" do
           create(:comment_vote, comment:, author: user, weight: -1)
@@ -137,13 +137,14 @@ module Decidim
       describe "#reported_content_url" do
         subject { comment.reported_content_url }
 
-        let(:url_format) { "http://%{host}:%{port}/processes/%{slug}/f/%{component_id}/dummy_resources/%{resource_id}#comment_%{comment_id}" }
+        let(:url_format) { "http://%{host}:%{port}/%{locale}/processes/%{slug}/f/%{component_id}/dummy_resources/%{resource_id}#comment_%{comment_id}" }
 
         it "returns the resource URL" do
           expect(subject).to eq(
             format(
               url_format,
               host: commentable.organization.host,
+              locale: I18n.locale,
               port: Capybara.server_port,
               slug: commentable.participatory_space.slug,
               component_id: commentable.component.id,
@@ -164,7 +165,7 @@ module Decidim
       end
 
       describe "#users_to_notify_on_comment_created" do
-        let(:user) { create(:user, organization: comment.organization) }
+        let(:user) { create(:user, :confirmed, organization: comment.organization) }
 
         it "includes the comment author" do
           expect(comment.users_to_notify_on_comment_created)

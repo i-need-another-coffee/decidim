@@ -14,6 +14,11 @@ describe "Admin reminds users with pending orders" do
   let!(:order2) { create(:order, budget:, user: user2, created_at: 3.days.ago) }
 
   before do
+    # We do not optimize n+1 here, as the n+1 comes from the enqueue mechanism, which is calling various jobs where the user is required.
+    # Does not make sense to optimize the enqueuer just for tests
+    Bullet.add_safelist :type => :n_plus_one_query, :class_name => "Decidim::Reminder", :association => :user
+    Bullet.add_safelist :type => :n_plus_one_query, :class_name => "Decidim::Reminder", :association => :component
+
     switch_to_host(organization.host)
     login_as user, scope: :user
     visit_component_admin
@@ -22,7 +27,7 @@ describe "Admin reminds users with pending orders" do
 
   describe "new vote reminder" do
     it "shows how many people are being reminded" do
-      expect(page).to have_content("You are about to send an email reminder to 2 users")
+      expect(page).to have_text("You are about to send an email reminder to 2 users")
     end
   end
 
@@ -34,23 +39,29 @@ describe "Admin reminds users with pending orders" do
     end
 
     it "sends reminders" do
-      perform_enqueued_jobs { click_on "Send" }
-      expect(page).to have_content("2 users will be reminded")
+      perform_enqueued_jobs do
+        click_on "Send"
+        expect(page).to have_text("2 users will be reminded")
+      end
 
       expect(emails.count).to eq(2)
       emails.each do |email|
         expect(email.subject).to eq("You have an unfinished vote in the participatory budgeting vote")
       end
-      expect(last_email_first_link).to eq("http://#{organization.host}:#{Capybara.server_port}/processes/#{component.participatory_space.slug}/f/#{component.id}/budgets/#{budget.id}")
-      expect(last_email_link).to eq("http://#{organization.host}:#{Capybara.server_port}/processes/#{component.participatory_space.slug}/f/#{component.id}/budgets")
+      expect(last_email_first_link).to eq("http://#{organization.host}:#{Capybara.server_port}/#{I18n.locale}/processes/#{component.participatory_space.slug}/f/#{component.id}/budgets/#{budget.id}")
+      expect(last_email_link).to eq("http://#{organization.host}:#{Capybara.server_port}/#{I18n.locale}/processes/#{component.participatory_space.slug}/f/#{component.id}/budgets")
     end
 
     it "does not send reminders twice" do
-      perform_enqueued_jobs { click_on "Send" }
-      expect(page).to have_content("2 users will be reminded")
+      perform_enqueued_jobs do
+        click_on "Send"
+        expect(page).to have_text("2 users will be reminded")
+      end
       click_on "Send voting reminders"
-      perform_enqueued_jobs { click_on "Send" }
-      expect(page).to have_content("0 users will be reminded")
+      perform_enqueued_jobs do
+        click_on "Send"
+        expect(page).to have_text("0 users will be reminded")
+      end
     end
   end
 end

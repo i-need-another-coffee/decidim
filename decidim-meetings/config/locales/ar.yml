@@ -110,7 +110,6 @@ ar:
           success: تم تكرار الاجتماع بنجاح.
         new:
           copy: نسخ
-          title: اجتماع مكرر
     components:
       meetings:
         actions:
@@ -121,7 +120,6 @@ ar:
           global:
             announcement: إعلان
             comments_enabled: تم تمكين التعليقات
-            comments_max_length: الحد الأقصى لطول التعليقات (اترك 0 لاستعمال القيمة الافتراضية)
             creation_enabled_for_participants: يمكن للمشاركين إنشاء اجتماعات
             default_registration_terms: شروط التسجيل الافتراضية
             enable_pads_creation: تمكين إنشاء منصات
@@ -238,13 +236,10 @@ ar:
             success: تمت دعوة المشارك بنجاح للانضمام إلى الاجتماع.
           form:
             attendee_type: نوع الحضور
-            existing_user: المشارك الحالي
             invite: دعا
             invite_explanation: سيتم دعوة المشارك للانضمام إلى الاجتماع وإلى المنظمة أيضًا.
-            non_user: مشارك غير موجود
             select_user: اختر المشارك
           index:
-            invite_attendee: دعوة الحضور
             invites: تدعو
         meeting_closes:
           edit:
@@ -274,7 +269,6 @@ ar:
             assign: تعيين
             link_a_space: اربط مساحة
             private_meeting_warning: لم يتم تطبيق المساحات المربوطة إذا كان الاجتماع خاص وغير شفاف.
-            private_space_warning: لم يتم تطبيق المساحات المربوطة إذا كان الاجتماع ينتمي إلى مساحه خاصة وغير شفافه.
             select: اختر مساحه
             table:
               actions: الإجراءات
@@ -314,7 +308,6 @@ ar:
               many: كان هناك %{count} التسجيلات.
               other: كان هناك %{count} التسجيلات.
             reserved_slots_less_than: يجب أن يكون أقل من أو يساوي %{count}
-            title: التسجيلات
           update:
             invalid: حدثت مشكلة أثناء حفظ إعدادات التسجيل.
             success: تم حفظ إعدادات تسجيل الاجتماع بنجاح.
@@ -498,7 +491,6 @@ ar:
           fields:
             closed: مغلق
             end_time: تاريخ الانتهاء
-            id: المعرف ID
             map: خريطة
             official_meeting: الاجتماع الرسمي
             start_time: تاريخ البدء

@@ -87,7 +87,6 @@ lb:
           fields:
             created_at: Erstellt am
             end_date: Enddatum
-            id: ID
             progress: Fortschritt
             start_date: Startdatum
             status: Status
@@ -123,7 +122,6 @@ lb:
         settings:
           global:
             comments_enabled: Kommentare aktiviert
-            comments_max_length: Maximale Länge der Kommentare (0 für Standardwert)
             display_progress_enabled: Fortschritt anzeigen
             intro: Einführung
           step:

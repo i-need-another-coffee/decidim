@@ -49,8 +49,6 @@ fi:
       meeting_registration_invite:
         email: Sähköpostiosoite
         name: Nimi
-      response:
-        add_documents: Lisää asiakirjoja
       validate_registration_code:
         code: Koodi
     errors:
@@ -145,7 +143,6 @@ fi:
           success: Tapaamisen kopioiminen onnistui.
         new:
           copy: Kopioi
-          title: Kopioi tapaaminen
       tooltips:
         cannot_close_meetings: Tätä tapaamista ei voi sulkea, koska se on osallistujan luoma
         cannot_duplicate_meetings: Tätä tapaamista ei voi kopioida, koska se on osallistujan luoma
@@ -162,6 +159,7 @@ fi:
           comment: Kommentoi
           join: Liity mukaan
           reply_poll: Vastaa mielipidetiedusteluun
+          vote_comment: Äänestä kommenttia
         name: Tapaamiset
         settings:
           global:
@@ -347,19 +345,22 @@ fi:
             success: Käyttäjän kutsuminen tapaamiseen onnistui.
           form:
             attendee_type: Osallistujatyyppi
-            existing_user: Olemassa oleva käyttäjä
+            email: Sähköposti
             invite: Kutsu
             invite_explanation: Käyttäjä kutsutaan osallistumaan tapaamiseen sekä liittymään organisaatioon.
-            non_user: Käyttäjää ei ole olemassa
+            name_or_nickname: Nimi tai nimimerkki
             select_user: Valitse käyttäjä
           index:
-            invite_attendee: Kutsu osallistuja
             invites: Kutsut
             registrations_disabled: Et voi kutsua osallistujaa, koska ilmoittautumiset on poistettu käytöstä.
+            title: Kutsu osallistuja
         meeting_closes:
           edit:
             close: Sulje
             title: Sulje tapaaminen
+        meeting_copies:
+          new:
+            title: Kopioi tapaaminen
         meetings:
           close:
             invalid: Tapaamisen sulkeminen epäonnistui.
@@ -392,7 +393,7 @@ fi:
             assign: Määritä
             link_a_space: Liitä osallistumistila
             private_meeting_warning: Liitettyjä osallistumistiloja ei käytetä, mikäli tapaaminen on yksityinen ja läpinäkymätön.
-            private_space_warning: Liitettyjä osallistumistiloja ei käytetä, mikäli tapaaminen on yksityisessä ja läpinäkymättömässä osallistumistilassa.
+            restricted_space_warning: Liitettyjä osallistumistiloja ei käytetä, mikäli tapaaminen on rajatussa osallistumistilassa.
             select: Valitse osallistumistila
             table:
               actions: Toiminnot
@@ -436,15 +437,21 @@ fi:
             invalid: Tapaamisen mielipidetiedustelun päivittäminen epäonnistui.
             success: Tapaamisen mielipidetiedustelun päivittäminen onnistui.
         poll:
+          edit:
+            title: Muokkaa mielipidetiedustelua
           form:
             announcement_html:
               - Kun kysymykseen vastataan tai se julkaistaan tai suljetaan, sitä ei voi enää muokata sen jälkeen.
               - Voit lisätä kysymyksiä milloin tahansa.
               - Tämä mielipidetiedustelu suljetaan, kun kaikkien kysymysten tulokset on julkaistu.
               - Vieraile <a href='%{admin_link}'>mielipidetiedustelun hallinnointisivulla</a> lähettääksesi kysymyksiä ja julkaistaksesi tuloksia.
+        registration_form:
+          edit_questions:
+            title: Muokkaa kysymyksiä
         registrations:
           edit:
             save: Tallenna
+            title: Ilmoittautumiset
           form:
             available_slots_help: Jätä arvoksi 0, mikäli tapaamiseen on rajoittamaton määrä paikkoja.
             invites: Kutsut
@@ -458,7 +465,6 @@ fi:
               other: Tapaamiseen on %{count} ilmoittautumista.
             reserved_slots_help: Jätä arvoksi 0, jos sinulla ei ole varattuja paikkoja.
             reserved_slots_less_than: Täytyy olla vähemmän tai yhtä paljon kuin %{count}
-            title: Ilmoittautumiset
           update:
             invalid: Rekisteröitymisasetusten päivitys epäonnistui.
             success: Tapaamisen ilmoittautumisasetusten tallennus onnistui.
@@ -677,7 +683,6 @@ fi:
           fields:
             closed: Suljettu
             end_time: Päättymispäivä
-            id: ID
             map: Kartta
             official_meeting: Virallinen tapaaminen
             published: Julkaistu
@@ -731,6 +736,8 @@ fi:
         hidden_participants_count:
           one: ja %{count} muu henkilö
           other: ja %{count} muuta henkilöä
+        show_less: Näytä vähemmän
+        show_more: Näytä enemmän
       read_more: "(lue lisää)"
       registration_mailer:
         confirmation:

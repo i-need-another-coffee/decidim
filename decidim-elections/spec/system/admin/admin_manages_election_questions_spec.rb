@@ -2,6 +2,8 @@
 
 require "spec_helper"
 
+require "decidim/forms/test/shared_examples/questionnaire_admin_access"
+
 describe "Admin manages elections questions" do
   let(:current_organization) { create(:organization) }
   let(:participatory_process) { create(:participatory_process, organization: current_organization) }
@@ -11,9 +13,11 @@ describe "Admin manages elections questions" do
 
   include_context "when managing a component as an admin"
 
+  it_behaves_like "questionnaire admin access", denied_error: 404
+
   it "opens a questions tab" do
     visit questions_edit_path
-    expect(page).to have_content("Question must have at least two answers in order go to the next step.")
+    expect(page).to have_text("Question must have at least two answers in order go to the next step.")
   end
 
   context "when an admin user add a question" do
@@ -56,13 +60,13 @@ describe "Admin manages elections questions" do
 
       click_on "Save and continue"
 
-      expect(page).to have_admin_callout("successfully")
+      expect(page).to have_callout("Questions updated successfully.")
 
       visit questions_edit_path
       expand_all_questions
 
       expect(page).to have_css("input[value='This is the first question']")
-      expect(page).to have_content("This is the first question description")
+      expect(page).to have_text("This is the first question description")
       expect(page).to have_css("input[value='This is the Q1 first option']")
       expect(page).to have_css("input[value='This is the Q1 second option']")
       expect(page).to have_css("input[value='This is the Q1 third option']")
@@ -174,7 +178,7 @@ describe "Admin manages elections questions" do
       sleep 0.5
 
       click_on "Save"
-      expect(page).to have_admin_callout("Questions updated successfully")
+      expect(page).to have_callout("Questions updated successfully")
 
       # Returned to the saved questions to see their different positions
       visit questions_edit_path
@@ -215,13 +219,92 @@ describe "Admin manages elections questions" do
 
       click_on "Save and continue"
 
-      expect(page).to have_admin_callout("successfully")
+      expect(page).to have_callout("Questions updated successfully.")
 
       visit questions_edit_path
       expand_all_questions
 
       expect(page).to have_no_css("input[value='first question']")
       expect(page).to have_css("input[value='second question']")
+    end
+  end
+
+  context "when the election has started" do
+    let!(:started_election) { create(:election, :published, :ongoing, component: current_component) }
+    let!(:question) { create(:election_question, :with_response_options, election: started_election) }
+
+    it "denies access to the questions edit page" do
+      visit Decidim::EngineRouter.admin_proxy(current_component).edit_questions_election_path(started_election)
+
+      expect(page).to have_text("You are not authorized to perform this action")
+    end
+  end
+
+  context "when admin user sets max_choices for multiple_option question" do
+    it "creates a question with max_choices" do
+      visit questions_edit_path
+
+      click_on "Add question"
+      expand_all_questions
+
+      within "form.edit_questions" do
+        within page.all(".questionnaire-question").first do
+          fill_in find_nested_form_field_locator("body_en"), with: "Select up to 2 options"
+          select "Multiple option", from: "Type"
+
+          3.times { click_on "Add response option" }
+
+          page.all(".questionnaire-question-response-option").each_with_index do |option, idx|
+            within option do
+              fill_in find_nested_form_field_locator("body_en"), with: "Option #{idx + 1}"
+            end
+          end
+
+          select "2", from: "Maximum number of choices"
+        end
+      end
+
+      click_on "Save and continue"
+
+      expect(page).to have_callout("Questions updated successfully.")
+
+      visit questions_edit_path
+      expand_all_questions
+
+      expect(page).to have_css("input[value='Select up to 2 options']")
+      expect(election.questions.last.max_choices).to eq(2)
+    end
+
+    it "updates max_choices on existing question" do
+      question = create(:election_question, :with_response_options,
+                        election:,
+                        question_type: "multiple_option",
+                        max_choices: nil)
+
+      visit questions_edit_path
+      find("#questionnaire_question_#{question.id}-button").click
+
+      within "#accordion-questionnaire_question_#{question.id}-field" do
+        select "2", from: "Maximum number of choices"
+      end
+
+      click_on "Save and continue"
+
+      expect(page).to have_callout("Questions updated successfully.")
+      expect(question.reload.max_choices).to eq(2)
+    end
+
+    it "shows 'Any' option for max_choices when unset" do
+      question = create(:election_question, :with_response_options,
+                        election:,
+                        question_type: "multiple_option")
+
+      visit questions_edit_path
+      find("#questionnaire_question_#{question.id}-button").click
+
+      within "#accordion-questionnaire_question_#{question.id}-field" do
+        expect(page).to have_select("Maximum number of choices", selected: "Any")
+      end
     end
   end
 
@@ -245,5 +328,9 @@ describe "Admin manages elections questions" do
 
   def questions_edit_path
     Decidim::EngineRouter.admin_proxy(current_component).edit_questions_election_path(election)
+  end
+
+  def manage_questions_path
+    questions_edit_path
   end
 end

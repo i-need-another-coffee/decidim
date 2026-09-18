@@ -16,35 +16,39 @@ describe "Admin publish and unpublish documents" do
     fill_in "Title", with: title
     fill_in_editor :document_body, with: body
     click_on "Create"
+    expect(page).to have_text("Document successfully created")
   end
 
   it "publishes and unpublish a document" do
-    expect(page).to have_content("Collaborative texts")
-    expect(page).to have_content("New text")
-    expect(page).to have_content("Configure")
+    expect(page).to have_text("Collaborative texts")
+    expect(page).to have_text("New text")
+    expect(page).to have_text("Configure")
 
     within "tr", text: title do
-      expect(page).to have_content("Unpublished")
+      expect(page).to have_text("Unpublished")
       find("button[data-controller='dropdown']").click
       click_on "Publish"
     end
-    expect(page).to have_admin_callout "Document successfully published"
+    expect(page).to have_callout "Document successfully published"
 
     within "tr", text: title do
-      expect(page).to have_content("Published")
+      expect(page).to have_text("Published")
       find("button[data-controller='dropdown']").click
       click_on "Unpublish"
     end
-    expect(page).to have_admin_callout "Document successfully unpublished"
+    expect(page).to have_callout "Document successfully unpublished"
   end
 
   context "when unpublished document" do
     before do
       visit_component
+      within ".account-container", visible: :hidden do
+        expect(page).to have_text(:all, user.name)
+      end
     end
 
     it "displays unpublished documents in public view" do
-      expect(page).to have_content(title)
+      expect(page).to have_text(title)
     end
 
     context "and non-admin user" do
@@ -53,10 +57,13 @@ describe "Admin publish and unpublish documents" do
       before do
         login_as regular_user, scope: :user
         visit_component
+        within ".account-container", visible: :hidden do
+          expect(page).to have_text(:all, regular_user.name)
+        end
       end
 
       it "does not display unpublished documents in public view" do
-        expect(page).to have_no_content(title)
+        expect(page).to have_no_text(title)
       end
     end
   end

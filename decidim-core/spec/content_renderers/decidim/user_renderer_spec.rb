@@ -7,7 +7,7 @@ module Decidim
     let(:user) { create(:user, :confirmed) }
     let(:renderer) { described_class.new(content) }
     let(:presenter) { Decidim::UserPresenter.new(user) }
-    let(:profile_url) { "http://#{user.organization.host}:#{Capybara.server_port}/profiles/#{user.nickname}" }
+    let(:profile_url) { "http://#{user.organization.host}:#{Capybara.server_port}/en/profiles/#{user.nickname}" }
 
     context "when content has a valid Decidim::User Global ID" do
       let(:content) { "This text contains a valid Decidim::User Global ID: #{user.to_global_id}" }
@@ -62,12 +62,53 @@ module Decidim
     context "when rendering for editor" do
       let(:content) { "This text contains a valid Decidim::User Global ID: #{user.to_global_id}" }
       let(:mention) { "@#{user.nickname}" }
-      let(:label) { "#{mention} (#{CGI.escapeHTML(user.name)})" }
+      let(:label) { mention }
 
       it "renders the mention wrapper for the editor" do
         expect(renderer.render(editor: true)).to eq(
-          %(This text contains a valid Decidim::User Global ID: <span data-type="mention" data-id="#{mention}" data-label="#{label}">#{label}</span>)
+          %(This text contains a valid Decidim::User Global ID: <span data-type="mention" data-id="#{label}" data-label="#{label}">#{label}</span>)
         )
+      end
+    end
+
+    context "when rendering for editor with a nickname containing HTML special characters" do
+      let(:content) { "Mention: #{user.to_global_id}" }
+
+      it "escapes the data-id attribute to prevent XSS" do
+        renderer = described_class.new(content)
+        allow(renderer).to receive(:render_text).and_return("user<script>alert(1)</script>")
+
+        result = renderer.send(:render_editor, double)
+
+        expect(result).to include("data-id=\"user&lt;script&gt;alert(1)&lt;/script&gt;\"")
+        expect(result).to include("data-label=\"user&lt;script&gt;alert(1)&lt;/script&gt;\"")
+        expect(result).not_to include("data-id=\"user<script>")
+      end
+    end
+
+    context "when user GID is inside an anchor tag" do
+      let(:content) { "<a href=\"#{user.to_global_id}\">Link to user</a>" }
+      let(:profile_path) { Decidim::UserPresenter.new(user).profile_path }
+
+      it "transforms user GID in href to profile path" do
+        fragment = Loofah.fragment(renderer.render)
+        link = fragment.at_css("a")
+
+        expect(link["href"]).to eq(profile_path)
+        expect(link.text).to eq("Link to user")
+      end
+    end
+
+    context "when user GID is inside an anchor tag in editor mode" do
+      let(:content) { "<a href=\"#{user.to_global_id}\">Link to user</a>" }
+      let(:profile_path) { Decidim::UserPresenter.new(user).profile_path }
+
+      it "transforms user GID in href to profile path in editor mode" do
+        fragment = Loofah.fragment(renderer.render(editor: true))
+        link = fragment.at_css("a")
+
+        expect(link["href"]).to eq(profile_path)
+        expect(link.text).to eq("Link to user")
       end
     end
   end

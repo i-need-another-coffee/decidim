@@ -49,12 +49,16 @@ module Decidim
         !officialized_at.nil?
       end
 
+      def profile_published?
+        true
+      end
+
       def confirmed?
         true
       end
 
       def follows?(followable)
-        Decidim::Follow.where(user: self, followable: followable).any?
+        Decidim::Follow.where(user: self, followable:).any?
       end
 
       # Public: whether the user accepts direct messages from another
@@ -76,6 +80,10 @@ module Decidim
 
       def needs_password_update?
         false
+      end
+
+      def ephemeral?
+        extended_data["ephemeral"]
       end
     end
   end

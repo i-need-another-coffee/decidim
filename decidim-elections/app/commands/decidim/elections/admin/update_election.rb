@@ -4,7 +4,8 @@ module Decidim
   module Elections
     module Admin
       class UpdateElection < Decidim::Commands::UpdateResource
-        include ::Decidim::GalleryMethods
+        include ::Decidim::MultipleAttachmentsMethods
+
         fetch_form_attributes :title, :description, :start_at, :end_at, :results_availability
 
         def initialize(form, election)
@@ -17,16 +18,16 @@ module Decidim
         alias election resource
 
         def attributes
-          election.published? ? published_election_attributes : unpublished_election_attributes
+          election.started? ? started_election_attributes : not_started_election_attributes
         end
 
-        def published_election_attributes
+        def started_election_attributes
           { description: parsed_description }
         end
 
-        def unpublished_election_attributes
+        def not_started_election_attributes
           {
-            title: parsed_title,
+            title: form.title,
             description: parsed_description,
             start_at: form.manual_start ? nil : form.start_at,
             end_at: form.end_at,
@@ -34,24 +35,20 @@ module Decidim
           }
         end
 
-        def parsed_title
-          Decidim::ContentProcessor.parse(form.title, current_organization: form.current_organization).rewrite
-        end
-
         def parsed_description
           Decidim::ContentProcessor.parse(form.description, current_organization: form.current_organization).rewrite
         end
 
         def run_after_hooks
-          create_gallery if process_gallery?
-          photo_cleanup!
+          create_attachments if process_attachments?
+          attachment_cleanup!(include_all_attachments: true)
         end
 
         def run_before_hooks
-          return unless process_gallery?
+          return unless process_attachments?
 
-          build_gallery
-          raise Decidim::Commands::HookError if gallery_invalid?
+          build_attachments
+          raise Decidim::Commands::HookError if attachments_invalid?
         end
       end
     end

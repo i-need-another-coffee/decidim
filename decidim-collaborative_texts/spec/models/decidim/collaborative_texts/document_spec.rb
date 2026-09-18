@@ -14,6 +14,7 @@ module Decidim
       it { is_expected.to act_as_paranoid }
 
       include_examples "resourceable"
+      include_examples "has reference"
 
       context "without a title" do
         let(:document) { build(:collaborative_text_document, title: nil) }
@@ -33,7 +34,7 @@ module Decidim
 
       it "current version points to last created" do
         document.save!
-        version = create(:collaborative_text_version, created_at: 1.second.from_now, document: document)
+        version = create(:collaborative_text_version, created_at: 1.second.from_now, document:)
         expect(document.reload.document_versions.count).to eq(4)
         expect(document.document_versions_count).to eq(4)
         expect(document.current_version).to eq(version)
@@ -50,7 +51,7 @@ module Decidim
 
       context "when document any author" do
         let(:component) { create(:collaborative_text_component) }
-        let(:user) { create(:user, organization: component.organization) }
+        let(:user) { create(:user, :confirmed, organization: component.organization) }
         let(:document) { create(:collaborative_text_document, users: [user], component:) }
         let(:coauthorable) { document }
 

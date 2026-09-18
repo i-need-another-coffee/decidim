@@ -34,15 +34,18 @@ module Decidim
         let(:meeting_id) { nil }
 
         describe "call" do
+          let(:title) { { en: "A reasonable proposal title" } }
+          let(:body) { { en: "A reasonable proposal body" } }
+
           let(:form_params) do
             {
-              title: { en: "A reasonable proposal title" },
-              body: { en: "A reasonable proposal body" },
+              title:,
+              body:,
               address:,
               has_address:,
               attachment: attachment_params,
-              documents: current_files,
-              add_documents: uploaded_files,
+              attachments: current_files,
+              add_attachments: uploaded_files,
               created_in_meeting:,
               meeting_id:
             }
@@ -139,6 +142,43 @@ module Decidim
               expect(action_log.version).to be_present
             end
 
+            context "when body has a user mention" do
+              let(:mentioned_user) { create(:user, :confirmed, organization:) }
+              let(:body) { { en: "A reasonable proposal body mentioning @#{mentioned_user.nickname}" } }
+
+              it "rewrites the mention to the mentioned user GID" do
+                command.call
+                proposal = Decidim::Proposals::Proposal.last
+
+                expect(proposal.body["en"]).to include(mentioned_user.to_global_id.to_s)
+              end
+            end
+
+            context "when body has a user mention with a hyphen in the nickname" do
+              let(:mentioned_user) { create(:user, :confirmed, organization:, nickname: "test-user-hyphen") }
+              let(:body) { { en: "A reasonable proposal body mentioning @#{mentioned_user.nickname}" } }
+
+              it "rewrites the mention to the mentioned user GID" do
+                command.call
+                proposal = Decidim::Proposals::Proposal.last
+
+                expect(proposal.body["en"]).to include(mentioned_user.to_global_id.to_s)
+              end
+            end
+
+            context "when title has a user mention" do
+              let(:mentioned_user) { create(:user, :confirmed, organization:) }
+              let(:title) { { en: "A reasonable proposal title mentioning @#{mentioned_user.nickname}" } }
+
+              it "does not rewrite the mention to the mentioned user GID" do
+                command.call
+                proposal = Decidim::Proposals::Proposal.last
+
+                expect(translated(proposal.title)).not_to include(mentioned_user.to_global_id.to_s)
+                expect(translated(proposal.title)).to include("@#{mentioned_user.nickname}")
+              end
+            end
+
             context "when followers" do
               let(:follower) { create(:user, organization: component.participatory_space.organization) }
               let!(:follow) { create(:follow, followable: component.participatory_space, user: follower) }
@@ -203,7 +243,7 @@ module Decidim
               let(:component) { create(:proposal_component, :with_attachments_allowed) }
               let(:uploaded_files) do
                 [
-                  file: upload_test_file(Decidim::Dev.asset("Exampledocument.pdf"), content_type: "application/pdf")
+                  { file: upload_test_file(Decidim::Dev.asset("Exampledocument.pdf"), content_type: "application/pdf") }
                 ]
               end
 

@@ -112,7 +112,6 @@ el:
           success: Η σύσκεψη αντιγράφτηκε με επιτυχία.
         new:
           copy: Αντιγραφή
-          title: Διπλή σύσκεψη
     components:
       meetings:
         actions:
@@ -123,7 +122,6 @@ el:
           global:
             announcement: Ανακοίνωση
             comments_enabled: Τα σχόλια ενεργοποιήθηκαν
-            comments_max_length: Μέγιστο μέγεθος σχολίων (Αφήστε το 0 για την προκαθορισμένη τιμή)
             creation_enabled_for_participants: Οι συμμετέχοντες μπορούν να δημιουργήσουν συναντήσεις
             default_registration_terms: Προεπιλεγμένοι όροι εγγραφής
             enable_pads_creation: Ενεργοποίηση δημιουργίας πινάκων σημειώσεων
@@ -247,13 +245,10 @@ el:
             success: Ο συμμετέχων προσκλήθηκε με επιτυχία στη σύσκεψη.
           form:
             attendee_type: Τύπος συμμετέχοντα
-            existing_user: Υπάρχων συμμετέχων
             invite: Πρόσκληση
             invite_explanation: Ο συμμετέχων θα προσκληθεί να συμμετάσχει στη σύσκεψη και στον οργανισμό.
-            non_user: Ο συμμετέχων δεν υπάρχει
             select_user: Επιλέξτε συμμετέχοντα
           index:
-            invite_attendee: Πρόσκληση συμμετέχοντα
             invites: Προσκλήσεις
             registrations_disabled: Δεν μπορείτε να προσκαλέσετε έναν συμμετέχοντα επειδή οι εγγραφές είναι απενεργοποιημένες.
         meeting_closes:
@@ -325,7 +320,6 @@ el:
               other: Πραγματοποιήθηκαν %{count} εγγραφές.
             reserved_slots_help: Αφήστε το στο 0 εάν δεν έχετε δεσμευμένες θέσεις.
             reserved_slots_less_than: Πρέπει να είναι μικρότερο ή ίσο με %{count}
-            title: Εγγραφές
           update:
             invalid: Υπήρξε ένα πρόβλημα κατά την αποθήκευση των ρυθμίσεων εγγραφής.
             success: Οι ρυθμίσεις εγγραφής στη σύσκεψη αποθηκεύτηκαν με επιτυχία.
@@ -505,7 +499,6 @@ el:
           fields:
             closed: Κλειστό
             end_time: Ημερομηνία λήξης
-            id: ID
             map: Χάρτης
             official_meeting: Επίσημη συνάντηση
             start_time: Ημερομηνία έναρξης

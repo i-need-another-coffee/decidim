@@ -30,14 +30,14 @@ describe "Edit a page" do
         find("*[type=submit]").click
       end
 
-      expect(page).to have_admin_callout("successfully")
+      expect(page).to have_callout("Page successfully saved.")
 
       visit_component
 
-      expect(page).to have_content(translated(component.name))
+      expect(page).to have_text(translated(component.name))
 
       visit decidim_admin.root_path
-      expect(page).to have_content("updated the #{translated(component.name)} page")
+      expect(page).to have_text("updated the #{translated(component.name)} page")
     end
   end
 
@@ -48,5 +48,20 @@ describe "Edit a page" do
     end
 
     it_behaves_like "manage announcements"
+  end
+
+  describe "attachments" do
+    let(:component) { create(:page_component, participatory_space: participatory_process) }
+
+    before do
+      create(:page, component:, body:)
+      visit_component_admin
+    end
+
+    it "shows the attachment upload field" do
+      within "form.edit_page" do
+        expect(page).to have_text("Add attachments")
+      end
+    end
   end
 end

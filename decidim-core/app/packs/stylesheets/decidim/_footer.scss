@@ -3,52 +3,48 @@ footer {
     @apply bg-gray-4;
 
     &__top {
-      @apply hidden lg:flex flex-row gap-8 container py-10;
+      @apply flex flex-col lg:flex-row gap-0 lg:gap-8 container py-10;
 
       .prose a,
       .prose strong {
         @apply text-white;
       }
+
+      .footer__nav {
+        @apply border-b border-white/20 lg:border-0;
+
+        ul {
+          @apply space-y-4 break-inside-avoid mb-4;
+
+          li a {
+            @apply font-semibold underline decoration-1 underline-offset-1;
+          }
+        }
+
+        > [data-controls] {
+          @apply flex items-center justify-between w-full py-4 lg:pointer-events-none lg:cursor-default text-left text-white font-semibold;
+
+          svg {
+            @apply w-4 h-4 fill-current transition-transform lg:hidden;
+          }
+
+          &[aria-expanded="true"] svg {
+            @apply rotate-180;
+          }
+        }
+
+        [id*="panel"][aria-hidden="true"] {
+          @apply hidden lg:block;
+        }
+
+        [id*="panel"][aria-hidden="false"] {
+          @apply block;
+        }
+      }
     }
 
     &__down {
       @apply border-t border-black flex flex-wrap items-center gap-6 container py-6 text-white;
-    }
-
-    &__language {
-      @apply absolute top-full left-0 bg-white rounded w-full;
-
-      &-container {
-        @apply relative;
-      }
-
-      &-trigger {
-        @apply flex items-center gap-1 border border-white rounded py-1.5 px-2 cursor-pointer text-md font-semibold;
-      }
-    }
-
-    /* overwrite default dropdown styles */
-    [data-target*="dropdown"] {
-      > svg {
-        @apply w-4 h-4 text-white fill-current last-of-type:block last-of-type:ml-auto;
-      }
-
-      &[aria-expanded="true"] > svg:first-of-type {
-        @apply block;
-      }
-
-      > span {
-        @apply block text-white;
-      }
-    }
-
-    /* overwrite default dropdown styles */
-    [id*="dropdown-menu"] {
-      @apply py-0 mx-0 w-full;
-
-      &[aria-hidden="true"] {
-        @apply md:hidden;
-      }
     }
   }
 

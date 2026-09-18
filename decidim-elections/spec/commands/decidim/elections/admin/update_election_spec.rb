@@ -19,8 +19,8 @@ module Decidim
         let(:start_at) { 1.day.from_now }
         let(:end_at) { 2.days.from_now }
         let(:manual_start) { false }
-        let(:uploaded_photos) { [] }
-        let(:current_photos) { [] }
+        let(:uploaded_attachments) { [] }
+        let(:current_attachments) { [] }
         let(:invalid) { false }
 
         let(:form) do
@@ -35,8 +35,8 @@ module Decidim
             end_at:,
             manual_start:,
             results_availability: "after_end",
-            photos: current_photos,
-            add_photos: uploaded_photos
+            attachments: current_attachments,
+            add_attachments: uploaded_attachments
           )
         end
 
@@ -54,6 +54,19 @@ module Decidim
             election.reload
             expect(election.title["en"]).to eq title[:en]
             expect(election.description["en"]).to eq description[:en]
+          end
+
+          context "when title has a user mention" do
+            let(:mentioned_user) { create(:user, :confirmed, organization:) }
+            let(:title) { { en: "Election title mentioning @#{mentioned_user.nickname}" } }
+
+            it "does not rewrite the mention to the mentioned user GID" do
+              subject.call
+              election.reload
+
+              expect(translated(election.title)).not_to include(mentioned_user.to_global_id.to_s)
+              expect(translated(election.title)).to include("@#{mentioned_user.nickname}")
+            end
           end
 
           it "sets times when manual_start is false" do
@@ -74,17 +87,33 @@ module Decidim
             end
           end
 
-          context "when the election is published" do
-            let(:election) { create(:election, :published, component:) }
+          context "when the election has started" do
+            let(:election) { create(:election, :ongoing, component:) }
 
-            it "does not update the election title or times" do
+            it "does not update the election title" do
               original_title = election.title["en"]
-              original_start_at = election.start_at
               subject.call
               election.reload
 
               expect(election.title["en"]).to eq original_title
-              expect(election.start_at).to eq original_start_at
+            end
+
+            it "does not update the election times" do
+              original_start_at = election.start_at.to_i
+              original_end_at = election.end_at.to_i
+              subject.call
+              election.reload
+
+              expect(election.start_at.to_i).to eq original_start_at
+              expect(election.end_at.to_i).to eq original_end_at
+            end
+
+            it "does not update results_availability" do
+              original_results_availability = election.results_availability
+              subject.call
+              election.reload
+
+              expect(election.results_availability).to eq original_results_availability
             end
 
             it "updates description from the form" do

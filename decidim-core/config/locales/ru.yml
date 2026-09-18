@@ -95,9 +95,6 @@ ru:
         update: "%{user_name} обновил приложение OAuth %{resource_name}"
       organization:
         update: "%{user_name} обновил настройки организации"
-      participatory_space_private_user:
-        create: "%{user_name} пригласил %{resource_name} стать частным участником"
-        delete: "%{user_name} удалил участника %{resource_name} как приватного участника"
       scope:
         create: "%{user_name} добавил охват %{resource_name}"
         create_with_parent: "%{user_name} создал охват %{resource_name} внутри охвата %{parent_scope}"
@@ -289,8 +286,6 @@ ru:
           affected_user:
             email_intro: 'Для %{amendable_title} была принята поправка. Вы можете увидеть ее на этой странице:'
             email_outro: Вы получили это уведомление, потому что вы автор %{amendable_title}.
-            email_subject: Принята поправка для %{amendable_title} от %{emendation_author_nickname}
-            notification_title: <a href="%{emendation_path}">Эта поправка</a> создана <a href="%{emendation_author_path}">%{emendation_author_nickname}</a> была принята для <a href="%{amendable_path}">%{amendable_title}</a>.
           follower:
             email_intro: 'Для %{amendable_title} была принята поправка. Вы можете увидеть ее на этой странице:'
             email_outro: Вы получили это уведомление, потому что вы следите за «%{amendable_title}». Вы можете отписаться от уведомлений, перейдя по приведенной выше ссылке.
@@ -311,12 +306,6 @@ ru:
         email_intro: '«%{resource_title}» обновили. Вы можете посмотреть его на странице:'
         email_outro: Вы получили это уведомление, потому что вы следите за «%{resource_title}». Вы можете перестать за ним следить, перейдя по приведенной выше ссылке.
         email_subject: Обновление %{resource_title}
-      users:
-        profile_updated:
-          email_intro: Страница <a href="%{resource_url}">профиля</a> участника %{name} (%{nickname}), за которым вы следите, была обновлена.
-          email_outro: Вы получили это уведомление, потому что вы следите за «%{nickname}». Вы можете отписаться от уведомлений, перейдя по приведенной выше ссылке.
-          email_subject: "%{nickname} обновил свой профиль"
-          notification_title: Страница <a href="%{resource_path}">профиля</a> участника %{name} (%{nickname}), за которым вы следите, была обновлена.
     export_mailer:
       download_your_data_export:
         download: Скачать
@@ -377,7 +366,6 @@ ru:
     managed_users:
       expired_session: Текущий сеанс выступления в роли участника истек.
     menu:
-      help: Справка
       home: Главная
     messaging:
       conversation_mailer:
@@ -433,12 +421,9 @@ ru:
           proposals_explanation: Вносите новые предложения, поддерживайте уже внесенные и способствуйте изменениям, которые вы хотите видеть.
         footer_sub_hero:
           footer_sub_hero_headline: Добро пожаловать на площадку соучастия %{organization}!
-          register: Зарегистрироваться
         hero:
           participate: Принять участие
           welcome: Добро пожаловать в %{organization}!
-        sub_hero:
-          register: Зарегистрироваться
     profile:
       deleted: Удаленный участник
     profiles:
@@ -521,8 +506,6 @@ ru:
         submit_button: Отправить приглашение
       no_invitations_remaining: Приглашений не осталось
       send_instructions: Приглашение было отправлено на %{email}.
-      updated: Ваш пароль был успешно установлен. Вы вошли в систему.
-      updated_not_active: Ваш пароль был успешно установлен.
     mailer:
       confirmation_instructions:
         action: Подтвердить мой аккаунт
@@ -538,10 +521,8 @@ ru:
         decline: Отклонить приглашение
         hello: Здравствуйте, %{email}!
         invited_you_as_admin: "%{invited_by} пригласил вас в качестве администратора %{application}. Вы можете принять это приглашение по ссылке ниже."
-        invited_you_as_private_user: "%{invited_by} пригласил вас в качестве частного участника %{application}. Вы можете принять это приглашение по ссылке ниже."
         someone_invited_you: Кто-то пригласил вас в %{application}. Вы можете принять это приглашение по ссылке ниже.
         someone_invited_you_as_admin: Кто-то пригласил вас в качестве администратора %{application}, вы можете принять это приглашение по ссылке ниже.
-        someone_invited_you_as_private_user: Кто-то пригласил вас в качестве частного участника %{application}, вы можете принять это приглашение по ссылке ниже.
         subject: Инструкция по приглашению
       password_change:
         greeting: Здравствуйте, %{recipient}!

@@ -9,16 +9,22 @@ describe "Admin copies meetings" do
   let(:longitude) { 2.1234 }
   let(:service_titles) { ["This is the first service", "This is the second service"] }
   let!(:meeting) { create(:meeting, type_of_meeting, :published, taxonomies:, services: [], component: current_component) }
-  let(:base_date) { Time.new.utc }
+  let(:base_date) { Time.now.utc }
   let(:meeting_start_date) { base_date.strftime("%d/%m/%Y") }
   let(:meeting_start_time) { base_date.utc.strftime("%H:%M") }
   let(:meeting_end_date) { ((base_date + 2.days) + 1.month).strftime("%d/%m/%Y") }
   let(:meeting_end_time) { (base_date + 4.hours).strftime("%H:%M") }
   let(:taxonomies) { [taxonomy] }
+  let(:root_taxonomy) { create(:taxonomy, organization:) }
+  let!(:taxonomy) { create(:taxonomy, parent: root_taxonomy, organization:) }
+  let(:taxonomy_filter) { create(:taxonomy_filter, root_taxonomy:) }
+  let!(:taxonomy_filter_item) { create(:taxonomy_filter_item, taxonomy_filter:, taxonomy_item: taxonomy) }
+  let(:taxonomy_filter_ids) { [taxonomy_filter.id] }
 
   include_context "when managing a component as an admin"
 
   before do
+    component.update!(settings: { taxonomy_filters: taxonomy_filter_ids })
     visit current_path
   end
 
@@ -64,10 +70,10 @@ describe "Admin copies meetings" do
         find("*[type=submit]").click
       end
 
-      expect(page).to have_admin_callout("successfully")
+      expect(page).to have_callout("Meeting successfully duplicated.")
 
       within "table" do
-        expect(page).to have_content("My duplicate meeting")
+        expect(page).to have_text("My duplicate meeting")
       end
     end
   end
@@ -126,10 +132,10 @@ describe "Admin copies meetings" do
         find("*[type=submit]").click
       end
 
-      expect(page).to have_admin_callout("successfully")
+      expect(page).to have_callout("Meeting successfully duplicated.")
 
       within "table" do
-        expect(page).to have_content("My duplicate meeting")
+        expect(page).to have_text("My duplicate meeting")
       end
     end
   end
@@ -187,10 +193,10 @@ describe "Admin copies meetings" do
         find("*[type=submit]").click
       end
 
-      expect(page).to have_admin_callout("successfully")
+      expect(page).to have_callout("Meeting successfully duplicated.")
 
       within "table" do
-        expect(page).to have_content("My duplicate meeting")
+        expect(page).to have_text("My duplicate meeting")
       end
     end
   end

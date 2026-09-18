@@ -23,7 +23,7 @@ module Decidim
       validates :title, presence: true, etiquette: true
       validates :description, presence: true, etiquette: true
       validates :type_of_meeting, presence: true
-      validates :location, presence: true, if: ->(form) { form.in_person_meeting? || form.hybrid_meeting? }
+      validates :location, presence: true, if: ->(form) { form.needs_address? }
       validates :online_meeting_url, presence: true, url: true, if: ->(form) { form.online_meeting? || form.hybrid_meeting? }
       validates :registration_type, presence: true
       validates :available_slots, numericality: { greater_than_or_equal_to: 0 }, presence: true, if: ->(form) { form.on_this_platform? }
@@ -40,7 +40,11 @@ module Decidim
       def map_model(model)
         presenter = MeetingEditionPresenter.new(model)
         self.title = presenter.title(all_locales: false)
-        self.description = presenter.editor_description(all_locales: false)
+        self.description = if model.component.organization.rich_text_editor_in_public_views?
+                             presenter.editor_description(all_locales: false)
+                           else
+                             presenter.plain_locales(model.description, false)
+                           end
         self.location = presenter.location(all_locales: false)
         self.location_hints = presenter.location_hints(all_locales: false)
         self.registration_terms = presenter.registration_terms(all_locales: false)

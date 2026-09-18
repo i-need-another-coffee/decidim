@@ -124,7 +124,6 @@ sq:
           fields:
             created_at: Krijuar
             end_date: Data e përfundimit
-            id: ID
             progress: Ecuria
             start_date: Data e fillimit
             status: Statusi
@@ -161,7 +160,6 @@ sq:
         settings:
           global:
             comments_enabled: Komentet e aktivizuara
-            comments_max_length: Madhësia maks. e komenteve
             display_progress_enabled: Shfaq ecurinë
             intro: Hyrje
           step:

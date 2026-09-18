@@ -40,7 +40,7 @@ module Decidim
           let(:question) { create(:questionnaire_question, question_type: "single_option") }
 
           it "returns the chart code" do
-            expect(helper.chart_for_question(question.id)).to have_content("ColumnChart")
+            expect(helper.chart_for_question(question.id)).to have_text("ColumnChart")
           end
         end
 
@@ -48,7 +48,34 @@ module Decidim
           let(:question) { create(:questionnaire_question, question_type: "multiple_option") }
 
           it "returns the chart code" do
-            expect(helper.chart_for_question(question.id)).to have_content("ColumnChart")
+            expect(helper.chart_for_question(question.id)).to have_text("ColumnChart")
+          end
+
+          context "and the responses select more than one option" do
+            let(:questionnaire) { question.questionnaire }
+            let!(:option_a) { create(:response_option, question:, body: { "en" => "Option A" }) }
+            let!(:option_b) { create(:response_option, question:, body: { "en" => "Option B" }) }
+            let!(:option_c) { create(:response_option, question:, body: { "en" => "Option C" }) }
+
+            before do
+              # A response selecting the three options at once.
+              response1 = create(:response, questionnaire:, question:)
+              [option_a, option_b, option_c].each do |response_option|
+                create(:response_choice, response: response1, response_option:, matrix_row: nil)
+              end
+
+              # And a response for the first option and another one for the last option.
+              response2 = create(:response, questionnaire:, question:)
+              [option_a, option_c].each do |response_option|
+                create(:response_choice, response: response2, response_option:, matrix_row: nil)
+              end
+            end
+
+            it "counts every selected option, not the combination of options of each response" do
+              expect(helper).to receive(:column_chart).with({ "Option A" => 2, "Option B" => 1, "Option C" => 2 }, download: true)
+
+              helper.chart_for_question(question.id)
+            end
           end
         end
 
@@ -56,7 +83,7 @@ module Decidim
           let(:question) { create(:questionnaire_question, question_type: "sorting") }
 
           it "returns the chart code" do
-            expect(helper.chart_for_question(question.id)).to have_content("BarChart")
+            expect(helper.chart_for_question(question.id)).to have_text("BarChart")
           end
         end
 
@@ -64,7 +91,7 @@ module Decidim
           let(:question) { create(:questionnaire_question, question_type: "matrix_single") }
 
           it "returns the chart code" do
-            expect(helper.chart_for_question(question.id)).to have_content("ColumnChart")
+            expect(helper.chart_for_question(question.id)).to have_text("ColumnChart")
           end
         end
 
@@ -72,7 +99,7 @@ module Decidim
           let(:question) { create(:questionnaire_question, question_type: "matrix_multiple") }
 
           it "returns the chart code" do
-            expect(helper.chart_for_question(question.id)).to have_content("ColumnChart")
+            expect(helper.chart_for_question(question.id)).to have_text("ColumnChart")
           end
         end
       end

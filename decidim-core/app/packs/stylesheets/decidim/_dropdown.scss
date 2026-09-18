@@ -1,5 +1,5 @@
 [id*="dropdown-menu"] {
-  @apply flex flex-col py-0 mx-3.5 md:mx-0 border-t-0 border-gray-3 cursor-pointer;
+  @apply flex flex-col py-0 mx-3.5 md:mx-0 border-t-0 border-gray-3;
 
   &[aria-hidden="true"] {
     @apply hidden md:flex;
@@ -64,42 +64,6 @@
 [data-target="dropdown-menu-resource"],
 [data-target="dropdown-menu-sidebar"] {
   @apply md:hidden;
-}
-
-[data-target="dropdown-menu-language-chooser"] {
-  & > span {
-    @apply block font-semibold text-black text-xs;
-  }
-
-  > svg {
-    @apply w-5 h-6 flex-none text-xs font-normal text-black fill-current;
-  }
-
-  & > ul {
-    @apply w-6 bg-gray;
-
-    > li {
-      @apply w-6 bg-gray;
-    }
-  }
-}
-
-[data-target="dropdown-menu-language-chooser-mobile"] {
-  & > span {
-    @apply block text-black font-normal text-sm;
-  }
-
-  > svg {
-    @apply w-fit h-6 flex-none text-xs font-normal text-black fill-current px-2;
-  }
-
-  & > ul {
-    @apply w-6 bg-gray;
-
-    > li {
-      @apply w-6 bg-gray;
-    }
-  }
 }
 
 .dropdown {

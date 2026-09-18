@@ -182,7 +182,6 @@ ar:
           fields:
             created_at: تم الإنشاء
             end_date: تاريخ الانتهاء
-            id: المعرف ID
             progress: تقدم
             start_date: تاريخ البدء
             status: الحالة
@@ -227,7 +226,6 @@ ar:
           global:
             clear_all: إمسح الكل
             comments_enabled: تم تمكين التعليقات
-            comments_max_length: الحد الأقصى لطول التعليقات (اترك ال0 للقيمة الافتراضية)
             define_taxonomy_filters: الرجاء تحديد بعض عوامل التصفية لهذه المساحة التشاركية قبل استخدام هذا الإعداد.
             display_progress_enabled: عرض التقدم
             geocoding_enabled: تم تمكين الخرائط

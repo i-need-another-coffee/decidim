@@ -20,7 +20,7 @@ module Decidim
     has_one :blocking, class_name: "Decidim::UserBlock", foreign_key: :id, primary_key: :block_id, dependent: :destroy
 
     # Regex for name & nickname format validations
-    REGEXP_NAME = /\A(?!.*[<>?%&\^*#@()\[\]=+:;"{}\\|])/
+    REGEXP_NAME = /\A(?!.*[<>?%&\^*#@()\[\]=+:;"{}\\|\n\r])/m
     REGEXP_NICKNAME = /\A[a-z0-9_-]+\z/
 
     has_one_attached :avatar
@@ -32,11 +32,49 @@ module Decidim
     scope :confirmed, -> { where.not(confirmed_at: nil) }
     scope :not_confirmed, -> { where(confirmed_at: nil) }
 
+    # Visible user entities are those that should appear publicly on the
+    # platform, such as on their personal profile page, the GraphQL API or
+    # other places where the user may appear.
+    scope :visible, lambda {
+      profile_published.not_blocked.merge(
+        Decidim::User.tos_accepted.or(
+          Decidim::UserBaseEntity.where.not(type: "Decidim::User")
+        )
+      )
+    }
+
+    # User entities that have their profile visible on the platform from the
+    # user's own perspective. This includes also blocked users because the
+    # decision to hide their profile has been made by someone else.
+    scope :profile_published, -> { confirmed.not_deleted.where(managed: false) }
+
     scope :blocked, -> { where(blocked: true) }
     scope :not_blocked, -> { where(blocked: false) }
     scope :available, -> { where(deleted_at: nil, blocked: false, managed: false) }
 
     scope :not_deleted, -> { where(deleted_at: nil) }
+
+    def visible?
+      return false if blocked?
+
+      profile_published?
+    end
+
+    # Note that the blocked users have the profile published on purpose for the
+    # admin users to be able access those profiles e.g. for inspecting the
+    # user's activity on the platform.
+    def profile_published?
+      return false if managed?
+      return false if deleted_at.present?
+
+      confirmed_at.present?
+    end
+
+    # This will hide the resource from the search index when the resource is not
+    # public and when the resource is searchable (i.e. `Decidim::User`).
+    def hidden?
+      !visible?
+    end
 
     # Public: Returns a collection with all the public entities this user is following.
     #
@@ -62,19 +100,34 @@ module Decidim
     end
 
     def users_followings
-      @users_followings ||= Decidim::UserBaseEntity.joins(:follows).where(decidim_follows: { user: self })
+      @users_followings ||= Decidim::UserBaseEntity.joins(:follows).where(decidim_follows: { user: self }).order(decidim_follows: { created_at: :asc, id: :asc })
     end
 
     def followings_blocked?
       Decidim::UserBaseEntity.joins(:follows).where(decidim_follows: { user: self }).blocked.exists?
     end
 
+    ransacker :role do
+      Arel.sql(%{CASE WHEN "decidim_users"."admin" = true THEN 'admin' ELSE cast("decidim_users"."roles" as text) END})
+    end
+
+    ransacker :user_moderation_report_count do
+      query = <<~SQL.squish
+        (
+            SELECT COALESCE(MAX(decidim_user_moderations.report_count), 0)
+            FROM decidim_user_moderations
+            WHERE decidim_user_moderations.decidim_user_id = decidim_users.id
+        )
+      SQL
+      Arel.sql(query)
+    end
+
     def self.ransackable_attributes(auth_object = nil)
-      base = %w(name email nickname last_sign_in_at)
+      base = %w(name email nickname last_sign_in_at created_at)
 
       return base unless auth_object&.admin?
 
-      base + %w(invitation_sent_at invitation_accepted_at officialized_at)
+      base + %w(invitation_sent_at invitation_accepted_at officialized_at role user_moderation_report_count)
     end
 
     def self.ransackable_associations(_auth_object = nil)

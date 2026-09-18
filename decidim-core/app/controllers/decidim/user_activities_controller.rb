@@ -14,6 +14,7 @@ module Decidim
     def index
       raise ActionController::RoutingError, "Missing user: #{params[:nickname]}" unless user
       raise ActionController::RoutingError, "Blocked User" if user.blocked? && !current_user&.admin?
+      raise ActionController::RoutingError, "Profile not published: #{params[:nickname]}" unless user.profile_published?
     end
 
     private
@@ -21,7 +22,7 @@ module Decidim
     def user
       return unless params[:nickname]
 
-      @user ||= current_organization.users.find_by("nickname = ?", params[:nickname].downcase)
+      @user ||= current_organization.users.find_by("nickname = ?", params.expect(:nickname).downcase)
     end
 
     def activities
@@ -56,8 +57,7 @@ module Decidim
 
     def resource_types
       @resource_types = begin
-        array = %w(Decidim::Proposals::CollaborativeDraft
-                   Decidim::Comments::Comment
+        array = %w(Decidim::Comments::Comment
                    Decidim::Debates::Debate
                    Decidim::Initiative
                    Decidim::Meetings::Meeting

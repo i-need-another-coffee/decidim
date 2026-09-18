@@ -18,7 +18,7 @@
 <%= append_javascript_pack_tag "decidim_blogs" %>
 <%= append_stylesheet_pack_tag "decidim_blogs" %>
 
-<%= render layout: "layouts/decidim/shared/layout_center", locals: { columns: 8 } do %>
+<%= render layout: "layouts/decidim/shared/layout_center", locals: { columns: 8, reference: resource_reference(post) } do %>
 
   <%= render partial: "schema_org_blog_posting_post" %>
 
@@ -39,7 +39,7 @@
           <%= cell "decidim/author", post_presenter.author, from: post, context_actions: [:date], layout: :compact %>
         </div>
         <%= render "decidim/shared/resource_actions", resource: post do %>
-          <%= render "decidim/blogs/posts/menu_actions", post: post %>
+          <%= render "decidim/blogs/posts/menu_actions", post: %>
         <% end %>
       </div>
     </div>
@@ -51,9 +51,11 @@
     </div>
 
     <%= attachments_for post %>
-
-    <%= render partial: "actions" %>
   </section>
+
+  <%= cell "decidim/tags", post %>
+
+  <%= render partial: "actions" %>
 
   <section class="layout-main__section">
     <%= comments_for post %>

@@ -2,7 +2,7 @@ eu:
   activemodel:
     attributes:
       post:
-        body: Testua
+        body: Gorputza
         decidim_author_id: Egilea
         published_at: Argitaratze-data
         title: Izenburua
@@ -59,7 +59,7 @@ eu:
           update: "%{user_name} parte-hartzailekak %{resource_name} blogeko argitalpena eguneratu egin da %{space_name} espazioan"
       content_blocks:
         highlighted_posts:
-          last_published: Azken argitarapena
+          last_published: Azken argitalpena
           name: Argitalpenak
           see_all: Ikusi argitalpen guztiak
       last_activity:
@@ -68,7 +68,7 @@ eu:
         post:
           fields:
             author: Egilea
-            body: Testua
+            body: Gorputza
             official_blog_post: Argitalpen ofiziala
             published_at: Argitaratze-data
             taxonomies: Taxonomiak
@@ -76,7 +76,6 @@ eu:
       posts:
         edit:
           add_attachments: Gehitu eranskinak
-          attachment_legend: Gehitu dokumentu edo irudi bat
           back: Itzuli sarrerara
           button: Eguneratu
           edit_attachments: Editatu eranskinak
@@ -87,7 +86,7 @@ eu:
           title: Izenburua
         index:
           count:
-            one: "Argitalpen %{count}"
+            one: "Argitalpen bat"
             other: "%{count} argitalpen"
           empty: Oraindik ez dago argitalpenik.
           new_post: Beste sarrera bat
@@ -99,6 +98,11 @@ eu:
           back: Itzuli sarrerara
           button: Sortu
           title: Sortu beste sarrera bat
+        orders:
+          label: Sarrera ordena honetan argitaratuta
+          most_commented: Gehien komentatua
+          random: Ausazko ordena
+          recent: Berrienak
     components:
       blogs:
         actions:
@@ -107,13 +111,14 @@ eu:
           destroy: Ezabatu
           like: Atsegin dut
           update: Eguneratu
+          vote_comment: Bozkatu iruzkina
         name: Bloga
         settings:
           global:
             announcement: Iragarpena
             attachments_allowed: Baimendu eranskinak
             comments_enabled: Iruzkinak gaituta
-            comments_max_length: Iruzkinen gehieneko luzera (utzi 0 lehenetsitako konfigurazioari eutsi nahi badiozu)
+            comments_max_length: Iruzkin bakoitzeko gehieneko karaktereak (utzi 0 aurrez zehaztutako baliorako)
             creation_enabled_for_participants: Parte-hartzaileek sarrerak sor ditzakete
             define_taxonomy_filters: Mesedez, zehaztu iragazki batzuk partaidetza-espazio honetarako eszenatoki hau erabili aurretik.
             no_taxonomy_filters_found: Ez da taxonomia-iragazkirik aurkitu.
@@ -128,8 +133,8 @@ eu:
       blogs:
         post_created:
           email_intro: '"%{resource_title}" argitalpena jarraitzen ari zaren "%{participatory_space_title}" espazioan argitaratu da.'
-          email_outro: Jakinarazpena jaso duzu "%{participatory_space_title}" jarraitzen ari zarelako. Aurreko estekan utzi ahal diozu jarraitzeari.
-          email_subject: Argitalpen berria %{participatory_space_title} espazioan
+          email_outro: Jakinarazpen hau jaso duzu "%{participatory_space_title}" jarraitzen ari zarelako. Aurreko estekan sartu jarraitzeari uzteko.
+          email_subject: Beste argitalpen bat %{participatory_space_title} espazioan
           notification_title: <a href="%{resource_path}">%{resource_title}</a> sarrera %{participatory_space_title} argitaratu da
     open_data:
       help:
@@ -155,6 +160,7 @@ eu:
           likes_count: Argitalpen honek duen like kopurua
           participatory_space: Argitalpen hau zein espaziotakoa da (adibidez, Partaidetza-prozesua, Batzarra)
           published_at: Zein datatan argitaratu zen atgitalpen hau
+          reference: Korreoaren erreferentzia bakarra
           title: Argitalpenaren izenburua
           updated_at: Zein egunetan eguneratu da azken aldiz argitalpen hau
           url: Argitalpen honetarakko URLa

@@ -1,6 +1,9 @@
 pl:
   activemodel:
     attributes:
+      milestone:
+        description: Opis
+        entry_date: Data
       result:
         decidim_accountability_status_id: Status
         decidim_category_id: Kategoria
@@ -129,7 +132,6 @@ pl:
           fields:
             created_at: Utworzono
             end_date: Data zakończenia
-            id: ID
             progress: Postęp
             start_date: Data rozpoczęcia
             status: Status
@@ -168,7 +170,6 @@ pl:
         settings:
           global:
             comments_enabled: Komentarze włączone
-            comments_max_length: Maksymalna długość komentarzy (Pozostaw 0 dla wartości domyślnej)
             display_progress_enabled: Wyświetl postęp
             intro: Wprowadzenie
           step:

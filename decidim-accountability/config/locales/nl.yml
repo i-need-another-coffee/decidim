@@ -91,7 +91,6 @@ nl:
           fields:
             created_at: Aangemaakt
             end_date: Einddatum
-            id: ID
             progress: Vooruitgang
             start_date: Startdatum
             status: Status
@@ -127,7 +126,6 @@ nl:
         settings:
           global:
             comments_enabled: Reacties ingeschakeld
-            comments_max_length: Commentaar maximale lengte (laat 0 voor standaard waarde)
             display_progress_enabled: Geef de voortgang weer
             intro: Inleiding
           step:

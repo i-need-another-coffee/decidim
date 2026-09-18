@@ -11,14 +11,6 @@ FactoryBot.define do
     title { generate_localized_title(:initiatives_type_title, skip_injection:) }
     description { generate_localized_description(:initiatives_type_description, skip_injection:) }
     organization
-    # Keep banner_image after organization
-    banner_image do
-      ActiveStorage::Blob.create_and_upload!(
-        io: File.open(Decidim::Dev.test_file("city2.jpeg", "image/jpeg")),
-        filename: "city2.jpeg",
-        content_type: "image/jpeg"
-      ).signed_id
-    end
     signature_type { :online }
     attachments_enabled { true }
     undo_online_signatures_enabled { true }
@@ -142,7 +134,7 @@ FactoryBot.define do
 
     after(:create) do |initiative, evaluator|
       if initiative.author.is_a?(Decidim::User) && Decidim::Authorization.where(user: initiative.author).where.not(granted_at: nil).none?
-        create(:authorization, user: initiative.author, granted_at: Time.now.utc, skip_injection: evaluator.skip_injection)
+        create(:authorization, :granted, user: initiative.author, skip_injection: evaluator.skip_injection)
       end
       create_list(:initiatives_committee_member, 3, initiative:, skip_injection: evaluator.skip_injection)
     end

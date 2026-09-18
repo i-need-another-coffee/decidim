@@ -22,6 +22,26 @@ module Decidim
         expect(subject.display_conditions).to match_array(display_conditions)
       end
 
+      context "when this question's answer controls the display of other questions" do
+        subject { question }
+
+        let(:question) { create(:questionnaire_question, questionnaire:) }
+        let(:conditioned_questions) { create_list(:questionnaire_question, 2, questionnaire:) }
+        let!(:display_conditions_for_other_questions) do
+          conditioned_questions.map do |conditioned_question|
+            create(:display_condition, condition_question: question, question: conditioned_question)
+          end
+        end
+
+        it "has an association of display_conditions_for_other_questions" do
+          expect(subject.display_conditions_for_other_questions).to match_array(display_conditions_for_other_questions)
+        end
+
+        it "has an association of conditioned_questions" do
+          expect(subject.conditioned_questions).to match_array(conditioned_questions)
+        end
+      end
+
       context "when there are response_options belonging to this question" do
         let(:response_options) { create_list(:response_option, 3, question:) }
 
@@ -65,6 +85,32 @@ module Decidim
 
           it "does not include questions that have display conditions" do
             expect(subject.class.not_conditioned).not_to include(question_conditioned)
+          end
+        end
+
+        describe "#not_separator" do
+          let(:question_separator) { create(:questionnaire_question, questionnaire:, question_type: "separator") }
+          let(:question_regular) { create(:questionnaire_question, questionnaire:, question_type: "short_response") }
+
+          it "excludes separator questions" do
+            expect(subject.class.not_separator).not_to include(question_separator)
+          end
+
+          it "includes regular questions" do
+            expect(subject.class.not_separator).to include(question_regular)
+          end
+        end
+
+        describe "#not_title_and_description" do
+          let(:question_title_desc) { create(:questionnaire_question, questionnaire:, question_type: "title_and_description") }
+          let(:question_regular) { create(:questionnaire_question, questionnaire:, question_type: "short_response") }
+
+          it "excludes title_and_description questions" do
+            expect(subject.class.not_title_and_description).not_to include(question_title_desc)
+          end
+
+          it "includes regular questions" do
+            expect(subject.class.not_title_and_description).to include(question_regular)
           end
         end
       end

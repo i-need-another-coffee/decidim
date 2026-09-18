@@ -17,30 +17,20 @@ module Decidim
 
         Decidim::Proposals.create_default_states!(component, admin_user)
 
-        number_of_records = slow_seeds? ? 10 : rand(25..50)
-
-        (5..number_of_records).to_a.sample.times do |n|
+        config_value(:proposals_count).times do
           proposal = create_proposal!(component:)
 
           if proposal.state.nil? && component.settings.amendments_enabled?
             emendation = create_emendation!(proposal:)
-            create_proposal_votes!(proposal: emendation)
+            create_proposal_votes!(proposal: emendation, amount: 1)
           end
 
-          (n % 3).times do |_m|
-            create_proposal_votes!(proposal:)
-          end
+          create_proposal_votes!(proposal:, amount: config_value(:proposals_votes_per_proposal_count))
 
-          (n % 3).times do
-            create_proposal_notes!(proposal:)
-          end
+          create_proposal_notes!(proposal:, amount: config_value(:proposals_notes_per_proposal_count))
 
           Decidim::Comments::Seed.comments_for(proposal)
-
-          create_collaborative_draft!(component:)
         end
-
-        update_traceability!(component:)
 
         create_report!(reportable: Decidim::Proposals::Proposal.take, current_user: Decidim::User.take)
         hide_report!(reportable: Decidim::Proposals::Proposal.take)
@@ -74,7 +64,6 @@ module Decidim
             can_accumulate_votes_beyond_threshold: [true, false].sample,
             attachments_allowed: [true, false].sample,
             amendments_enabled: participatory_space.id.odd?,
-            collaborative_drafts_enabled: true,
             geocoding_enabled: [true, false].sample
           },
           step_settings:
@@ -161,24 +150,20 @@ module Decidim
 
         case n
         when 0
-          Decidim::User.where(organization:).sample
+          Decidim::User.visible.where(organization:).sample || organization
         when 1
           meeting_component = participatory_space.components.find_by(manifest_name: "meetings")
 
-          Decidim::Meetings::Meeting.where(component: meeting_component).sample
+          Decidim::Meetings::Meeting.where(component: meeting_component).sample ||
+            Decidim::User.visible.where(organization:).sample ||
+            organization
         else
           organization
         end
       end
 
       def random_nickname
-        "#{::Faker::Twitter.unique.screen_name}-#{SecureRandom.hex(4)}"[0, 20]
-      end
-
-      def random_email(suffix:)
-        r = SecureRandom.hex(4)
-
-        "#{suffix}-author-#{participatory_space.underscored_name}-#{participatory_space.id}-#{r}@example.org"
+        "#{::Faker::X.unique.screen_name}-#{SecureRandom.hex(4)}"[0, 20]
       end
 
       def create_emendation!(proposal:)
@@ -216,67 +201,33 @@ module Decidim
         emendation
       end
 
-      def create_proposal_votes!(proposal:)
-        author = find_or_initialize_user_by(email: random_email(suffix: "vote"))
+      def create_proposal_votes!(proposal:, amount:)
+        return if proposal.published_state? && proposal.rejected?
 
-        Decidim::Proposals::ProposalVote.create!(proposal:, author:) unless proposal.published_state? && proposal.rejected?
-      end
+        emails = amount.times.map do
+          random_email(suffix: "proposal-vote")
+        end
+        authors = bulk_find_or_create_users(emails:)
 
-      def create_proposal_notes!(proposal:)
-        author_admin = Decidim::User.where(organization:, admin: true).all.sample
-
-        Decidim::Proposals::ProposalNote.create!(
-          proposal:,
-          author: author_admin,
-          body: ::Faker::Lorem.paragraphs(number: 2).join("\n")
+        # rubocop:disable-next Rails/SkipsModelValidations
+        proposal.votes.insert_all(
+          authors.map do |author|
+            { decidim_author_id: author.id }
+          end
         )
       end
 
-      def create_collaborative_draft!(component:)
-        n = rand(5)
-        state = if n > 3
-                  "published"
-                elsif n > 2
-                  "withdrawn"
-                else
-                  "open"
-                end
-        author = Decidim::User.where(organization:).all.sample
+      def create_proposal_notes!(proposal:, amount: 3)
+        author_admins = Decidim::User.where(organization:, admin: true).all.sample(amount)
 
-        draft = Decidim.traceability.perform_action!("create", Decidim::Proposals::CollaborativeDraft, author) do
-          draft = Decidim::Proposals::CollaborativeDraft.new(
-            component:,
-            title: ::Faker::Lorem.sentence(word_count: 2),
-            body: ::Faker::Lorem.paragraphs(number: 2).join("\n"),
-            state:,
-            published_at: Time.current
-          )
-          draft.coauthorships.build(author: participatory_space.organization)
-          draft.save!
-          draft
-        end
-
-        case n
-        when 2
-          authors = Decidim::User.where(organization:).all.sample(5)
-          authors.each do |local_author|
-            Decidim::Coauthorship.create(coauthorable: draft, author: local_author)
+        # rubocop:disable-next Rails/SkipsModelValidations
+        proposal.notes.insert_all(
+          author_admins.map do |author|
+            {
+              decidim_author_id: author.id,
+              body: ::Faker::Lorem.paragraphs(number: 2).join("\n")
+            }
           end
-        when 3
-          author2 = Decidim::User.where(organization:).all.sample
-          Decidim::Coauthorship.create(coauthorable: draft, author: author2)
-        end
-
-        Decidim::Comments::Seed.comments_for(draft)
-      end
-
-      def update_traceability!(component:)
-        Decidim.traceability.update!(
-          Decidim::Proposals::CollaborativeDraft.all.sample,
-          Decidim::User.where(organization:).all.sample,
-          component:,
-          title: ::Faker::Lorem.sentence(word_count: 2),
-          body: ::Faker::Lorem.paragraphs(number: 2).join("\n")
         )
       end
     end

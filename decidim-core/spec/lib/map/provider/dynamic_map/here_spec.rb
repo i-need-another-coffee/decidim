@@ -32,37 +32,47 @@ module Decidim
                 marker_color: "#e02d2d",
                 tile_layer: {
                   api_key: "key1234", foo: "bar", language: "en"
-                }
+                },
+                zoom_in_text: "Zoom in",
+                zoom_out_text: "Zoom out"
               )
             end
 
             context "with different locale configuration" do
-              before do
-                allow(I18n.config).to receive(:enforce_available_locales).and_return(false)
-              end
-
-              after do
-                I18n.locale = "en"
+              around do |example|
+                I18n.with_locale(:en) do
+                  example.run
+                end
               end
 
               it "returns the correct builder options for CA" do
-                I18n.locale = "ca"
-                expect(subject.builder_options).to eq(
-                  marker_color: "#e02d2d",
-                  tile_layer: {
-                    api_key: "key1234", foo: "bar", language: "ca"
-                  }
-                )
+                allow(I18n.config).to receive(:enforce_available_locales).and_return(false)
+
+                I18n.with_locale "ca" do
+                  expect(subject.builder_options).to eq(
+                    marker_color: "#e02d2d",
+                    tile_layer: {
+                      api_key: "key1234", foo: "bar", language: "ca"
+                    },
+                    zoom_in_text: "Ampliar",
+                    zoom_out_text: "Allunyar"
+                  )
+                end
               end
 
               it "returns the correct builder options for ES" do
-                I18n.locale = "es"
-                expect(subject.builder_options).to eq(
-                  marker_color: "#e02d2d",
-                  tile_layer: {
-                    api_key: "key1234", foo: "bar", language: "es"
-                  }
-                )
+                allow(I18n.config).to receive(:enforce_available_locales).and_return(false)
+
+                I18n.with_locale "es" do
+                  expect(subject.builder_options).to eq(
+                    marker_color: "#e02d2d",
+                    tile_layer: {
+                      api_key: "key1234", foo: "bar", language: "es"
+                    },
+                    zoom_in_text: "Ampliar",
+                    zoom_out_text: "Alejar"
+                  )
+                end
               end
             end
 
@@ -82,7 +92,9 @@ module Decidim
                     api_key: "appid123secret456",
                     foo: "bar",
                     language: "en"
-                  }
+                  },
+                  zoom_in_text: "Zoom in",
+                  zoom_out_text: "Zoom out"
                 )
               end
             end

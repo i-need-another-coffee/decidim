@@ -15,11 +15,20 @@ module Decidim
     def call
       return broadcast(:invalid) unless @form.valid?
 
-      Decidim::User.transaction do
+      with_events(with_transaction: true) do
         destroy_user_account!
         destroy_user_identities
         destroy_follows
-        destroy_participatory_space_private_user
+        destroy_user_versions
+        destroy_user_private_exports
+        destroy_user_access_grants
+        destroy_user_access_tokens
+        destroy_user_reminders
+        destroy_user_notifications
+        destroy_user_badges
+        destroy_user_likes
+        destroy_user_reports
+        destroy_member
         delegate_destroy_to_participatory_spaces
       end
 
@@ -47,23 +56,70 @@ module Decidim
       current_user.save!
     end
 
+    def destroy_user_badges
+      Decidim::Gamification::BadgeScore.where(user: current_user).find_each(&:destroy)
+    end
+
+    def destroy_user_reports
+      Decidim::UserModeration.where(user: current_user).find_each(&:destroy)
+    end
+
+    def destroy_user_likes
+      Decidim::Like.where(author: current_user).find_each(&:destroy)
+    end
+
     def destroy_user_identities
-      current_user.identities.destroy_all
+      current_user.identities.find_each(&:destroy)
+    end
+
+    def destroy_user_versions
+      current_user.versions.find_each(&:destroy)
+    end
+
+    def destroy_user_private_exports
+      current_user.private_exports.find_each(&:destroy)
+    end
+
+    def destroy_user_access_grants
+      current_user.access_grants.find_each(&:destroy)
+    end
+
+    def destroy_user_access_tokens
+      current_user.access_tokens.find_each(&:destroy)
+    end
+
+    def destroy_user_reminders
+      current_user.reminders.find_each(&:destroy)
+    end
+
+    def destroy_user_notifications
+      current_user.notifications.find_each(&:destroy)
     end
 
     def destroy_follows
-      Decidim::Follow.where(followable: current_user).destroy_all
-      Decidim::Follow.where(user: current_user).destroy_all
+      Decidim::Follow.where(followable: current_user).find_each(&:destroy)
+      Decidim::Follow.where(user: current_user).find_each(&:destroy)
     end
 
-    def destroy_participatory_space_private_user
-      Decidim::ParticipatorySpacePrivateUser.where(user: current_user).destroy_all
+    def destroy_member
+      Decidim::ParticipatorySpace::Member.where(user: current_user).find_each(&:destroy)
     end
 
     def delegate_destroy_to_participatory_spaces
       Decidim.participatory_space_manifests.each do |space_manifest|
         space_manifest.invoke_on_destroy_account(current_user)
       end
+    end
+
+    # We use memoization in this particular email, as we want to have the data available before the actual anonymization
+    def event_arguments
+      @event_arguments ||= {
+        user_id: current_user.id,
+        user_email: current_user.email,
+        user_name: current_user.name,
+        locale: current_user.locale,
+        organization: current_user.organization
+      }
     end
   end
 end

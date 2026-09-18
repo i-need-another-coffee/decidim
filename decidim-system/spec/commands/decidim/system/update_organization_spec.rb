@@ -18,6 +18,7 @@ module Decidim
           let(:params) do
             {
               name: { en: "Gotham City" },
+              short_name: { en: "GothamCity" },
               host: "decide.example.org",
               secondary_hosts: "foo.example.org\r\n\r\nbar.example.org",
               force_users_to_authenticate_before_access_organization: false,
@@ -57,6 +58,7 @@ module Decidim
             organization = Organization.last
 
             expect(translated(organization.name)).to eq("Gotham City")
+            expect(translated(organization.short_name)).to eq("GothamCity")
             expect(organization.host).to eq("decide.example.org")
             expect(organization.secondary_hosts).to contain_exactly("foo.example.org", "bar.example.org")
             expect(organization.users_registration_mode).to eq("existing")
@@ -130,6 +132,7 @@ module Decidim
           let(:params) do
             {
               name: { en: "Gotham City" },
+              short_name: { en: "GothamCity" },
               host: "decide.example.org",
               users_registration_mode: "existing",
               file_upload_settings: params_for_uploads(upload_settings),

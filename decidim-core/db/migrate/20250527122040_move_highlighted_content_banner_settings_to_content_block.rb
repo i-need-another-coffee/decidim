@@ -11,7 +11,7 @@ class MoveHighlightedContentBannerSettingsToContentBlock < ActiveRecord::Migrati
     Decidim::ContentBlock.reset_column_information
 
     Organization.find_each do |organization|
-      content_block = Decidim::ContentBlock.find_by(organization: organization, scope_name: :homepage, manifest_name: :highlighted_content_banner)
+      content_block = Decidim::ContentBlock.find_by(organization:, scope_name: :homepage, manifest_name: :highlighted_content_banner)
       settings = extract_settings(organization)
 
       # We need to do a workaround for getting the image, as ActiveStorage is polymorphic and expects that the `record_type` is the class name of the model
@@ -44,7 +44,7 @@ class MoveHighlightedContentBannerSettingsToContentBlock < ActiveRecord::Migrati
 
   private
 
-  # rubocop:disable Metrics/CyclomaticComplexity
+  # rubocop:disable-next Metrics/CyclomaticComplexity
   def extract_settings(organization)
     settings = {}
 
@@ -65,5 +65,4 @@ class MoveHighlightedContentBannerSettingsToContentBlock < ActiveRecord::Migrati
 
     settings
   end
-  # rubocop:enable Metrics/CyclomaticComplexity
 end

@@ -80,7 +80,6 @@ namespace :decidim do
       task transfer_user_groups_authorships: :environment do
         coauthorable_models = %w(
           Decidim::Proposals::Proposal
-          Decidim::Proposals::CollaborativeDraft
         )
         authorable_models = %w(
           Decidim::Like
@@ -146,9 +145,8 @@ namespace :decidim do
         items = Decidim::ActionLog.where(resource_type: "Decidim::UserGroup")
 
         if (count = items.count).positive?
-          # rubocop:disable Rails/SkipsModelValidations
+          # rubocop:disable-next Rails/SkipsModelValidations
           items.update_all(resource_type: "Decidim::User")
-          # rubocop:enable Rails/SkipsModelValidations
 
           puts "===== Transformed #{count} action log entries."
         else

@@ -168,7 +168,6 @@ he:
           fields:
             created_at: נוצר
             end_date: תאריך סיום
-            id: מספר מזהה
             progress: התקדמות
             start_date: תאריך התחלה
             status: סטטוס
@@ -210,7 +209,6 @@ he:
           global:
             clear_all: נקה הכל
             comments_enabled: תגובות אפשריות
-            comments_max_length: אורך מקסימלי להערות (השאירו 0 לערך ברירת המחדל)
             display_progress_enabled: הצגת התקדמות
             intro: הקדמה
           step:

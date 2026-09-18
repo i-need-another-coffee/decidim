@@ -14,6 +14,7 @@ module Decidim
       include Decidim::Loggable
       include Decidim::Searchable
       include Decidim::Coauthorable
+      include Decidim::HasReference
 
       component_manifest_name "collaborative_texts"
 
@@ -29,13 +30,12 @@ module Decidim
       delegate :organization, :participatory_space, to: :component
       delegate :draft?, :draft, :draft=, :body, :body=, to: :current_version
 
-      searchable_fields(
-        participatory_space: { component: :participatory_space },
-        A: :title,
-        D: :consolidated_body,
-        datetime: :published_at
-      )
-
+      searchable_fields({ participatory_space: { component: :participatory_space },
+                          A: :title,
+                          D: :consolidated_body,
+                          datetime: :published_at },
+                        index_on_create: ->(document) { document.visible? },
+                        index_on_update: ->(document) { document.visible? })
       def self.log_presenter_class_for(_log)
         Decidim::CollaborativeTexts::AdminLog::DocumentPresenter
       end

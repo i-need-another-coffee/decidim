@@ -34,7 +34,7 @@ module Decidim
       #   end
       #
       # Returns nothing.
-      # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+      # rubocop:disable-next Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
       def translatable_attribute(name, type, **)
         attribute(name, { String => Object }, default: {})
 
@@ -70,7 +70,6 @@ module Decidim
           yield(attribute_name, locale) if block_given?
         end
       end
-      # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
       def locales
         Decidim.available_locales
@@ -96,8 +95,7 @@ module Decidim
         given_organization ||= try(:organization)
         organization_locale = given_organization.try(:default_locale)
 
-        attribute[I18n.locale.to_s].presence ||
-          machine_translation_value(attribute, given_organization, override_machine_translation_settings) ||
+        translated_value(attribute, given_organization, override_machine_translation_settings) ||
           attribute[organization_locale].presence ||
           attribute[attribute.keys.first].presence ||
           ""
@@ -112,7 +110,7 @@ module Decidim
         return unless organization
         return unless organization.enable_machine_translations?
 
-        attribute.dig("machine_translations", I18n.locale.to_s).presence if must_render_translation?(organization, override_machine_translation_settings)
+        attribute.dig("machine_translations", I18n.locale.to_s)&.gsub("<p></p>", "").presence if must_render_translation?(organization, override_machine_translation_settings)
       end
 
       def must_render_translation?(organization, override_machine_translation_settings = nil)
@@ -130,6 +128,13 @@ module Decidim
 
     def attachment?(value)
       value.is_a?(String) && value.include?(ActiveStorage.routes_prefix)
+    end
+
+    private
+
+    def translated_value(attribute, given_organization, override_machine_translation_settings = nil)
+      attribute[I18n.locale.to_s]&.gsub("<p></p>", "").presence ||
+        machine_translation_value(attribute, given_organization, override_machine_translation_settings)
     end
   end
 end

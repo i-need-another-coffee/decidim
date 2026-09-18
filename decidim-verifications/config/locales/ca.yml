@@ -48,7 +48,7 @@ ca:
             confirm: La revocació d'autoritzacions anteriors a aquesta data no es pot desfer. Segur que vols continuar?
             confirm_all: La revocació de totes les autoritzacions no es pot desfer. Segur que vols continuar?
           destroy_nok: S'ha produït un error en revocar les autoritzacions.
-          destroy_ok: Totes les autoritzacions coincidents s'han revocat correctament.
+          destroy_ok: S'estan revocant les autoritzacions. Aquest procés pot trigar uns minuts a completar-se.
           info: Hi ha un total de %{count} participants verificades.
           no_data: No hi ha participants verificades.
           title: Revocació d'autoritzacions
@@ -117,10 +117,10 @@ ca:
     events:
       verifications:
         verify_with_managed_user:
-          email_intro: La participant <a href="%{resource_url}">%{resource_title}</a> ha intentat verificar-se amb les dades d'una altra participant (<a href="%{managed_user_url}">%{managed_user_name}</a>).
+          email_intro: La participant <a href="%{resource_url}">%{resource_title}</a> ha intentat verificar-se amb les dades d'una altra participant (%{managed_user_name}).
           email_outro: Comprova la <a href="%{conflicts_url}">llista de conflictes de verificacions</a> i posa't en contacte amb la participant per a verificar els seus detalls i resoldre el problema.
           email_subject: Error en intentar verificar-se contra una altra participant
-          notification_title: La participant <a href="%{resource_path}">%{resource_title}</a> ha intentat verificar-se amb les dades d'una altra participant (<a href="%{managed_user_path}">%{managed_user_name}</a>).
+          notification_title: La participant <a href="%{resource_path}">%{resource_title}</a> ha intentat verificar-se amb les dades d'una altra participant (%{managed_user_name}).
     verifications:
       admin_log:
         csv_datum:
@@ -183,6 +183,10 @@ ca:
               empty: No hi ha dades del cens. Utilitza %{import_csv} per importar-lo mitjançant un fitxer CSV.
               no_sign_in: Mai no ha iniciat sessió
               no_user: No s'ha trobat cap usuària
+              title: Dades censals actuals
+            instructions:
+              body: Per fer-ho, has d'entrar al panell d'administració i afegir les autoritzacions de "csv_census" a l'organització
+              title: Necessites activar el "csv_census" d'aquesta organització
             last_login:
               no_sign_in: Mai no ha iniciat sessió
               no_user: Cap usuària
@@ -220,10 +224,6 @@ ca:
               user_authorized: Usuària autoritzada?
             import_csv: Importar CSV
             no_authorized: Usuària no actualitzada
-            title: Dades censals actuals
-          instructions:
-            body: Per fer-ho, has d'entrar al panell d'administració i afegir les autoritzacions de csv_census a l'organització
-            title: Necessites activar el cens csv d'aquesta organització
         authorizations:
           new:
             error: No hem pogut verificar el teu compte o no estàs al cens de l'organització.
@@ -254,8 +254,8 @@ ca:
               error: La verificació no coincideix. Si us plau, torna-ho a provar o rebutja la verificació perquè la participant pugui modificar-la.
               success: Participant convidada correctament.
             new:
-              introduce_user_data: Introdueix les dades de la imatge
               reject: Rebutjar
+              title: Introdueix les dades que apareixen a la imatge
               verify: Verificar
           offline_confirmations:
             create:
@@ -263,7 +263,7 @@ ca:
               success: Participant verificada correctament.
             new:
               cancel: Cancel·lar
-              introduce_user_data: Introdueix el correu electrònic de la participant i les dades del document
+              title: Introdueix el correu electrònic de la participant i les dades del document
               verify: Verificar
           pending_authorizations:
             index:

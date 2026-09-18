@@ -16,6 +16,10 @@ ja:
           body: 本文
           draft: 下書き
           version_number: バージョン番号
+  activerecord:
+    models:
+      decidim/collaborative_texts/document:
+        other: コラボレーションテキスト
   decidim:
     admin:
       tooltips:
@@ -74,6 +78,8 @@ ja:
           update_settings:
             invalid: ドキュメントの更新中に問題が発生しました。
             success: ドキュメントを更新しました。
+        exports:
+          document_suggestions: 候補
         index:
           published: 公開済み
           unpublished: 未公開

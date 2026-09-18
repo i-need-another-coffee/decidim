@@ -4,6 +4,7 @@ require "spec_helper"
 
 shared_context "when a simple event" do
   include Decidim::SanitizeHelper
+
   subject { event_instance }
 
   let(:event_instance) do
@@ -23,7 +24,7 @@ shared_context "when a simple event" do
       create :organization
     end
   end
-  let(:user) { create(:user, organization:) }
+  let(:user) { create(:user, :confirmed, organization:) }
   let(:user_role) { :follower }
   let(:extra) { {} }
   let(:resource_path) { resource_locator(resource).path }

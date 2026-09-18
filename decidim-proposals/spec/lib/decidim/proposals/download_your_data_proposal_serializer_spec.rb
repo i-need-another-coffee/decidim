@@ -27,12 +27,12 @@ module Decidim
 
       let(:expected_answer) do
         answer = proposal.answer
-        Decidim.available_locales.each_with_object({}) do |locale, result|
-          result[locale.to_s] = if answer.is_a?(Hash)
-                                  answer[locale.to_s] || ""
-                                else
-                                  ""
-                                end
+        Decidim.available_locales.to_h do |locale|
+          [locale.to_s, if answer.is_a?(Hash)
+                          answer[locale.to_s] || ""
+                        else
+                          ""
+                        end]
         end
       end
 
@@ -125,10 +125,6 @@ module Decidim
 
         it "serializes withdrawn date" do
           expect(serialized).to include(withdrawn_at: proposal.withdrawn_at)
-        end
-
-        it "serializes the amount of attachments" do
-          expect(serialized).to include(attachments: proposal.attachments.count)
         end
 
         it "serializes the state at which the proposal was published at" do

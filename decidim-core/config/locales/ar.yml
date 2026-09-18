@@ -202,10 +202,6 @@ ar:
       organization:
         update: "قام %{user_name} بتحديث إعدادات المنظمة"
         update_external_domain: "قام %{user_name} بتحديث النطاقات الخارجية للمنظمة external domains"
-      participatory_space_private_user:
-        create: "%{user_name} مدعو %{resource_name} ليكون مشاركًا خاصًا"
-        create_via_csv: "%{user_name} دعا %{resource_name} عبر CSV ليكون مشاركا خاصا"
-        delete: "%{user_name} أزال المشارك %{resource_name} كمشارك خاص"
       scope:
         create: "%{user_name} خلق نطاق %{resource_name}"
         create_with_parent: "إنشاء %{user_name} النطاق %{resource_name} داخل النطاق %{parent_scope}"
@@ -292,9 +288,6 @@ ar:
       update_draft:
         error: حدثت هناك مشكلة أثناء تحديث مسودة التعديل.
         success: تم تحديث مسودة التعديل بنجاح.
-      wizard_step_form:
-        steps:
-          '1': إنشاء التعديل الخاص بك
     anonymous_user: مجهول
     application:
       document:
@@ -409,7 +402,6 @@ ar:
           global:
             amendments_enabled: تم تمكين التعديلات
             comments_enabled: تم تمكين التعليقات
-            comments_max_length: الحد الأقصى لطول التعليقات
             dummy_global_attribute1: السمة الدمية 1
             dummy_global_attribute2: السمة الدمية 2
             dummy_global_translatable_text: نص افتراضي قابل للترجمة
@@ -435,8 +427,6 @@ ar:
         description: الوصف
       footer_sub_hero:
         name: تذييل البطل الفرعي راية
-      global_menu:
-        name: القائمة العامة
       hero_settings_form:
         background_image: الصورة الخلفية
         welcome_text: نص الترحيب
@@ -547,13 +537,9 @@ ar:
           affected_user:
             email_intro: 'تم قبول التعديل لمدة %{amendable_title}. يمكنك أن ترى ذلك من هذه الصفحة:'
             email_outro: لقد تلقيت هذا الإشعار لأنك مؤلف برقم %{amendable_title}.
-            email_subject: تم قبول التعديل من %{amendable_title} من %{emendation_author_nickname}
-            notification_title: تم قبول التعديل <a href="%{emendation_path}"></a> تم إنشاؤه بواسطة <a href="%{emendation_author_path}">%{emendation_author_nickname}</a> لمدة <a href="%{amendable_path}">%{amendable_title}</a>.
           follower:
             email_intro: 'تم قبول التعديل لمدة %{amendable_title}. يمكنك أن ترى ذلك من هذه الصفحة:'
             email_outro: لقد تلقيت هذا الإشعار لأنك تتابع %{amendable_title}. يمكنك إيقاف تلقي الإخطارات باتباع الرابط السابق.
-            email_subject: تم قبول التعديل من %{amendable_title} من %{emendation_author_nickname}
-            notification_title: تم قبول التعديل <a href="%{emendation_path}"></a> تم إنشاؤه بواسطة <a href="%{emendation_author_path}">%{emendation_author_nickname}</a> لمدة <a href="%{amendable_path}">%{amendable_title}</a>.
         amendment_created:
           affected_user:
             email_intro: 'تم إنشاء تعديل جديد لـ %{amendable_title}. يمكنك أن ترى ذلك من هذه الصفحة:'
@@ -569,29 +555,20 @@ ar:
           affected_user:
             email_intro: 'تم نشر تعديل مرفوض لـ %{amendable_title} باعتباره %{amendable_type}جديد. يمكنك أن ترى ذلك من هذه الصفحة:'
             email_outro: لقد تلقيت هذا الإشعار لأنك مؤلف برقم %{amendable_title}.
-            email_subject: تم نشر تعديل من %{emendation_author_nickname} كـ %{amendable_type}جديد
-            notification_title: A <a href="%{emendation_path}">رفض التعديل</a> لل <a href="%{amendable_path}">%{amendable_title}</a> تم نشره باعتباره الجديدة %{amendable_type} من <a href="%{emendation_author_path}">%{emendation_author_nickname}</a>.
           follower:
             email_intro: 'تم نشر تعديل مرفوض لـ %{amendable_title} باعتباره %{amendable_type}جديد. يمكنك أن ترى ذلك من هذه الصفحة:'
             email_outro: لقد تلقيت هذا الإشعار لأنك تتابع %{amendable_title}. يمكنك إيقاف تلقي الإخطارات باتباع الرابط السابق.
-            email_subject: تم نشر تعديل من %{emendation_author_nickname} كـ %{amendable_type}جديد
-            notification_title: A <a href="%{emendation_path}">رفض التعديل</a> لل <a href="%{amendable_path}">%{amendable_title}</a> تم نشره باعتباره الجديدة %{amendable_type} من <a href="%{emendation_author_path}">%{emendation_author_nickname}</a>.
         amendment_rejected:
           affected_user:
             email_intro: 'تم رفض التعديل لمدة %{amendable_title}. يمكنك أن ترى ذلك من هذه الصفحة:'
             email_outro: لقد تلقيت هذا الإشعار لأنك مؤلف برقم %{amendable_title}.
-            email_subject: تم رفض التعديل لـ %{amendable_title} من %{emendation_author_nickname}
-            notification_title: تم رفض التعديل <a href="%{emendation_path}"></a> تم إنشاؤه بواسطة <a href="%{emendation_author_path}">%{emendation_author_nickname}</a> لـ <a href="%{amendable_path}">%{amendable_title}</a>.
           follower:
             email_intro: 'تم رفض التعديل لمدة %{amendable_title}. يمكنك أن ترى ذلك من هذه الصفحة:'
             email_outro: لقد تلقيت هذا الإشعار لأنك تتابع %{amendable_title}. يمكنك إيقاف تلقي الإخطارات باتباع الرابط السابق.
-            email_subject: تم رفض التعديل لـ %{amendable_title} من %{emendation_author_nickname}
-            notification_title: تم رفض التعديل <a href="%{emendation_path}"></a> تم إنشاؤه بواسطة <a href="%{emendation_author_path}">%{emendation_author_nickname}</a> لـ <a href="%{amendable_path}">%{amendable_title}</a>.
         emendation_promoted:
           follower:
             email_intro: 'تم نشر تعديل لـ %{amendable_title}. يمكنك رؤيته من هذه الصفحة:'
             email_outro: لقد تلقيت هذا الإشعار لأنك مؤلف %{amendable_title}.
-            email_subject: تم نشر تعديل من قبل %{emendation_author_nickname} كـ %{amendable_type} جديد
       attachments:
         attachment_created:
           email_intro: 'تمت إضافة مستند جديد إلى %{resource_title}. يمكنك أن ترى ذلك من هذه الصفحة:'
@@ -622,16 +599,9 @@ ar:
           notification_title: |-
             قام مسؤول بإزالة %{resource_type} لأنه تم الإبلاغ عنه كـ %{report_reasons}.</br><i>%{resource_content}</i>
       users:
-        profile_updated:
-          email_intro: و <a href="%{resource_url}">صفحة الملف الشخصي</a> من %{name} (%{nickname})، الذي كنت التالية، وقد تم تحديثها.
-          email_outro: لقد تلقيت هذا الإشعار لأنك تتابع %{nickname}. يمكنك إيقاف تلقي الإخطارات باتباع الرابط السابق.
-          email_subject: "%{nickname} تحديث ملفهم الشخصي"
-          notification_title: و <a href="%{resource_path}">صفحة الملف الشخصي</a> من %{name} (%{nickname})، الذي كنت التالية، وقد تم تحديثها.
         user_officialized:
-          email_intro: تم إضفاء الطابع الرسمي على المشارك %{name} (%{nickname}).
           email_outro: تلقيت هذا الإشعار لأنك مدير في هذه المنظمة.
           email_subject: "تم إضفاء الطابع الرسمي على %{name}"
-          notification_title: تم إضفاء الطابع الرسمي على المشارك %{name} (%{nickname}).
     export_mailer:
       download_your_data_export:
         download: تحميل
@@ -793,7 +763,6 @@ ar:
         latlng_text: 'العرض: %{latitude}، الطول: %{longitude}'
         map_service_brand: OpenStreetMap
     menu:
-      help: المساعدة
       home: الصفحة الرئيسية
     messaging:
       conversation_mailer:
@@ -812,7 +781,6 @@ ar:
           modal_title: محادثة جديدة
           no_results: لا توجد نتائج
         error_modal:
-          close: اغلاق النموذج
           correct_errors: يرجى تصحيح الأخطاء والمحاولة مرة أخرى.
           intro: 'حدثت الأخطاء التالية في رسالتك:'
           ok: حسناً
@@ -884,7 +852,6 @@ ar:
       hello: مرحبا %{name}،
       intro:
         daily: 'هذه هي إخطارات اليوم الأخير بناءً على النشاط الذي تتابعه:'
-        real_time: 'هذا تنبيه عن النشاط الذي تتبعّه:'
         weekly: 'هذه هي إخطارات الأسبوع الأخير بناءً على النشاط الذي تتابعه:'
       outro: لقد تلقيت هذه الإشعارات لأنك تتبع هذا المحتوى أو مؤلفيه. يمكنك إلغاء متابعتها من صفحات كل منهم.
       see_more: عرض المزيد من الإشعارات
@@ -933,13 +900,10 @@ ar:
           proposals_explanation: تقديم مقترحات ، ودعم المقترحات الحالية وتعزيز التغييرات التي تريد رؤيتها.
         footer_sub_hero:
           footer_sub_hero_headline: مرحبًا بكم على المنصة التشاركية لـ %{organization}.
-          register: تسجيل
         hero:
           participate: مشاركة
           participate_title: المشاركة في مسارات المنصة
           welcome: مرحبًا بكم على %{organization}!
-        sub_hero:
-          register: تسجيل
       index:
         standalone_pages: صفحات
         subheading: انتقل من خلال صفحات المساعدة من %{name}
@@ -948,6 +912,9 @@ ar:
       terms_of_service:
         form:
           agreement: أوافق على هذه الشروط
+    participatory_space_members:
+      index:
+        members: أفراد
     profile:
       deleted: مشارك محذوف
     profiles:
@@ -1126,8 +1093,6 @@ ar:
         submit_button: ارسل دعوة
       no_invitations_remaining: لا توجد دعوات متبقية
       send_instructions: تم إرسال دعوة بريد إلكتروني إلى %{email}.
-      updated: تم ضبط كلمة مرورك بنجاح. انت الآن مسجل دخولك.
-      updated_not_active: تم ضبط كلمة مرورك بنجاح.
     mailer:
       confirmation_instructions:
         action: تأكيد حسابي
@@ -1143,10 +1108,8 @@ ar:
         decline: رفض الدعوة
         hello: مرحبا %{email}،
         invited_you_as_admin: "%{invited_by} دعاك كمشرف لـ %{application}. يمكنك قبول ذلك من خلال الرابط أدناه."
-        invited_you_as_private_user: "تلقيت دعوة من %{invited_by} كمشارك خاص لـ %{application}يمكنك قبول ذلك من خلال الرابط أدناه."
         someone_invited_you: دعاك شخص ما إلى %{application}. يمكنك قبول ذلك من خلال الرابط أدناه.
         someone_invited_you_as_admin: قام شخص ما بدعوتك كمسؤول لـ %{application}، يمكنك قبولها من خلال الرابط أدناه.
-        someone_invited_you_as_private_user: قام شخص ما بدعوتك كمشارك خاص بقيمة %{application}، ويمكنك قبولها من خلال الرابط أدناه.
         subject: تعليمات الدعوة
       password_change:
         greeting: مرحبا %{recipient}!

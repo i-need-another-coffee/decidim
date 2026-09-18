@@ -35,76 +35,69 @@ gem "decidim-dev", github: "decidim/decidim"
 bundle update decidim
 bin/rails decidim:upgrade
 bin/rails db:migrate
-# skip this command if you have run it before:
-bin/rails decidim:upgrade:clean:remove_private_exports_attachments
 bin/rails data:migrate
 ```
 
-### 1.4. AWS/Azure/Google Cloud assets storage
-
-There is a bug related to the cache expiration using Active Storage (assets, such as images). For fixing this issue, the Rails team added an extra active storage parameter, `public: true` that you can add it to your storage configuration. If you followed the step `3.4. Deprecation of Rails.application.secrets` and changed your `config/storage.yml` file you don't need to do anything else.
-
-This will also change the URL that is used, so you will need to update your [Content Security Policy](https://docs.decidim.org/en/develop/customize/content_security_policy.html), adding the new URL in the policies "default-src", "img-src", "media-src", and "connect-src". For instance, in the case of S3 with AWS, the format of the URL is the following:  `https://BUCKET-NAME.s3.amazonaws.com/ASSET_ID`.
-
-Apart of that, you also need to configure your preferred cloud service provider to support this. We recommend you to follow the Rails official guide for [Active Storage configuration](https://guides.rubyonrails.org/v7.0/active_storage_overview.html#setup).
-
-You can read more about this change on PR [#15005](https://github.com/decidim/decidim/pull/15005/).
-
-### 1.5. Follow the steps and commands detailed in these notes
+### 1.4. Follow the steps and commands detailed in these notes
 
 ## 2. General notes
 
-### 2.1. Module deprecations
+### 2.1. Unconfirmed and managed participants are now hidden by default
 
-As part of our ongoing efforts to improve and make simpler Decidim, the following modules will be **deprecated** in this version (v0.31) and **removed** in the next major version (v0.32):
+Participants that have not confirmed their account or accepted the terms of service of the website and managed participants are now hidden by default. This means that these profiles do not appear publicly on the website before the participant has accepted the terms of service. It is assumed that the consent to publish the participant's personal details on the website is mandated by the terms of service.
 
-#### Collaborative Drafts
+The profiles will be considered hidden by default and visible after the participant has accepted the terms of service or after a managed participant account is elevated to a regular participant account. The details of the hidden profiles are not displayed on the website and the API.
 
-The Collaborative Drafts feature in the Proposals module (`decidim-proposals`) will be removed in v0.32. Organizations using this feature can switch to the new proposal co-authorship feature.
+This change is based on the GDPR regulation:
 
-#### Sortitions (decidim-sortitions)
+> [...] In particular, such measures shall ensure that by default personal data are not made accessible without the individual’s intervention to an indefinite number of natural persons.
+>
+> GDPR Art. 25 (2)
 
-The Sortitions module (`decidim-sortitions`) will be removed in v0.32. This module provided functionality to randomly select participants or proposals. Organizations relying on this feature should consider implementing alternative selection mechanisms.
+You can read more about this change on PR [#11036](https://github.com/decidim/decidim/pull/11036).
 
-#### Polls in Meetings (decidim-meetings polls functionality)
+### 2.2. Sidekiq configuration overwrite
 
-The Polls feature within the Meetings module (`decidim-meetings`) will be removed in a future version (to be determined). This feature allowed meeting organizers to create polls during meetings. Organizations using meeting polls should plan to use external polling tools (for instance, through Jitsi) or migrate to other voting mechanisms available in Decidim, such as the new Elections module (`decidim-elections`).
+As we are doing changes in the default sidekiq.yml configuration and we want to do them automatically, this file will be overwritten during the upgrade process (on the `bin/rails decidim:upgrade` command).
 
-### 2.2. Old private exports are now expired
+If you have queues or any configuration particular to your environment that you do not want to get overwritten, you can do so by calling another configuration file on the sidekiq daemon call. For instance:
 
-Due to some data consistency issues with the private exports, we have decided to expire all the previously generated files. Users are able to request and receive a new private export file.
-
-if you are upgrading from a lover version like 0.30, and you have already ran this command, you can skip this step.
-
-Run the following command to expire all the private exports:
-
-```console
-bin/rails decidim:upgrade:clean:remove_private_exports_attachments
+```bash
+sidekiq -C config/sidekiq.yml -C config/sidekiq.local.yml
 ```
 
-You can read more about this change on PR [#15020](https://github.com/decidim/decidim/pull/15020).
+You can read more about this change on PR [#17596](https://github.com/decidim/decidim/pull/17596).
 
-### 2.3. Add data migrations
+### 2.3. Verification code security hardening
 
-At the moment we are adding this gem so we can start doing data migrations for fixes when v0.33.0 is released. You can read more about this at [Data migrations doc](https://docs.decidim.org/en/develop/develop/guide_data_migrations.html).
+The verification code confirmation flow has been enhanced with multiple security improvements. Failed attempt tracking has been moved from client-side session to server-side database storage, with three layers of protection:
 
-You can read more about this change on PR [#15501](https://github.com/decidim/decidim/pull/15501).
+1. **Server-side failed attempt tracking**: Failed attempts are now tracked in the database with automatic lockout after 5 failed attempts (configurable via `DECIDIM_VERIFICATION_MAX_FAILED_ATTEMPTS`) and automatic unlock after 30 minutes (configurable via `DECIDIM_VERIFICATION_UNLOCK_IN`).
+
+2. **Code expiration**: SMS verification codes now expire after 10 minutes (configurable via `DECIDIM_VERIFICATION_CODE_EXPIRY_MINUTES`), reducing the window of opportunity for unauthorized access.
+
+3. **HTTP-level rate limiting**: Rack::Attack now throttles verification confirmation endpoints to 10 requests per minute per IP.
+
+Server-side failed attempt tracking applies to all verification handlers (SMS, postal letter, ID documents, CSV census). Code expiration applies only to SMS verification. HTTP-level rate limiting applies only to SMS and postal letter authorization paths.
+
+We strongly recommend that implementers review any custom authorization handlers for code that may still rely on the old session-based attempt tracking patterns, which have been replaced by the new server-side mechanism.
+
+You can read more about this change on PR [#17639](https://github.com/decidim/decidim/pull/17639).
+
+### 2.4. [[TITLE OF THE ACTION]]
+
+You can read more about this change on PR [#XXXX](https://github.com/decidim/decidim/pull/XXXX).
 
 ## 3. One time actions
 
 These are one time actions that need to be done after the code is updated in the production database.
 
-### 3.1. Fix incorrect ActionLog entries
+### 3.1. New Active Storage Sidekiq queue
 
-The action of hiding a component from a menu was being stored as a public action. These can lead to crashing the application if some related participatory space is removed.
+Active Storage jobs now run in the dedicated Sidekiq queue `active_storage` to avoid blocking the default queue.
+Please add this queue to your `config/sidekiq.yml` and ensure at least one Sidekiq process is consuming it.
 
-In order to correct the existing entries you should run the following rake task:
-
-```bash
-bin/rails decidim:upgrade:fix_action_log
-```
-
-You can read more about this change on PR [#15390](https://github.com/decidim/decidim/pull/15390).
+You can read more about this change on PR [#17520](https://github.com/decidim/decidim/pull/17520).
 
 ### 3.2. [[TITLE OF THE ACTION]]
 
@@ -125,7 +118,15 @@ You can read more about this change on PR [#XXXX](https://github.com/decidim/dec
 
 ## 5. Changes in APIs
 
-### 5.1. [[TITLE OF THE CHANGE]]
+### 5.1. `initFoundation` Javascript function has been removed
+
+In order to fully remove Foundation CSS, we need to remove any dependency to Foundation-Sites. In the latest releases we started to rely more on Stimulus controllers and plain Javascript.
+
+If you are a developer or implementer, and you are upgrading your module or application, make sure that you do not have `foundation-sites` related code.
+
+You can read more about this change on PR [#16889](https://github.com/decidim/decidim/pull/16889).
+
+### 5.2. [[TITLE OF THE CHANGE]]
 
 In order to [[REASONING (e.g. improve the maintenance of the code base)]] we have changed...
 
@@ -141,4 +142,4 @@ You need to change it to:
 ```ruby
 # Explain the usage of the API as it is in the new version
 result = 1 + 1 if after
-        ```
+```

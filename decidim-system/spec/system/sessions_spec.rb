@@ -9,6 +9,16 @@ describe "Sessions" do
                    password_confirmation: "decidim123456789")
   end
 
+  around do |example|
+    previous_value = ActionController::Base.allow_forgery_protection
+    ActionController::Base.allow_forgery_protection = true
+    begin
+      example.run
+    ensure
+      ActionController::Base.allow_forgery_protection = previous_value
+    end
+  end
+
   before do
     visit decidim_system.root_path
   end
@@ -21,7 +31,7 @@ describe "Sessions" do
         find("*[type=submit]").click
       end
 
-      expect(page).to have_content("Dashboard")
+      expect(page).to have_text("Dashboard")
     end
   end
 
@@ -33,7 +43,24 @@ describe "Sessions" do
         find("*[type=submit]").click
       end
 
-      expect(page).to have_no_content("Dashboard")
+      expect(page).to have_no_text("Dashboard")
+    end
+  end
+
+  context "when the csrf token is expired" do
+    it "displays a retry error message" do
+      within ".new_admin" do
+        fill_in :admin_email, with: "admin@example.org"
+        fill_in :admin_password, with: "decidim123456789"
+      end
+
+      expire_browser_session do
+        within ".new_admin" do
+          find("*[type=submit]").click
+        end
+
+        expect(page).to have_text("Unable to verify your request. Please retry.")
+      end
     end
   end
 end

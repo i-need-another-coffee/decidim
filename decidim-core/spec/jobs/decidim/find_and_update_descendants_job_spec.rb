@@ -30,13 +30,20 @@ describe Decidim::FindAndUpdateDescendantsJob do
       expect(proposal.searchable_resources).not_to be_empty
       expect(post.searchable_resources).not_to be_empty
 
-      # rubocop:disable Rails/SkipsModelValidations:
+      # rubocop:disable-next Rails/SkipsModelValidations:
       participatory_process.update_column(:published_at, nil)
-      # rubocop:enable Rails/SkipsModelValidations:
 
       expect do
         Decidim::FindAndUpdateDescendantsJob.perform_now(participatory_process)
       end.to have_enqueued_job(Decidim::UpdateSearchIndexesJob).exactly(:twice)
+    end
+
+    context "when recursion reaches max depth" do
+      it "does not update search indexes" do
+        expect do
+          Decidim::FindAndUpdateDescendantsJob.perform_now(participatory_process, described_class::MAX_DEPTH)
+        end.not_to have_enqueued_job(Decidim::UpdateSearchIndexesJob)
+      end
     end
 
     context "when participatory process has no descendants" do

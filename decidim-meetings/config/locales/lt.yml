@@ -121,7 +121,6 @@ lt:
           success: Susitikimas dubliuotas.
         new:
           copy: Kopijuoti
-          title: Dubliuoti susirinkimą
     components:
       meetings:
         actions:
@@ -132,7 +131,6 @@ lt:
           global:
             announcement: Pranešimas
             comments_enabled: Komentarai aktyvuoti
-            comments_max_length: Maksimalus komentarų ilgis (numatytoji vertė – 0)
             creation_enabled_for_participants: Dalyviai gali sukurti susitikimus
             default_registration_terms: Numatytos registracijos sąlygos
             enable_pads_creation: Leisti bendrų dokumentų kūrimą
@@ -258,13 +256,10 @@ lt:
             success: Dalyvis pakviestas dalyvauti susirinkime.
           form:
             attendee_type: Dalyvio tipas
-            existing_user: Egzistuojantis dalyvis
             invite: Pakviesti
             invite_explanation: Dalyvis bus pakviestas dalyvauti ne tik susirinkime, bet ir organizacijoje.
-            non_user: Neegzistuojantis dalyvis
             select_user: Pasirinkti dalyvį
           index:
-            invite_attendee: Kviesti dalyvį
             invites: Pakvietimai
             registrations_disabled: Negalite kviesti dalyvio, nes registracija išjungta.
         meeting_closes:
@@ -338,7 +333,6 @@ lt:
               other: Yra %{count} registracijų.
             reserved_slots_help: Palikite 0, jei vietos nerezervuotos.
             reserved_slots_less_than: Turi būti ne didesnis kaip %{count} arba jam lygus
-            title: Registracijos
           update:
             invalid: Išsaugant registracijos nuostatas iškilo problema.
             success: Susirinkimo registracijų nuostatos išsaugotos.
@@ -525,7 +519,6 @@ lt:
           fields:
             closed: Uždaryta
             end_time: Pabaigos data
-            id: ID
             map: Žemėlapis
             official_meeting: Oficialus susirinkimas
             start_time: Pradžios data

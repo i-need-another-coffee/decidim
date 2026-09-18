@@ -7,8 +7,8 @@ describe "Admin creates proposals" do
   let(:creation_enabled?) { true }
   let(:new_title) { "This is my proposal new title" }
   let(:new_body) { "This is my proposal new body" }
-  let(:image_filename) { "city2.jpeg" }
-  let(:image_path) { Decidim::Dev.asset(image_filename) }
+  let(:attached_image_filename) { "city2.jpeg" }
+  let(:attached_image_path) { Decidim::Dev.asset(attached_image_filename) }
   let(:document_filename) { "Exampledocument.pdf" }
   let(:document_path) { Decidim::Dev.asset(document_filename) }
 
@@ -33,8 +33,8 @@ describe "Admin creates proposals" do
 
     fill_in_i18n :proposal_title, "#proposal-title-tabs", en: new_title
     fill_in_i18n_editor :proposal_body, "#proposal-body-tabs", en: new_body
-    dynamically_attach_file(:proposal_documents, image_path)
-    dynamically_attach_file(:proposal_documents, document_path)
+    dynamically_attach_file(:proposal_attachments, attached_image_path)
+    dynamically_attach_file(:proposal_attachments, document_path)
 
     click_on("Create")
     within "tr", text: translated_attribute(new_title) do
@@ -42,8 +42,8 @@ describe "Admin creates proposals" do
       click_on "Edit proposal"
     end
 
-    expect(page).to have_content(image_filename)
-    expect(page).to have_content(document_filename)
+    expect(page).to have_text(attached_image_filename)
+    expect(page).to have_text(document_filename)
   end
 
   it "displays the correct version link", versioning: true do
@@ -53,7 +53,7 @@ describe "Admin creates proposals" do
     fill_in_i18n :proposal_title, "#proposal-title-tabs", en: new_title
     fill_in_i18n_editor :proposal_body, "#proposal-body-tabs", en: new_body
     click_on("Create")
-    expect(page).to have_admin_callout("successfully")
+    expect(page).to have_callout("Proposal successfully created.")
 
     path = resource_locator(Decidim::Proposals::Proposal.last).path
 

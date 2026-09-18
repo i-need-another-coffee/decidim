@@ -179,7 +179,6 @@ fi-pl:
       front_page_link: Siirry etusivulle
       logo: "Organisaation %{organization} virallinen logo"
       opens_in_new_tab: Avautuu uuteen välilehteen
-      secondary_menu: Toissijainen valikko
       skip_button: Siirry sisältöön
     account:
       blocked: Tämä käyttäjätili on estetty, koska käyttäjä ei noudattanut käyttöehtoja
@@ -198,6 +197,7 @@ fi-pl:
         success: Tilisi poistaminen onnistui.
       download_your_data_export:
         export_expired: Vientitiedosto on vanhentunut. Yritä luoda uusi vienti.
+        export_not_found: Vientitiedosto, jota yritit ladata, ei ole enää saatavilla tai sinulla ei ole oikeutta ladata sitä
         file_no_exists: Tiedostoa ei ole olemassa
         notice: Tietojen vienti on käynnissä. Saat sähköpostiviestin, kun se valmistuu.
       email_change:
@@ -265,6 +265,10 @@ fi-pl:
         results: tulokset
       impersonation_log:
         manage: "%{user_name} hallinnoi käyttäjää %{resource_name}, koska %{reason}"
+      member:
+        create: "%{user_name} kutsui henkilön %{resource_name} jäseneksi"
+        create_via_csv: "%{user_name} kutsui henkilön %{resource_name} jäseneksi CSV-tuonnin kautta"
+        delete: "%{user_name} poisti osallistujan %{resource_name} jäsenyyden"
       moderation:
         bulk_hide: "%{user_name} piilotti %{reported_count} kohdetta"
         bulk_unhide: "%{user_name} palautti %{reported_count} kohdetta näkyviin"
@@ -283,10 +287,6 @@ fi-pl:
       organization:
         update: "%{user_name} päivitti organisaation asetuksia"
         update_external_domain: "%{user_name} päivitti organisaation ulkoisia verkkotunnuksia"
-      participatory_space_private_user:
-        create: "%{user_name} kutsui %{resource_name} yksityiseksi käyttäjaksi"
-        create_via_csv: "%{user_name} kutsui yksityisen osallistujan %{resource_name} CSV-tuonnin kautta"
-        delete: "%{user_name} poisti yksityisen käyttäjän %{resource_name}"
       scope:
         create: "%{user_name} loi %{resource_name} teeman"
         create_with_parent: "%{user_name} loi %{resource_name} teeman %{parent_scope} teeman alle"
@@ -419,10 +419,10 @@ fi-pl:
       withdraw:
         error: Muutoksen peruminen epäonnistui.
         success: Muutos on peruutettu.
-      wizard_step_form:
+      wizard:
         steps:
           '1': Luo muutos
-          '2': Julkaise muutoksesi
+          '2': Julkaise muutos
     anonymous_user: Anonyymi
     application:
       document:
@@ -578,6 +578,7 @@ fi-pl:
     contact: Ota yhteyttä
     content_blocks:
       announcement:
+        body: Ilmoituksen teksti
         name: Ilmoitus
       cta:
         name: Kuva, teksti ja toimintopainike (Call to Action)
@@ -588,8 +589,6 @@ fi-pl:
         description: Kuvaus
       footer_sub_hero:
         name: Alaosion esialueen banneri
-      global_menu:
-        name: Päänavigaatio
       hero:
         name: Pääkuva ja CTA-painike (call to action)
       hero_settings_form:
@@ -662,6 +661,13 @@ fi-pl:
           all: Kaikki
         filter_taxonomy_values:
           all: Kaikki
+    delete_user_mailer:
+      delete:
+        body_1: Tilisi on poistettu käytöstä ja se ei ole enää käytettävissä. Henkilötietosi on tarkoitus poistaa pysyvästi tietojen säilyttämiskäytäntöjemme mukaisesti.
+        body_2: Turvallisuussyistä tietyt vahvistuksiin liittyvät tiedot säilytetään. Jos luot uuden tilin ja vahvistat sen uudestaan, tiedot voidaan liittää uuteen tiliisi.
+        greetings_html: Terveisin,<br/><a href="%{organization_url}">%{organization_name}</a>
+        hello: Hei %{username},
+      subject: Tilisi on poistettu
     devise:
       omniauth_registrations:
         create:
@@ -770,13 +776,13 @@ fi-pl:
           id: Ilmoituksen yksilöivä tunniste
           resource_type: Ilmoituksen kohteen tyyppi
           updated_at: Ilmoituksen viimeisimmän päivityksen ajankohta
-        participatory_space_private_users:
-          created_at: Yksityisen käyttäjän luontiaika
-          id: Yksityisen käyttäjän yksilöivä tunniste
-          privatable_to: Mihin osallistumistilaan tämä yksityinen käyttäjä kuuluu
-          published: Onko yksityinen käyttäjä julkaistu vai ei
-          role: Yksityisen käyttäjän rooli
-          updated_at: Yksityisen käyttäjän viimeisimmän päivityksen ajankohta
+        participatory_space_members:
+          created_at: Jäsenen luontiaika
+          id: Jäsenen yksilöivä tunniste
+          participatory_space: Mihin osallistumistilaan tämä jäsen kuuluu
+          published: Onko jäsen julkaistu vai ei
+          role: Jäsenen rooli
+          updated_at: Jäsenen viimeisimmän päivityksen ajankohta
         reports:
           created_at: Ilmoituksen luontiaika
           details: Ilmoituksen tiedot
@@ -786,7 +792,7 @@ fi-pl:
           reason: Ilmoituksen syy
           updated_at: Ilmoituksen viimeisimmän päivityksen ajankohta
         users:
-          about: Käyttäjätilin profiilin kuvaus
+          about: Osallistujan profiilikuvaus
           accepted_tos_version: Käyttäjän palvelun käyttöehtojen hyväksymisaika
           admin: Onko tämä käyttäjä hallintakäyttäjä
           confirmation_sent_at: Käyttäjätilin vahvistusviestin lähetysaika
@@ -852,7 +858,7 @@ fi-pl:
       files:
         file_cannot_be_processed: Tiedostoa ei voida käsitellä
         file_resolution_too_large: Tiedoston resoluutio on liian suuri
-        not_inside_organization: Tiedostoa ei ole liitetty mihinkään organisaatioon
+        not_inside_organization: Tiedostoa ei ole liitetty mihinkään organisaatioon.
       internal_server_error:
         copied: Teksti kopioitu!
         copy_error_message_clarification: Kopioi virheviesti leikepöydälle
@@ -875,13 +881,13 @@ fi-pl:
           affected_user:
             email_intro: 'Kohdetta %{amendable_title} koskeva muutos on hyväksytty. Näet sen tältä sivulta:'
             email_outro: Tämä ilmoitus on lähetetty sinulle, koska olet luonut kohteen %{amendable_title}.
-            email_subject: Kohdetta %{amendable_title} koskeva muutos on hyväksytty käyttäjältä %{emendation_author_nickname}
-            notification_title: <a href="%{emendation_author_path}">%{emendation_author_nickname}</a> luomalla <a href="%{emendation_path}">tarkistuksella</a> hyväksyttiin <a href="%{amendable_path}">%{amendable_title}</a>.
+            email_subject: Muutos hyväksytty kohteelle %{amendable_title} osallistujalta %{emendation_author_name}
+            notification_title: Osallistujan <a href="%{emendation_author_path}">%{emendation_author_name}</a> luoma <a href="%{emendation_path}">muutos</a> hyväksyttiin kohteelle <a href="%{amendable_path}">%{amendable_title}</a>.
           follower:
             email_intro: 'Kohdetta %{amendable_title} koskeva muutos on hyväksytty. Näet sen tältä sivulta:'
             email_outro: Tämä ilmoitus on lähetetty sinulle, koska seuraat %{amendable_title}. Voit lopettaa ilmoitusten vastaanottamisen edellä esitetyn linkin kautta.
-            email_subject: Kohdetta %{amendable_title} koskeva muutos on hyväksytty käyttäjältä %{emendation_author_nickname}
-            notification_title: <a href="%{emendation_author_path}">%{emendation_author_nickname}</a> luomalla <a href="%{emendation_path}">tarkistuksella</a> hyväksyttiin <a href="%{amendable_path}">%{amendable_title}</a>.
+            email_subject: Muutos hyväksytty kohteelle %{amendable_title} osallistujalta %{emendation_author_name}
+            notification_title: Osallistujan <a href="%{emendation_author_path}">%{emendation_author_name}</a> luoma <a href="%{emendation_path}">muutos</a> hyväksyttiin kohteelle <a href="%{amendable_path}">%{amendable_title}</a>.
         amendment_created:
           affected_user:
             email_intro: 'Uusi muutos on luotu kohteelle %{amendable_title}. Näet sen tältä sivulta:'
@@ -897,29 +903,29 @@ fi-pl:
           affected_user:
             email_intro: 'Kohdetta %{amendable_title} koskeva muutos on korostettu omaksi %{amendable_type} -kohteeksi. Näet sen tältä sivulta:'
             email_outro: Tämä ilmoitus on lähetetty sinulle, koska olet luonut kohteen %{amendable_title}.
-            email_subject: Muutos %{emendation_author_nickname} on julkaistu uutena %{amendable_type}
-            notification_title: 'A <a href="%{emendation_path}">hylätty tarkistus</a> <a href="%{amendable_path}">%{amendable_title}</a> on julkaistu uudella %{amendable_type} : llä <a href="%{emendation_author_path}">%{emendation_author_nickname}</a>.'
+            email_subject: Osallistujan %{emendation_author_name} laatima muutos on julkaistu uutena %{amendable_type} -kohteena
+            notification_title: <a href="%{emendation_path}">Hylätty muutos</a> kohteelle <a href="%{amendable_path}">%{amendable_title}</a> on julkaistu uutena %{amendable_type} -kohteena osallistujan <a href="%{emendation_author_path}">%{emendation_author_name}</a> toimesta.
           follower:
             email_intro: 'Kohdetta %{amendable_title} koskeva muutos on korostettu omaksi %{amendable_type} -kohteeksi. Näet sen tältä sivulta:'
             email_outro: Tämä ilmoitus on lähetetty sinulle, koska seuraat kohdetta %{amendable_title}. Voit lopettaa ilmoitusten vastaanottamisen edellä esitetyn linkin kautta.
-            email_subject: Muutos %{emendation_author_nickname} on julkaistu uutena %{amendable_type}
-            notification_title: 'A <a href="%{emendation_path}">hylätty tarkistus</a> <a href="%{amendable_path}">%{amendable_title}</a> on julkaistu uudella %{amendable_type} : llä <a href="%{emendation_author_path}">%{emendation_author_nickname}</a>.'
+            email_subject: Osallistujan %{emendation_author_name} laatima muutos on julkaistu uutena %{amendable_type} -kohteena
+            notification_title: <a href="%{emendation_path}">Hylätty muutos</a> kohteelle <a href="%{amendable_path}">%{amendable_title}</a> on julkaistu uutena %{amendable_type} -kohteena osallistujan <a href="%{emendation_author_path}">%{emendation_author_name}</a> toimesta.
         amendment_rejected:
           affected_user:
             email_intro: 'Kohdetta %{amendable_title} koskeva muutos on hylätty. Näet sen tältä sivulta:'
             email_outro: Olet saanut tämän ilmoituksen, koska olet kirjailija %{amendable_title}.
-            email_subject: Kohdetta %{amendable_title} koskeva muutos on hylätty käyttäjältä %{emendation_author_nickname}
-            notification_title: <a href="%{emendation_author_path}">%{emendation_author_nickname}</a> llä luotu <a href="%{emendation_path}">tarkistusta</a> hylättiin <a href="%{amendable_path}">%{amendable_title}</a>.
+            email_subject: Kohdetta %{amendable_title} koskeva muutos on hylätty käyttäjältä %{emendation_author_name}
+            notification_title: Osallistujan <a href="%{emendation_author_path}">%{emendation_author_name}</a> laatima <a href="%{emendation_path}">muutos</a> hylättiin kohteelle <a href="%{amendable_path}">%{amendable_title}</a>.
           follower:
             email_intro: 'Kohdetta %{amendable_title} koskeva muutos on hylätty. Näet sen tältä sivulta:'
             email_outro: Tämä ilmoitus on lähetetty sinulle, koska seuraat kohdetta %{amendable_title}. Voit lopettaa ilmoitusten vastaanottamisen edellä esitetyn linkin kautta.
-            email_subject: Kohdetta %{amendable_title} koskeva muutos on hylätty käyttäjältä %{emendation_author_nickname}
-            notification_title: <a href="%{emendation_author_path}">%{emendation_author_nickname}</a> llä luotu <a href="%{emendation_path}">tarkistusta</a> hylättiin <a href="%{amendable_path}">%{amendable_title}</a>.
+            email_subject: Kohdetta %{amendable_title} koskeva muutos on hylätty osallistujalta %{emendation_author_name}
+            notification_title: Osallistujan <a href="%{emendation_author_path}">%{emendation_author_name}</a> laatima <a href="%{emendation_path}">muutos</a> hylättiin kohteelle <a href="%{amendable_path}">%{amendable_title}</a>.
         emendation_promoted:
           follower:
             email_intro: 'Muutos on julkaistu kohteelle %{amendable_title}. Näet sen tältä sivulta:'
             email_outro: Tämä ilmoitus on lähetetty sinulle, koska olet laatinut kohteen %{amendable_title}.
-            email_subject: Laatijan %{emendation_author_nickname} muutos on julkaistu uutena kohteena %{amendable_type}
+            email_subject: Osallistujan %{emendation_author_name} laatima muutos on julkaistu uutena %{amendable_type} -kohteena
       attachments:
         attachment_created:
           email_intro: 'Uusi asiakirja on lisätty kohteeseen %{resource_title}. Voit nähdä sen täältä:'
@@ -952,6 +958,18 @@ fi-pl:
         notification_body: Olemme muuttaneet nimimerkkien sääntöjä varmistaaksemme, että alustalla ei ole useampaa tiliä samalla nimimerkillä eri tavalla kirjoitettuna. <br/> Tilisi on luotu toisen samaa nimimerkkiä käyttäneen henkilön jälkeen, joten olemme vaihtaneet nimimerkkiäsi automaattisesti. Halutessasi voit vaihtaa nimimerkkiäsi <a href="%{link_to_account_settings}">tilisi asetuksista</a>.
       notification_event:
         notification_title: Kohteessa <a href="%{resource_path}">%{resource_title}</a> on uutta toimintaa.
+      participatory_space:
+        member_added:
+          published:
+            email_intro: Sinut on lisätty osallistumistilan jäseneksi.
+            email_outro: Tämä viesti on lähetetty sinulle, koska hallintakäyttäjä lisäsi sinut osallistumistilaan <a href="%{resource_url}">%{resource_title}</a>. Mikäli tämä osallistumistila on rajattu ainoastaan jäsenille, pääset kyseiseen osallistumistilaan omalla käyttäjätililläsi.<br> Profiilisi näytetään osallistumistilan <a href="%{members_page}">jäsenlistauksessa</a>.
+            email_subject: Sinulla on nyt pääsy osallistumistilaan %{resource_title}.
+            notification_title: Sinulla on nyt pääsy osallistumistilaan <a href="%{resource_url}">%{resource_title}</a>.
+          unpublished:
+            email_intro: Sinut on lisätty osallistumistilan jäseneksi.
+            email_outro: Tämä viesti on lähetetty sinulle, koska hallintakäyttäjä lisäsi sinut osallistumistilaan <a href="%{resource_url}">%{resource_title}</a>. Mikäli tämä osallistumistila on rajattu ainoastaan jäsenille, pääset kyseiseen osallistumistilaan omalla käyttäjätililläsi.
+            email_subject: Sinulla on nyt pääsy osallistumistilaan %{resource_title}.
+            notification_title: Sinulla on nyt pääsy osallistumistilaan <a href="%{resource_url}">%{resource_title}</a>.
       reports:
         parent_hidden:
           email_intro: |-
@@ -970,24 +988,24 @@ fi-pl:
           notification_title: |-
             Hallintakäyttäjä poisti luomasi kohteen %{resource_type}, koska se on ilmoitettu asiattomana syyllä "%{report_reasons}".</br><i>%{resource_content}</i>
       resource_liked:
-        email_intro: '%{liker_name} %{liker_nickname}, jota seuraat, on juuri tykännyt kohteesta "%{resource_title}" ja uskomme, että tämä voi kiinnostaa sinua. Tutustu tykättyyn kohteeseen ja osallistu:'
-        email_outro: Tämä ilmoitus on lähetetty sinulle, koska olet seuraat käyttäjää %{liker_nickname}. Voit lopettaa ilmoitusten vastaanottamisen edellä esitetyn linkin kautta.
-        email_subject: "%{liker_nickname} teki uuden tykkäyksen"
-        notification_title: <a href="%{liker_path}">%{liker_name} %{liker_nickname}</a> tykkäsi kohteesta <a href="%{resource_path}">%{resource_title}</a> (%{resource_type}).
+        email_intro: 'Seuraamasi osallistuja %{liker_name} tykkäsi kohteesta "%{resource_title}" ja uskomme, että tämä voi kiinnostaa sinua. Tutustu tykättyyn asiaan ja osallistu:'
+        email_outro: Tämä ilmoitus on lähetetty sinulle, koska olet seuraat käyttäjää %{liker_name}. Voit lopettaa ilmoitusten vastaanottamisen edellä esitetyn linkin kautta.
+        email_subject: "%{liker_name} lisäsi uuden tykkäyksen"
+        notification_title: <a href="%{liker_path}">%{liker_name} </a> tykkäsi kohteesta <a href="%{resource_path}">%{resource_title}</a> %{resource_type}.
       resources:
         soft_deleted:
           notification_title: Ylläpitäjä poisti kohteen "%{resource_type}" "%{resource_title}".
       users:
         profile_updated:
-          email_intro: Seuraamasi käyttäjän %{name} (%{nickname}) <a href="%{resource_url}">profiilisivua</a> on päivitetty.
-          email_outro: Tämä ilmoitus on lähetetty sinulle, koska seuraat käyttäjää %{nickname}. Voit lopettaa ilmoitusten vastaanottamisen edellä esitetyn linkin kautta.
-          email_subject: "%{nickname} päivitti profiiliaan"
-          notification_title: Seuraamasi käyttäjän %{name} (%{nickname}) <a href="%{resource_path}">profiilisivua</a> on päivitetty.
+          email_intro: Seuraamasi osallistujan %{name} <a href="%{resource_url}">profiilisivua</a> on päivitetty.
+          email_outro: Tämä ilmoitus on lähetetty sinulle, koska olet seuraat osallistujaa %{name}. Voit lopettaa ilmoitusten vastaanottamisen edellä esitetyn linkin kautta.
+          email_subject: "%{name} päivitti profiiliaan"
+          notification_title: Seuraamasi osallistujan %{name} <a href="%{resource_path}">profiilisivua</a> on päivitetty.
         user_officialized:
-          email_intro: Osallistuja %{name} (%{nickname}) on virallistettu.
+          email_intro: Osallistuja %{name} on virallistettu.
           email_outro: Tämä ilmoitus on lähetetty sinulle, koska olet tämän organisaation hallintakäyttäjä.
           email_subject: "%{name} on virallistettu"
-          notification_title: Osallistuja %{name} (%{nickname}) on virallistettu.
+          notification_title: Osallistuja %{name} on virallistettu.
     export_mailer:
       download_your_data_export:
         click_button_html: Napsauta seuraavaa linkkiä ladataksesi tietosi.<br/>Tiedosto on ladattavissa %{date} saakka.
@@ -1057,6 +1075,9 @@ fi-pl:
           explanation: 'Kuvan ohjeistus:'
           message_1: Käytä mieluiten vaakasuuntaista kuvaa, jossa ei ole tekstiä.
           message_2: Palvelu rajaa kuvaa.
+        import_file:
+          explanation: 'Tuontitiedoston ohjeistus:'
+          message_1: Tiedoston on oltava JSON-muotoinen, joka on ladattu vientitoiminnon kautta.
       file_validation:
         allowed_file_extensions: 'Sallitut tiedostopäätteet: %{extensions}'
         max_file_dimension: 'Tiedoston enimmäismitat: %{resolution} pikseliä'
@@ -1150,6 +1171,7 @@ fi-pl:
         create_with_space: "%{user_name} loi %{resource_name} tilassa %{space_name}"
         delete: "%{user_name} poisti %{resource_name}"
         delete_with_space: "%{user_name} poisti %{resource_name} tilassa %{space_name}"
+        publish: "%{user_name} julkaisi kohteen %{resource_name}"
         publish_with_space: "%{user_name} julkaisi %{resource_name} osallistumistilassa %{space_name}"
         unknown_action: "%{user_name} suoritti toimenpiteen koskien kohdetta %{resource_name}"
         unknown_action_with_space: "%{user_name} suoritti toimenpiteen koskien kohdetta %{resource_name} tilassa %{space_name}"
@@ -1160,6 +1182,12 @@ fi-pl:
         update_permissions_with_space: "%{user_name} päivitti kohteen %{resource_name} oikeuksia tilassa %{space_name}"
         update_with_space: "%{user_name} päivitti %{resource_name} tilassa %{space_name}"
       value_types:
+        access_mode_presenter:
+          access_modes:
+            open: Avoimet
+            restricted: Rajoitetut
+            transparent: Läpinäkyvät
+          not_found: Pääsyoikeuksien tilaa %{id} ei löytynyt
         area_presenter:
           not_found: 'Aluetta ei löytynyt tietokannasta (ID: %{id})'
         area_type_presenter:
@@ -1178,11 +1206,12 @@ fi-pl:
       dynamic:
         screen_reader_explanation: Seuraavassa elementissä on kartta, joka esittää tämän sivun tietueet karttapisteinä. Elementtiä voi käyttää ruudunlukijalla, mutta se voi olla vaikeaselkoinen.
         skip_button: Ohita kartta
+        zoom_in: Lähennä
+        zoom_out: Loitonna
       static:
         latlng_text: 'leveysaste: %{latitude}, pituusaste: %{longitude}'
         map_service_brand: OpenStreetMap
     menu:
-      help: Tietoa
       home: Etusivu
     messaging:
       conversation_mailer:
@@ -1208,7 +1237,6 @@ fi-pl:
         create:
           error: Keskustelun aloittaminen epäonnistui. Yritä myöhemmin uudelleen.
         error_modal:
-          close: Sulje ikkuna
           correct_errors: Korjaa virheet ja yritä uudestaan.
           intro: 'Viestisi sisältää seuraavia virheitä:'
           ok: OK
@@ -1291,11 +1319,13 @@ fi-pl:
         same_language: Sisältö on lisätty toivomallasi kielellä (%{language}), minkä takia tässä viestissä ei näytetä automaattista käännöstä.
         translated_text: 'Automaattisesti käännetty teksti:'
     notifications:
-      action_error: Ilmoitusasetusten päivitys epäonnistui.
+      action_error: Ilmoitusasetusten päivittäminen epäonnistui.
       no_notifications: Ei vielä ilmoituksia.
       show:
+        deleted: Sisällön laatija on poistanut tämän sisällön.
         missing_event: Hups, tämä ilmoitus kuuluu kohteeseen, joka ei ole enää käytettävissä. Voit merkitä sen luetuksi.
-        moderated: Sisältö moderoitu
+        moderated: Moderoija on piilottanut tämän sisällön.
+        not_available: Tämä ilmoitus kuuluu kohteeseen, joka ei ole enää käytettävissä. Voit merkitä sen luetuksi.
     notifications_digest_mailer:
       header:
         daily: Päivittäinen ilmoitusyhteenveto
@@ -1332,6 +1362,7 @@ fi-pl:
         own_activity: Oma toiminta, kuten omia ehdotuksia koskevat kommentit tai maininnat
         push_notifications: Push-ilmoitukset
         push_notifications_reminder: Mikäli haluat vastaanottaa push-ilmoituksia alustalta, sinun on sallittava ne ensin selaimesi asetuksista tälle sivustolle.
+        push_notifications_unsupported_browser: Selaimesi ei ole tuettu.
         receive_notifications_about: Haluan saada ilmoituksia
         update_notifications_settings: Tallenna muutokset
       update:
@@ -1447,9 +1478,9 @@ fi-pl:
           title: Miten nämä tiedostot avataan ja miten niiden kanssa työskennellään?
         license:
           body_1_html: '%{organization_name} -palvelun tietokanta on lisensoitu %{link_database} -lisenssillä. Kaikki tietokannan sisällöt on lisensoitu %{link_contents} -lisenssillä.'
-          license_contents_link: https://opendatacommons.org/licenses/dbcl/1-0/
+          license_contents_link: https://opendatacommons.org/licenses/dbcl/1.0/
           license_contents_name: Tietokannan sisällön lisenssi
-          license_database_link: https://opendatacommons.org/licenses/dbcl/1-0/
+          license_database_link: https://opendatacommons.org/licenses/odbl/1.0/
           license_database_name: Avoimien tietojen lisenssi
           title: Lisenssi
         title: Avoin data
@@ -1472,7 +1503,7 @@ fi-pl:
         footer_sub_hero:
           footer_sub_hero_body_html: Rakennetaan entistä avoimempi, läpinäkyvämpi ja yhteistyökykyisempi yhteiskunta.<br /> Liity, osallistu ja päätä.
           footer_sub_hero_headline: Tervetuloa yhteisölliseen osallisuuspalveluun %{organization}.
-          register: Rekisteröidy
+          register: Luo tili
         hero:
           participate: Osallistu
           participate_title: Osallistu alustan prosesseihin
@@ -1480,7 +1511,7 @@ fi-pl:
         statistics:
           headline: Tilastot
         sub_hero:
-          register: Rekisteröidy
+          register: Luo tili
           register_title: Luo tili
       index:
         standalone_pages: Sivut
@@ -1517,13 +1548,22 @@ fi-pl:
         log_in: kirjaudu sisään
         never_logged_in: et ole koskaan kirjautunut palveluun
         subject: Varoitus passiivisesta käyttäjätilistä
-      removal_notification:
-        body: Tilisi palvelussa %{organization_name} on poistettu, koska tiliä ei ole käytetty pitkään aikaan.
-        greetings_html: |
-          Terveisin,<br>
-          %{organization_name}
-        hello: Hei %{username},
-        subject: Käyttämättä ollut tili on poistettu
+    participatory_space:
+      labels:
+        reference: Tilan viite
+        restricted: Rajoitettu tila
+        transparent: Läpinäkyvä tila
+      pages:
+        user_profile:
+          member_of:
+            member_of: Jäsen ryhmässä
+    participatory_space_members:
+      index:
+        members: Jäsenet
+    participatory_spaces:
+      show:
+        restricted_space: Tämä on rajattu osallistumistila. Ainoastaan jäsenet ja hallintakäyttäjät näkevät tämän osallistumistilan ja voivat osallistua sen sisällä.
+        transparent_space: Tämä on läpinäkyvä osallistumistila. Kuka tahansa voi tarkastella osallistumistilan sisältöä, mutta ainoastaan osallistumistilan jäsenet ja hallintakäyttäjät voivat osallistua sen sisällä.
     passwords:
       update:
         error: Salasanan päivitys epäonnistui.
@@ -1671,6 +1711,8 @@ fi-pl:
       login_modal:
         please_log_in: Kirjaudu sisään
         sign_up: Luo tili
+      mentions:
+        search_prompt: Kirjoita etsiäksesi osallistujia
       mentions_modal:
         remove_recipient: Poista vastaanottaja %{name}
       progress: Edistyminen
@@ -1739,6 +1781,16 @@ fi-pl:
         instructions_title: "<strong>Mitä sinun tulee tehdä</strong>"
         set_password: Määritä salasana
         subject: Tärkeä ryhmäprofiilia koskeva päivitys
+      notify_user_group_patched:
+        body_1_html: Tämä viesti koskee tärkeää päivitystä käyttäjäryhmät-toiminnossa palvelussa %{organization_name}.
+        body_2_html: Yksinkertaistaaksemme organisaatioiden kokemusta tällä alustalla, käyttäjäryhmät poistetaan alustalta. Käyttäjäryhmäsi <strong>%{name}</strong> profiili on nyt muutettu tavalliseksi osallistujaprofiiliksi.
+        body_3_html: Jatkaaksesi ryhmätilisi käyttöä, sinun tulee asettaa sille sähköpostiosoite ja salasana. Huomioithan, että jokainen ryhmäsi jäsen saa tämän sähköpostiviestin. Mikäli haluat jatkaa tilin käyttöä, yhden ryhmän jäsenen tulee jatkossa hallinnoida tiliä ryhmän sähköpostiosoitteella ja hänen asettamallaan salasanalla.
+        greeting: Hei %{name},
+        instructions_1_html: 'Käytä seuraavia väliaikaisia tunnuksia kirjautuaksesi sisään: <br><br> Sähköpostiosoite: <strong>%{email}</strong> <br> Salasana <strong>%{password}</strong><br><br>'
+        instructions_2_html: Aseta uusi sähköpostiosoite ja salasana.
+        instructions_3_html: Älä jaa näitä tunnuksia kenenkään kanssa. Ainoastaan ryhmän hallinnoija voi jatkossa kirjautua palveluun tällä tilillä.
+        instructions_title_html: "<strong>Mitä sinun täytyy tehdä?</strong>"
+        subject: Tärkeä ryhmäprofiilia koskeva päivitys
     user_report_mailer:
       notify:
         body_1: Käyttäjä %{user} on ilmoitettu käyttäjän %{token} toimesta
@@ -1788,6 +1840,7 @@ fi-pl:
       send_paranoid_instructions: Jos sähköpostiosoitteesi on tietokannassamme, saat hetken kuluttua sähköpostiisi ohjeet tunnuksen vahvistamiseen.
     failure:
       already_authenticated: Olet jo kirjautunut sisään.
+      csrf_token: Pyyntöäsi ei voitu vahvistaa. Yritä uudelleen.
       inactive: Tilisi ei ole vielä aktivoitu.
       invalid: Virheellinen %{authentication_keys} tai salasana.
       invited: Sinulla on odottava kutsu, hyväksy se ja viimeistele tilin luominen.
@@ -1802,6 +1855,7 @@ fi-pl:
         nickname_help: Nimimerkkisi palvelussa %{organization}. Voi sisältää ainoastaan kirjaimia, numeroita sekä yhdysmerkkejä "-" ja alaviivoja "_".
         submit_button: Tallenna
         subtitle: Jos hyväksyt kutsun, aseta käyttäjänimesi ja salasana.
+        subtitle_no_password: Jos hyväksyt kutsun, aseta tilillesi nimi.
       invitation_removed: Kutsusi peruutettiin.
       invitation_token_invalid: Käyttämäsi kutsuavain ei ole voimassa!
       new:
@@ -1809,8 +1863,8 @@ fi-pl:
         submit_button: Lähetä kutsu
       no_invitations_remaining: Ei kutsuja jäljellä
       send_instructions: Kutsuviesti on lähetetty %{email}.
-      updated: Salasanasi on asetettu onnistuneesti. Olet nyt kirjautunut sisään.
-      updated_not_active: Salasanasi on asetettu onnistuneesti.
+      updated: Kutsun hyväksyminen onnistui. Olet nyt kirjautunut sisään.
+      updated_not_active: Kutsun hyväksyminen onnistui.
     mailer:
       confirmation_instructions:
         action: Vahvista käyttäjätilini
@@ -1830,16 +1884,16 @@ fi-pl:
           Jos et halua hyväksyä kutsua, jätä tämä viesti huomioimatta.<br />
           Sinulle ei luoda tiliä ennen kuin seuraat yllä olevaa linkkiä ja asetat käyttäjänimen sekä salasanan.
         invited_you_as_admin: "%{invited_by} on kutsunut sinut hallinnoimaan kohdetta %{application}. Voit hyväksyä sen alla olevan linkin kautta."
-        invited_you_as_private_user: "%{invited_by} on kutsunut sinut yksityiseksi käyttäjäksi %{application} -nimiseen palveluun. Voit hyväksyä kutsun alla olevan linkin kautta."
+        invited_you_as_member: "%{invited_by} on kutsunut sinut jäseneksi palveluun %{application}. Voit hyväksyä kutsun alla olevan linkin avulla."
         someone_invited_you: Joku on kutsunut sinut kohteeseen %{application}. Voit hyväksyä sen alla olevan linkin kautta.
         someone_invited_you_as_admin: Joku on kutsunut sinut ylläpitämään palvelua %{application}. Voit hyväksyä kutsun alla olevan linkin avulla.
-        someone_invited_you_as_private_user: Joku on kutsunut sinut yksityiseksi käyttäjäksi %{application} -nimiseen palveluun. Voit hyväksyä kutsun alla olevan linkin kautta.
+        someone_invited_you_as_member: Joku on kutsunut sinut jäseneksi palveluun %{application}. Voit hyväksyä kutsun alla olevan linkin kautta.
         subject: Kutsuohjeet
       invite_admin:
         subject: Sinut on kutsuttu hallinnoimaan palvelua %{organization}
       invite_collaborator:
         subject: Sinut on kutsuttu osallistumaan palvelussa %{organization}
-      invite_private_user:
+      invite_member:
         subject: Sinut on kutsuttu yksityiseen osallistumisprosessiin palvelussa %{organization}
       organization_admin_invitation_instructions:
         subject: Sinut on kutsuttu hallinnoimaan palvelua %{organization}
@@ -1870,8 +1924,8 @@ fi-pl:
         confirm_new_password: Vahvista uusi salasana
         new_password: Uusi salasana
         old_password_help: Vahvistaaksesi muutokset käyttäjätiliisi, anna nykyinen salasanasi.
-        password_help: "Tulee sisältää vähintään %{minimum_characters} merkkiä, ei voi olla yleisesti käytetty salasana (esim. 123456), eikä voi vastata nimimerkkiäsi tai sähköpostiosoitettasi."
-        password_help_admin: "Tulee sisältää vähintään %{minimum_characters} merkkiä, ei voi olla yleisesti käytetty salasana (esim. 123456), eikä voi vastata nimimerkkiäsi tai sähköpostiosoitettasi. On myös oltava eri salasana kuin edelliset salasanasi."
+        password_help: "Vähintään %{minimum_characters} merkkiä, vähintään 5 eri merkkiä, ei voi olla yleisesti käytetty salasana (esim. 123456), eikä voi vastata nimeäsi, nimimerkkiäsi, sähköpostiosoitettasi tai tämän palvelun verkko-osoitetta."
+        password_help_admin: "Vähintään %{minimum_characters} merkkiä, vähintään 5 eri merkkiä, ei voi olla yleisesti käytetty salasana (esim. 123456), eikä voi vastata nimeäsi, nimimerkkiäsi, sähköpostiosoitettasi tai tämän palvelun verkko-osoitetta. Et myöskään voi käyttää aikaisempia salasanojasi."
         title: Salasanan vaihto
       new:
         forgot_your_password: Unohditko salasanasi?
@@ -2039,7 +2093,6 @@ fi-pl:
   layouts:
     decidim:
       announcements:
-        view_less: Näytä vähemmän
         view_more: Lisätietoa
       data_consent:
         details:
@@ -2113,6 +2166,7 @@ fi-pl:
         confirm_title_close_ephemeral_session: Ennen kuin poistut tältä sivulta…
         log_in: Kirjaudu sisään
         main_menu: Päävalikko
+        mobile_account_greeting: Hei %{user_name}
         user_menu: Käyttäjän valikko
       impersonation_warning:
         close_session: Sulje istunto

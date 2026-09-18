@@ -1,14 +1,13 @@
-/* eslint-disable require-jsdoc, react/no-deprecated */
-
 import "entrypoints/decidim_api_graphiql.scss";
 // Styles from node_modules/graphiql/graphiql.css
 // It needs to be done in JS because postcss-import does not find files in node_modules/
-import "graphiql/graphiql.css";
+// eslint-disable-next-line import/no-unresolved
+import "graphiql/style.css";
 
 import React from "react";
 import { createRoot } from "react-dom/client";
 
-import { GraphiQL } from "graphiql"; // eslint-disable-line no-unused-vars
+import { GraphiQL } from "graphiql";
 import Configuration from "src/decidim/refactor/implementation/configuration"
 
 window.Decidim = window.Decidim || {};
@@ -37,6 +36,7 @@ if (parameters.variables) {
       null,
       2
     );
+    // eslint-disable-next-line no-unused-vars
   } catch (error) {
     // Do nothing, we want to display the invalid JSON as a string, rather
     // than present an error.
@@ -76,16 +76,18 @@ const graphQLFetcher = function (graphQLParams) {
     body: JSON.stringify(graphQLParams),
     credentials: "include"
   }).then(function (response) {
-    try {
-      return response.json();
-    } catch (error) {
-      return {
-        status: response.status,
-        message:
-          "The server responded with invalid JSON, this is probably a server-side error",
-        response: response.text()
-      };
-    }
+    return response.text().then(function (text) {
+      try {
+        return JSON.parse(text);
+      } catch {
+        return {
+          status: response.status,
+          message:
+            "The server responded with invalid JSON, this is probably a server-side error",
+          response: text
+        };
+      }
+    });
   });
 };
 
