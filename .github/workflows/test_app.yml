@@ -31,7 +31,7 @@ on:
       bullet_counter_cache:
         description: 'Enable bullet counter cache testing'
         required: false
-        default: false
+        default: true
         type: boolean
       # We prefer to disable this check instead of having to create more associations during the tests/seeds that
       # would make the testing/seeding performance worse
