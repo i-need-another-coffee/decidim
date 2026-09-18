@@ -66,7 +66,7 @@ module Decidim
         html_properties = html_properties.merge({ "aria-label" => I18n.t("decidim.author.likes.other") }).except("aria-hidden")
       end
 
-      href = Decidim.cors_enabled ? "" : asset_pack_path("media/images/remixicon.symbol.svg")
+      href = asset_pack_path("media/images/remixicon.symbol.svg")
 
       content_tag :svg, html_properties do
         content_tag :use, nil, "href" => "#{href}#ri-#{name}"

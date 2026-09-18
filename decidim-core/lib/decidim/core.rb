@@ -305,9 +305,6 @@ module Decidim
   # VAPID private key that will be used to sign the Push API requests.
   mattr_accessor :vapid_private_key, default: Decidim::Env.new("VAPID_PRIVATE_KEY", nil).to_s
 
-  # Having this on true will change the way the svg assets are being served.
-  mattr_accessor :cors_enabled, default: Decidim::Env.new("DECIDIM_CORS_ENABLED", "false").present?
-
   # Exposes a configuration option: The application available locales.
   mattr_accessor :available_locales, default: Decidim::Env.new("DECIDIM_AVAILABLE_LOCALES", %w(en bg ar ca cs da de el eo es es-MX es-PY et eu fa fi-pl
                                                                                                fi fr fr-CA ga gl hr hu id is it ja ko lb lt lv mt nl no pl pt pt-BR ro ru sk sl
