@@ -9,7 +9,7 @@ module Decidim
 
           protected
 
-          def query = Decidim::Initiative
+          def model = Decidim::Initiative
         end
       end
     end
