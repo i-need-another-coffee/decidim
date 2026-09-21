@@ -308,6 +308,11 @@ module Decidim
   # Having this on true will change the way the svg assets are being served.
   mattr_accessor :cors_enabled, default: Decidim::Env.new("DECIDIM_CORS_ENABLED", "false").present?
 
+  # Enables serving user-uploaded images in AVIF format with a JPEG/PNG
+  # fallback for browsers that do not support it. Set it to false on
+  # instances where libvips cannot encode AVIF.
+  mattr_accessor :avif_images_enabled, default: Decidim::Env.new("DECIDIM_AVIF_IMAGES_ENABLED", "true").present?
+
   # Exposes a configuration option: The application available locales.
   mattr_accessor :available_locales, default: Decidim::Env.new("DECIDIM_AVAILABLE_LOCALES", %w(en bg ar ca cs da de el eo es es-MX es-PY et eu fa fi-pl
                                                                                                fi fr fr-CA ga gl hr hu id is it ja ko lb lt lv mt nl no pl pt pt-BR ro ru sk sl
