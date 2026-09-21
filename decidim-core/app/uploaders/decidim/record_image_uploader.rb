@@ -5,11 +5,11 @@ module Decidim
   # limited content types than the defaults.
   class RecordImageUploader < ImageUploader
     def content_type_allowlist
-      %w(image/jpeg image/png image/webp)
+      %w(image/jpeg image/png image/webp image/avif)
     end
 
     def extension_allowlist
-      %w(jpeg jpg png webp)
+      %w(jpeg jpg png webp avif)
     end
   end
 end
