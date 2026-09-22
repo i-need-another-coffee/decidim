@@ -144,8 +144,7 @@ Decidim.register_component(:proposals) do |component|
   end
 
   component.register_stat :likes_count, priority: Decidim::StatsRegistry::LOW_PRIORITY do |components, start_at, end_at|
-    proposals = Decidim::Proposals::FilteredProposals.for(components, start_at, end_at).not_hidden
-    proposals.sum(:likes_count)
+    Decidim::Proposals::FilteredProposals.for(components, start_at, end_at).not_hidden.sum(:likes_count)
   end
 
   component.register_stat :comments_count,
@@ -153,8 +152,7 @@ Decidim.register_component(:proposals) do |component|
                           icon_name: "chat-1-line",
                           tooltip_key: "comments_count",
                           tag: :comments do |components, start_at, end_at|
-    proposals = Decidim::Proposals::FilteredProposals.for(components, start_at, end_at).published.not_hidden
-    proposals.sum(:comments_count)
+    Decidim::Proposals::FilteredProposals.for(components, start_at, end_at).published.not_hidden.sum(:comments_count)
   end
 
   component.register_stat :followers_count,
@@ -162,8 +160,7 @@ Decidim.register_component(:proposals) do |component|
                           icon_name: "user-follow-line",
                           tooltip_key: "followers_count_tooltip",
                           priority: Decidim::StatsRegistry::MEDIUM_PRIORITY do |components, start_at, end_at|
-    proposals_ids = Decidim::Proposals::FilteredProposals.for(components, start_at, end_at).published.not_hidden.pluck(:id)
-    Decidim::Follow.where(decidim_followable_type: "Decidim::Proposals::Proposal", decidim_followable_id: proposals_ids).count
+    Decidim::Proposals::FilteredProposals.for(components, start_at, end_at).published.not_hidden.sum(:follows_count)
   end
 
   component.exports :proposals do |exports|

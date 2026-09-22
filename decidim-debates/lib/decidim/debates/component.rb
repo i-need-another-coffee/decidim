@@ -53,8 +53,7 @@ Decidim.register_component(:debates) do |component|
                           icon_name: "user-follow-line",
                           tooltip_key: "followers_count_tooltip",
                           priority: Decidim::StatsRegistry::MEDIUM_PRIORITY do |components, _start_at, _end_at|
-    debates_ids = Decidim::Debates::Debate.where(component: components).not_hidden.pluck(:id)
-    Decidim::Follow.where(decidim_followable_type: "Decidim::Debates::Debate", decidim_followable_id: debates_ids).count
+    Decidim::Debates::Debate.where(component: components).not_hidden.sum(:follows_count)
   end
 
   component.register_stat :comments_count,
@@ -66,8 +65,7 @@ Decidim.register_component(:debates) do |component|
   end
 
   component.register_stat :likes_count, priority: Decidim::StatsRegistry::LOW_PRIORITY do |components, _start_at, _end_at|
-    debates_ids = Decidim::Debates::Debate.where(component: components).not_hidden.pluck(:id)
-    Decidim::Like.where(resource_id: debates_ids, resource_type: Decidim::Debates::Debate.name).count
+    Decidim::Debates::Debate.where(component: components).not_hidden.sum(:likes_count)
   end
 
   component.register_resource(:debate) do |resource|
