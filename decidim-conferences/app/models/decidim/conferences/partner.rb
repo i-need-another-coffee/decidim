@@ -7,6 +7,7 @@ module Decidim
       include Decidim::Traceable
       include Decidim::Loggable
       include Decidim::HasUploadValidations
+      include Decidim::GeneratesImageVariants
 
       TYPES = %w(main_promotor collaborator).freeze
 
@@ -16,6 +17,7 @@ module Decidim
 
       has_one_attached :logo
       validates_avatar :logo, uploader: Decidim::Conferences::PartnerLogoUploader
+      generates_image_variants_for :logo
 
       delegate :organization, to: :conference
 

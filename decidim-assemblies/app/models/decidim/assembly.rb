@@ -39,6 +39,7 @@ module Decidim
     include Decidim::FilterableResource
     include Decidim::SoftDeletable
     include Decidim::ShareableWithToken
+    include Decidim::GeneratesImageVariants
 
     CREATED_BY = %w(city_council public others).freeze
 
@@ -66,6 +67,7 @@ module Decidim
 
     has_one_attached :hero_image
     validates_upload :hero_image, uploader: Decidim::HeroImageUploader
+    generates_image_variants_for :hero_image
 
     validates :slug, uniqueness: { scope: :organization }
     validates :slug, presence: true, format: { with: Decidim::Assembly.slug_format }
