@@ -24,7 +24,7 @@ module Decidim
           # once all questions are copied, copy display conditions. The destination
           # questions are looked up by position (and their response options by body)
           # while cross referencing the conditions, so eager load them to avoid N+1s.
-          destination_questions = new_questionnaire.questions.includes(:response_options).to_a
+          destination_questions = new_questionnaire.questions.includes(:questionnaire, :response_options).to_a
           original_questions.zip(destination_questions).each do |original_question, new_question|
             copy_question_display_conditions(original_question, new_question, destination_questions)
           end
