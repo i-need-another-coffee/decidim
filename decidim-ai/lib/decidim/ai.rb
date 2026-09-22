@@ -7,5 +7,9 @@ module Decidim
     autoload :StrategyRegistry, "decidim/ai/strategy_registry"
     autoload :SpamDetection, "decidim/ai/spam_detection/spam_detection"
     autoload :Language, "decidim/ai/language/language"
+
+    def self.logger(message)
+      Rails.logger.info("[decidim-ai] #{message}")
+    end
   end
 end
