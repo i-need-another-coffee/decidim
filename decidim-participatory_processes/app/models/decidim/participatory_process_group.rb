@@ -7,6 +7,7 @@ module Decidim
     include Decidim::Traceable
     include Decidim::HasUploadValidations
     include Decidim::TranslatableResource
+    include Decidim::GeneratesImageVariants
 
     translatable_fields :title, :description, :developer_group, :local_area, :meta_scope, :participatory_scope,
                         :participatory_structure, :target
@@ -23,6 +24,7 @@ module Decidim
 
     has_one_attached :hero_image
     validates_upload :hero_image, uploader: Decidim::HeroImageUploader
+    generates_image_variants_for :hero_image
 
     searchable_fields({
                         participatory_space: :itself,

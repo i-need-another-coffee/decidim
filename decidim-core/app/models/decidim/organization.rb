@@ -11,6 +11,7 @@ module Decidim
     include Decidim::HasUploadValidations
     include Decidim::TranslatableResource
     include Decidim::ActsAsAuthor
+    include Decidim::GeneratesImageVariants
 
     SOCIAL_HANDLERS = [:twitter, :facebook, :instagram, :youtube, :github].freeze
     AVAILABLE_MACHINE_TRANSLATION_DISPLAY_PRIORITIES = %w(original translation).freeze
@@ -54,6 +55,7 @@ module Decidim
 
     has_one_attached :favicon
     validates_upload :favicon, uploader: Decidim::OrganizationFaviconUploader
+    generates_image_variants_for :logo, :official_img_footer, :favicon
 
     has_many_attached :open_data_files
 
