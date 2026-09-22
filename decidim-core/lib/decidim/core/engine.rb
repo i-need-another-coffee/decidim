@@ -280,6 +280,13 @@ module Decidim
           transform: :active_storage
         }
 
+        Mime::Type.register "image/avif", :avif
+
+        app.config.active_storage.variable_content_types << "image/webp"
+        app.config.active_storage.variable_content_types << "image/avif"
+        app.config.active_storage.web_image_content_types << "image/avif"
+        app.config.active_storage.track_variants = true
+
         next if app.config.active_storage.service_urls_expire_in.present?
 
         # Ensure that the ActiveStorage URLs are valid long enough because with
