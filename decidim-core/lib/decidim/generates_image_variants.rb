@@ -37,6 +37,7 @@ module Decidim
     # saved_change_to_attribute?.
     def decidim_snapshot_attachment_blob_ids
       @decidim_attachment_blob_ids = nil
+      return unless Decidim.avif_images_enabled
       return if attachment_changes.empty?
 
       self.class.image_variant_attachments.each do |name|
@@ -54,6 +55,7 @@ module Decidim
       previous_blob_ids = @decidim_attachment_blob_ids
       @decidim_attachment_blob_ids = nil
       return unless previous_blob_ids
+      return unless Decidim.avif_images_enabled
 
       previous_blob_ids.each do |name, previous_blob_id|
         # The association may have been loaded before the save with the old
