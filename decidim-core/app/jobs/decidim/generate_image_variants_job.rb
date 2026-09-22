@@ -9,11 +9,10 @@ module Decidim
   # Encoding failures (e.g. libvips without an AVIF encoder) are logged and
   # skipped so that the application degrades gracefully to plain <img> tags.
   class GenerateImageVariantsJob < ApplicationJob
-    queue_as :active_storage
+    queue_as { ::ActiveStorage.queues[:transform] }
 
     def perform(record_type, record_id, attachment_name)
-      record = record_type.constantize.find_by(id: record_id)
-      return if record.nil?
+      record = record_type.constantize.find(record_id)
 
       uploader = record.attached_uploader(attachment_name)
       return unless uploader.attached?
@@ -31,7 +30,7 @@ module Decidim
 
     private
 
-    def process_variant(uploader, blob, key, context)
+    def process_variant(uploader, blob, key, context = nil)
       if uploader.avif_blob?
         return if key.present?
         return if uploader.full_size_fallback_processed?
