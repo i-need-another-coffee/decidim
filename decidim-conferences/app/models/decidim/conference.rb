@@ -23,6 +23,7 @@ module Decidim
     include Decidim::FilterableResource
     include Decidim::SoftDeletable
     include Decidim::ShareableWithToken
+    include Decidim::GeneratesImageVariants
 
     translatable_fields :title, :slogan, :short_description, :description, :objectives, :registration_terms
 
@@ -70,6 +71,7 @@ module Decidim
 
     has_one_attached :signature
     validates_upload :signature, uploader: Decidim::Conferences::DiplomaUploader
+    generates_image_variants_for :hero_image, :banner_image, :main_logo, :signature
 
     searchable_fields({
                         scope_id: :decidim_scope_id,

@@ -12,6 +12,7 @@ module Decidim
     include Decidim::Followable
     include Decidim::Loggable
     include Decidim::HasUploadValidations
+    include Decidim::GeneratesImageVariants
 
     belongs_to :organization, foreign_key: "decidim_organization_id", class_name: "Decidim::Organization"
     has_many :notifications, foreign_key: "decidim_user_id", class_name: "Decidim::Notification", dependent: :destroy
@@ -25,6 +26,7 @@ module Decidim
 
     has_one_attached :avatar
     validates_avatar :avatar, uploader: Decidim::AvatarUploader
+    generates_image_variants_for :avatar
 
     validates :name, format: { with: REGEXP_NAME }
     validates :nickname, format: { with: REGEXP_NICKNAME }, unless: -> { deleted? || managed? }
