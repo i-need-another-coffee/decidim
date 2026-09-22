@@ -11,13 +11,15 @@ module Decidim
   class GenerateImageVariantsJob < ApplicationJob
     queue_as { ::ActiveStorage.queues[:transform] }
 
-    def perform(record_type, record_id, attachment_name)
+    def perform(record_type, record_id, attachment_name, previous_blob_id)
       record = record_type.constantize.find(record_id)
 
       uploader = record.attached_uploader(attachment_name)
       return unless uploader.attached?
 
       blob = uploader.blob
+
+      return if previous_blob_id == blob&.id
       return unless blob&.image?
 
       context = "#{record_type} ##{record_id} (#{attachment_name})"
@@ -39,7 +41,7 @@ module Decidim
       else
         return if uploader.avif_variant_processed?(key)
 
-        blob.variant(uploader.class.avif_variation_spec(key)).processed
+        blob.variant(key, uploader.class.avif_variation_spec(key)).processed
       end
     rescue Vips::Error, ActiveStorage::InvariableError, NotImplementedError, ArgumentError => e
       Rails.logger.warn(

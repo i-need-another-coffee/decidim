@@ -56,12 +56,7 @@ module Decidim
       return unless previous_blob_ids
 
       previous_blob_ids.each do |name, previous_blob_id|
-        # The association may have been loaded before the save with the old
-        # attachment, so it is reloaded to read the post-save state.
-        current_blob_id = association("#{name}_attachment").reload.target&.blob_id
-        next if previous_blob_id == current_blob_id
-
-        Decidim::GenerateImageVariantsJob.perform_later(self.class.name, id, name.to_s)
+        Decidim::GenerateImageVariantsJob.perform_later(self.class.name, id, name.to_s, previous_blob_id)
       end
     end
   end

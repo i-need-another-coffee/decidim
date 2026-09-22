@@ -52,6 +52,7 @@ module Decidim
     def avif_blob?
       blob&.content_type == AVIF_CONTENT_TYPE
     end
+
     #
     # # The <source> entries for a <picture> element pointing to the AVIF
     # # representation of the attached image. Returns an empty array when the
@@ -82,7 +83,7 @@ module Decidim
     #     variant_url(nil)
     #   end
     # end
-    #
+
     def avif_variant_processed?(key)
       blob_id = blob&.id
       return false unless blob_id
@@ -189,7 +190,7 @@ module Decidim
       def fallback_variation_digest
         ActiveStorage::Variation.wrap(format: :png).default_to(format: :png).digest
       end
-      #
+
       # # Returns the [blob_id, variation_digest] pairs of the given blobs and
       # # variant keys whose AVIF variant has already been processed, so that
       # # lists of attachments can be checked with a single query.
