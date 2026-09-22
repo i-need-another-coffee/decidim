@@ -445,11 +445,6 @@ take over user accounts.
 |€
 |No
 
-|DECIDIM_CORS_ENABLED
-|The SVG do not support CORS. When using custom asset host different than root url, set this value to `true`, in order to activate the available workaround.
-|false
-|No
-
 |DECIDIM_IMAGE_UPLOADER_QUALITY
 |Defines the quality of image uploads after processing. Image uploads are processed by Decidim, this value helps reduce the size of the files.
 |80
