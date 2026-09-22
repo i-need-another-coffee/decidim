@@ -25,6 +25,7 @@ module Decidim
 
     has_one_attached :avatar
     validates_avatar :avatar, uploader: Decidim::AvatarUploader
+    after_commit :process_avatar, on: [:create, :update]
 
     validates :name, format: { with: REGEXP_NAME }
     validates :nickname, format: { with: REGEXP_NICKNAME }, unless: -> { deleted? || managed? }
@@ -135,6 +136,16 @@ module Decidim
     end
 
     private
+
+    def process_avatar
+      return unless avatar.attached?
+
+      if saved_change_to_attribute?(:avatar) || avatar.attachment.saved_change_to_created_at?
+        Decidim::AvatarUploader.variants.each_key do |variant_key|
+          Decidim::GenerateAvifVariantJob.perform_later(self.class.name, id, :avatar, variant_key)
+        end
+      end
+    end
 
     def only_public(klass, ids)
       scope = klass.where(id: ids)
