@@ -193,7 +193,16 @@ const initializer = (element = document) => {
 
   markAsReadNotifications(element)
 
-  element.querySelectorAll("[data-dialog]").forEach((component) => createDialog(component))
+  element.querySelectorAll('[data-controller="dialog"]').forEach((component) => createDialog(component))
+  element.querySelectorAll("[data-dialog]").forEach((component) => {
+    if (component.hasAttribute("data-controller"))
+    {
+      return;
+    }
+    alert(`${window.location.href} Using dialog component`);
+    createDialog(component);
+  })
+
 
   // Initialize available remote modals (ajax-fetched contents)
   element.querySelectorAll("[data-dialog-remote-url]").forEach((elem) => new RemoteModal(elem))
