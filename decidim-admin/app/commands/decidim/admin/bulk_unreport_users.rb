@@ -57,7 +57,7 @@ module Decidim
             result[:ok] << reportable
             next
           end
-          reportable.user_moderation.destroy!
+          reportable.moderation.destroy!
           result[:ok] << reportable
           @first_unreported ||= reportable
         rescue ActiveRecord::RecordInvalid

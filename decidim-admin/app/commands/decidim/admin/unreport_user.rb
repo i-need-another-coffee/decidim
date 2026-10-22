@@ -30,7 +30,7 @@ module Decidim
       def unreport!
         Decidim.traceability.perform_action!(
           "unreport",
-          @reportable.user_moderation,
+          @reportable.moderation,
           @current_user,
           extra: {
             reportable_type: @reportable.class.name,
@@ -38,7 +38,7 @@ module Decidim
             user_id: @reportable.id
           }
         ) do
-          @reportable.user_moderation.destroy!
+          @reportable.moderation.destroy!
         end
       end
     end
