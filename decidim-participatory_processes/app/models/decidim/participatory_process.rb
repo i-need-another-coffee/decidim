@@ -26,6 +26,7 @@ module Decidim
     include Decidim::FilterableResource
     include Decidim::SoftDeletable
     include Decidim::ShareableWithToken
+    include Decidim::GeneratesImageVariants
 
     translatable_fields :title, :subtitle, :short_description, :description, :developer_group, :meta_scope, :local_area,
                         :target, :participatory_scope, :participatory_structure, :announcement
@@ -76,6 +77,7 @@ module Decidim
 
     has_one_attached :hero_image
     validates_upload :hero_image, uploader: Decidim::HeroImageUploader
+    generates_image_variants_for :hero_image
 
     scope :past, -> { where(arel_table[:end_date].lt(Date.current)) }
     scope :upcoming, -> { where(arel_table[:start_date].gt(Date.current)) }

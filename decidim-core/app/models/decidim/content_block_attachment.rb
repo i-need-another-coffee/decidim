@@ -5,11 +5,13 @@ module Decidim
   # process.
   class ContentBlockAttachment < ApplicationRecord
     include Decidim::HasUploadValidations
+    include Decidim::GeneratesImageVariants
 
     belongs_to :content_block, foreign_key: "decidim_content_block_id", class_name: "Decidim::ContentBlock", inverse_of: :attachments
 
     has_one_attached :file
     validates_upload :file
+    generates_image_variants_for :file
 
     delegate :attached?, to: :file
     delegate :organization, :manifest, to: :content_block

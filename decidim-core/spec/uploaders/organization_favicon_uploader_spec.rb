@@ -14,7 +14,7 @@ module Decidim
       subject { uploader.extension_allowlist }
 
       it "returns the custom allowed extensions" do
-        expect(subject).to eq(%w(png jpg jpeg webp))
+        expect(subject).to eq(%w(png jpg jpeg webp avif))
       end
     end
 
@@ -22,7 +22,7 @@ module Decidim
       subject { uploader.content_type_allowlist }
 
       it "returns the correct MIME types" do
-        expect(subject).to eq(%w(image/png image/jpeg image/webp))
+        expect(subject).to eq(%w(image/png image/jpeg image/webp image/avif))
       end
     end
   end
