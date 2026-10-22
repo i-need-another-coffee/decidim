@@ -69,8 +69,7 @@ Decidim.register_component(:budgets) do |component|
                           icon_name: "chat-1-line",
                           tooltip_key: "comments_count",
                           tag: :comments do |components, start_at, end_at|
-    projects = Decidim::Budgets::FilteredProjects.for(components, start_at, end_at)
-    projects.sum(:comments_count)
+    Decidim::Budgets::FilteredProjects.for(components, start_at, end_at).sum(:comments_count)
   end
 
   component.register_stat :followers_count,
@@ -78,8 +77,7 @@ Decidim.register_component(:budgets) do |component|
                           icon_name: "user-follow-line",
                           tooltip_key: "followers_count_tooltip",
                           priority: Decidim::StatsRegistry::MEDIUM_PRIORITY do |components, start_at, end_at|
-    projects_ids = Decidim::Budgets::FilteredProjects.for(components, start_at, end_at).pluck(:id)
-    Decidim::Follow.where(decidim_followable_type: "Decidim::Budgets::Project", decidim_followable_id: projects_ids).count
+    Decidim::Budgets::FilteredProjects.for(components, start_at, end_at).sum(:follows_count)
   end
 
   component.exports :projects do |exports|
