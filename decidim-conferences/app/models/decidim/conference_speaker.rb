@@ -9,6 +9,7 @@ module Decidim
     include Decidim::HasUploadValidations
     include Decidim::TranslatableResource
     include Decidim::Publicable
+    include Decidim::GeneratesImageVariants
 
     translatable_fields :position, :affiliation, :short_bio
 
@@ -22,6 +23,7 @@ module Decidim
 
     has_one_attached :avatar
     validates_avatar :avatar, uploader: Decidim::AvatarUploader
+    generates_image_variants_for :avatar
 
     delegate :organization, to: :conference
 

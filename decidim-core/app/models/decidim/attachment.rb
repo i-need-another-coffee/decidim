@@ -6,6 +6,7 @@ module Decidim
   class Attachment < ApplicationRecord
     include Decidim::HasUploadValidations
     include Decidim::TranslatableResource
+    include Decidim::GeneratesImageVariants
     include Traceable
 
     before_save :set_content_type_and_size, if: :attached?
@@ -17,6 +18,7 @@ module Decidim
 
     has_one_attached :file
     validates_upload :file, uploader: Decidim::AttachmentUploader
+    generates_image_variants_for :file
     validates :content_type, presence: true
 
     delegate :attached?, to: :file

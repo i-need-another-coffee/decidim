@@ -105,7 +105,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y libu2f-udev libvips libvips-tools
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y libu2f-udev libvips libvips-tools libheif-plugin-libde265 libheif-plugin-aomdec libheif-plugin-aomenc
           wget --no-verbose -O /tmp/chrome.deb https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${{inputs.chrome_version}}-1_amd64.deb
           sudo DEBIAN_FRONTEND=noninteractive dpkg -i /tmp/chrome.deb
           rm /tmp/chrome.deb

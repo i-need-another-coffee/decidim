@@ -5,10 +5,12 @@ module Decidim
     include Decidim::Traceable
     include Decidim::Loggable
     include Decidim::HasUploadValidations
+    include Decidim::GeneratesImageVariants
 
     belongs_to :organization, foreign_key: "decidim_organization_id", class_name: "Decidim::Organization", inverse_of: :oauth_applications
 
     has_one_attached :organization_logo
+    generates_image_variants_for :organization_logo
 
     # validates_upload cannot be used here because the file is not necessarily
     # attached to any organization yet when creating a new OAuth application.
