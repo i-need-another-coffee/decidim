@@ -21,6 +21,7 @@ RSpec.configure do |config|
           t.integer :likes_count, null: false, default: 0
           t.integer :comments_count, null: false, default: 0
           t.integer :follows_count, null: false, default: 0
+          t.integer :attachments_count, null: false, default: 0
 
           t.references :decidim_component, index: false
           t.integer :decidim_author_id, index: false
